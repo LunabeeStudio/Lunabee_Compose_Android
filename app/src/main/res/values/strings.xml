@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- MainScreen -->
+    <string name="select_your_theme_title">"Select your theme"</string>
+    <string name="material_title">"Material"</string>
+    <string name="material_subtitle">"androidx.composable.material"</string>
+    <string name="material3_title">"Material 3 (Alpha)"</string>
+    <string name="material3_subtitle">"androidx.composable.material3"</string>
+
+    <!-- MaterialScreen -->
+    <string name="top_bar_list_title">"TopAppBar"</string>
+    <string name="top_bar_list_subtitle">"Examples of different TopAppBar"</string>
+
+    <!-- TopAppBarScreen -->
+    <string name="top_bar_screen_description">"A list of TopAppBar that can be displayed by this lib."</string>
+    <string name="top_bar_screen_simple_description">"TopAppBar classic"</string>
+    <string name="top_bar_screen_simple_menu_description">"TopAppBar with menus"</string>
+    <string name="top_bar_screen_back_description">"TopAppBar with navigation"</string>
+    <string name="top_bar_screen_back_menu_description">"TopAppBar with navigation and menus"</string>
+    <string name="top_bar_screen_custom_title_description">"TopAppBar with custom title"</string>
+    <string name="top_bar_screen_elevate_top_bar_action">"Default elevation for TopAppBar"</string>
+    <string name="top_bar_screen_elevate_status_bar_padding_action">"Add status bar padding"</string>
+    <string name="top_bar_screen_loading_description">"TopAppBar with loader"</string>
+    <string name="top_bar_screen_loading_navigation_description">"TopAppBar with navigation and loader"</string>
+    <string name="top_bar_screen_is_loading_action">"Loading in progress"</string>
+    <string name="top_bar_screen_is_menu_showing_action">"Menu shown during loading"</string>
+</resources>
