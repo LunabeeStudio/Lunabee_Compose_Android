@@ -1,15 +1,12 @@
-[![Logo of the project](art/Lunabee_Blue.png?raw=true)](http://www.lunabee.studio/)
-
 # Lunabee Jetpack Compose library
 
 > A set of Composable that can be used in any Android Project with Compose.
 
-This library is used in the projects we work. Its goal is to **simplify** and **generify** patterns
-of development and style with Jetpack Compose.
+This library is used in the projects we work. Its goal is to **simplify** use of Jetpack Compose.
 
-## Documentation about the libraries is available on notion :
+## Documentation
 
-[https://www.notion.so/lunabeestudio/Lunabee-Android-Compose-bb08d8a58b4e46f1bce9394aa7b3b8ed](https://www.notion.so/lunabeestudio/Lunabee-Android-Compose-bb08d8a58b4e46f1bce9394aa7b3b8ed)
+Documentation is not ready yet, but it will be soon!
 
 ## Changelog
 
@@ -17,20 +14,22 @@ of development and style with Jetpack Compose.
 
 ## Installing / Getting started
 
-TODO
+You just have to clone the project. There is a demo app in order to visualize all libraries module.
 
 ### Deploying / Publishing
 
-TODO
+It will be soon deployed!
 
 ## Contributing
 
-TODO
+When you publish something open source, one of the greatest motivations is that anyone can just jump in and start contributing to your project.
 
-## Links
+These paragraphs are meant to welcome those kind souls to feel that they are needed. You should state something like:
 
-TODO
+If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
 
 ## Licensing
 
-TODO
+Lunabee Compose is available under the Apache 2.0 license. See the LICENSE file for more info.
+
+

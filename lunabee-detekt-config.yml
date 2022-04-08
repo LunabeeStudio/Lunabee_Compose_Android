@@ -5,6 +5,13 @@ console-reports:
   active: true
   exclude:
 
+comments:
+  active: true
+  AbsentOrWrongFileLicense:
+    active: true
+    licenseTemplateFile: 'detekt-license.template'
+    licenseTemplateIsRegex: true
+
 complexity:
   LongParameterList:
     active: false
