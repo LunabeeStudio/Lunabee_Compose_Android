@@ -32,10 +32,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import studio.lunabee.compose.material.preview.PreviewMenuEntryParameter
-import studio.lunabee.compose.material.theme.LunabeeComposeMaterialTheme
 import studio.lunabee.compose.model.MenuEntry
 
 /**
@@ -61,16 +58,6 @@ fun MenuItem(
         Text(
             text = stringResource(id = menu.subtitleRes),
             style = MaterialTheme.typography.caption,
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun MenuItemPreview() {
-    LunabeeComposeMaterialTheme {
-        MenuItem(
-            menu = PreviewMenuEntryParameter().values.first(),
         )
     }
 }

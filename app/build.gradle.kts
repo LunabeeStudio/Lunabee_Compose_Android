@@ -80,8 +80,6 @@ dependencies {
 
     implementation(Google.accompanist.systemuicontroller)
 
-    debugImplementation(AndroidX.compose.ui.tooling)
-    implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.activity.compose)
     implementation(AndroidX.compose.foundation)
     implementation(AndroidX.compose.material)

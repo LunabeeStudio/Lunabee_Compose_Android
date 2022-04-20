@@ -27,4 +27,7 @@ object AndroidConfig {
     const val TARGET_SDK: Int = COMPILE_SDK
     const val MIN_SDK: Int = BuildConfigs.minSdk
     const val BUILD_TOOLS_VERSION: String = "31.0.0"
+
+    const val LIBRARY_URL = "https://github.com/LunabeeStudio/Lunabee_Compose_Android"
+    const val GROUP_ID = "studio.lunabee.compose"
 }

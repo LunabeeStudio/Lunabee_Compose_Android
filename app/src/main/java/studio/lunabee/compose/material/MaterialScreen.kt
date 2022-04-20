@@ -24,10 +24,8 @@ package studio.lunabee.compose.material
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import studio.lunabee.compose.R
 import studio.lunabee.compose.material.common.screen.MenuBackScreen
-import studio.lunabee.compose.material.theme.LunabeeComposeMaterialTheme
 import studio.lunabee.compose.model.MenuEntry
 import studio.lunabee.compose.navigation.ToDirection
 
@@ -58,15 +56,4 @@ fun MaterialScreen(
         menus = menus,
         navigateToPreviousScreen = navigateToPreviousScreen,
     )
-}
-
-@Preview
-@Composable
-private fun MaterialScreenPreview() {
-    LunabeeComposeMaterialTheme {
-        MaterialScreen(
-            navigateToPreviousScreen = { },
-            navigateToTopAppBarScreen = { },
-        )
-    }
 }

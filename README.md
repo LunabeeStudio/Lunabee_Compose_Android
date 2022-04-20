@@ -16,9 +16,17 @@ Documentation is not ready yet, but it will be soon!
 
 You just have to clone the project. There is a demo app in order to visualize all libraries module.
 
-### Deploying / Publishing
+### Using it
 
-It will be soon deployed!
+All modules of this library are available on Maven central. You can access Snapshot version by using
+
+```
+maven {
+    url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+}
+```
+
+Only authorized developers with access to Sonatype will be able to publish the library on Maven central, or on the Snapshots repository.
 
 ## Contributing
 

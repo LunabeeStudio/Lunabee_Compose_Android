@@ -31,6 +31,8 @@ import org.gradle.kotlin.dsl.getByType
 fun Project.configureAndroidPlugins(): Unit = plugins.run {
     apply("com.android.library")
     apply("kotlin-android")
+    apply("maven-publish") // publish to Sonatype.
+    apply("signing") // Sign publish with a GPG key.
 }
 
 fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>().run {
@@ -39,8 +41,6 @@ fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>(
     defaultConfig {
         minSdk = BuildConfigs.minSdk
         targetSdk = BuildConfigs.targetSdk
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     this.buildFeatures.compose = true

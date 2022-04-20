@@ -26,12 +26,9 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import studio.lunabee.compose.extension.topAppBarElevation
 import studio.lunabee.compose.lbctopappbar.material.LbcTopAppBar
 import studio.lunabee.compose.material.common.section.MenuSection
-import studio.lunabee.compose.material.preview.PreviewMenuEntryParameter
-import studio.lunabee.compose.material.theme.LunabeeComposeMaterialTheme
 import studio.lunabee.compose.model.MenuEntry
 
 /**
@@ -61,17 +58,6 @@ fun MenuScreen(
         MenuSection(
             lazyListState = lazyListState,
             menus = menus,
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun MenuScreenPreview() {
-    LunabeeComposeMaterialTheme {
-        MenuScreen(
-            title = "TopAppBar",
-            menus = PreviewMenuEntryParameter().values.toList(),
         )
     }
 }
