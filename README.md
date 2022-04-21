@@ -6,7 +6,7 @@ This library is used in the projects we work. Its goal is to **simplify** use of
 
 ## Documentation
 
-Documentation is not ready yet, but it will be soon!
+Documentation can be found [here](https://github.com/LunabeeStudio/Lunabee_Compose_Android/wiki)
 
 ## Changelog
 
