@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/license-Apache--2.0-informational?style=for-the-badge) ![](https://img.shields.io/badge/minSdk-23-informational?style=for-the-badge)
+
+
 # Lunabee Jetpack Compose library
 
 > A set of Composable that can be used in any Android Project with Compose.
