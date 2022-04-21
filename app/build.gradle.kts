@@ -20,7 +20,8 @@
  */
 
 plugins {
-    `application-flavors`
+    id("com.android.application")
+    id("kotlin-android")
 }
 
 android {
@@ -34,13 +35,6 @@ android {
 
         versionCode = System.getenv(EnvConfig.ENV_VERSION_CODE)?.toInt() ?: AndroidConfig.VERSION_CODE
         versionName = System.getenv(EnvConfig.ENV_VERSION_NAME) ?: AndroidConfig.VERSION_NAME
-    }
-
-    signingConfigs {
-        maybeCreate("dev").apply {
-        }
-        maybeCreate("releaseProd").apply {
-        }
     }
 
     buildFeatures.compose = true
