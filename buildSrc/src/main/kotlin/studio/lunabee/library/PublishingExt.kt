@@ -141,9 +141,9 @@ private fun MavenPublication.setPom(project: Project) {
 
         developers {
             developer {
-                id.set("hbernardi-luna")
-                name.set("Hugo Bernardi")
-                email.set("hugo.bernardi@lunabee.com")
+                id.set("Publisher")
+                name.set("Publisher Lunabee")
+                email.set("publisher@lunabee.com")
             }
         }
     }
