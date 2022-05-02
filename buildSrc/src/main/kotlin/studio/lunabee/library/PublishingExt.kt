@@ -48,8 +48,8 @@ fun PublishingExtension.setRepository(project: Project) {
     repositories {
         maven {
             authentication {
-                credentials.username = project.properties["sonatypeUsername"]?.toString() ?: System.getenv("sonatypeUsername")
-                credentials.password = project.properties["sonatypePassword"]?.toString() ?: System.getenv("sonatypePassword")
+                credentials.username = project.properties["sonatypeUsername"]?.toString() ?: System.getenv("SONATYPE_USERNAME")
+                credentials.password = project.properties["sonatypePassword"]?.toString() ?: System.getenv("SONATYPE_PASSWORD")
             }
             url = if (project.version.toString().endsWith("-SNAPSHOT")) {
                 URI.create("https://s01.oss.sonatype.org/content/repositories/snapshots/")
