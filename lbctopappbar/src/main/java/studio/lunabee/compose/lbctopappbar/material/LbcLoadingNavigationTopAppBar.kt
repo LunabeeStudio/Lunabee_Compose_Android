@@ -41,12 +41,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import studio.lunabee.compose.lbctopappbar.R
 import studio.lunabee.compose.lbctopappbar.material.error.ExceptionThrown
 
 /**
@@ -177,61 +175,4 @@ fun LbcLoadingNavigationTopAppBar(
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun LbcLoadingNavigationTopAppBarPreview() {
-    LbcLoadingNavigationTopAppBar(
-        title = "Material2 TopAppBar",
-        isLoading = true,
-        navigationIconRes = R.drawable.ic_back,
-        loaderIndicatorColor = Color.Red,
-        onNavigationClicked = { },
-    )
-}
-
-@Preview
-@Composable
-private fun LbcLoadingNavigationTopAppBarWithMenuPreview() {
-    LbcLoadingNavigationTopAppBar(
-        title = "TopAppBar",
-        isLoading = true,
-        loaderIndicatorColor = Color.Red,
-        navigationIconRes = R.drawable.ic_back,
-        onNavigationClicked = { },
-        rowActionsComposable = {
-            IconButton(
-                onClick = { },
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_more),
-                    contentDescription = null,
-                )
-            }
-        }
-    )
-}
-
-@Preview
-@Composable
-private fun LbcLoadingNavigationTopAppBarDarkWithMenuHiddenOnLoadingPreview() {
-    LbcLoadingNavigationTopAppBar(
-        title = "TopAppBar",
-        isLoading = true,
-        loaderIndicatorColor = Color.Red,
-        showMenuOnLoading = false,
-        navigationIconRes = R.drawable.ic_back,
-        onNavigationClicked = { },
-        rowActionsComposable = {
-            IconButton(
-                onClick = { },
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_more),
-                    contentDescription = null,
-                )
-            }
-        }
-    )
 }

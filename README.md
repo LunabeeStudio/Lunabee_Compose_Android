@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/license-Apache--2.0-informational?style=for-the-badge) ![](https://img.shields.io/badge/minSdk-23-informational?style=for-the-badge)
+
+
 # Lunabee Jetpack Compose library
 
 > A set of Composable that can be used in any Android Project with Compose.
@@ -6,7 +9,7 @@ This library is used in the projects we work. Its goal is to **simplify** use of
 
 ## Documentation
 
-Documentation is not ready yet, but it will be soon!
+Documentation can be found [here](https://github.com/LunabeeStudio/Lunabee_Compose_Android/wiki)
 
 ## Changelog
 
@@ -16,9 +19,17 @@ Documentation is not ready yet, but it will be soon!
 
 You just have to clone the project. There is a demo app in order to visualize all libraries module.
 
-### Deploying / Publishing
+### Using it
 
-It will be soon deployed!
+All modules of this library are available on Maven central. You can access Snapshot version by using
+
+```
+maven {
+    url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+}
+```
+
+Only authorized developers with access to Sonatype will be able to publish the library on Maven central, or on the Snapshots repository.
 
 ## Contributing
 

@@ -40,10 +40,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import studio.lunabee.compose.lbctopappbar.R
 import studio.lunabee.compose.lbctopappbar.material.error.ExceptionThrown
 
 /**
@@ -136,34 +134,4 @@ fun LbcNavigationTopAppBar(
             navigationIcon = navigationIconComposable,
         )
     }
-}
-
-@Preview
-@Composable
-private fun LbcDefaultNavigationTopAppBarPreview() {
-    LbcNavigationTopAppBar(
-        title = "TopAppBar",
-        navigationIconRes = R.drawable.ic_back,
-        onNavigationClicked = { },
-    )
-}
-
-@Preview
-@Composable
-private fun LbcDefaultNavigationTopAppBarWithMenuPreview() {
-    LbcNavigationTopAppBar(
-        title = "TopAppBar",
-        navigationIconRes = R.drawable.ic_back,
-        onNavigationClicked = { },
-        rowActionsComposable = {
-            IconButton(
-                onClick = { },
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_more),
-                    contentDescription = null,
-                )
-            }
-        }
-    )
 }

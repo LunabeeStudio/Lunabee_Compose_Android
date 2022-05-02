@@ -20,7 +20,8 @@
  */
 
 plugins {
-    `application-flavors`
+    id("com.android.application")
+    id("kotlin-android")
 }
 
 android {
@@ -34,13 +35,6 @@ android {
 
         versionCode = System.getenv(EnvConfig.ENV_VERSION_CODE)?.toInt() ?: AndroidConfig.VERSION_CODE
         versionName = System.getenv(EnvConfig.ENV_VERSION_NAME) ?: AndroidConfig.VERSION_NAME
-    }
-
-    signingConfigs {
-        maybeCreate("dev").apply {
-        }
-        maybeCreate("releaseProd").apply {
-        }
     }
 
     buildFeatures.compose = true
@@ -80,8 +74,6 @@ dependencies {
 
     implementation(Google.accompanist.systemuicontroller)
 
-    debugImplementation(AndroidX.compose.ui.tooling)
-    implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.activity.compose)
     implementation(AndroidX.compose.foundation)
     implementation(AndroidX.compose.material)

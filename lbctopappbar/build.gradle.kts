@@ -18,6 +18,8 @@
  *
  * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
+import studio.lunabee.library.setPublication
+import studio.lunabee.library.setRepository
 
 plugins {
     id("studio.lunabee.library.android")
@@ -27,15 +29,20 @@ android {
     resourcePrefix("lbc_tab_")
 }
 
-description = "Lunabee Studio Compose library related to TopBar"
+description = "A set of TopAppBar to be used in any Jetpack Compose app."
+version = "1.0.0-SNAPSHOT"
+
+publishing {
+    setRepository(project)
+    setPublication(project)
+}
+
+signing {
+    sign(publishing.publications[project.name])
+}
 
 dependencies {
     implementation(AndroidX.compose.material)
     implementation(AndroidX.constraintLayout.compose)
     implementation(AndroidX.compose.foundation)
-
-    // Needed for preview.
-    implementation(AndroidX.appCompat)
-    implementation(AndroidX.compose.ui.toolingPreview)
-    debugImplementation(AndroidX.compose.ui.tooling)
 }
