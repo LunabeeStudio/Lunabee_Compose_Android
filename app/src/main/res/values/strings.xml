@@ -21,6 +21,8 @@
   -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="application_name" translatable="false">Lunabee Compose Android</string>
+
     <!-- MainScreen -->
     <string name="select_your_theme_title">"Select your theme"</string>
     <string name="material_title">"Material"</string>
