@@ -16,7 +16,7 @@
  * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/9/2022 - for the Lunabee Compose library.
  */
 import studio.lunabee.library.setPublication
 import studio.lunabee.library.setRepository
@@ -26,11 +26,11 @@ plugins {
 }
 
 android {
-    resourcePrefix("lbc_tab_")
+    resourcePrefix("lbc_acc_")
 }
 
-description = "A set of TopAppBar to be used in any Jetpack Compose app."
-version = "1.1.0-SNAPSHOT"
+description = "A set methods and composable for accessibility"
+version = "0.1.0-SNAPSHOT"
 
 publishing {
     setRepository(project)

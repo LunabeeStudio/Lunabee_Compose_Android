@@ -29,5 +29,6 @@ open class LunabeeAndroidPlugin : Plugin<Project> {
         target.configureAndroidPlugins()
         target.configureAndroid()
         target.configureDependencies()
+        target.tasks.register("${target.name}Version", VersionTask::class.java)
     }
 }
