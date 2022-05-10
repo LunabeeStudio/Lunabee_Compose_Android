@@ -13,23 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * LunabeeAndroidPlugin.kt
+ * VersionTask.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/9/2022 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.library
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
+import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.TaskAction
 
-open class LunabeeAndroidPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        target.configureAndroidPlugins()
-        target.configureAndroid()
-        target.configureDependencies()
-        target.tasks.register("${target.name}Version", VersionTask::class.java)
-        target.tasks.register("${target.name}IsSnapshot", SnapshotTask::class.java)
+abstract class SnapshotTask : DefaultTask() {
+    @TaskAction
+    fun isSnapshotVersion() {
+        println(project.version.toString().contains("-SNAPSHOT"))
     }
 }
