@@ -30,7 +30,7 @@ android {
 }
 
 description = "A set methods and composable for accessibility"
-version = "0.1.0-SNAPSHOT"
+version = "0.2.0-SNAPSHOT"
 
 publishing {
     setRepository(project)

@@ -7,11 +7,16 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
-### All
+### LbcAccessibility
 
 #### Added
 
-- Initialize project
+- `Modifier` extensions for accessibility
+- `AccessibilityCheckBoxRow` and the stateless version of this `Composable`
+- `AccessibilityState` to handle `Talkback` activation
+- `openAccessibilitySettings` to open directly accessibility settings page
+
+## 1.0.0
 
 ### LbcTopAppBar
 
