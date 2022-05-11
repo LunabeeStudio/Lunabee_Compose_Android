@@ -21,18 +21,21 @@
 
 package studio.lunabee.compose.navigation
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.systemuicontroller.SystemUiController
 import studio.lunabee.compose.MainScreen
+import studio.lunabee.compose.accessibility.AccessibilityScreen
+import studio.lunabee.compose.lbcaccessibility.extension.openAccessibilitySettings
 import studio.lunabee.compose.material.MaterialScreen
-import studio.lunabee.compose.material.topappbar.TopAppBarScreen
 import studio.lunabee.compose.material.theme.LunabeeComposeMaterialTheme
 
 @Composable
 fun MainNavGraph(
+    context: Context,
     navController: NavHostController,
     systemUiController: SystemUiController,
     directions: Directions,
@@ -50,6 +53,7 @@ fun MainNavGraph(
                 MainScreen(
                     navigateToMaterialScreen = directions.navigateToMaterialScreen,
                     navigateToMaterial3Screen = directions.navigateToMaterial3Screen,
+                    navigateToAccessibilityScreen = directions.navigateToAccessibilityScreen,
                 )
             }
         }
@@ -68,13 +72,14 @@ fun MainNavGraph(
         }
 
         composable(
-            route = Destinations.TOP_APP_BAR_ROUTE,
+            route = Destinations.ACCESSIBILITY_ROUTE,
         ) {
             LunabeeComposeMaterialTheme(
                 systemUiController = systemUiController,
             ) {
-                TopAppBarScreen(
+                AccessibilityScreen(
                     navigateToPreviousScreen = directions.navigateToPreviousScreen,
+                    openAccessibilitySettings = { context.openAccessibilitySettings() },
                 )
             }
         }

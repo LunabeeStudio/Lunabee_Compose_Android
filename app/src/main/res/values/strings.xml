@@ -29,6 +29,8 @@
     <string name="material_subtitle">"androidx.composable.material"</string>
     <string name="material3_title">"Material 3 (Alpha)"</string>
     <string name="material3_subtitle">"androidx.composable.material3"</string>
+    <string name="accessibility_title">"Accessibility"</string>
+    <string name="accessibility_subtitle">"Accessibility with Compose"</string>
 
     <!-- MaterialScreen -->
     <string name="top_bar_list_title">"TopAppBar"</string>
@@ -47,4 +49,16 @@
     <string name="top_bar_screen_loading_navigation_description">"TopAppBar with navigation and loader"</string>
     <string name="top_bar_screen_is_loading_action">"Loading in progress"</string>
     <string name="top_bar_screen_is_menu_showing_action">"Menu shown during loading"</string>
+
+    <!-- AccessibilityScreen -->
+    <string name="accessibility_screen_simple_text">"Text read by Talkback"</string>
+    <string name="accessibility_screen_simple_text_not_read">"Text not read by Talkback"</string>
+    <string name="accessibility_screen_simple_text_head">"A swipe down will jump to me!"</string>
+    <string name="accessibility_screen_floating_button_explanation_enabled">"When accessibility is enabled, FloatingActionButton is moved to a menu action."</string>
+    <string name="accessibility_screen_floating_button_explanation_disabled">"FloatingActionButton will be visible only if accessibility is disabled."</string>
+    <string name="accessibility_screen_menu_content_description">"Go to accessibility settings"</string>
+    <string name="accessibility_screen_custom_content_description_click">"Specific content description"</string>
+    <string name="accessibility_screen_custom_content_description_checkbox">"I'm an accessible CheckBox"</string>
+    <string name="accessibility_screen_custom_content_description_state_enabled">"Custom content description for enabled state"</string>
+    <string name="accessibility_screen_custom_content_description_state_disabled">"Custom content description for disabled state"</string>
 </resources>
