@@ -30,6 +30,7 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.create
+import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.registering
@@ -145,6 +146,17 @@ private fun MavenPublication.setPom(project: Project) {
                 name.set("Publisher Lunabee")
                 email.set("publisher@lunabee.com")
             }
+        }
+
+        withXml {
+            val dependencies = asNode().appendNode("dependencies")
+            project.configurations["implementation"].dependencies.forEach { dependency ->
+                val dependencyNode = dependencies.appendNode("dependency")
+                dependencyNode.appendNode("groupId", dependency.group)
+                dependencyNode.appendNode("artifactId", dependency.name)
+                dependencyNode.appendNode("version", dependency.version)
+            }
+            asNode()
         }
     }
 }

@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### All
+
+- Update Jetpack Compose to `1.2.0-beta01`
+- Update Kotlin to `1.6.21`
+- Add dependencies to pom.xml
+
 ### LbcAccessibility
 
 #### Added

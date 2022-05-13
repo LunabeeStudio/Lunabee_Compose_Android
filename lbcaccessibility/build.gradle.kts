@@ -43,6 +43,5 @@ signing {
 
 dependencies {
     implementation(AndroidX.compose.material)
-    implementation(AndroidX.constraintLayout.compose)
     implementation(AndroidX.compose.foundation)
 }
