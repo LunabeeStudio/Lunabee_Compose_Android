@@ -32,6 +32,7 @@ import studio.lunabee.compose.accessibility.AccessibilityScreen
 import studio.lunabee.compose.lbcaccessibility.extension.openAccessibilitySettings
 import studio.lunabee.compose.material.MaterialScreen
 import studio.lunabee.compose.material.theme.LunabeeComposeMaterialTheme
+import studio.lunabee.compose.material.topappbar.TopAppBarScreen
 
 @Composable
 fun MainNavGraph(
@@ -67,6 +68,18 @@ fun MainNavGraph(
                 MaterialScreen(
                     navigateToPreviousScreen = directions.navigateToPreviousScreen,
                     navigateToTopAppBarScreen = directions.navigateToTopAppBarScreen,
+                )
+            }
+        }
+
+        composable(
+            route = Destinations.TOP_APP_BAR_ROUTE,
+        ) {
+            LunabeeComposeMaterialTheme(
+                systemUiController = systemUiController,
+            ) {
+                TopAppBarScreen(
+                    navigateToPreviousScreen = directions.navigateToPreviousScreen,
                 )
             }
         }

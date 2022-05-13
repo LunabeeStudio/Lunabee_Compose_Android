@@ -21,11 +21,14 @@
 
 package studio.lunabee.compose.material.common.screen
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import studio.lunabee.compose.extension.topAppBarElevation
 import studio.lunabee.compose.lbctopappbar.material.LbcTopAppBar
 import studio.lunabee.compose.material.common.section.MenuSection
@@ -55,9 +58,14 @@ fun MenuScreen(
             )
         }
     ) {
-        MenuSection(
-            lazyListState = lazyListState,
-            menus = menus,
-        )
+        Box(
+            modifier = Modifier
+                .padding(paddingValues = it),
+        ) {
+            MenuSection(
+                lazyListState = lazyListState,
+                menus = menus,
+            )
+        }
     }
 }

@@ -101,6 +101,7 @@ fun AccessibilityScreen(
     ) {
         LazyColumn(
             state = lazyListState,
+            contentPadding = it,
         ) {
             item(
                 key = "description_fab_text",
