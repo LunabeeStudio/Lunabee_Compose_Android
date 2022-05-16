@@ -24,14 +24,10 @@ package studio.lunabee.compose.lbcaccessibility.model
 /**
  * Wrapper object to set a state description in a [androidx.compose.ui.Modifier] with semantics method.
  *
- * @param stateEnabledDescription string that will be read by Talkback when [currentStateValue] is true
- *
- * @param stateDisabledDescription string that will be read by Talkback when [currentStateValue] is false
- *
- * @param currentStateValue current value of your state (true/false).
+ * @param stateEnabledDescription string that will be read by Talkback when your state is true/enabled/checked...
+ * @param stateDisabledDescription string that will be read by Talkback when your state is false/disabled/unchecked...
  */
 data class StateDescription(
     val stateEnabledDescription: String,
     val stateDisabledDescription: String,
-    val currentStateValue: Boolean,
 )

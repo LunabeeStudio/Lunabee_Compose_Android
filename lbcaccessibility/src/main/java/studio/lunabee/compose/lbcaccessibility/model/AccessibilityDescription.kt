@@ -29,17 +29,14 @@ import androidx.compose.ui.semantics.heading
  *
  * @param text see [SemanticsPropertyReceiver.text], text of the semantics node.
  * It must be real text instead of developer-set content description.
- *
  * @param contentDescription see [SemanticsPropertyReceiver.contentDescription], Developer-set content description of the semantics node.
  * If this is not set, accessibility services will present the [text] of this node as the content. This typically should not be set
  * directly by applications, because some screen readers will cease presenting other relevant information when this property is present.
  * This is intended to be used via Foundation components which are inherently intractable to automatically describe, such as Image, Icon,
  * and Canvas.
- *
  * @param stateDescription see [SemanticsPropertyReceiver.stateDescription], developer-set state description of the semantics node.
  * For example: on/off. If this not set, accessibility services will derive the state from other semantics properties,
  * like ProgressBarRangeInfo, but it is not guaranteed and the format will be decided by accessibility services.
- *
  * @param isHeading indicates if your Composable should be consider as a heading. This will facilitate navigation for the user. See
  * [heading] method.
  */

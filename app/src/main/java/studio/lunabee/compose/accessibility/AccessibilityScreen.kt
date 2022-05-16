@@ -182,7 +182,6 @@ fun AccessibilityScreen(
                                 stateDisabledDescription = stringResource(
                                     id = R.string.accessibility_screen_custom_content_description_state_disabled,
                                 ),
-                                currentStateValue = false,
                             )
                         )
                     ) {

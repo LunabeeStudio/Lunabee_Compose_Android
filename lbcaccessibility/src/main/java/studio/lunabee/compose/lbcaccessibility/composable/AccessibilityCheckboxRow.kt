@@ -45,15 +45,10 @@ import studio.lunabee.compose.lbcaccessibility.model.AccessibilityDescription
  * This Composable is stateful, checked value is already handled.
  *
  * @param initialCheckStateValue initial value for [androidx.compose.material.Checkbox]
- *
  * @param accessibilityDescription see [AccessibilityDescription]
- *
  * @param modifier default [Modifier] that could be override and will be use for the [Row]
- *
  * @param horizontalArrangement default [Arrangement.Horizontal] for the [Row]
- *
  * @param verticalAlignment default [Alignment.Vertical] for the [Row]
- *
  * @param rowContent custom content to display with the [Checkbox] in a [RowScope]
  */
 @Composable
@@ -73,9 +68,7 @@ fun AccessibilityCheckBoxRow(
         modifier = modifier,
         horizontalArrangement = horizontalArrangement,
         verticalAlignment = verticalAlignment,
-        accessibilityDescription = accessibilityDescription.copy(
-            stateDescription = accessibilityDescription.stateDescription?.copy(currentStateValue = isChecked),
-        ),
+        accessibilityDescription = accessibilityDescription,
         rowContent = rowContent,
     )
 }
@@ -88,17 +81,11 @@ fun AccessibilityCheckBoxRow(
  * This Composable is stateless, checked value has to be handled.
  *
  * @param currentCheckedStateValue current value for [androidx.compose.material.Checkbox]
- *
  * @param onCheckedChange on user interaction
- *
  * @param accessibilityDescription see [AccessibilityDescription]
- *
  * @param modifier default [Modifier] that could be override and will be use for the [Row]
- *
  * @param horizontalArrangement default [Arrangement.Horizontal] for the [Row]
- *
  * @param verticalAlignment default [Alignment.Vertical] for the [Row]
- *
  * @param rowContent custom content to display with the [Checkbox] in a [RowScope]
  */
 @Composable
