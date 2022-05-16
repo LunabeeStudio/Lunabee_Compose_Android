@@ -27,6 +27,8 @@
     <string name="material_subtitle">"androidx.composable.material"</string>
     <string name="material3_title">"Material3 (Alpha)"</string>
     <string name="material3_subtitle">"androidx.composable.material3"</string>
+    <string name="accessibility_title">"Accessibilité"</string>
+    <string name="accessibility_subtitle">"Accéssibilité avec Compose"</string>
 
     <!-- MaterialScreen -->
     <string name="top_bar_list_title">"TopAppBar"</string>
@@ -45,4 +47,16 @@
     <string name="top_bar_screen_loading_navigation_description">"TopAppBar avec navigation et loader"</string>
     <string name="top_bar_screen_is_loading_action">"Afficher le loader"</string>
     <string name="top_bar_screen_is_menu_showing_action">"Menu visible pendant chargement"</string>
+
+    <!-- AccessibilityScreen -->
+    <string name="accessibility_screen_simple_text">"Texte lu par Talkback"</string>
+    <string name="accessibility_screen_simple_text_not_read">"Texte non lu par Talkaback"</string>
+    <string name="accessibility_screen_simple_text_head">"Glisser vers le bas pour me sélectionner directement !"</string>
+    <string name="accessibility_screen_custom_content_description_click">"Texte spécialement lu pour l'accessibilité"</string>
+    <string name="accessibility_screen_floating_button_explanation_enabled">"Le FloatingActionButton devient un menu lorsque Talkback est activé."</string>
+    <string name="accessibility_screen_floating_button_explanation_disabled">"Le FloatingActionButton est visible seulement lorsque Talkback est désactivé."</string>
+    <string name="accessibility_screen_menu_content_description">"Aller aux paramètres d'accessibilité"</string>
+    <string name="accessibility_screen_custom_content_description_checkbox">"Je suis une CheckBox accessible"</string>
+    <string name="accessibility_screen_custom_content_description_state_enabled">"Texte spécialement lu pour l'état sélectionné"</string>
+    <string name="accessibility_screen_custom_content_description_state_disabled">"Texte spécialement lu pour l'état désélectionné"</string>
 </resources>

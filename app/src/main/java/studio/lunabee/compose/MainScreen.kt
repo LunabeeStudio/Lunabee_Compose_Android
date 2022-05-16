@@ -32,6 +32,7 @@ import studio.lunabee.compose.navigation.ToDirection
 fun MainScreen(
     navigateToMaterialScreen: ToDirection,
     navigateToMaterial3Screen: ToDirection,
+    navigateToAccessibilityScreen: ToDirection,
 ) {
     val menus: List<MenuEntry> = remember {
         listOf(
@@ -44,7 +45,12 @@ fun MainScreen(
                 titleRes = R.string.material3_title,
                 subtitleRes = R.string.material3_subtitle,
                 direction = navigateToMaterial3Screen,
-            )
+            ),
+            MenuEntry(
+                titleRes = R.string.accessibility_title,
+                subtitleRes = R.string.accessibility_subtitle,
+                direction = navigateToAccessibilityScreen,
+            ),
         )
     }
 

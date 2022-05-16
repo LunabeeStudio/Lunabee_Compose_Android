@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Dependencies.kt
+ * VersionTask.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/9/2022 - for the Lunabee Compose library.
  */
 
-object Modules {
-    const val lbctopappbar: String = ":lbctopappbar"
-    const val lbcaccessibility: String = ":lbcaccessibility"
-}
+package studio.lunabee.library
 
-object BuildConfigs {
-    const val lunabeeCompose: String = "1.0.0"
-    const val compileSdk: Int = 32
-    const val minSdk: Int = 23
-    const val targetSdk: Int = 32
+import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.TaskAction
+
+abstract class VersionTask : DefaultTask() {
+    @TaskAction
+    fun getVersion() {
+        println(project.version)
+    }
 }

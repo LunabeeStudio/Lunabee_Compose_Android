@@ -28,8 +28,8 @@ typealias ToDirection = () -> Unit
 
 class Directions(navController: NavHostController) {
     val navigateToMaterialScreen: ToDirection = {
-        navController.navigate(Destinations.MATERIAL_ROUTE) {
-            popUpTo(Destinations.MAIN_ROUTE) { inclusive = false }
+        navController.navigate(route = Destinations.MATERIAL_ROUTE) {
+            popUpTo(route = Destinations.MAIN_ROUTE) { inclusive = false }
         }
     }
 
@@ -37,9 +37,15 @@ class Directions(navController: NavHostController) {
         Toast.makeText(navController.context, "Not implemented yet!", Toast.LENGTH_LONG).show()
     }
 
+    val navigateToAccessibilityScreen: ToDirection = {
+        navController.navigate(route = Destinations.ACCESSIBILITY_ROUTE) {
+            popUpTo(route = Destinations.MAIN_ROUTE) { inclusive = false }
+        }
+    }
+
     val navigateToTopAppBarScreen: ToDirection = {
-        navController.navigate(Destinations.TOP_APP_BAR_ROUTE) {
-            popUpTo(Destinations.MATERIAL_ROUTE) { inclusive = false }
+        navController.navigate(route = Destinations.TOP_APP_BAR_ROUTE) {
+            popUpTo(route = Destinations.MATERIAL_ROUTE) { inclusive = false }
         }
     }
 

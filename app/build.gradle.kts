@@ -80,4 +80,5 @@ dependencies {
     implementation(AndroidX.navigation.compose)
 
     implementation(project(Modules.lbctopappbar))
+    implementation(project(Modules.lbcaccessibility))
 }
