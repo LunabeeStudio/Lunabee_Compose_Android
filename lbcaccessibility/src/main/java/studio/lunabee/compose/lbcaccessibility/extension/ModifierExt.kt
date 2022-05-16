@@ -97,48 +97,50 @@ fun Modifier.setAsInvisibleForAccessibility(): Modifier {
  * You can either use this [Modifier], or directly use [studio.lunabee.compose.lbcaccessibility.composable.AccessibilityCheckBoxRow] or
  * [studio.lunabee.compose.lbcaccessibility.composable.AccessibilityCheckBoxRowStateless] if you want to handle checked state.
  *
- * @param currentCheckedStateValue current state of the [androidx.compose.material.Checkbox] (true/false)
- * @param onCheckedChange trigger on user interaction
+ * @param currentStateValue current state of the [androidx.compose.material.Checkbox] (true/false)
+ * @param onStateChanged trigger on user interaction
  * @param accessibilityDescription see [AccessibilityDescription]
  *
  * @return a toggleable [Modifier] with accessibility set
  */
-fun Modifier.addSemanticsForCheckBox(
-    currentCheckedStateValue: Boolean,
-    onCheckedChange: (newCheckedStateValue: Boolean) -> Unit,
+fun Modifier.addSemanticsToggleable(
+    currentStateValue: Boolean,
+    onStateChanged: (newStateValue: Boolean) -> Unit,
     accessibilityDescription: AccessibilityDescription,
+    role: Role,
     mergeDescendants: Boolean = false,
 ): Modifier {
     return addSemantics(
         accessibilityDescription = accessibilityDescription,
         mergeDescendants = mergeDescendants,
-        currentStateValue = currentCheckedStateValue,
+        currentStateValue = currentStateValue,
     ).toggleable(
-        value = currentCheckedStateValue,
-        onValueChange = onCheckedChange,
-        role = Role.Checkbox,
+        value = currentStateValue,
+        onValueChange = onStateChanged,
+        role = role,
     ) // order is important, semantics must be set before toggleable
 }
 
 /**
- * Similar to [addSemanticsForCheckBox], but will override all existing Semantics and replace it by parameters you provide.
- * @param currentCheckedStateValue current state of the [androidx.compose.material.Checkbox] (true/false)
- * @param onCheckedChange trigger on user interaction
+ * Similar to [addSemanticsToggleable], but will override all existing Semantics and replace it by parameters you provide.
+ * @param currentStateValue current state of the [androidx.compose.material.Checkbox] (true/false)
+ * @param onStateChanged trigger on user interaction
  * @param accessibilityDescription see [AccessibilityDescription]
  *
  * @return a toggleable [Modifier] with accessibility set
  */
-fun Modifier.overrideSemanticsForCheckBox(
-    currentCheckedStateValue: Boolean,
-    onCheckedChange: (newCheckedStateValue: Boolean) -> Unit,
+fun Modifier.overrideSemanticsToggleable(
+    currentStateValue: Boolean,
+    onStateChanged: (newStateValue: Boolean) -> Unit,
     accessibilityDescription: AccessibilityDescription,
+    role: Role,
 ): Modifier {
     return overrideSemantics(
         accessibilityDescription = accessibilityDescription,
     ).toggleable(
-        value = currentCheckedStateValue,
-        onValueChange = onCheckedChange,
-        role = Role.Checkbox,
+        value = currentStateValue,
+        onValueChange = onStateChanged,
+        role = role,
     ) // order is important, semantics must be set before toggleable
 }
 

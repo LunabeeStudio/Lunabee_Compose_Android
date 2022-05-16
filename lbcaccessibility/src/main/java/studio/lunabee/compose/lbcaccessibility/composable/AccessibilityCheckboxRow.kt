@@ -33,8 +33,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import studio.lunabee.compose.lbcaccessibility.extension.addSemanticsForCheckBox
+import studio.lunabee.compose.lbcaccessibility.extension.addSemanticsToggleable
 import studio.lunabee.compose.lbcaccessibility.model.AccessibilityDescription
 
 /**
@@ -100,10 +101,11 @@ fun AccessibilityCheckBoxRowStateless(
 ) {
     Row(
         modifier = Modifier
-            .addSemanticsForCheckBox(
-                currentCheckedStateValue = currentCheckedStateValue,
-                onCheckedChange = onCheckedChange,
+            .addSemanticsToggleable(
+                currentStateValue = currentCheckedStateValue,
+                onStateChanged = onCheckedChange,
                 accessibilityDescription = accessibilityDescription,
+                role = Role.Checkbox,
             )
             .then(modifier), // order is important
         horizontalArrangement = horizontalArrangement,
