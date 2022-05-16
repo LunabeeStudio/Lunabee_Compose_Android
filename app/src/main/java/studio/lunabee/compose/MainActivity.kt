@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 modifier = Modifier.navigationBarsPadding(),
             ) {
                 MainNavGraph(
+                    context = this@MainActivity,
                     navController = navController,
                     systemUiController = systemUiController,
                     directions = directions,

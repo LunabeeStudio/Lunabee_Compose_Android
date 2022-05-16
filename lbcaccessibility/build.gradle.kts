@@ -13,20 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Dependencies.kt
+ * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/9/2022 - for the Lunabee Compose library.
  */
+import studio.lunabee.library.setPublication
+import studio.lunabee.library.setRepository
 
-object Modules {
-    const val lbctopappbar: String = ":lbctopappbar"
-    const val lbcaccessibility: String = ":lbcaccessibility"
+plugins {
+    id("studio.lunabee.library.android")
 }
 
-object BuildConfigs {
-    const val lunabeeCompose: String = "1.0.0"
-    const val compileSdk: Int = 32
-    const val minSdk: Int = 23
-    const val targetSdk: Int = 32
+android {
+    resourcePrefix("lbc_acc_")
+}
+
+description = "A set methods and composable for accessibility"
+version = "1.0.0"
+
+publishing {
+    setRepository(project)
+    setPublication(project)
+}
+
+signing {
+    sign(publishing.publications[project.name])
+}
+
+dependencies {
+    implementation(AndroidX.compose.material)
+    implementation(AndroidX.compose.foundation)
 }

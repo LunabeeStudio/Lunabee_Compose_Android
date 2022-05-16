@@ -7,11 +7,24 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
-### All
+## 1.1.0
+
+### LbcTopAppBar
+
+- Update Jetpack Compose to `1.2.0-beta01`
+- Update Kotlin to `1.6.21`
+
+### 1.0.0
+
+### LbcAccessibility
 
 #### Added
 
-- Initialize project
+- `Modifier` extensions for accessibility
+- `AccessibilityCheckBoxRow` and the stateless version of this `Composable`
+- `AccessibilityState` to handle `Talkback` activation
+
+## 1.0.0
 
 ### LbcTopAppBar
 

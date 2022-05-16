@@ -21,18 +21,23 @@
 
 package studio.lunabee.compose.navigation
 
+import android.content.Context
+import android.content.Intent
+import android.provider.Settings
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.systemuicontroller.SystemUiController
 import studio.lunabee.compose.MainScreen
+import studio.lunabee.compose.accessibility.AccessibilityScreen
 import studio.lunabee.compose.material.MaterialScreen
-import studio.lunabee.compose.material.topappbar.TopAppBarScreen
 import studio.lunabee.compose.material.theme.LunabeeComposeMaterialTheme
+import studio.lunabee.compose.material.topappbar.TopAppBarScreen
 
 @Composable
 fun MainNavGraph(
+    context: Context,
     navController: NavHostController,
     systemUiController: SystemUiController,
     directions: Directions,
@@ -50,6 +55,7 @@ fun MainNavGraph(
                 MainScreen(
                     navigateToMaterialScreen = directions.navigateToMaterialScreen,
                     navigateToMaterial3Screen = directions.navigateToMaterial3Screen,
+                    navigateToAccessibilityScreen = directions.navigateToAccessibilityScreen,
                 )
             }
         }
@@ -75,6 +81,22 @@ fun MainNavGraph(
             ) {
                 TopAppBarScreen(
                     navigateToPreviousScreen = directions.navigateToPreviousScreen,
+                )
+            }
+        }
+
+        composable(
+            route = Destinations.ACCESSIBILITY_ROUTE,
+        ) {
+            LunabeeComposeMaterialTheme(
+                systemUiController = systemUiController,
+            ) {
+                AccessibilityScreen(
+                    navigateToPreviousScreen = directions.navigateToPreviousScreen,
+                    openAccessibilitySettings = {
+                        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+                        context.startActivity(intent)
+                    },
                 )
             }
         }

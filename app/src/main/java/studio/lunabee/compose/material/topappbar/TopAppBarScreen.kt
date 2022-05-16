@@ -23,6 +23,7 @@ package studio.lunabee.compose.material.topappbar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -79,222 +80,227 @@ fun TopAppBarScreen(
             )
         }
     ) {
-        var isElevationEnabled: Boolean by rememberSaveable { mutableStateOf(value = false) }
-        val currentElevation = if (isElevationEnabled) AppBarDefaults.TopAppBarElevation else 0.dp
-        var isStatusBarPaddingEnabled: Boolean by rememberSaveable { mutableStateOf(value = false) }
-        var isLoading: Boolean by rememberSaveable { mutableStateOf(value = true) }
-        var isMenuShowingWhenLoading: Boolean by rememberSaveable { mutableStateOf(value = true) }
-
-        LazyColumn(
-            state = lazyListState,
+        Box(
+            modifier = Modifier
+                .padding(paddingValues = it),
         ) {
-            item(
-                key = R.string.top_bar_screen_description,
+            var isElevationEnabled: Boolean by rememberSaveable { mutableStateOf(value = false) }
+            val currentElevation = if (isElevationEnabled) AppBarDefaults.TopAppBarElevation else 0.dp
+            var isStatusBarPaddingEnabled: Boolean by rememberSaveable { mutableStateOf(value = false) }
+            var isLoading: Boolean by rememberSaveable { mutableStateOf(value = true) }
+            var isMenuShowingWhenLoading: Boolean by rememberSaveable { mutableStateOf(value = true) }
+
+            LazyColumn(
+                state = lazyListState,
             ) {
-                Text(
-                    modifier = Modifier
-                        .padding(all = 16.dp),
-                    text = stringResource(id = R.string.top_bar_screen_description),
-                )
-
-                Divider()
-            }
-
-            item(
-                key = R.string.top_bar_screen_elevate_top_bar_action,
-            ) {
-                SwitchItem(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { isElevationEnabled = !isElevationEnabled }
-                        .padding(horizontal = 16.dp),
-                    switchText = stringResource(id = R.string.top_bar_screen_elevate_top_bar_action),
-                    isCheckedByDefault = isElevationEnabled,
-                    onCheckChange = { isElevationEnabled = it },
-                )
-
-                Divider()
-            }
-
-            item(
-                key = R.string.top_bar_screen_elevate_status_bar_padding_action,
-            ) {
-                SwitchItem(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { isStatusBarPaddingEnabled = !isStatusBarPaddingEnabled }
-                        .padding(horizontal = 16.dp),
-                    switchText =
-                    stringResource(id = R.string.top_bar_screen_elevate_status_bar_padding_action),
-                    isCheckedByDefault = isStatusBarPaddingEnabled,
-                    onCheckChange = { isStatusBarPaddingEnabled = it },
-                )
-
-                Divider()
-            }
-
-            item(
-                key = R.string.top_bar_screen_is_loading_action,
-            ) {
-                SwitchItem(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { isLoading = !isLoading }
-                        .padding(horizontal = 16.dp),
-                    switchText =
-                    stringResource(id = R.string.top_bar_screen_is_loading_action),
-                    isCheckedByDefault = isLoading,
-                    onCheckChange = { isLoading = it },
-                )
-
-                Divider()
-            }
-
-            item(
-                key = R.string.top_bar_screen_is_menu_showing_action,
-            ) {
-                SwitchItem(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { isMenuShowingWhenLoading = !isMenuShowingWhenLoading }
-                        .padding(horizontal = 16.dp),
-                    switchText =
-                    stringResource(id = R.string.top_bar_screen_is_menu_showing_action),
-                    isCheckedByDefault = isMenuShowingWhenLoading,
-                    onCheckChange = { isMenuShowingWhenLoading = it },
-                )
-
-                Divider()
-            }
-
-            item(
-                key = R.string.top_bar_screen_simple_description,
-            ) {
-                TopAppBarDisplayableItem(
-                    title = stringResource(
-                        id = R.string.top_bar_screen_simple_description,
-                    ),
+                item(
+                    key = R.string.top_bar_screen_description,
                 ) {
-                    LbcTopAppBar(
-                        title = "TopAppBar",
-                        elevation = currentElevation,
-                        applyStatusBarPadding = isStatusBarPaddingEnabled,
+                    Text(
+                        modifier = Modifier
+                            .padding(all = 16.dp),
+                        text = stringResource(id = R.string.top_bar_screen_description),
+                    )
+
+                    Divider()
+                }
+
+                item(
+                    key = R.string.top_bar_screen_elevate_top_bar_action,
+                ) {
+                    SwitchItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { isElevationEnabled = !isElevationEnabled }
+                            .padding(horizontal = 16.dp),
+                        switchText = stringResource(id = R.string.top_bar_screen_elevate_top_bar_action),
+                        isCheckedByDefault = isElevationEnabled,
+                        onCheckChange = { newCheckedValue -> isElevationEnabled = newCheckedValue },
+                    )
+
+                    Divider()
+                }
+
+                item(
+                    key = R.string.top_bar_screen_elevate_status_bar_padding_action,
+                ) {
+                    SwitchItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { isStatusBarPaddingEnabled = !isStatusBarPaddingEnabled }
+                            .padding(horizontal = 16.dp),
+                        switchText =
+                        stringResource(id = R.string.top_bar_screen_elevate_status_bar_padding_action),
+                        isCheckedByDefault = isStatusBarPaddingEnabled,
+                        onCheckChange = { newCheckedValue -> isStatusBarPaddingEnabled = newCheckedValue },
+                    )
+
+                    Divider()
+                }
+
+                item(
+                    key = R.string.top_bar_screen_is_loading_action,
+                ) {
+                    SwitchItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { isLoading = !isLoading }
+                            .padding(horizontal = 16.dp),
+                        switchText =
+                        stringResource(id = R.string.top_bar_screen_is_loading_action),
+                        isCheckedByDefault = isLoading,
+                        onCheckChange = { newCheckedValue -> isLoading = newCheckedValue },
+                    )
+
+                    Divider()
+                }
+
+                item(
+                    key = R.string.top_bar_screen_is_menu_showing_action,
+                ) {
+                    SwitchItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { isMenuShowingWhenLoading = !isMenuShowingWhenLoading }
+                            .padding(horizontal = 16.dp),
+                        switchText =
+                        stringResource(id = R.string.top_bar_screen_is_menu_showing_action),
+                        isCheckedByDefault = isMenuShowingWhenLoading,
+                        onCheckChange = { newCheckedValue -> isMenuShowingWhenLoading = newCheckedValue },
+                    )
+
+                    Divider()
+                }
+
+                item(
+                    key = R.string.top_bar_screen_simple_description,
+                ) {
+                    TopAppBarDisplayableItem(
+                        title = stringResource(
+                            id = R.string.top_bar_screen_simple_description,
+                        ),
+                    ) {
+                        LbcTopAppBar(
+                            title = "TopAppBar",
+                            elevation = currentElevation,
+                            applyStatusBarPadding = isStatusBarPaddingEnabled,
+                        )
+                    }
+                }
+
+                item(
+                    key = R.string.top_bar_screen_back_description,
+                ) {
+                    TopAppBarDisplayableItem(
+                        title = stringResource(id = R.string.top_bar_screen_back_description),
+                    ) {
+                        LbcNavigationTopAppBar(
+                            navigationIconRes = R.drawable.ic_back,
+                            onNavigationClicked = { },
+                            title = "TopAppBar",
+                            elevation = currentElevation,
+                            applyStatusBarPadding = isStatusBarPaddingEnabled,
+                        )
+                    }
+                }
+
+                item(
+                    key = R.string.top_bar_screen_simple_menu_description,
+                ) {
+                    TopAppBarDisplayableItem(
+                        title = stringResource(id = R.string.top_bar_screen_simple_menu_description),
+                    ) {
+                        LbcTopAppBar(
+                            title = "TopAppBar",
+                            elevation = currentElevation,
+                            applyStatusBarPadding = isStatusBarPaddingEnabled,
+                            rowActionsComposable = { RowActionMenu() },
+                        )
+                    }
+                }
+
+                item(
+                    key = R.string.top_bar_screen_back_menu_description,
+                ) {
+                    TopAppBarDisplayableItem(
+                        title = stringResource(id = R.string.top_bar_screen_back_menu_description),
+                    ) {
+                        LbcNavigationTopAppBar(
+                            navigationIconRes = R.drawable.ic_back,
+                            onNavigationClicked = { },
+                            title = "TopAppBar",
+                            elevation = currentElevation,
+                            applyStatusBarPadding = isStatusBarPaddingEnabled,
+                            rowActionsComposable = { RowActionMenu() },
+                        )
+                    }
+                }
+
+                item(
+                    key = R.string.top_bar_screen_custom_title_description,
+                ) {
+                    TopAppBarDisplayableItem(
+                        title = stringResource(id = R.string.top_bar_screen_custom_title_description),
+                    ) {
+                        LbcTopAppBar(
+                            elevation = currentElevation,
+                            applyStatusBarPadding = isStatusBarPaddingEnabled,
+                            titleComposable = {
+                                Image(
+                                    painter = painterResource(id = R.drawable.ic_logo),
+                                    contentDescription = null,
+                                )
+                            }
+                        )
+                    }
+                }
+
+                item(
+                    key = R.string.top_bar_screen_loading_description,
+                ) {
+                    TopAppBarDisplayableItem(
+                        title = stringResource(id = R.string.top_bar_screen_loading_description),
+                    ) {
+                        LbcLoadingTopAppBar(
+                            title = "TopAppBar",
+                            isLoading = isLoading,
+                            showMenuOnLoading = isMenuShowingWhenLoading,
+                            elevation = currentElevation,
+                            applyStatusBarPadding = isStatusBarPaddingEnabled,
+                            loaderIndicatorColor = Color.DarkGray,
+                            rowActionsComposable = { RowActionMenu() },
+                        )
+                    }
+                }
+
+                item(
+                    key = R.string.top_bar_screen_loading_navigation_description,
+                ) {
+                    TopAppBarDisplayableItem(
+                        title = stringResource(id = R.string.top_bar_screen_loading_navigation_description),
+                    ) {
+                        LbcLoadingNavigationTopAppBar(
+                            title = "TopAppBar",
+                            isLoading = isLoading,
+                            showMenuOnLoading = isMenuShowingWhenLoading,
+                            elevation = currentElevation,
+                            applyStatusBarPadding = isStatusBarPaddingEnabled,
+                            loaderIndicatorColor = Color.DarkGray,
+                            navigationIconRes = R.drawable.ic_back,
+                            rowActionsComposable = { RowActionMenu() },
+                            onNavigationClicked = { },
+                        )
+                    }
+                }
+
+                // Add additional elements before end space.
+
+                item(key = "endSpace") {
+                    Spacer(
+                        modifier = Modifier
+                            .padding(bottom = 16.dp),
                     )
                 }
-            }
-
-            item(
-                key = R.string.top_bar_screen_back_description,
-            ) {
-                TopAppBarDisplayableItem(
-                    title = stringResource(id = R.string.top_bar_screen_back_description),
-                ) {
-                    LbcNavigationTopAppBar(
-                        navigationIconRes = R.drawable.ic_back,
-                        onNavigationClicked = { },
-                        title = "TopAppBar",
-                        elevation = currentElevation,
-                        applyStatusBarPadding = isStatusBarPaddingEnabled,
-                    )
-                }
-            }
-
-            item(
-                key = R.string.top_bar_screen_simple_menu_description,
-            ) {
-                TopAppBarDisplayableItem(
-                    title = stringResource(id = R.string.top_bar_screen_simple_menu_description),
-                ) {
-                    LbcTopAppBar(
-                        title = "TopAppBar",
-                        elevation = currentElevation,
-                        applyStatusBarPadding = isStatusBarPaddingEnabled,
-                        rowActionsComposable = { RowActionMenu() },
-                    )
-                }
-            }
-
-            item(
-                key = R.string.top_bar_screen_back_menu_description,
-            ) {
-                TopAppBarDisplayableItem(
-                    title = stringResource(id = R.string.top_bar_screen_back_menu_description),
-                ) {
-                    LbcNavigationTopAppBar(
-                        navigationIconRes = R.drawable.ic_back,
-                        onNavigationClicked = { },
-                        title = "TopAppBar",
-                        elevation = currentElevation,
-                        applyStatusBarPadding = isStatusBarPaddingEnabled,
-                        rowActionsComposable = { RowActionMenu() },
-                    )
-                }
-            }
-
-            item(
-                key = R.string.top_bar_screen_custom_title_description,
-            ) {
-                TopAppBarDisplayableItem(
-                    title = stringResource(id = R.string.top_bar_screen_custom_title_description),
-                ) {
-                    LbcTopAppBar(
-                        elevation = currentElevation,
-                        applyStatusBarPadding = isStatusBarPaddingEnabled,
-                        titleComposable = {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_logo),
-                                contentDescription = null,
-                            )
-                        }
-                    )
-                }
-            }
-
-            item(
-                key = R.string.top_bar_screen_loading_description,
-            ) {
-                TopAppBarDisplayableItem(
-                    title = stringResource(id = R.string.top_bar_screen_loading_description),
-                ) {
-                    LbcLoadingTopAppBar(
-                        title = "TopAppBar",
-                        isLoading = isLoading,
-                        showMenuOnLoading = isMenuShowingWhenLoading,
-                        elevation = currentElevation,
-                        applyStatusBarPadding = isStatusBarPaddingEnabled,
-                        loaderIndicatorColor = Color.DarkGray,
-                        rowActionsComposable = { RowActionMenu() },
-                    )
-                }
-            }
-
-            item(
-                key = R.string.top_bar_screen_loading_navigation_description,
-            ) {
-                TopAppBarDisplayableItem(
-                    title = stringResource(id = R.string.top_bar_screen_loading_navigation_description),
-                ) {
-                    LbcLoadingNavigationTopAppBar(
-                        title = "TopAppBar",
-                        isLoading = isLoading,
-                        showMenuOnLoading = isMenuShowingWhenLoading,
-                        elevation = currentElevation,
-                        applyStatusBarPadding = isStatusBarPaddingEnabled,
-                        loaderIndicatorColor = Color.DarkGray,
-                        navigationIconRes = R.drawable.ic_back,
-                        rowActionsComposable = { RowActionMenu() },
-                        onNavigationClicked = { },
-                    )
-                }
-            }
-
-            // Add additional elements before end space.
-
-            item(key = "endSpace") {
-                Spacer(
-                    modifier = Modifier
-                        .padding(bottom = 16.dp),
-                )
             }
         }
     }

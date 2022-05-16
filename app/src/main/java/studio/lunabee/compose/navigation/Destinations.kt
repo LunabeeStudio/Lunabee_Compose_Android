@@ -36,6 +36,11 @@ object Destinations {
     const val MATERIAL_ROUTE: String = "MATERIAL_ROUTE"
 
     /**
+     * Will navigate to
+     */
+    const val ACCESSIBILITY_ROUTE: String = "ACCESSIBILITY_ROUTE"
+
+    /**
      * Will navigate to [studio.lunabee.compose.material.topappbar.TopAppBarScreen]
      */
     const val TOP_APP_BAR_ROUTE: String = "TOP_APP_BAR_ROUTE"

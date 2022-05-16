@@ -28,6 +28,7 @@ rootProject.name = "Lunabee Compose"
 
 include("app")
 include(":lbctopappbar")
+include(":lbcaccessibility")
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
