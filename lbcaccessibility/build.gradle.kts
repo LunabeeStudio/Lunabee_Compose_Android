@@ -29,8 +29,8 @@ android {
     resourcePrefix("lbc_acc_")
 }
 
-description = "A set methods and composable for accessibility"
-version = "1.0.0"
+description = "A set of methods and composable for accessibility"
+version = "1.1.0-SNAPSHOT"
 
 publishing {
     setRepository(project)
