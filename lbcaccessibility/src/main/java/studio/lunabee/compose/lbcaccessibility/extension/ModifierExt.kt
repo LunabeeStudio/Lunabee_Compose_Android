@@ -30,6 +30,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.text
@@ -86,6 +87,7 @@ fun Modifier.overrideSemantics(
  * Talkback will ignore elements marked with [invisibleToUser].
  */
 @ExperimentalComposeUiApi
+@Suppress("unused")
 fun Modifier.setAsInvisibleForAccessibility(): Modifier {
     return semantics {
         invisibleToUser()
@@ -129,6 +131,7 @@ fun Modifier.addSemanticsToggleable(
  *
  * @return a toggleable [Modifier] with accessibility set
  */
+@Suppress("unused")
 fun Modifier.overrideSemanticsToggleable(
     currentStateValue: Boolean,
     onStateChanged: (newStateValue: Boolean) -> Unit,
@@ -160,5 +163,15 @@ private fun SemanticsPropertyReceiver.buildSemantics(
 
     if (accessibilityDescription.isHeading) {
         heading()
+    }
+
+    accessibilityDescription.onClickDescription?.let { onClickDescription ->
+        onClick(
+            label = onClickDescription.clickLabel,
+            action = {
+                onClickDescription.action()
+                true
+            },
+        )
     }
 }

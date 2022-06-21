@@ -59,4 +59,8 @@
     <string name="accessibility_screen_custom_content_description_checkbox">"Je suis une CheckBox accessible"</string>
     <string name="accessibility_screen_custom_content_description_state_enabled">"Texte spécialement lu pour l'état sélectionné"</string>
     <string name="accessibility_screen_custom_content_description_state_disabled">"Texte spécialement lu pour l'état désélectionné"</string>
+    <string name="accessibility_screen_custom_button_click_me">"Je suis un bouton accessible"</string>
+    <string name="accessibility_screen_custom_button_on_click_description">"Je suis le label action du bouton"</string>
+    <string name="accessibility_screen_custom_button_clicked">"Tapé!"</string>
+
 </resources>

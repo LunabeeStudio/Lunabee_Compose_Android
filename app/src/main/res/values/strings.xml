@@ -61,4 +61,7 @@
     <string name="accessibility_screen_custom_content_description_checkbox">"I'm an accessible CheckBox"</string>
     <string name="accessibility_screen_custom_content_description_state_enabled">"Custom content description for enabled state"</string>
     <string name="accessibility_screen_custom_content_description_state_disabled">"Custom content description for disabled state"</string>
+    <string name="accessibility_screen_custom_button_click_me">"I'm an accessible button"</string>
+    <string name="accessibility_screen_custom_button_on_click_description">"Custom description for my click"</string>
+    <string name="accessibility_screen_custom_button_clicked">"Tapped!"</string>
 </resources>

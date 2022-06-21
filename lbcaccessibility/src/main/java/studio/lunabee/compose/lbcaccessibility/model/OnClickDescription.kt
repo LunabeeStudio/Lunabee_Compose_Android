@@ -13,21 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * AndroidConfig.kt
+ * OnClickDescription.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 6/21/2022 - for the Lunabee Compose library.
  */
 
-object AndroidConfig {
-    const val VERSION_CODE: Int = 1
-    const val VERSION_NAME: String = BuildConfigs.lunabeeCompose
+package studio.lunabee.compose.lbcaccessibility.model
 
-    const val COMPILE_SDK: Int = BuildConfigs.compileSdk
-    const val TARGET_SDK: Int = COMPILE_SDK
-    const val MIN_SDK: Int = BuildConfigs.minSdk
-    const val BUILD_TOOLS_VERSION: String = "33.0.0"
-
-    const val LIBRARY_URL = "https://github.com/LunabeeStudio/Lunabee_Compose_Android"
-    const val GROUP_ID = "studio.lunabee.compose"
-}
+/**
+ * Use this class to set a click label for accessibility if you don't have access to Modifier's clickable method.
+ *
+ * @param action action to be executed on click
+ * @param clickLabel label read by TalkBack
+ */
+data class OnClickDescription(
+    val action: () -> Unit,
+    val clickLabel: String,
+)
