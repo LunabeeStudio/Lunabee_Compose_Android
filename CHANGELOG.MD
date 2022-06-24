@@ -7,12 +7,20 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 1.2.0
+
+### LbcTopAppBar
+
+- Update Jetpack Compose to `1.2.0-rc02`
+
+## 1.1.0
+
 ### LbcAccessibility
 
 #### Added
 
 - `OnClickDescription` for `Composable` without `Modifier.clickable` access.
-- Update Jetpack Compose to `1.2.0-rc01`
+- Update Jetpack Compose to `1.2.0-rc02`
 
 
 ## 1.1.0
