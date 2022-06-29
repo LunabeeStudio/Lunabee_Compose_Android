@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.accessibility
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,6 +30,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material.Button
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
 import androidx.compose.material.FloatingActionButton
@@ -44,6 +46,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -52,6 +55,7 @@ import studio.lunabee.compose.extension.topAppBarElevation
 import studio.lunabee.compose.lbcaccessibility.composable.AccessibilityCheckBoxRow
 import studio.lunabee.compose.lbcaccessibility.extension.addSemantics
 import studio.lunabee.compose.lbcaccessibility.model.AccessibilityDescription
+import studio.lunabee.compose.lbcaccessibility.model.OnClickDescription
 import studio.lunabee.compose.lbcaccessibility.model.StateDescription
 import studio.lunabee.compose.lbcaccessibility.state.AccessibilityState
 import studio.lunabee.compose.lbcaccessibility.state.rememberAccessibilityState
@@ -166,7 +170,9 @@ fun AccessibilityScreen(
                 Divider()
             }
 
-            item {
+            item(
+                key = "checkbox_accessible_item_key"
+            ) {
                 if (accessibilityState.isAccessibilityEnabled) {
                     AccessibilityCheckBoxRow(
                         initialCheckStateValue = false,
@@ -193,6 +199,39 @@ fun AccessibilityScreen(
                     }
                 } else {
                     DefaultCheckBox()
+                }
+            }
+
+            item(
+                key = "button_accessible_item_key",
+            ) {
+                val context = LocalContext.current
+                val clickAction = {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.accessibility_screen_custom_button_clicked),
+                        Toast.LENGTH_LONG,
+                    ).show()
+                }
+                Button(
+                    onClick = clickAction,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(all = 8.dp)
+                        .addSemantics(
+                            accessibilityDescription = AccessibilityDescription(
+                                onClickDescription = OnClickDescription(
+                                    action = clickAction,
+                                    clickLabel = stringResource(id = R.string.accessibility_screen_custom_button_on_click_description),
+                                )
+                            )
+                        )
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.accessibility_screen_custom_button_click_me),
+                        modifier = Modifier
+                            .padding(vertical = 8.dp),
+                    )
                 }
             }
         }

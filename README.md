@@ -5,11 +5,12 @@
 
 > A set of Composable that can be used in any Android Project with Compose.
 
-This library is used in the projects we work. Its goal is to **simplify** use of Jetpack Compose.
+This Compose library is used on Lunabee Studio's projects. Its goal is to **simplify** our use of Jetpack Compose.
+To date, this library is composed of 2 distincts modules.
 
 ## Documentation
 
-Documentation can be found [here](https://github.com/LunabeeStudio/Lunabee_Compose_Android/wiki)
+The documentation of these two modules can be found [here](https://github.com/LunabeeStudio/Lunabee_Compose_Android/wiki)
 
 ## Changelog
 
@@ -17,7 +18,7 @@ Documentation can be found [here](https://github.com/LunabeeStudio/Lunabee_Compo
 
 ## Installing / Getting started
 
-You just have to clone the project. There is a demo app in order to visualize all libraries module.
+You just have to clone the project. There is a demo app in order to visualize all library's modules.
 
 ### Using it
 
@@ -32,10 +33,6 @@ maven {
 Only authorized developers with access to Sonatype will be able to publish the library on Maven central, or on the Snapshots repository.
 
 ## Contributing
-
-When you publish something open source, one of the greatest motivations is that anyone can just jump in and start contributing to your project.
-
-These paragraphs are meant to welcome those kind souls to feel that they are needed. You should state something like:
 
 If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
 
