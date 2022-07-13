@@ -30,7 +30,7 @@ android {
 }
 
 description = "A set of TopAppBar to be used in any Jetpack Compose app."
-version = "1.3.0"
+version = "1.4.0-SNAPSHOT"
 
 publishing {
     setRepository(project)
