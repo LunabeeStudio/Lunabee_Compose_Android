@@ -22,31 +22,27 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- MainScreen -->
-    <string name="select_your_theme_title">"Choisissez le thème"</string>
-    <string name="material_title">"Material"</string>
-    <string name="material_subtitle">"androidx.composable.material"</string>
-    <string name="material3_title">"Material3 (Alpha)"</string>
-    <string name="material3_subtitle">"androidx.composable.material3"</string>
-    <string name="accessibility_title">"Accessibilité"</string>
+    <string name="select_your_theme_title">"Modules"</string>
+    <string name="accessibility_title">"Accessibilité (lbcaccessibility)"</string>
     <string name="accessibility_subtitle">"Accéssibilité avec Compose"</string>
-
-    <!-- MaterialScreen -->
-    <string name="top_bar_list_title">"TopAppBar"</string>
+    <string name="top_bar_list_title">"TopAppBar (lbctopappbar)"</string>
     <string name="top_bar_list_subtitle">"Exemples de différentes TopAppBar"</string>
+    <string name="top_bar_loading_list_title">"TopAppBar avec chargement (lbctopappbar)"</string>
+    <string name="top_bar_loading_list_subtitle">"TopAppBar avec navigation, menus et LinearProgressIndicator"</string>
+    <string name="top_bar_search_list_title">"TopAppBar avec recherche (lbctopappbar)"</string>
+    <string name="top_bar_search_list_subtitle">"TopAppBar avec un champs de recherche, navigation, menus et LinearProgressIndicator"</string>
+    <string name="top_bar_screen_previous_screen">"Retour à l'écran précédent"</string>
 
-    <!-- TopAppBarScreen -->
+    <!-- *TopAppBarScreen -->
     <string name="top_bar_screen_description">"Une liste de TopAppBar que cette librairie est capable de créer."</string>
     <string name="top_bar_screen_simple_description">"TopAppBar"</string>
     <string name="top_bar_screen_simple_menu_description">"TopAppBar avec menus"</string>
-    <string name="top_bar_screen_back_description">"TopAppBar avec navigation"</string>
-    <string name="top_bar_screen_back_menu_description">"TopAppBar avec navigation et menus"</string>
-    <string name="top_bar_screen_custom_title_description">"TopAppBar avec logo"</string>
     <string name="top_bar_screen_elevate_top_bar_action">"Elévation par défaut"</string>
     <string name="top_bar_screen_elevate_status_bar_padding_action">"Ajouter le padding de la status bar"</string>
-    <string name="top_bar_screen_loading_description">"TopAppBar avec loader"</string>
-    <string name="top_bar_screen_loading_navigation_description">"TopAppBar avec navigation et loader"</string>
     <string name="top_bar_screen_is_loading_action">"Afficher le loader"</string>
     <string name="top_bar_screen_is_menu_showing_action">"Menu visible pendant chargement"</string>
+    <string name="top_bar_screen_search_placeholder">"Votre recherche ici"</string>
+    <string name="top_bar_screen_navigation_action">"Avec navigation"</string>
 
     <!-- AccessibilityScreen -->
     <string name="accessibility_screen_simple_text">"Texte lu par Talkback"</string>
@@ -62,5 +58,4 @@
     <string name="accessibility_screen_custom_button_click_me">"Je suis un bouton accessible"</string>
     <string name="accessibility_screen_custom_button_on_click_description">"Je suis le label action du bouton"</string>
     <string name="accessibility_screen_custom_button_clicked">"Tapé!"</string>
-
 </resources>

@@ -21,31 +21,32 @@
 
 package studio.lunabee.compose.navigation
 
-import android.widget.Toast
 import androidx.navigation.NavHostController
 
 typealias ToDirection = () -> Unit
 
 class Directions(navController: NavHostController) {
-    val navigateToMaterialScreen: ToDirection = {
-        navController.navigate(route = Destinations.MATERIAL_ROUTE) {
-            popUpTo(route = Destinations.MAIN_ROUTE) { inclusive = false }
-        }
-    }
-
-    val navigateToMaterial3Screen: ToDirection = {
-        Toast.makeText(navController.context, "Not implemented yet!", Toast.LENGTH_LONG).show()
-    }
-
     val navigateToAccessibilityScreen: ToDirection = {
-        navController.navigate(route = Destinations.ACCESSIBILITY_ROUTE) {
-            popUpTo(route = Destinations.MAIN_ROUTE) { inclusive = false }
+        navController.navigate(route = Destinations.AccessibilityRoute) {
+            popUpTo(route = Destinations.MainRoute) { inclusive = false }
         }
     }
 
-    val navigateToTopAppBarScreen: ToDirection = {
-        navController.navigate(route = Destinations.TOP_APP_BAR_ROUTE) {
-            popUpTo(route = Destinations.MATERIAL_ROUTE) { inclusive = false }
+    val navigateToLoadingTopAppBarScreen: ToDirection = {
+        navController.navigate(route = Destinations.LoadingTopAppBarRoute) {
+            popUpTo(route = Destinations.MainRoute) { inclusive = false }
+        }
+    }
+
+    val navigateToSearchTopAppBarScreen: ToDirection = {
+        navController.navigate(route = Destinations.SearchTopAppBarRoute) {
+            popUpTo(route = Destinations.MainRoute) { inclusive = false }
+        }
+    }
+
+    val navigateToSimpleTopAppBarScreen: ToDirection = {
+        navController.navigate(route = Destinations.SimpleTopAppBarRoute) {
+            popUpTo(route = Destinations.MainRoute) { inclusive = false }
         }
     }
 

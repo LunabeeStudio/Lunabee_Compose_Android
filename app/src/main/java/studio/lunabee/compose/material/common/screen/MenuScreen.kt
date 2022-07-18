@@ -36,9 +36,7 @@ import studio.lunabee.compose.model.MenuEntry
 
 /**
  * Simple screen with a list of clickable item and a [LbcTopAppBar]
- *
  * @param title text to set in the [LbcTopAppBar]
- *
  * @param menus item to display
  */
 @Composable
@@ -53,7 +51,7 @@ fun MenuScreen(
             LbcTopAppBar(
                 title = title,
                 elevation = lazyListState.topAppBarElevation,
-                backgroundColor = MaterialTheme.colors.surface,
+                topAppBarBackgroundColor = MaterialTheme.colors.surface,
                 applyStatusBarPadding = true,
             )
         }
