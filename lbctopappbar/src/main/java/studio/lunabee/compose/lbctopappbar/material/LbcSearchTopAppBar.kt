@@ -13,14 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * LbcLoadingTopAppBar.kt
+ * LbcSearchTopAppBar.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 7/13/2022 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.lbctopappbar.material
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -36,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import studio.lunabee.compose.lbctopappbar.material.internal.LbcTopAppBarUtils.applyStatusBarPaddingIfNeeded
 import studio.lunabee.compose.lbctopappbar.material.model.LbcTopAppBarAction
 
 /**
@@ -43,6 +48,8 @@ import studio.lunabee.compose.lbctopappbar.material.model.LbcTopAppBarAction
  * You can also add an optional [Row] with an action menus.
  *
  * @param title default title set in a [Text].
+ * @param isSearchBarExpanded either display the search menu or the edit text.
+ * @param searchAction action triggered when user clicks on menu icon. Should set [isSearchBarExpanded] to true.
  * @param modifier custom [Modifier] applied on root view. [TopAppBar] [Modifier] can't be edited.
  * If you need to do so, create your own [TopAppBar]
  * @param applyStatusBarPadding if you want to add status bar padding in [TopAppBar] layout.
@@ -59,10 +66,13 @@ import studio.lunabee.compose.lbctopappbar.material.model.LbcTopAppBarAction
  * @param isLoading flag that determines if [LinearProgressIndicator] should be displayed or not
  * @param showMenuOnLoading flag that determines if you want to hide menu when [isLoading] is true
  * @param loaderIndicatorColor color of [LinearProgressIndicator]
+ * @param searchBarComposable your implementation of search bar content. You can use [LbcSearchTextField]
  */
 @Composable
-fun LbcLoadingTopAppBar(
+fun LbcSearchTopAppBar(
     title: String,
+    isSearchBarExpanded: Boolean,
+    searchAction: LbcTopAppBarAction,
     modifier: Modifier = Modifier,
     applyStatusBarPadding: Boolean = false,
     topAppBarBackgroundColor: Color = if (isSystemInDarkTheme()) MaterialTheme.colors.surface else MaterialTheme.colors.primary,
@@ -73,18 +83,54 @@ fun LbcLoadingTopAppBar(
     isLoading: Boolean = false,
     showMenuOnLoading: Boolean = true,
     loaderIndicatorColor: Color = MaterialTheme.colors.primary,
+    searchBarComposable: @Composable () -> Unit,
 ) {
     Box {
-        LbcTopAppBar(
-            title = title,
+        LbcSurfaceTopAppBar(
             modifier = modifier,
-            elevation = elevation,
-            applyStatusBarPadding = applyStatusBarPadding,
-            topAppBarBackgroundColor = topAppBarBackgroundColor,
             statusBarColor = statusBarColor,
-            navigationAction = navigationAction,
-            rowActionsComposable = rowActionsComposable.takeIf { (showMenuOnLoading && isLoading) || !isLoading },
-        )
+            elevation = elevation,
+        ) {
+            TopAppBar(
+                modifier = Modifier
+                    .applyStatusBarPaddingIfNeeded(applyStatusBarPadding = applyStatusBarPadding),
+                elevation = 0.dp, // handle by surface
+                title = {
+                    // No handle animation for now. We just use AnimatedVisibility to keep Composable "alive".
+                    AnimatedVisibility(
+                        visible = !isSearchBarExpanded,
+                        enter = fadeIn(tween(durationMillis = 0)),
+                        exit = fadeOut(tween(durationMillis = 0)),
+                    ) {
+                        Text(
+                            text = title,
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                        )
+                    }
+
+                    AnimatedVisibility(
+                        visible = isSearchBarExpanded,
+                        enter = fadeIn(tween(durationMillis = 0)),
+                        exit = fadeOut(tween(durationMillis = 0)),
+                    ) {
+                        searchBarComposable()
+                    }
+                },
+                backgroundColor = topAppBarBackgroundColor,
+                navigationIcon = if (navigationAction != null) {
+                    { LbcMenuIconButton(action = navigationAction) }
+                } else {
+                    null
+                },
+                actions = {
+                    if (((showMenuOnLoading && isLoading) || !isLoading) && !isSearchBarExpanded) {
+                        rowActionsComposable?.invoke(this)
+                        LbcMenuIconButton(action = searchAction)
+                    }
+                },
+            )
+        }
         if (isLoading) {
             LinearProgressIndicator(
                 modifier = Modifier

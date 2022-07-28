@@ -7,6 +7,18 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### LbcTopAppBar
+
+- *Breaking*: remove `LbcNavigationTopAppBar` and `LbcLoadingNavigationTopAppBar` (see documentation for replacement).
+- *Breaking*: Change parameters for `LbcTopAppBar` and `LbcLoadingTopAppBar` (see documentation for replacement).
+- Distinct `TopAppBar` background color and status bar color in parameters.
+- Add `LbcSurfaceTopAppBar` to wrap your custom `TopAppBar` if needed.
+- Add `LbcMenuIconButton` to create menu icon for your `TopAppBar`.
+- Add `LbcTopAppBarAction` to describe the content of your `LbcMenuIconButton`.
+- New `LbcSearchTopAppBar` with a search text field.
+- New default implementation of `LbcSearchTextField` that can be provided to your `LbcSearchTopAppBar` for standard needs.
+- `LbcSearchTopAppBarState` that handles `LbcSearchTextField` states and `LbcSearchTopAppBar` expansion.
+
 ## 1.3.0
 
 ### LbcTopAppBar

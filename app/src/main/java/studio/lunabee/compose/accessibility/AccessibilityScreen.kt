@@ -59,7 +59,8 @@ import studio.lunabee.compose.lbcaccessibility.model.OnClickDescription
 import studio.lunabee.compose.lbcaccessibility.model.StateDescription
 import studio.lunabee.compose.lbcaccessibility.state.AccessibilityState
 import studio.lunabee.compose.lbcaccessibility.state.rememberAccessibilityState
-import studio.lunabee.compose.lbctopappbar.material.LbcNavigationTopAppBar
+import studio.lunabee.compose.lbctopappbar.material.LbcTopAppBar
+import studio.lunabee.compose.lbctopappbar.material.model.LbcTopAppBarAction
 import studio.lunabee.compose.navigation.ToDirection
 
 @Composable
@@ -72,13 +73,16 @@ fun AccessibilityScreen(
 
     Scaffold(
         topBar = {
-            LbcNavigationTopAppBar(
+            LbcTopAppBar(
                 title = stringResource(id = R.string.accessibility_title),
-                navigationIconRes = R.drawable.ic_back,
                 elevation = lazyListState.topAppBarElevation,
-                onNavigationClicked = navigateToPreviousScreen,
+                navigationAction = LbcTopAppBarAction.DrawableResAction(
+                    iconRes = R.drawable.ic_back,
+                    contentDescription = null,
+                    action = navigateToPreviousScreen,
+                ),
                 applyStatusBarPadding = true,
-                backgroundColor = MaterialTheme.colors.surface,
+                topAppBarBackgroundColor = MaterialTheme.colors.surface,
                 rowActionsComposable = {
                     if (accessibilityState.isAccessibilityEnabled) {
                         IconButton(onClick = openAccessibilitySettings) {

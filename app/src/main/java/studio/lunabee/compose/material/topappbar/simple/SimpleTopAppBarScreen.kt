@@ -13,56 +13,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * MenuBackScreen.kt
+ * SimpleTopAppBarScreen.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 7/18/2022 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.material.common.screen
+package studio.lunabee.compose.material.topappbar.simple
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import studio.lunabee.compose.R
 import studio.lunabee.compose.extension.topAppBarElevation
 import studio.lunabee.compose.lbctopappbar.material.LbcTopAppBar
 import studio.lunabee.compose.lbctopappbar.material.model.LbcTopAppBarAction
-import studio.lunabee.compose.material.common.section.MenuSection
-import studio.lunabee.compose.model.MenuEntry
+import studio.lunabee.compose.material.topappbar.TopAppBarItemFactory
+import studio.lunabee.compose.material.topappbar.TopAppBarOption
+import studio.lunabee.compose.material.topappbar.state.TopAppBarState
+import studio.lunabee.compose.material.topappbar.state.rememberTopAppBarState
 import studio.lunabee.compose.navigation.ToDirection
 
-/**
- * Screen with a simple [MenuSection] that displays a list of clickable item, with a [LbcTopAppBar].
- * @param title title to set in the [LbcTopAppBar]
- * @param menus items element to me displayed in the list
- * @param navigateToPreviousScreen action on [LbcTopAppBar] navigation pressed
- */
 @Composable
-fun MenuBackScreen(
-    title: String,
-    menus: List<MenuEntry>,
+fun SimpleTopAppBarScreen(
     navigateToPreviousScreen: ToDirection,
 ) {
     val lazyListState: LazyListState = rememberLazyListState()
+    val topAppBarState: TopAppBarState = rememberTopAppBarState()
 
     Scaffold(
         topBar = {
             LbcTopAppBar(
-                title = title,
+                title = stringResource(id = R.string.top_bar_list_title),
                 elevation = lazyListState.topAppBarElevation,
                 navigationAction = LbcTopAppBarAction.DrawableResAction(
                     iconRes = R.drawable.ic_back,
                     contentDescription = null,
                     action = navigateToPreviousScreen,
                 ),
-                topAppBarBackgroundColor = MaterialTheme.colors.surface,
                 applyStatusBarPadding = true,
+                topAppBarBackgroundColor = MaterialTheme.colors.surface,
             )
         }
     ) {
@@ -70,10 +67,31 @@ fun MenuBackScreen(
             modifier = Modifier
                 .padding(paddingValues = it),
         ) {
-            MenuSection(
-                lazyListState = lazyListState,
-                menus = menus,
-            )
+            LazyColumn(
+                state = lazyListState,
+            ) {
+                TopAppBarItemFactory.showOptions(
+                    options = listOf(
+                        TopAppBarOption.Elevation,
+                        TopAppBarOption.StatusBarPadding,
+                        TopAppBarOption.Navigation,
+                    ),
+                    topAppBarState = topAppBarState,
+                    lazyListScope = this,
+                )
+
+                TopAppBarItemFactory.showSimpleTopAppBar(
+                    titleRes = R.string.top_bar_screen_simple_description,
+                    topAppBarState = topAppBarState,
+                    lazyListScope = this,
+                )
+
+                TopAppBarItemFactory.showSimpleTopAppBarWithMenu(
+                    titleRes = R.string.top_bar_screen_simple_menu_description,
+                    topAppBarState = topAppBarState,
+                    lazyListScope = this,
+                )
+            }
         }
     }
 }
