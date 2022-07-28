@@ -21,12 +21,19 @@
 
 package studio.lunabee.library
 
+import java.io.File
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
 abstract class SnapshotTask : DefaultTask() {
     @TaskAction
-    fun isSnapshotVersion() {
-        println(project.version.toString().contains("-SNAPSHOT"))
+    fun setSnapshotVersion() {
+        val file = File(project.name + "/build.gradle.kts")
+        val newContents = file.readText().replace(Regex("version = \"[^\"]*")) { matchResult ->
+            "${matchResult.value}-SNAPSHOT"
+        }
+        file.writeText(newContents)
+
+        println(newContents)
     }
 }
