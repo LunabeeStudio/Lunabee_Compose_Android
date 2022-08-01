@@ -50,6 +50,12 @@ class Directions(navController: NavHostController) {
         }
     }
 
+    val navigateToTextScreen: ToDirection = {
+        navController.navigate(route = Destinations.TextRoute) {
+            popUpTo(route = Destinations.MainRoute) { inclusive = false }
+        }
+    }
+
     val navigateToPreviousScreen: ToDirection = {
         navController.popBackStack()
     }

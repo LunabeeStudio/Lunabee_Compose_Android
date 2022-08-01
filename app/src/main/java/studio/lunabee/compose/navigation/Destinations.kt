@@ -49,4 +49,9 @@ object Destinations {
      * Will navigate to [studio.lunabee.compose.material.topappbar.search.SearchTopAppBarScreen]
      */
     const val SearchTopAppBarRoute: String = "SearchTopAppBarRoute"
+
+    /**
+     * Will navigate to [studio.lunabee.compose.material.text.TextScreen]
+     */
+    const val TextRoute: String = "TextRoute"
 }
