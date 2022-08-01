@@ -7,6 +7,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### LbcAccessibility
+
+- *Breaking*: remove `AccessibilityDescription` object
+- *Breaking*: remove some `Modifier` extension
+- *Breaking*: change name and signature for `addSemantics` method to `setAccessibilityDetails`
+- Add some new parameters like `LiveRegion` and `ToggleableDescription`
+- See documentation for more details
+
 ### LbcTopAppBar
 
 - *Breaking*: remove `LbcNavigationTopAppBar` and `LbcLoadingNavigationTopAppBar` (see documentation for replacement).

@@ -47,17 +47,18 @@
     <string name="top_bar_screen_previous_screen">"Go back to previous screen"</string>
 
     <!-- AccessibilityScreen -->
-    <string name="accessibility_screen_simple_text">"Text read by Talkback"</string>
-    <string name="accessibility_screen_simple_text_not_read">"Text not read by Talkback"</string>
-    <string name="accessibility_screen_simple_text_head">"A swipe down will jump to me!"</string>
-    <string name="accessibility_screen_floating_button_explanation_enabled">"When accessibility is enabled, FloatingActionButton is moved to a menu action."</string>
-    <string name="accessibility_screen_floating_button_explanation_disabled">"FloatingActionButton will be visible only if accessibility is disabled."</string>
+    <string name="accessibility_screen_simple_text">"Title"</string>
+    <string name="accessibility_screen_simple_text2">"Subtitle"</string>
+    <string name="accessibility_screen_simple_text_not_read">"I'm invisible"</string>
+    <string name="accessibility_screen_simple_text_head">"I'm accessible by swiping up/down"</string>
     <string name="accessibility_screen_menu_content_description">"Go to accessibility settings"</string>
-    <string name="accessibility_screen_custom_content_description_click">"Specific content description"</string>
-    <string name="accessibility_screen_custom_content_description_checkbox">"I'm an accessible CheckBox"</string>
-    <string name="accessibility_screen_custom_content_description_state_enabled">"Custom content description for enabled state"</string>
-    <string name="accessibility_screen_custom_content_description_state_disabled">"Custom content description for disabled state"</string>
+    <string name="accessibility_screen_custom_content_description_state_enabled">"Screen is accessible"</string>
+    <string name="accessibility_screen_custom_content_description_state_disabled">"Screen is not accessible"</string>
     <string name="accessibility_screen_custom_button_click_me">"I'm an accessible button"</string>
-    <string name="accessibility_screen_custom_button_on_click_description">"Custom description for my click"</string>
+    <string name="accessibility_screen_custom_button_on_click_description">"display a toast"</string>
     <string name="accessibility_screen_custom_button_clicked">"Tapped!"</string>
+    <string name="accessibility_screen_current_value">"Current value is: %d"</string>
+    <string name="accessibility_screen_current_value_now">"Current value is now: %d"</string>
+    <string name="accessibility_screen_current_value_increment">"Increment value"</string>
+    <string name="accessibility_screen_make_layout_accessible">"Make layout accessible"</string>
 </resources>

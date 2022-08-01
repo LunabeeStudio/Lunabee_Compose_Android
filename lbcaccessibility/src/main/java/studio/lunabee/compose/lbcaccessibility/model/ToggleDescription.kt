@@ -13,21 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * StateDescription.kt
+ * OnClickDescription.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 5/10/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 6/21/2022 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.lbcaccessibility.model
 
+import androidx.compose.ui.semantics.Role
+
 /**
- * Wrapper object to set a state description in a [androidx.compose.ui.Modifier] with semantics method.
+ * Use this class to set a toggleable state for accessibility (Checkbox, Switch...).
  *
- * @param stateEnabledDescription string that will be read by Talkback when your state is true/enabled/checked...
- * @param stateDisabledDescription string that will be read by Talkback when your state is false/disabled/unchecked...
+ * @param value state value for the toggleable element.
+ * @param onValueChanged when user toggle state.
+ * @param role value in [Role]
  */
-data class StateDescription(
-    val stateEnabledDescription: String,
-    val stateDisabledDescription: String,
+data class ToggleDescription(
+    val value: Boolean,
+    val onValueChanged: (newValue: Boolean) -> Unit,
+    val role: Role,
 )
