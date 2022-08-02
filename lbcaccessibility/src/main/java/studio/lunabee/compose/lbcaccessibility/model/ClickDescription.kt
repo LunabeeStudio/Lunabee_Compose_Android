@@ -24,10 +24,10 @@ package studio.lunabee.compose.lbcaccessibility.model
 /**
  * Use this class to set a click label for accessibility if you don't have access to Modifier's clickable method.
  *
- * @param action action to be executed on click
  * @param clickLabel label read by TalkBack
+ * @param action action to be executed on click
  */
-data class OnClickDescription(
-    val action: () -> Unit,
+data class ClickDescription(
     val clickLabel: String,
+    val action: () -> Boolean,
 )

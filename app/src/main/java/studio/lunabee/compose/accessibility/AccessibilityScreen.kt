@@ -21,42 +21,23 @@
 
 package studio.lunabee.compose.accessibility
 
-import android.widget.Toast
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.Button
-import androidx.compose.material.Checkbox
-import androidx.compose.material.Divider
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import studio.lunabee.compose.R
 import studio.lunabee.compose.extension.topAppBarElevation
-import studio.lunabee.compose.lbcaccessibility.composable.AccessibilityCheckBoxRow
-import studio.lunabee.compose.lbcaccessibility.extension.addSemantics
-import studio.lunabee.compose.lbcaccessibility.model.AccessibilityDescription
-import studio.lunabee.compose.lbcaccessibility.model.OnClickDescription
-import studio.lunabee.compose.lbcaccessibility.model.StateDescription
 import studio.lunabee.compose.lbcaccessibility.state.AccessibilityState
 import studio.lunabee.compose.lbcaccessibility.state.rememberAccessibilityState
 import studio.lunabee.compose.lbctopappbar.material.LbcTopAppBar
@@ -70,6 +51,8 @@ fun AccessibilityScreen(
 ) {
     val lazyListState: LazyListState = rememberLazyListState()
     val accessibilityState: AccessibilityState = rememberAccessibilityState()
+    var isLayoutAccessible: Boolean by rememberSaveable { mutableStateOf(value = false) }
+    var currentValue: Int by rememberSaveable { mutableStateOf(value = 0) }
 
     Scaffold(
         topBar = {
@@ -111,161 +94,34 @@ fun AccessibilityScreen(
             state = lazyListState,
             contentPadding = it,
         ) {
-            item(
-                key = "description_fab_text",
-            ) {
-                val textToDisplay = if (accessibilityState.isAccessibilityEnabled) {
-                    stringResource(id = R.string.accessibility_screen_floating_button_explanation_enabled)
-                } else {
-                    stringResource(id = R.string.accessibility_screen_floating_button_explanation_disabled)
-                }
-
-                Text(
-                    text = textToDisplay,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                )
-
-                Divider()
-            }
-
-            item(
-                key = "default_accessibility_item",
-            ) {
-                Text(
-                    text = stringResource(id = R.string.accessibility_screen_simple_text),
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                )
-                Divider()
-            }
-
-            item(
-                key = "content_description_accessibility_item",
-            ) {
-                Text(
-                    text = stringResource(id = R.string.accessibility_screen_simple_text_not_read),
-                    modifier = Modifier
-                        .addSemantics(
-                            accessibilityDescription = AccessibilityDescription(
-                                contentDescription = stringResource(id = R.string.accessibility_screen_custom_content_description_click),
-                            )
-                        )
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                )
-                Divider()
-            }
-
-            item(
-                key = "heading_accessibility_item",
-            ) {
-                Text(
-                    style = MaterialTheme.typography.h5,
-                    text = stringResource(id = R.string.accessibility_screen_simple_text_head),
-                    modifier = Modifier
-                        .addSemantics(
-                            accessibilityDescription = AccessibilityDescription(
-                                contentDescription = stringResource(id = R.string.accessibility_screen_custom_content_description_click),
-                                isHeading = true,
-                            )
-                        )
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                )
-                Divider()
-            }
-
-            item(
-                key = "checkbox_accessible_item_key"
-            ) {
-                if (accessibilityState.isAccessibilityEnabled) {
-                    AccessibilityCheckBoxRow(
-                        initialCheckStateValue = false,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .defaultMinSize(minHeight = 48.dp)
-                            .padding(horizontal = 16.dp, vertical = 8.dp),
-                        accessibilityDescription = AccessibilityDescription(
-                            stateDescription = StateDescription(
-                                stateEnabledDescription = stringResource(
-                                    id = R.string.accessibility_screen_custom_content_description_state_enabled,
-                                ),
-                                stateDisabledDescription = stringResource(
-                                    id = R.string.accessibility_screen_custom_content_description_state_disabled,
-                                ),
-                            )
-                        )
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.accessibility_screen_custom_content_description_checkbox),
-                            modifier = Modifier
-                                .weight(weight = 1f),
-                        )
-                    }
-                } else {
-                    DefaultCheckBox()
-                }
-            }
-
-            item(
-                key = "button_accessible_item_key",
-            ) {
-                val context = LocalContext.current
-                val clickAction = {
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.accessibility_screen_custom_button_clicked),
-                        Toast.LENGTH_LONG,
-                    ).show()
-                }
-                Button(
-                    onClick = clickAction,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(all = 8.dp)
-                        .addSemantics(
-                            accessibilityDescription = AccessibilityDescription(
-                                onClickDescription = OnClickDescription(
-                                    action = clickAction,
-                                    clickLabel = stringResource(id = R.string.accessibility_screen_custom_button_on_click_description),
-                                )
-                            )
-                        )
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.accessibility_screen_custom_button_click_me),
-                        modifier = Modifier
-                            .padding(vertical = 8.dp),
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun DefaultCheckBox() {
-    var isChecked: Boolean by rememberSaveable { mutableStateOf(value = false) }
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .defaultMinSize(minHeight = 48.dp)
-            .toggleable(
-                value = isChecked,
-                onValueChange = { isChecked = it },
+            AccessibilityItemFactory.itemSwitchUiNotAccessible(
+                lazyListScope = this,
+                isChecked = isLayoutAccessible,
+                onCheckChange = { isLayoutAccessible = it },
             )
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
 
-        Text(
-            text = stringResource(id = R.string.accessibility_screen_custom_content_description_checkbox),
-            modifier = Modifier
-                .weight(weight = 1f),
-        )
-        Checkbox(
-            checked = isChecked,
-            onCheckedChange = { isChecked = it },
-        )
+            AccessibilityItemFactory.itemColumnAccessible(
+                lazyListScope = this,
+                isLayoutAccessible = isLayoutAccessible,
+            )
+
+            AccessibilityItemFactory.itemHeading(
+                lazyListScope = this,
+            )
+
+            AccessibilityItemFactory.itemInvisible(
+                lazyListScope = this,
+            )
+
+            AccessibilityItemFactory.itemButtonAccessible(
+                lazyListScope = this,
+            )
+
+            AccessibilityItemFactory.itemLiveRegion(
+                lazyListScope = this,
+                value = currentValue,
+                onValueChange = { currentValue++ },
+            )
+        }
     }
 }
