@@ -30,7 +30,7 @@ abstract class SnapshotTask : DefaultTask() {
     fun setSnapshotVersion() {
         val file = File(project.name + "/build.gradle.kts")
         val newContents = file.readText().replace(Regex("version = \"[^\"]*")) { matchResult ->
-            "${matchResult.value}-SNAPSHOT"
+            "${matchResult.value}-${project.properties["counter"]}-SNAPSHOT"
         }
         file.writeText(newContents)
 

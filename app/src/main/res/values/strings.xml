@@ -33,6 +33,8 @@
     <string name="top_bar_loading_list_subtitle">"TopAppBar with navigation, menus and LinearProgressIndicator"</string>
     <string name="top_bar_search_list_title">"Search TopAppBar (lbctopappbar)"</string>
     <string name="top_bar_search_list_subtitle">"TopAppBar with search text field, navigation, menus, LinearProgressIndicator"</string>
+    <string name="text_screen_title">"Text"</string>
+    <string name="text_screen_subtitle">"Material text to style dynamically"</string>
 
     <!-- *TopAppBarScreen -->
     <string name="top_bar_screen_description">"A list of TopAppBar that can be displayed by this lib."</string>
@@ -61,4 +63,12 @@
     <string name="accessibility_screen_current_value_now">"Current value is now: %d"</string>
     <string name="accessibility_screen_current_value_increment">"Increment value"</string>
     <string name="accessibility_screen_make_layout_accessible">"Make layout accessible"</string>
+
+    <!-- TextScreen -->
+    <string name="text_screen_highlight_placeholder">"Separate text to highlight by a comma"</string>
+    <string name="text_screen_base_text_placeholder">"Base raw text"</string>
+
+    <!-- Common -->
+    <string name="lorem_ipsum">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</string>
+    <string name="highlighted_lorem_ipsum">"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</string>
 </resources>

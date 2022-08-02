@@ -1,5 +1,10 @@
 ![](https://img.shields.io/badge/license-Apache--2.0-informational?style=for-the-badge) ![](https://img.shields.io/badge/minSdk-23-informational?style=for-the-badge)
 
+| Module           | Last version                                                                                            |
+|------------------|---------------------------------------------------------------------------------------------------------|
+| LbcTopAppBar     | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbctopappbar?style=for-the-badge)     |
+| LbcAccessibility | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbcaccessibility?style=for-the-badge) |
+| LbcMaterial      | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbcmaterial?style=for-the-badge)      |
 
 # Lunabee Jetpack Compose library
 
@@ -10,7 +15,7 @@ To date, this library is composed of 2 distincts modules.
 
 ## Documentation
 
-The documentation of these two modules can be found [here](https://github.com/LunabeeStudio/Lunabee_Compose_Android/wiki)
+The documentation of these modules can be found [here](https://www.notion.so/lunabeestudio/Lunabee-Compose-library-42f4d91d463a4e8492a1a4d3d32a243f)
 
 ## Changelog
 
