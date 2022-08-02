@@ -7,6 +7,17 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### Global
+
+- Update Jetpack Compose compiler to `1.3.0-rc01`
+- Update Kotlin to `1.7.10`
+- Update Jetpack Compose to stable version `1.2.0`
+
+### LbcMaterial
+
+- Add new module `lbcmaterial` for Material Composable that can be reuse.
+- Add `StyledTextItem` Composable to make highlighted clickable text.
+
 ### LbcTopAppBar
 
 - *Breaking*: remove `LbcNavigationTopAppBar` and `LbcLoadingNavigationTopAppBar` (see documentation for replacement).
@@ -47,7 +58,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - `OnClickDescription` for `Composable` without `Modifier.clickable` access.
 - Update Jetpack Compose to `1.2.0-rc02`
-
 
 ## 1.1.0
 

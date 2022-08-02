@@ -81,4 +81,5 @@ dependencies {
 
     implementation(project(Modules.lbctopappbar))
     implementation(project(Modules.lbcaccessibility))
+    implementation(project(Modules.lbcmaterial))
 }
