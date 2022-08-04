@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
   ~ Copyright © 2022 Lunabee Studio
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,8 +30,7 @@
     <string name="top_bar_loading_list_title">"TopAppBar avec chargement (lbctopappbar)"</string>
     <string name="top_bar_loading_list_subtitle">"TopAppBar avec navigation, menus et LinearProgressIndicator"</string>
     <string name="top_bar_search_list_title">"TopAppBar avec recherche (lbctopappbar)"</string>
-    <string
-        name="top_bar_search_list_subtitle">"TopAppBar avec un champs de recherche, navigation, menus et LinearProgressIndicator"</string>
+    <string name="top_bar_search_list_subtitle">"TopAppBar avec un champs de recherche, navigation, menus et LinearProgressIndicator"</string>
     <string name="top_bar_screen_previous_screen">"Retour à l'écran précédent"</string>
     <string name="text_screen_title">"Texte"</string>
     <string name="text_screen_subtitle">"Material texte qui peuvent être partiellement stylisés"</string>
@@ -47,19 +47,20 @@
     <string name="top_bar_screen_navigation_action">"Avec navigation"</string>
 
     <!-- AccessibilityScreen -->
-    <string name="accessibility_screen_simple_text">"Texte lu par Talkback"</string>
-    <string name="accessibility_screen_simple_text_not_read">"Texte non lu par Talkaback"</string>
+    <string name="accessibility_screen_simple_text">"Titre"</string>
+    <string name="accessibility_screen_simple_text2">"Sous-titre"</string>
+    <string name="accessibility_screen_simple_text_not_read">"Je suis invisible"</string>
     <string name="accessibility_screen_simple_text_head">"Glisser vers le bas pour me sélectionner directement !"</string>
-    <string name="accessibility_screen_custom_content_description_click">"Texte spécialement lu pour l'accessibilité"</string>
-    <string name="accessibility_screen_floating_button_explanation_enabled">"Le FloatingActionButton devient un menu lorsque Talkback est activé."</string>
-    <string name="accessibility_screen_floating_button_explanation_disabled">"Le FloatingActionButton est visible seulement lorsque Talkback est désactivé."</string>
     <string name="accessibility_screen_menu_content_description">"Aller aux paramètres d'accessibilité"</string>
-    <string name="accessibility_screen_custom_content_description_checkbox">"Je suis une CheckBox accessible"</string>
-    <string name="accessibility_screen_custom_content_description_state_enabled">"Texte spécialement lu pour l'état sélectionné"</string>
-    <string name="accessibility_screen_custom_content_description_state_disabled">"Texte spécialement lu pour l'état désélectionné"</string>
+    <string name="accessibility_screen_custom_content_description_state_enabled">"L'écran est accessible"</string>
+    <string name="accessibility_screen_custom_content_description_state_disabled">"L'écran n'est pas accessible"</string>
     <string name="accessibility_screen_custom_button_click_me">"Je suis un bouton accessible"</string>
-    <string name="accessibility_screen_custom_button_on_click_description">"Je suis le label action du bouton"</string>
+    <string name="accessibility_screen_custom_button_on_click_description">"afficher un toast"</string>
     <string name="accessibility_screen_custom_button_clicked">"Tapé!"</string>
+    <string name="accessibility_screen_current_value">"La valeur actuelle est: %d"</string>
+    <string name="accessibility_screen_current_value_now">"La valeur actuelle est désormais: %d"</string>
+    <string name="accessibility_screen_current_value_increment">"Incrémenter la valeur"</string>
+    <string name="accessibility_screen_make_layout_accessible">"Rendre le layout accessible"</string>
 
     <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Séparez les textes à mettre en évidence par une virgule"</string>
