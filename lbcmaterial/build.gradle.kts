@@ -13,21 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * OnClickDescription.kt
+ * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 6/21/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 7/29/2022 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.lbcaccessibility.model
+import studio.lunabee.library.setPublication
+import studio.lunabee.library.setRepository
 
-/**
- * Use this class to set a click label for accessibility if you don't have access to Modifier's clickable method.
- *
- * @param action action to be executed on click
- * @param clickLabel label read by TalkBack
- */
-data class OnClickDescription(
-    val action: () -> Unit,
-    val clickLabel: String,
-)
+plugins {
+    id("studio.lunabee.library.android")
+}
+
+android {
+    resourcePrefix("lbc_mat_")
+}
+
+description = "A set of material Composable"
+version = "1.0.0"
+
+publishing {
+    setRepository(project)
+    setPublication(project)
+}
+
+signing {
+    sign(publishing.publications[project.name])
+}
+
+dependencies {
+    implementation(AndroidX.compose.material)
+}

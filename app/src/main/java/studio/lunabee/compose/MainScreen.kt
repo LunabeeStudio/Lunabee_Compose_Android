@@ -30,26 +30,38 @@ import studio.lunabee.compose.navigation.ToDirection
 
 @Composable
 fun MainScreen(
-    navigateToMaterialScreen: ToDirection,
-    navigateToMaterial3Screen: ToDirection,
+    navigateToSimpleTopAppBarScreen: ToDirection,
+    navigateToLoadingTopAppBarScreen: ToDirection,
+    navigateToSearchTopAppBarScreen: ToDirection,
     navigateToAccessibilityScreen: ToDirection,
+    navigateToTextScreen: ToDirection,
 ) {
     val menus: List<MenuEntry> = remember {
         listOf(
             MenuEntry(
-                titleRes = R.string.material_title,
-                subtitleRes = R.string.material_subtitle,
-                direction = navigateToMaterialScreen,
+                titleRes = R.string.top_bar_list_title,
+                subtitleRes = R.string.top_bar_list_subtitle,
+                direction = navigateToSimpleTopAppBarScreen,
             ),
             MenuEntry(
-                titleRes = R.string.material3_title,
-                subtitleRes = R.string.material3_subtitle,
-                direction = navigateToMaterial3Screen,
+                titleRes = R.string.top_bar_loading_list_title,
+                subtitleRes = R.string.top_bar_loading_list_subtitle,
+                direction = navigateToLoadingTopAppBarScreen,
+            ),
+            MenuEntry(
+                titleRes = R.string.top_bar_search_list_title,
+                subtitleRes = R.string.top_bar_search_list_subtitle,
+                direction = navigateToSearchTopAppBarScreen,
             ),
             MenuEntry(
                 titleRes = R.string.accessibility_title,
                 subtitleRes = R.string.accessibility_subtitle,
                 direction = navigateToAccessibilityScreen,
+            ),
+            MenuEntry(
+                titleRes = R.string.text_screen_title,
+                subtitleRes = R.string.text_screen_subtitle,
+                direction = navigateToTextScreen,
             ),
         )
     }

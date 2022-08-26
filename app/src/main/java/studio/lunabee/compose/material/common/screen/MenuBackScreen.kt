@@ -31,19 +31,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import studio.lunabee.compose.R
 import studio.lunabee.compose.extension.topAppBarElevation
-import studio.lunabee.compose.lbctopappbar.material.LbcNavigationTopAppBar
+import studio.lunabee.compose.lbctopappbar.material.LbcTopAppBar
+import studio.lunabee.compose.lbctopappbar.material.model.LbcTopAppBarAction
 import studio.lunabee.compose.material.common.section.MenuSection
 import studio.lunabee.compose.model.MenuEntry
 import studio.lunabee.compose.navigation.ToDirection
 
 /**
- * Screen with a simple [MenuSection] that displays a list of clickable item, with a [LbcNavigationTopAppBar].
- *
- * @param title title to set in the [LbcNavigationTopAppBar]
- *
+ * Screen with a simple [MenuSection] that displays a list of clickable item, with a [LbcTopAppBar].
+ * @param title title to set in the [LbcTopAppBar]
  * @param menus items element to me displayed in the list
- *
- * @param navigateToPreviousScreen action on [LbcNavigationTopAppBar] navigation pressed
+ * @param navigateToPreviousScreen action on [LbcTopAppBar] navigation pressed
  */
 @Composable
 fun MenuBackScreen(
@@ -55,12 +53,15 @@ fun MenuBackScreen(
 
     Scaffold(
         topBar = {
-            LbcNavigationTopAppBar(
+            LbcTopAppBar(
                 title = title,
-                navigationIconRes = R.drawable.ic_back,
                 elevation = lazyListState.topAppBarElevation,
-                onNavigationClicked = navigateToPreviousScreen,
-                backgroundColor = MaterialTheme.colors.surface,
+                navigationAction = LbcTopAppBarAction.DrawableResAction(
+                    iconRes = R.drawable.ic_back,
+                    contentDescription = null,
+                    action = navigateToPreviousScreen,
+                ),
+                topAppBarBackgroundColor = MaterialTheme.colors.surface,
                 applyStatusBarPadding = true,
             )
         }

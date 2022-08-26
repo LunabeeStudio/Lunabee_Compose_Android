@@ -28,20 +28,30 @@ object Destinations {
     /**
      * Will navigate to [studio.lunabee.compose.MainScreen].
      */
-    const val MAIN_ROUTE: String = "MAIN_ROUTE"
+    const val MainRoute: String = "MainRoute"
 
     /**
-     * Will navigate to [studio.lunabee.compose.material.MaterialScreen].
+     * Will navigate to [studio.lunabee.compose.accessibility.AccessibilityScreen]
      */
-    const val MATERIAL_ROUTE: String = "MATERIAL_ROUTE"
+    const val AccessibilityRoute: String = "AccessibilityRoute"
 
     /**
-     * Will navigate to
+     * Will navigate to [studio.lunabee.compose.material.topappbar.simple.SimpleTopAppBarScreen]
      */
-    const val ACCESSIBILITY_ROUTE: String = "ACCESSIBILITY_ROUTE"
+    const val SimpleTopAppBarRoute: String = "SimpleTopAppBarRoute"
 
     /**
-     * Will navigate to [studio.lunabee.compose.material.topappbar.TopAppBarScreen]
+     * Will navigate to [studio.lunabee.compose.material.topappbar.loading.LoadingTopAppBarScreen]
      */
-    const val TOP_APP_BAR_ROUTE: String = "TOP_APP_BAR_ROUTE"
+    const val LoadingTopAppBarRoute: String = "LoadingTopAppBarRoute"
+
+    /**
+     * Will navigate to [studio.lunabee.compose.material.topappbar.search.SearchTopAppBarScreen]
+     */
+    const val SearchTopAppBarRoute: String = "SearchTopAppBarRoute"
+
+    /**
+     * Will navigate to [studio.lunabee.compose.material.text.TextScreen]
+     */
+    const val TextRoute: String = "TextRoute"
 }

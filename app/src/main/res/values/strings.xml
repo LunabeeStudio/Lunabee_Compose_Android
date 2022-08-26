@@ -24,44 +24,51 @@
     <string name="application_name" translatable="false">Lunabee Compose Android</string>
 
     <!-- MainScreen -->
-    <string name="select_your_theme_title">"Select your theme"</string>
-    <string name="material_title">"Material"</string>
-    <string name="material_subtitle">"androidx.composable.material"</string>
-    <string name="material3_title">"Material 3 (Alpha)"</string>
-    <string name="material3_subtitle">"androidx.composable.material3"</string>
-    <string name="accessibility_title">"Accessibility"</string>
+    <string name="select_your_theme_title">"Modules"</string>
+    <string name="accessibility_title">"Accessibility (lbcaccessibility)"</string>
     <string name="accessibility_subtitle">"Accessibility with Compose"</string>
+    <string name="top_bar_list_title">"Simple TopAppBar (lbctopappbar)"</string>
+    <string name="top_bar_list_subtitle">"TopAppBar with navigation and menus"</string>
+    <string name="top_bar_loading_list_title">"TopAppBar with loading (lbctopappbar)"</string>
+    <string name="top_bar_loading_list_subtitle">"TopAppBar with navigation, menus and LinearProgressIndicator"</string>
+    <string name="top_bar_search_list_title">"Search TopAppBar (lbctopappbar)"</string>
+    <string name="top_bar_search_list_subtitle">"TopAppBar with search text field, navigation, menus, LinearProgressIndicator"</string>
+    <string name="text_screen_title">"Text"</string>
+    <string name="text_screen_subtitle">"Material text to style dynamically"</string>
 
-    <!-- MaterialScreen -->
-    <string name="top_bar_list_title">"TopAppBar"</string>
-    <string name="top_bar_list_subtitle">"Examples of different TopAppBar"</string>
-
-    <!-- TopAppBarScreen -->
+    <!-- *TopAppBarScreen -->
     <string name="top_bar_screen_description">"A list of TopAppBar that can be displayed by this lib."</string>
     <string name="top_bar_screen_simple_description">"TopAppBar classic"</string>
     <string name="top_bar_screen_simple_menu_description">"TopAppBar with menus"</string>
-    <string name="top_bar_screen_back_description">"TopAppBar with navigation"</string>
-    <string name="top_bar_screen_back_menu_description">"TopAppBar with navigation and menus"</string>
-    <string name="top_bar_screen_custom_title_description">"TopAppBar with custom title"</string>
     <string name="top_bar_screen_elevate_top_bar_action">"Default elevation for TopAppBar"</string>
     <string name="top_bar_screen_elevate_status_bar_padding_action">"Add status bar padding"</string>
-    <string name="top_bar_screen_loading_description">"TopAppBar with loader"</string>
-    <string name="top_bar_screen_loading_navigation_description">"TopAppBar with navigation and loader"</string>
     <string name="top_bar_screen_is_loading_action">"Loading in progress"</string>
     <string name="top_bar_screen_is_menu_showing_action">"Menu shown during loading"</string>
+    <string name="top_bar_screen_navigation_action">"With navigation"</string>
+    <string name="top_bar_screen_search_placeholder">"Your search here"</string>
+    <string name="top_bar_screen_previous_screen">"Go back to previous screen"</string>
 
     <!-- AccessibilityScreen -->
-    <string name="accessibility_screen_simple_text">"Text read by Talkback"</string>
-    <string name="accessibility_screen_simple_text_not_read">"Text not read by Talkback"</string>
-    <string name="accessibility_screen_simple_text_head">"A swipe down will jump to me!"</string>
-    <string name="accessibility_screen_floating_button_explanation_enabled">"When accessibility is enabled, FloatingActionButton is moved to a menu action."</string>
-    <string name="accessibility_screen_floating_button_explanation_disabled">"FloatingActionButton will be visible only if accessibility is disabled."</string>
+    <string name="accessibility_screen_simple_text">"Title"</string>
+    <string name="accessibility_screen_simple_text2">"Subtitle"</string>
+    <string name="accessibility_screen_simple_text_not_read">"I'm invisible"</string>
+    <string name="accessibility_screen_simple_text_head">"I'm accessible by swiping up/down"</string>
     <string name="accessibility_screen_menu_content_description">"Go to accessibility settings"</string>
-    <string name="accessibility_screen_custom_content_description_click">"Specific content description"</string>
-    <string name="accessibility_screen_custom_content_description_checkbox">"I'm an accessible CheckBox"</string>
-    <string name="accessibility_screen_custom_content_description_state_enabled">"Custom content description for enabled state"</string>
-    <string name="accessibility_screen_custom_content_description_state_disabled">"Custom content description for disabled state"</string>
+    <string name="accessibility_screen_custom_content_description_state_enabled">"Screen is accessible"</string>
+    <string name="accessibility_screen_custom_content_description_state_disabled">"Screen is not accessible"</string>
     <string name="accessibility_screen_custom_button_click_me">"I'm an accessible button"</string>
-    <string name="accessibility_screen_custom_button_on_click_description">"Custom description for my click"</string>
+    <string name="accessibility_screen_custom_button_on_click_description">"display a toast"</string>
     <string name="accessibility_screen_custom_button_clicked">"Tapped!"</string>
+    <string name="accessibility_screen_current_value">"Current value is: %d"</string>
+    <string name="accessibility_screen_current_value_now">"Current value is now: %d"</string>
+    <string name="accessibility_screen_current_value_increment">"Increment value"</string>
+    <string name="accessibility_screen_make_layout_accessible">"Make layout accessible"</string>
+
+    <!-- TextScreen -->
+    <string name="text_screen_highlight_placeholder">"Separate text to highlight by a comma"</string>
+    <string name="text_screen_base_text_placeholder">"Base raw text"</string>
+
+    <!-- Common -->
+    <string name="lorem_ipsum">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</string>
+    <string name="highlighted_lorem_ipsum">"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</string>
 </resources>

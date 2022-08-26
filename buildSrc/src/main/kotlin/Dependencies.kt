@@ -22,6 +22,7 @@
 object Modules {
     const val lbctopappbar: String = ":lbctopappbar"
     const val lbcaccessibility: String = ":lbcaccessibility"
+    const val lbcmaterial: String = ":lbcmaterial"
 }
 
 object BuildConfigs {

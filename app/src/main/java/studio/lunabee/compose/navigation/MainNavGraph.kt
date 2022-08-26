@@ -31,9 +31,11 @@ import androidx.navigation.compose.composable
 import com.google.accompanist.systemuicontroller.SystemUiController
 import studio.lunabee.compose.MainScreen
 import studio.lunabee.compose.accessibility.AccessibilityScreen
-import studio.lunabee.compose.material.MaterialScreen
+import studio.lunabee.compose.material.text.TextScreen
 import studio.lunabee.compose.material.theme.LunabeeComposeMaterialTheme
-import studio.lunabee.compose.material.topappbar.TopAppBarScreen
+import studio.lunabee.compose.material.topappbar.loading.LoadingTopAppBarScreen
+import studio.lunabee.compose.material.topappbar.search.SearchTopAppBarScreen
+import studio.lunabee.compose.material.topappbar.simple.SimpleTopAppBarScreen
 
 @Composable
 fun MainNavGraph(
@@ -44,49 +46,62 @@ fun MainNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Destinations.MAIN_ROUTE,
+        startDestination = Destinations.MainRoute,
     ) {
         composable(
-            route = Destinations.MAIN_ROUTE,
+            route = Destinations.MainRoute,
         ) {
             LunabeeComposeMaterialTheme(
                 systemUiController = systemUiController,
             ) {
                 MainScreen(
-                    navigateToMaterialScreen = directions.navigateToMaterialScreen,
-                    navigateToMaterial3Screen = directions.navigateToMaterial3Screen,
+                    navigateToSimpleTopAppBarScreen = directions.navigateToSimpleTopAppBarScreen,
+                    navigateToLoadingTopAppBarScreen = directions.navigateToLoadingTopAppBarScreen,
+                    navigateToSearchTopAppBarScreen = directions.navigateToSearchTopAppBarScreen,
                     navigateToAccessibilityScreen = directions.navigateToAccessibilityScreen,
+                    navigateToTextScreen = directions.navigateToTextScreen,
                 )
             }
         }
 
         composable(
-            route = Destinations.MATERIAL_ROUTE,
+            route = Destinations.SimpleTopAppBarRoute,
         ) {
             LunabeeComposeMaterialTheme(
                 systemUiController = systemUiController,
             ) {
-                MaterialScreen(
-                    navigateToPreviousScreen = directions.navigateToPreviousScreen,
-                    navigateToTopAppBarScreen = directions.navigateToTopAppBarScreen,
-                )
-            }
-        }
-
-        composable(
-            route = Destinations.TOP_APP_BAR_ROUTE,
-        ) {
-            LunabeeComposeMaterialTheme(
-                systemUiController = systemUiController,
-            ) {
-                TopAppBarScreen(
+                SimpleTopAppBarScreen(
                     navigateToPreviousScreen = directions.navigateToPreviousScreen,
                 )
             }
         }
 
         composable(
-            route = Destinations.ACCESSIBILITY_ROUTE,
+            route = Destinations.LoadingTopAppBarRoute,
+        ) {
+            LunabeeComposeMaterialTheme(
+                systemUiController = systemUiController,
+            ) {
+                LoadingTopAppBarScreen(
+                    navigateToPreviousScreen = directions.navigateToPreviousScreen,
+                )
+            }
+        }
+
+        composable(
+            route = Destinations.SearchTopAppBarRoute,
+        ) {
+            LunabeeComposeMaterialTheme(
+                systemUiController = systemUiController,
+            ) {
+                SearchTopAppBarScreen(
+                    navigateToPreviousScreen = directions.navigateToPreviousScreen,
+                )
+            }
+        }
+
+        composable(
+            route = Destinations.AccessibilityRoute,
         ) {
             LunabeeComposeMaterialTheme(
                 systemUiController = systemUiController,
@@ -97,6 +112,18 @@ fun MainNavGraph(
                         val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
                         context.startActivity(intent)
                     },
+                )
+            }
+        }
+
+        composable(
+            route = Destinations.TextRoute,
+        ) {
+            LunabeeComposeMaterialTheme(
+                systemUiController = systemUiController,
+            ) {
+                TextScreen(
+                    navigateToPreviousScreen = directions.navigateToPreviousScreen,
                 )
             }
         }

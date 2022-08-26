@@ -7,6 +7,46 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 1.0.0
+
+### LbcMaterial
+
+- Update Jetpack Compose compiler to `1.3.0`
+- Update Kotlin to `1.7.10`
+- Update Jetpack Compose to stable version `1.2.1`
+- Add new module `lbcmaterial` for Material Composable that can be reuse.
+- Add `StyledTextItem` Composable to make highlighted clickable text.
+
+## 1.3.0
+
+### LbcAccessibility
+
+- Update Jetpack Compose compiler to `1.3.0`
+- Update Kotlin to `1.7.10`
+- Update Jetpack Compose to stable version `1.2.1`
+- *Breaking*: remove `AccessibilityDescription` object
+- *Breaking*: remove some `Modifier` extension
+- *Breaking*: change name and signature for `addSemantics` method to `setAccessibilityDetails`
+- Add some new parameters like `LiveRegion` and `ToggleableDescription`
+- See documentation for more details
+
+## 1.4.0
+
+### LbcTopAppBar
+
+- Update Jetpack Compose compiler to `1.3.0`
+- Update Kotlin to `1.7.10`
+- Update Jetpack Compose to stable version `1.2.1`
+- *Breaking*: remove `LbcNavigationTopAppBar` and `LbcLoadingNavigationTopAppBar` (see documentation for replacement).
+- *Breaking*: Change parameters for `LbcTopAppBar` and `LbcLoadingTopAppBar` (see documentation for replacement).
+- Distinct `TopAppBar` background color and status bar color in parameters.
+- Add `LbcSurfaceTopAppBar` to wrap your custom `TopAppBar` if needed.
+- Add `LbcMenuIconButton` to create menu icon for your `TopAppBar`.
+- Add `LbcTopAppBarAction` to describe the content of your `LbcMenuIconButton`.
+- New `LbcSearchTopAppBar` with a search text field.
+- New default implementation of `LbcSearchTextField` that can be provided to your `LbcSearchTopAppBar` for standard needs.
+- `LbcSearchTopAppBarState` that handles `LbcSearchTextField` states and `LbcSearchTopAppBar` expansion.
+
 ## 1.3.0
 
 ### LbcTopAppBar
@@ -35,7 +75,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - `OnClickDescription` for `Composable` without `Modifier.clickable` access.
 - Update Jetpack Compose to `1.2.0-rc02`
-
 
 ## 1.1.0
 

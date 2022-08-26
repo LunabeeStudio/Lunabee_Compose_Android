@@ -24,8 +24,9 @@ package studio.lunabee.compose.material.common.item
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -48,16 +49,20 @@ fun MenuItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { menu.direction() }
-            .padding(horizontal = 16.dp)
-            .height(height = 56.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .defaultMinSize(minHeight = 56.dp),
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
             text = stringResource(id = menu.titleRes),
+            style = MaterialTheme.typography.subtitle2,
         )
+
+        Spacer(modifier = Modifier.padding(vertical = 4.dp))
+
         Text(
             text = stringResource(id = menu.subtitleRes),
-            style = MaterialTheme.typography.caption,
+            style = MaterialTheme.typography.body2,
         )
     }
 }

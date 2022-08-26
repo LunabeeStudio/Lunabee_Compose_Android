@@ -30,7 +30,7 @@ android {
 }
 
 description = "A set of methods and composable for accessibility"
-version = "1.2.0"
+version = "1.3.0"
 
 publishing {
     setRepository(project)
@@ -42,6 +42,5 @@ signing {
 }
 
 dependencies {
-    implementation(AndroidX.compose.material)
     implementation(AndroidX.compose.foundation)
 }

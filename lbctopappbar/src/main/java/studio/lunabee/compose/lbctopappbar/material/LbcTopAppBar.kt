@@ -24,12 +24,7 @@ package studio.lunabee.compose.lbctopappbar.material
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
@@ -37,67 +32,52 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import studio.lunabee.compose.lbctopappbar.material.error.ExceptionThrown
+import studio.lunabee.compose.lbctopappbar.material.internal.LbcTopAppBarUtils
+import studio.lunabee.compose.lbctopappbar.material.internal.LbcTopAppBarUtils.applyStatusBarPaddingIfNeeded
+import studio.lunabee.compose.lbctopappbar.material.model.LbcTopAppBarAction
 
 /**
  * A simple [TopAppBar] with a [Text] title. You can also add an optional [Row] with an action menus.
  *
- * @throws [ExceptionThrown.LbcTopAppBarNoTitleException] if [title] is null and [titleComposable] is not override.
- *
+ * @param title default title set in a [Text].
  * @param modifier custom [Modifier] applied on root view. [TopAppBar] [Modifier] can't be edited.
  * If you need to do so, create your own [TopAppBar]
- *
  * @param applyStatusBarPadding if you want to add status bar padding in [TopAppBar] layout.
  * It can be useful to handle correctly status bar color when user is scrolling on the page content.
- * If set to true, status bar color will be the same as [TopAppBar] [backgroundColor] on scroll.
- * Otherwise, it's your responsibility to handle [TopAppBar] position.
- *
- * @param title a nullable string to set in the default [Text]. If title is set to null, [titleComposable] must be override.
- **
- * @param backgroundColor override default color if needed. Default color is the same used by Google in [TopAppBar]
+ * If set to true, status bar color will be the same as [TopAppBar] [topAppBarBackgroundColor] on scroll.
+ * @param topAppBarBackgroundColor override default color if needed. Default color is the same used by Google in [TopAppBar]
  * - primary color is used in light mode
  * - surface color is used in dark mode
- *
+ * @param statusBarColor color of the status bar. Will only be visible if [applyStatusBarPadding] is set to true.
  * @param elevation custom elevation depending on your need. By default, [TopAppBar] is not lifted
- *
+ * @param navigationAction if not null, it will add a navigation icon at the start.
  * @param rowActionsComposable action menu to be displayed at the end of the [TopAppBar]. Your content will be part of a [RowScope],
- * so no need to wrap it into a [Row] when calling [LbcLoadingNavigationTopAppBar]
- *
- * @param titleComposable if you need to do customize title differently than the implementation provided by [LbcLoadingNavigationTopAppBar],
- * you can override [titleComposable] with your own implementation. By default, [titleComposable] is a simple text.
- * Default implementation of [titleComposable] should never be edited.
- *
+ * so no need to wrap it into a [Row]
  */
 @Composable
 fun LbcTopAppBar(
+    title: String,
     modifier: Modifier = Modifier,
     applyStatusBarPadding: Boolean = false,
-    title: String? = null,
-    backgroundColor: Color = if (isSystemInDarkTheme()) MaterialTheme.colors.surface else MaterialTheme.colors.primary,
+    topAppBarBackgroundColor: Color = if (isSystemInDarkTheme()) MaterialTheme.colors.surface else MaterialTheme.colors.primary,
+    statusBarColor: Color = topAppBarBackgroundColor,
     elevation: Dp = 0.dp,
+    navigationAction: LbcTopAppBarAction? = null,
     rowActionsComposable: (@Composable RowScope.() -> Unit)? = null,
-    titleComposable: @Composable () -> Unit = { Text(text = title ?: throw ExceptionThrown.LbcTopAppBarNoTitleException) },
 ) {
-    Surface(
+    LbcSurfaceTopAppBar(
         modifier = modifier,
-        color = backgroundColor,
+        statusBarColor = statusBarColor,
         elevation = elevation,
     ) {
         TopAppBar(
-            modifier = if (applyStatusBarPadding) {
-                Modifier
-                    .padding(paddingValues = WindowInsets.statusBars.asPaddingValues())
-            } else {
-                Modifier
-            },
+            modifier = Modifier
+                .applyStatusBarPaddingIfNeeded(applyStatusBarPadding = applyStatusBarPadding),
             elevation = 0.dp, // handle by surface
-            title = titleComposable,
-            backgroundColor = backgroundColor,
-            actions = {
-                Row {
-                    rowActionsComposable?.invoke(this)
-                }
-            },
+            title = { Text(text = title) },
+            backgroundColor = topAppBarBackgroundColor,
+            actions = { rowActionsComposable?.invoke(this) },
+            navigationIcon = LbcTopAppBarUtils.getTopAppBarIconOrNull(lbcTopAppBarAction = navigationAction),
         )
     }
 }
