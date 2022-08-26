@@ -30,7 +30,7 @@ android {
 }
 
 description = "A set of methods and composable for accessibility"
-version = "1.3.0"
+version = AndroidConfig.LBC_ACCESSIBILITY_VERSION
 
 publishing {
     setRepository(project)
