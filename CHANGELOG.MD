@@ -7,27 +7,36 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
-### Global
-
-- Update Jetpack Compose compiler to `1.3.0-rc01`
-- Update Kotlin to `1.7.10`
-- Update Jetpack Compose to stable version `1.2.0`
+## 1.0.0
 
 ### LbcMaterial
 
+- Update Jetpack Compose compiler to `1.3.0`
+- Update Kotlin to `1.7.10`
+- Update Jetpack Compose to stable version `1.2.1`
 - Add new module `lbcmaterial` for Material Composable that can be reuse.
 - Add `StyledTextItem` Composable to make highlighted clickable text.
 
+## 1.3.0
+
 ### LbcAccessibility
 
+- Update Jetpack Compose compiler to `1.3.0`
+- Update Kotlin to `1.7.10`
+- Update Jetpack Compose to stable version `1.2.1`
 - *Breaking*: remove `AccessibilityDescription` object
 - *Breaking*: remove some `Modifier` extension
 - *Breaking*: change name and signature for `addSemantics` method to `setAccessibilityDetails`
 - Add some new parameters like `LiveRegion` and `ToggleableDescription`
 - See documentation for more details
 
+## 1.4.0
+
 ### LbcTopAppBar
 
+- Update Jetpack Compose compiler to `1.3.0`
+- Update Kotlin to `1.7.10`
+- Update Jetpack Compose to stable version `1.2.1`
 - *Breaking*: remove `LbcNavigationTopAppBar` and `LbcLoadingNavigationTopAppBar` (see documentation for replacement).
 - *Breaking*: Change parameters for `LbcTopAppBar` and `LbcLoadingTopAppBar` (see documentation for replacement).
 - Distinct `TopAppBar` background color and status bar color in parameters.

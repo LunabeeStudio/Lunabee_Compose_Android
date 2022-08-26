@@ -31,7 +31,7 @@ android {
 }
 
 description = "A set of material Composable"
-version = "1.0.0"
+version = AndroidConfig.LBC_MATERIAL_VERSION
 
 publishing {
     setRepository(project)
