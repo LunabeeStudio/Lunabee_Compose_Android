@@ -13,29 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * settings.gradle.kts
+ * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 10/3/2022 - for the Lunabee Compose library.
  */
 
+import studio.lunabee.library.setPublication
+import studio.lunabee.library.setRepository
+
 plugins {
-    // See https://jmfayard.github.io/refreshVersions
-    id("de.fayard.refreshVersions") version "0.40.1"
+    id("studio.lunabee.library.android")
 }
 
-rootProject.name = "Lunabee Compose"
+android {
+    resourcePrefix("lbc_graph_")
+}
 
-include("app")
-include(":lbctopappbar")
-include(":lbcaccessibility")
-include(":lbcmaterial")
-include(":lbcgraph")
+description = "Graph in Compose"
+version = AndroidConfig.LBC_GRAPH_VERSION
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
+publishing {
+    setRepository(project)
+    setPublication(project)
+}
+
+signing {
+    sign(publishing.publications[project.name])
+}
+
+dependencies {
+    implementation(AndroidX.compose.material)
+    implementation(AndroidX.compose.foundation)
 }

@@ -34,4 +34,5 @@ object AndroidConfig {
     const val LBC_MATERIAL_VERSION: String = "1.1.0"
     const val LBC_ACCESSIBILITY_VERSION: String = "1.4.0"
     const val LBC_TOP_APP_BAR_VERSION: String = "1.5.0"
+    const val LBC_GRAPH_VERSION: String = "1.0.0"
 }
