@@ -56,6 +56,12 @@ class Directions(navController: NavHostController) {
         }
     }
 
+    val navigateToVerticalBarGraphScreen: ToDirection = {
+        navController.navigate(route = Destinations.VerticalBarGraphRoute) {
+            popUpTo(route = Destinations.MainRoute) { inclusive = false }
+        }
+    }
+
     val navigateToPreviousScreen: ToDirection = {
         navController.popBackStack()
     }

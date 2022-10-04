@@ -13,37 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * build.gradle.kts
+ * AnimatedContent.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 10/3/2022 - for the Lunabee Compose library.
  */
 
-import studio.lunabee.library.setPublication
-import studio.lunabee.library.setRepository
+package studio.lunabee.compose.lbcgraph.model
 
-plugins {
-    id("studio.lunabee.library.android")
-}
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector1D
 
-android {
-    resourcePrefix("lbc_graph_")
-}
-
-description = "Graph in Compose"
-version = AndroidConfig.LBC_GRAPH_VERSION
-
-publishing {
-    setRepository(project)
-    setPublication(project)
-}
-
-signing {
-    sign(publishing.publications[project.name])
-}
-
-dependencies {
-    implementation(AndroidX.compose.material)
-    implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.constraintLayout.compose)
-}
+/**
+ * Store data to draw bar correctly and animate it.
+ * @param graphItemIndex index corresponding to the parent graph item.
+ * @param topValue max value for current graph item
+ * @param currentFraction value between 0.0f and 1.0f that will be used to draw the line.
+ * @param animatable use to animate drawing.
+ */
+data class AnimatedContent(
+    val graphItemIndex: Int,
+    val topValue: Float,
+    val currentFraction: Float,
+    val animatable: Animatable<Float, AnimationVector1D>,
+)

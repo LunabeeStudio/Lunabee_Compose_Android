@@ -31,6 +31,7 @@ import androidx.navigation.compose.composable
 import com.google.accompanist.systemuicontroller.SystemUiController
 import studio.lunabee.compose.MainScreen
 import studio.lunabee.compose.accessibility.AccessibilityScreen
+import studio.lunabee.compose.graph.VerticalBarGraphScreen
 import studio.lunabee.compose.material.text.TextScreen
 import studio.lunabee.compose.material.theme.LunabeeComposeMaterialTheme
 import studio.lunabee.compose.material.topappbar.loading.LoadingTopAppBarScreen
@@ -60,6 +61,7 @@ fun MainNavGraph(
                     navigateToSearchTopAppBarScreen = directions.navigateToSearchTopAppBarScreen,
                     navigateToAccessibilityScreen = directions.navigateToAccessibilityScreen,
                     navigateToTextScreen = directions.navigateToTextScreen,
+                    navigateToVerticalBarGraphScreen = directions.navigateToVerticalBarGraphScreen,
                 )
             }
         }
@@ -123,6 +125,18 @@ fun MainNavGraph(
                 systemUiController = systemUiController,
             ) {
                 TextScreen(
+                    navigateToPreviousScreen = directions.navigateToPreviousScreen,
+                )
+            }
+        }
+
+        composable(
+            route = Destinations.VerticalBarGraphRoute,
+        ) {
+            LunabeeComposeMaterialTheme(
+                systemUiController = systemUiController,
+            ) {
+                VerticalBarGraphScreen(
                     navigateToPreviousScreen = directions.navigateToPreviousScreen,
                 )
             }

@@ -13,37 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * build.gradle.kts
+ * BarDescription.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 10/3/2022 - for the Lunabee Compose library.
  */
 
-import studio.lunabee.library.setPublication
-import studio.lunabee.library.setRepository
+package studio.lunabee.compose.lbcgraph.model
 
-plugins {
-    id("studio.lunabee.library.android")
-}
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 
-android {
-    resourcePrefix("lbc_graph_")
-}
-
-description = "Graph in Compose"
-version = AndroidConfig.LBC_GRAPH_VERSION
-
-publishing {
-    setRepository(project)
-    setPublication(project)
-}
-
-signing {
-    sign(publishing.publications[project.name])
-}
-
-dependencies {
-    implementation(AndroidX.compose.material)
-    implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.constraintLayout.compose)
-}
+/**
+ * Describe how to draw the bar in the graph.
+ * @param ordinateValue will determine the height of the bar depending on your ordinate axis.
+ * @param defaultColor [Color] of the bar for normal state.
+ * @param thickness thickness in [Dp] of the bar.
+ */
+data class BarDescription(
+    val ordinateValue: Float,
+    val defaultColor: Color,
+    val thickness: Dp,
+)

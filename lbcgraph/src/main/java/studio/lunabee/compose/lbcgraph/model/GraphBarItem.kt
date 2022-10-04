@@ -13,37 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * build.gradle.kts
+ * GraphBarItem.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 10/3/2022 - for the Lunabee Compose library.
  */
 
-import studio.lunabee.library.setPublication
-import studio.lunabee.library.setRepository
+package studio.lunabee.compose.lbcgraph.model
 
-plugins {
-    id("studio.lunabee.library.android")
-}
-
-android {
-    resourcePrefix("lbc_graph_")
-}
-
-description = "Graph in Compose"
-version = AndroidConfig.LBC_GRAPH_VERSION
-
-publishing {
-    setRepository(project)
-    setPublication(project)
-}
-
-signing {
-    sign(publishing.publications[project.name])
-}
-
-dependencies {
-    implementation(AndroidX.compose.material)
-    implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.constraintLayout.compose)
-}
+/**
+ * Describe how to draw an item for a specific abscissa.
+ * @param id will be used for click action.
+ * @param content describe for each abscissa a list of [BarDescription]. This list must have the same size as your abscissa axis.
+ */
+data class GraphBarItem(
+    val id: Any,
+    val content: List<BarDescription>,
+)
