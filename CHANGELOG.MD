@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### LbcGraph
+
+- New module LbcGraph that provide a first version of a vertical bar graph
+
 ## 1.0.0
 
 ### LbcMaterial
