@@ -34,6 +34,8 @@
     <string name="top_bar_screen_previous_screen">"Retour à l'écran précédent"</string>
     <string name="text_screen_title">"Texte"</string>
     <string name="text_screen_subtitle">"Material texte qui peuvent être partiellement stylisés"</string>
+    <string name="vertical_bar_graph_screen_title">"Graph vertical"</string>
+    <string name="vertical_bar_graph_screen_subtitle">"Graph vertical avec des barres"</string>
 
     <!-- *TopAppBarScreen -->
     <string name="top_bar_screen_description">"Une liste de TopAppBar que cette librairie est capable de créer."</string>

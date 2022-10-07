@@ -35,6 +35,8 @@
     <string name="top_bar_search_list_subtitle">"TopAppBar with search text field, navigation, menus, LinearProgressIndicator"</string>
     <string name="text_screen_title">"Text"</string>
     <string name="text_screen_subtitle">"Material text to style dynamically"</string>
+    <string name="vertical_bar_graph_screen_title">"Vertical bar graph"</string>
+    <string name="vertical_bar_graph_screen_subtitle">"Vertical bar graph"</string>
 
     <!-- *TopAppBarScreen -->
     <string name="top_bar_screen_description">"A list of TopAppBar that can be displayed by this lib."</string>

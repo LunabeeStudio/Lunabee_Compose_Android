@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Dependencies.kt
+ * AbscissaDetailInView.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 10/3/2022 - for the Lunabee Compose library.
  */
 
-object Modules {
-    const val lbctopappbar: String = ":lbctopappbar"
-    const val lbcaccessibility: String = ":lbcaccessibility"
-    const val lbcmaterial: String = ":lbcmaterial"
-    const val lbcgraph: String = ":lbcgraph"
-}
+package studio.lunabee.compose.lbcgraph.model
 
-object BuildConfigs {
-    const val lunabeeCompose: String = "1.0.0"
-    const val compileSdk: Int = 33
-    const val minSdk: Int = 23
-    const val targetSdk: Int = 33
-}
+/**
+ * Describe Composable details in view
+ * @param position index starting from the beginning of the axis.
+ * @param width real width in pixel.
+ * @param height real height in pixel.
+ */
+data class AbscissaDetailInView(
+    val position: Int,
+    val width: Int,
+    val height: Int,
+)

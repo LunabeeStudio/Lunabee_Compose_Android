@@ -30,6 +30,7 @@ include("app")
 include(":lbctopappbar")
 include(":lbcaccessibility")
 include(":lbcmaterial")
+include(":lbcgraph")
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)

@@ -62,6 +62,10 @@ android {
         htmlOutput = file("${project.rootDir}/build/reports/lint/lint-report.html")
         lintConfig = file("${project.rootDir}/lint.xml")
     }
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
 }
 
 dependencies {
@@ -79,7 +83,10 @@ dependencies {
     implementation(AndroidX.compose.material)
     implementation(AndroidX.navigation.compose)
 
+    coreLibraryDesugaring(Android.tools.desugarJdkLibs)
+
     implementation(project(Modules.lbctopappbar))
     implementation(project(Modules.lbcaccessibility))
     implementation(project(Modules.lbcmaterial))
+    implementation(project(Modules.lbcgraph))
 }

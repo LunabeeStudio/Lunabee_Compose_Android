@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Dependencies.kt
+ * GraphBarItem.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 10/3/2022 - for the Lunabee Compose library.
  */
 
-object Modules {
-    const val lbctopappbar: String = ":lbctopappbar"
-    const val lbcaccessibility: String = ":lbcaccessibility"
-    const val lbcmaterial: String = ":lbcmaterial"
-    const val lbcgraph: String = ":lbcgraph"
-}
+package studio.lunabee.compose.lbcgraph.model
 
-object BuildConfigs {
-    const val lunabeeCompose: String = "1.0.0"
-    const val compileSdk: Int = 33
-    const val minSdk: Int = 23
-    const val targetSdk: Int = 33
-}
+/**
+ * Describe how to draw an item for a specific abscissa.
+ * @param id will be used for click action.
+ * @param content describe for each abscissa a list of [BarDescription]. This list must have the same size as your abscissa axis.
+ */
+data class GraphBarItem(
+    val id: Any,
+    val content: List<BarDescription>,
+)
