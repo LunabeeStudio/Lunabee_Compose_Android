@@ -28,6 +28,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.TextStyle
@@ -45,11 +49,16 @@ import studio.lunabee.compose.lbcgraph.model.AbscissaDetailInView
 @Composable
 fun AbscissaAxis(
     labels: List<String>,
-    onAbscissaPositioned: (abscissaDetailInView: AbscissaDetailInView) -> Unit,
+    onAbscissaPositioned: (abscissaDetailInView: Set<AbscissaDetailInView>) -> Unit,
     modifier: Modifier = Modifier,
     defaultTextStyle: TextStyle = androidx.compose.material.MaterialTheme.typography.body1,
     abscissaPadding: PaddingValues = PaddingValues(all = 0.dp),
 ) {
+    val abscissaDetailInView: MutableSet<AbscissaDetailInView> = mutableSetOf()
+
+    // Will avoid useless recomposition as onGloballyPositioned is called on scroll.
+    var isAbscissaDetailInViewAlreadyComputed: Boolean by remember { mutableStateOf(value = false) }
+
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -57,15 +66,18 @@ fun AbscissaAxis(
         labels.forEachIndexed { index, label ->
             val boxModifier = Modifier
                 .onGloballyPositioned { layoutCoordinates ->
-                    onAbscissaPositioned(
-                        AbscissaDetailInView(
-                            position = index,
-                            width = layoutCoordinates.size.width,
-                            height = layoutCoordinates.size.height,
-                        )
+                    abscissaDetailInView += AbscissaDetailInView(
+                        position = index,
+                        width = layoutCoordinates.size.width,
+                        height = layoutCoordinates.size.height,
                     )
+
+                    if (!isAbscissaDetailInViewAlreadyComputed && abscissaDetailInView.size == labels.size) {
+                        isAbscissaDetailInViewAlreadyComputed = true
+                        onAbscissaPositioned(abscissaDetailInView)
+                    }
                 }
-                .padding(paddingValues = abscissaPadding) // Order is important here.
+                .padding(paddingValues = abscissaPadding) // Order is important here to have correct details in onGloballyPositioned.
 
             Box(
                 modifier = boxModifier,

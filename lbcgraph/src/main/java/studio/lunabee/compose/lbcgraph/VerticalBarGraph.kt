@@ -69,7 +69,7 @@ fun VerticalBarGraph(
             AbscissaAxis(
                 labels = abscissaAxisLabel,
                 onAbscissaPositioned = { abscissaDetailInView ->
-                    abscissaDetailsInView = abscissaDetailsInView + abscissaDetailInView
+                    abscissaDetailsInView = abscissaDetailInView
                 },
                 modifier = Modifier
                     .fillMaxWidth()
