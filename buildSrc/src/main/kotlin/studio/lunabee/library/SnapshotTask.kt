@@ -28,8 +28,8 @@ import org.gradle.api.tasks.TaskAction
 abstract class SnapshotTask : DefaultTask() {
     @TaskAction
     fun setSnapshotVersion() {
-        val file = File(project.name + "/build.gradle.kts")
-        val newContents = file.readText().replace(Regex("version = \"[^\"]*")) { matchResult ->
+        val file = File(project.rootDir.path + "/buildSrc/src/main/kotlin/AndroidConfig.kt")
+        val newContents = file.readText().replace(Regex("${project.properties["libName"]}: String = \"[^\"]*")) { matchResult ->
             "${matchResult.value}-${project.properties["counter"]}-SNAPSHOT"
         }
         file.writeText(newContents)
