@@ -42,14 +42,14 @@ import studio.lunabee.compose.lbcaccessibility.model.ToggleDescription
 /**
  * Set accessibility details for screen reader.
  *
- * @param text text see SemanticsPropertyReceiver.text, text of the semantics node.
+ * @param text text see [SemanticsPropertyReceiver.text], text of the semantics node.
  * It must be real text instead of developer-set content description.
- * @param contentDescription see SemanticsPropertyReceiver.contentDescription.
+ * @param contentDescription see [SemanticsPropertyReceiver.contentDescription].
  * Developer-set content description of the semantics node. If this is not set, accessibility services will present the [text] of this node
  * as the content. This typically should not be set directly by applications, because some screen readers will cease presenting
  * other relevant information when this property is present. This is intended to be used via Foundation components which are inherently
  * intractable to automatically describe, such as Image, Icon, and Canvas.
- * @param stateDescription see SemanticsPropertyReceiver.stateDescription. Developer-set state description of the semantics node.
+ * @param stateDescription see [SemanticsPropertyReceiver.stateDescription]. Developer-set state description of the semantics node.
  * For example: on/off. If this not set, accessibility services will derive the state from other semantics properties,
  * like ProgressBarRangeInfo, but it is not guaranteed and the format will be decided by accessibility services.
  * @param clickDescription will be used for elements with no clickable method on [Modifier]
