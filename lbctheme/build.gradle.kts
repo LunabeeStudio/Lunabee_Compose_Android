@@ -13,30 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * settings.gradle.kts
+ * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 10/21/2022 - for the Lunabee Compose library.
  */
 
+import studio.lunabee.library.setPublication
+import studio.lunabee.library.setRepository
+
 plugins {
-    // See https://jmfayard.github.io/refreshVersions
-    id("de.fayard.refreshVersions") version "0.40.1"
+    id("studio.lunabee.library.android")
 }
 
-rootProject.name = "Lunabee Compose"
+android {
+    resourcePrefix("lbc_th_")
+}
 
-include("app")
-include(":lbctopappbar")
-include(":lbcaccessibility")
-include(":lbcmaterial")
-include(":lbcgraph")
-include(":lbctheme")
+description = "Function to build dynamic theme with Material3 algorithm"
+version = AndroidConfig.LBC_THEME_VERSION
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
+publishing {
+    setRepository(project)
+    setPublication(project)
+}
+
+signing {
+    sign(publishing.publications[project.name])
 }

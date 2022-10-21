@@ -24,6 +24,7 @@ object Modules {
     const val lbcaccessibility: String = ":lbcaccessibility"
     const val lbcmaterial: String = ":lbcmaterial"
     const val lbcgraph: String = ":lbcgraph"
+    const val lbctheme: String = ":lbctheme"
 }
 
 object BuildConfigs {
