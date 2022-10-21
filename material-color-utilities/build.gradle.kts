@@ -19,30 +19,12 @@
  * Created by Lunabee Studio / Date - 10/21/2022 - for the Lunabee Compose library.
  */
 
-import studio.lunabee.library.setPublication
-import studio.lunabee.library.setRepository
-
 plugins {
-    id("studio.lunabee.library.android")
+    id("java-library")
+    id("org.jetbrains.kotlin.jvm")
 }
 
-android {
-    resourcePrefix("lbc_th_")
-}
-
-description = "Function to build dynamic theme with Material3 algorithm"
-version = AndroidConfig.LBC_THEME_VERSION
-
-publishing {
-    setRepository(project)
-    setPublication(project)
-}
-
-signing {
-    sign(publishing.publications[project.name])
-}
-
-dependencies {
-    implementation(AndroidX.compose.material3)
-    implementation(project(":material-color-utilities"))
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }

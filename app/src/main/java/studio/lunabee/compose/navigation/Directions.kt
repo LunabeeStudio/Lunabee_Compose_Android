@@ -62,6 +62,18 @@ class Directions(navController: NavHostController) {
         }
     }
 
+    val navigateToMaterial3: ToDirection = {
+        navController.navigate(route = Destinations.Material3Route) {
+            popUpTo(route = Destinations.MainRoute) { inclusive = false }
+        }
+    }
+
+    val navigateToTheme: ToDirection = {
+        navController.navigate(route = Destinations.ThemeRoute) {
+            popUpTo(route = Destinations.Material3Route) { inclusive = false }
+        }
+    }
+
     val navigateToPreviousScreen: ToDirection = {
         navController.popBackStack()
     }

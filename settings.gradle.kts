@@ -40,3 +40,4 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+include(":material-color-utilities")
