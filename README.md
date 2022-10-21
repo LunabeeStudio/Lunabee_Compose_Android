@@ -6,6 +6,7 @@
 | LbcAccessibility | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbcaccessibility?style=for-the-badge) |
 | LbcMaterial      | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbcmaterial?style=for-the-badge)      |
 | LbcGraph         | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbcgraph?style=for-the-badge)         |
+| LbcTheme         | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbctheme?style=for-the-badge)         |
 
 # Lunabee Jetpack Compose library
 
