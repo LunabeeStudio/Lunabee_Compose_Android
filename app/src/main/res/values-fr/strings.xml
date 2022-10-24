@@ -36,6 +36,8 @@
     <string name="text_screen_subtitle">"Material texte qui peuvent être partiellement stylisés"</string>
     <string name="vertical_bar_graph_screen_title">"Graph vertical"</string>
     <string name="vertical_bar_graph_screen_subtitle">"Graph vertical avec des barres"</string>
+    <string name="material3_screen_title">"Material 3"</string>
+    <string name="material3_screen_subtitle">"Librairies basées sur Material 3"</string>
 
     <!-- *TopAppBarScreen -->
     <string name="top_bar_screen_description">"Une liste de TopAppBar que cette librairie est capable de créer."</string>
@@ -67,6 +69,15 @@
     <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Séparez les textes à mettre en évidence par une virgule"</string>
     <string name="text_screen_base_text_placeholder">"Texte de base non stylisé"</string>
+
+    <!-- Material3Screen -->
+    <string name="material3_theme_title">"Theme"</string>
+    <string name="material3_theme_subtitle">"Méthode utiles pour générer des couleurs dynamiquement"</string>
+    <string name="material3_theme_primary_explanation">"La couleur affichée sur la droite est la couleur primary générée à partir de la couleur que vous avez entré"</string>
+
+    <!-- ThemeScreen -->
+    <string name="material3_theme_color_placeholder">"#EEFF00"</string>
+    <string name="material3_theme_color_label">"Couleur hexadécimale"</string>
 
     <!-- Common -->
     <string name="lorem_ipsum">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</string>

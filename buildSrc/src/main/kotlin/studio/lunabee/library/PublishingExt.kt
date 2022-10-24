@@ -39,6 +39,7 @@ import java.util.Locale
 
 private val Project.android: LibraryExtension
     get() = (this as ExtensionAware).extensions.getByName("android") as LibraryExtension
+
 /**
  * Set repository destination depending on [project] and version name.
  * Credentials should be stored in your root gradle.properties, in a non source controlled file.
@@ -73,7 +74,11 @@ fun PublishingExtension.setPublication(project: Project) {
 private fun PublicationContainer.setPublication(project: Project) {
     this.create<MavenPublication>(project.name) {
         setProjectDetails(project)
-        setArtifacts(project)
+        if (project.plugins.hasPlugin("java-library")) {
+            setJavaArtifacts(project)
+        } else {
+            setAndroidArtifacts(project)
+        }
         setPom(project)
     }
 }
@@ -100,7 +105,7 @@ private fun MavenPublication.setProjectDetails(project: Project) {
  *
  * @param project project current project
  */
-private fun MavenPublication.setArtifacts(project: Project) {
+private fun MavenPublication.setAndroidArtifacts(project: Project) {
     val sourceJar by project.tasks.registering(Jar::class) {
         archiveClassifier.set("sources")
         from(project.android.sourceSets.getByName("main").java.srcDirs)
@@ -114,6 +119,10 @@ private fun MavenPublication.setArtifacts(project: Project) {
     artifact(sourceJar)
     artifact(javadocJar)
     artifact("${project.buildDir}/outputs/aar/${project.name.toLowerCase(Locale.getDefault())}-release.aar")
+}
+
+private fun MavenPublication.setJavaArtifacts(project: Project) {
+    artifact("${project.buildDir}/libs/${project.name}-${project.version}.jar")
 }
 
 /**

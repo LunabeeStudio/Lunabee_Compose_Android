@@ -37,6 +37,9 @@ import studio.lunabee.compose.material.theme.LunabeeComposeMaterialTheme
 import studio.lunabee.compose.material.topappbar.loading.LoadingTopAppBarScreen
 import studio.lunabee.compose.material.topappbar.search.SearchTopAppBarScreen
 import studio.lunabee.compose.material.topappbar.simple.SimpleTopAppBarScreen
+import studio.lunabee.compose.material3.LunabeeComposeMaterial3Theme
+import studio.lunabee.compose.material3.Material3Screen
+import studio.lunabee.compose.material3.theme.ThemeScreen
 
 @Composable
 fun MainNavGraph(
@@ -62,6 +65,7 @@ fun MainNavGraph(
                     navigateToAccessibilityScreen = directions.navigateToAccessibilityScreen,
                     navigateToTextScreen = directions.navigateToTextScreen,
                     navigateToVerticalBarGraphScreen = directions.navigateToVerticalBarGraphScreen,
+                    navigateToMaterial3 = directions.navigateToMaterial3,
                 )
             }
         }
@@ -140,6 +144,28 @@ fun MainNavGraph(
                     navigateToPreviousScreen = directions.navigateToPreviousScreen,
                 )
             }
+        }
+
+        composable(
+            route = Destinations.Material3Route,
+        ) {
+            LunabeeComposeMaterial3Theme(
+                systemUiController = systemUiController,
+            ) {
+                Material3Screen(
+                    navigateToTheme = directions.navigateToTheme,
+                    navigateBack = directions.navigateToPreviousScreen,
+                )
+            }
+        }
+
+        composable(
+            route = Destinations.ThemeRoute,
+        ) {
+            ThemeScreen(
+                systemUiController = systemUiController,
+                navigateBack = directions.navigateToPreviousScreen,
+            )
         }
     }
 }

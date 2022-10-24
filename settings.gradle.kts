@@ -31,11 +31,16 @@ include(":lbctopappbar")
 include(":lbcaccessibility")
 include(":lbcmaterial")
 include(":lbcgraph")
+include(":lbctheme")
+include(":material-color-utilities")
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+        }
     }
 }

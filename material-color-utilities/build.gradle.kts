@@ -13,23 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Dependencies.kt
+ * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 10/21/2022 - for the Lunabee Compose library.
  */
+import studio.lunabee.library.setPublication
+import studio.lunabee.library.setRepository
 
-object Modules {
-    const val lbctopappbar: String = ":lbctopappbar"
-    const val lbcaccessibility: String = ":lbcaccessibility"
-    const val lbcmaterial: String = ":lbcmaterial"
-    const val lbcgraph: String = ":lbcgraph"
-    const val lbctheme: String = ":lbctheme"
+plugins {
+    id("studio.lunabee.library.java")
 }
 
-object BuildConfigs {
-    const val lunabeeCompose: String = "1.0.0"
-    const val compileSdk: Int = 33
-    const val minSdk: Int = 23
-    const val targetSdk: Int = 33
+version = AndroidConfig.MATERIAL_COLOR_UTILITIES_VERSION
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+publishing {
+    setRepository(project)
+    setPublication(project)
+}
+
+signing {
+    sign(publishing.publications[project.name])
 }

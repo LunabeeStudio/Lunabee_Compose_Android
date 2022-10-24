@@ -36,6 +36,7 @@ fun MainScreen(
     navigateToAccessibilityScreen: ToDirection,
     navigateToTextScreen: ToDirection,
     navigateToVerticalBarGraphScreen: ToDirection,
+    navigateToMaterial3: ToDirection,
 ) {
     val menus: List<MenuEntry> = remember {
         listOf(
@@ -68,6 +69,11 @@ fun MainScreen(
                 titleRes = R.string.vertical_bar_graph_screen_title,
                 subtitleRes = R.string.vertical_bar_graph_screen_subtitle,
                 direction = navigateToVerticalBarGraphScreen,
+            ),
+            MenuEntry(
+                titleRes = R.string.material3_screen_title,
+                subtitleRes = R.string.material3_screen_subtitle,
+                direction = navigateToMaterial3,
             ),
         )
     }

@@ -59,4 +59,14 @@ object Destinations {
      * Will navigate to [studio.lunabee.compose.graph.VerticalBarGraphScreen]
      */
     const val VerticalBarGraphRoute: String = "VerticalBarGraphRoute"
+
+    /**
+     * Will navigate to [studio.lunabee.compose.material3.theme.ThemeScreen]
+     */
+    const val ThemeRoute: String = "ThemeRoute"
+
+    /**
+     * Will navigate to [studio.lunabee.compose.material3.Material3Screen]
+     */
+    const val Material3Route: String = "Material3"
 }

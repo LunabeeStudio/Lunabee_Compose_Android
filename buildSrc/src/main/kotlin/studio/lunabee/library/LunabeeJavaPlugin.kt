@@ -13,23 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * android-library.gradle.kts
+ * LunabeeAndroidPlugin.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
 
-plugins {
-    id("com.android.library")
-    id("kotlin-android")
-}
+package studio.lunabee.library
 
-android {
-    compileSdk = AndroidConfig.COMPILE_SDK
-    buildToolsVersion = AndroidConfig.BUILD_TOOLS_VERSION
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
-    defaultConfig {
-        minSdk = AndroidConfig.MIN_SDK
-        targetSdk = AndroidConfig.TARGET_SDK
+open class LunabeeJavaPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        target.configureJavaPlugins()
+        target.tasks.register("${target.name}Version", VersionTask::class.java)
+        target.tasks.register("${target.name}setSnapshotVersion", SnapshotTask::class.java)
     }
 }
