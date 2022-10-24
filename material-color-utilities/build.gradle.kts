@@ -18,13 +18,25 @@
  *
  * Created by Lunabee Studio / Date - 10/21/2022 - for the Lunabee Compose library.
  */
+import studio.lunabee.library.setPublication
+import studio.lunabee.library.setRepository
 
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+    id("studio.lunabee.library.java")
 }
+
+version = AndroidConfig.MATERIAL_COLOR_UTILITIES_VERSION
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
+}
+
+publishing {
+    setRepository(project)
+    setPublication(project)
+}
+
+signing {
+    sign(publishing.publications[project.name])
 }

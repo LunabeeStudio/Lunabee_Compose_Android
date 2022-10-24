@@ -35,6 +35,13 @@ fun Project.configureAndroidPlugins(): Unit = plugins.run {
     apply("signing") // Sign publish with a GPG key.
 }
 
+fun Project.configureJavaPlugins(): Unit = plugins.run {
+    apply("java-library")
+    apply("org.jetbrains.kotlin.jvm")
+    apply("maven-publish") // publish to Sonatype.
+    apply("signing") // Sign publish with a GPG key.
+}
+
 fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>().run {
     compileSdkVersion(BuildConfigs.compileSdk)
 
