@@ -135,6 +135,13 @@ fun ThemeScreen(
                     modifier = Modifier
                         .fillMaxSize(),
                 ) {
+                    item {
+                        Text(
+                            text = stringResource(id = R.string.material3_theme_primary_explanation),
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp),
+                        )
+                    }
                     items(
                         items = ColorScheme::class.java.declaredFields,
                     ) { field ->
@@ -216,4 +223,4 @@ fun BoxWithColorHex(
 }
 
 val Color.hexValue: String
-    get() = String.format(locale = Locale.getDefault(), format = "#%08X", toArgb())
+    get() = String.format(locale = Locale.ROOT, format = "#%08X", toArgb())

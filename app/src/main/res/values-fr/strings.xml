@@ -73,6 +73,7 @@
     <!-- Material3Screen -->
     <string name="material3_theme_title">"Theme"</string>
     <string name="material3_theme_subtitle">"Méthode utiles pour générer des couleurs dynamiquement"</string>
+    <string name="material3_theme_primary_explanation">"La couleur affichée sur la droite est la couleur primary générée à partir de la couleur que vous avez entré"</string>
 
     <!-- ThemeScreen -->
     <string name="material3_theme_color_placeholder">"#EEFF00"</string>
