@@ -134,7 +134,6 @@ fun ThemeScreen(
                         Spacer(modifier = Modifier.width(16.dp))
                     }
 
-
                     BoxWithColorHex(
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(top = 8.dp)
