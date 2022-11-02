@@ -102,10 +102,10 @@ fun ThemeScreen(
                     },
                 )
             }
-        ) {
+        ) { paddingValues ->
             Column(
                 modifier = Modifier
-                    .padding(paddingValues = it),
+                    .padding(paddingValues = paddingValues),
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -125,10 +125,29 @@ fun ThemeScreen(
 
                     Spacer(modifier = Modifier.width(16.dp))
 
+                    customColor?.let {
+                        BoxWithColorHex(
+                            color = customColor,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+
+                        Spacer(modifier = Modifier.width(16.dp))
+                    }
+
                     BoxWithColorHex(
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(top = 8.dp)
                     )
+                }
+
+                val colorMap = mutableListOf<Pair<String, Color>>()
+                customColor?.let { colorMap += "Custom seed" to customColor }
+                ColorScheme::class.java.declaredFields.mapNotNullTo(colorMap) { field ->
+                    field.isAccessible = true
+                    @Suppress("unchecked_cast")
+                    val color = (field.get(MaterialTheme.colorScheme) as? State<Color>)?.value
+                    val colorName = field.name.substringBefore('$')
+                    color?.let { colorName to color }
                 }
 
                 LazyColumn(
@@ -142,14 +161,10 @@ fun ThemeScreen(
                                 .padding(horizontal = 16.dp),
                         )
                     }
-                    items(
-                        items = ColorScheme::class.java.declaredFields,
-                    ) { field ->
-                        field.isAccessible = true
-                        @Suppress("unchecked_cast")
-                        val color = (field.get(MaterialTheme.colorScheme) as? State<Color>)?.value
 
-                        val colorName = field.name.substringBefore('$')
+                    items(
+                        items = colorMap,
+                    ) { (colorName, color) ->
                         Text(
                             text = colorName,
                             modifier = Modifier
@@ -157,32 +172,30 @@ fun ThemeScreen(
                             style = MaterialTheme.typography.titleLarge
                         )
 
-                        color?.let {
-                            LazyRow {
+                        LazyRow {
+                            item {
+                                BoxWithColorHex(
+                                    color = color,
+                                    modifier = Modifier
+                                        .wrapContentWidth()
+                                        .padding(all = 8.dp)
+                                )
+                            }
+
+                            for (i in 5 until 100 step 5) {
                                 item {
+                                    val tone = LbcThemeUtilities.getToneForColor(color = color, tone = i)
+
                                     BoxWithColorHex(
-                                        color = color,
+                                        color = tone,
                                         modifier = Modifier
                                             .wrapContentWidth()
                                             .padding(all = 8.dp)
-                                    )
-                                }
-
-                                for (i in 5 until 100 step 5) {
-                                    item {
-                                        val tone = LbcThemeUtilities.getToneForColor(color = color, tone = i)
-
-                                        BoxWithColorHex(
-                                            color = tone,
-                                            modifier = Modifier
-                                                .wrapContentWidth()
-                                                .padding(all = 8.dp)
-                                        ) {
-                                            Text(
-                                                text = (100 - i).toString(),
-                                                color = if (tone.luminance() >= 0.5) Color.Black else Color.White,
-                                            )
-                                        }
+                                    ) {
+                                        Text(
+                                            text = (100 - i).toString(),
+                                            color = if (tone.luminance() >= 0.5) Color.Black else Color.White,
+                                        )
                                     }
                                 }
                             }
