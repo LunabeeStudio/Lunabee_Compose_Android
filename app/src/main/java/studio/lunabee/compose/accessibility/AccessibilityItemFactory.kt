@@ -41,9 +41,31 @@ import studio.lunabee.compose.lbcaccessibility.extension.setAccessibilityDetails
 import studio.lunabee.compose.lbcaccessibility.extension.setAsInvisibleForAccessibility
 import studio.lunabee.compose.lbcaccessibility.model.ClickDescription
 import studio.lunabee.compose.lbcaccessibility.model.ToggleDescription
+import studio.lunabee.compose.lbcaccessibility.state.AccessibilityState
 import studio.lunabee.compose.material.common.item.SwitchItem
 
 object AccessibilityItemFactory {
+    fun itemAccessibilityState(
+        lazyListScope: LazyListScope,
+        accessibilityState: AccessibilityState,
+    ) {
+        lazyListScope.item {
+            Text(
+                text = stringResource(id = R.string.accessibility_screen_isEnabled, accessibilityState.isAccessibilityEnabled),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+            )
+            Text(
+                text = stringResource(
+                    id = R.string.accessibility_screen_isTouchExplorationEnabled,
+                    accessibilityState.isTouchExplorationEnabled
+                ),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+            )
+        }
+    }
+
     fun itemSwitchUiNotAccessible(
         lazyListScope: LazyListScope,
         isChecked: Boolean,

@@ -8,10 +8,19 @@ complexity:
   LongParameterList:
     ignoreDefaultParameters: true
     ignoreAnnotated: [ 'Composable', 'Inject' ]
+    functionThreshold: 10
   TooManyFunctions:
     active: false
   LargeClass:
     threshold: 1000
+  LongMethod:
+    threshold: 250
+  CyclomaticComplexMethod:
+    threshold: 25
+  NestedBlockDepth:
+    threshold: 10
+  ComplexCondition:
+    threshold: 10
 
 empty-blocks:
   EmptyFunctionBlock:

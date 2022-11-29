@@ -67,6 +67,8 @@
     <string name="accessibility_screen_current_value_now">"Current value is now: %d"</string>
     <string name="accessibility_screen_current_value_increment">"Increment value"</string>
     <string name="accessibility_screen_make_layout_accessible">"Make layout accessible"</string>
+    <string name="accessibility_screen_isEnabled">"Accessibility manager isAccessibilityEnabled:"</string>
+    <string name="accessibility_screen_isTouchExplorationEnabled">"Accessibility manager isTouchExplorationEnabled:"</string>
 
     <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Separate text to highlight by a comma"</string>
