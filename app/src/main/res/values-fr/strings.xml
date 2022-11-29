@@ -65,8 +65,8 @@
     <string name="accessibility_screen_current_value_now">"La valeur actuelle est désormais: %d"</string>
     <string name="accessibility_screen_current_value_increment">"Incrémenter la valeur"</string>
     <string name="accessibility_screen_make_layout_accessible">"Rendre le layout accessible"</string>
-    <string name="accessibility_screen_isEnabled">"Accessibility manager isAccessibilityEnabled:"</string>
-    <string name="accessibility_screen_isTouchExplorationEnabled">"Accessibility manager isTouchExplorationEnabled:"</string>
+    <string name="accessibility_screen_isEnabled">"isAccessibilityEnabled: %s"</string>
+    <string name="accessibility_screen_isTouchExplorationEnabled">"isTouchExplorationEnabled: %s"</string>
 
     <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Séparez les textes à mettre en évidence par une virgule"</string>

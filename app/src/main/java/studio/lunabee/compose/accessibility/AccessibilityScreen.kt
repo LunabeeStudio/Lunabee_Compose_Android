@@ -75,7 +75,7 @@ fun AccessibilityScreen(
                             )
                         }
                     }
-                }
+                },
             )
         },
         floatingActionButton = {
@@ -88,7 +88,7 @@ fun AccessibilityScreen(
                     )
                 }
             }
-        }
+        },
     ) { paddingValues ->
         LazyColumn(
             state = lazyListState,

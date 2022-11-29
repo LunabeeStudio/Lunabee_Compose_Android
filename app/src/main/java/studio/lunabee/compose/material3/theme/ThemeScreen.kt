@@ -101,7 +101,7 @@ fun ThemeScreen(
                         }
                     },
                 )
-            }
+            },
         ) { paddingValues ->
             Column(
                 modifier = Modifier
@@ -128,7 +128,7 @@ fun ThemeScreen(
                     customColor?.let {
                         BoxWithColorHex(
                             color = customColor,
-                            modifier = Modifier.padding(top = 8.dp)
+                            modifier = Modifier.padding(top = 8.dp),
                         )
 
                         Spacer(modifier = Modifier.width(16.dp))
@@ -136,7 +136,7 @@ fun ThemeScreen(
 
                     BoxWithColorHex(
                         color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(top = 8.dp)
+                        modifier = Modifier.padding(top = 8.dp),
                     )
                 }
 
@@ -169,7 +169,7 @@ fun ThemeScreen(
                             text = colorName,
                             modifier = Modifier
                                 .padding(all = 16.dp),
-                            style = MaterialTheme.typography.titleLarge
+                            style = MaterialTheme.typography.titleLarge,
                         )
 
                         LazyRow {
@@ -178,7 +178,7 @@ fun ThemeScreen(
                                     color = color,
                                     modifier = Modifier
                                         .wrapContentWidth()
-                                        .padding(all = 8.dp)
+                                        .padding(all = 8.dp),
                                 )
                             }
 
@@ -190,7 +190,7 @@ fun ThemeScreen(
                                         color = tone,
                                         modifier = Modifier
                                             .wrapContentWidth()
-                                            .padding(all = 8.dp)
+                                            .padding(all = 8.dp),
                                     ) {
                                         Text(
                                             text = (100 - i).toString(),
@@ -223,7 +223,7 @@ fun BoxWithColorHex(
                 .size(50.dp)
                 .clip(shape = RoundedCornerShape(size = 4.dp))
                 .drawBehind { drawRect(color) },
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             innerText?.invoke()
         }

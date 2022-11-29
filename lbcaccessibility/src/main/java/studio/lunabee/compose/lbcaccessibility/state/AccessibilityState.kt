@@ -44,7 +44,7 @@ class AccessibilityState internal constructor(
         private set
 
     var isTouchExplorationEnabled: Boolean by mutableStateOf(
-        value = accessibilityManager?.let { am -> am.isEnabled && am.isTouchExplorationEnabled } ?: false
+        value = accessibilityManager?.let { am -> am.isEnabled && am.isTouchExplorationEnabled } ?: false,
     )
         private set
 

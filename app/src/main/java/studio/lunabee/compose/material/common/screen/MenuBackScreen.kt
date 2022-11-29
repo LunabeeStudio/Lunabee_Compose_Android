@@ -64,7 +64,7 @@ fun MenuBackScreen(
                 topAppBarBackgroundColor = MaterialTheme.colors.surface,
                 applyStatusBarPadding = true,
             )
-        }
+        },
     ) {
         Box(
             modifier = Modifier

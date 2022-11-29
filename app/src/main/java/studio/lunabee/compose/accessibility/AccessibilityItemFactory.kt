@@ -58,7 +58,7 @@ object AccessibilityItemFactory {
             Text(
                 text = stringResource(
                     id = R.string.accessibility_screen_isTouchExplorationEnabled,
-                    accessibilityState.isTouchExplorationEnabled
+                    accessibilityState.isTouchExplorationEnabled,
                 ),
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 8.dp),
@@ -113,7 +113,7 @@ object AccessibilityItemFactory {
                                 )
                         } else {
                             Modifier
-                        }
+                        },
                     ),
             ) {
                 Text(text = stringResource(id = R.string.accessibility_screen_simple_text))
@@ -156,8 +156,8 @@ object AccessibilityItemFactory {
                                     .show()
                                 true
                             },
-                        )
-                    )
+                        ),
+                    ),
             ) {
                 Text(text = stringResource(id = R.string.accessibility_screen_custom_button_click_me))
             }
@@ -181,7 +181,7 @@ object AccessibilityItemFactory {
     fun itemLiveRegion(
         lazyListScope: LazyListScope,
         value: Int,
-        onValueChange: () -> Unit
+        onValueChange: () -> Unit,
     ) {
         lazyListScope.item {
             Text(
@@ -193,7 +193,7 @@ object AccessibilityItemFactory {
                         liveRegionMode = LiveRegionMode.Assertive,
                         contentDescription = stringResource(id = R.string.accessibility_screen_current_value_now, value),
                         setAsInvisible = true,
-                    )
+                    ),
             )
         }
 

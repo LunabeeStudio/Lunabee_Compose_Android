@@ -101,7 +101,7 @@ fun Modifier.setAccessibilityDetails(
                 onValueChange = toggleDescription.onValueChanged,
                 role = toggleDescription.role,
             )
-        } ?: Modifier
+        } ?: Modifier,
     )
 }
 
