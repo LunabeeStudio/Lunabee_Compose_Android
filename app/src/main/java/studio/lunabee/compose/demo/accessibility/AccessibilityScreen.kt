@@ -67,5 +67,9 @@ fun AccessibilityScreen() {
             value = currentValue,
             onValueChange = { currentValue++ },
         )
+
+        AccessibilityItemFactory.itemCustomString(
+            lazyListScope = this,
+        )
     }
 }

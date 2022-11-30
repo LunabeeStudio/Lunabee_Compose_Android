@@ -15,6 +15,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - *Breaking*: remove `lbc` prefix from all packages.
 - *Breaking*: rename `LbcMaterial` to `LbcFoundation`.
 - Add `LbcCore` with `LbcTextSpec`
+- Add `cleanForAccessibility` to remove unexpected character for Talkback.
 
 ### LbTheme
 

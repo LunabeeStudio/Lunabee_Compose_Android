@@ -46,6 +46,7 @@
     <string name="accessibility_screen_make_layout_accessible">"Rendre le layout accessible"</string>
     <string name="accessibility_screen_isEnabled">"isAccessibilityEnabled: %s"</string>
     <string name="accessibility_screen_isTouchExplorationEnabled">"isTouchExplorationEnabled: %s"</string>
+    <string name="accessibility_screen_with_emoji">"Ma phrase 👋 avec 🫣😅 des emojis"</string>
 
     <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Séparez les textes à mettre en évidence par une virgule"</string>

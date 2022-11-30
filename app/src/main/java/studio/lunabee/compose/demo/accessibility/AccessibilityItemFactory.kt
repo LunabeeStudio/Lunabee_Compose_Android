@@ -36,6 +36,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.unit.dp
 import studio.lunabee.compose.R
+import studio.lunabee.compose.accessibility.LbcAccessibilityUtils.cleanForAccessibility
 import studio.lunabee.compose.accessibility.extension.setAccessibilityDetails
 import studio.lunabee.compose.accessibility.extension.setAsInvisibleForAccessibility
 import studio.lunabee.compose.accessibility.model.ClickDescription
@@ -163,6 +164,22 @@ object AccessibilityItemFactory {
             ) {
                 Text(text = stringResource(id = R.string.accessibility_screen_current_value_increment))
             }
+        }
+    }
+
+    fun itemCustomString(
+        lazyListScope: LazyListScope,
+    ) {
+        lazyListScope.item {
+            Text(
+                text = stringResource(id = R.string.accessibility_screen_with_emoji),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .setAccessibilityDetails(
+                        text = stringResource(id = R.string.accessibility_screen_with_emoji).cleanForAccessibility(),
+                    ),
+            )
         }
     }
 }

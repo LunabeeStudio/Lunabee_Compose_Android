@@ -49,6 +49,7 @@
     <string name="accessibility_screen_make_layout_accessible">"Make layout accessible"</string>
     <string name="accessibility_screen_isEnabled">"isAccessibilityEnabled: %s"</string>
     <string name="accessibility_screen_isTouchExplorationEnabled">"isTouchExplorationEnabled: %s"</string>
+    <string name="accessibility_screen_with_emoji">"My custom 👋 strings with 🫣😅 emoji"</string>
 
     <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Separate text to highlight by a comma"</string>
