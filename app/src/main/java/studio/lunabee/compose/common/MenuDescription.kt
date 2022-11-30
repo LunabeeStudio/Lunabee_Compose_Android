@@ -13,23 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Destinations.kt
+ * MenuEntry.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.navigation
+package studio.lunabee.compose.common
 
-object Destinations {
-    const val MainRoute: String = "MainRoute"
-    const val AccessibilityRoute: String = "AccessibilityRoute"
-    const val FoundationRoute: String = "FoundationRoute"
-    const val ThemeRoute: String = "ThemeRoute"
+import studio.lunabee.compose.navigation.ToDirection
 
-    val BackNavigationScreen: List<String> = listOf(
-        AccessibilityRoute,
-        FoundationRoute,
-        ThemeRoute,
-    )
-}
+data class MenuDescription(
+    val titleRes: Int,
+    val subtitleRes: Int,
+    val direction: ToDirection,
+)

@@ -13,23 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Destinations.kt
+ * OnClickDescription.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 6/21/2022 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.navigation
+package studio.lunabee.compose.accessibility.model
 
-object Destinations {
-    const val MainRoute: String = "MainRoute"
-    const val AccessibilityRoute: String = "AccessibilityRoute"
-    const val FoundationRoute: String = "FoundationRoute"
-    const val ThemeRoute: String = "ThemeRoute"
+import androidx.compose.ui.semantics.Role
 
-    val BackNavigationScreen: List<String> = listOf(
-        AccessibilityRoute,
-        FoundationRoute,
-        ThemeRoute,
-    )
-}
+/**
+ * Use this class to set a toggleable state for accessibility (Checkbox, Switch...).
+ *
+ * @param value state value for the toggleable element.
+ * @param onValueChanged when user toggle state.
+ * @param role value in [Role]
+ */
+data class ToggleDescription(
+    val value: Boolean,
+    val onValueChanged: (newValue: Boolean) -> Unit,
+    val role: Role,
+)

@@ -13,23 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Destinations.kt
+ * OnClickDescription.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 6/21/2022 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.navigation
+package studio.lunabee.compose.accessibility.model
 
-object Destinations {
-    const val MainRoute: String = "MainRoute"
-    const val AccessibilityRoute: String = "AccessibilityRoute"
-    const val FoundationRoute: String = "FoundationRoute"
-    const val ThemeRoute: String = "ThemeRoute"
-
-    val BackNavigationScreen: List<String> = listOf(
-        AccessibilityRoute,
-        FoundationRoute,
-        ThemeRoute,
-    )
-}
+/**
+ * Use this class to set a click label for accessibility if you don't have access to Modifier's clickable method.
+ *
+ * @param clickLabel label read by TalkBack
+ * @param action action to be executed on click
+ */
+data class ClickDescription(
+    val clickLabel: String,
+    val action: () -> Boolean,
+)

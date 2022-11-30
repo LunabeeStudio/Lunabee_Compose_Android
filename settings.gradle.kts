@@ -27,10 +27,8 @@ plugins {
 rootProject.name = "Lunabee Compose"
 
 include("app")
-include(":lbctopappbar")
 include(":lbcaccessibility")
-include(":lbcmaterial")
-include(":lbcgraph")
+include(":lbcfoundation")
 include(":lbctheme")
 include(":material-color-utilities")
 
