@@ -80,15 +80,12 @@ dependencies {
 
     implementation(AndroidX.activity.compose)
     implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.compose.material)
     implementation(AndroidX.compose.material3)
     implementation(AndroidX.navigation.compose)
 
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
-    implementation(project(Modules.lbctopappbar))
-    implementation(project(Modules.lbcaccessibility))
-    implementation(project(Modules.lbcmaterial))
-    implementation(project(Modules.lbcgraph))
-    implementation(project(Modules.lbctheme))
+    implementation(project(Modules.LbcAccessibility))
+    implementation(project(Modules.LbcFoundation))
+    implementation(project(Modules.LbcTheme))
 }

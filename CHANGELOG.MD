@@ -9,16 +9,15 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### All
 
-- Update Jetpack Compose libs to `1.3.0-rcO1`
-- Update Gradle Plugin to `7.3.1`
+- Update to last stable version of Jetpack Compose.
+- Update Gradle Plugin to `7.3.1`.
+- *Breaking*: remove `LbcTopAppBar` and `LbcGraph`.
+- *Breaking*: remove `lbc` prefix from all packages.
+- *Breaking*: rename `LbcMaterial` to `LbcFoundation`.
 
 ### LbTheme
 
 - New module `LbcTheme` to build custom theme with Material3 algorithms.
-
-### LbcGraph
-
-- New module `LbcGraph` that provide a first version of a vertical bar graph
 
 ## 1.0.0
 

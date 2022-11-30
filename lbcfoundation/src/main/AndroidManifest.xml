@@ -16,7 +16,7 @@
   ~ AndroidManifest.xml
   ~ Lunabee Compose
   ~
-  ~ Created by Lunabee Studio / Date - 5/9/2022 - for the Lunabee Compose library.
+  ~ Created by Lunabee Studio / Date - 7/29/2022 - for the Lunabee Compose library.
   -->
 
-<manifest package="studio.lunabee.compose.accessibility" />
+<manifest package="studio.lunabee.compose.foundation" />

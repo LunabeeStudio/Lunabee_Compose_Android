@@ -13,23 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Destinations.kt
+ * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 7/29/2022 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.navigation
+import studio.lunabee.library.setPublication
+import studio.lunabee.library.setRepository
 
-object Destinations {
-    const val MainRoute: String = "MainRoute"
-    const val AccessibilityRoute: String = "AccessibilityRoute"
-    const val FoundationRoute: String = "FoundationRoute"
-    const val ThemeRoute: String = "ThemeRoute"
+plugins {
+    id("studio.lunabee.library.android")
+}
 
-    val BackNavigationScreen: List<String> = listOf(
-        AccessibilityRoute,
-        FoundationRoute,
-        ThemeRoute,
-    )
+android {
+    resourcePrefix("lbc_mat_")
+}
+
+description = "A set of custom components from androidx.composable.foundation"
+version = AndroidConfig.LBC_FOUNDATION_VERSION
+
+publishing {
+    setRepository(project)
+    setPublication(project)
+}
+
+signing {
+    sign(publishing.publications[project.name])
+}
+
+dependencies {
+    implementation(AndroidX.compose.foundation)
 }

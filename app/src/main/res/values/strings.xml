@@ -27,30 +27,10 @@
     <string name="select_your_theme_title">"Modules"</string>
     <string name="accessibility_title">"Accessibility (lbcaccessibility)"</string>
     <string name="accessibility_subtitle">"Accessibility with Compose"</string>
-    <string name="top_bar_list_title">"Simple TopAppBar (lbctopappbar)"</string>
-    <string name="top_bar_list_subtitle">"TopAppBar with navigation and menus"</string>
-    <string name="top_bar_loading_list_title">"TopAppBar with loading (lbctopappbar)"</string>
-    <string name="top_bar_loading_list_subtitle">"TopAppBar with navigation, menus and LinearProgressIndicator"</string>
-    <string name="top_bar_search_list_title">"Search TopAppBar (lbctopappbar)"</string>
-    <string name="top_bar_search_list_subtitle">"TopAppBar with search text field, navigation, menus, LinearProgressIndicator"</string>
-    <string name="text_screen_title">"Text"</string>
-    <string name="text_screen_subtitle">"Material text to style dynamically"</string>
-    <string name="vertical_bar_graph_screen_title">"Vertical bar graph"</string>
-    <string name="vertical_bar_graph_screen_subtitle">"Vertical bar graph"</string>
-    <string name="material3_screen_title">"Material 3"</string>
-    <string name="material3_screen_subtitle">"Libraries related to Material 3"</string>
-
-    <!-- *TopAppBarScreen -->
-    <string name="top_bar_screen_description">"A list of TopAppBar that can be displayed by this lib."</string>
-    <string name="top_bar_screen_simple_description">"TopAppBar classic"</string>
-    <string name="top_bar_screen_simple_menu_description">"TopAppBar with menus"</string>
-    <string name="top_bar_screen_elevate_top_bar_action">"Default elevation for TopAppBar"</string>
-    <string name="top_bar_screen_elevate_status_bar_padding_action">"Add status bar padding"</string>
-    <string name="top_bar_screen_is_loading_action">"Loading in progress"</string>
-    <string name="top_bar_screen_is_menu_showing_action">"Menu shown during loading"</string>
-    <string name="top_bar_screen_navigation_action">"With navigation"</string>
-    <string name="top_bar_screen_search_placeholder">"Your search here"</string>
-    <string name="top_bar_screen_previous_screen">"Go back to previous screen"</string>
+    <string name="foundation_screen_title">"Foundation"</string>
+    <string name="foundation_screen_subtitle">"Derivated components from androidx.compose.foundation"</string>
+    <string name="theme_screen_title">"Theme"</string>
+    <string name="theme_screen_subtitle">"Tools to create custom Material3 theme"</string>
 
     <!-- AccessibilityScreen -->
     <string name="accessibility_screen_simple_text">"Title"</string>
