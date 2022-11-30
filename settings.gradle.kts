@@ -30,6 +30,7 @@ include("app")
 include(":lbcaccessibility")
 include(":lbcfoundation")
 include(":lbctheme")
+include(":lbccore")
 include(":material-color-utilities")
 
 dependencyResolutionManagement {
