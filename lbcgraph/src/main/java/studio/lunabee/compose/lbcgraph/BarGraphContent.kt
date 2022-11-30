@@ -146,7 +146,7 @@ fun BarGraphContent(
                         Canvas(
                             modifier = Modifier
                                 .padding(top = topContentSafePadding)
-                                .fillMaxHeight(fraction = sortedByAscending.maxOf { it.ordinateValue } / ordinateTopValue)
+                                .fillMaxHeight(fraction = sortedByAscending.maxOf { it.ordinateValue } / ordinateTopValue),
                         ) {
                             var previousOffsetY = size.height
                             sortedByAscending.forEachIndexed { indexBar, barDescription ->
@@ -206,7 +206,7 @@ private fun Modifier.thenBackgroundModifier(
                     blue = backgroundColor.blue,
                     alpha = RippleTheme.defaultRippleAlpha(
                         contentColor = MaterialTheme.colors.primary,
-                        lightTheme = !isSystemInDarkTheme()
+                        lightTheme = !isSystemInDarkTheme(),
                     ).pressedAlpha,
                 ),
             )

@@ -41,9 +41,31 @@ import studio.lunabee.compose.lbcaccessibility.extension.setAccessibilityDetails
 import studio.lunabee.compose.lbcaccessibility.extension.setAsInvisibleForAccessibility
 import studio.lunabee.compose.lbcaccessibility.model.ClickDescription
 import studio.lunabee.compose.lbcaccessibility.model.ToggleDescription
+import studio.lunabee.compose.lbcaccessibility.state.AccessibilityState
 import studio.lunabee.compose.material.common.item.SwitchItem
 
 object AccessibilityItemFactory {
+    fun itemAccessibilityState(
+        lazyListScope: LazyListScope,
+        accessibilityState: AccessibilityState,
+    ) {
+        lazyListScope.item {
+            Text(
+                text = stringResource(id = R.string.accessibility_screen_isEnabled, accessibilityState.isAccessibilityEnabled),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+            )
+            Text(
+                text = stringResource(
+                    id = R.string.accessibility_screen_isTouchExplorationEnabled,
+                    accessibilityState.isTouchExplorationEnabled,
+                ),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+            )
+        }
+    }
+
     fun itemSwitchUiNotAccessible(
         lazyListScope: LazyListScope,
         isChecked: Boolean,
@@ -91,7 +113,7 @@ object AccessibilityItemFactory {
                                 )
                         } else {
                             Modifier
-                        }
+                        },
                     ),
             ) {
                 Text(text = stringResource(id = R.string.accessibility_screen_simple_text))
@@ -134,8 +156,8 @@ object AccessibilityItemFactory {
                                     .show()
                                 true
                             },
-                        )
-                    )
+                        ),
+                    ),
             ) {
                 Text(text = stringResource(id = R.string.accessibility_screen_custom_button_click_me))
             }
@@ -159,7 +181,7 @@ object AccessibilityItemFactory {
     fun itemLiveRegion(
         lazyListScope: LazyListScope,
         value: Int,
-        onValueChange: () -> Unit
+        onValueChange: () -> Unit,
     ) {
         lazyListScope.item {
             Text(
@@ -171,7 +193,7 @@ object AccessibilityItemFactory {
                         liveRegionMode = LiveRegionMode.Assertive,
                         contentDescription = stringResource(id = R.string.accessibility_screen_current_value_now, value),
                         setAsInvisible = true,
-                    )
+                    ),
             )
         }
 

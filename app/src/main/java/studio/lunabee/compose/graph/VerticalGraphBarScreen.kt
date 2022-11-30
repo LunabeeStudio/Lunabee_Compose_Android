@@ -124,7 +124,7 @@ fun VerticalBarGraphScreen(
                     Text(
                         text = values?.toString() ?: "No selection",
                         modifier = Modifier
-                            .padding(all = 16.dp)
+                            .padding(all = 16.dp),
                     )
                 }
             }

@@ -300,7 +300,7 @@ object TopAppBarItemFactory {
                                     text = stringResource(id = R.string.top_bar_screen_search_placeholder),
                                     style = MaterialTheme.typography.body2,
                                 )
-                            }
+                            },
                         )
                     },
                     searchAction = LbcTopAppBarAction.DrawableResAction(

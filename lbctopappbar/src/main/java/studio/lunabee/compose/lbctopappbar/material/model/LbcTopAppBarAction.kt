@@ -52,7 +52,7 @@ sealed class LbcTopAppBarAction(
         action: () -> Unit,
         tintColor: Color = Color.Unspecified,
         resizeIconWith: LbcIconSize? = null,
-    ): LbcTopAppBarAction(
+    ) : LbcTopAppBarAction(
         contentDescription = contentDescription,
         action = action,
         tintColor = tintColor,
@@ -73,7 +73,7 @@ sealed class LbcTopAppBarAction(
         action: () -> Unit,
         tintColor: Color = Color.Unspecified,
         resizeIconWith: LbcIconSize? = null,
-    ): LbcTopAppBarAction(
+    ) : LbcTopAppBarAction(
         contentDescription = contentDescription,
         action = action,
         tintColor = tintColor,

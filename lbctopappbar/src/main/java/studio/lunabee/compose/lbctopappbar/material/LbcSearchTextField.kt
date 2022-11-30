@@ -92,7 +92,7 @@ fun LbcSearchTextField(
                     placeholder?.invoke()
                 }
                 innerTextField() // mandatory in all cases
-            }
+            },
         )
 
         LbcMenuIconButton(action = clearSearchAction)

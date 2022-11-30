@@ -102,6 +102,6 @@ fun VerticalBarGraph(
                 onBarClicked = graphConfiguration.onBarClicked,
                 barIdSelected = barIdSelected,
             )
-        }
+        },
     )
 }

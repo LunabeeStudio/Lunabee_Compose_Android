@@ -74,7 +74,7 @@ fun TextScreen(
                 applyStatusBarPadding = true,
                 topAppBarBackgroundColor = MaterialTheme.colors.surface,
             )
-        }
+        },
     ) { paddingValues ->
         Box(
             modifier = Modifier
@@ -128,7 +128,7 @@ fun TextScreen(
                             textDecoration = TextDecoration.Underline,
                         ).toSpanStyle(),
                         context = LocalContext.current,
-                    )
+                    ),
                 )
 
                 StyledTextItem(
@@ -143,7 +143,7 @@ fun TextScreen(
                         ).toSpanStyle(),
                         context = LocalContext.current,
                         ignoreCase = true,
-                    )
+                    ),
                 )
 
                 StyledTextItem(
@@ -165,12 +165,12 @@ fun TextScreen(
                                         Color(0xFFFFFF00),
                                         Color(0xFFFF7F00),
                                         Color(0xFFFF0000),
-                                    )
-                                )
+                                    ),
+                                ),
                             ),
                         context = LocalContext.current,
                         ignoreCase = true,
-                    )
+                    ),
                 )
             }
         }

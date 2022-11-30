@@ -31,9 +31,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import studio.lunabee.compose.R
@@ -75,7 +75,7 @@ fun AccessibilityScreen(
                             )
                         }
                     }
-                }
+                },
             )
         },
         floatingActionButton = {
@@ -88,12 +88,17 @@ fun AccessibilityScreen(
                     )
                 }
             }
-        }
-    ) {
+        },
+    ) { paddingValues ->
         LazyColumn(
             state = lazyListState,
-            contentPadding = it,
+            contentPadding = paddingValues,
         ) {
+            AccessibilityItemFactory.itemAccessibilityState(
+                lazyListScope = this,
+                accessibilityState = accessibilityState,
+            )
+
             AccessibilityItemFactory.itemSwitchUiNotAccessible(
                 lazyListScope = this,
                 isChecked = isLayoutAccessible,

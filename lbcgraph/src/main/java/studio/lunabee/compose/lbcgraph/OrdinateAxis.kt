@@ -70,7 +70,7 @@ fun OrdinateAxis(
                     Modifier.padding(top = topContentSafePadding)
                 } else {
                     Modifier
-                }
+                },
             )
         }
     }

@@ -43,7 +43,7 @@ object LbcThemeUtilities {
                 Scheme.dark(color.toArgb())
             } else {
                 Scheme.light(color.toArgb())
-            }
+            },
         )
     }
 

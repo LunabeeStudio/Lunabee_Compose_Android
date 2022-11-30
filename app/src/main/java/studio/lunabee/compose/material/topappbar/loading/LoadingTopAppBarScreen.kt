@@ -61,7 +61,7 @@ fun LoadingTopAppBarScreen(
                 applyStatusBarPadding = true,
                 topAppBarBackgroundColor = MaterialTheme.colors.surface,
             )
-        }
+        },
     ) {
         Box(
             modifier = Modifier
