@@ -26,33 +26,21 @@ import androidx.navigation.NavHostController
 typealias ToDirection = () -> Unit
 
 class Directions(navController: NavHostController) {
-    val navigateToAccessibilityScreen: ToDirection = {
+    val navigateToAccessibility: ToDirection = {
         navController.navigate(route = Destinations.AccessibilityRoute) {
             popUpTo(route = Destinations.MainRoute) { inclusive = false }
         }
     }
 
-    val navigateToLoadingTopAppBarScreen: ToDirection = {
-        navController.navigate(route = Destinations.LoadingTopAppBarRoute) {
+    val navigateToFoundation: ToDirection = {
+        navController.navigate(route = Destinations.FoundationRoute) {
             popUpTo(route = Destinations.MainRoute) { inclusive = false }
         }
     }
 
-    val navigateToSearchTopAppBarScreen: ToDirection = {
-        navController.navigate(route = Destinations.SearchTopAppBarRoute) {
-            popUpTo(route = Destinations.MainRoute) { inclusive = false }
-        }
-    }
-
-    val navigateToSimpleTopAppBarScreen: ToDirection = {
-        navController.navigate(route = Destinations.SimpleTopAppBarRoute) {
-            popUpTo(route = Destinations.MainRoute) { inclusive = false }
-        }
-    }
-
-    val navigateToTextScreen: ToDirection = {
-        navController.navigate(route = Destinations.TextRoute) {
-            popUpTo(route = Destinations.MainRoute) { inclusive = false }
+    val navigateToTheme: ToDirection = {
+        navController.navigate(route = Destinations.ThemeRoute) {
+            popUpTo(route = Destinations.ThemeRoute) { inclusive = false }
         }
     }
 

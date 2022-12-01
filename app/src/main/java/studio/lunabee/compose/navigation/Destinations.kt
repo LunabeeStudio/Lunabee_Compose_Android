@@ -21,37 +21,15 @@
 
 package studio.lunabee.compose.navigation
 
-/**
- * All navigation route.
- */
 object Destinations {
-    /**
-     * Will navigate to [studio.lunabee.compose.MainScreen].
-     */
     const val MainRoute: String = "MainRoute"
-
-    /**
-     * Will navigate to [studio.lunabee.compose.accessibility.AccessibilityScreen]
-     */
     const val AccessibilityRoute: String = "AccessibilityRoute"
+    const val FoundationRoute: String = "FoundationRoute"
+    const val ThemeRoute: String = "ThemeRoute"
 
-    /**
-     * Will navigate to [studio.lunabee.compose.material.topappbar.simple.SimpleTopAppBarScreen]
-     */
-    const val SimpleTopAppBarRoute: String = "SimpleTopAppBarRoute"
-
-    /**
-     * Will navigate to [studio.lunabee.compose.material.topappbar.loading.LoadingTopAppBarScreen]
-     */
-    const val LoadingTopAppBarRoute: String = "LoadingTopAppBarRoute"
-
-    /**
-     * Will navigate to [studio.lunabee.compose.material.topappbar.search.SearchTopAppBarScreen]
-     */
-    const val SearchTopAppBarRoute: String = "SearchTopAppBarRoute"
-
-    /**
-     * Will navigate to [studio.lunabee.compose.material.text.TextScreen]
-     */
-    const val TextRoute: String = "TextRoute"
+    val BackNavigationScreen: List<String> = listOf(
+        AccessibilityRoute,
+        FoundationRoute,
+        ThemeRoute,
+    )
 }

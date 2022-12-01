@@ -1,32 +1,26 @@
-build:
-  maxIssues: 1000 # Reduce it when we start fixing them
+config:
+  warningsAsErrors: true
 
 console-reports:
   active: true
-  exclude:
-
-comments:
-  active: true
-  AbsentOrWrongFileLicense:
-    active: true
-    licenseTemplateFile: 'detekt-license.template'
-    licenseTemplateIsRegex: true
 
 complexity:
   LongParameterList:
-    active: false
+    ignoreDefaultParameters: true
+    ignoreAnnotated: [ 'Composable', 'Inject' ]
+    functionThreshold: 10
   TooManyFunctions:
     active: false
   LargeClass:
     threshold: 1000
   LongMethod:
-    threshold: 500 # TODO reduce
-  ComplexMethod:
-    threshold: 50 # TODO reduce
+    threshold: 250
+  CyclomaticComplexMethod:
+    threshold: 25
   NestedBlockDepth:
-    threshold: 10 # TODO reduce
+    threshold: 10
   ComplexCondition:
-    threshold: 10 # TODO reduce
+    threshold: 10
 
 empty-blocks:
   EmptyFunctionBlock:
@@ -73,11 +67,10 @@ formatting:
   Indentation:
     active: true
     autoCorrect: true
-    indentSize: 4
-    continuationIndentSize: 4
   MaximumLineLength:
-    active: true
+    active: false
     maxLineLength: 140
+    excludeCommentStatements: true
   ModifierOrdering:
     active: true
     autoCorrect: true
@@ -125,10 +118,6 @@ formatting:
   ParameterListWrapping:
     active: false
     autoCorrect: true
-    indentSize: 4
-  SpacingAroundColon:
-    active: false
-    autoCorrect: true
   SpacingAroundComma:
     active: true
     autoCorrect: true
@@ -156,10 +145,22 @@ formatting:
   StringTemplate:
     active: true
     autoCorrect: true
+  TrailingCommaOnDeclarationSite:
+    active: true
+  TrailingCommaOnCallSite:
+    active: true
+  ArgumentListWrapping:
+    maxLineLength: 140
 
 naming:
   FunctionNaming:
-    ignoreAnnotated: ['Composable']
+    ignoreAnnotated: [ 'Composable', 'Test' ]
+  TopLevelPropertyNaming:
+    constantPattern: '[A-Z][A-Za-z0-9]*'
+
+performance:
+  SpreadOperator:
+    ignoreAnnotated: [ 'Preview' ]
 
 style:
   MaxLineLength:
@@ -173,4 +174,4 @@ style:
   NewLineAtEndOfFile:
     active: false # https://detekt.dev/formatting.html#finalnewline
   UnusedPrivateMember:
-    ignoreAnnotated: ['Preview']
+    ignoreAnnotated: [ 'Preview' ]

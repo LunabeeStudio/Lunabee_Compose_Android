@@ -35,12 +35,21 @@ fun Project.configureAndroidPlugins(): Unit = plugins.run {
     apply("signing") // Sign publish with a GPG key.
 }
 
+fun Project.configureJavaPlugins(): Unit = plugins.run {
+    apply("java-library")
+    apply("org.jetbrains.kotlin.jvm")
+    apply("maven-publish") // publish to Sonatype.
+    apply("signing") // Sign publish with a GPG key.
+}
+
 fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>().run {
     compileSdkVersion(BuildConfigs.compileSdk)
 
     defaultConfig {
         minSdk = BuildConfigs.minSdk
         targetSdk = BuildConfigs.targetSdk
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     this.buildFeatures.compose = true
@@ -49,4 +58,5 @@ fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>(
 
 fun Project.configureDependencies(): Unit = dependencies {
     add("implementation", Kotlin.Stdlib.jdk8)
+    add("androidTestImplementation", AndroidX.test.runner)
 }
