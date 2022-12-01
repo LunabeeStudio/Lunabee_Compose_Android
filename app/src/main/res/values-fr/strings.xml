@@ -21,7 +21,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- MainScreen -->
-    <string name="select_your_theme_title">"Modules"</string>
     <string name="accessibility_title">"Accessibilité"</string>
     <string name="accessibility_subtitle">"Outils pour faciliter l'implémentation de l'accessibilité"</string>
     <string name="foundation_screen_title">"Foundation"</string>
@@ -34,26 +33,21 @@
     <string name="accessibility_screen_simple_text2">"Sous-titre"</string>
     <string name="accessibility_screen_simple_text_not_read">"Je suis invisible"</string>
     <string name="accessibility_screen_simple_text_head">"Glisser vers le bas pour me sélectionner directement !"</string>
-    <string name="accessibility_screen_menu_content_description">"Aller aux paramètres d'accessibilité"</string>
-    <string name="accessibility_screen_custom_content_description_state_enabled">"L'écran est accessible"</string>
-    <string name="accessibility_screen_custom_content_description_state_disabled">"L'écran n'est pas accessible"</string>
     <string name="accessibility_screen_custom_button_click_me">"Je suis un bouton accessible"</string>
     <string name="accessibility_screen_custom_button_on_click_description">"afficher un toast"</string>
     <string name="accessibility_screen_custom_button_clicked">"Tapé!"</string>
     <string name="accessibility_screen_current_value">"La valeur actuelle est: %d"</string>
     <string name="accessibility_screen_current_value_now">"La valeur actuelle est désormais: %d"</string>
     <string name="accessibility_screen_current_value_increment">"Incrémenter la valeur"</string>
-    <string name="accessibility_screen_make_layout_accessible">"Rendre le layout accessible"</string>
     <string name="accessibility_screen_isEnabled">"isAccessibilityEnabled: %s"</string>
     <string name="accessibility_screen_isTouchExplorationEnabled">"isTouchExplorationEnabled: %s"</string>
+    <string name="accessibility_screen_with_emoji">"Ma phrase 👋 avec 🫣😅 des emojis"</string>
 
     <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Séparez les textes à mettre en évidence par une virgule"</string>
     <string name="text_screen_base_text_placeholder">"Texte de base non stylisé"</string>
 
     <!-- Material3Screen -->
-    <string name="material3_theme_title">"Theme"</string>
-    <string name="material3_theme_subtitle">"Méthode utiles pour générer des couleurs dynamiquement"</string>
     <string name="material3_theme_primary_explanation">"La couleur affichée la plus à droite est la couleur primary générée à partir de la couleur source que vous avez entré"</string>
 
     <!-- ThemeScreen -->

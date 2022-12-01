@@ -14,9 +14,17 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - *Breaking*: remove `LbcTopAppBar` and `LbcGraph`.
 - *Breaking*: remove `lbc` prefix from all packages.
 - *Breaking*: rename `LbcMaterial` to `LbcFoundation`.
-- Add `LbcCore` with `LbcTextSpec`
 
-### LbTheme
+### LbcCore
+
+- New module `LbcCore`
+- Add `LbcTextSpec` to factorize merge text sources
+
+### LbcAccessibility
+
+- Add `cleanForAccessibility` to remove unexpected character for Talkback.
+
+### LbcTheme
 
 - New module `LbcTheme` to build custom theme with Material3 algorithms.
 
