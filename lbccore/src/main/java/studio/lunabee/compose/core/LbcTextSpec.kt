@@ -1,3 +1,23 @@
+/*
+ * Copyright © 2022 Lunabee Studio
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * LbcTextSpec.kt
+ * Lunabee Compose
+ *
+ * Created by Lunabee Studio / Date - 11/30/2022 - for the Lunabee Compose library.
+ */
 package studio.lunabee.compose.core
 
 import androidx.annotation.PluralsRes
@@ -11,7 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 
 @Stable
-abstract class LbcTextSpec {
+sealed class LbcTextSpec {
 
     abstract val annotated: AnnotatedString
         @ReadOnlyComposable @Composable
@@ -27,41 +47,14 @@ abstract class LbcTextSpec {
         return Array(this.size) { idx ->
             val entry = this[idx]
             if (entry is LbcTextSpec) {
-                entry.string // marker as compile error due to Java(?)
+                entry.string // marked as compile error due to Java(?)
             } else {
                 this[idx]
             }
         }
     }
 
-    companion object {
-        fun fromString(value: String, vararg params: Any): LbcTextSpec {
-            return Raw(value, params)
-        }
-
-        fun fromStringRes(
-            @StringRes id: Int,
-            vararg params: Any,
-        ): LbcTextSpec {
-            return StringResource(id, params)
-        }
-
-        fun fromPluralsRes(
-            @PluralsRes id: Int,
-            count: Int,
-            vararg params: Any,
-        ): LbcTextSpec {
-            return PluralsResource(id, count, params)
-        }
-
-        fun fromAnnotated(value: AnnotatedString): LbcTextSpec {
-            return Annotated(value)
-        }
-
-        val Empty: LbcTextSpec = fromString(value = "")
-    }
-
-    private class Raw(private val value: String, private val args: Array<out Any>) : LbcTextSpec() {
+    class Raw(private val value: String, private vararg val args: Any) : LbcTextSpec() {
         override val annotated: AnnotatedString
             @Composable
             @ReadOnlyComposable
@@ -102,7 +95,7 @@ abstract class LbcTextSpec {
         }
     }
 
-    private class Annotated(private val value: AnnotatedString) : LbcTextSpec() {
+    class Annotated(private val value: AnnotatedString) : LbcTextSpec() {
         override val annotated: AnnotatedString
             @Composable
             @ReadOnlyComposable
@@ -133,9 +126,9 @@ abstract class LbcTextSpec {
         }
     }
 
-    private class StringResource(
-        @StringRes val id: Int,
-        private val args: Array<out Any>,
+    class StringResource(
+        @StringRes private val id: Int,
+        private vararg val args: Any,
     ) : LbcTextSpec() {
         override val annotated: AnnotatedString
             @Composable
@@ -169,10 +162,10 @@ abstract class LbcTextSpec {
     }
 
     @OptIn(ExperimentalComposeUiApi::class)
-    private class PluralsResource(
+    class PluralsResource(
         @PluralsRes private val id: Int,
         private val count: Int,
-        private val args: Array<out Any>,
+        private vararg val args: Any,
     ) : LbcTextSpec() {
 
         override val annotated: AnnotatedString

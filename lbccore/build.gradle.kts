@@ -43,4 +43,10 @@ signing {
 
 dependencies {
     implementation(AndroidX.compose.foundation)
+
+    androidTestImplementation(AndroidX.test.runner)
+    androidTestImplementation(AndroidX.compose.ui.test)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    androidTestImplementation(AndroidX.Compose.ui.testManifest)
+    api(Kotlin.test)
 }
