@@ -48,5 +48,5 @@ dependencies {
     androidTestImplementation(AndroidX.compose.ui.test)
     androidTestImplementation(AndroidX.compose.ui.testJunit4)
     androidTestImplementation(AndroidX.Compose.ui.testManifest)
-    api(Kotlin.test)
+    androidTestImplementation(Kotlin.test)
 }
