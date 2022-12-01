@@ -23,6 +23,7 @@ object Modules {
     const val LbcAccessibility: String = ":lbcaccessibility"
     const val LbcFoundation: String = ":lbcfoundation"
     const val LbcTheme: String = ":lbctheme"
+    const val LbcCore: String = ":lbccore"
 }
 
 object BuildConfigs {

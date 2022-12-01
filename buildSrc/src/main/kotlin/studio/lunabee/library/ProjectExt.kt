@@ -48,6 +48,8 @@ fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>(
     defaultConfig {
         minSdk = BuildConfigs.minSdk
         targetSdk = BuildConfigs.targetSdk
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     this.buildFeatures.compose = true
@@ -56,4 +58,5 @@ fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>(
 
 fun Project.configureDependencies(): Unit = dependencies {
     add("implementation", Kotlin.Stdlib.jdk8)
+    add("androidTestImplementation", AndroidX.test.runner)
 }

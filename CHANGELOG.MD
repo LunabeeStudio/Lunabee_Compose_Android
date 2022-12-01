@@ -14,6 +14,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - *Breaking*: remove `LbcTopAppBar` and `LbcGraph`.
 - *Breaking*: remove `lbc` prefix from all packages.
 - *Breaking*: rename `LbcMaterial` to `LbcFoundation`.
+- Add `LbcCore` with `LbcTextSpec`
 
 ### LbTheme
 
