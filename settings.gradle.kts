@@ -27,14 +27,19 @@ plugins {
 rootProject.name = "Lunabee Compose"
 
 include("app")
-include(":lbctopappbar")
 include(":lbcaccessibility")
-include(":lbcmaterial")
+include(":lbcfoundation")
+include(":lbctheme")
+include(":lbccore")
+include(":material-color-utilities")
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+        }
     }
 }

@@ -20,9 +20,10 @@
  */
 
 object Modules {
-    const val lbctopappbar: String = ":lbctopappbar"
-    const val lbcaccessibility: String = ":lbcaccessibility"
-    const val lbcmaterial: String = ":lbcmaterial"
+    const val LbcAccessibility: String = ":lbcaccessibility"
+    const val LbcFoundation: String = ":lbcfoundation"
+    const val LbcTheme: String = ":lbctheme"
+    const val LbcCore: String = ":lbccore"
 }
 
 object BuildConfigs {

@@ -22,52 +22,31 @@
 package studio.lunabee.compose
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.res.stringResource
-import studio.lunabee.compose.material.common.screen.MenuScreen
-import studio.lunabee.compose.model.MenuEntry
-import studio.lunabee.compose.navigation.ToDirection
+import studio.lunabee.compose.common.MenuDescription
+import studio.lunabee.compose.common.MenuSection
+import studio.lunabee.compose.navigation.Directions
 
 @Composable
 fun MainScreen(
-    navigateToSimpleTopAppBarScreen: ToDirection,
-    navigateToLoadingTopAppBarScreen: ToDirection,
-    navigateToSearchTopAppBarScreen: ToDirection,
-    navigateToAccessibilityScreen: ToDirection,
-    navigateToTextScreen: ToDirection,
+    directions: Directions,
 ) {
-    val menus: List<MenuEntry> = remember {
-        listOf(
-            MenuEntry(
-                titleRes = R.string.top_bar_list_title,
-                subtitleRes = R.string.top_bar_list_subtitle,
-                direction = navigateToSimpleTopAppBarScreen,
-            ),
-            MenuEntry(
-                titleRes = R.string.top_bar_loading_list_title,
-                subtitleRes = R.string.top_bar_loading_list_subtitle,
-                direction = navigateToLoadingTopAppBarScreen,
-            ),
-            MenuEntry(
-                titleRes = R.string.top_bar_search_list_title,
-                subtitleRes = R.string.top_bar_search_list_subtitle,
-                direction = navigateToSearchTopAppBarScreen,
-            ),
-            MenuEntry(
+    MenuSection(
+        menus = listOf(
+            MenuDescription(
                 titleRes = R.string.accessibility_title,
                 subtitleRes = R.string.accessibility_subtitle,
-                direction = navigateToAccessibilityScreen,
+                direction = directions.navigateToAccessibility,
             ),
-            MenuEntry(
-                titleRes = R.string.text_screen_title,
-                subtitleRes = R.string.text_screen_subtitle,
-                direction = navigateToTextScreen,
+            MenuDescription(
+                titleRes = R.string.foundation_screen_title,
+                subtitleRes = R.string.foundation_screen_subtitle,
+                direction = directions.navigateToFoundation,
             ),
-        )
-    }
-
-    MenuScreen(
-        title = stringResource(id = R.string.select_your_theme_title),
-        menus = menus,
+            MenuDescription(
+                titleRes = R.string.theme_screen_title,
+                subtitleRes = R.string.theme_screen_subtitle,
+                direction = directions.navigateToTheme,
+            ),
+        ),
     )
 }

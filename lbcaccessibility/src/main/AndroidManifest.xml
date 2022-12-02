@@ -19,4 +19,4 @@
   ~ Created by Lunabee Studio / Date - 5/9/2022 - for the Lunabee Compose library.
   -->
 
-<manifest package="studio.lunabee.compose.lbcaccessibility" />
+<manifest package="studio.lunabee.compose.accessibility" />
