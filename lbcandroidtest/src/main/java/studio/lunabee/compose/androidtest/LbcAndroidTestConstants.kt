@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright © 2023 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Dependencies.kt
+ * LbcAndroidTestConstants.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/20/2023 - for the Lunabee Compose library.
  */
 
-object Modules {
-    const val LbcAccessibility: String = ":lbcaccessibility"
-    const val LbcFoundation: String = ":lbcfoundation"
-    const val LbcTheme: String = ":lbctheme"
-    const val LbcCore: String = ":lbccore"
-    const val LbcAndroidTest: String = ":lbcandroidtest"
-}
+package studio.lunabee.compose.androidtest
 
-object BuildConfigs {
-    const val lunabeeCompose: String = "1.0.0"
-    const val compileSdk: Int = 33
-    const val minSdk: Int = 23
-    const val targetSdk: Int = 33
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
+
+internal object LbcAndroidTestConstants {
+    /**
+     * Default timeout used for waiting methods in a [androidx.compose.ui.test.ComposeUiTest] scope.
+     */
+    val WaitNodeTimeout: Duration = 5.seconds
 }

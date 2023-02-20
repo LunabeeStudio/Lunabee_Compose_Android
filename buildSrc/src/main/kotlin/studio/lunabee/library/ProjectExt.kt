@@ -28,6 +28,10 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
+val excludedTestProjects: List<String> = listOf(
+    "lbcandroidtest",
+)
+
 fun Project.configureAndroidPlugins(): Unit = plugins.run {
     apply("com.android.library")
     apply("kotlin-android")
@@ -49,7 +53,9 @@ fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>(
         minSdk = BuildConfigs.minSdk
         targetSdk = BuildConfigs.targetSdk
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        if (!excludedTestProjects.contains(name)) {
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
     }
 
     this.buildFeatures.compose = true
@@ -58,5 +64,7 @@ fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>(
 
 fun Project.configureDependencies(): Unit = dependencies {
     add("implementation", Kotlin.Stdlib.jdk8)
-    add("androidTestImplementation", AndroidX.test.runner)
+    if (!excludedTestProjects.contains(name)) {
+        add("androidTestImplementation", AndroidX.test.runner)
+    }
 }
