@@ -9,6 +9,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### All
 
+- Update all dependencies
+
+### LbcAndroidTest
+
+- New module for Android Compose testing.
+
+### All
+
 - Update to last stable version of Jetpack Compose.
 - Update Gradle Plugin to `7.3.1`.
 - *Breaking*: remove `LbcTopAppBar` and `LbcGraph`.

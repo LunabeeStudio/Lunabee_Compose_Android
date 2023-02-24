@@ -43,3 +43,4 @@ dependencyResolutionManagement {
         }
     }
 }
+include(":lbcandroidtest")

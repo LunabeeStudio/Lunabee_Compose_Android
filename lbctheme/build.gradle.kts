@@ -27,6 +27,7 @@ plugins {
 }
 
 android {
+    namespace = "studio.lunabee.compose.theme"
     resourcePrefix("lbc_th_")
 }
 
