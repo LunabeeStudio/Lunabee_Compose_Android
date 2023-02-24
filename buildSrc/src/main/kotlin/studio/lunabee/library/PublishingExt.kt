@@ -35,7 +35,6 @@ import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.registering
 import java.net.URI
-import java.util.Locale
 
 private val Project.android: LibraryExtension
     get() = (this as ExtensionAware).extensions.getByName("android") as LibraryExtension
@@ -118,7 +117,7 @@ private fun MavenPublication.setAndroidArtifacts(project: Project) {
 
     artifact(sourceJar)
     artifact(javadocJar)
-    artifact("${project.buildDir}/outputs/aar/${project.name.toLowerCase(Locale.getDefault())}-release.aar")
+    artifact("${project.buildDir}/outputs/aar/${project.name.lowercase()}-release.aar")
 }
 
 private fun MavenPublication.setJavaArtifacts(project: Project) {

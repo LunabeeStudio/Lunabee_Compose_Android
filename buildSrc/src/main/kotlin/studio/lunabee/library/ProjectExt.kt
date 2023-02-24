@@ -21,12 +21,18 @@
 
 package studio.lunabee.library
 
+import AndroidConfig
 import BuildConfigs
-import Kotlin
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.Project
+import org.gradle.api.plugins.JavaBasePlugin
+import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val excludedTestProjects: List<String> = listOf(
     "lbcandroidtest",
@@ -58,12 +64,37 @@ fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>(
         }
     }
 
+    configureAndroidCompileJavaVersion()
+    configureCompileJavaVersion()
+
     this.buildFeatures.compose = true
     composeOptions.kotlinCompilerExtensionVersion = "_"
 }
 
+fun BaseExtension.configureAndroidCompileJavaVersion() {
+    compileOptions {
+        sourceCompatibility = AndroidConfig.JDK_VERSION
+        targetCompatibility = AndroidConfig.JDK_VERSION
+    }
+}
+
+fun Project.configureCompileJavaVersion(): Unit = this.extensions.getByType<BaseExtension>().run {
+    tasks.withType<KotlinCompile>().configureEach {
+        kotlinOptions {
+            jvmTarget = AndroidConfig.JDK_VERSION.toString()
+        }
+    }
+
+    plugins.withType<JavaBasePlugin>().configureEach {
+        extensions.configure<JavaPluginExtension> {
+            toolchain {
+                languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JDK_VERSION.toString()))
+            }
+        }
+    }
+}
+
 fun Project.configureDependencies(): Unit = dependencies {
-    add("implementation", Kotlin.Stdlib.jdk8)
     if (!excludedTestProjects.contains(name)) {
         add("androidTestImplementation", AndroidX.test.runner)
     }

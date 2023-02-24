@@ -1,3 +1,6 @@
+import studio.lunabee.library.configureAndroidCompileJavaVersion
+import studio.lunabee.library.configureCompileJavaVersion
+
 /*
  * Copyright © 2022 Lunabee Studio
  *
@@ -36,6 +39,9 @@ android {
         versionCode = System.getenv(EnvConfig.ENV_VERSION_CODE)?.toInt() ?: AndroidConfig.VERSION_CODE
         versionName = System.getenv(EnvConfig.ENV_VERSION_NAME) ?: AndroidConfig.VERSION_NAME
     }
+
+    configureAndroidCompileJavaVersion()
+    configureCompileJavaVersion()
 
     buildFeatures.compose = true
     composeOptions.kotlinCompilerExtensionVersion = "_"

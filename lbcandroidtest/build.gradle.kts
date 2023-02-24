@@ -7,6 +7,7 @@ plugins {
 
 android {
     resourcePrefix("lbc_at_")
+    namespace = "studio.lunabee.compose.androidtest"
 }
 
 description = "Tools for developping android test"

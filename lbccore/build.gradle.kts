@@ -27,6 +27,7 @@ plugins {
 
 android {
     resourcePrefix("lbc_core_")
+    namespace = "studio.lunabee.compose.core"
 }
 
 description = "A set of tools for Compose"
