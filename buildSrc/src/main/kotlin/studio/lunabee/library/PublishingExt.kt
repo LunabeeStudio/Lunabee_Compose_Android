@@ -29,6 +29,7 @@ import org.gradle.api.publish.PublicationContainer
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
+import org.gradle.configurationcache.extensions.capitalized
 import org.gradle.kotlin.dsl.*
 import java.net.URI
 
@@ -45,8 +46,10 @@ fun PublishingExtension.setRepository(project: Project) {
     repositories {
         maven {
             authentication {
-                credentials.username = project.properties["sonatypeUsername"]?.toString() ?: System.getenv("SONATYPE_USERNAME")
-                credentials.password = project.properties["sonatypePassword"]?.toString() ?: System.getenv("SONATYPE_PASSWORD")
+                credentials.username = project.properties["sonatypeUsername"]?.toString()
+                    ?: System.getenv("SONATYPE_USERNAME")
+                credentials.password = project.properties["sonatypePassword"]?.toString()
+                    ?: System.getenv("SONATYPE_PASSWORD")
             }
             url = if (project.version.toString().endsWith("-SNAPSHOT")) {
                 URI.create("https://s01.oss.sonatype.org/content/repositories/snapshots/")
@@ -115,8 +118,10 @@ private fun MavenPublication.setAndroidArtifacts(project: Project) {
     artifact(javadocJar)
     artifact("${project.buildDir}/outputs/aar/${project.name.lowercase()}-release.aar")
 
-    project.tasks.named("sign${project.name}Publication") {
-        dependsOn("bundleReleaseAar")
+    project.afterEvaluate {
+        project.tasks.named("sign${project.name.capitalized()}Publication") {
+            dependsOn("bundleReleaseAar")
+        }
     }
 }
 
