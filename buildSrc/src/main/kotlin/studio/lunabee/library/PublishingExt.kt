@@ -29,11 +29,7 @@ import org.gradle.api.publish.PublicationContainer
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
-import org.gradle.kotlin.dsl.create
-import org.gradle.kotlin.dsl.get
-import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.provideDelegate
-import org.gradle.kotlin.dsl.registering
+import org.gradle.kotlin.dsl.*
 import java.net.URI
 
 private val Project.android: LibraryExtension
@@ -118,6 +114,10 @@ private fun MavenPublication.setAndroidArtifacts(project: Project) {
     artifact(sourceJar)
     artifact(javadocJar)
     artifact("${project.buildDir}/outputs/aar/${project.name.lowercase()}-release.aar")
+
+    project.tasks.named("sign${project.name}Publication") {
+        dependsOn("bundleReleaseAar")
+    }
 }
 
 private fun MavenPublication.setJavaArtifacts(project: Project) {
