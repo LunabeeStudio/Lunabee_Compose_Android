@@ -26,12 +26,6 @@ import androidx.navigation.NavHostController
 typealias ToDirection = () -> Unit
 
 class Directions(navController: NavHostController) {
-    val navigateToAccessibility: ToDirection = {
-        navController.navigate(route = Destinations.AccessibilityRoute) {
-            popUpTo(route = Destinations.MainRoute) { inclusive = false }
-        }
-    }
-
     val navigateToFoundation: ToDirection = {
         navController.navigate(route = Destinations.FoundationRoute) {
             popUpTo(route = Destinations.MainRoute) { inclusive = false }

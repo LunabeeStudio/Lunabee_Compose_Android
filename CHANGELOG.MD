@@ -22,6 +22,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - *Breaking*: remove `LbcTopAppBar` and `LbcGraph`.
 - *Breaking*: remove `lbc` prefix from all packages.
 - *Breaking*: rename `LbcMaterial` to `LbcFoundation`.
+- *Breaking*: delete accessibility `Modifier` extensions, update `AccessibilityState` class.
 
 ## 1.0.0
 

@@ -72,7 +72,6 @@ class MainActivity : AppCompatActivity() {
                     title = when (destination.route) {
                         Destinations.MainRoute -> getString(R.string.application_name)
                         Destinations.ThemeRoute -> getString(R.string.theme_screen_title)
-                        Destinations.AccessibilityRoute -> getString(R.string.accessibility_title)
                         Destinations.FoundationRoute -> getString(R.string.foundation_screen_title)
                         else -> ""
                     }
