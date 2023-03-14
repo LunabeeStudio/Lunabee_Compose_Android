@@ -33,11 +33,6 @@ fun MainScreen(
     MenuSection(
         menus = listOf(
             MenuDescription(
-                titleRes = R.string.accessibility_title,
-                subtitleRes = R.string.accessibility_subtitle,
-                direction = directions.navigateToAccessibility,
-            ),
-            MenuDescription(
                 titleRes = R.string.foundation_screen_title,
                 subtitleRes = R.string.foundation_screen_subtitle,
                 direction = directions.navigateToFoundation,

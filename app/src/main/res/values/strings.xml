@@ -24,27 +24,10 @@
     <string name="application_name" translatable="false">Lunabee Compose Android</string>
 
     <!-- MainScreen -->
-    <string name="accessibility_title">"Accessibility (lbcaccessibility)"</string>
-    <string name="accessibility_subtitle">"Accessibility with Compose"</string>
     <string name="foundation_screen_title">"Foundation"</string>
     <string name="foundation_screen_subtitle">"Derivated components from androidx.compose.foundation"</string>
     <string name="theme_screen_title">"Theme"</string>
     <string name="theme_screen_subtitle">"Tools to create custom Material3 theme"</string>
-
-    <!-- AccessibilityScreen -->
-    <string name="accessibility_screen_simple_text">"Title"</string>
-    <string name="accessibility_screen_simple_text2">"Subtitle"</string>
-    <string name="accessibility_screen_simple_text_not_read">"I'm invisible"</string>
-    <string name="accessibility_screen_simple_text_head">"I'm accessible by swiping up/down"</string>
-    <string name="accessibility_screen_custom_button_click_me">"I'm an accessible button"</string>
-    <string name="accessibility_screen_custom_button_on_click_description">"display a toast"</string>
-    <string name="accessibility_screen_custom_button_clicked">"Tapped!"</string>
-    <string name="accessibility_screen_current_value">"Current value is: %d"</string>
-    <string name="accessibility_screen_current_value_now">"Current value is now: %d"</string>
-    <string name="accessibility_screen_current_value_increment">"Increment value"</string>
-    <string name="accessibility_screen_isEnabled">"isAccessibilityEnabled: %s"</string>
-    <string name="accessibility_screen_isTouchExplorationEnabled">"isTouchExplorationEnabled: %s"</string>
-    <string name="accessibility_screen_with_emoji">"My custom 👋 strings with 🫣😅 emoji"</string>
 
     <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Separate text to highlight by a comma"</string>
