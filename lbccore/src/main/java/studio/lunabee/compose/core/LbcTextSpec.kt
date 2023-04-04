@@ -20,6 +20,7 @@
  */
 package studio.lunabee.compose.core
 
+import android.content.Context
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
@@ -40,6 +41,8 @@ sealed class LbcTextSpec {
     abstract val string: String
         @ReadOnlyComposable @Composable
         get
+
+    abstract fun string(context: Context): String
 
     @Composable
     @ReadOnlyComposable
@@ -75,6 +78,14 @@ sealed class LbcTextSpec {
                 value.format(*args.resolveArgs())
             }
 
+        override fun string(context: Context): String {
+            return if (args.isEmpty()) {
+                value
+            } else {
+                value.format(args)
+            }
+        }
+
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
@@ -105,6 +116,8 @@ sealed class LbcTextSpec {
             @Composable
             @ReadOnlyComposable
             get() = value.text
+
+        override fun string(context: Context): String = value.text
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -141,6 +154,10 @@ sealed class LbcTextSpec {
             @ReadOnlyComposable
             @Suppress("SpreadOperator")
             get() = stringResource(id, *args.resolveArgs())
+
+        override fun string(context: Context): String {
+            return context.getString(id, args)
+        }
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -179,6 +196,10 @@ sealed class LbcTextSpec {
             @ReadOnlyComposable
             @Suppress("SpreadOperator")
             get() = pluralStringResource(id, count, *args.resolveArgs())
+
+        override fun string(context: Context): String {
+            return context.resources.getQuantityString(id, count, args)
+        }
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
