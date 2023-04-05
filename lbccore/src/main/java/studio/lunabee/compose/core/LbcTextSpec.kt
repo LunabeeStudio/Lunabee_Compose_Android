@@ -57,6 +57,17 @@ sealed class LbcTextSpec {
         }
     }
 
+    protected fun Array<out Any>.resolveArgsContext(context: Context): Array<out Any> {
+        return Array(this.size) { idx ->
+            val entry = this[idx]
+            if (entry is LbcTextSpec) {
+                entry.string(context) // marked as compile error due to Java(?)
+            } else {
+                this[idx]
+            }
+        }
+    }
+
     class Raw(private val value: String, private vararg val args: Any) : LbcTextSpec() {
         override val annotated: AnnotatedString
             @Composable
@@ -82,7 +93,8 @@ sealed class LbcTextSpec {
             return if (args.isEmpty()) {
                 value
             } else {
-                value.format(args)
+                @Suppress("SpreadOperator")
+                value.format(*args.resolveArgsContext(context))
             }
         }
 
@@ -156,7 +168,8 @@ sealed class LbcTextSpec {
             get() = stringResource(id, *args.resolveArgs())
 
         override fun string(context: Context): String {
-            return context.getString(id, args)
+            @Suppress("SpreadOperator")
+            return context.getString(id, *args.resolveArgsContext(context))
         }
 
         override fun equals(other: Any?): Boolean {
@@ -198,7 +211,8 @@ sealed class LbcTextSpec {
             get() = pluralStringResource(id, count, *args.resolveArgs())
 
         override fun string(context: Context): String {
-            return context.resources.getQuantityString(id, count, args)
+            @Suppress("SpreadOperator")
+            return context.resources.getQuantityString(id, count, *args.resolveArgsContext(context))
         }
 
         override fun equals(other: Any?): Boolean {
