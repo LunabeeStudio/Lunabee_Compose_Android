@@ -20,6 +20,7 @@
  */
 package studio.lunabee.compose.core
 
+import android.content.Context
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
@@ -41,6 +42,8 @@ sealed class LbcTextSpec {
         @ReadOnlyComposable @Composable
         get
 
+    abstract fun string(context: Context): String
+
     @Composable
     @ReadOnlyComposable
     protected fun Array<out Any>.resolveArgs(): Array<out Any> {
@@ -48,6 +51,17 @@ sealed class LbcTextSpec {
             val entry = this[idx]
             if (entry is LbcTextSpec) {
                 entry.string // marked as compile error due to Java(?)
+            } else {
+                this[idx]
+            }
+        }
+    }
+
+    protected fun Array<out Any>.resolveArgsContext(context: Context): Array<out Any> {
+        return Array(this.size) { idx ->
+            val entry = this[idx]
+            if (entry is LbcTextSpec) {
+                entry.string(context) // marked as compile error due to Java(?)
             } else {
                 this[idx]
             }
@@ -74,6 +88,15 @@ sealed class LbcTextSpec {
             } else {
                 value.format(*args.resolveArgs())
             }
+
+        override fun string(context: Context): String {
+            return if (args.isEmpty()) {
+                value
+            } else {
+                @Suppress("SpreadOperator")
+                value.format(*args.resolveArgsContext(context))
+            }
+        }
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -105,6 +128,8 @@ sealed class LbcTextSpec {
             @Composable
             @ReadOnlyComposable
             get() = value.text
+
+        override fun string(context: Context): String = value.text
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -141,6 +166,11 @@ sealed class LbcTextSpec {
             @ReadOnlyComposable
             @Suppress("SpreadOperator")
             get() = stringResource(id, *args.resolveArgs())
+
+        override fun string(context: Context): String {
+            @Suppress("SpreadOperator")
+            return context.getString(id, *args.resolveArgsContext(context))
+        }
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -179,6 +209,11 @@ sealed class LbcTextSpec {
             @ReadOnlyComposable
             @Suppress("SpreadOperator")
             get() = pluralStringResource(id, count, *args.resolveArgs())
+
+        override fun string(context: Context): String {
+            @Suppress("SpreadOperator")
+            return context.resources.getQuantityString(id, count, *args.resolveArgsContext(context))
+        }
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

@@ -15,6 +15,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - New module for Android Compose testing.
 
+### LbcCore
+- Add a method to get string with context in `LbcTextSpec`
+
 ### All
 
 - Update to last stable version of Jetpack Compose.
