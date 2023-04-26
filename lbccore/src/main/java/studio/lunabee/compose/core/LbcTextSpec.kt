@@ -21,12 +21,13 @@
 package studio.lunabee.compose.core
 
 import android.content.Context
+import android.content.res.Resources
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -73,11 +74,7 @@ sealed class LbcTextSpec {
             @Composable
             @ReadOnlyComposable
             @Suppress("SpreadOperator")
-            get() = if (args.isEmpty()) {
-                AnnotatedString(value)
-            } else {
-                AnnotatedString(value.format(*args.resolveArgs()))
-            }
+            get() = AnnotatedString(string)
 
         override val string: String
             @Composable
@@ -159,7 +156,7 @@ sealed class LbcTextSpec {
             @Composable
             @ReadOnlyComposable
             @Suppress("SpreadOperator")
-            get() = AnnotatedString(stringResource(id, *args.resolveArgs()))
+            get() = AnnotatedString(string)
 
         override val string: String
             @Composable
@@ -191,7 +188,6 @@ sealed class LbcTextSpec {
         }
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
     class PluralsResource(
         @PluralsRes private val id: Int,
         private val count: Int,
@@ -202,7 +198,7 @@ sealed class LbcTextSpec {
             @Composable
             @ReadOnlyComposable
             @Suppress("SpreadOperator")
-            get() = AnnotatedString(pluralStringResource(id, count, *args.resolveArgs()))
+            get() = AnnotatedString(string)
 
         override val string: String
             @Composable
@@ -233,6 +229,55 @@ sealed class LbcTextSpec {
             result = 31 * result + count
             result = 31 * result + args.contentHashCode()
             return result
+        }
+    }
+
+    class StringByNameResource(
+        private val name: String,
+        @StringRes private val fallbackId: Int,
+        private vararg val args: Any,
+    ) : LbcTextSpec() {
+        override val annotated: AnnotatedString
+            @Composable
+            @ReadOnlyComposable
+            @Suppress("SpreadOperator")
+            get() = AnnotatedString(string)
+
+        override val string: String
+            @Composable
+            @ReadOnlyComposable
+            @Suppress("SpreadOperator")
+            get() = stringResource(getStringIdByName(LocalContext.current, name) ?: fallbackId, *args.resolveArgs())
+
+        override fun string(context: Context): String {
+            @Suppress("SpreadOperator")
+            return context.getString(getStringIdByName(context, name) ?: fallbackId, *args.resolveArgsContext(context))
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as StringByNameResource
+
+            if (name != other.name) return false
+            if (fallbackId != other.fallbackId) return false
+            if (!args.contentEquals(other.args)) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = name.hashCode()
+            result = 31 * result + fallbackId
+            result = 31 * result + args.contentHashCode()
+            return result
+        }
+
+        @StringRes
+        private fun getStringIdByName(context: Context, name: String): Int? {
+            val res: Resources = context.resources
+            return res.getIdentifier(name, "string", context.packageName).takeIf { id -> id != 0 }
         }
     }
 }
