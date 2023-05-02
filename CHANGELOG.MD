@@ -17,6 +17,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### LbcCore
 - Add a method to get string with context in `LbcTextSpec`
+- Add a sealed class of `LbcTextSpec` to find string in resource by name
 
 ### All
 
