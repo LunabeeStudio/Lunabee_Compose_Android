@@ -32,12 +32,16 @@ class LbcPrintRule(private val context: Context) : TestWatcher() {
     }
 
     fun print(bitmap: Bitmap, suffix: String) {
-        val screenFile = File("${basePath}_${counter++}$suffix.jpeg")
-        screenFile.parentFile?.mkdirs()
-        screenFile.outputStream().use { outputStream ->
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
+        try {
+            val screenFile = File("${basePath}_${counter++}$suffix.jpeg")
+            screenFile.parentFile?.mkdirs()
+            screenFile.outputStream().use { outputStream ->
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
+            }
+            screenshots += screenFile
+        } finally {
+            bitmap.recycle()
         }
-        screenshots += screenFile
     }
 
     fun printWholeScreen(suffix: String) {
