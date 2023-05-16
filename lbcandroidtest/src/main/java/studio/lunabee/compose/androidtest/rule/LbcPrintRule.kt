@@ -2,6 +2,8 @@ package studio.lunabee.compose.androidtest.rule
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
+import androidx.test.core.app.takeScreenshot
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import java.io.File
@@ -36,6 +38,17 @@ class LbcPrintRule(private val context: Context) : TestWatcher() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
         }
         screenshots += screenFile
+    }
+
+    fun printWholeScreen(suffix: String) {
+        val bitmap = try {
+            takeScreenshot()
+        } catch (e: Throwable) {
+            Log.e("LbcPrintRule", "screenshot failed", e)
+            null
+        }
+
+        bitmap?.let { print(it, suffix) }
     }
 
     override fun succeeded(description: Description?) {
