@@ -131,6 +131,12 @@ private fun MavenPublication.setAndroidArtifacts(project: Project) {
 
 private fun MavenPublication.setJavaArtifacts(project: Project) {
     artifact("${project.buildDir}/libs/${project.name}-${project.version}.jar")
+
+    project.afterEvaluate {
+        project.tasks.named("sign${project.name.capitalized()}Publication") {
+            dependsOn("jar")
+        }
+    }
 }
 
 /**
