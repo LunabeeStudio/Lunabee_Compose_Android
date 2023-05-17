@@ -13,7 +13,6 @@ import androidx.compose.ui.test.SemanticsNodeInteractionCollection
 import androidx.compose.ui.test.filterToOne
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.waitUntilNodeCount
-import androidx.test.core.app.takeScreenshot
 import studio.lunabee.compose.androidtest.LbcAndroidTestConstants
 import studio.lunabee.compose.androidtest.rule.LbcPrintRule
 import kotlin.time.Duration
@@ -154,7 +153,8 @@ fun SemanticsMatcher.waitAndPrintRootToCacheDir(
         composeUiTest.onRoot().printToCacheDir(printRule, suffix)
         composeUiTest.onNode(this)
     } catch (e: ComposeTimeoutException) {
-        composeUiTest.onRoot(useUnmergedTree = useUnmergedTree).printToCacheDir(printRule, "${suffix}_TIMEOUT")
+        composeUiTest.onRoot(useUnmergedTree = useUnmergedTree)
+            .printToCacheDir(printRule, "${suffix}_TIMEOUT")
         throw e
     }
 }
@@ -187,10 +187,10 @@ fun SemanticsMatcher.waitAndPrintWholeScreenToCacheDir(
 ): SemanticsNodeInteraction {
     return try {
         waitUntilAtLeastOneExists(composeUiTest, useUnmergedTree, timeoutMillis)
-        printRule.print(takeScreenshot(), suffix)
+        printRule.printWholeScreen(suffix = suffix)
         composeUiTest.onAllNodes(this).filterToOne(this)
     } catch (e: ComposeTimeoutException) {
-        printRule.print(takeScreenshot(), "${suffix}_TIMEOUT")
+        printRule.printWholeScreen(suffix = "${suffix}_TIMEOUT")
         throw e
     }
 }
@@ -211,7 +211,10 @@ fun SemanticsMatcher.waitAndPrintWholeScreenToCacheDir(
  * ConsoleTestLog - On node with TestTag MyTestTag - isRoot? false - printToCacheDir
  * ConsoleTestLog - On node with TestTag MyTestTag - isRoot? false - scrollTo
  */
-fun SemanticsNodeInteraction.consoleLog(message: String, tag: String = "ConsoleTestLog"): SemanticsNodeInteraction {
+fun SemanticsNodeInteraction.consoleLog(
+    message: String,
+    tag: String = "ConsoleTestLog",
+): SemanticsNodeInteraction {
     val semanticsNode = fetchSemanticsNode()
     val config = semanticsNode.config
     val (type, value) = when {

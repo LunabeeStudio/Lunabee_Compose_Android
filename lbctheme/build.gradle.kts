@@ -45,5 +45,5 @@ signing {
 
 dependencies {
     implementation(AndroidX.compose.material3)
-    implementation("studio.lunabee.compose:material-color-utilities:_")
+    implementation(project(":material-color-utilities"))
 }

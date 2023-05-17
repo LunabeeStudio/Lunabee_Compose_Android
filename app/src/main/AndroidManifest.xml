@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright © 2022 Lunabee Studio
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,9 +19,7 @@
   ~ Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
   -->
 
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="studio.lunabee.compose">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"

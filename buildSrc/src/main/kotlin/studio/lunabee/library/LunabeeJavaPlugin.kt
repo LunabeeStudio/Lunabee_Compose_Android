@@ -29,5 +29,6 @@ open class LunabeeJavaPlugin : Plugin<Project> {
         target.configureJavaPlugins()
         target.tasks.register("${target.name}Version", VersionTask::class.java)
         target.tasks.register("${target.name}setSnapshotVersion", SnapshotTask::class.java)
+        target.group = "studio.lunabee.compose"
     }
 }
