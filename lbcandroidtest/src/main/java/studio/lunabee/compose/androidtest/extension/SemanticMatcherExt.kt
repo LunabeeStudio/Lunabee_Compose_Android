@@ -32,11 +32,11 @@ import kotlin.time.Duration
 fun SemanticsMatcher.waitUntilDoesNotExist(
     composeUiTest: ComposeUiTest,
     useUnmergedTree: Boolean = false,
-    timeoutMillis: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
+    timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
 ): SemanticsNodeInteraction {
     // Method copy from ComposeUiTest.waitUntilExactlyOneExists to add useUnmergedTree.
     // Waiting for answer: https://issuetracker.google.com/issues/268432145
-    return waitUntilNodeCount(composeUiTest, 0, useUnmergedTree, timeoutMillis).filterToOne(this)
+    return waitUntilNodeCount(composeUiTest, 0, useUnmergedTree, timeout).filterToOne(this)
 }
 
 /**
@@ -58,11 +58,11 @@ fun SemanticsMatcher.waitUntilDoesNotExist(
 fun SemanticsMatcher.waitUntilExactlyOneExists(
     composeUiTest: ComposeUiTest,
     useUnmergedTree: Boolean = false,
-    timeoutMillis: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
+    timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
 ): SemanticsNodeInteraction {
     // Method copy from ComposeUiTest.waitUntilExactlyOneExists to add useUnmergedTree.
     // Waiting for answer: https://issuetracker.google.com/issues/268432145
-    return waitUntilNodeCount(composeUiTest, 1, useUnmergedTree, timeoutMillis).filterToOne(this)
+    return waitUntilNodeCount(composeUiTest, 1, useUnmergedTree, timeout).filterToOne(this)
 }
 
 /**
@@ -85,11 +85,11 @@ fun SemanticsMatcher.waitUntilNodeCount(
     composeUiTest: ComposeUiTest,
     count: Int,
     useUnmergedTree: Boolean = false,
-    timeoutMillis: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
+    timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
 ): SemanticsNodeInteractionCollection {
     // Method copy from ComposeUiTest.waitUntilExactlyOneExists to add useUnmergedTree.
     // Waiting for answer: https://issuetracker.google.com/issues/268432145
-    composeUiTest.waitUntil(timeoutMillis.inWholeMilliseconds) {
+    composeUiTest.waitUntil(timeout.inWholeMilliseconds) {
         composeUiTest.onAllNodes(this, useUnmergedTree).fetchSemanticsNodes().size == count
     }
     return composeUiTest.onAllNodes(this, useUnmergedTree)
@@ -114,11 +114,11 @@ fun SemanticsMatcher.waitUntilNodeCount(
 fun SemanticsMatcher.waitUntilAtLeastOneExists(
     composeUiTest: ComposeUiTest,
     useUnmergedTree: Boolean = false,
-    timeoutMillis: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
+    timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
 ): SemanticsNodeInteractionCollection {
     // Method copy from ComposeUiTest.waitUntilExactlyOneExists to add useUnmergedTree.
     // Waiting for answer: https://issuetracker.google.com/issues/268432145
-    composeUiTest.waitUntil(timeoutMillis.inWholeMilliseconds) {
+    composeUiTest.waitUntil(timeout.inWholeMilliseconds) {
         composeUiTest.onAllNodes(this, useUnmergedTree).fetchSemanticsNodes().isNotEmpty()
     }
     return composeUiTest.onAllNodes(this, useUnmergedTree)
@@ -146,10 +146,10 @@ fun SemanticsMatcher.waitAndPrintRootToCacheDir(
     printRule: LbcPrintRule,
     suffix: String = "",
     useUnmergedTree: Boolean = false,
-    timeoutMillis: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
+    timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
 ): SemanticsNodeInteraction {
     return try {
-        waitUntilExactlyOneExists(composeUiTest, useUnmergedTree, timeoutMillis)
+        waitUntilExactlyOneExists(composeUiTest, useUnmergedTree, timeout)
         composeUiTest.onRoot().printToCacheDir(printRule, suffix)
         composeUiTest.onNode(this)
     } catch (e: ComposeTimeoutException) {
@@ -183,10 +183,10 @@ fun SemanticsMatcher.waitAndPrintWholeScreenToCacheDir(
     printRule: LbcPrintRule,
     suffix: String = "",
     useUnmergedTree: Boolean = false,
-    timeoutMillis: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
+    timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
 ): SemanticsNodeInteraction {
     return try {
-        waitUntilAtLeastOneExists(composeUiTest, useUnmergedTree, timeoutMillis)
+        waitUntilAtLeastOneExists(composeUiTest, useUnmergedTree, timeout)
         printRule.printWholeScreen(suffix = suffix)
         composeUiTest.onAllNodes(this).filterToOne(this)
     } catch (e: ComposeTimeoutException) {
