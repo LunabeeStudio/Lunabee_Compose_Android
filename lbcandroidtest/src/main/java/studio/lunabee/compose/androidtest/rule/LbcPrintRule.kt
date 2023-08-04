@@ -25,7 +25,8 @@ class LbcPrintRule(private val appName: String) : TestWatcher() {
     override fun starting(d: Description) {
         super.starting(d)
         counter = 0
-        val screenshotFolder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "lbc_screenshots")
+        val publicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val screenshotFolder = File(publicDirectory, "lbc_screenshots")
         val appFolder = File(screenshotFolder, appName)
         val className = d.className.substringAfterLast(".")
         classFolder = File(appFolder, className)
