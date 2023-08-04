@@ -37,6 +37,8 @@ android {
         minSdk = AndroidConfig.MIN_SDK
         targetSdk = AndroidConfig.TARGET_SDK
 
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
         versionCode =
             System.getenv(EnvConfig.ENV_VERSION_CODE)?.toInt() ?: AndroidConfig.VERSION_CODE
         versionName = System.getenv(EnvConfig.ENV_VERSION_NAME) ?: AndroidConfig.VERSION_NAME
@@ -84,7 +86,7 @@ dependencies {
 
     implementation(Google.android.material)
 
-    implementation(Google.accompanist.systemuicontroller)
+    implementation(Google.accompanist.systemUiController)
 
     implementation(AndroidX.activity.compose)
     implementation(AndroidX.compose.foundation)
@@ -96,4 +98,10 @@ dependencies {
     implementation(project(Modules.LbcAccessibility))
     implementation(project(Modules.LbcFoundation))
     implementation(project(Modules.LbcTheme))
+
+    androidTestImplementation(project(Modules.LbcAndroidTest))
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    androidTestImplementation(Testing.junit4)
+    androidTestImplementation(Kotlin.test.junit)
+    debugImplementation(AndroidX.Compose.ui.testManifest)
 }
