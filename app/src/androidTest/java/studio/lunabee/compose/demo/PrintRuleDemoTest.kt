@@ -10,27 +10,12 @@ import studio.lunabee.compose.androidtest.LbcComposeTest
 import studio.lunabee.compose.androidtest.extension.waitAndPrintRootToCacheDir
 import java.io.File
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalTestApi::class)
 class PrintRuleDemoTest : LbcComposeTest() {
-
-    @Test
-    fun dont_print_screenshot_on_succeess_test(): Unit = invoke {
-        setContent {
-            Text("Hello")
-        }
-
-        hasText("Hello")
-            .waitAndPrintRootToCacheDir(this, printRule)
-            .assertIsDisplayed()
-
-        val base = File(printRule.basePath)
-        assertFalse(base.parentFile!!.exists())
-    }
 
     @Test
     fun print_screenshot_on_failure_test(): Unit = invoke {

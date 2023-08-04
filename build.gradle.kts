@@ -27,8 +27,8 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:_")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
+        classpath(libs.gradle)
+        classpath(libs.kotlin.gradle.plugin)
     }
 }
 
@@ -37,14 +37,14 @@ plugins {
 }
 
 dependencies {
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:_")
+    detektPlugins(libs.detekt.formatting)
 }
 
 detekt {
     parallel = true
-    source = files(rootProject.rootDir)
+    source.setFrom(files(rootProject.rootDir))
     buildUponDefaultConfig = true
-    config = files("$projectDir/lunabee-detekt-config.yml")
+    config.setFrom(files("$projectDir/lunabee-detekt-config.yml"))
     autoCorrect = true
     ignoreFailures = true
 }

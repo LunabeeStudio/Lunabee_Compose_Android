@@ -11,7 +11,7 @@ import java.io.File
 /**
  * Custom rule to print a screenshot from a test.
  */
-class LbcPrintRule : TestWatcher() {
+class LbcPrintRule(private val appName: String) : TestWatcher() {
 
     private lateinit var classFolder: File
 
@@ -25,16 +25,17 @@ class LbcPrintRule : TestWatcher() {
     override fun starting(d: Description) {
         super.starting(d)
         counter = 0
-        val screenshotFolder =
-            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "lbc_screenshots")
+        val screenshotFolder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "lbc_screenshots")
+        val appFolder = File(screenshotFolder, appName)
         val className = d.className.substringAfterLast(".")
-        classFolder = File(screenshotFolder, className)
+        classFolder = File(appFolder, className)
         basePath = File(classFolder, d.methodName).absolutePath
     }
 
     fun print(bitmap: Bitmap, suffix: String) {
         try {
             val screenFile = File("${basePath}_${counter++}$suffix.jpeg")
+            if (screenFile.exists()) screenFile.delete()
             screenFile.parentFile?.mkdirs()
             screenFile.outputStream().use { outputStream ->
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
