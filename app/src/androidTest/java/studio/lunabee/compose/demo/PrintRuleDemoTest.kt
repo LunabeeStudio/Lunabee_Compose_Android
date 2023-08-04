@@ -19,7 +19,7 @@ import kotlin.time.Duration.Companion.milliseconds
 class PrintRuleDemoTest : LbcComposeTest() {
 
     @Test
-    fun print_screenshot_delete_succeed_test(): Unit = invoke {
+    fun dont_print_screenshot_on_succeess_test(): Unit = invoke {
         setContent {
             Text("Hello")
         }
@@ -28,11 +28,12 @@ class PrintRuleDemoTest : LbcComposeTest() {
             .waitAndPrintRootToCacheDir(this, printRule)
             .assertIsDisplayed()
 
-        assertFalse(File(printRule.basePath).exists())
+        val base = File(printRule.basePath)
+        assertFalse(base.parentFile!!.exists())
     }
 
     @Test
-    fun print_screenshot_delete_failure_test(): Unit = invoke {
+    fun print_screenshot_on_failure_test(): Unit = invoke {
         setContent {
             Text("Hello")
         }
@@ -50,6 +51,6 @@ class PrintRuleDemoTest : LbcComposeTest() {
 
         println(base.parentFile!!.listFiles()!!.joinToString("\n") { it.absolutePath })
 
-        assert(false) // Make the test fail to check if screenshots still exist in device cache storage
+        // assert(false) // Make the test fail to check if screenshots still exist in device cache storage
     }
 }
