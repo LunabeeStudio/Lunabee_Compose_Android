@@ -49,7 +49,7 @@ abstract class LbcComposeTest {
     private val context: Context = InstrumentationRegistry.getInstrumentation().targetContext
 
     @get:Rule
-    val printRule: LbcPrintRule = LbcPrintRule(context)
+    val printRule: LbcPrintRule = LbcPrintRule()
 
     fun getString(@StringRes id: Int, vararg args: Any): String = context.getString(id, *args)
 
