@@ -20,22 +20,27 @@ class PrintRuleDemoTest : LbcComposeTest() {
     @Test
     fun print_screenshot_on_failure_test(): Unit = invoke {
         setContent {
-            Text("Hello")
+            Text("foo")
         }
 
         val error = runCatching {
-            hasText("World")
+            hasText("bar")
                 .waitAndPrintRootToCacheDir(this, printRule, timeout = 200.milliseconds)
                 .assertIsDisplayed()
         }.exceptionOrNull()
         assertIs<ComposeTimeoutException>(error)
 
         val base = File(printRule.basePath)
-        assertTrue(base.parentFile!!.exists())
-        assertEquals(1, base.parentFile!!.listFiles()!!.size)
+        val parentFile = base.parentFile!!
+        assertTrue(parentFile.exists())
 
-        println("-> Files found:\n" + base.parentFile!!.listFiles()!!.joinToString("\n") { it.absolutePath })
+        val files = parentFile.listFiles()!!
+        assertEquals(1, files.size)
+        assertEquals(
+            "/storage/emulated/0/Download/lbc_screenshots/studio.lunabee.compose/PrintRuleDemoTest/print_screenshot_on_failure_test_0_TIMEOUT.jpeg",
+            files.first().absolutePath
+        )
 
-        assert(false) // Make the test fail to check if screenshots still exist in device cache storage
+        // assert(false) // Make the test fail to check if screenshots still exist in device cache storage
     }
 }
