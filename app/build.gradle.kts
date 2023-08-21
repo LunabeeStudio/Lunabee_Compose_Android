@@ -79,6 +79,7 @@ android {
 }
 
 dependencies {
+    implementation(platform(libs.androidx.compose.bom))
     implementation(Kotlin.stdlib.jdk8)
 
     implementation(AndroidX.appCompat)
