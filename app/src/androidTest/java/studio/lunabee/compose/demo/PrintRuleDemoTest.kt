@@ -34,7 +34,7 @@ class PrintRuleDemoTest : LbcComposeTest() {
         assertTrue(base.parentFile!!.exists())
         assertEquals(1, base.parentFile!!.listFiles()!!.size)
 
-        println(base.parentFile!!.listFiles()!!.joinToString("\n") { it.absolutePath })
+        println("-> Files found:\n" + base.parentFile!!.listFiles()!!.joinToString("\n") { it.absolutePath })
 
         assert(false) // Make the test fail to check if screenshots still exist in device cache storage
     }
