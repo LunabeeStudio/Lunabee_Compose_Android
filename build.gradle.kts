@@ -56,9 +56,9 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
 
     reports {
         xml.required.set(true)
-        xml.outputLocation.set(file("$buildDir/reports/detekt/detekt-report.xml"))
+        xml.outputLocation.set(file("${layout.buildDirectory}/reports/detekt/detekt-report.xml"))
 
         html.required.set(true)
-        html.outputLocation.set(file("$buildDir/reports/detekt/detekt-report.html"))
+        html.outputLocation.set(file("${layout.buildDirectory}/reports/detekt/detekt-report.html"))
     }
 }

@@ -11,6 +11,7 @@
 [versions]
 
 
+
 [libraries]
 
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "_" }

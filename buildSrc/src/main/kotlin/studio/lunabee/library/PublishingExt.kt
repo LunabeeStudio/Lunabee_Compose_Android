@@ -120,7 +120,7 @@ private fun MavenPublication.setAndroidArtifacts(project: Project) {
 
     artifact(sourceJar)
     artifact(javadocJar)
-    artifact("${project.buildDir}/outputs/aar/${project.name.lowercase()}-release.aar")
+    artifact("${project.layout.buildDirectory}/outputs/aar/${project.name.lowercase()}-release.aar")
 
     project.afterEvaluate {
         project.tasks.named("sign${project.name.capitalized()}Publication") {
@@ -130,7 +130,7 @@ private fun MavenPublication.setAndroidArtifacts(project: Project) {
 }
 
 private fun MavenPublication.setJavaArtifacts(project: Project) {
-    artifact("${project.buildDir}/libs/${project.name}-${project.version}.jar")
+    artifact("${project.layout.buildDirectory}/libs/${project.name}-${project.version}.jar")
 
     project.afterEvaluate {
         project.tasks.named("sign${project.name.capitalized()}Publication") {
