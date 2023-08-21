@@ -37,8 +37,9 @@ class PrintRuleDemoTest : LbcComposeTest() {
         val files = parentFile.listFiles()!!
         assertEquals(1, files.size)
         assertEquals(
-            "/storage/emulated/0/Download/lbc_screenshots/studio.lunabee.compose/PrintRuleDemoTest/print_screenshot_on_failure_test_0_TIMEOUT.jpeg",
-            files.first().absolutePath
+            "/storage/emulated/0/Download/lbc_screenshots/studio.lunabee.compose/PrintRuleDemoTest" +
+                "/print_screenshot_on_failure_test_0_TIMEOUT.jpeg",
+            files.first().absolutePath,
         )
 
         // assert(false) // Make the test fail to check if screenshots still exist in device cache storage
