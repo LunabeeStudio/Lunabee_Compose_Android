@@ -19,6 +19,10 @@ gradle = { module = "com.android.tools.build:gradle", version = "_" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version = "_" }
 
 androidx-test-runner = { module = "androidx.test:runner", version = "1.5.2" }
+##                                                             ⬆ = "1.5.3-alpha01" }
+##                                                             ⬆ = "1.6.0-alpha01" }
+##                                                             ⬆ = "1.6.0-alpha02" }
+##                                                             ⬆ = "1.6.0-alpha03" }
 
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "_" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
