@@ -14,7 +14,15 @@
 
 [libraries]
 
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "_" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version = "_" }
 gradle = { module = "com.android.tools.build:gradle", version = "_" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version = "_" }
+
+androidx-test-runner = { module = "androidx.test:runner", version = "1.5.2" }
+
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "_" }
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-ui-test = { module = "androidx.compose.ui:ui-test" }
+androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }

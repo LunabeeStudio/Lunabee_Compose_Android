@@ -24,7 +24,7 @@ signing {
 
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
-    implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.compose.ui.test)
-    implementation(AndroidX.compose.ui.testJunit4)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui.test)
+    implementation(libs.androidx.compose.ui.test.junit4)
 }

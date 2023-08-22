@@ -25,6 +25,7 @@ import AndroidConfig
 import BuildConfigs
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.plugins.JavaBasePlugin
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.jvm.toolchain.JavaLanguageVersion
@@ -96,6 +97,15 @@ fun Project.configureCompileJavaVersion(): Unit = this.extensions.getByType<Base
 
 fun Project.configureDependencies(): Unit = dependencies {
     if (!excludedTestProjects.contains(name)) {
-        add("androidTestImplementation", AndroidX.test.runner)
+        // https://github.com/gradle/gradle/issues/25737
+        addProvider(
+            configurationName = "androidTestImplementation",
+            dependencyNotation = provider {
+                rootProject.extensions
+                    .getByType(VersionCatalogsExtension::class.java)
+                    .named("libs")
+                    .findLibrary("androidx.test.runner").get().get()
+            },
+        )
     }
 }

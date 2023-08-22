@@ -79,20 +79,18 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
     implementation(Kotlin.stdlib.jdk8)
 
+    implementation(Google.android.material)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.core.ktx)
-
-    implementation(Google.android.material)
-
-    implementation(Google.accompanist.systemUiController)
-
     implementation(AndroidX.activity.compose)
-    implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.compose.material3)
     implementation(AndroidX.navigation.compose)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3)
+    implementation(Google.accompanist.systemUiController)
 
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
@@ -101,8 +99,8 @@ dependencies {
     implementation(project(Modules.LbcTheme))
 
     androidTestImplementation(project(Modules.LbcAndroidTest))
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(Testing.junit4)
     androidTestImplementation(Kotlin.test.junit)
-    debugImplementation(AndroidX.Compose.ui.testManifest)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
