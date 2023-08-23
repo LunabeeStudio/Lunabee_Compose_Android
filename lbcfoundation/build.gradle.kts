@@ -44,5 +44,6 @@ signing {
 }
 
 dependencies {
-    implementation(AndroidX.compose.foundation)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.foundation)
 }

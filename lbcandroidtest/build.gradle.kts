@@ -23,7 +23,8 @@ signing {
 }
 
 dependencies {
-    implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.compose.ui.test)
-    implementation(AndroidX.compose.ui.testJunit4)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui.test)
+    implementation(libs.androidx.compose.ui.test.junit4)
 }

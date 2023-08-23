@@ -7,17 +7,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
-### All
-
-- Update all dependencies
-
-### LbcAndroidTest
-
-- New module for Android Compose testing.
-
-### LbcCore
-- Add a method to get string with context in `LbcTextSpec`
-- Add a sealed class of `LbcTextSpec` to find string in resource by name
+## 1.1.0
 
 ### All
 
@@ -27,6 +17,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - *Breaking*: remove `lbc` prefix from all packages.
 - *Breaking*: rename `LbcMaterial` to `LbcFoundation`.
 - *Breaking*: delete accessibility `Modifier` extensions, update `AccessibilityState` class.
+
+### LbcAndroidTest
+
+- New module for Android Compose testing.
+
+### LbcCore
+- Add a method to get string with context in `LbcTextSpec`
+- Add a sealed class of `LbcTextSpec` to find string in resource by name
 
 ## 1.0.0
 

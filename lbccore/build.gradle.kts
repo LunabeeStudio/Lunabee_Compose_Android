@@ -43,11 +43,12 @@ signing {
 }
 
 dependencies {
-    implementation(AndroidX.compose.foundation)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.foundation)
 
-    androidTestImplementation(AndroidX.test.runner)
-    androidTestImplementation(AndroidX.compose.ui.test)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
-    androidTestImplementation(AndroidX.Compose.ui.testManifest)
+    androidTestImplementation(libs.androidx.compose.ui.test)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(Kotlin.test)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
