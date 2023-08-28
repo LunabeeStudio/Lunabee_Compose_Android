@@ -11,7 +11,11 @@ import java.io.File
 /**
  * Custom rule to print a screenshot from a test.
  */
-class LbcPrintRule(private val appName: String) : TestWatcher() {
+class LbcPrintRule(
+    private val appName: String,
+    private val deleteOnSuccess: Boolean = true,
+    private val addTimestampToPath: Boolean = false,
+) : TestWatcher() {
 
     private lateinit var classFolder: File
 
@@ -27,7 +31,11 @@ class LbcPrintRule(private val appName: String) : TestWatcher() {
         counter = 0
         val publicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         val screenshotFolder = File(publicDirectory, "lbc_screenshots")
-        val appFolder = File(screenshotFolder, appName)
+        val sb = StringBuilder(appName)
+        if (addTimestampToPath) {
+            sb.append("_${System.currentTimeMillis()}")
+        }
+        val appFolder = File(screenshotFolder, sb.toString())
         val className = d.className.substringAfterLast(".")
         classFolder = File(appFolder, className)
         basePath = File(classFolder, d.methodName).absolutePath
@@ -60,7 +68,9 @@ class LbcPrintRule(private val appName: String) : TestWatcher() {
 
     override fun succeeded(description: Description?) {
         super.succeeded(description)
-        screenshots.forEach(File::delete)
-        classFolder.delete() // try delete (fail if not empty)
+        if (deleteOnSuccess) {
+            screenshots.forEach(File::delete)
+            classFolder.delete() // try delete (fail if not empty)
+        }
     }
 }
