@@ -14,7 +14,7 @@ import java.io.File
 class LbcPrintRule(
     private val appName: String,
     private val deleteOnSuccess: Boolean = true,
-    private val addTimestampToPath: Boolean = false,
+    private val appendTimestamp: Boolean = false,
 ) : TestWatcher() {
 
     private lateinit var classFolder: File
@@ -32,7 +32,7 @@ class LbcPrintRule(
         val publicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         val screenshotFolder = File(publicDirectory, "lbc_screenshots")
         val sb = StringBuilder(appName)
-        if (addTimestampToPath) {
+        if (appendTimestamp) {
             sb.append("_${System.currentTimeMillis()}")
         }
         val appFolder = File(screenshotFolder, sb.toString())
