@@ -8,6 +8,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## Unreleased
 ### LbcAndroidTest
 - Add params `deleteOnSuccess` and `appendTimestamp` to `LbcPrintRule`
+- Allow client to choose between internal or public storage for `LbcPrintRule`
+- Rework `LbcPrintRule` constructor with `internalStorage` and `publicStorage` factories
 
 ## 1.1.0
 
