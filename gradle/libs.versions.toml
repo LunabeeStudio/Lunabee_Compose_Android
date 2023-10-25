@@ -64,11 +64,6 @@ androidx-activity = "1.8.0"
 
 androidx-navigation = "2.7.4"
 
-google-accompanist = "0.32.0"
-##              ⬆ = "0.33.0-alpha"
-##              ⬆ = "0.33.1-alpha"
-##              ⬆ = "0.33.2-alpha"
-
 [libraries]
 
 desugarJdk = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-tools-desugar_jdk_libs" }
@@ -88,7 +83,6 @@ compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-mani
 
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-navigation" }
-accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "google-accompanist" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit-junit" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }

@@ -90,10 +90,6 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
-    // Deprecated in favor of Activity.enableEdgeToEdge from androidx.activity 1.8+
-    //FIXME: See the example PR in the migration guide here:
-    // https://google.github.io/accompanist/systemuicontroller/
-    implementation(libs.accompanist.systemuicontroller)
 
     coreLibraryDesugaring(libs.desugarJdk)
 
