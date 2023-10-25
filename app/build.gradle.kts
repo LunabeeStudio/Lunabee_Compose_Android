@@ -48,7 +48,9 @@ android {
     configureCompileJavaVersion()
 
     buildFeatures.compose = true
-    composeOptions.kotlinCompilerExtensionVersion = "_"
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
 
     buildTypes {
         debug {
@@ -79,28 +81,29 @@ android {
 }
 
 dependencies {
-    implementation(Kotlin.stdlib.jdk8)
+    implementation(libs.material)
+    implementation(libs.appcompat)
+    implementation(libs.core.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.navigation.compose)
 
-    implementation(Google.android.material)
-    implementation(AndroidX.appCompat)
-    implementation(AndroidX.core.ktx)
-    implementation(AndroidX.activity.compose)
-    implementation(AndroidX.navigation.compose)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material3)
+    // Deprecated in favor of Activity.enableEdgeToEdge from androidx.activity 1.8+
+    //FIXME: See the example PR in the migration guide here:
+    // https://google.github.io/accompanist/systemuicontroller/
+    implementation(libs.accompanist.systemuicontroller)
 
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material3)
-    implementation(Google.accompanist.systemUiController)
-
-    coreLibraryDesugaring(Android.tools.desugarJdkLibs)
+    coreLibraryDesugaring(libs.desugarJdk)
 
     implementation(project(Modules.LbcAccessibility))
     implementation(project(Modules.LbcFoundation))
     implementation(project(Modules.LbcTheme))
 
     androidTestImplementation(project(Modules.LbcAndroidTest))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    androidTestImplementation(Testing.junit4)
-    androidTestImplementation(Kotlin.test.junit)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    androidTestImplementation(libs.compose.ui.test.junit4)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.kotlin.test.junit)
+    debugImplementation(libs.compose.ui.test.manifest)
 }

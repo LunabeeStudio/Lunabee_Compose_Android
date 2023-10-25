@@ -44,8 +44,8 @@ signing {
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.material3)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.material3)
 
-    implementation(project(":material-color-utilities"))
+    implementation(project(Modules.MaterialColorUtilities))
 }

@@ -27,13 +27,13 @@ buildscript {
     }
 
     dependencies {
-        classpath(libs.gradle)
+        classpath(libs.android.gradle.plugin)
         classpath(libs.kotlin.gradle.plugin)
     }
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt")
+    alias(libs.plugins.detekt)
 }
 
 dependencies {
