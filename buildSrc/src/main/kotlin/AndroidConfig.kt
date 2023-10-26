@@ -40,5 +40,5 @@ object AndroidConfig {
     const val LBC_THEME_VERSION: String = "1.1.0"
     const val MATERIAL_COLOR_UTILITIES_VERSION: String = "1.1.0"
 
-    val JDK_VERSION: JavaVersion = JavaVersion.VERSION_11
+    val JDK_VERSION: JavaVersion = JavaVersion.VERSION_17
 }

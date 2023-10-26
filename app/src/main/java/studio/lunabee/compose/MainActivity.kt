@@ -21,8 +21,12 @@
 
 package studio.lunabee.compose
 
+import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -42,7 +46,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import studio.lunabee.compose.common.AppDemoTheme
 import studio.lunabee.compose.navigation.Destinations
 import studio.lunabee.compose.navigation.Directions
@@ -52,13 +55,10 @@ import studio.lunabee.compose.navigation.MainNavGraph
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // For status bar color with elevation.
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        enableEdgeToEdge()
 
         setContent {
             val navController = rememberNavController()
-            val systemUiController = rememberSystemUiController()
             val directions = remember { Directions(navController = navController) }
             var title: String by rememberSaveable {
                 mutableStateOf(value = getString(R.string.application_name))
@@ -80,9 +80,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            AppDemoTheme(
-                systemUiController = systemUiController,
-            ) {
+            AppDemoTheme {
                 Scaffold(
                     topBar = {
                         TopAppBar(
@@ -114,5 +112,24 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun enableEdgeToEdge() {
+        // For status bar color with elevation.
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        val isDark = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+            Configuration.UI_MODE_NIGHT_YES
+        // Don't use SystemBarStyle.auto for navigation bar because it always add a scrim (cf doc)
+        val navigationBarStyle = if (isDark) {
+            SystemBarStyle.dark(scrim = Color.TRANSPARENT)
+        } else {
+            SystemBarStyle.light(scrim = Color.TRANSPARENT, darkScrim = Color.TRANSPARENT)
+        }
+        val statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+        enableEdgeToEdge(
+            statusBarStyle = statusBarStyle,
+            navigationBarStyle = navigationBarStyle,
+        )
     }
 }

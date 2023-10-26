@@ -24,6 +24,7 @@ package studio.lunabee.library
 import AndroidConfig
 import BuildConfigs
 import com.android.build.gradle.BaseExtension
+import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.plugins.JavaBasePlugin
@@ -32,6 +33,7 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -68,8 +70,13 @@ fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>(
     configureAndroidCompileJavaVersion()
     configureCompileJavaVersion()
 
+    // FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
+    val libs: LibrariesForLibs = the<LibrariesForLibs>()
+
     this.buildFeatures.compose = true
-    composeOptions.kotlinCompilerExtensionVersion = "_"
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
 }
 
 fun BaseExtension.configureAndroidCompileJavaVersion() {

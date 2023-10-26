@@ -6,28 +6,89 @@
 
 [plugins]
 
-
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [versions]
 
+kotlin = "1.9.10"
+##  ⬆ = "1.9.20-Beta"
+##  ⬆ = "1.9.20-Beta2"
+##  ⬆ = "1.9.20-RC"
+##  ⬆ = "1.9.20-RC2"
 
+android-gradle-plugin = "8.2.0-rc01"
+##                 ⬆ = "8.3.0-alpha01"
+##                 ⬆ = "8.3.0-alpha02"
+##                 ⬆ = "8.3.0-alpha03"
+##                 ⬆ = "8.3.0-alpha04"
+##                 ⬆ = "8.3.0-alpha05"
+##                 ⬆ = "8.3.0-alpha06"
+##                 ⬆ = "8.3.0-alpha07"
+##                 ⬆ = "8.3.0-alpha08"
+##                 ⬆ = "8.3.0-alpha09"
+##                 ⬆ = "8.3.0-alpha10"
+
+detekt = "1.23.1"
+
+androidx-test-runner = "1.5.2"
+##                ⬆ = "1.5.3-alpha01"
+##                ⬆ = "1.6.0-alpha01"
+##                ⬆ = "1.6.0-alpha02"
+##                ⬆ = "1.6.0-alpha03"
+##                ⬆ = "1.6.0-alpha04"
+
+# Used to set kotlinCompilerExtensionVersion
+compose-compiler = "1.5.3"
+
+compose-bom = "2023.10.01"
+
+junit-junit = "4.13.2"
+
+android-tools-desugar_jdk_libs = "2.0.3"
+
+google-android-material = "1.10.0"
+##                   ⬆ = "1.11.0-alpha01"
+##                   ⬆ = "1.11.0-alpha02"
+##                   ⬆ = "1.11.0-alpha03"
+##                   ⬆ = "1.11.0-beta01"
+
+androidx-appcompat = "1.6.1"
+##              ⬆ = "1.7.0-alpha01"
+##              ⬆ = "1.7.0-alpha02"
+##              ⬆ = "1.7.0-alpha03"
+
+androidx-core = "1.12.0"
+##         ⬆ = "1.13.0-alpha01"
+
+androidx-activity = "1.8.0"
+
+androidx-navigation = "2.7.4"
 
 [libraries]
 
-detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version = "_" }
-gradle = { module = "com.android.tools.build:gradle", version = "_" }
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version = "_" }
+desugarJdk = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-tools-desugar_jdk_libs" }
 
-androidx-test-runner = { module = "androidx.test:runner", version = "1.5.2" }
-##                                                             ⬆ = "1.5.3-alpha01" }
-##                                                             ⬆ = "1.6.0-alpha01" }
-##                                                             ⬆ = "1.6.0-alpha02" }
-##                                                             ⬆ = "1.6.0-alpha03" }
-##                                                             ⬆ = "1.6.0-alpha04" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android-gradle-plugin" }
+detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "_" }
-androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
-androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
-androidx-compose-ui-test = { module = "androidx.compose.ui:ui-test" }
-androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
-androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+# Add compose compiler entry to get compiler updates
+androidx-compose-compiler = { group = "androidx.compose.compiler", name = "compiler", version.ref = "compose-compiler" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+compose-ui-test = { group = "androidx.compose.ui", name = "ui-test" }
+compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-navigation" }
+
+junit = { group = "junit", name = "junit", version.ref = "junit-junit" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+kotlin-test-junit = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
+
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidx-test-runner" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core" }
+material = { group = "com.google.android.material", name = "material", version.ref = "google-android-material" }

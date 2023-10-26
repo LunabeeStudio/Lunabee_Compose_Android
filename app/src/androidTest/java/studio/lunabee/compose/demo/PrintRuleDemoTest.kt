@@ -5,6 +5,7 @@ import androidx.compose.ui.test.ComposeTimeoutException
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasText
+import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Test
 import studio.lunabee.compose.androidtest.LbcComposeTest
 import studio.lunabee.compose.androidtest.extension.waitAndPrintRootToCacheDir
@@ -19,6 +20,8 @@ class PrintRuleDemoTest : LbcComposeTest() {
 
     @Test
     fun print_screenshot_on_failure_test(): Unit = invoke {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+
         setContent {
             Text("foo")
         }
@@ -37,8 +40,7 @@ class PrintRuleDemoTest : LbcComposeTest() {
         val files = parentFile.listFiles()!!
         assertEquals(1, files.size)
         assertEquals(
-            "/storage/emulated/0/Download/lbc_screenshots/studio.lunabee.compose/PrintRuleDemoTest" +
-                "/print_screenshot_on_failure_test_0_TIMEOUT.jpeg",
+            File(context.cacheDir, "screenshot/PrintRuleDemoTest/print_screenshot_on_failure_test_0_TIMEOUT.jpeg").absolutePath,
             files.first().absolutePath,
         )
 
