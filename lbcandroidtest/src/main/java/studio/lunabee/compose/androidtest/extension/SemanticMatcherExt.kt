@@ -156,6 +156,9 @@ fun SemanticsMatcher.waitAndPrintRootToCacheDir(
         composeUiTest.onRoot(useUnmergedTree = useUnmergedTree)
             .printToCacheDir(printRule, "${suffix}_TIMEOUT")
         throw e
+    } catch (e: AssertionError) {
+        printRule.printWholeScreen(suffix = "${suffix}_ERROR")
+        throw e
     }
 }
 
