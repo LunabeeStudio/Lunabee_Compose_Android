@@ -128,7 +128,7 @@ fun SemanticsMatcher.waitUntilAtLeastOneExists(
  * Wait for the [SemanticsNodeInteraction] corresponding to the provided [SemanticsMatcher] and return it condition is filled
  * (i.e element exists).
  * Before returning the element, a screenshot of the root node is taken. If the condition is not filled, a screenshot is also
- * taken with the suffix "_TIMEOUT" to see what went wrong.
+ * taken with the suffix "LbcAndroidTestConstants.timeoutSuffix" to see what went wrong.
  *
  * ⚠️ It doesn't mean that all elements are displayed. You should check the visibility with
  * [androidx.compose.ui.test.assertIsDisplayed].
@@ -154,10 +154,10 @@ fun SemanticsMatcher.waitAndPrintRootToCacheDir(
         composeUiTest.onNode(this)
     } catch (e: ComposeTimeoutException) {
         composeUiTest.onRoot(useUnmergedTree = useUnmergedTree)
-            .printToCacheDir(printRule, "${suffix}_TIMEOUT")
+            .printToCacheDir(printRule, "${suffix}${LbcAndroidTestConstants.TimeoutSuffix}")
         throw e
     } catch (e: AssertionError) {
-        printRule.printWholeScreen(suffix = "${suffix}_ERROR")
+        printRule.printWholeScreen(suffix = "${suffix}${LbcAndroidTestConstants.ErrorSuffix}")
         throw e
     }
 }
@@ -166,7 +166,7 @@ fun SemanticsMatcher.waitAndPrintRootToCacheDir(
  * Wait for the [SemanticsNodeInteraction] corresponding to the provided [SemanticsMatcher] and return it condition is filled
  * (i.e element exists).
  * Before returning the element, a screenshot of the whole screen is taken. If the condition is not filled, a screenshot is also
- * taken with the suffix "_TIMEOUT" to see what went wrong.
+ * taken with the suffix [LbcAndroidTestConstants.TimeoutSuffix] to see what went wrong.
  *
  * Should be use when the UI contains many root node, like when a dialog is shown. In other cases, [waitAndPrintRootToCacheDir] must be
  * preferred.
@@ -193,7 +193,7 @@ fun SemanticsMatcher.waitAndPrintWholeScreenToCacheDir(
         printRule.printWholeScreen(suffix = suffix)
         composeUiTest.onAllNodes(this).filterToOne(this)
     } catch (e: ComposeTimeoutException) {
-        printRule.printWholeScreen(suffix = "${suffix}_TIMEOUT")
+        printRule.printWholeScreen(suffix = "${suffix}${LbcAndroidTestConstants.TimeoutSuffix}")
         throw e
     }
 }

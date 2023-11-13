@@ -63,7 +63,15 @@ abstract class LbcComposeTest {
         effectContext: CoroutineContext = EmptyCoroutineContext,
         block: ComposeUiTest.() -> Unit,
     ) {
-        runComposeUiTest(effectContext = effectContext, block = block)
+        runComposeUiTest(effectContext = effectContext) {
+            try {
+                block()
+            } catch (e: Throwable) {
+                val suffix = LbcAndroidTestConstants.FailureSuffix + "_${e.javaClass.simpleName}"
+                printRule.printWholeScreen(suffix)
+                throw e
+            }
+        }
     }
 
     /**
@@ -79,7 +87,14 @@ abstract class LbcComposeTest {
         runAndroidComposeUiTest(
             activityClass = clazz,
             effectContext = effectContext,
-            block = block,
-        )
+        ) {
+            try {
+                block()
+            } catch (e: Throwable) {
+                val suffix = LbcAndroidTestConstants.FailureSuffix + "_${e.javaClass.simpleName}"
+                printRule.printWholeScreen(suffix)
+                throw e
+            }
+        }
     }
 }
