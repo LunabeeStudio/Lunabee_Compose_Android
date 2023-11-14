@@ -24,9 +24,24 @@ package studio.lunabee.compose.androidtest
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
-internal object LbcAndroidTestConstants {
+object LbcAndroidTestConstants {
     /**
      * Default timeout used for waiting methods in a [androidx.compose.ui.test.ComposeUiTest] scope.
      */
     val WaitNodeTimeout: Duration = 5.seconds
+
+    /**
+     * Suffix for timeout screenshot on waiting composable
+     */
+    const val TimeoutSuffix: String = "_TIMEOUT"
+
+    /**
+     * Suffix for exception throws on waiting composable
+     */
+    const val ErrorSuffix: String = "_ERROR"
+
+    /**
+     * Suffix for any failure at the end of test
+     */
+    const val FailureSuffix: String = "_FAILURE"
 }

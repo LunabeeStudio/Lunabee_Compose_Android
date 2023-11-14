@@ -11,6 +11,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Allow client to choose between internal or public storage for `LbcPrintRule`
 - Rework `LbcPrintRule` constructor with `internalStorage` and `publicStorage` factories
 - Catch `AssertionError` in print helper in case of error due to multiple root. Fallback to print whole screen
+- Add a whole screen screenshot in `LbcComposeTest::invoke` on failure to get the last state of the app
 
 ## 1.1.0
 

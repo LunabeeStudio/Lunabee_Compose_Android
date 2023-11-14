@@ -19,7 +19,7 @@ import kotlin.time.Duration.Companion.milliseconds
 class PrintRuleDemoTest : LbcComposeTest() {
 
     @Test
-    fun print_screenshot_on_failure_test(): Unit = invoke {
+    fun print_screenshot_on_timeout_test(): Unit = invoke {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
 
         setContent {
@@ -40,10 +40,30 @@ class PrintRuleDemoTest : LbcComposeTest() {
         val files = parentFile.listFiles()!!
         assertEquals(1, files.size)
         assertEquals(
-            File(context.cacheDir, "screenshot/PrintRuleDemoTest/print_screenshot_on_failure_test_0_TIMEOUT.jpeg").absolutePath,
+            File(context.cacheDir, "screenshot/PrintRuleDemoTest/print_screenshot_on_timeout_test_0_TIMEOUT.jpeg").absolutePath,
             files.first().absolutePath,
         )
 
         // assert(false) // Make the test fail to check if screenshots still exist in device cache storage
     }
+
+    /**
+     * Screenshot on failure testing (manual testing)
+     */
+    //    @Test
+    //    fun print_screenshot_on_failure_test(): Unit = invoke {
+    //        setContent {
+    //            Box(
+    //                modifier = Modifier
+    //                    .fillMaxSize()
+    //                    .background(Brush.verticalGradient(listOf(Color.Red, Color.Blue))),
+    //            ) {
+    //                Text(text = "my text")
+    //            }
+    //        }
+    //
+    //        hasText("not my text")
+    //            .waitUntilExactlyOneExists(this)
+    //            .assertIsDisplayed()
+    //    }
 }
