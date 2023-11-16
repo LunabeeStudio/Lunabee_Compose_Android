@@ -110,18 +110,18 @@ fun SemanticsMatcher.waitUntilNodeCount(
  *     .assertIdDisplayed() // additional check
  * ```
  */
+context(ComposeUiTest)
 @OptIn(ExperimentalTestApi::class)
 fun SemanticsMatcher.waitUntilAtLeastOneExists(
-    composeUiTest: ComposeUiTest,
     useUnmergedTree: Boolean = false,
     timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
 ): SemanticsNodeInteractionCollection {
     // Method copy from ComposeUiTest.waitUntilExactlyOneExists to add useUnmergedTree.
     // Waiting for answer: https://issuetracker.google.com/issues/268432145
-    composeUiTest.waitUntil(timeout.inWholeMilliseconds) {
-        composeUiTest.onAllNodes(this, useUnmergedTree).fetchSemanticsNodes().isNotEmpty()
+    waitUntil(timeout.inWholeMilliseconds) {
+        onAllNodes(this, useUnmergedTree).fetchSemanticsNodes().isNotEmpty()
     }
-    return composeUiTest.onAllNodes(this, useUnmergedTree)
+    return onAllNodes(this, useUnmergedTree)
 }
 
 /**
@@ -180,18 +180,18 @@ fun SemanticsMatcher.waitAndPrintRootToCacheDir(
  *     .waitAndPrintWholeScreenToCacheDir(composeUiTest, printRule, "_suffix", false, 1.seconds)
  * ```
  */
+context(ComposeUiTest)
 @OptIn(ExperimentalTestApi::class)
 fun SemanticsMatcher.waitAndPrintWholeScreenToCacheDir(
-    composeUiTest: ComposeUiTest,
     printRule: LbcPrintRule,
     suffix: String = "",
     useUnmergedTree: Boolean = false,
     timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
 ): SemanticsNodeInteraction {
     return try {
-        waitUntilAtLeastOneExists(composeUiTest, useUnmergedTree, timeout)
+        waitUntilAtLeastOneExists(useUnmergedTree, timeout)
         printRule.printWholeScreen(suffix = suffix)
-        composeUiTest.onAllNodes(this).filterToOne(this)
+        onAllNodes(this).filterToOne(this)
     } catch (e: ComposeTimeoutException) {
         printRule.printWholeScreen(suffix = "${suffix}${LbcAndroidTestConstants.TimeoutSuffix}")
         throw e
