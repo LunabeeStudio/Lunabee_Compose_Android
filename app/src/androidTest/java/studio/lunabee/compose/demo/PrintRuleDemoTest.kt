@@ -28,7 +28,7 @@ class PrintRuleDemoTest : LbcComposeTest() {
 
         val error = runCatching {
             hasText("bar")
-                .waitAndPrintRootToCacheDir(this, printRule, timeout = 200.milliseconds)
+                .waitAndPrintRootToCacheDir(printRule, timeout = 200.milliseconds)
                 .assertIsDisplayed()
         }.exceptionOrNull()
         assertIs<ComposeTimeoutException>(error)
