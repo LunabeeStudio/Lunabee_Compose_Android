@@ -73,6 +73,7 @@ abstract class LbcComposeTest {
                 block()
             } catch (e: Throwable) {
                 onFailure(e)
+                throw e
             }
         }
     }
@@ -95,12 +96,13 @@ abstract class LbcComposeTest {
                 block()
             } catch (e: Throwable) {
                 onFailure(e)
+                throw e
             }
         }
     }
 
     context(ComposeUiTest)
-    fun onFailure(e: Throwable) {
+    open fun onFailure(e: Throwable) {
         val suffix = LbcAndroidTestConstants.FailureSuffix + "_${e.javaClass.simpleName}"
         printRule.printWholeScreen(suffix)
         val tree = isRoot()
@@ -108,6 +110,5 @@ abstract class LbcComposeTest {
             .onFirst()
             .printToString()
         Log.e("ON_FAILURE", tree)
-        throw e
     }
 }
