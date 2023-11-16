@@ -63,7 +63,7 @@ class PrintRuleDemoTest : LbcComposeTest() {
     //        }
     //
     //        hasText("not my text")
-    //            .waitUntilExactlyOneExists(this)
+    //            .waitUntilExactlyOneExists()
     //            .assertIsDisplayed()
     //    }
 }
