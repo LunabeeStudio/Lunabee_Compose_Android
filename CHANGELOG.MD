@@ -13,6 +13,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Catch `AssertionError` in print helper in case of error due to multiple root. Fallback to print whole screen
 - Add a whole screen screenshot in `LbcComposeTest::invoke` on failure to get the last state of the app
 - Use context receiver for `ComposeUiTest` on matcher extension
+- Log the unmerged tree on test failed
 
 ## 1.1.0
 
