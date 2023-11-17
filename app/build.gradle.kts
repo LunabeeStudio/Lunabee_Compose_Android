@@ -78,6 +78,8 @@ android {
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }
+
+    kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
 }
 
 dependencies {
