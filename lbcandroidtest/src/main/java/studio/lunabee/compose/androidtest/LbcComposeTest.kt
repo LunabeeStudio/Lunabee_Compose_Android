@@ -1,16 +1,21 @@
 package studio.lunabee.compose.androidtest
 
 import android.content.Context
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.test.AndroidComposeUiTest
 import androidx.compose.ui.test.ComposeUiTest
 import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.isRoot
+import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.printToString
 import androidx.compose.ui.test.runAndroidComposeUiTest
 import androidx.compose.ui.test.runComposeUiTest
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Rule
+import studio.lunabee.compose.androidtest.extension.waitUntilAtLeastOneExists
 import studio.lunabee.compose.androidtest.rule.LbcPrintRule
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -67,8 +72,7 @@ abstract class LbcComposeTest {
             try {
                 block()
             } catch (e: Throwable) {
-                val suffix = LbcAndroidTestConstants.FailureSuffix + "_${e.javaClass.simpleName}"
-                printRule.printWholeScreen(suffix)
+                onFailure(e)
                 throw e
             }
         }
@@ -91,10 +95,20 @@ abstract class LbcComposeTest {
             try {
                 block()
             } catch (e: Throwable) {
-                val suffix = LbcAndroidTestConstants.FailureSuffix + "_${e.javaClass.simpleName}"
-                printRule.printWholeScreen(suffix)
+                onFailure(e)
                 throw e
             }
         }
+    }
+
+    context(ComposeUiTest)
+    open fun onFailure(e: Throwable) {
+        val suffix = LbcAndroidTestConstants.FailureSuffix + "_${e.javaClass.simpleName}"
+        printRule.printWholeScreen(suffix)
+        val tree = isRoot()
+            .waitUntilAtLeastOneExists(true)
+            .onFirst()
+            .printToString()
+        Log.e("ON_FAILURE", tree)
     }
 }
