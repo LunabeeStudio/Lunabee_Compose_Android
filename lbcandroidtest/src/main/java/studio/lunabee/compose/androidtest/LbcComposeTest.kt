@@ -72,7 +72,7 @@ abstract class LbcComposeTest {
             try {
                 block()
             } catch (e: Throwable) {
-                onFailure(e)
+                runCatching { onFailure(e) }
                 throw e
             }
         }
@@ -95,7 +95,7 @@ abstract class LbcComposeTest {
             try {
                 block()
             } catch (e: Throwable) {
-                onFailure(e)
+                runCatching { onFailure(e) }
                 throw e
             }
         }
