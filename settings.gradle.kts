@@ -20,18 +20,8 @@
  */
 
 plugins {
-    // See https://jmfayard.github.io/refreshVersions
-    id("de.fayard.refreshVersions") version "0.40.1"
+    id("de.fayard.refreshVersions") version "0.60.3"
 }
-
-rootProject.name = "Lunabee Compose"
-
-include("app")
-include(":lbcaccessibility")
-include(":lbcfoundation")
-include(":lbctheme")
-include(":lbccore")
-include(":material-color-utilities")
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -43,3 +33,13 @@ dependencyResolutionManagement {
         }
     }
 }
+
+rootProject.name = "Lunabee Compose"
+
+include("app")
+include(":lbcaccessibility")
+include(":lbcfoundation")
+include(":lbctheme")
+include(":lbccore")
+include(":material-color-utilities")
+include(":lbcandroidtest")

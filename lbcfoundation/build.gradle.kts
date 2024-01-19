@@ -28,6 +28,7 @@ plugins {
 
 android {
     resourcePrefix("lbc_mat_")
+    namespace = "studio.lunabee.compose.foundation"
 }
 
 description = "A set of custom components from androidx.composable.foundation"
@@ -43,5 +44,6 @@ signing {
 }
 
 dependencies {
-    implementation(AndroidX.compose.foundation)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.foundation)
 }

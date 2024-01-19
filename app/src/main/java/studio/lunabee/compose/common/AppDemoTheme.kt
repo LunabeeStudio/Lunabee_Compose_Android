@@ -29,17 +29,13 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
-import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.android.material.color.DynamicColors
 
 @Composable
 fun AppDemoTheme(
     isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
-    systemUiController: SystemUiController? = null,
     customColorScheme: ColorScheme? = null,
     content: @Composable () -> Unit,
 ) {
@@ -52,10 +48,6 @@ fun AppDemoTheme(
         isMaterialYouEnabled -> dynamicLightColorScheme(context = LocalContext.current)
         isSystemInDarkTheme -> darkColorScheme()
         else -> lightColorScheme()
-    }
-
-    SideEffect {
-        systemUiController?.setStatusBarColor(Color.Transparent, darkIcons = !isSystemInDarkTheme)
     }
 
     MaterialTheme(

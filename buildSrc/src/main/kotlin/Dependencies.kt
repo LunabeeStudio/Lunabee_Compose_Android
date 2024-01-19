@@ -24,11 +24,13 @@ object Modules {
     const val LbcFoundation: String = ":lbcfoundation"
     const val LbcTheme: String = ":lbctheme"
     const val LbcCore: String = ":lbccore"
+    const val LbcAndroidTest: String = ":lbcandroidtest"
+    const val MaterialColorUtilities: String = ":material-color-utilities"
 }
 
 object BuildConfigs {
-    const val lunabeeCompose: String = "1.0.0"
-    const val compileSdk: Int = 33
-    const val minSdk: Int = 23
-    const val targetSdk: Int = 33
+    const val lunabeeCompose: String = "_"
+    const val compileSdk: Int = 34
+    const val minSdk: Int = 21
+    const val targetSdk: Int = 34
 }

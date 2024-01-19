@@ -23,12 +23,10 @@ package studio.lunabee.compose.navigation
 
 object Destinations {
     const val MainRoute: String = "MainRoute"
-    const val AccessibilityRoute: String = "AccessibilityRoute"
     const val FoundationRoute: String = "FoundationRoute"
     const val ThemeRoute: String = "ThemeRoute"
 
     val BackNavigationScreen: List<String> = listOf(
-        AccessibilityRoute,
         FoundationRoute,
         ThemeRoute,
     )

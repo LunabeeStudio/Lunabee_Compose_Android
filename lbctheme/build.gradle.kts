@@ -27,6 +27,7 @@ plugins {
 }
 
 android {
+    namespace = "studio.lunabee.compose.theme"
     resourcePrefix("lbc_th_")
 }
 
@@ -43,6 +44,8 @@ signing {
 }
 
 dependencies {
-    implementation(AndroidX.compose.material3)
-    implementation("studio.lunabee.compose:material-color-utilities:_")
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.material3)
+
+    implementation(project(Modules.MaterialColorUtilities))
 }

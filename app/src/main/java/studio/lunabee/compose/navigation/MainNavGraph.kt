@@ -26,7 +26,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import studio.lunabee.compose.MainScreen
-import studio.lunabee.compose.demo.accessibility.AccessibilityScreen
 import studio.lunabee.compose.demo.foundation.TextScreen
 import studio.lunabee.compose.demo.theme.ThemeScreen
 
@@ -43,12 +42,6 @@ fun MainNavGraph(
             route = Destinations.MainRoute,
         ) {
             MainScreen(directions = directions)
-        }
-
-        composable(
-            route = Destinations.AccessibilityRoute,
-        ) {
-            AccessibilityScreen()
         }
 
         composable(

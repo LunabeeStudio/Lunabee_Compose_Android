@@ -27,6 +27,7 @@ plugins {
 
 android {
     resourcePrefix("lbc_acc_")
+    namespace = "studio.lunabee.compose.accessibility"
 }
 
 description = "A set of methods and composable for accessibility"
@@ -42,5 +43,6 @@ signing {
 }
 
 dependencies {
-    implementation(AndroidX.compose.foundation)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.foundation)
 }

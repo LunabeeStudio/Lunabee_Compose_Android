@@ -27,11 +27,6 @@ plugins {
 
 version = AndroidConfig.MATERIAL_COLOR_UTILITIES_VERSION
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
 publishing {
     setRepository(project)
     setPublication(project)

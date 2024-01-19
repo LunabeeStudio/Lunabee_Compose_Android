@@ -21,7 +21,15 @@
 
 pluginManagement {
     plugins {
-        id("de.fayard.refreshVersions") version "0.40.1"
+        id("de.fayard.refreshVersions") version "0.60.3"
+    }
+}
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
     }
 }
 

@@ -27,24 +27,24 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:_")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
+        classpath(libs.android.gradle.plugin)
+        classpath(libs.kotlin.gradle.plugin)
     }
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt")
+    alias(libs.plugins.detekt)
 }
 
 dependencies {
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:_")
+    detektPlugins(libs.detekt.formatting)
 }
 
 detekt {
     parallel = true
-    source = files(rootProject.rootDir)
+    source.setFrom(files(rootProject.rootDir))
     buildUponDefaultConfig = true
-    config = files("$projectDir/lunabee-detekt-config.yml")
+    config.setFrom(files("$projectDir/lunabee-detekt-config.yml"))
     autoCorrect = true
     ignoreFailures = true
 }
@@ -56,9 +56,9 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
 
     reports {
         xml.required.set(true)
-        xml.outputLocation.set(file("$buildDir/reports/detekt/detekt-report.xml"))
+        xml.outputLocation.set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.xml"))
 
         html.required.set(true)
-        html.outputLocation.set(file("$buildDir/reports/detekt/detekt-report.html"))
+        html.outputLocation.set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.html"))
     }
 }

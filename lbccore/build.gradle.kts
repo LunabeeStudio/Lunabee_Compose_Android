@@ -27,6 +27,7 @@ plugins {
 
 android {
     resourcePrefix("lbc_core_")
+    namespace = "studio.lunabee.compose.core"
 }
 
 description = "A set of tools for Compose"
@@ -42,11 +43,12 @@ signing {
 }
 
 dependencies {
-    implementation(AndroidX.compose.foundation)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.foundation)
 
-    androidTestImplementation(AndroidX.test.runner)
-    androidTestImplementation(AndroidX.compose.ui.test)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
-    androidTestImplementation(AndroidX.Compose.ui.testManifest)
-    androidTestImplementation(Kotlin.test)
+    androidTestImplementation(libs.compose.ui.test)
+    androidTestImplementation(libs.compose.ui.test.junit4)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.kotlin.test)
+    debugImplementation(libs.compose.ui.test.manifest)
 }

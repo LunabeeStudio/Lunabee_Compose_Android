@@ -31,6 +31,8 @@ repositories {
 }
 
 dependencies {
-    implementation("com.android.tools.build:gradle:_")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
+    implementation(libs.android.gradle.plugin)
+    implementation(libs.kotlin.gradle.plugin)
+
+    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }

@@ -29,13 +29,13 @@ import org.gradle.api.publish.PublicationContainer
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
+import org.gradle.configurationcache.extensions.capitalized
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.registering
 import java.net.URI
-import java.util.Locale
 
 private val Project.android: LibraryExtension
     get() = (this as ExtensionAware).extensions.getByName("android") as LibraryExtension
@@ -50,8 +50,10 @@ fun PublishingExtension.setRepository(project: Project) {
     repositories {
         maven {
             authentication {
-                credentials.username = project.properties["sonatypeUsername"]?.toString() ?: System.getenv("SONATYPE_USERNAME")
-                credentials.password = project.properties["sonatypePassword"]?.toString() ?: System.getenv("SONATYPE_PASSWORD")
+                credentials.username = project.properties["sonatypeUsername"]?.toString()
+                    ?: System.getenv("SONATYPE_USERNAME")
+                credentials.password = project.properties["sonatypePassword"]?.toString()
+                    ?: System.getenv("SONATYPE_PASSWORD")
             }
             url = if (project.version.toString().endsWith("-SNAPSHOT")) {
                 URI.create("https://s01.oss.sonatype.org/content/repositories/snapshots/")
@@ -118,11 +120,23 @@ private fun MavenPublication.setAndroidArtifacts(project: Project) {
 
     artifact(sourceJar)
     artifact(javadocJar)
-    artifact("${project.buildDir}/outputs/aar/${project.name.toLowerCase(Locale.getDefault())}-release.aar")
+    artifact("${project.layout.buildDirectory.asFile.get().path}/outputs/aar/${project.name.lowercase()}-release.aar")
+
+    project.afterEvaluate {
+        project.tasks.named("sign${project.name.capitalized()}Publication") {
+            dependsOn("bundleReleaseAar")
+        }
+    }
 }
 
 private fun MavenPublication.setJavaArtifacts(project: Project) {
-    artifact("${project.buildDir}/libs/${project.name}-${project.version}.jar")
+    artifact("${project.layout.buildDirectory.asFile.get().path}/libs/${project.name}-${project.version}.jar")
+
+    project.afterEvaluate {
+        project.tasks.named("sign${project.name.capitalized()}Publication") {
+            dependsOn("jar")
+        }
+    }
 }
 
 /**

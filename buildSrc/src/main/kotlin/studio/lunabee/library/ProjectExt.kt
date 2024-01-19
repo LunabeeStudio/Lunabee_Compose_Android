@@ -21,12 +21,25 @@
 
 package studio.lunabee.library
 
+import AndroidConfig
 import BuildConfigs
-import Kotlin
 import com.android.build.gradle.BaseExtension
+import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.plugins.JavaBasePlugin
+import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.the
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+val excludedTestProjects: List<String> = listOf(
+    "lbcandroidtest",
+)
 
 fun Project.configureAndroidPlugins(): Unit = plugins.run {
     apply("com.android.library")
@@ -49,14 +62,57 @@ fun Project.configureAndroid(): Unit = this.extensions.getByType<BaseExtension>(
         minSdk = BuildConfigs.minSdk
         targetSdk = BuildConfigs.targetSdk
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        if (!excludedTestProjects.contains(name)) {
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
     }
 
+    configureAndroidCompileJavaVersion()
+    configureCompileJavaVersion()
+
+    // FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
+    val libs: LibrariesForLibs = the<LibrariesForLibs>()
+
     this.buildFeatures.compose = true
-    composeOptions.kotlinCompilerExtensionVersion = "_"
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
+}
+
+fun BaseExtension.configureAndroidCompileJavaVersion() {
+    compileOptions {
+        sourceCompatibility = AndroidConfig.JDK_VERSION
+        targetCompatibility = AndroidConfig.JDK_VERSION
+    }
+}
+
+fun Project.configureCompileJavaVersion(): Unit = this.extensions.getByType<BaseExtension>().run {
+    tasks.withType<KotlinCompile>().configureEach {
+        kotlinOptions {
+            jvmTarget = AndroidConfig.JDK_VERSION.toString()
+        }
+    }
+
+    plugins.withType<JavaBasePlugin>().configureEach {
+        extensions.configure<JavaPluginExtension> {
+            toolchain {
+                languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JDK_VERSION.toString()))
+            }
+        }
+    }
 }
 
 fun Project.configureDependencies(): Unit = dependencies {
-    add("implementation", Kotlin.Stdlib.jdk8)
-    add("androidTestImplementation", AndroidX.test.runner)
+    if (!excludedTestProjects.contains(name)) {
+        // https://github.com/gradle/gradle/issues/25737
+        addProvider(
+            configurationName = "androidTestImplementation",
+            dependencyNotation = provider {
+                rootProject.extensions
+                    .getByType(VersionCatalogsExtension::class.java)
+                    .named("libs")
+                    .findLibrary("androidx.test.runner").get().get()
+            },
+        )
+    }
 }

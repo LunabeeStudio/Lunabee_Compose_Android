@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### LbcAndroidTest
+- Add params `deleteOnSuccess` and `appendTimestamp` to `LbcPrintRule`
+- Allow client to choose between internal or public storage for `LbcPrintRule`
+- Rework `LbcPrintRule` constructor with `internalStorage` and `publicStorage` factories
+- Catch `AssertionError` in print helper in case of error due to multiple root. Fallback to print whole screen
+- Add a whole screen screenshot in `LbcComposeTest::invoke` on failure to get the last state of the app
+- Use context receiver for `ComposeUiTest` on matcher extension
+- Log the unmerged tree on test failed
+
+## 1.1.0
 
 ### All
 
@@ -14,6 +24,17 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - *Breaking*: remove `LbcTopAppBar` and `LbcGraph`.
 - *Breaking*: remove `lbc` prefix from all packages.
 - *Breaking*: rename `LbcMaterial` to `LbcFoundation`.
+- *Breaking*: delete accessibility `Modifier` extensions, update `AccessibilityState` class.
+
+### LbcAndroidTest
+
+- New module for Android Compose testing.
+
+### LbcCore
+- Add a method to get string with context in `LbcTextSpec`
+- Add a sealed class of `LbcTextSpec` to find string in resource by name
+
+## 1.0.0
 
 ## 1.0.0
 

@@ -1,3 +1,6 @@
+import studio.lunabee.library.configureAndroidCompileJavaVersion
+import studio.lunabee.library.configureCompileJavaVersion
+
 /*
  * Copyright © 2022 Lunabee Studio
  *
@@ -25,6 +28,7 @@ plugins {
 }
 
 android {
+    namespace = "studio.lunabee.compose"
 
     compileSdk = AndroidConfig.COMPILE_SDK
     buildToolsVersion = AndroidConfig.BUILD_TOOLS_VERSION
@@ -33,12 +37,20 @@ android {
         minSdk = AndroidConfig.MIN_SDK
         targetSdk = AndroidConfig.TARGET_SDK
 
-        versionCode = System.getenv(EnvConfig.ENV_VERSION_CODE)?.toInt() ?: AndroidConfig.VERSION_CODE
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        versionCode =
+            System.getenv(EnvConfig.ENV_VERSION_CODE)?.toInt() ?: AndroidConfig.VERSION_CODE
         versionName = System.getenv(EnvConfig.ENV_VERSION_NAME) ?: AndroidConfig.VERSION_NAME
     }
 
+    configureAndroidCompileJavaVersion()
+    configureCompileJavaVersion()
+
     buildFeatures.compose = true
-    composeOptions.kotlinCompilerExtensionVersion = "_"
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
 
     buildTypes {
         debug {
@@ -66,26 +78,30 @@ android {
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }
+
+    kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
 }
 
 dependencies {
-    implementation(Kotlin.stdlib.jdk8)
+    implementation(libs.material)
+    implementation(libs.appcompat)
+    implementation(libs.core.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.navigation.compose)
 
-    implementation(AndroidX.appCompat)
-    implementation(AndroidX.core.ktx)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material3)
 
-    implementation(Google.android.material)
-
-    implementation(Google.accompanist.systemuicontroller)
-
-    implementation(AndroidX.activity.compose)
-    implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.compose.material3)
-    implementation(AndroidX.navigation.compose)
-
-    coreLibraryDesugaring(Android.tools.desugarJdkLibs)
+    coreLibraryDesugaring(libs.desugarJdk)
 
     implementation(project(Modules.LbcAccessibility))
     implementation(project(Modules.LbcFoundation))
     implementation(project(Modules.LbcTheme))
+
+    androidTestImplementation(project(Modules.LbcAndroidTest))
+    androidTestImplementation(libs.compose.ui.test.junit4)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.kotlin.test.junit)
+    debugImplementation(libs.compose.ui.test.manifest)
 }

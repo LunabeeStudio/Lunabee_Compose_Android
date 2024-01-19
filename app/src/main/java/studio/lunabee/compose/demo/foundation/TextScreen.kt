@@ -26,7 +26,6 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -40,7 +39,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -51,7 +49,6 @@ import studio.lunabee.compose.foundation.StyledTextItem
 import studio.lunabee.compose.foundation.model.TextToHighlight
 import java.util.UUID
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalTextApi::class)
 @Composable
 fun TextScreen() {
     var rawText: String by rememberSaveable { mutableStateOf(value = "") }
@@ -119,7 +116,6 @@ fun TextScreen() {
                     textDecoration = TextDecoration.LineThrough,
                 ).toSpanStyle(),
                 context = LocalContext.current,
-                ignoreCase = true,
             ),
         )
 
