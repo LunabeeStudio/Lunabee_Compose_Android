@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+## 1.2.0
+
 ### LbcAndroidTest
 - Add params `deleteOnSuccess` and `appendTimestamp` to `LbcPrintRule`
 - Allow client to choose between internal or public storage for `LbcPrintRule`
@@ -33,8 +36,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### LbcCore
 - Add a method to get string with context in `LbcTextSpec`
 - Add a sealed class of `LbcTextSpec` to find string in resource by name
-
-## 1.0.0
 
 ## 1.0.0
 
