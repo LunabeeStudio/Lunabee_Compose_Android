@@ -39,4 +39,5 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.ui.test)
     implementation(libs.compose.ui.test.junit4)
+    implementation(libs.androidx.test.runner)
 }
