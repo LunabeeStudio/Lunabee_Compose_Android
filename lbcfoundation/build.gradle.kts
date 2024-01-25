@@ -19,29 +19,22 @@
  * Created by Lunabee Studio / Date - 7/29/2022 - for the Lunabee Compose library.
  */
 
-import studio.lunabee.library.setPublication
-import studio.lunabee.library.setRepository
-
 plugins {
-    id("studio.lunabee.library.android")
+    id("lunabee.android-library-conventions")
+    id("lunabee.library-publish-conventions")
 }
 
 android {
     resourcePrefix("lbc_mat_")
     namespace = "studio.lunabee.compose.foundation"
+
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 }
 
 description = "A set of custom components from androidx.composable.foundation"
 version = AndroidConfig.LBC_FOUNDATION_VERSION
-
-publishing {
-    setRepository(project)
-    setPublication(project)
-}
-
-signing {
-    sign(publishing.publications[project.name])
-}
 
 dependencies {
     implementation(platform(libs.compose.bom))

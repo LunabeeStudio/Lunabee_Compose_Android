@@ -18,20 +18,10 @@
  *
  * Created by Lunabee Studio / Date - 10/21/2022 - for the Lunabee Compose library.
  */
-import studio.lunabee.library.setPublication
-import studio.lunabee.library.setRepository
 
 plugins {
-    id("studio.lunabee.library.java")
+    id("lunabee.java-library-conventions")
+    id("lunabee.library-publish-conventions")
 }
 
 version = AndroidConfig.MATERIAL_COLOR_UTILITIES_VERSION
-
-publishing {
-    setRepository(project)
-    setPublication(project)
-}
-
-signing {
-    sign(publishing.publications[project.name])
-}
