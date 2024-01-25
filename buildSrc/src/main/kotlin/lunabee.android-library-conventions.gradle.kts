@@ -28,6 +28,9 @@ plugins {
 
 group = AndroidConfig.GROUP_ID
 
+// FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
+val libs: LibrariesForLibs = the<LibrariesForLibs>()
+
 android {
     compileSdk = AndroidConfig.COMPILE_SDK
     buildToolsVersion = AndroidConfig.BUILD_TOOLS_VERSION
@@ -39,7 +42,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures.viewBinding = true
+    buildFeatures.compose = true
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
 
     compileOptions {
         sourceCompatibility = AndroidConfig.JDK_VERSION
@@ -53,9 +59,6 @@ android {
         }
     }
 }
-
-// FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
-val libs: LibrariesForLibs = the<LibrariesForLibs>()
 
 dependencies {
     androidTestImplementation(libs.androidx.test.runner)
