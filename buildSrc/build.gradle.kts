@@ -1,6 +1,3 @@
-import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 /*
  * Copyright © 2022 Lunabee Studio
  *
