@@ -33,7 +33,7 @@ public class MathUtils {
     /**
      * The signum function.
      *
-     * @return 1 if num > 0, -1 if num < 0, and 0 if num = 0
+     * @return 1 if num > 0, -1 if num &lt; 0, and 0 if num = 0
      */
     public static int signum(double num) {
         if (num < 0) {
@@ -57,7 +57,7 @@ public class MathUtils {
     /**
      * Clamps an integer between two integers.
      *
-     * @return input when min <= input <= max, and either min or max otherwise.
+     * @return input when min &lt;= input &lt;= max, and either min or max otherwise.
      */
     public static int clampInt(int min, int max, int input) {
         if (input < min) {
@@ -72,7 +72,7 @@ public class MathUtils {
     /**
      * Clamps an integer between two floating-point numbers.
      *
-     * @return input when min <= input <= max, and either min or max otherwise.
+     * @return input when min &lt;= input &lt;= max, and either min or max otherwise.
      */
     public static double clampDouble(double min, double max, double input) {
         if (input < min) {
