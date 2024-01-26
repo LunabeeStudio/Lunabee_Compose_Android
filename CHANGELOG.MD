@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+### All
+- Update dependencies
+- Rename source dirs from `java` to `kotlin`
+
 ### LbcAndroidTest
 - Add params `deleteOnSuccess` and `appendTimestamp` to `LbcPrintRule`
 - Allow client to choose between internal or public storage for `LbcPrintRule`
