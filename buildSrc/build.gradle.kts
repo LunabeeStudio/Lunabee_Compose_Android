@@ -21,7 +21,6 @@
 
 plugins {
     `kotlin-dsl`
-    `kotlin-dsl-precompiled-script-plugins`
 }
 
 repositories {
@@ -33,6 +32,9 @@ repositories {
 dependencies {
     implementation(libs.android.gradle.plugin)
     implementation(libs.kotlin.gradle.plugin)
+
+    implementation(gradleApi())
+    implementation(localGroovy())
 
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }

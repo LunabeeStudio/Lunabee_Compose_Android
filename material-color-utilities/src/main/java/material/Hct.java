@@ -49,10 +49,10 @@ public final class Hct {
     /**
      * Create an HCT color from hue, chroma, and tone.
      *
-     * @param hue    0 <= hue < 360; invalid values are corrected.
-     * @param chroma 0 <= chroma < ?; Informally, colorfulness. The color returned may be lower than
+     * @param hue    0 &lt;= hue &lt; 360; invalid values are corrected.
+     * @param chroma 0 &lt;= chroma &lt; ?; Informally, colorfulness. The color returned may be lower than
      *               the requested chroma. Chroma has a different maximum for any given hue and tone.
-     * @param tone   0 <= tone <= 100; invalid values are corrected.
+     * @param tone   0 &lt;= tone &lt;= 100; invalid values are corrected.
      * @return HCT representation of a color in default viewing conditions.
      */
     public static Hct from(double hue, double chroma, double tone) {
@@ -94,7 +94,7 @@ public final class Hct {
      * Set the hue of this color. Chroma may decrease because chroma has a different maximum for any
      * given hue and tone.
      *
-     * @param newHue 0 <= newHue < 360; invalid values are corrected.
+     * @param newHue 0 &lt;= newHue &lt; 360; invalid values are corrected.
      */
     public void setHue(double newHue) {
         setInternalState(HctSolver.solveToInt(newHue, chroma, tone));
@@ -104,7 +104,7 @@ public final class Hct {
      * Set the chroma of this color. Chroma may decrease because chroma has a different maximum for
      * any given hue and tone.
      *
-     * @param newChroma 0 <= newChroma < ?
+     * @param newChroma 0 &lt;= newChroma &lt; ?
      */
     public void setChroma(double newChroma) {
         setInternalState(HctSolver.solveToInt(hue, newChroma, tone));
@@ -114,7 +114,7 @@ public final class Hct {
      * Set the tone of this color. Chroma may decrease because chroma has a different maximum for any
      * given hue and tone.
      *
-     * @param newTone 0 <= newTone <= 100; invalid valids are corrected.
+     * @param newTone 0 &lt;= newTone &lt;= 100; invalid valids are corrected.
      */
     public void setTone(double newTone) {
         setInternalState(HctSolver.solveToInt(hue, chroma, newTone));

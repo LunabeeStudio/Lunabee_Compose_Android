@@ -13,31 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * build.gradle.kts
+ * lunabee.java-library-conventions.gradle.kts
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 1/25/2024 - for the Lunabee Compose library.
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
-    id("lunabee.library-publish-conventions")
+    id("java-library")
 }
 
-android {
-    resourcePrefix("lbc_at_")
-    namespace = "studio.lunabee.compose.androidtest"
+group = AndroidConfig.GROUP_ID
 
-    kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
+    kotlinOptions {
+        jvmTarget = AndroidConfig.JDK_VERSION.toString()
+    }
 }
 
-description = "Tools for developping android test"
-version = AndroidConfig.LBC_ANDROID_TEST_VERSION
+java {
+    sourceCompatibility = AndroidConfig.JDK_VERSION
+    targetCompatibility = AndroidConfig.JDK_VERSION
 
-dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.foundation)
-    implementation(libs.compose.ui.test)
-    implementation(libs.compose.ui.test.junit4)
-    implementation(libs.androidx.test.runner)
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JDK_VERSION.toString()))
+    }
+
+    withJavadocJar()
+    withSourcesJar()
 }
