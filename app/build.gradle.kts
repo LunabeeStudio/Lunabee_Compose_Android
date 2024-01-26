@@ -1,6 +1,3 @@
-import studio.lunabee.library.configureAndroidCompileJavaVersion
-import studio.lunabee.library.configureCompileJavaVersion
-
 /*
  * Copyright © 2022 Lunabee Studio
  *
@@ -39,13 +36,14 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        versionCode =
-            System.getenv(EnvConfig.ENV_VERSION_CODE)?.toInt() ?: AndroidConfig.VERSION_CODE
+        versionCode = System.getenv(EnvConfig.ENV_VERSION_CODE)?.toInt() ?: AndroidConfig.VERSION_CODE
         versionName = System.getenv(EnvConfig.ENV_VERSION_NAME) ?: AndroidConfig.VERSION_NAME
     }
 
-    configureAndroidCompileJavaVersion()
-    configureCompileJavaVersion()
+    compileOptions {
+        sourceCompatibility = AndroidConfig.JDK_VERSION
+        targetCompatibility = AndroidConfig.JDK_VERSION
+    }
 
     buildFeatures.compose = true
     composeOptions {
@@ -104,4 +102,16 @@ dependencies {
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.kotlin.test.junit)
     debugImplementation(libs.compose.ui.test.manifest)
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
+    kotlinOptions {
+        jvmTarget = AndroidConfig.JDK_VERSION.toString()
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JDK_VERSION.toString()))
+    }
 }

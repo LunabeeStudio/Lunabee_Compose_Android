@@ -36,7 +36,7 @@ import kotlin.coroutines.EmptyCoroutineContext
  *
  *       @Test
  *      fun my_screen_test() {
- *          invoke(clazz = ComponentActivity::class.java) { activity ->l
+ *          invoke(clazz = ComponentActivity::class.kotlin) { activity ->l
  *              hasTestTag(getString(R.string.my_string_res))
  *                  .waitUntilOnlyOneExists(this) // not mandatory, you can also use directly onNodeWithTag if you don't need to wait.
  *                  .assertIsDisplayed()

@@ -18,20 +18,13 @@
  *
  * Created by Lunabee Studio / Date - 10/21/2022 - for the Lunabee Compose library.
  */
-import studio.lunabee.library.setPublication
-import studio.lunabee.library.setRepository
 
 plugins {
-    id("studio.lunabee.library.java")
+    id("lunabee.java-library-conventions")
+    id("lunabee.library-publish-conventions")
 }
 
 version = AndroidConfig.MATERIAL_COLOR_UTILITIES_VERSION
-
-publishing {
-    setRepository(project)
-    setPublication(project)
-}
-
-signing {
-    sign(publishing.publications[project.name])
-}
+description = "Algorithms and utilities that power the Material Design 3 (M3) color system, including choosing theme colors from images" +
+    " and creating tones of colors; all in a new color space.\n" +
+    "See https://github.com/material-foundation/material-color-utilities"

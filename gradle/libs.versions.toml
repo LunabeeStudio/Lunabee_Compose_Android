@@ -10,9 +10,12 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [versions]
 
-kotlin = "1.9.20"
+kotlin = "1.9.22"
+##  ⬆ = "2.0.0-Beta1"
+##  ⬆ = "2.0.0-Beta2"
+##  ⬆ = "2.0.0-Beta3"
 
-android-gradle-plugin = "8.2.0-rc03"
+android-gradle-plugin = "8.2.2"
 ##                 ⬆ = "8.3.0-alpha01"
 ##                 ⬆ = "8.3.0-alpha02"
 ##                 ⬆ = "8.3.0-alpha03"
@@ -27,6 +30,18 @@ android-gradle-plugin = "8.2.0-rc03"
 ##                 ⬆ = "8.3.0-alpha12"
 ##                 ⬆ = "8.3.0-alpha13"
 ##                 ⬆ = "8.3.0-alpha14"
+##                 ⬆ = "8.3.0-alpha15"
+##                 ⬆ = "8.3.0-alpha16"
+##                 ⬆ = "8.3.0-alpha17"
+##                 ⬆ = "8.3.0-alpha18"
+##                 ⬆ = "8.3.0-beta01"
+##                 ⬆ = "8.3.0-beta02"
+##                 ⬆ = "8.4.0-alpha01"
+##                 ⬆ = "8.4.0-alpha02"
+##                 ⬆ = "8.4.0-alpha03"
+##                 ⬆ = "8.4.0-alpha04"
+##                 ⬆ = "8.4.0-alpha05"
+##                 ⬆ = "8.4.0-alpha06"
 
 detekt = "1.23.4"
 
@@ -36,23 +51,21 @@ androidx-test-runner = "1.5.2"
 ##                ⬆ = "1.6.0-alpha02"
 ##                ⬆ = "1.6.0-alpha03"
 ##                ⬆ = "1.6.0-alpha04"
+##                ⬆ = "1.6.0-alpha05"
 
 # Used to set kotlinCompilerExtensionVersion
-compose-compiler = "1.5.4"
+compose-compiler = "1.5.8"
 
-compose-bom = "2023.10.01"
+compose-bom = "2024.01.00"
 
 junit-junit = "4.13.2"
 
 android-tools-desugar_jdk_libs = "2.0.4"
 
-google-android-material = "1.10.0"
-##                   ⬆ = "1.11.0-alpha01"
-##                   ⬆ = "1.11.0-alpha02"
-##                   ⬆ = "1.11.0-alpha03"
-##                   ⬆ = "1.11.0-beta01"
-##                   ⬆ = "1.11.0-rc01"
+google-android-material = "1.11.0"
 ##                   ⬆ = "1.12.0-alpha01"
+##                   ⬆ = "1.12.0-alpha02"
+##                   ⬆ = "1.12.0-alpha03"
 
 androidx-appcompat = "1.6.1"
 ##              ⬆ = "1.7.0-alpha01"
@@ -61,10 +74,16 @@ androidx-appcompat = "1.6.1"
 
 androidx-core = "1.12.0"
 ##         ⬆ = "1.13.0-alpha01"
+##         ⬆ = "1.13.0-alpha02"
+##         ⬆ = "1.13.0-alpha03"
+##         ⬆ = "1.13.0-alpha04"
 
-androidx-activity = "1.8.1"
+androidx-activity = "1.8.2"
+##             ⬆ = "1.9.0-alpha01"
+##             ⬆ = "1.9.0-alpha02"
 
-androidx-navigation = "2.7.5"
+androidx-navigation = "2.7.6"
+##               ⬆ = "2.8.0-alpha01"
 
 [libraries]
 
@@ -75,7 +94,7 @@ android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", ve
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
 # Add compose compiler entry to get compiler updates
-androidx-compose-compiler = { group = "androidx.compose.compiler", name = "compiler", version.ref = "compose-compiler" }
+compose-compiler = { group = "androidx.compose.compiler", name = "compiler", version.ref = "compose-compiler" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
