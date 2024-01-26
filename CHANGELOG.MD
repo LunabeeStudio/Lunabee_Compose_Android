@@ -10,6 +10,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### All
 - Update dependencies
 - Rename source dirs from `java` to `kotlin`
+- Use precompiled plugin for publishing
 
 ### LbcAndroidTest
 - Add params `deleteOnSuccess` and `appendTimestamp` to `LbcPrintRule`
