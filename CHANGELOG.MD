@@ -7,10 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
-### All
+### All (LbcAccessibility 1.5.0, lbcAndroidTest 1.2.0, LbcCore 1.1.0, LbcFoundation 1.1.0, LbcTheme 1.1.0, MaterialColorUtilities 1.1.0)
 - Update dependencies
 - Rename source dirs from `java` to `kotlin`
 - Use precompiled plugin for publishing
+
+## 1.2.0
 
 ### LbcAndroidTest
 - Add params `deleteOnSuccess` and `appendTimestamp` to `LbcPrintRule`
