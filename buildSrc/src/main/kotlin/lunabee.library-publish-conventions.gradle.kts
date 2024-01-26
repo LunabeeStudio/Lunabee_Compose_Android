@@ -43,8 +43,10 @@ val publishType: PublishType = when {
 println("Configure publish of ${project.name} with type $publishType")
 
 project.extensions.configure<PublishingExtension>("publishing") {
-    setupMavenRepository()
     setupPublication()
+    afterEvaluate {
+        setupMavenRepository()
+    }
 }
 
 /**
@@ -78,14 +80,18 @@ fun PublishingExtension.setupPublication() {
     publications {
         when (publishType) {
             PublishType.Android -> create<MavenPublication>(project.name) {
-                setProjectDetails()
-                setAndroidArtifacts()
-                setPom()
+                afterEvaluate { // version is set in project, so use after evaluate
+                    setProjectDetails()
+                    setAndroidArtifacts()
+                    setPom()
+                }
             }
             PublishType.Java -> create<MavenPublication>(project.name) {
-                setProjectDetails()
-                setJavaArtifacts()
-                setPom()
+                afterEvaluate { // version is set in project, so use after evaluate
+                    setProjectDetails()
+                    setJavaArtifacts()
+                    setPom()
+                }
             }
         }
     }
