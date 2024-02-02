@@ -155,6 +155,9 @@ fun SemanticsMatcher.waitAndPrintRootToCacheDir(
     } catch (e: ComposeTimeoutException) {
         printRoot(useUnmergedTree = useUnmergedTree, printRule, "${suffix}${LbcAndroidTestConstants.TimeoutSuffix}")
         throw e
+    } catch (e: AssertionError) {
+        printRoot(useUnmergedTree = useUnmergedTree, printRule, "${suffix}${LbcAndroidTestConstants.ErrorSuffix}")
+        throw e
     }
 }
 
