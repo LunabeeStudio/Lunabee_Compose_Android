@@ -42,8 +42,9 @@ android-gradle-plugin = "8.2.2"
 ##                 ⬆ = "8.4.0-alpha04"
 ##                 ⬆ = "8.4.0-alpha05"
 ##                 ⬆ = "8.4.0-alpha06"
+##                 ⬆ = "8.4.0-alpha07"
 
-detekt = "1.23.4"
+detekt = "1.23.5"
 
 androidx-test-runner = "1.5.2"
 ##                ⬆ = "1.5.3-alpha01"
@@ -52,6 +53,7 @@ androidx-test-runner = "1.5.2"
 ##                ⬆ = "1.6.0-alpha03"
 ##                ⬆ = "1.6.0-alpha04"
 ##                ⬆ = "1.6.0-alpha05"
+##                ⬆ = "1.6.0-alpha06"
 
 # Used to set kotlinCompilerExtensionVersion
 compose-compiler = "1.5.8"
