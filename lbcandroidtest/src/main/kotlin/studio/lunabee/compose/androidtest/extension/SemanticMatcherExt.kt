@@ -150,15 +150,24 @@ fun SemanticsMatcher.waitAndPrintRootToCacheDir(
 ): SemanticsNodeInteraction {
     return try {
         waitUntilExactlyOneExists(useUnmergedTree, timeout)
-        onRoot().printToCacheDir(printRule, suffix)
+        printRoot(useUnmergedTree, printRule, suffix)
         onNode(this)
     } catch (e: ComposeTimeoutException) {
-        onRoot(useUnmergedTree = useUnmergedTree)
-            .printToCacheDir(printRule, "${suffix}${LbcAndroidTestConstants.TimeoutSuffix}")
+        printRoot(useUnmergedTree = useUnmergedTree, printRule, "${suffix}${LbcAndroidTestConstants.TimeoutSuffix}")
         throw e
+    }
+}
+
+@OptIn(ExperimentalTestApi::class)
+private fun ComposeUiTest.printRoot(
+    useUnmergedTree: Boolean,
+    printRule: LbcPrintRule,
+    suffix: String,
+) {
+    try {
+        onRoot(useUnmergedTree = useUnmergedTree).printToCacheDir(printRule, suffix)
     } catch (e: AssertionError) {
-        printRule.printWholeScreen(suffix = "${suffix}${LbcAndroidTestConstants.ErrorSuffix}")
-        throw e
+        printRule.printWholeScreen(suffix = "${suffix}${LbcAndroidTestConstants.ManyRootsSuffix}")
     }
 }
 
