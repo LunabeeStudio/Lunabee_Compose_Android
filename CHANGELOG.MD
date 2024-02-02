@@ -7,7 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### LbcAndroidTest
+
+- Catch root print error more precisely, and don't rethrow when the screenshot failed
+
 ### All (LbcAccessibility 1.5.0, lbcAndroidTest 1.2.0, LbcCore 1.1.0, LbcFoundation 1.1.0, LbcTheme 1.1.0, MaterialColorUtilities 1.1.0)
+
 - Update dependencies
 - Rename source dirs from `java` to `kotlin`
 - Use precompiled plugin for publishing
@@ -15,6 +20,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## 1.2.0
 
 ### LbcAndroidTest
+
 - Add params `deleteOnSuccess` and `appendTimestamp` to `LbcPrintRule`
 - Allow client to choose between internal or public storage for `LbcPrintRule`
 - Rework `LbcPrintRule` constructor with `internalStorage` and `publicStorage` factories
@@ -39,6 +45,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - New module for Android Compose testing.
 
 ### LbcCore
+
 - Add a method to get string with context in `LbcTextSpec`
 - Add a sealed class of `LbcTextSpec` to find string in resource by name
 
