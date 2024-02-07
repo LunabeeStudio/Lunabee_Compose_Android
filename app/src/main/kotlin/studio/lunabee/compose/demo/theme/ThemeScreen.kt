@@ -38,7 +38,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -62,7 +61,6 @@ import studio.lunabee.compose.common.AppDemoTheme
 import studio.lunabee.compose.theme.LbcThemeUtilities
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThemeScreen() {
     var colorHex: String by rememberSaveable { mutableStateOf(value = "") }
