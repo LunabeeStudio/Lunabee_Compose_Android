@@ -62,7 +62,6 @@ import studio.lunabee.compose.common.AppDemoTheme
 import studio.lunabee.compose.theme.LbcThemeUtilities
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThemeScreen() {
     var colorHex: String by rememberSaveable { mutableStateOf(value = "") }
