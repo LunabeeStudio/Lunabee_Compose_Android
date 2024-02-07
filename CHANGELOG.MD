@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### All
+- Fix Kotlin sources not published anymore on Maven
+
 ### LbcAndroidTest
 
 - Catch root print error more precisely, and don't rethrow when the screenshot failed
