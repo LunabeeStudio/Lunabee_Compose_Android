@@ -8,11 +8,16 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## Unreleased
 
 ### All
+
 - Fix Kotlin sources not published anymore on Maven
 
 ### LbcAndroidTest
 
 - Catch root print error more precisely, and don't rethrow when the screenshot failed
+
+### LbcCore
+
+- Add `fun annotated(context: Context): AnnotatedString` in `LbcTextSpec` to retrieve `AnnotatedString` directly
 
 ### All (LbcAccessibility 1.5.0, lbcAndroidTest 1.2.0, LbcCore 1.1.0, LbcFoundation 1.1.0, LbcTheme 1.1.0, MaterialColorUtilities 1.1.0)
 
