@@ -44,6 +44,7 @@ sealed class LbcTextSpec {
         get
 
     abstract fun string(context: Context): String
+    open fun annotated(context: Context): AnnotatedString = AnnotatedString(string(context))
 
     @Composable
     @ReadOnlyComposable
@@ -127,6 +128,8 @@ sealed class LbcTextSpec {
             get() = value.text
 
         override fun string(context: Context): String = value.text
+
+        override fun annotated(context: Context): AnnotatedString = this.value
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
