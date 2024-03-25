@@ -27,6 +27,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import studio.lunabee.compose.MainScreen
 import studio.lunabee.compose.demo.foundation.TextScreen
+import studio.lunabee.compose.demo.haptic.HapticScreen
 import studio.lunabee.compose.demo.theme.ThemeScreen
 
 @Composable
@@ -48,6 +49,12 @@ fun MainNavGraph(
             route = Destinations.FoundationRoute,
         ) {
             TextScreen()
+        }
+
+        composable(
+            route = Destinations.HapticRoute,
+        ) {
+            HapticScreen()
         }
 
         composable(

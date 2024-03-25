@@ -39,4 +39,5 @@ version = AndroidConfig.LBC_FOUNDATION_VERSION
 dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.foundation)
+    implementation(libs.appcompat)
 }
