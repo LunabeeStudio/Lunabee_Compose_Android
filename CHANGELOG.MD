@@ -19,9 +19,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Add `fun annotated(context: Context): AnnotatedString` in `LbcTextSpec` to retrieve `AnnotatedString` directly
 
-### LbcFoundation
+### LbcHapticFeedback
 
-- Add [LbcHapticFeedback]
+- New module to perform haptics feedback from compose
 
 ### All (LbcAccessibility 1.5.0, lbcAndroidTest 1.2.0, LbcCore 1.1.0, LbcFoundation 1.1.0, LbcTheme 1.1.0, MaterialColorUtilities 1.1.0)
 
