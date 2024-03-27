@@ -39,6 +39,7 @@ object AndroidConfig {
     const val LBC_ACCESSIBILITY_VERSION: String = "1.5.0"
     const val LBC_THEME_VERSION: String = "1.1.0"
     const val MATERIAL_COLOR_UTILITIES_VERSION: String = "1.1.0"
+    const val LBC_HAPTIC_VERSION: String = "1.0.0"
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_17
 }
