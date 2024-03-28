@@ -26,7 +26,6 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.View
-import androidx.annotation.RequiresPermission
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.hapticfeedback.HapticFeedback
@@ -43,7 +42,6 @@ class LbcHapticFeedback(
     /**
      * Perform an haptic feedback. If it's not supported, [fallback] will be used. To avoid an infinite loop, [fallback] is also tested.
      */
-    @RequiresPermission(value = "android.permission.VIBRATE")
     fun perform(hapticEffect: LbcHapticEffect, fallback: LbcHapticEffect? = LbcHapticEffect.Compose.LongPress) {
         if (vibrator == null) return
         val supportedHapticEffect = getSupportedHapticEffect()
@@ -60,7 +58,6 @@ class LbcHapticFeedback(
         }
     }
 
-    @RequiresPermission(value = "android.permission.VIBRATE")
     private fun performPredefined(hapticEffect: LbcHapticEffect.Predefined) {
         if (vibrator != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             vibrator.vibrate(VibrationEffect.createPredefined(hapticEffect.hapticId))
@@ -71,7 +68,6 @@ class LbcHapticFeedback(
         view.performHapticFeedback(hapticEffect.hapticId)
     }
 
-    @RequiresPermission(value = "android.permission.VIBRATE")
     private fun performCompositionPrimitives(hapticEffect: LbcHapticEffect.CompositionPrimitives) {
         if (vibrator != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             vibrator.vibrate(VibrationEffect.startComposition().addPrimitive(hapticEffect.hapticId).compose())
