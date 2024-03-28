@@ -7,10 +7,23 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2024-03-28
+
+```
+lbcCore 1.2.0
+lbcFoundation 1.2.0
+lbcAndroidTest 1.3.0
+lbcAccessibility 1.6.0
+lbcTheme 1.2.0
+materialColorUtilities 1.2.0
+lbcHaptic 1.0.0
+```
+
 ### All
 
 - Fix Kotlin sources not published anymore on Maven
 - Add `publishList` Gradle task to get all module to publish from CI
+- Update dependencies
 
 ### LbcAndroidTest
 
