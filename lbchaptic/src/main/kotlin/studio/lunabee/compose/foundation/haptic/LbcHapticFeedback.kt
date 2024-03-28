@@ -102,8 +102,7 @@ class LbcHapticFeedback(
                 add(LbcHapticEffect.CompositionPrimitives.Thud)
             }
             add(LbcHapticEffect.Compose.LongPress)
-            filter { it.isSupported(vibrator = vibrator) }
-        }
+        }.filter { it.isSupported(vibrator = vibrator) }
     }
 
     companion object {
