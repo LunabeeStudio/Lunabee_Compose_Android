@@ -16,7 +16,7 @@
  * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 5/9/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 7/29/2022 - for the Lunabee Compose library.
  */
 
 plugins {
@@ -25,18 +25,19 @@ plugins {
 }
 
 android {
-    resourcePrefix("lbc_acc_")
-    namespace = "studio.lunabee.compose.accessibility"
+    resourcePrefix("lbc_hap_")
+    namespace = "studio.lunabee.compose.haptic"
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
-description = "A set of methods and composable for accessibility"
-version = AndroidConfig.LBCACCESSIBILITY_VERSION
+description = "Helper to perform haptics feedback from compose"
+version = AndroidConfig.LBCHAPTIC_VERSION
 
 dependencies {
     implementation(platform(libs.compose.bom))
-    implementation(libs.compose.foundation)
+    implementation(libs.compose.ui)
+    implementation(libs.appcompat)
 }

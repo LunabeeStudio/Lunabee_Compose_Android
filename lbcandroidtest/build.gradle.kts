@@ -31,8 +31,8 @@ android {
     kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
 }
 
-description = "Tools for developping android test"
-version = AndroidConfig.LBC_ANDROID_TEST_VERSION
+description = "Tools for developing android test"
+version = AndroidConfig.LBCANDROIDTEST_VERSION
 
 dependencies {
     implementation(platform(libs.compose.bom))

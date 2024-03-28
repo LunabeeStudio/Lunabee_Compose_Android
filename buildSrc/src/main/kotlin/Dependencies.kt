@@ -26,6 +26,7 @@ object Modules {
     const val LbcCore: String = ":lbccore"
     const val LbcAndroidTest: String = ":lbcandroidtest"
     const val MaterialColorUtilities: String = ":material-color-utilities"
+    const val LbcHaptic: String = ":lbchaptic"
 }
 
 object BuildConfigs {

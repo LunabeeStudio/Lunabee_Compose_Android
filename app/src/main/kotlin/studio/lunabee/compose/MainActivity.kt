@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                     title = when (destination.route) {
                         Destinations.MainRoute -> getString(R.string.application_name)
                         Destinations.ThemeRoute -> getString(R.string.theme_screen_title)
+                        Destinations.HapticRoute -> getString(R.string.haptic_screen_title)
                         Destinations.FoundationRoute -> getString(R.string.foundation_screen_title)
                         else -> ""
                     }

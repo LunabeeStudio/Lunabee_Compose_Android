@@ -44,4 +44,9 @@ object LbcAndroidTestConstants {
      * Suffix for any failure at the end of test
      */
     const val FailureSuffix: String = "_FAILURE"
+
+    /**
+     * Suffix when root capture fallback to whole screen (due to many roots)
+     */
+    const val ManyRootsSuffix: String = "_MANY_ROOTS"
 }

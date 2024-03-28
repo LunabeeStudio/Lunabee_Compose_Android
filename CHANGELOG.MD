@@ -7,7 +7,38 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2024-03-28
+
+```
+lbcCore 1.2.0
+lbcFoundation 1.2.0
+lbcAndroidTest 1.3.0
+lbcAccessibility 1.6.0
+lbcTheme 1.2.0
+materialColorUtilities 1.2.0
+lbcHaptic 1.0.0
+```
+
+### All
+
+- Fix Kotlin sources not published anymore on Maven
+- Add `publishList` Gradle task to get all module to publish from CI
+- Update dependencies
+
+### LbcAndroidTest
+
+- Catch root print error more precisely, and don't rethrow when the screenshot failed
+
+### LbcCore
+
+- Add `fun annotated(context: Context): AnnotatedString` in `LbcTextSpec` to retrieve `AnnotatedString` directly
+
+### LbcHapticFeedback
+
+- New module to perform haptics feedback from compose
+
 ### All (LbcAccessibility 1.5.0, lbcAndroidTest 1.2.0, LbcCore 1.1.0, LbcFoundation 1.1.0, LbcTheme 1.1.0, MaterialColorUtilities 1.1.0)
+
 - Update dependencies
 - Rename source dirs from `java` to `kotlin`
 - Use precompiled plugin for publishing
@@ -15,6 +46,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## 1.2.0
 
 ### LbcAndroidTest
+
 - Add params `deleteOnSuccess` and `appendTimestamp` to `LbcPrintRule`
 - Allow client to choose between internal or public storage for `LbcPrintRule`
 - Rework `LbcPrintRule` constructor with `internalStorage` and `publicStorage` factories
@@ -39,6 +71,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - New module for Android Compose testing.
 
 ### LbcCore
+
 - Add a method to get string with context in `LbcTextSpec`
 - Add a sealed class of `LbcTextSpec` to find string in resource by name
 

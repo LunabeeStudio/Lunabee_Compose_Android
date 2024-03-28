@@ -32,6 +32,12 @@ class Directions(navController: NavHostController) {
         }
     }
 
+    val navigateToHaptic: ToDirection = {
+        navController.navigate(route = Destinations.HapticRoute) {
+            popUpTo(route = Destinations.MainRoute) { inclusive = false }
+        }
+    }
+
     val navigateToTheme: ToDirection = {
         navController.navigate(route = Destinations.ThemeRoute) {
             popUpTo(route = Destinations.ThemeRoute) { inclusive = false }
