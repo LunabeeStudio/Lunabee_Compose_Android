@@ -38,6 +38,11 @@ fun MainScreen(
                 direction = directions.navigateToFoundation,
             ),
             MenuDescription(
+                titleRes = R.string.haptic_screen_title,
+                subtitleRes = R.string.haptic_screen_subtitle,
+                direction = directions.navigateToHaptic,
+            ),
+            MenuDescription(
                 titleRes = R.string.theme_screen_title,
                 subtitleRes = R.string.theme_screen_subtitle,
                 direction = directions.navigateToTheme,

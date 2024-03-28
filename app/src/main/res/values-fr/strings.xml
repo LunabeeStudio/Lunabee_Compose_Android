@@ -21,6 +21,8 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- MainScreen -->
+    <string name="haptic_screen_title">"Haptics"</string>
+    <string name="haptic_screen_subtitle">"Haptics API"</string>
     <string name="foundation_screen_title">"Foundation"</string>
     <string name="foundation_screen_subtitle">"Composants dérivés de androidx.compose.foundation"</string>
     <string name="theme_screen_title">"Theme"</string>
