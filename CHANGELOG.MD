@@ -10,6 +10,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### All
 
 - Fix Kotlin sources not published anymore on Maven
+- Add `publishList` Gradle task to get all module to publish from CI
 
 ### LbcAndroidTest
 
