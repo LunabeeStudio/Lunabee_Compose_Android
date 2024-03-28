@@ -45,16 +45,13 @@ class LbcHapticFeedback(
     fun perform(hapticEffect: LbcHapticEffect, fallback: LbcHapticEffect? = LbcHapticEffect.Compose.LongPress) {
         if (vibrator == null) return
         val supportedHapticEffect = getSupportedHapticEffect()
-        if (supportedHapticEffect.contains(hapticEffect)) {
-            when (hapticEffect) {
-                is LbcHapticEffect.Compose -> performCompose(hapticEffect = hapticEffect)
-                is LbcHapticEffect.CompositionPrimitives -> performCompositionPrimitives(hapticEffect)
-                is LbcHapticEffect.Predefined -> performPredefined(hapticEffect)
-                is LbcHapticEffect.FeedbackConstants -> performFeedbackConstants(view = view, hapticEffect = hapticEffect)
+        (hapticEffect.takeIf { supportedHapticEffect.contains(it) } ?: fallback)?.let { effect ->
+            when (effect) {
+                is LbcHapticEffect.Compose -> performCompose(hapticEffect = effect)
+                is LbcHapticEffect.CompositionPrimitives -> performCompositionPrimitives(effect)
+                is LbcHapticEffect.Predefined -> performPredefined(effect)
+                is LbcHapticEffect.FeedbackConstants -> performFeedbackConstants(view = view, hapticEffect = effect)
             }
-        } else {
-            // Avoid infinite loop by testing the fallback availability.
-            fallback?.takeIf { supportedHapticEffect.contains(it) }?.let { perform(hapticEffect = fallback) }
         }
     }
 
@@ -133,7 +130,6 @@ class LbcHapticFeedback(
          * Query whether the vibrator supports all of the given primitives.
          * If a primitive is not supported by the device, then no vibration will occur if it is played.
          */
-        @JvmStatic
         fun isPrimitiveSupported(vibrator: Vibrator, primitiveId: Int): Boolean {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 vibrator.areAllPrimitivesSupported(primitiveId)
