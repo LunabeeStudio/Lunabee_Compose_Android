@@ -97,6 +97,7 @@ dependencies {
     implementation(project(Modules.LbcFoundation))
     implementation(project(Modules.LbcTheme))
     implementation(project(Modules.LbcHaptic))
+    implementation(project(Modules.LbcCrop))
 
     androidTestImplementation(project(Modules.LbcAndroidTest))
     androidTestImplementation(libs.compose.ui.test.junit4)
