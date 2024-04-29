@@ -47,6 +47,11 @@ fun MainScreen(
                 subtitleRes = R.string.theme_screen_subtitle,
                 direction = directions.navigateToTheme,
             ),
+            MenuDescription(
+                titleRes = R.string.crop_screen_title,
+                subtitleRes = R.string.crop_screen_subtitle,
+                direction = directions.navigateToCrop,
+            ),
         ),
     )
 }

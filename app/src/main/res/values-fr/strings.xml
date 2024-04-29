@@ -26,9 +26,12 @@
     <string name="foundation_screen_title">"Foundation"</string>
     <string name="foundation_screen_subtitle">"Composants dérivés de androidx.compose.foundation"</string>
     <string name="theme_screen_title">"Theme"</string>
-    <string name="theme_screen_subtitle">"Utilitaires pour créer ses thèmes Material3 dynamiquement"</string>
+     <string name="theme_screen_subtitle">"Utilitaires pour créer ses thèmes Material3 dynamiquement"</string>
+    <string name="crop_screen_title">"Crop"</string>
+    <string name="crop_screen_subtitle">"Composant permettant de zommer et croper des images."</string>
 
-     <!-- TextScreen -->
+
+    <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Séparez les textes à mettre en évidence par une virgule"</string>
     <string name="text_screen_base_text_placeholder">"Texte de base non stylisé"</string>
 
@@ -38,6 +41,12 @@
     <!-- ThemeScreen -->
     <string name="material3_theme_color_placeholder">"#EEFF00"</string>
     <string name="material3_theme_color_label">"Couleur hexadécimale"</string>
+
+    <!-- CropScreen -->
+    <string name="crop_screen_description">Déplacez-vous et zommer dans l\'image pour optenir le cadrage désiré.</string>
+    <string name="crop_screen_crop_button">Valider</string>
+    <string name="crop_screen_retry_button">Réessayer</string>
+
 
     <!-- Common -->
     <string name="lorem_ipsum">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</string>

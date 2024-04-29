@@ -44,6 +44,12 @@ class Directions(navController: NavHostController) {
         }
     }
 
+    val navigateToCrop: ToDirection = {
+        navController.navigate(route = Destinations.CropRoute) {
+            popUpTo(route = Destinations.MainRoute) { inclusive = false }
+        }
+    }
+
     val navigateToPreviousScreen: ToDirection = {
         navController.popBackStack()
     }
