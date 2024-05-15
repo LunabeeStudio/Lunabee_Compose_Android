@@ -152,8 +152,8 @@ sealed class LbcTextSpec {
     }
 
     class StringResource(
-        @StringRes private val id: Int,
-        private vararg val args: Any,
+        @StringRes val id: Int,
+        vararg val args: Any,
     ) : LbcTextSpec() {
         override val annotated: AnnotatedString
             @Composable
@@ -192,9 +192,9 @@ sealed class LbcTextSpec {
     }
 
     class PluralsResource(
-        @PluralsRes private val id: Int,
-        private val count: Int,
-        private vararg val args: Any,
+        @PluralsRes val id: Int,
+        val count: Int,
+        vararg val args: Any,
     ) : LbcTextSpec() {
 
         override val annotated: AnnotatedString
