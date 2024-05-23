@@ -52,6 +52,11 @@ fun MainScreen(
                 subtitleRes = R.string.crop_screen_subtitle,
                 direction = directions.navigateToCrop,
             ),
+            MenuDescription(
+                titleRes = R.string.uiFields_screen_title,
+                subtitleRes = R.string.uiFields_screen_subtitle,
+                direction = directions.navigateToUiFields,
+            ),
         ),
     )
 }

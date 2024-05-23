@@ -96,8 +96,10 @@ dependencies {
     implementation(project(Modules.LbcAccessibility))
     implementation(project(Modules.LbcFoundation))
     implementation(project(Modules.LbcTheme))
+    implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcHaptic))
     implementation(project(Modules.LbcCrop))
+    implementation(project(Modules.LbcUiField))
 
     androidTestImplementation(project(Modules.LbcAndroidTest))
     androidTestImplementation(libs.compose.ui.test.junit4)

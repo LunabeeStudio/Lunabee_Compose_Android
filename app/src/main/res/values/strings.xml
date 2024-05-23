@@ -31,6 +31,8 @@
     <string name="theme_screen_subtitle">"Tools to create custom Material3 theme"</string>
     <string name="crop_screen_title">"Crop"</string>
     <string name="crop_screen_subtitle">"Component to zoom and crop images."</string>
+    <string name="uiFields_screen_title">"UiFields"</string>
+    <string name="uiFields_screen_subtitle">"Components allowing form creation in Compose"</string>
 
     <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Separate text to highlight by a comma"</string>

@@ -28,6 +28,7 @@ object Modules {
     const val MaterialColorUtilities: String = ":material-color-utilities"
     const val LbcHaptic: String = ":lbchaptic"
     const val LbcCrop: String = ":lbccrop"
+    const val LbcUiField: String = ":lbcuifield"
 }
 
 object BuildConfigs {

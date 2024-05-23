@@ -29,6 +29,8 @@
      <string name="theme_screen_subtitle">"Utilitaires pour créer ses thèmes Material3 dynamiquement"</string>
     <string name="crop_screen_title">"Crop"</string>
     <string name="crop_screen_subtitle">"Composant permettant de zommer et croper des images."</string>
+    <string name="uiFields_screen_title">"UiFields"</string>
+    <string name="uiFields_screen_subtitle">"Composant permettant la creation de formulaire en Compose"</string>
 
 
     <!-- TextScreen -->
