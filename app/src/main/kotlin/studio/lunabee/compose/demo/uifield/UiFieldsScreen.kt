@@ -25,7 +25,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccessTime
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
@@ -33,28 +38,41 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.SavedStateHandle
+import studio.lunabee.compose.core.LbImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.text.NormalUiTextField
 import studio.lunabee.compose.foundation.uifield.field.text.PasswordUiTextField
+import studio.lunabee.compose.foundation.uifield.field.text.option.VisibilityOptionData
 import studio.lunabee.compose.foundation.uifield.field.time.DateAndHourUiField
 import studio.lunabee.compose.foundation.uifield.field.time.DateUiField
+import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePickerData
+import studio.lunabee.compose.foundation.uifield.field.time.option.hour.HourPickerData
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UiFieldsScreen() {
+fun UiFieldsScreen(
+    savedStateHandle: SavedStateHandle,
+) {
     val normalUiTextField = remember {
         NormalUiTextField(
-            initialValue = "",
+            initialValue = "Yes yes",
             placeholder = LbcTextSpec.Raw("This is a normal text field"),
             label = LbcTextSpec.Raw("Normal"),
             isFieldInError = { value ->
                 if (value.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
             },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Next,
+            ),
+            savedStateHandle = savedStateHandle,
+            id = "1",
         )
     }
     val passwordUiTextField = remember {
@@ -65,6 +83,17 @@ fun UiFieldsScreen() {
             isFieldInError = {
                 null
             },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Next,
+            ),
+            savedStateHandle = savedStateHandle,
+            id = "2",
+            visibilityOptionData = VisibilityOptionData(
+                hidePasswordClickLabel = LbcTextSpec.Raw("Hide password"),
+                showPasswordClickLabel = LbcTextSpec.Raw("Show password"),
+                showIcon = LbImageSpec.KtImageVector(Icons.Default.Visibility),
+                hideIcon = LbImageSpec.KtImageVector(Icons.Default.VisibilityOff),
+            ),
         )
     }
     val dateAndHourUiField = remember {
@@ -73,8 +102,26 @@ fun UiFieldsScreen() {
             placeholder = LbcTextSpec.Raw("This is a Date and Hour UiField"),
             label = LbcTextSpec.Raw("Date and Hour"),
             isFieldInError = {
-                null
+                if (it.isAfter(LocalDateTime.now().plusDays(7))) {
+                    UiFieldError(LbcTextSpec.Raw("The date can't be more than 7 days in the future"))
+                } else {
+                    null
+                }
             },
+            savedStateHandle = savedStateHandle,
+            id = "3",
+            datePickerData = DatePickerData(
+                datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
+                datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
+                datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
+                icon = LbImageSpec.KtImageVector(Icons.Default.DateRange),
+            ),
+            hourPickerData = HourPickerData(
+                hourPickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
+                hourPickerCancelLabel = LbcTextSpec.Raw("Cancel"),
+                hourPickerClickLabel = LbcTextSpec.Raw("Picker Hour"),
+                icon = LbImageSpec.KtImageVector(Icons.Default.AccessTime),
+            ),
         )
     }
     val dateUiField = remember {
@@ -90,11 +137,18 @@ fun UiFieldsScreen() {
                     return Instant.now().toEpochMilli() < utcTimeMillis
                 }
             },
+            savedStateHandle = savedStateHandle,
+            id = "4",
+            datePickerData = DatePickerData(
+                datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
+                datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
+                datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
+                icon = LbImageSpec.KtImageVector(Icons.Default.DateRange),
+            ),
         )
     }
     Column(
         modifier = Modifier
-            .systemBarsPadding()
             .padding(all = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {

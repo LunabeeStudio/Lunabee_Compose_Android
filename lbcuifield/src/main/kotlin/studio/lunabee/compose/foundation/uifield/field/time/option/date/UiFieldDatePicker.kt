@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * DatePickerUiField.kt
+ * UiFieldDatePicker.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
@@ -36,7 +36,7 @@ import java.time.ZoneOffset
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DatePickerUiField(
+fun UiFieldDatePicker(
     date: LocalDate,
     onDismiss: () -> Unit,
     onValueChanged: (LocalDate) -> Unit,

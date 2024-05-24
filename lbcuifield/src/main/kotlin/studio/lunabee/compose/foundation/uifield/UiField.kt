@@ -23,32 +23,54 @@ package studio.lunabee.compose.foundation.uifield
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.flow.MutableStateFlow
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
-import studio.lunabee.compose.foundation.uifield.field.data.UiFieldData
+import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 
 abstract class UiField<T> {
+    abstract val id: String
+    abstract val savedStateHandle: SavedStateHandle
     abstract val initialValue: T
     abstract var placeholder: LbcTextSpec
     abstract var label: LbcTextSpec
     abstract val options: List<UiFieldOption>
-    abstract val uiFieldData: UiFieldData
+    abstract val uiFieldStyleData: UiFieldStyleData
     abstract val isFieldInError: (T) -> UiFieldError?
 
-    protected val value: MutableStateFlow<T> by lazy { MutableStateFlow(initialValue) }
+    protected val mValue: MutableStateFlow<T> by lazy {
+        MutableStateFlow(
+            savedStateHandle.get<String>(id)?.let(::savedValueToData) ?: initialValue,
+        )
+    }
 
     protected val error: MutableStateFlow<UiFieldError?> = MutableStateFlow(null)
 
-    fun getValue(): T {
-        return value.value
-    }
+    protected var hasBeenCaptured: Boolean = false
+
+    var value: T
+        get() = mValue.value
+        set(value) {
+            savedStateHandle.set(key = id, valueToSavedString(value))
+            mValue.value = value
+        }
 
     fun checkAndDisplayError() {
-        error.value = isFieldInError(getValue())
+        isFieldInError(value)?.let(::displayError)
     }
 
-    abstract fun valueToString(value: T): String
+    fun dismissDismissedError() {
+        error.value = null
+    }
+
+    fun displayError(displayError: UiFieldError) {
+        error.value = displayError
+    }
+
+    abstract fun valueToDisplayedString(value: T): String
+    abstract fun valueToSavedString(value: T): String
+    abstract fun savedValueToData(value: String): T
 
     @Composable
     abstract fun Composable(modifier: Modifier)

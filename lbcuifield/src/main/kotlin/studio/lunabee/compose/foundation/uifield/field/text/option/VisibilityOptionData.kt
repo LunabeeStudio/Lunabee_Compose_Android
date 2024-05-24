@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * HourPickerHolder.kt
+ * VisibilityAccessibilityLabels.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/24/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.time.option.time
+package studio.lunabee.compose.foundation.uifield.field.text.option
 
+import studio.lunabee.compose.core.LbImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
-import java.time.LocalDateTime
 
-interface HourPickerHolder {
-    val hourPickerConfirmLabel: LbcTextSpec
-    val hourPickerCancelLabel: LbcTextSpec
-    val hourPickerClickLabel: LbcTextSpec
-    val dateTime: LocalDateTime
-    fun onValueTimeChanged(hours: Int, minutes: Int)
-}
+data class VisibilityOptionData(
+    val hidePasswordClickLabel: LbcTextSpec,
+    val showPasswordClickLabel: LbcTextSpec,
+    val showIcon: LbImageSpec,
+    val hideIcon: LbImageSpec,
+)

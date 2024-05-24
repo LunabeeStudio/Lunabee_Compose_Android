@@ -13,24 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * DatePickerHolder.kt
+ * VisibilityOptionHolder.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/24/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.time.option.date
+package studio.lunabee.compose.foundation.uifield.field.text.option
 
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SelectableDates
-import java.time.LocalDate
+import androidx.compose.ui.text.input.VisualTransformation
+import kotlinx.coroutines.flow.StateFlow
 
-interface DatePickerHolder {
-    val datePickerData: DatePickerData
-    val date: LocalDate
+interface VisibilityOptionHolder {
+    val visualTransformation: StateFlow<VisualTransformation>
+    val visibilityOptionData: VisibilityOptionData
 
-    @OptIn(ExperimentalMaterial3Api::class)
-    val selectableDates: SelectableDates
-
-    fun onValueDateChanged(date: LocalDate)
+    fun onVisibilityToggle()
 }

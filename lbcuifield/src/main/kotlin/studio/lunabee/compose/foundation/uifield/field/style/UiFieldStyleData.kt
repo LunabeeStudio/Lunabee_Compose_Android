@@ -19,16 +19,18 @@
  * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.data
+package studio.lunabee.compose.foundation.uifield.field.style
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.VisualTransformation
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 
-interface UiFieldData {
+interface UiFieldStyleData {
     @Composable
     fun ComposeTextField(
         value: String,
@@ -38,6 +40,8 @@ interface UiFieldData {
         label: LbcTextSpec,
         trailingIcon: @Composable RowScope.() -> Unit,
         visualTransformation: VisualTransformation,
+        keyboardOptions: KeyboardOptions,
+        keyboardActions: KeyboardActions,
         maxLine: Int,
         readOnly: Boolean,
         error: UiFieldError?,

@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.text.input.VisualTransformation
 import kotlinx.coroutines.flow.StateFlow
 import studio.lunabee.compose.foundation.uifield.UiField
@@ -39,13 +40,20 @@ abstract class TextUiField : UiField<String>() {
 
     @Composable
     override fun Composable(modifier: Modifier) {
-        val collectedValue by value.collectAsState()
+        val collectedValue by mValue.collectAsState()
         val collectedVisualTransformation by visualTransformation.collectAsState()
         val collectedError by error.collectAsState()
-        uiFieldData.ComposeTextField(
-            value = valueToString(collectedValue),
-            onValueChange = { value.value = it },
-            modifier = modifier,
+        uiFieldStyleData.ComposeTextField(
+            value = valueToDisplayedString(collectedValue),
+            onValueChange = { value = it },
+            modifier = modifier.onFocusEvent {
+                if (!it.hasFocus && hasBeenCaptured) {
+                    checkAndDisplayError()
+                } else {
+                    hasBeenCaptured = true
+                    dismissDismissedError()
+                }
+            },
             placeholder = placeholder,
             trailingIcon = { options.forEach { it.Composable(modifier = Modifier) } },
             visualTransformation = collectedVisualTransformation,
@@ -53,10 +61,16 @@ abstract class TextUiField : UiField<String>() {
             readOnly = false,
             label = label,
             error = collectedError,
+            keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
         )
     }
 
-    override fun valueToString(value: String): String {
+    override fun valueToDisplayedString(value: String): String {
         return value
     }
+
+    override fun valueToSavedString(value: String): String = value
+
+    override fun savedValueToData(value: String): String = value
 }

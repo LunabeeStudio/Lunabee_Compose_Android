@@ -13,18 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * PasswordUiFieldData.kt
+ * DatePickerAccessibilityLabels.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/24/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.text.data.password
+package studio.lunabee.compose.foundation.uifield.field.time.option.date
 
+import studio.lunabee.compose.core.LbImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
-import studio.lunabee.compose.foundation.uifield.field.data.UiFieldData
 
-interface PasswordUiFieldData : UiFieldData {
-    val hidePasswordClickLabel: LbcTextSpec
-    val showPasswordClickLabel: LbcTextSpec
-}
+data class DatePickerData(
+    val datePickerConfirmLabel: LbcTextSpec,
+    val datePickerCancelLabel: LbcTextSpec,
+    val datePickerClickLabel: LbcTextSpec,
+    val icon: LbImageSpec,
+)

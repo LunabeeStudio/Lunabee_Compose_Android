@@ -24,15 +24,18 @@ package studio.lunabee.compose.foundation.uifield.field.time
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
+import androidx.lifecycle.SavedStateHandle
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
-import studio.lunabee.compose.foundation.uifield.field.data.UiFieldData
-import studio.lunabee.compose.foundation.uifield.field.data.UiFieldDataImpl
+import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
+import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
+import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePickerData
 import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePickerHolder
 import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePickerOption
-import studio.lunabee.compose.foundation.uifield.field.time.option.time.HourPickerHolder
-import studio.lunabee.compose.foundation.uifield.field.time.option.time.HourPickerOption
+import studio.lunabee.compose.foundation.uifield.field.time.option.hour.HourPickerData
+import studio.lunabee.compose.foundation.uifield.field.time.option.hour.HourPickerHolder
+import studio.lunabee.compose.foundation.uifield.field.time.option.hour.HourPickerOption
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -45,45 +48,51 @@ class DateAndHourUiField(
     override var label: LbcTextSpec,
     override var placeholder: LbcTextSpec,
     override val isFieldInError: (LocalDateTime) -> UiFieldError?,
-    override val uiFieldData: UiFieldData = UiFieldDataImpl(),
+    override val id: String,
+    override val savedStateHandle: SavedStateHandle,
+    override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
     override val selectableDates: SelectableDates = DatePickerDefaults.AllDates,
+    override val datePickerData: DatePickerData,
+    override val hourPickerData: HourPickerData,
     private val formatter: DateTimeFormatter = DateTimeFormatter
         .ofLocalizedDateTime(FormatStyle.SHORT)
-        .withZone(ZoneOffset.UTC)
+        .withZone(ZoneOffset.UTC),
 ) : TimeUiField<LocalDateTime>(), HourPickerHolder, DatePickerHolder {
     override val options: List<UiFieldOption> = listOf(
         DatePickerOption(),
         HourPickerOption(),
     )
 
-    override fun valueToString(value: LocalDateTime): String {
+    override fun savedValueToData(value: String): LocalDateTime {
+        return LocalDateTime.parse(value)
+    }
+
+    override fun valueToSavedString(value: LocalDateTime): String {
+        return value.toString()
+    }
+
+    override fun valueToDisplayedString(value: LocalDateTime): String {
         return formatter.format(value)
     }
 
-    override val datePickerClickLabel: LbcTextSpec = LbcTextSpec.Raw("Picker Date")
-    override val datePickerConfirmLabel: LbcTextSpec = LbcTextSpec.Raw("Confirm")
-    override val datePickerCancelLabel: LbcTextSpec = LbcTextSpec.Raw("Cancel")
-
-    override val hourPickerConfirmLabel: LbcTextSpec = LbcTextSpec.Raw("Confirm")
-    override val hourPickerCancelLabel: LbcTextSpec = LbcTextSpec.Raw("Cancel")
-    override val hourPickerClickLabel: LbcTextSpec = LbcTextSpec.Raw("Picker Hour")
-
     override val date: LocalDate
-        get() = value.value.toLocalDate()
+        get() = value.toLocalDate()
 
     override fun onValueDateChanged(date: LocalDate) {
-        value.value = value.value
+        value = value
             .withDayOfMonth(date.dayOfMonth)
             .withMonth(date.monthValue)
             .withYear(date.year)
+        checkAndDisplayError()
     }
 
     override val dateTime: LocalDateTime
-        get() = value.value
+        get() = value
 
     override fun onValueTimeChanged(hours: Int, minutes: Int) {
-        value.value = value.value
+        value = value
             .withHour(hours)
             .withMinute(minutes)
+        checkAndDisplayError()
     }
 }

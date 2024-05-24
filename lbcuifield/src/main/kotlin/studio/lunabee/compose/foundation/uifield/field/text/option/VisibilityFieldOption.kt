@@ -21,38 +21,26 @@
 
 package studio.lunabee.compose.foundation.uifield.field.text.option
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import studio.lunabee.compose.core.LbImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.composable.TrailingAction
-import studio.lunabee.compose.foundation.uifield.field.text.PasswordUiTextField
 
-context (PasswordUiTextField)
+context(VisibilityOptionHolder)
 class VisibilityFieldOption : UiFieldOption {
 
-    override fun onClick() {
-        if (visualTransformation.value == VisualTransformation.None) {
-            mVisualTransformation.value = PasswordVisualTransformation()
-        } else {
-            mVisualTransformation.value = VisualTransformation.None
-        }
-    }
+    override fun onClick(): Unit = onVisibilityToggle()
 
     override val clickLabel: LbcTextSpec
         get() {
             return if (visualTransformation.value == VisualTransformation.None) {
-                uiFieldData.hidePasswordClickLabel
+                visibilityOptionData.hidePasswordClickLabel
             } else {
-                uiFieldData.showPasswordClickLabel
+                visibilityOptionData.showPasswordClickLabel
             }
         }
 
@@ -60,9 +48,9 @@ class VisibilityFieldOption : UiFieldOption {
     override fun Composable(modifier: Modifier) {
         val visualTransformation by visualTransformation.collectAsState()
         val image = if (visualTransformation == VisualTransformation.None) {
-            LbImageSpec.KtImageVector(Icons.Default.VisibilityOff)
+            visibilityOptionData.hideIcon
         } else {
-            LbImageSpec.KtImageVector(Icons.Default.Visibility)
+            visibilityOptionData.showIcon
         }
 
         TrailingAction(

@@ -19,10 +19,13 @@
  * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.data
+package studio.lunabee.compose.foundation.uifield.field.style
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,7 +34,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 
-class UiFieldDataImpl : UiFieldData {
+class UiFieldStyleDataImpl : UiFieldStyleData {
     @Composable
     override fun ComposeTextField(
         value: String,
@@ -41,6 +44,8 @@ class UiFieldDataImpl : UiFieldData {
         label: LbcTextSpec,
         trailingIcon: @Composable RowScope.() -> Unit,
         visualTransformation: VisualTransformation,
+        keyboardOptions: KeyboardOptions,
+        keyboardActions: KeyboardActions,
         maxLine: Int,
         readOnly: Boolean,
         error: UiFieldError?,
@@ -48,27 +53,21 @@ class UiFieldDataImpl : UiFieldData {
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = modifier,
-            placeholder = @Composable {
-                Text(text = placeholder.string)
-            },
-            trailingIcon = {
-                Row { trailingIcon() }
-            },
-            label = @Composable {
-                Text(text = label.string)
-            },
+            modifier = modifier.animateContentSize(),
+            placeholder = { Text(text = placeholder.string) },
+            trailingIcon = { Row { trailingIcon() } },
+            label = { Text(text = label.string) },
             maxLines = maxLine,
             readOnly = readOnly,
             visualTransformation = visualTransformation,
             isError = error != null,
             supportingText = if (error?.text != null) {
-                @Composable {
-                    Text(text = error.text.string)
-                }
+                { Text(text = error.text.string) }
             } else {
                 null
             },
+            keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
         )
     }
 }

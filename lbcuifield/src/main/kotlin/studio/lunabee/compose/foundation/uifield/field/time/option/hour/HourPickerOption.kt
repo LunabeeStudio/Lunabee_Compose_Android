@@ -19,17 +19,14 @@
  * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.time.option.time
+package studio.lunabee.compose.foundation.uifield.field.time.option.hour
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import kotlinx.coroutines.flow.MutableStateFlow
-import studio.lunabee.compose.core.LbImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.composable.TrailingAction
@@ -38,7 +35,7 @@ context(HourPickerHolder)
 class HourPickerOption : UiFieldOption {
     private val isPickerVisible: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
-    override val clickLabel: LbcTextSpec = hourPickerClickLabel
+    override val clickLabel: LbcTextSpec = hourPickerData.hourPickerClickLabel
 
     override fun onClick() {
         isPickerVisible.value = true
@@ -49,20 +46,20 @@ class HourPickerOption : UiFieldOption {
         val collectedIsPickedVisible by isPickerVisible.collectAsState()
         val focusManager = LocalFocusManager.current
         TrailingAction(
-            image = LbImageSpec.KtImageVector(Icons.Default.AccessTime),
+            image = hourPickerData.icon,
             onClick = { isPickerVisible.value = true },
             contentDescription = null,
             modifier = modifier,
         )
         if (collectedIsPickedVisible) {
             focusManager.clearFocus(true)
-            TimePickerUiField(
+            UiFieldTimePicker(
                 onDismiss = { isPickerVisible.value = false },
                 hour = dateTime.hour,
                 minutes = dateTime.minute,
                 onValueChanged = ::onValueTimeChanged,
-                confirmLabel = hourPickerConfirmLabel,
-                cancelLabel = hourPickerCancelLabel,
+                confirmLabel = hourPickerData.hourPickerConfirmLabel,
+                cancelLabel = hourPickerData.hourPickerCancelLabel,
             )
         }
     }

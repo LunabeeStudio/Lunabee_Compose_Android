@@ -9,6 +9,7 @@ complexity:
     ignoreDefaultParameters: true
     ignoreAnnotated: [ 'Composable', 'Inject' ]
     functionThreshold: 10
+    constructorThreshold: 10
   TooManyFunctions:
     active: false
   LargeClass:

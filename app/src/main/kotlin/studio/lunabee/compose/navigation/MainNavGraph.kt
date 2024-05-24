@@ -74,7 +74,9 @@ fun MainNavGraph(
         composable(
             route = Destinations.UiFieldRoute,
         ) {
-            UiFieldsScreen()
+            UiFieldsScreen(
+                it.savedStateHandle,
+            )
         }
     }
 }

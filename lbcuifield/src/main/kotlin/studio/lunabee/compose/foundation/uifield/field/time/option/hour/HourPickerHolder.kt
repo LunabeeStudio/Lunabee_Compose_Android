@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * PasswordUiFieldDataImpl.kt
+ * HourPickerHolder.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.text.data.password
+package studio.lunabee.compose.foundation.uifield.field.time.option.hour
 
-import studio.lunabee.compose.core.LbcTextSpec
-import studio.lunabee.compose.foundation.uifield.field.data.UiFieldData
-import studio.lunabee.compose.foundation.uifield.field.data.UiFieldDataImpl
+import java.time.LocalDateTime
 
-class PasswordUiFieldDataImpl : PasswordUiFieldData, UiFieldData by UiFieldDataImpl() {
-    override val hidePasswordClickLabel: LbcTextSpec = LbcTextSpec.Raw("Hide password")
-    override val showPasswordClickLabel: LbcTextSpec = LbcTextSpec.Raw("Show password")
+interface HourPickerHolder {
+    val hourPickerData: HourPickerData
+    val dateTime: LocalDateTime
+    fun onValueTimeChanged(hours: Int, minutes: Int)
 }

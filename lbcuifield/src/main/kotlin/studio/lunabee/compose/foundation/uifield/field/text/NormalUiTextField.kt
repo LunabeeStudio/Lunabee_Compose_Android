@@ -24,23 +24,29 @@ package studio.lunabee.compose.foundation.uifield.field.text
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
-import studio.lunabee.compose.foundation.uifield.field.data.UiFieldData
-import studio.lunabee.compose.foundation.uifield.field.data.UiFieldDataImpl
+import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
+import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
 
 class NormalUiTextField(
     override val initialValue: String = "",
     override var label: LbcTextSpec,
     override var placeholder: LbcTextSpec,
     override val isFieldInError: (String) -> UiFieldError?,
+    override val id: String,
+    override val savedStateHandle: SavedStateHandle,
     override val options: List<UiFieldOption> = listOf(),
     override val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     override val keyboardActions: KeyboardActions = KeyboardActions.Default,
-    override val visualTransformation: StateFlow<VisualTransformation> = MutableStateFlow(VisualTransformation.None),
-    override val uiFieldData: UiFieldData = UiFieldDataImpl(),
+    override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
     override val maxLine: Int = 1,
+    override val visualTransformation: StateFlow<VisualTransformation> = MutableStateFlow(
+        VisualTransformation.None,
+    ).asStateFlow(),
 ) : TextUiField()

@@ -22,6 +22,8 @@
 package studio.lunabee.compose.foundation.uifield.field.time
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,15 +36,17 @@ abstract class TimeUiField<T> : UiField<T>() {
 
     @Composable
     override fun Composable(modifier: Modifier) {
-        val collectedValue by value.collectAsState()
+        val collectedValue by mValue.collectAsState()
         val collectedError by error.collectAsState()
-        uiFieldData.ComposeTextField(
-            value = valueToString(collectedValue),
+        uiFieldStyleData.ComposeTextField(
+            value = valueToDisplayedString(collectedValue),
             onValueChange = {},
             modifier = modifier
                 .fillMaxWidth()
                 .onFocusEvent {
                     if (it.hasFocus) {
+                        dismissDismissedError()
+                        hasBeenCaptured = true
                         options
                             .first()
                             .onClick()
@@ -55,6 +59,8 @@ abstract class TimeUiField<T> : UiField<T>() {
             readOnly = true,
             label = label,
             error = collectedError,
+            keyboardActions = KeyboardActions.Default,
+            keyboardOptions = KeyboardOptions.Default,
         )
     }
 }

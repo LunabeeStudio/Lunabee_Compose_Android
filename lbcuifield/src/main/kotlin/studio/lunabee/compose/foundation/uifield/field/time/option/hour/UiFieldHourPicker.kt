@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * HourPickerUiField.kt
+ * UiFieldHourPicker.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.time.option.time
+package studio.lunabee.compose.foundation.uifield.field.time.option.hour
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -48,7 +48,7 @@ import studio.lunabee.compose.core.LbcTextSpec
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TimePickerUiField(
+fun UiFieldTimePicker(
     hour: Int,
     minutes: Int,
     onDismiss: () -> Unit,
