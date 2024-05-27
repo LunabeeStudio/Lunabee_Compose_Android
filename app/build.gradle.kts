@@ -90,14 +90,17 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
+    implementation(libs.compose.material.icons.extended)
 
     coreLibraryDesugaring(libs.desugarJdk)
 
     implementation(project(Modules.LbcAccessibility))
     implementation(project(Modules.LbcFoundation))
     implementation(project(Modules.LbcTheme))
+    implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcHaptic))
     implementation(project(Modules.LbcCrop))
+    implementation(project(Modules.LbcUiField))
 
     androidTestImplementation(project(Modules.LbcAndroidTest))
     androidTestImplementation(libs.compose.ui.test.junit4)

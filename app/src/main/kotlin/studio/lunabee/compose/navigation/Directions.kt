@@ -53,4 +53,8 @@ class Directions(navController: NavHostController) {
     val navigateToPreviousScreen: ToDirection = {
         navController.popBackStack()
     }
+
+    val navigateToUiFields: ToDirection = {
+        navController.navigate(route = Destinations.UiFieldRoute)
+    }
 }

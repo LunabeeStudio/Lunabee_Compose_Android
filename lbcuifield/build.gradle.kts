@@ -16,7 +16,7 @@
  * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 11/30/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 7/29/2022 - for the Lunabee Compose library.
  */
 
 plugins {
@@ -25,28 +25,29 @@ plugins {
 }
 
 android {
-    resourcePrefix("lbc_core_")
-    namespace = "studio.lunabee.compose.core"
+    resourcePrefix("lbc_uifield_")
+    namespace = "studio.lunabee.compose.haptic"
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+    kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
 }
 
-description = "A set of tools for Compose"
-version = AndroidConfig.LBCCORE_VERSION
+description = "group of ui field to easily create forms in compose"
+version = AndroidConfig.LBCHAPTIC_VERSION
 
 dependencies {
+    coreLibraryDesugaring(libs.desugarJdk)
     implementation(platform(libs.compose.bom))
-    implementation(libs.compose.foundation)
-    implementation(libs.coil.compose)
-    implementation(libs.coil.compose.svg)
-
+    implementation(libs.compose.ui)
     implementation(libs.compose.material3)
-
-    androidTestImplementation(libs.compose.ui.test)
-    androidTestImplementation(libs.compose.ui.test.junit4)
-    androidTestImplementation(libs.androidx.test.runner)
-    androidTestImplementation(libs.kotlin.test)
-    debugImplementation(libs.compose.ui.test.manifest)
+    implementation(libs.appcompat)
+    implementation(project(Modules.LbcCore))
 }

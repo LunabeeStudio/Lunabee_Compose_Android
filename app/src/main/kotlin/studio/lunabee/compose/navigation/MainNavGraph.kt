@@ -30,6 +30,7 @@ import studio.lunabee.compose.demo.crop.CropScreen
 import studio.lunabee.compose.demo.foundation.TextScreen
 import studio.lunabee.compose.demo.haptic.HapticScreen
 import studio.lunabee.compose.demo.theme.ThemeScreen
+import studio.lunabee.compose.demo.uifield.UiFieldsScreen
 
 @Composable
 fun MainNavGraph(
@@ -68,6 +69,14 @@ fun MainNavGraph(
             route = Destinations.CropRoute,
         ) {
             CropScreen()
+        }
+
+        composable(
+            route = Destinations.UiFieldRoute,
+        ) {
+            UiFieldsScreen(
+                it.savedStateHandle,
+            )
         }
     }
 }
