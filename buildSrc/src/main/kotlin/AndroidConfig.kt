@@ -41,6 +41,7 @@ object AndroidConfig {
     const val LBCTHEME_VERSION: String = "1.2.0"
     const val MATERIAL_COLOR_UTILITIES_VERSION: String = "1.2.0"
     const val LBCHAPTIC_VERSION: String = "1.0.0"
+    const val LBCUIFIELD_VERSION: String = "1.0.0"
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_17
 }
