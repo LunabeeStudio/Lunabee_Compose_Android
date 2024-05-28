@@ -52,7 +52,6 @@ import studio.lunabee.compose.foundation.uifield.field.time.DateUiField
 import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePickerData
 import studio.lunabee.compose.foundation.uifield.field.time.option.hour.HourPickerData
 import java.time.Instant
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -102,7 +101,7 @@ fun UiFieldsScreen(
             placeholder = LbcTextSpec.Raw("This is a Date and Hour UiField"),
             label = LbcTextSpec.Raw("Date and Hour"),
             isFieldInError = {
-                if (it.isAfter(LocalDateTime.now().plusDays(7))) {
+                if (it?.isAfter(LocalDateTime.now().plusDays(7)) == true) {
                     UiFieldError(LbcTextSpec.Raw("The date can't be more than 7 days in the future"))
                 } else {
                     null
@@ -126,7 +125,7 @@ fun UiFieldsScreen(
     }
     val dateUiField = remember {
         DateUiField(
-            initialValue = LocalDate.now(),
+            initialValue = null,
             placeholder = LbcTextSpec.Raw("This is a Date UiField"),
             label = LbcTextSpec.Raw("Date in future"),
             isFieldInError = {

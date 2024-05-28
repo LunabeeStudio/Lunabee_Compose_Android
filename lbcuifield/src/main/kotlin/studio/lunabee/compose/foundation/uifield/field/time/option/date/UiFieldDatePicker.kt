@@ -37,7 +37,7 @@ import java.time.ZoneOffset
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UiFieldDatePicker(
-    date: LocalDate,
+    date: LocalDate?,
     onDismiss: () -> Unit,
     onValueChanged: (LocalDate) -> Unit,
     confirmLabel: LbcTextSpec,
@@ -45,7 +45,7 @@ fun UiFieldDatePicker(
     selectableDates: SelectableDates,
 ) {
     val state = rememberDatePickerState(
-        initialSelectedDateMillis = date.atStartOfDay().toInstant(ZoneOffset.UTC).toEpochMilli(),
+        initialSelectedDateMillis = date?.atStartOfDay()?.toInstant(ZoneOffset.UTC)?.toEpochMilli(),
         selectableDates = selectableDates,
     )
     DatePickerDialog(

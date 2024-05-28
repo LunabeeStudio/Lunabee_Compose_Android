@@ -56,8 +56,10 @@ abstract class UiField<T> {
             mValue.value = value
         }
 
-    fun checkAndDisplayError() {
-        isFieldInError(value)?.let(::displayError)
+    fun checkAndDisplayError(): Boolean {
+        val error = isFieldInError(value)
+        error?.let(::displayError)
+        return error != null
     }
 
     fun dismissDismissedError() {
