@@ -27,7 +27,7 @@ import java.time.LocalDate
 
 interface DatePickerHolder {
     val datePickerData: DatePickerData
-    val date: LocalDate
+    val date: LocalDate?
 
     @OptIn(ExperimentalMaterial3Api::class)
     val selectableDates: SelectableDates

@@ -26,35 +26,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 
-sealed interface LbImageSpec {
+sealed interface LbcImageSpec {
 
     class Icon(
         @DrawableRes val drawableRes: Int,
         val tint: @Composable () -> Color = { Color.Unspecified },
-    ) : LbImageSpec
+    ) : LbcImageSpec
 
     class KtImageVector(
         val icon: ImageVector,
         val tint: @Composable () -> Color = { Color.Unspecified },
-    ) : LbImageSpec
+    ) : LbcImageSpec
 
     class ImageDrawable(
         @DrawableRes val drawableRes: Int,
-    ) : LbImageSpec
+    ) : LbcImageSpec
 
     class Bitmap(
         val bitmap: android.graphics.Bitmap,
-    ) : LbImageSpec
+    ) : LbcImageSpec
 
     class ByteArray(
         val byteArray: kotlin.ByteArray,
-    ) : LbImageSpec
+    ) : LbcImageSpec
 
     class Url(
         val url: String,
-    ) : LbImageSpec
+    ) : LbcImageSpec
 
     class Uri(
         val uri: android.net.Uri,
-    ) : LbImageSpec
+    ) : LbcImageSpec
 }

@@ -44,10 +44,10 @@ import java.time.format.FormatStyle
 
 @OptIn(ExperimentalMaterial3Api::class)
 class DateAndHourUiField(
-    override val initialValue: LocalDateTime,
+    override val initialValue: LocalDateTime?,
     override var label: LbcTextSpec,
     override var placeholder: LbcTextSpec,
-    override val isFieldInError: (LocalDateTime) -> UiFieldError?,
+    override val isFieldInError: (LocalDateTime?) -> UiFieldError?,
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
     override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
@@ -57,7 +57,7 @@ class DateAndHourUiField(
     private val formatter: DateTimeFormatter = DateTimeFormatter
         .ofLocalizedDateTime(FormatStyle.SHORT)
         .withZone(ZoneOffset.UTC),
-) : TimeUiField<LocalDateTime>(), HourPickerHolder, DatePickerHolder {
+) : TimeUiField<LocalDateTime?>(), HourPickerHolder, DatePickerHolder {
     override val options: List<UiFieldOption> = listOf(
         DatePickerOption(),
         HourPickerOption(),
@@ -67,30 +67,30 @@ class DateAndHourUiField(
         return LocalDateTime.parse(value)
     }
 
-    override fun valueToSavedString(value: LocalDateTime): String {
+    override fun valueToSavedString(value: LocalDateTime?): String {
         return value.toString()
     }
 
-    override fun valueToDisplayedString(value: LocalDateTime): String {
-        return formatter.format(value)
+    override fun valueToDisplayedString(value: LocalDateTime?): String {
+        return value?.let(formatter::format).orEmpty()
     }
 
-    override val date: LocalDate
-        get() = value.toLocalDate()
+    override val date: LocalDate?
+        get() = value?.toLocalDate()
 
     override fun onValueDateChanged(date: LocalDate) {
-        value = value
+        value = (value ?: LocalDateTime.now().withHour(0).withMinute(0))
             .withDayOfMonth(date.dayOfMonth)
             .withMonth(date.monthValue)
             .withYear(date.year)
         checkAndDisplayError()
     }
 
-    override val dateTime: LocalDateTime
+    override val dateTime: LocalDateTime?
         get() = value
 
     override fun onValueTimeChanged(hours: Int, minutes: Int) {
-        value = value
+        value = (value ?: LocalDateTime.now())
             .withHour(hours)
             .withMinute(minutes)
         checkAndDisplayError()

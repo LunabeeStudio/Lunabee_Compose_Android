@@ -24,13 +24,13 @@ package studio.lunabee.compose.foundation.uifield.composable
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import studio.lunabee.compose.core.LbImage
-import studio.lunabee.compose.core.LbImageSpec
+import studio.lunabee.compose.image.LbcImage
+import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
 
 @Composable
 internal fun TrailingAction(
-    image: LbImageSpec,
+    image: LbcImageSpec,
     onClick: () -> Unit,
     contentDescription: LbcTextSpec?,
     modifier: Modifier = Modifier,
@@ -39,7 +39,7 @@ internal fun TrailingAction(
         onClick = onClick,
         modifier = modifier,
     ) {
-        LbImage(
+        LbcImage(
             imageSpec = image,
             contentDescription = contentDescription,
         )

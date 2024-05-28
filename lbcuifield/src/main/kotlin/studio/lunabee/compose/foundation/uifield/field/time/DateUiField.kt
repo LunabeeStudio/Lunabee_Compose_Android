@@ -40,33 +40,33 @@ import java.time.format.FormatStyle
 
 @OptIn(ExperimentalMaterial3Api::class)
 class DateUiField(
-    override val initialValue: LocalDate,
+    override val initialValue: LocalDate?,
     override var label: LbcTextSpec,
     override var placeholder: LbcTextSpec,
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
     override val datePickerData: DatePickerData,
-    override val isFieldInError: (LocalDate) -> UiFieldError?,
+    override val isFieldInError: (LocalDate?) -> UiFieldError?,
     override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
     override val selectableDates: SelectableDates = DatePickerDefaults.AllDates,
     private val formatter: DateTimeFormatter = DateTimeFormatter
         .ofLocalizedDate(FormatStyle.SHORT)
         .withZone(ZoneOffset.UTC),
-) : TimeUiField<LocalDate>(), DatePickerHolder {
+) : TimeUiField<LocalDate?>(), DatePickerHolder {
     override val options: List<UiFieldOption> = listOf(DatePickerOption())
     override fun savedValueToData(value: String): LocalDate {
         return LocalDate.parse(value)
     }
 
-    override fun valueToSavedString(value: LocalDate): String {
-        return value.toString()
+    override fun valueToSavedString(value: LocalDate?): String {
+        return value?.let(LocalDate::toString).orEmpty()
     }
 
-    override fun valueToDisplayedString(value: LocalDate): String {
-        return formatter.format(value)
+    override fun valueToDisplayedString(value: LocalDate?): String {
+        return value?.let(formatter::format).orEmpty()
     }
 
-    override val date: LocalDate
+    override val date: LocalDate?
         get() = value
 
     override fun onValueDateChanged(date: LocalDate) {

@@ -55,8 +55,8 @@ class HourPickerOption : UiFieldOption {
             focusManager.clearFocus(true)
             UiFieldTimePicker(
                 onDismiss = { isPickerVisible.value = false },
-                hour = dateTime.hour,
-                minutes = dateTime.minute,
+                hour = dateTime?.hour ?: 0,
+                minutes = dateTime?.minute ?: 0,
                 onValueChanged = ::onValueTimeChanged,
                 confirmLabel = hourPickerData.hourPickerConfirmLabel,
                 cancelLabel = hourPickerData.hourPickerCancelLabel,

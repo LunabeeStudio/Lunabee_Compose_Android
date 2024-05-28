@@ -1,4 +1,4 @@
-package studio.lunabee.compose.core
+package studio.lunabee.compose.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.material3.Icon
@@ -15,10 +15,12 @@ import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
+import studio.lunabee.compose.core.LbcImageSpec
+import studio.lunabee.compose.core.LbcTextSpec
 
 @Composable
-fun LbImage(
-    imageSpec: LbImageSpec,
+fun LbcImage(
+    imageSpec: LbcImageSpec,
     modifier: Modifier = Modifier,
     contentDescription: LbcTextSpec? = null,
     onState: ((AsyncImagePainter.State) -> Unit)? = null,
@@ -28,7 +30,7 @@ fun LbImage(
     errorPainter: Painter? = null,
 ) {
     when (imageSpec) {
-        is LbImageSpec.Bitmap -> {
+        is LbcImageSpec.Bitmap -> {
             Image(
                 bitmap = imageSpec.bitmap.asImageBitmap(),
                 contentDescription = contentDescription?.string,
@@ -39,7 +41,7 @@ fun LbImage(
             )
         }
 
-        is LbImageSpec.ImageDrawable -> {
+        is LbcImageSpec.ImageDrawable -> {
             Image(
                 painter = painterResource(id = imageSpec.drawableRes),
                 contentDescription = contentDescription?.string,
@@ -50,7 +52,7 @@ fun LbImage(
             )
         }
 
-        is LbImageSpec.Icon -> {
+        is LbcImageSpec.Icon -> {
             Icon(
                 painter = painterResource(id = imageSpec.drawableRes),
                 contentDescription = contentDescription?.string,
@@ -59,7 +61,7 @@ fun LbImage(
             )
         }
 
-        is LbImageSpec.KtImageVector -> {
+        is LbcImageSpec.KtImageVector -> {
             Icon(
                 imageVector = imageSpec.icon,
                 contentDescription = contentDescription?.string,
@@ -68,7 +70,7 @@ fun LbImage(
             )
         }
 
-        is LbImageSpec.Url -> {
+        is LbcImageSpec.Url -> {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(imageSpec.url)
@@ -86,7 +88,7 @@ fun LbImage(
             )
         }
 
-        is LbImageSpec.ByteArray ->
+        is LbcImageSpec.ByteArray ->
             AsyncImage(
                 model = imageSpec.byteArray,
                 contentDescription = contentDescription?.string,
@@ -100,7 +102,7 @@ fun LbImage(
                 colorFilter = colorFilter,
             )
 
-        is LbImageSpec.Uri ->
+        is LbcImageSpec.Uri ->
             AsyncImage(
                 model = imageSpec.uri,
                 contentDescription = contentDescription?.string,

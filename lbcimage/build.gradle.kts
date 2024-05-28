@@ -16,7 +16,7 @@
  * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 7/29/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 11/30/2022 - for the Lunabee Compose library.
  */
 
 plugins {
@@ -25,30 +25,19 @@ plugins {
 }
 
 android {
-    resourcePrefix("lbc_uifield_")
-    namespace = "studio.lunabee.compose.uifield"
-
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-    kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
-
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-    }
+    resourcePrefix("lbc_image_")
+    namespace = "studio.lunabee.compose.image"
 }
 
-description = "group of ui field to easily create forms in compose"
-version = AndroidConfig.LBCUIFIELD_VERSION
+description = "Provide image composable displaying imageSpec data"
+version = AndroidConfig.LBCIMAGE_VERSION
 
 dependencies {
-    coreLibraryDesugaring(libs.desugarJdk)
     implementation(platform(libs.compose.bom))
-    implementation(libs.compose.ui)
+    implementation(libs.compose.foundation)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.compose.svg)
+
     implementation(libs.compose.material3)
-    implementation(libs.appcompat)
     implementation(project(Modules.LbcCore))
-    implementation(project(Modules.LbcImage))
 }
