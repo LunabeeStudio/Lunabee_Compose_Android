@@ -10,14 +10,25 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## 2024-03-28
 
 ```
-lbcCore 1.2.0
+lbcCore 1.3.0
 lbcFoundation 1.2.0
 lbcAndroidTest 1.3.0
 lbcAccessibility 1.6.0
 lbcTheme 1.2.0
 materialColorUtilities 1.2.0
 lbcHaptic 1.0.0
+lbcImage 1.0.0
+lbcUiField 1.0.0
 ```
+
+### LbcCore, LbcImage, LbcUiField
+
+- Add `lbcImageSpec` to `core`
+- New image module with `LbcImage` use to display image data from `lbcImageSpec`
+- New uiField module
+  - TextField
+  - DateField
+  - DateTimeField
 
 ### All
 
