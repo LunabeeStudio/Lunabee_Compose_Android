@@ -24,6 +24,7 @@ object Modules {
     const val LbcFoundation: String = ":lbcfoundation"
     const val LbcTheme: String = ":lbctheme"
     const val LbcCore: String = ":lbccore"
+    const val LbcImage: String = ":lbcimage"
     const val LbcAndroidTest: String = ":lbcandroidtest"
     const val MaterialColorUtilities: String = ":material-color-utilities"
     const val LbcHaptic: String = ":lbchaptic"

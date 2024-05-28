@@ -41,7 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.SavedStateHandle
-import studio.lunabee.compose.core.LbImageSpec
+import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.text.NormalUiTextField
@@ -91,8 +91,8 @@ fun UiFieldsScreen(
             visibilityOptionData = VisibilityOptionData(
                 hidePasswordClickLabel = LbcTextSpec.Raw("Hide password"),
                 showPasswordClickLabel = LbcTextSpec.Raw("Show password"),
-                showIcon = LbImageSpec.KtImageVector(Icons.Default.Visibility),
-                hideIcon = LbImageSpec.KtImageVector(Icons.Default.VisibilityOff),
+                showIcon = LbcImageSpec.KtImageVector(Icons.Default.Visibility),
+                hideIcon = LbcImageSpec.KtImageVector(Icons.Default.VisibilityOff),
             ),
         )
     }
@@ -114,13 +114,13 @@ fun UiFieldsScreen(
                 datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
                 datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
                 datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
-                icon = LbImageSpec.KtImageVector(Icons.Default.DateRange),
+                icon = LbcImageSpec.KtImageVector(Icons.Default.DateRange),
             ),
             hourPickerData = HourPickerData(
                 hourPickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
                 hourPickerCancelLabel = LbcTextSpec.Raw("Cancel"),
                 hourPickerClickLabel = LbcTextSpec.Raw("Picker Hour"),
-                icon = LbImageSpec.KtImageVector(Icons.Default.AccessTime),
+                icon = LbcImageSpec.KtImageVector(Icons.Default.AccessTime),
             ),
         )
     }
@@ -143,7 +143,7 @@ fun UiFieldsScreen(
                 datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
                 datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
                 datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
-                icon = LbImageSpec.KtImageVector(Icons.Default.DateRange),
+                icon = LbcImageSpec.KtImageVector(Icons.Default.DateRange),
             ),
         )
     }

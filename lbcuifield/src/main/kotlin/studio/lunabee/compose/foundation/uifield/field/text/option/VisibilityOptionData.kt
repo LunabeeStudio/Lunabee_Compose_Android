@@ -21,12 +21,12 @@
 
 package studio.lunabee.compose.foundation.uifield.field.text.option
 
-import studio.lunabee.compose.core.LbImageSpec
+import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
 
 data class VisibilityOptionData(
     val hidePasswordClickLabel: LbcTextSpec,
     val showPasswordClickLabel: LbcTextSpec,
-    val showIcon: LbImageSpec,
-    val hideIcon: LbImageSpec,
+    val showIcon: LbcImageSpec,
+    val hideIcon: LbcImageSpec,
 )

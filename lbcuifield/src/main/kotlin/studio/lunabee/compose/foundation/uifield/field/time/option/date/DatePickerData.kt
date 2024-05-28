@@ -21,12 +21,12 @@
 
 package studio.lunabee.compose.foundation.uifield.field.time.option.date
 
-import studio.lunabee.compose.core.LbImageSpec
+import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
 
 data class DatePickerData(
     val datePickerConfirmLabel: LbcTextSpec,
     val datePickerCancelLabel: LbcTextSpec,
     val datePickerClickLabel: LbcTextSpec,
-    val icon: LbImageSpec,
+    val icon: LbcImageSpec,
 )

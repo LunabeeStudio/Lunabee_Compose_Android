@@ -39,10 +39,6 @@ version = AndroidConfig.LBCCORE_VERSION
 dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.foundation)
-    implementation(libs.coil.compose)
-    implementation(libs.coil.compose.svg)
-
-    implementation(libs.compose.material3)
 
     androidTestImplementation(libs.compose.ui.test)
     androidTestImplementation(libs.compose.ui.test.junit4)
