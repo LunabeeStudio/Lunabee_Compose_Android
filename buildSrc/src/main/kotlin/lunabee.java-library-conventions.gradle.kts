@@ -25,12 +25,6 @@ plugins {
 
 group = AndroidConfig.GROUP_ID
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
-    kotlinOptions {
-        jvmTarget = AndroidConfig.JDK_VERSION.toString()
-    }
-}
-
 java {
     sourceCompatibility = AndroidConfig.JDK_VERSION
     targetCompatibility = AndroidConfig.JDK_VERSION

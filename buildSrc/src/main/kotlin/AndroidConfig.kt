@@ -1,4 +1,5 @@
 import org.gradle.api.JavaVersion
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 /*
  * Copyright © 2022 Lunabee Studio
@@ -45,4 +46,5 @@ object AndroidConfig {
     const val LBCIMAGE_VERSION: String = "1.0.0"
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_17
+    val JVM_TARGET: JvmTarget = JvmTarget.JVM_17
 }

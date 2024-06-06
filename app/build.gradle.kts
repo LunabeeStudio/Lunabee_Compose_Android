@@ -22,6 +22,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id(libs.plugins.compose.plugin.get().pluginId)
 }
 
 android {
@@ -43,11 +44,6 @@ android {
     compileOptions {
         sourceCompatibility = AndroidConfig.JDK_VERSION
         targetCompatibility = AndroidConfig.JDK_VERSION
-    }
-
-    buildFeatures.compose = true
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     buildTypes {
@@ -109,11 +105,7 @@ dependencies {
     debugImplementation(libs.compose.ui.test.manifest)
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
-    kotlinOptions {
-        jvmTarget = AndroidConfig.JDK_VERSION.toString()
-    }
-}
+kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JVM_TARGET)
 
 java {
     toolchain {
