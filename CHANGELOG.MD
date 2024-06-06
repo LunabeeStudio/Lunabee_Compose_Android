@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2024-06-06
+
+- Migrate to K2 🏔️
+
 ## 2024-03-28
 
 ```
