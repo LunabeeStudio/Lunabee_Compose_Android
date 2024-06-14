@@ -7,41 +7,46 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2024-06-14
+
+- Migrate to K2 🏔️
+- Update dependencies
+- Fix Kotlin sources not published anymore on Maven
+- Add `publishList` Gradle task to get all module to publish from CI
+- Rename source dirs from `java` to `kotlin`
+- Use precompiled plugin for publishing
+- `LbcUiField`: New module for displaying fom easily
+- `LbcImage`: New module to display image data from `LbcImageSpec`
+- `LbcHapticFeedback`: New module to perform haptics feedback from compose
+- `LbcAndroidTest`: Catch root print error more precisely, and don't rethrow when the screenshot failed
+- `LbcCore`: Add `fun annotated(context: Context): AnnotatedString` in `LbcTextSpec` to retrieve `AnnotatedString` directly
+- `LbcCore`: Add `LbcImageSpec`
+
+```
+lbcCore = "1.4.0"
+lbcFoundation = "1.3.0"
+lbcAndroidTest = "1.2.0"
+lbcAccessibility = "1.7.0"
+lbcTheme = "1.3.0"
+matieralColorUtilities = "1.2.0"
+lbcHaptic = "1.1.0"
+lbcUiField = "1.0.0"
+lbcImage = "1.0.0"
+```
+
 ## 2024-03-28
 
 ```
-lbcCore 1.2.0
+lbcCore 1.3.0
 lbcFoundation 1.2.0
 lbcAndroidTest 1.3.0
 lbcAccessibility 1.6.0
 lbcTheme 1.2.0
 materialColorUtilities 1.2.0
 lbcHaptic 1.0.0
+lbcImage 1.0.0
+lbcUiField 1.0.0
 ```
-
-### All
-
-- Fix Kotlin sources not published anymore on Maven
-- Add `publishList` Gradle task to get all module to publish from CI
-- Update dependencies
-
-### LbcAndroidTest
-
-- Catch root print error more precisely, and don't rethrow when the screenshot failed
-
-### LbcCore
-
-- Add `fun annotated(context: Context): AnnotatedString` in `LbcTextSpec` to retrieve `AnnotatedString` directly
-
-### LbcHapticFeedback
-
-- New module to perform haptics feedback from compose
-
-### All (LbcAccessibility 1.5.0, lbcAndroidTest 1.2.0, LbcCore 1.1.0, LbcFoundation 1.1.0, LbcTheme 1.1.0, MaterialColorUtilities 1.1.0)
-
-- Update dependencies
-- Rename source dirs from `java` to `kotlin`
-- Use precompiled plugin for publishing
 
 ## 1.2.0
 

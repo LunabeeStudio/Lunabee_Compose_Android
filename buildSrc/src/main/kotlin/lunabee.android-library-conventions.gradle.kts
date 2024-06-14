@@ -24,6 +24,7 @@ import org.gradle.accessors.dm.LibrariesForLibs
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 group = AndroidConfig.GROUP_ID
@@ -40,11 +41,6 @@ android {
         @Suppress("DEPRECATION") // https://stackoverflow.com/questions/76084080/apply-targetsdk-in-android-instrumentation-test
         targetSdk = AndroidConfig.TARGET_SDK
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildFeatures.compose = true
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     compileOptions {
@@ -64,11 +60,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.runner)
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
-    kotlinOptions {
-        jvmTarget = AndroidConfig.JDK_VERSION.toString()
-    }
-}
+kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JVM_TARGET)
 
 java {
     toolchain {

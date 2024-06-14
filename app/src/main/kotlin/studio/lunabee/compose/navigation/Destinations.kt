@@ -26,10 +26,14 @@ object Destinations {
     const val FoundationRoute: String = "FoundationRoute"
     const val HapticRoute: String = "HapticRoute"
     const val ThemeRoute: String = "ThemeRoute"
+    const val CropRoute: String = "CropRoute"
+    const val UiFieldRoute: String = "UiField"
 
     val BackNavigationScreen: List<String> = listOf(
         FoundationRoute,
         ThemeRoute,
         HapticRoute,
+        CropRoute,
+        UiFieldRoute,
     )
 }
