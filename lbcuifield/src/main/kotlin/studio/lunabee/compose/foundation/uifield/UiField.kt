@@ -38,6 +38,7 @@ abstract class UiField<T> {
     abstract val options: List<UiFieldOption>
     abstract val uiFieldStyleData: UiFieldStyleData
     abstract val isFieldInError: (T) -> UiFieldError?
+    abstract val onValueChange: (T) -> Unit
 
     protected val mValue: MutableStateFlow<T> by lazy {
         MutableStateFlow(
@@ -52,6 +53,7 @@ abstract class UiField<T> {
     var value: T
         get() = mValue.value
         set(value) {
+            onValueChange(value)
             savedStateHandle.set(key = id, valueToSavedString(value))
             mValue.value = value
         }

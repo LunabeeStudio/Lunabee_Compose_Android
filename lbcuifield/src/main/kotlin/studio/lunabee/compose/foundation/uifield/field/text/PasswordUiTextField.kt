@@ -34,8 +34,8 @@ import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
-import studio.lunabee.compose.foundation.uifield.field.text.option.VisibilityOptionData
 import studio.lunabee.compose.foundation.uifield.field.text.option.VisibilityFieldOption
+import studio.lunabee.compose.foundation.uifield.field.text.option.VisibilityOptionData
 import studio.lunabee.compose.foundation.uifield.field.text.option.VisibilityOptionHolder
 
 class PasswordUiTextField(
@@ -49,6 +49,7 @@ class PasswordUiTextField(
     override val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     override val keyboardActions: KeyboardActions = KeyboardActions.Default,
     override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
+    override val onValueChange: (String) -> Unit = {},
 ) : TextUiField(), VisibilityOptionHolder {
     private val mVisualTransformation: MutableStateFlow<VisualTransformation> =
         MutableStateFlow(PasswordVisualTransformation())
