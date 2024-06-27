@@ -52,6 +52,7 @@ class DateUiField(
     private val formatter: DateTimeFormatter = DateTimeFormatter
         .ofLocalizedDate(FormatStyle.SHORT)
         .withZone(ZoneOffset.UTC),
+    override val onValueChange: (LocalDate?) -> Unit = {},
 ) : TimeUiField<LocalDate?>(), DatePickerHolder {
     override val options: List<UiFieldOption> = listOf(DatePickerOption())
     override fun savedValueToData(value: String): LocalDate {
