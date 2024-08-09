@@ -48,7 +48,7 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
-    implementation(libs.appcompat)
+    implementation(libs.androidx.appcompat)
     implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))
 }

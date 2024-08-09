@@ -78,8 +78,8 @@ android {
 
 dependencies {
     implementation(libs.material)
-    implementation(libs.appcompat)
-    implementation(libs.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core)
     implementation(libs.activity.compose)
     implementation(libs.navigation.compose)
 
@@ -97,6 +97,7 @@ dependencies {
     implementation(project(Modules.LbcHaptic))
     implementation(project(Modules.LbcCrop))
     implementation(project(Modules.LbcUiField))
+    implementation(project(Modules.LbcGlance))
 
     androidTestImplementation(project(Modules.LbcAndroidTest))
     androidTestImplementation(libs.compose.ui.test.junit4)

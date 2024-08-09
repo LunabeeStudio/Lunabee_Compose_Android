@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("de.fayard.refreshVersions") version "0.60.3"
+    id("de.fayard.refreshVersions") version "0.60.5"
 }
 
 dependencyResolutionManagement {
@@ -38,12 +38,14 @@ rootProject.name = "Lunabee Compose"
 
 include("app")
 include(":lbcaccessibility")
-include(":lbcfoundation")
-include(":lbctheme")
-include(":lbccore")
-include(":material-color-utilities")
 include(":lbcandroidtest")
-include(":lbchaptic")
+include(":lbccore")
 include(":lbccrop")
+include(":lbcfoundation")
+include(":lbcglance")
+include(":lbcglide")
+include(":lbchaptic")
 include(":lbcimage")
+include(":lbctheme")
 include(":lbcuifield")
+include(":material-color-utilities")

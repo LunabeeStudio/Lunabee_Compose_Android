@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * settings.gradle.kts
+ * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 08/09/2024 - for the Lunabee Compose library.
  */
 
-pluginManagement {
-    plugins {
-        id("de.fayard.refreshVersions") version "0.60.5"
-    }
-}
-
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
-}
-
 plugins {
-    id("de.fayard.refreshVersions")
+    id("lunabee.android-library-conventions")
+    id("lunabee.library-publish-conventions")
+}
+
+android {
+    resourcePrefix("lbc_glance_")
+    namespace = "studio.lunabee.compose.glance"
+}
+
+description = "Provide tools to build widget with Glance"
+version = AndroidConfig.LBCGLANCE_VERSION
+
+dependencies {
+    implementation(libs.androidx.core)
+    api(libs.androidx.glance.widget)
 }

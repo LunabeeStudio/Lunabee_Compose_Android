@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### LbcGlance, All
+
+- Update dependencies for all
+- Add new `LbcGlance` module.
+
 ## 2024-06-27
 ```
 lbcCore = "1.4.0"
@@ -22,7 +27,6 @@ lbcImage = "1.0.1"
 ### LbcImage, LbcUiField
 - Fallback to `LocalContentColor.current` if no tint provided on `LbcImage`
 - Add `onValueChange` callback on UiTextField
-
 
 ## 2024-06-14
 
