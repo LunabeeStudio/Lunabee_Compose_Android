@@ -24,8 +24,11 @@ package studio.lunabee.compose.demo.uifield
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.icons.filled.DateRange
@@ -36,11 +39,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.SavedStateHandle
+import kotlinx.coroutines.flow.combine
 import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
@@ -146,8 +152,19 @@ fun UiFieldsScreen(
             ),
         )
     }
+    val areFieldsInError by combine(
+        normalUiTextField.isInError,
+        passwordUiTextField.isInError,
+        dateAndHourUiField.isInError,
+        dateUiField.isInError,
+    ) { error1, error2, error3, error4 ->
+        error1 || error2 || error3 || error4
+    }.collectAsState(initial = false)
+
     Column(
         modifier = Modifier
+            .imePadding()
+            .verticalScroll(rememberScrollState())
             .padding(all = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -166,6 +183,13 @@ fun UiFieldsScreen(
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text(text = "Check error")
+        }
+        Button(
+            onClick = {},
+            enabled = !areFieldsInError,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text(text = "Its All Good")
         }
     }
 }

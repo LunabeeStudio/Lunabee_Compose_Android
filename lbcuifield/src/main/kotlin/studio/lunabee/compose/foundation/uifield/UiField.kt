@@ -48,7 +48,7 @@ abstract class UiField<T> {
         )
     }
 
-    val isInError: Flow<Boolean> = mValue.map { isFieldInError(it) != null }
+    val isInError: Flow<Boolean> by lazy { mValue.map { isFieldInError(it) != null } }
 
     protected val error: MutableStateFlow<UiFieldError?> = MutableStateFlow(null)
 
