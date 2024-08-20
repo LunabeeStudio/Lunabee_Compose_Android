@@ -24,7 +24,9 @@ package studio.lunabee.compose.foundation.uifield
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.SavedStateHandle
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.map
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
@@ -45,6 +47,8 @@ abstract class UiField<T> {
             savedStateHandle.get<String>(id)?.let(::savedValueToData) ?: initialValue,
         )
     }
+
+    val isInError: Flow<Boolean> by lazy { mValue.map { isFieldInError(it) != null } }
 
     protected val error: MutableStateFlow<UiFieldError?> = MutableStateFlow(null)
 
