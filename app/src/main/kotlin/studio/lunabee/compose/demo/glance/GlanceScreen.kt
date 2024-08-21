@@ -29,18 +29,19 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import studio.lunabee.compose.glance.helpers.PinWidgetToHomeScreenHelper
 
 @Composable
-fun GlanceScreen(
-    context: Context = LocalContext.current,
-) {
+fun GlanceScreen() {
+    val context: Context = LocalContext.current
     val pinWidgetHelper: PinWidgetToHomeScreenHelper = remember {
-        PinWidgetToHomeScreenHelper(context, Dispatchers.IO)
+        PinWidgetToHomeScreenHelper(context)
     }
 
     Box(
@@ -49,9 +50,13 @@ fun GlanceScreen(
             .padding(all = 16.dp),
     ) {
         if (pinWidgetHelper.isPinSupported()) {
+            // Used for demo purpose directly in the Composable.
+            val coroutineScope: CoroutineScope = rememberCoroutineScope()
             Button(
                 onClick = {
-                    pinWidgetHelper.pin(GlanceWidgetDemo::class.java, GlanceWidgetDemoReceiver::class.java)
+                    coroutineScope.launch {
+                        pinWidgetHelper.pin(GlanceWidgetDemo::class.java, GlanceWidgetDemoReceiver::class.java)
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth(),

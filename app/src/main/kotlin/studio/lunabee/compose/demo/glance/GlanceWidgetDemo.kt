@@ -41,6 +41,7 @@ import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.provideContent
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Column
+import androidx.glance.layout.Spacer
 import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
@@ -48,8 +49,6 @@ import androidx.glance.layout.size
 import androidx.glance.text.TextAlign
 import studio.lunabee.compose.MainActivity
 import studio.lunabee.compose.R
-import studio.lunabee.compose.glance.extensions.VerticalSpacer
-import studio.lunabee.compose.glance.extensions.WeightSpacer
 import studio.lunabee.compose.glance.extensions.appWidgetBackgroundCompat
 import studio.lunabee.compose.glance.ui.GlanceBackground
 import studio.lunabee.compose.glance.ui.GlanceTypefaceButton
@@ -79,7 +78,7 @@ class GlanceWidgetDemo : GlanceAppWidget() {
                 ),
             horizontalAlignment = Alignment.Horizontal.CenterHorizontally,
         ) {
-            WeightSpacer()
+            Spacer(modifier = GlanceModifier.defaultWeight())
 
             GlanceViewFlipper(
                 viewFlipperLayout = R.layout.glance_view_flipper,
@@ -115,7 +114,7 @@ class GlanceWidgetDemo : GlanceAppWidget() {
                 textAlign = TextAlign.Center,
             )
 
-            8.dp.VerticalSpacer()
+            Spacer(modifier = GlanceModifier.height(8.dp))
 
             // Demonstration of a custom button with an XML background and a custom typeface. You can also use a classic
             // Glance button if you don't have specific font or an ImageProvider/ColorProvider with the Modifier.
@@ -136,7 +135,7 @@ class GlanceWidgetDemo : GlanceAppWidget() {
                         .height(height = 48.dp),
                 )
             }
-            WeightSpacer()
+            Spacer(modifier = GlanceModifier.defaultWeight())
         }
     }
 }
