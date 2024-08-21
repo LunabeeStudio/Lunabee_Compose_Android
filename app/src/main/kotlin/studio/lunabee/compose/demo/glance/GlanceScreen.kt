@@ -21,7 +21,6 @@
 
 package studio.lunabee.compose.demo.glance
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -49,7 +48,6 @@ fun GlanceScreen(
             .fillMaxWidth()
             .padding(all = 16.dp),
     ) {
-        @SuppressLint("NewApi") // because lint is not really "fute-fute" as we say
         if (pinWidgetHelper.isPinSupported()) {
             Button(
                 onClick = {

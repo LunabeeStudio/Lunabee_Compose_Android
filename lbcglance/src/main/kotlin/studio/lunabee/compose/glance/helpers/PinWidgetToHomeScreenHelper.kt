@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.annotation.RequiresApi
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetManager
@@ -57,6 +58,7 @@ class PinWidgetToHomeScreenHelper(
         }
     }
 
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.O)
     fun isPinSupported(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && AppWidgetManager.getInstance(context).isRequestPinAppWidgetSupported
     }
