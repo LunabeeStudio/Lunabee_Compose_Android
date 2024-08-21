@@ -57,6 +57,11 @@ fun MainScreen(
                 subtitleRes = R.string.uiFields_screen_subtitle,
                 direction = directions.navigateToUiFields,
             ),
+            MenuDescription(
+                titleRes = R.string.glance_title,
+                subtitleRes = R.string.glance_description,
+                direction = directions.navigateToGlanceScreen,
+            ),
         ),
     )
 }

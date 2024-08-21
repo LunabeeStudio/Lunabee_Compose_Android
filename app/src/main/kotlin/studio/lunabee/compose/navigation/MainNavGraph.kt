@@ -28,6 +28,7 @@ import androidx.navigation.compose.composable
 import studio.lunabee.compose.MainScreen
 import studio.lunabee.compose.demo.crop.CropScreen
 import studio.lunabee.compose.demo.foundation.TextScreen
+import studio.lunabee.compose.demo.glance.GlanceScreen
 import studio.lunabee.compose.demo.haptic.HapticScreen
 import studio.lunabee.compose.demo.theme.ThemeScreen
 import studio.lunabee.compose.demo.uifield.UiFieldsScreen
@@ -77,6 +78,12 @@ fun MainNavGraph(
             UiFieldsScreen(
                 it.savedStateHandle,
             )
+        }
+
+        composable(
+            route = Destinations.GlanceRoute,
+        ) {
+            GlanceScreen()
         }
     }
 }
