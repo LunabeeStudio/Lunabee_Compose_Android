@@ -65,9 +65,9 @@ fun PublishingExtension.setupMavenRepository() {
         maven {
             authentication {
                 credentials.username = project.properties["sonatypeUsername"]?.toString()
-                    ?: System.getenv("SONATYPE_USERNAME")
+                    ?: System.getenv("SONATYPE_PUBLISH_USERNAME")
                 credentials.password = project.properties["sonatypePassword"]?.toString()
-                    ?: System.getenv("SONATYPE_PASSWORD")
+                    ?: System.getenv("SONATYPE_PUBLISH_PASSWORD")
             }
             url = URI.create("https://s01.oss.sonatype.org/$repoPath")
         }
