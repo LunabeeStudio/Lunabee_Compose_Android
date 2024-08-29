@@ -57,4 +57,8 @@ class Directions(navController: NavHostController) {
     val navigateToUiFields: ToDirection = {
         navController.navigate(route = Destinations.UiFieldRoute)
     }
+
+    val navigateToGlanceScreen: ToDirection = {
+        navController.navigate(route = Destinations.GlanceRoute)
+    }
 }

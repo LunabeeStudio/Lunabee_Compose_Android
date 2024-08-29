@@ -2,9 +2,11 @@ package studio.lunabee.compose.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.Painter
@@ -53,20 +55,22 @@ fun LbcImage(
         }
 
         is LbcImageSpec.Icon -> {
+            val tint = imageSpec.tint.invoke().takeIf { it != Color.Unspecified } ?: LocalContentColor.current
             Icon(
                 painter = painterResource(id = imageSpec.drawableRes),
                 contentDescription = contentDescription?.string,
                 modifier = modifier,
-                tint = imageSpec.tint.invoke(),
+                tint = tint,
             )
         }
 
         is LbcImageSpec.KtImageVector -> {
+            val tint = imageSpec.tint.invoke().takeIf { it != Color.Unspecified } ?: LocalContentColor.current
             Icon(
                 imageVector = imageSpec.icon,
                 contentDescription = contentDescription?.string,
                 modifier = modifier,
-                tint = imageSpec.tint.invoke(),
+                tint = tint,
             )
         }
 

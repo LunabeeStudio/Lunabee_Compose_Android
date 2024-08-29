@@ -7,6 +7,27 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### LbcGlance, All
+
+- Update dependencies for all
+- Add new `LbcGlance` module.
+
+## 2024-06-27
+```
+lbcCore = "1.4.0"
+lbcFoundation = "1.3.0"
+lbcAndroidTest = "1.2.0"
+lbcAccessibility = "1.7.0"
+lbcTheme = "1.3.0"
+matieralColorUtilities = "1.2.0"
+lbcHaptic = "1.1.0"
+lbcUiField = "1.0.1"
+lbcImage = "1.0.1"
+```
+### LbcImage, LbcUiField
+- Fallback to `LocalContentColor.current` if no tint provided on `LbcImage`
+- Add `onValueChange` callback on UiTextField
+
 ## 2024-06-14
 
 - Migrate to K2 🏔️

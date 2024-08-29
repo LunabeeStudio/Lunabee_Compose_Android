@@ -49,4 +49,5 @@ class NormalUiTextField(
     override val visualTransformation: StateFlow<VisualTransformation> = MutableStateFlow(
         VisualTransformation.None,
     ).asStateFlow(),
+    override val onValueChange: (String) -> Unit = {},
 ) : TextUiField()

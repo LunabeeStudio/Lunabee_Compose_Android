@@ -19,7 +19,7 @@ dependencies {
     implementation(libs.androidx.exifinterface)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
-    implementation(libs.appcompat)
+    implementation(libs.androidx.appcompat)
     implementation(libs.zoomable)
     implementation(libs.coil.compose)
 }

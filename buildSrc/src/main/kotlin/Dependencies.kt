@@ -30,6 +30,7 @@ object Modules {
     const val LbcHaptic: String = ":lbchaptic"
     const val LbcCrop: String = ":lbccrop"
     const val LbcUiField: String = ":lbcuifield"
+    const val LbcGlance: String = ":lbcglance"
 }
 
 object BuildConfigs {
