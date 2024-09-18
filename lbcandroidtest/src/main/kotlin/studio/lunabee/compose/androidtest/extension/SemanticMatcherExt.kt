@@ -87,9 +87,9 @@ fun SemanticsMatcher.waitUntilNodeCount(
     useUnmergedTree: Boolean = false,
     timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
 ): SemanticsNodeInteractionCollection {
-    // Method copy from ComposeUiTest.waitUntilExactlyOneExists to add useUnmergedTree.
+    // Method copy from ComposeUiTest.waitUntilNodeCount to add useUnmergedTree.
     // Waiting for answer: https://issuetracker.google.com/issues/268432145
-    waitUntil(timeout.inWholeMilliseconds) {
+    waitUntil("exactly $count nodes match (${this.description})", timeout.inWholeMilliseconds) {
         onAllNodes(this, useUnmergedTree).fetchSemanticsNodes().size == count
     }
     return onAllNodes(this, useUnmergedTree)
@@ -118,7 +118,7 @@ fun SemanticsMatcher.waitUntilAtLeastOneExists(
 ): SemanticsNodeInteractionCollection {
     // Method copy from ComposeUiTest.waitUntilExactlyOneExists to add useUnmergedTree.
     // Waiting for answer: https://issuetracker.google.com/issues/268432145
-    waitUntil(timeout.inWholeMilliseconds) {
+    waitUntil("at least one node matches (${this.description})", timeout.inWholeMilliseconds) {
         onAllNodes(this, useUnmergedTree).fetchSemanticsNodes().isNotEmpty()
     }
     return onAllNodes(this, useUnmergedTree)
