@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Environment
 import android.util.Log
+import androidx.test.core.app.takeScreenshot
 import androidx.test.core.app.takeScreenshotNoSync
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.rules.TestWatcher
@@ -121,9 +122,13 @@ class LbcPrintRule(
     }
 
     @SuppressLint("RestrictedApi")
-    fun printWholeScreen(suffix: String) {
+    fun printWholeScreen(suffix: String, noSync: Boolean = false) {
         val bitmap = try {
-            takeScreenshotNoSync()
+            if (noSync) {
+                takeScreenshotNoSync()
+            } else {
+                takeScreenshot()
+            }
         } catch (e: Throwable) {
             Log.e("LbcPrintRule", "screenshot failed", e)
             null
