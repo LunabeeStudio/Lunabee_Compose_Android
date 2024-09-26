@@ -1,9 +1,10 @@
 package studio.lunabee.compose.androidtest.rule
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Environment
 import android.util.Log
-import androidx.test.core.app.takeScreenshot
+import androidx.test.core.app.takeScreenshotNoSync
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
@@ -119,9 +120,10 @@ class LbcPrintRule(
         }
     }
 
+    @SuppressLint("RestrictedApi")
     fun printWholeScreen(suffix: String) {
         val bitmap = try {
-            takeScreenshot()
+            takeScreenshotNoSync()
         } catch (e: Throwable) {
             Log.e("LbcPrintRule", "screenshot failed", e)
             null

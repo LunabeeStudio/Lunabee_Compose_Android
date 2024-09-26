@@ -15,6 +15,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Add new `LbcGlance` module.
 
+### LbcAndroidTest
+
+- Use `takeScreenshotNoSync` instead of `takeScreenshot` in case of test failure
+
 ## 2024-06-27
 
 ```
