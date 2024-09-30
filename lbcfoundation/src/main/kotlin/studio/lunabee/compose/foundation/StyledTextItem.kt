@@ -24,7 +24,10 @@ package studio.lunabee.compose.foundation
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.LinkInteractionListener
 import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
@@ -78,18 +81,19 @@ fun StyledTextItem(
 
                 // Set a tag to retrieve our annotation later if needed for a click for example.
                 // Set a start and an end index to retrieve this annotation later when clicking on it.
-                addStringAnnotation(
-                    tag = textToHighlight.tag,
-                    annotation = textToAppend,
+                addLink(
+                    LinkAnnotation.Clickable(
+                        tag = textToHighlight.tag,
+                        styles = TextLinkStyles(textToHighlight.style),
+                        linkInteractionListener = textToHighlight.action?.let { action ->
+                            LinkInteractionListener { action() }
+                        },
+                    ),
                     start = index,
                     end = index + textToHighlight.text.length,
                 )
 
-                // Push style for new annotation
-                pushStyle(style = textToHighlight.style)
                 append(text = textToAppend)
-                // Remove pushed style to go back to raw text style.
-                pop()
 
                 // Skip index of highlighted text.
                 index += textToHighlight.text.length

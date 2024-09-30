@@ -23,7 +23,7 @@ package studio.lunabee.compose.common
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 
 @Composable
@@ -36,7 +36,7 @@ fun MenuSection(
             key = { it.titleRes },
         ) { menu ->
             MenuEntry(menu = menu)
-            Divider()
+            HorizontalDivider()
         }
     }
 }
