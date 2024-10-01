@@ -155,7 +155,7 @@ class LbcPrintRule(
     override fun succeeded(description: Description?) {
         super.succeeded(description)
         if (deleteOnSuccess) {
-            if (verbose) {
+            if (verbose && screenshots.isNotEmpty()) {
                 Log.v("LbcPrintRule", "Delete screenshots\n${screenshots.joinToString("\n") { "\t$it" }}")
             }
             screenshots.forEach(File::delete)
