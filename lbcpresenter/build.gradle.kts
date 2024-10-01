@@ -36,17 +36,12 @@ android {
 
     kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
     kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
-
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-    }
 }
 
 description = "Way to create screens in android replacing the MVVM pattern"
 version = AndroidConfig.LBCPRESENTER_VERSION
 
 dependencies {
-    coreLibraryDesugaring(libs.desugarJdk)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
