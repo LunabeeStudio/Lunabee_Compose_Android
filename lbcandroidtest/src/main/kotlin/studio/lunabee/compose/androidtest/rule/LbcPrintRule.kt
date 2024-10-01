@@ -29,6 +29,7 @@ class LbcPrintRule(
     private val usePublicStorage: Boolean,
     private val deleteOnSuccess: Boolean,
     private val appendTimestamp: Boolean = usePublicStorage,
+    private val verbose: Boolean,
 ) : TestWatcher() {
 
     companion object {
@@ -42,11 +43,13 @@ class LbcPrintRule(
             usePublicStorage: Boolean = false,
             deleteOnSuccess: Boolean = true,
             appendTimestamp: Boolean = usePublicStorage,
+            verbose: Boolean = true,
         ): LbcPrintRule = LbcPrintRule(
             appName = appName,
             usePublicStorage = usePublicStorage,
             deleteOnSuccess = deleteOnSuccess,
             appendTimestamp = appendTimestamp,
+            verbose = verbose,
         )
 
         /**
@@ -59,11 +62,13 @@ class LbcPrintRule(
             usePublicStorage: Boolean = true,
             deleteOnSuccess: Boolean = true,
             appendTimestamp: Boolean = usePublicStorage,
+            verbose: Boolean = true,
         ): LbcPrintRule = LbcPrintRule(
             appName = appName,
             usePublicStorage = usePublicStorage,
             deleteOnSuccess = deleteOnSuccess,
             appendTimestamp = appendTimestamp,
+            verbose = verbose,
         )
     }
 
@@ -102,9 +107,14 @@ class LbcPrintRule(
         } else {
             File(screenshotFolder, subFolder.toString())
         }
+
         val className = d.className.substringAfterLast(".")
         classFolder = File(appFolder, className)
         basePath = File(classFolder, d.methodName).absolutePath
+
+        if (verbose) {
+            Log.v("LbcPrintRule", "Screenshot test path: $basePath")
+        }
     }
 
     fun print(bitmap: Bitmap, suffix: String) {
@@ -115,6 +125,11 @@ class LbcPrintRule(
             screenFile.outputStream().use { outputStream ->
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
             }
+
+            if (verbose) {
+                Log.v("LbcPrintRule", "Screenshot saved to ${screenFile.absolutePath}")
+            }
+
             screenshots += screenFile
         } finally {
             bitmap.recycle()
@@ -140,6 +155,9 @@ class LbcPrintRule(
     override fun succeeded(description: Description?) {
         super.succeeded(description)
         if (deleteOnSuccess) {
+            if (verbose) {
+                Log.v("LbcPrintRule", "Delete screenshots\n${screenshots.joinToString("\n") { "\t$it" }}")
+            }
             screenshots.forEach(File::delete)
             classFolder.delete() // try delete (fail if not empty)
             appFolder.delete() // try delete (fail if not empty)

@@ -18,6 +18,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### LbcAndroidTest
 
 - Use `takeScreenshotNoSync` instead of `takeScreenshot` in case of test failure
+- Add `verbose` param to `LbcPrintRule` to enable verbose logging
 
 ## 2024-06-27
 
