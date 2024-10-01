@@ -30,6 +30,7 @@ import studio.lunabee.compose.demo.crop.CropScreen
 import studio.lunabee.compose.demo.foundation.TextScreen
 import studio.lunabee.compose.demo.glance.GlanceScreen
 import studio.lunabee.compose.demo.haptic.HapticScreen
+import studio.lunabee.compose.demo.presenter.TestPresenterRoute
 import studio.lunabee.compose.demo.theme.ThemeScreen
 import studio.lunabee.compose.demo.uifield.UiFieldsScreen
 
@@ -84,6 +85,14 @@ fun MainNavGraph(
             route = Destinations.GlanceRoute,
         ) {
             GlanceScreen()
+		}
+
+		composable(
+            route = Destinations.PresenterRoute
+        ) {
+            TestPresenterRoute(
+                navigateBack = { navController.popBackStack() }
+            )
         }
     }
 }

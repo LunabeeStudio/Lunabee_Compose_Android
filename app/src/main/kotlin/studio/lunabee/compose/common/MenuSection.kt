@@ -33,7 +33,7 @@ fun MenuSection(
     LazyColumn {
         items(
             items = menus,
-            key = { it.titleRes },
+            key = { it.titleRes.hashCode() },
         ) { menu ->
             MenuEntry(menu = menu)
             HorizontalDivider()

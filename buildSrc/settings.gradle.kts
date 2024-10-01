@@ -25,6 +25,8 @@ pluginManagement {
     }
 }
 
+
+
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {

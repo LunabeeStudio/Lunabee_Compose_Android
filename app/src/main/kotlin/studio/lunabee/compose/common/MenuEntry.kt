@@ -32,7 +32,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -48,14 +47,14 @@ fun MenuEntry(
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
-            text = stringResource(id = menu.titleRes),
+            text = menu.titleRes.string,
             style = MaterialTheme.typography.labelLarge,
         )
 
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
 
         Text(
-            text = stringResource(id = menu.subtitleRes),
+            text = menu.subtitleRes.string,
             style = MaterialTheme.typography.bodyLarge,
         )
     }

@@ -31,6 +31,7 @@ object Modules {
     const val LbcCrop: String = ":lbccrop"
     const val LbcUiField: String = ":lbcuifield"
     const val LbcGlance: String = ":lbcglance"
+    const val LbcPresenter: String = ":lbcpresenter"
 }
 
 object BuildConfigs {
