@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### LbcAccessibility
+
+- Add currency check and tests to ensure that `cleanForAccessibility` function works properly
+
 ### All
 
 - Update dependencies (including compose 1.7 and Android SDK 35)
