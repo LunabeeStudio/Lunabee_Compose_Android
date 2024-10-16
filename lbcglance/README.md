@@ -21,9 +21,8 @@ Note that this demo app does not provide a configuration Activity. You can consu
 ### Extensions
 
 This package provides some extensions, as we have some limitation with Glance, i.e we can not use all Compose APIs (like LocalDensity, Modifier):
-- [DpExt.kt](src/main/kotlin/studio/lunabee/compose/glance/extensions/DpExt.kt): brings some extensions to create `Spacer` with a `GlanceModifier`
 - [GlanceModifierExt.kt](src/main/kotlin/studio/lunabee/compose/glance/extensions/GlanceModifierExt.kt):
-    - `appWidgetBackgroundCompat`: can be used to apply rounded corner on your widget on all APIs (supported by default only on API31+)
+    - `cornerRadiusCompat`: can be used to apply rounded corner on your widget on all APIs (supported by default only on API31+)
 - [GlanceDensityExt.kt](src/main/kotlin/studio/lunabee/compose/glance/extensions/GlanceDensityExt.kt): extension that replace usage of `LocalDensity.toPx`
 
 ### Helpers
@@ -35,6 +34,10 @@ This package provides helpful method or classes:
 - [PinWidgetToHomeScreenHelper.kt](src/main/kotlin/studio/lunabee/compose/glance/helpers/PinWidgetToHomeScreenHelper.kt): offers the possibility to pin the widget from the application (API26+)
 
 ### UI
+
+#### GlanceRoot
+
+With [GlanceRoot.kt](src/main/kotlin/studio/lunabee/compose/glance/ui/GlanceRoot.kt), you can automatically apply the `appWidgetBackground` Modifier
 
 #### GlanceBackground
 

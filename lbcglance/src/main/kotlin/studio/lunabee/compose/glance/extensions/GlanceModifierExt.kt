@@ -33,7 +33,6 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.glance.GlanceModifier
 import androidx.glance.ImageProvider
 import androidx.glance.LocalSize
-import androidx.glance.appwidget.appWidgetBackground
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.background
 import androidx.glance.layout.size
@@ -43,14 +42,15 @@ import kotlin.math.roundToInt
  * According to the documentation of [androidx.glance.appwidget.CornerRadiusModifier],
  * rounded corners are applied with [GlanceModifier.cornerRadius] method only on API S+ (31+).
  * For below APIs, we need to use a [ShapeDrawable] to keep our design consistency across APIs.
- * This methods also applied [appWidgetBackground], so don't use it again (otherwise, it will crash)!
+ * FIXME for Android S+, documentation advices to apply appWidgetBackground to the same view that handles corner radius.
+ *  -> But it is currently causing a flickering when the widget is moved by the user.
  * @param cornerRadius dimension in [Dp] of the desired corner radius. To keep your design consistency across all devices, it is mandatory,
  * as the default value used by Android on API31+ depends on the device. If you want to keep this behavior, you can use
  * [android.R.dimen.system_app_widget_background_radius] dimension.
  * @param color background color of your widget.
  * @param size size of your widget. Can be get with [LocalSize].
  */
-fun GlanceModifier.appWidgetBackgroundCompat(
+fun GlanceModifier.cornerRadiusCompat(
     cornerRadius: Dp,
     color: Color,
     size: DpSize,
@@ -67,5 +67,4 @@ fun GlanceModifier.appWidgetBackgroundCompat(
         size(width = size.width, height = size.height)
             .background(imageProvider = ImageProvider(bitmap = bitmap))
     }
-        .appWidgetBackground() // must be called only on the top view, will throw an exception if applied to multiple views.
 }
