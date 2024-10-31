@@ -52,7 +52,10 @@ abstract class UiField<T> {
 
     protected val error: MutableStateFlow<UiFieldError?> = MutableStateFlow(null)
 
-    protected var hasBeenCaptured: Boolean = false
+    /**
+     * Focus has been acquired by the field at least once
+     */
+    protected var hasBeenFocused: Boolean = false
 
     var value: T
         get() = mValue.value
@@ -68,7 +71,7 @@ abstract class UiField<T> {
         return error != null
     }
 
-    fun dismissDismissedError() {
+    fun dismissError() {
         error.value = null
     }
 
