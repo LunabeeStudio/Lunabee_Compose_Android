@@ -43,13 +43,18 @@ abstract class TimeUiField<T> : UiField<T>() {
         val collectedValue by mValue.collectAsState()
         val collectedError by error.collectAsState()
         // https://stackoverflow.com/a/70335041
-        val interactionSource = remember { MutableInteractionSource() }
-        LaunchedEffect(interactionSource) {
-            interactionSource.interactions.collect { interaction ->
-                if (interaction is PressInteraction.Release) {
-                    options.firstOrNull()?.onClick()
+        val interactionSource = if (options.isNotEmpty()) {
+            remember { MutableInteractionSource() }.also { interactionSource ->
+                LaunchedEffect(interactionSource) {
+                    interactionSource.interactions.collect { interaction ->
+                        if (interaction is PressInteraction.Release) {
+                            options.firstOrNull()?.onClick()
+                        }
+                    }
                 }
             }
+        } else {
+            null
         }
         uiFieldStyleData.ComposeTextField(
             value = valueToDisplayedString(collectedValue),
