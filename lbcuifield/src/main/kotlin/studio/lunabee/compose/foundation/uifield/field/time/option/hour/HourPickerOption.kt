@@ -25,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalFocusManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
@@ -44,7 +43,6 @@ class HourPickerOption : UiFieldOption {
     @Composable
     override fun Composable(modifier: Modifier) {
         val collectedIsPickedVisible by isPickerVisible.collectAsState()
-        val focusManager = LocalFocusManager.current
         TrailingAction(
             image = hourPickerData.icon,
             onClick = { isPickerVisible.value = true },
@@ -52,7 +50,6 @@ class HourPickerOption : UiFieldOption {
             modifier = modifier,
         )
         if (collectedIsPickedVisible) {
-            focusManager.clearFocus(true)
             UiFieldTimePicker(
                 onDismiss = { isPickerVisible.value = false },
                 hour = dateTime?.hour ?: 0,

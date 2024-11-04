@@ -22,6 +22,7 @@
 package studio.lunabee.compose.foundation.uifield.field.style
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.text.KeyboardActions
@@ -49,6 +50,7 @@ class UiFieldStyleDataImpl : UiFieldStyleData {
         maxLine: Int,
         readOnly: Boolean,
         error: UiFieldError?,
+        interactionSource: MutableInteractionSource?,
     ) {
         OutlinedTextField(
             value = value,
@@ -68,6 +70,7 @@ class UiFieldStyleDataImpl : UiFieldStyleData {
             },
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
+            interactionSource = interactionSource,
         )
     }
 }
