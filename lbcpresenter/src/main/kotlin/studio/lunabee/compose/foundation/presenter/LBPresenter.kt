@@ -29,16 +29,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
-import org.jetbrains.annotations.ApiStatus.Experimental
 
-@Experimental
-abstract class LBPresenter<UiState, NavScope : Any, Action> : ViewModel() {
+abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> : ViewModel() {
 
+    open val userActionFlow: MutableSharedFlow<Action> = MutableSharedFlow(extraBufferCapacity = 10)
     abstract val flows: List<Flow<Action>>
 
     abstract fun getInitialState(): UiState
@@ -60,11 +60,12 @@ abstract class LBPresenter<UiState, NavScope : Any, Action> : ViewModel() {
     private val uiStateFlow: StateFlow<UiState> by lazy {
         var actualStateSaved: UiState = getInitialState()
         reducer.collectReducer(
-            flows = flows,
+            flows = flows + userActionFlow,
             actualState = { actualStateSaved },
-            performNavigation = ::performNavigation
-        ).onEach { actualStateSaved = it }
-            .stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(1_000), actualStateSaved)
+            performNavigation = ::performNavigation,
+        ).onEach {
+            actualStateSaved = it
+        }.stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(1_000), actualStateSaved)
     }
 
     @Composable
@@ -76,7 +77,7 @@ abstract class LBPresenter<UiState, NavScope : Any, Action> : ViewModel() {
                 consumeNavigation()
             }
         }
-        val uiState by uiStateFlow.collectAsStateWithLifecycle(getInitialState())
+        val uiState by uiStateFlow.collectAsStateWithLifecycle()
         content(uiState)
     }
 }

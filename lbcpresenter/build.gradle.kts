@@ -50,7 +50,6 @@ dependencies {
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
-
     implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))
 }

@@ -60,7 +60,7 @@ class Directions(navController: NavHostController) {
 
     val navigateToPresenterScreen: ToDirection = {
         navController.navigate(route = Destinations.PresenterRoute)
-	}
+    }
 
     val navigateToGlanceScreen: ToDirection = {
         navController.navigate(route = Destinations.GlanceRoute)

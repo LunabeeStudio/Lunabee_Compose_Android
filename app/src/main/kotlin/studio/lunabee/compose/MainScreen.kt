@@ -61,7 +61,7 @@ fun MainScreen(
             MenuDescription(
                 titleRes = LbcTextSpec.Raw("Presenter"),
                 subtitleRes = LbcTextSpec.Raw("Composable architecture with presenter"),
-                direction = directions.navigateToPresenterScreen
+                direction = directions.navigateToPresenterScreen,
             ),
             MenuDescription(
                 titleRes = LbcTextSpec.StringResource(R.string.glance_title),

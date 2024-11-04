@@ -21,31 +21,37 @@
 
 package studio.lunabee.compose.foundation.presenter
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
-import org.jetbrains.annotations.ApiStatus.Experimental
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
-@Experimental
-abstract class LBReducer<UiState, NavScope, Action> {
+abstract class LBReducer<UiState : PresenterUiState, NavScope, Action> {
+    abstract val coroutineScope: CoroutineScope
 
     abstract suspend fun reduce(
         actualState: UiState,
         action: Action,
-        performNavigation: (NavScope.() -> Unit) -> Unit
-    ): UiState
+        performNavigation: (NavScope.() -> Unit) -> Unit,
+    ): ReduceResult<UiState>
 
     fun collectReducer(
         flows: List<Flow<Action>>,
         actualState: () -> UiState,
-        performNavigation: (NavScope.() -> Unit) -> Unit
+        performNavigation: (NavScope.() -> Unit) -> Unit,
     ): Flow<UiState> {
-        return merge(*flows.toTypedArray()).map { action ->
+        return flows.merge().map { action ->
             reduce(
                 actualState = actualState(),
                 action = action,
-                performNavigation = performNavigation
+                performNavigation = performNavigation,
             )
         }
+            .onEach { coroutineScope.launch { it.sideEffect?.invoke() } }
+            .map {
+                it.uiState
+            }
     }
 }

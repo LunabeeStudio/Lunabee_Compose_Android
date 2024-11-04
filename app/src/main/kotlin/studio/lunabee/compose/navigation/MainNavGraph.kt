@@ -85,13 +85,13 @@ fun MainNavGraph(
             route = Destinations.GlanceRoute,
         ) {
             GlanceScreen()
-		}
+        }
 
-		composable(
-            route = Destinations.PresenterRoute
+        composable(
+            route = Destinations.PresenterRoute,
         ) {
             TestPresenterRoute(
-                navigateBack = { navController.popBackStack() }
+                navigateBack = { navController.popBackStack() },
             )
         }
     }

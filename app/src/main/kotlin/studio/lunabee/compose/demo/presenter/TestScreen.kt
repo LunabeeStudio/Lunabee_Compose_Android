@@ -23,10 +23,15 @@ package studio.lunabee.compose.demo.presenter
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -40,30 +45,45 @@ fun TestPresenterRoute(
     PresentScreen<TestNavScope, TestPresenter>(navScope)
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TestScreen(
-    uiState: TestUiState
+    uiState: TestUiState,
 ) {
-    Column {
-        Text(
-            text = uiState.title,
-            style = MaterialTheme.typography.titleSmall
-        )
-        Spacer(Modifier.height(8.dp))
-        Text(
-            text = uiState.subtitle,
-            style = MaterialTheme.typography.labelSmall
-        )
-        Spacer(Modifier.height(8.dp))
-        Text(
-            text = uiState.timer.toString()
-        )
-        Spacer(Modifier.height(8.dp))
-        Button(onClick = uiState.onBackClick) {
-            Text(text = "Finish")
-        }
-        Button(onClick = uiState.onTitleChange) {
-            Text(text = "Change Title")
+    PullToRefreshBox(
+        isRefreshing = uiState.isRefreshing,
+        onRefresh = uiState.refresh,
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+        ) {
+            Text(
+                text = uiState.title,
+                style = MaterialTheme.typography.titleSmall,
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = uiState.subtitle,
+                style = MaterialTheme.typography.labelSmall,
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = uiState.timer.toString(),
+            )
+            Spacer(Modifier.height(8.dp))
+            Button(onClick = uiState.onBackClick) {
+                Text(text = "Finish")
+            }
+            Button(onClick = uiState.onTitleChange) {
+                Text(text = "Change Title")
+            }
+            Text(
+                text = "is refreshing ${uiState.isRefreshing}",
+                style = MaterialTheme.typography.labelSmall,
+            )
         }
     }
 }

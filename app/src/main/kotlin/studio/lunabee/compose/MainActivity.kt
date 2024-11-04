@@ -47,7 +47,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 import studio.lunabee.compose.common.AppDemoTheme
 import studio.lunabee.compose.navigation.Destinations
 import studio.lunabee.compose.navigation.Directions

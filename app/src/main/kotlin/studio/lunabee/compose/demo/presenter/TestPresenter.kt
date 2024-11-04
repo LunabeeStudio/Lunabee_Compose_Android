@@ -26,12 +26,11 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import studio.lunabee.compose.foundation.presenter.LBPresenter
 import studio.lunabee.compose.foundation.presenter.LBReducer
+import studio.lunabee.compose.foundation.presenter.PresenterUiState
 import javax.inject.Inject
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.seconds
@@ -42,10 +41,12 @@ data class TestUiState(
     val timer: Int,
     val onBackClick: () -> Unit,
     val onTitleChange: () -> Unit,
-)
+    val isRefreshing: Boolean,
+    val refresh: () -> Unit,
+) : PresenterUiState
 
 data class TestNavScope(
-    val navigateBack: () -> Unit
+    val navigateBack: () -> Unit,
 )
 
 sealed interface TestAction {
@@ -54,6 +55,7 @@ sealed interface TestAction {
     data class SetSubtitle(val subtitle: String) : TestAction
     data class NewInt(val value: Int) : TestAction
     data class NewSuperValue(val value: Int) : TestAction
+    data class Refresh(val value: Boolean) : TestAction
 }
 
 @HiltViewModel
@@ -62,7 +64,6 @@ class TestPresenter @Inject constructor() : LBPresenter<TestUiState, TestNavScop
     private val collectFromDataBase: Flow<TestAction> = flow {
         while (true) {
             delay(1.seconds)
-            println("collectFromDataBase")
             emit(Random.nextInt())
         }
     }.map { TestAction.NewInt(it) }
@@ -74,21 +75,26 @@ class TestPresenter @Inject constructor() : LBPresenter<TestUiState, TestNavScop
         }
     }.map { TestAction.NewSuperValue(it) }
 
-    private val userActionFlow: MutableSharedFlow<TestAction> = MutableSharedFlow()
-
-    override val flows: List<Flow<TestAction>> = listOf(collectFromDataBase, collectFromDataBase2, userActionFlow)
+    override val flows: List<Flow<TestAction>> = listOf(collectFromDataBase, collectFromDataBase2)
 
     override fun getInitialState(): TestUiState = TestUiState(
         title = "Title",
         subtitle = "Subtitle",
-        onBackClick = { viewModelScope.launch { userActionFlow.emit(TestAction.Finish) } },
+        onBackClick = { userActionFlow.tryEmit(TestAction.Finish) },
         timer = 0,
-        onTitleChange = { viewModelScope.launch { userActionFlow.emit(TestAction.SetTitle("New Title")) } }
+        onTitleChange = { userActionFlow.tryEmit(TestAction.SetTitle(titleList.random())) },
+        refresh = { userActionFlow.tryEmit(TestAction.Refresh(true)) },
+        isRefreshing = false,
     )
 
-    override val reducer: LBReducer<TestUiState, TestNavScope, TestAction> = TestReducer()
+    override val reducer: LBReducer<TestUiState, TestNavScope, TestAction> = TestReducer(
+        coroutineScope = viewModelScope,
+        performAction = { userActionFlow.tryEmit(it) },
+    )
 
     override val content: @Composable (TestUiState) -> Unit = { uiState ->
         TestScreen(uiState)
     }
+
+    val titleList = listOf("yes", "ok", "again", "snow ou flo ?")
 }
