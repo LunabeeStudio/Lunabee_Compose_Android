@@ -21,12 +21,16 @@
 
 package studio.lunabee.compose.foundation.uifield.field.time
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.text.input.VisualTransformation
@@ -38,6 +42,20 @@ abstract class TimeUiField<T> : UiField<T>() {
     override fun Composable(modifier: Modifier) {
         val collectedValue by mValue.collectAsState()
         val collectedError by error.collectAsState()
+        // https://stackoverflow.com/a/70335041
+        val interactionSource = if (options.isNotEmpty()) {
+            remember { MutableInteractionSource() }.also { interactionSource ->
+                LaunchedEffect(interactionSource) {
+                    interactionSource.interactions.collect { interaction ->
+                        if (interaction is PressInteraction.Release) {
+                            options.firstOrNull()?.onClick()
+                        }
+                    }
+                }
+            }
+        } else {
+            null
+        }
         uiFieldStyleData.ComposeTextField(
             value = valueToDisplayedString(collectedValue),
             onValueChange = {},
@@ -45,22 +63,20 @@ abstract class TimeUiField<T> : UiField<T>() {
                 .fillMaxWidth()
                 .onFocusEvent {
                     if (it.hasFocus) {
-                        dismissDismissedError()
-                        hasBeenCaptured = true
-                        options
-                            .first()
-                            .onClick()
+                        dismissError()
+                        hasBeenFocused = true
                     }
                 },
             placeholder = placeholder,
+            label = label,
             trailingIcon = { options.forEach { it.Composable(modifier = Modifier) } },
             visualTransformation = VisualTransformation.None,
+            keyboardOptions = KeyboardOptions.Default,
+            keyboardActions = KeyboardActions.Default,
             maxLine = 1,
             readOnly = true,
-            label = label,
             error = collectedError,
-            keyboardActions = KeyboardActions.Default,
-            keyboardOptions = KeyboardOptions.Default,
+            interactionSource = interactionSource,
         )
     }
 }

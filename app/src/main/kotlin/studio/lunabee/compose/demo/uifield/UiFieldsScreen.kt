@@ -85,8 +85,8 @@ fun UiFieldsScreen(
             initialValue = "",
             placeholder = LbcTextSpec.Raw("This is a password Text Field"),
             label = LbcTextSpec.Raw("Password"),
-            isFieldInError = {
-                null
+            isFieldInError = { value ->
+                if (value.length < 6) UiFieldError(LbcTextSpec.Raw("At least 6 chars required")) else null
             },
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Next,
@@ -168,9 +168,9 @@ fun UiFieldsScreen(
             .padding(all = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
+        dateAndHourUiField.Composable(modifier = Modifier.fillMaxWidth())
         normalUiTextField.Composable(modifier = Modifier.fillMaxWidth())
         passwordUiTextField.Composable(modifier = Modifier.fillMaxWidth())
-        dateAndHourUiField.Composable(modifier = Modifier.fillMaxWidth())
         dateUiField.Composable(modifier = Modifier.fillMaxWidth())
 
         Button(

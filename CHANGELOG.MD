@@ -2,10 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+### LbcUiField
+
+#### Fixed
+
+- **Breaking**: Add an `interactionSource` param to `ComposeTextField` to fix a focus issue when using a time field as first field depending
+  on Android API version (reproducible on API 27)
+
+### LbcAccessibility
+
+- Add currency check and tests to ensure that `cleanForAccessibility` function works properly
 
 ### All
 
@@ -18,6 +29,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### LbcAndroidTest
 
 - Use `takeScreenshotNoSync` instead of `takeScreenshot` in case of test failure
+- Add `verbose` param to `LbcPrintRule` to enable verbose logging
 
 ## 2024-06-27
 
@@ -100,10 +112,10 @@ lbcUiField 1.0.0
 
 - Update to last stable version of Jetpack Compose.
 - Update Gradle Plugin to `7.3.1`.
-- *Breaking*: remove `LbcTopAppBar` and `LbcGraph`.
-- *Breaking*: remove `lbc` prefix from all packages.
-- *Breaking*: rename `LbcMaterial` to `LbcFoundation`.
-- *Breaking*: delete accessibility `Modifier` extensions, update `AccessibilityState` class.
+- **Breaking**: remove `LbcTopAppBar` and `LbcGraph`.
+- **Breaking**: remove `lbc` prefix from all packages.
+- **Breaking**: rename `LbcMaterial` to `LbcFoundation`.
+- **Breaking**: delete accessibility `Modifier` extensions, update `AccessibilityState` class.
 
 ### LbcAndroidTest
 
@@ -150,9 +162,9 @@ lbcUiField 1.0.0
 - Update Jetpack Compose compiler to `1.3.0`
 - Update Kotlin to `1.7.10`
 - Update Jetpack Compose to stable version `1.2.1`
-- *Breaking*: remove `AccessibilityDescription` object
-- *Breaking*: remove some `Modifier` extension
-- *Breaking*: change name and signature for `addSemantics` method to `setAccessibilityDetails`
+- **Breaking**: remove `AccessibilityDescription` object
+- **Breaking**: remove some `Modifier` extension
+- **Breaking**: change name and signature for `addSemantics` method to `setAccessibilityDetails`
 - Add some new parameters like `LiveRegion` and `ToggleableDescription`
 - See documentation for more details
 
@@ -163,8 +175,8 @@ lbcUiField 1.0.0
 - Update Jetpack Compose compiler to `1.3.0`
 - Update Kotlin to `1.7.10`
 - Update Jetpack Compose to stable version `1.2.1`
-- *Breaking*: remove `LbcNavigationTopAppBar` and `LbcLoadingNavigationTopAppBar` (see documentation for replacement).
-- *Breaking*: Change parameters for `LbcTopAppBar` and `LbcLoadingTopAppBar` (see documentation for replacement).
+- **Breaking**: remove `LbcNavigationTopAppBar` and `LbcLoadingNavigationTopAppBar` (see documentation for replacement).
+- **Breaking**: Change parameters for `LbcTopAppBar` and `LbcLoadingTopAppBar` (see documentation for replacement).
 - Distinct `TopAppBar` background color and status bar color in parameters.
 - Add `LbcSurfaceTopAppBar` to wrap your custom `TopAppBar` if needed.
 - Add `LbcMenuIconButton` to create menu icon for your `TopAppBar`.

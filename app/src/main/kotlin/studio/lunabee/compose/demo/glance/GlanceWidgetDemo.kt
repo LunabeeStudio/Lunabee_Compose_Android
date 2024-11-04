@@ -49,8 +49,9 @@ import androidx.glance.layout.size
 import androidx.glance.text.TextAlign
 import studio.lunabee.compose.MainActivity
 import studio.lunabee.compose.R
-import studio.lunabee.compose.glance.extensions.appWidgetBackgroundCompat
+import studio.lunabee.compose.glance.extensions.cornerRadiusCompat
 import studio.lunabee.compose.glance.ui.GlanceBackground
+import studio.lunabee.compose.glance.ui.GlanceRoot
 import studio.lunabee.compose.glance.ui.GlanceTypefaceButton
 import studio.lunabee.compose.glance.ui.GlanceTypefaceText
 import studio.lunabee.compose.glance.ui.GlanceViewFlipper
@@ -69,73 +70,75 @@ class GlanceWidgetDemo : GlanceAppWidget() {
 
     @Composable
     fun Render() {
-        Column(
-            modifier = GlanceModifier
-                .appWidgetBackgroundCompat(
-                    cornerRadius = 16.dp,
-                    color = Color(0xFFE5DDC8),
-                    size = DpSize(LocalSize.current.width, LocalSize.current.height),
-                ),
-            horizontalAlignment = Alignment.Horizontal.CenterHorizontally,
-        ) {
-            Spacer(modifier = GlanceModifier.defaultWeight())
-
-            GlanceViewFlipper(
-                viewFlipperLayout = R.layout.glance_view_flipper,
-                viewFlipperViewId = R.id.glance_view_flipper,
-                flipInterval = 2.seconds,
+        GlanceRoot {
+            Column(
                 modifier = GlanceModifier
-                    .size(60.dp),
+                    .cornerRadiusCompat(
+                        cornerRadius = 16.dp,
+                        color = Color(0xFFE5DDC8),
+                        size = DpSize(LocalSize.current.width, LocalSize.current.height),
+                    ),
+                horizontalAlignment = Alignment.Horizontal.CenterHorizontally,
             ) {
-                listOf(
-                    R.drawable.ic_view_flipper_1,
-                    R.drawable.ic_view_flipper_2,
-                    R.drawable.ic_view_flipper_3,
-                    R.drawable.ic_view_flipper_4,
-                ).forEach { resId ->
-                    Image(
-                        provider = ImageProvider(resId = resId),
-                        contentDescription = null,
-                        modifier = GlanceModifier
-                            .size(size = 48.dp),
-                    )
+                Spacer(modifier = GlanceModifier.defaultWeight())
+
+                GlanceViewFlipper(
+                    viewFlipperLayout = R.layout.glance_view_flipper,
+                    viewFlipperViewId = R.id.glance_view_flipper,
+                    flipInterval = 2.seconds,
+                    modifier = GlanceModifier
+                        .size(60.dp),
+                ) {
+                    listOf(
+                        R.drawable.ic_view_flipper_1,
+                        R.drawable.ic_view_flipper_2,
+                        R.drawable.ic_view_flipper_3,
+                        R.drawable.ic_view_flipper_4,
+                    ).forEach { resId ->
+                        Image(
+                            provider = ImageProvider(resId = resId),
+                            contentDescription = null,
+                            modifier = GlanceModifier
+                                .size(size = 48.dp),
+                        )
+                    }
                 }
-            }
 
-            // The text will automatically fill the width and go to multiline if needed.
-            // You can specify a limited width with ellipsizedWidth (if you want to apply a padding for example).
-            GlanceTypefaceText(
-                text = "Welcome in this beautiful widget! Click on the button bellow to launch the application from here 😱!",
-                color = Color.Black,
-                fontSize = 14.sp,
-                typeface = ResourcesCompat.getFont(LocalContext.current, R.font.robot_regular)!!,
-                modifier = GlanceModifier
-                    .fillMaxWidth(),
-                textAlign = TextAlign.Center,
-            )
+                // The text will automatically fill the width and go to multiline if needed.
+                // You can specify a limited width with ellipsizedWidth (if you want to apply a padding for example).
+                GlanceTypefaceText(
+                    text = "Welcome in this beautiful widget! Click on the button bellow to launch the application from here 😱!",
+                    color = Color.Black,
+                    fontSize = 14.sp,
+                    typeface = ResourcesCompat.getFont(LocalContext.current, R.font.robot_regular)!!,
+                    modifier = GlanceModifier
+                        .fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                )
 
-            Spacer(modifier = GlanceModifier.height(8.dp))
+                Spacer(modifier = GlanceModifier.height(8.dp))
 
-            // Demonstration of a custom button with an XML background and a custom typeface. You can also use a classic
-            // Glance button if you don't have specific font or an ImageProvider/ColorProvider with the Modifier.
-            GlanceBackground(
-                background = R.drawable.widget_button_gradient_bg,
-                modifier = GlanceModifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-            ) {
-                GlanceTypefaceButton(
-                    text = "Open the app",
-                    color = Color.White,
-                    fontSize = 12.sp,
-                    typeface = ResourcesCompat.getFont(LocalContext.current, R.font.write)!!,
-                    action = actionStartActivity(MainActivity::class.java),
+                // Demonstration of a custom button with an XML background and a custom typeface. You can also use a classic
+                // Glance button if you don't have specific font or an ImageProvider/ColorProvider with the Modifier.
+                GlanceBackground(
+                    background = R.drawable.widget_button_gradient_bg,
                     modifier = GlanceModifier
                         .fillMaxWidth()
-                        .height(height = 48.dp),
-                )
+                        .padding(horizontal = 16.dp),
+                ) {
+                    GlanceTypefaceButton(
+                        text = "Open the app",
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        typeface = ResourcesCompat.getFont(LocalContext.current, R.font.write)!!,
+                        action = actionStartActivity(MainActivity::class.java),
+                        modifier = GlanceModifier
+                            .fillMaxWidth()
+                            .height(height = 48.dp),
+                    )
+                }
+                Spacer(modifier = GlanceModifier.defaultWeight())
             }
-            Spacer(modifier = GlanceModifier.defaultWeight())
         }
     }
 }

@@ -29,7 +29,7 @@ object LbcAccessibilityUtils {
      * @return lean string
      */
     fun String.cleanForAccessibility(): String {
-        val characterFilter = Regex("[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}\\p{Cf}\\p{Cs}\\s]")
+        val characterFilter = Regex("[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}\\p{Cf}\\p{Cs}\\p{Sc}\\s]")
         return replace(regex = characterFilter, replacement = "")
     }
 }

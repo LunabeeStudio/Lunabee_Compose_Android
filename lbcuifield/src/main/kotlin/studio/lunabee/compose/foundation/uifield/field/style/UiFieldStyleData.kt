@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.foundation.uifield.field.style
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -45,5 +46,6 @@ interface UiFieldStyleData {
         maxLine: Int,
         readOnly: Boolean,
         error: UiFieldError?,
+        interactionSource: MutableInteractionSource?,
     )
 }
