@@ -46,6 +46,6 @@ interface UiFieldStyleData {
         maxLine: Int,
         readOnly: Boolean,
         error: UiFieldError?,
-        interactionSource: MutableInteractionSource? = null,
+        interactionSource: MutableInteractionSource?,
     )
 }

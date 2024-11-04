@@ -63,6 +63,7 @@ abstract class TextUiField : UiField<String>() {
             maxLine = maxLine,
             readOnly = false,
             error = collectedError,
+            interactionSource = null,
         )
     }
 
