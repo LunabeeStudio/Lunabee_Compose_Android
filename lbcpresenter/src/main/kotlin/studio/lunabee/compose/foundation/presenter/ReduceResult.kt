@@ -23,11 +23,13 @@ package studio.lunabee.compose.foundation.presenter
 
 data class ReduceResult<UiState>(
     val uiState: UiState,
-    val sideEffect: (suspend () -> Unit)?,
+    val sideEffect: ReduceSideEffect?,
 )
 
-infix fun <UiState> UiState.withSideEffect(sideEffect: (suspend () -> Unit)?): ReduceResult<UiState> = ReduceResult(this, sideEffect)
+infix fun <UiState> UiState.withSideEffect(sideEffect: ReduceSideEffect): ReduceResult<UiState> = ReduceResult(this, sideEffect)
 
 fun <UiState : PresenterUiState> UiState.asResult(): ReduceResult<UiState> {
     return ReduceResult(this, null)
 }
+
+typealias ReduceSideEffect = suspend () -> Unit

@@ -47,13 +47,13 @@ class TestReducer(
             is TestAction.SetTitle -> actualState.copy(title = action.title).asResult()
             is TestAction.NewInt -> actualState.copy(timer = action.value).asResult()
             is TestAction.NewSuperValue -> actualState.copy(timer = action.value).asResult()
-            is TestAction.Refresh -> actualState.copy(isRefreshing = action.value) withSideEffect if (action.value) {
-                suspend {
+            is TestAction.Refresh -> if (action.value) {
+                actualState.copy(isRefreshing = true) withSideEffect {
                     delay(Random.nextLong(50, 1000))
                     performAction(TestAction.Refresh(false))
                 }
             } else {
-                null
+                actualState.copy(isRefreshing = false).asResult()
             }
         }
     }
