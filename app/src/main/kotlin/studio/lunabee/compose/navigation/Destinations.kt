@@ -28,6 +28,7 @@ object Destinations {
     const val ThemeRoute: String = "ThemeRoute"
     const val CropRoute: String = "CropRoute"
     const val UiFieldRoute: String = "UiField"
+    const val PresenterRoute: String = "Presenter"
     const val GlanceRoute: String = "GlanceRoute"
 
     val BackNavigationScreen: List<String> = listOf(
@@ -36,6 +37,7 @@ object Destinations {
         HapticRoute,
         CropRoute,
         UiFieldRoute,
+        PresenterRoute,
         GlanceRoute,
     )
 }

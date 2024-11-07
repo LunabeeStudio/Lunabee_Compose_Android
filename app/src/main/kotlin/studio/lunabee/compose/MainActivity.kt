@@ -46,11 +46,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import studio.lunabee.compose.common.AppDemoTheme
 import studio.lunabee.compose.navigation.Destinations
 import studio.lunabee.compose.navigation.Directions
 import studio.lunabee.compose.navigation.MainNavGraph
 
+@AndroidEntryPoint
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
