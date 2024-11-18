@@ -35,14 +35,15 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import studio.lunabee.compose.foundation.presenter.PresentScreen
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun TestPresenterRoute(
     navigateBack: () -> Unit,
+    presenter: TestPresenter = hiltViewModel(),
 ) {
     val navScope = TestNavScope(navigateBack = navigateBack)
-    PresentScreen<TestNavScope, TestPresenter>(navScope)
+    presenter.invoke(navScope)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
