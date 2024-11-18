@@ -24,7 +24,6 @@ package studio.lunabee.compose.foundation.presenter
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
@@ -80,10 +79,4 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
         val uiState by uiStateFlow.collectAsStateWithLifecycle()
         content(uiState)
     }
-}
-
-@Composable
-inline fun <NavScope, reified Presenter : LBPresenter<*, NavScope, *>> PresentScreen(navScope: NavScope) {
-    val presenter: Presenter = hiltViewModel()
-    presenter.invoke(navScope)
 }
