@@ -8,10 +8,12 @@
 
 # Do not remove, use as "id" instead of alias, this is why it is not detected.
 compose-plugin = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+
 
 [versions]
 
@@ -39,6 +41,7 @@ androidx-navigation = "2.8.3"
 androidx-test-runner = "1.6.2"
 android-tools-desugar_jdk_libs = "2.1.2"
 coil = "2.7.0"
+compose = "1.7.0"
 compose-bom = "2024.10.01"
 detekt = "1.23.7"
 google-android-material = "1.12.0"
@@ -69,6 +72,7 @@ androidx-hilt-navigation-compose = "1.2.0"
 androidx-lifecycle = "2.8.6"
 
 javapoet = "1.13.0"
+jetbrains-kotlin-jvm = "1.9.24"
 
 lifecycle-viewmodel-android = "2.8.7"
 
