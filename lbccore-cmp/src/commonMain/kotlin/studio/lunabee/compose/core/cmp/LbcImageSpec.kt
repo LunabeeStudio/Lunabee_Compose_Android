@@ -19,7 +19,7 @@
  * Created by Lunabee Studio / Date - 11/19/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.core.kmp
+package studio.lunabee.compose.core.cmp
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color

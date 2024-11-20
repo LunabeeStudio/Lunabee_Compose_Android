@@ -50,5 +50,9 @@ kotlin {
             api(libs.coil3)
             implementation(compose.components.uiToolingPreview)
         }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+        }
     }
 }

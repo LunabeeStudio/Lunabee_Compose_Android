@@ -19,7 +19,7 @@
  * Created by Lunabee Studio / Date - 11/19/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.image.kmp
+package studio.lunabee.compose.image.cmp
 
 import androidx.compose.foundation.Image
 import androidx.compose.material3.Icon
@@ -37,8 +37,8 @@ import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import coil3.svg.SvgDecoder
 import org.jetbrains.compose.resources.painterResource
-import studio.lunabee.compose.core.kmp.LbcImageSpec
-import studio.lunabee.compose.core.kmp.LbcTextSpec
+import studio.lunabee.compose.core.cmp.LbcImageSpec
+import studio.lunabee.compose.core.cmp.LbcTextSpec
 
 @Composable
 fun LbcImage(
