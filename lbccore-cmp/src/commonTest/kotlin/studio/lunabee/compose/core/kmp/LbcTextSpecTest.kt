@@ -36,7 +36,7 @@ class LbcTextSpecTest {
         assertEquals(
             expected = expectedFormatedString,
             actual = actualFormatedString,
-            message = "The string should be correctly formated."
+            message = "The string should be correctly formated.",
         )
     }
 
@@ -50,7 +50,7 @@ class LbcTextSpecTest {
         assertEquals(
             expected = expectedFormatedString,
             actual = actualFormatedString,
-            message = "The string should be correctly formated."
+            message = "The string should be correctly formated.",
         )
     }
 
@@ -64,7 +64,7 @@ class LbcTextSpecTest {
         assertEquals(
             expected = expectedFormatedString,
             actual = actualFormatedString,
-            message = "The string should be correctly formated."
+            message = "The string should be correctly formated.",
         )
     }
 }

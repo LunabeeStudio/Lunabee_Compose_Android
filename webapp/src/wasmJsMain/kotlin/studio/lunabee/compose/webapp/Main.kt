@@ -19,7 +19,7 @@
  * Created by Lunabee Studio / Date - 11/19/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose
+package studio.lunabee.compose.webapp
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text

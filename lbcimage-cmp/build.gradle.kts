@@ -32,8 +32,8 @@ plugins {
 }
 
 android {
-    resourcePrefix("lbc_image_kmp_")
-    namespace = "studio.lunabee.compose.image.kmp"
+    resourcePrefix("lbc_image_cmp_")
+    namespace = "studio.lunabee.compose.image.cmp"
 }
 
 description = "Provide image composable displaying imageSpec data for Compose Multiplatform"

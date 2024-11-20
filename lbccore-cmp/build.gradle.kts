@@ -32,11 +32,11 @@ plugins {
 }
 
 android {
-    resourcePrefix("lbc_core_kmp_")
-    namespace = "studio.lunabee.compose.core.kmp"
+    resourcePrefix("lbc_core_cmp_")
+    namespace = "studio.lunabee.compose.core.cmp"
 }
 compose.resources {
-    packageOfResClass = "studio.lunabee.compose.core.kmp.generated.resources"
+    packageOfResClass = "studio.lunabee.compose.core.cmp.generated.resources"
 }
 
 description = "A set of tools for Compose Multiplatform"
