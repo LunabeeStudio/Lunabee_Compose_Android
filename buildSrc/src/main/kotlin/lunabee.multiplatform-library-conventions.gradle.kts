@@ -82,3 +82,11 @@ kotlin {
     }
     androidTarget()
 }
+
+project.afterEvaluate {
+    tasks.named<Jar>("javadocJar") {
+        dependsOn("generateResourceAccessorsForAndroidMain")
+        dependsOn("generateActualResourceCollectorsForAndroidMain")
+    }
+}
+
