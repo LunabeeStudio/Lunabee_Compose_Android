@@ -53,4 +53,8 @@ sealed interface LbcImageSpec {
     class Url(
         val url: String,
     ) : LbcImageSpec
+
+    class Uri(
+        val uri: coil3.Uri,
+    ) : LbcImageSpec
 }

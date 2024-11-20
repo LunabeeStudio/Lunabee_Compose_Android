@@ -24,13 +24,17 @@ package studio.lunabee.compose
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import studio.lunabee.compose.core.kmp.LbcImageSpec
 import studio.lunabee.compose.core.kmp.LbcTextSpec
+import studio.lunabee.compose.image.kmp.LbcImage
 import studio.lunabee.compose.webapp.generated.resources.Res
 import studio.lunabee.compose.webapp.generated.resources.allStringResources
 import studio.lunabee.compose.webapp.generated.resources.fallback
+import studio.lunabee.compose.webapp.generated.resources.ic_share
 import studio.lunabee.compose.webapp.generated.resources.test
 import studio.lunabee.compose.webapp.generated.resources.test_args
 import studio.lunabee.compose.webapp.generated.resources.test_args_plural
@@ -100,6 +104,18 @@ fun main() {
                         123,
                     ).string
                 }",
+            )
+
+            LbcImage(
+                imageSpec = LbcImageSpec.Icon(
+                    resource = Res.drawable.ic_share,
+                    tint = { Color.Red },
+                ),
+            )
+            LbcImage(
+                imageSpec = LbcImageSpec.Url(
+                    url = "https://cdn.getmidnight.com/26ffcef53c44522efbfe7fef964a4058/2023/02/untitled-1-.png",
+                ),
             )
         }
     }

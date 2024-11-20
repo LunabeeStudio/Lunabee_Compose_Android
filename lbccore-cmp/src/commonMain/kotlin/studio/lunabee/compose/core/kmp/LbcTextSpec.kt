@@ -64,6 +64,7 @@ sealed class LbcTextSpec {
             get() = AnnotatedString(string)
         override val string: String
             @Composable
+            @Suppress("SpreadOperator")
             get() = if (args.isEmpty()) {
                 value
             } else {
@@ -129,6 +130,7 @@ sealed class LbcTextSpec {
             (cannot use %s or %d format)
              */
             @Composable
+            @Suppress("SpreadOperator")
             get() = stringResource(resource).format(*args.resolveArgs())
 
         override fun equals(other: Any?): Boolean {
@@ -164,6 +166,7 @@ sealed class LbcTextSpec {
             (cannot use %s or %d format)
              */
             @Composable
+            @Suppress("SpreadOperator")
             get() = pluralStringResource(resource, count).format(*args.resolveArgs())
 
         override fun equals(other: Any?): Boolean {
@@ -200,6 +203,7 @@ sealed class LbcTextSpec {
         @OptIn(ExperimentalResourceApi::class)
         override val string: String
             @Composable
+            @Suppress("SpreadOperator")
             get() {
                 /*
                 We cannot use the stringResource function with args because the param format is limited with it

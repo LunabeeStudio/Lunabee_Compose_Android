@@ -1,3 +1,9 @@
+@file:OptIn(ExperimentalWasmDsl::class, ExperimentalComposeLibrary::class)
+
+import org.gradle.kotlin.dsl.compose
+import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
 /*
  * Copyright (c) 2024 Lunabee Studio
  *
@@ -19,40 +25,33 @@
  * Created by Lunabee Studio / Date - 11/19/2024 - for the Lunabee Compose library.
  */
 
-@file:OptIn(ExperimentalWasmDsl::class)
-
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-
 plugins {
-    id("org.jetbrains.kotlin.multiplatform")
+    id("lunabee.multiplatform-library-conventions")
+    id("lunabee.library-publish-conventions")
     alias(libs.plugins.compose)
-    id(libs.plugins.compose.plugin.get().pluginId)
 }
 
-group = "studio.lunabee.compose"
-version = "1.0"
-
-compose.resources {
-    packageOfResClass = "studio.lunabee.compose.webapp.generated.resources"
-    generateResClass = always
+android {
+    resourcePrefix("lbc_image_kmp_")
+    namespace = "studio.lunabee.compose.image.kmp"
 }
+
+description = "Provide image composable displaying imageSpec data for Compose Multiplatform"
+version = AndroidConfig.LBCIMAGE_CMP_VERSION
 
 kotlin {
-    wasmJs {
-        browser()
-        binaries.executable()
-    }
-
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
-            implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
+            api(libs.coil3.compose)
+            implementation(libs.coil3.compose.svg)
+            implementation(libs.coil3.network)
+            implementation(libs.ktor.client.core)
+
             implementation(project(Modules.LbcCoreCmp))
-            implementation(project(Modules.LbcImageCmp))
         }
     }
 }

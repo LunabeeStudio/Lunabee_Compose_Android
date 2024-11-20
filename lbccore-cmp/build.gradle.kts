@@ -1,3 +1,9 @@
+@file:OptIn(ExperimentalWasmDsl::class, ExperimentalComposeLibrary::class)
+
+import org.gradle.kotlin.dsl.compose
+import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
 /*
  * Copyright (c) 2024 Lunabee Studio
  *
@@ -19,40 +25,30 @@
  * Created by Lunabee Studio / Date - 11/19/2024 - for the Lunabee Compose library.
  */
 
-@file:OptIn(ExperimentalWasmDsl::class)
-
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-
 plugins {
-    id("org.jetbrains.kotlin.multiplatform")
+    id("lunabee.multiplatform-library-conventions")
+    id("lunabee.library-publish-conventions")
     alias(libs.plugins.compose)
-    id(libs.plugins.compose.plugin.get().pluginId)
 }
 
-group = "studio.lunabee.compose"
-version = "1.0"
-
+android {
+    resourcePrefix("lbc_core_kmp_")
+    namespace = "studio.lunabee.compose.core.kmp"
+}
 compose.resources {
-    packageOfResClass = "studio.lunabee.compose.webapp.generated.resources"
-    generateResClass = always
+    packageOfResClass = "studio.lunabee.compose.core.kmp.generated.resources"
 }
+
+description = "A set of tools for Compose Multiplatform"
+version = AndroidConfig.LBCCORE_CMP_VERSION
 
 kotlin {
-    wasmJs {
-        browser()
-        binaries.executable()
-    }
-
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.components.resources)
+            api(compose.components.resources)
+            api(libs.coil3)
             implementation(compose.components.uiToolingPreview)
-
-            implementation(project(Modules.LbcCoreCmp))
-            implementation(project(Modules.LbcImageCmp))
         }
     }
 }
