@@ -88,5 +88,10 @@ project.afterEvaluate {
         dependsOn("generateResourceAccessorsForAndroidMain")
         dependsOn("generateActualResourceCollectorsForAndroidMain")
     }
+
+    tasks.named<Jar>("sourceJar") {
+        dependsOn("generateResourceAccessorsForAndroidMain")
+        dependsOn("generateActualResourceCollectorsForAndroidMain")
+    }
 }
 
