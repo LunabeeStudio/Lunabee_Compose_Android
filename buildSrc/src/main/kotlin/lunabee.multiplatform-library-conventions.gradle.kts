@@ -24,7 +24,6 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
     id("com.android.library")
-    id("lunabee.library-publish-conventions")
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.kotlin.multiplatform")
 }
@@ -69,6 +68,9 @@ java {
 }
 
 kotlin {
+    androidTarget {
+        publishLibraryVariants("release")
+    }
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser {
@@ -80,18 +82,14 @@ kotlin {
         }
         binaries.executable()
     }
-    androidTarget()
 }
 
-project.afterEvaluate {
-    tasks.named<Jar>("javadocJar") {
-        dependsOn("generateResourceAccessorsForAndroidMain")
-        dependsOn("generateActualResourceCollectorsForAndroidMain")
-    }
-
-    tasks.named<Jar>("sourceJar") {
-        dependsOn("generateResourceAccessorsForAndroidMain")
-        dependsOn("generateActualResourceCollectorsForAndroidMain")
-    }
+tasks.register("sourceJar", Jar::class) {
+    archiveClassifier.set("sources")
+    // Access the source sets
+    from(
+        kotlin.targets.flatMap {
+            it.compilations.flatMap { compilation -> compilation.allKotlinSourceSets.flatMap { it.kotlin.srcDirs } }
+        },
+    )
 }
-
