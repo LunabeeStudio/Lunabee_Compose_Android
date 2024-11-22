@@ -21,9 +21,12 @@
 
 package studio.lunabee.compose.core.kmp
 
+import studio.lunabee.compose.core.cmp.LbcTextSpec
 import studio.lunabee.compose.core.cmp.ext.format
+import kotlin.math.exp
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class LbcTextSpecTest {
     @Test
@@ -65,6 +68,25 @@ class LbcTextSpecTest {
             expected = expectedFormatedString,
             actual = actualFormatedString,
             message = "The string should be correctly formated.",
+        )
+    }
+
+    @Test
+    fun givenRawText_whenComparingEachOthers_thenShouldGetCorrectComparison() {
+        val rawText = LbcTextSpec.Raw("My super text")
+        val sameText = LbcTextSpec.Raw("My super text")
+        val otherRawText = LbcTextSpec.Raw("My other text")
+
+        assertNotEquals(
+            illegal = rawText,
+            actual = otherRawText,
+            message = "The given raw texts should not be equals to each other"
+        )
+
+        assertEquals(
+            expected = rawText,
+            actual = sameText,
+            message = "The given raw texts should be equals to each other"
         )
     }
 }
