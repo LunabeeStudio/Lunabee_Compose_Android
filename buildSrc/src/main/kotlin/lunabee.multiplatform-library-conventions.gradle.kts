@@ -83,13 +83,3 @@ kotlin {
         binaries.executable()
     }
 }
-
-tasks.register("sourceJar", Jar::class) {
-    archiveClassifier.set("sources")
-    // Access the source sets
-    from(
-        kotlin.targets.flatMap {
-            it.compilations.flatMap { compilation -> compilation.allKotlinSourceSets.flatMap { it.kotlin.srcDirs } }
-        },
-    )
-}

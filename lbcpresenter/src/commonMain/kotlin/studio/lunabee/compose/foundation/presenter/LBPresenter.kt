@@ -25,15 +25,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
+import studio.lunabee.compose.foundation.presenter.ext.collectAsStateWithLifecycleCompat
 
 abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> : ViewModel() {
 
@@ -69,14 +63,14 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
 
     @Composable
     operator fun invoke(navScope: NavScope) {
-        val navigation by navigation.collectAsStateWithLifecycle()
+        val navigation by navigation.collectAsStateWithLifecycleCompat()
         navigation?.let {
             LaunchedEffect(navigation) {
                 it(navScope)
                 consumeNavigation()
             }
         }
-        val uiState by uiStateFlow.collectAsStateWithLifecycle()
+        val uiState by uiStateFlow.collectAsStateWithLifecycleCompat()
         content(uiState)
     }
 }
