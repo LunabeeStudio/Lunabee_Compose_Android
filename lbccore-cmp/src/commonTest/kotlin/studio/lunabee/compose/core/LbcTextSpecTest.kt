@@ -21,7 +21,6 @@
 
 package studio.lunabee.compose.core
 
-import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.core.ext.format
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -79,13 +78,13 @@ class LbcTextSpecTest {
         assertNotEquals(
             illegal = rawText,
             actual = otherRawText,
-            message = "The given raw texts should not be equals to each other"
+            message = "The given raw texts should not be equals to each other",
         )
 
         assertEquals(
             expected = rawText,
             actual = sameText,
-            message = "The given raw texts should be equals to each other"
+            message = "The given raw texts should be equals to each other",
         )
     }
 }

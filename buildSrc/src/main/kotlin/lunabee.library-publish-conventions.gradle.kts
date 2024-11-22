@@ -258,9 +258,11 @@ afterEvaluate {
                 tasks.named("bundleReleaseAar"),
             )
 
-            PublishType.Java, PublishType.Multiplatform -> dependsOn(
+            PublishType.Java -> dependsOn(
                 tasks.withType(Jar::class.java),
             )
+
+            PublishType.Multiplatform -> {}
         }
     }
 }
