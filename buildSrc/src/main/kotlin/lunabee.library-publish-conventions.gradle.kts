@@ -33,6 +33,7 @@ enum class PublishType {
 plugins {
     `maven-publish`
     signing
+    id("org.jetbrains.dokka")
 }
 
 val publishType: PublishType = when {
@@ -98,7 +99,10 @@ fun PublishingExtension.setupPublication() {
             }
 
             PublishType.Multiplatform -> create<MavenPublication>(project.name) {
-                // KMP plugin already setup publication stuff
+                afterEvaluate {
+                    setMultiplatformProjectDetails()
+                    setMultiplatformArtifacts()
+                }
             }
         }
     }
@@ -111,6 +115,13 @@ fun PublishingExtension.setupPublication() {
  * - version will be set in each submodule gradle file
  */
 fun MavenPublication.setProjectDetails() {
+    groupId = AndroidConfig.GROUP_ID
+    artifactId = project.name
+    version = project.version.toString()
+}
+
+fun MavenPublication.setMultiplatformProjectDetails() {
+    from(components["kotlin"])
     groupId = AndroidConfig.GROUP_ID
     artifactId = project.name
     version = project.version.toString()
@@ -204,6 +215,18 @@ fun MavenPublication.setAndroidArtifacts() {
             dependsOn("bundleReleaseAar")
         }
     }
+}
+
+fun MavenPublication.setMultiplatformArtifacts() {
+    val dokkaHtml by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class)
+
+    val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+        dependsOn(dokkaHtml)
+        archiveClassifier.set("javadoc")
+        from(dokkaHtml.outputDirectory)
+    }
+
+    artifact(javadocJar)
 }
 
 /**
