@@ -19,7 +19,7 @@
  * Created by Lunabee Studio / Date - 11/20/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.core.cmp
+package studio.lunabee.compose.core
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -30,7 +30,7 @@ import org.jetbrains.compose.resources.getPluralString
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
-import studio.lunabee.compose.core.cmp.ext.format
+import studio.lunabee.compose.core.ext.format
 import kotlin.collections.contentEquals
 import kotlin.collections.contentHashCode
 import kotlin.collections.isEmpty

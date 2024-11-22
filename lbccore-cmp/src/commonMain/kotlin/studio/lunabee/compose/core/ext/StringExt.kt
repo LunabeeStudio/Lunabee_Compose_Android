@@ -19,7 +19,7 @@
  * Created by Lunabee Studio / Date - 11/19/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.core.cmp.ext
+package studio.lunabee.compose.core.ext
 
 /**
  * Format a string with given parameters.

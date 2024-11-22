@@ -19,11 +19,10 @@
  * Created by Lunabee Studio / Date - 11/20/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.core.kmp
+package studio.lunabee.compose.core
 
-import studio.lunabee.compose.core.cmp.LbcTextSpec
-import studio.lunabee.compose.core.cmp.ext.format
-import kotlin.math.exp
+import studio.lunabee.compose.core.LbcTextSpec
+import studio.lunabee.compose.core.ext.format
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals

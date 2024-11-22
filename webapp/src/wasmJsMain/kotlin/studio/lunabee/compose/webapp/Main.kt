@@ -28,8 +28,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import studio.lunabee.compose.core.cmp.LbcImageSpec
-import studio.lunabee.compose.core.cmp.LbcTextSpec
+import studio.lunabee.compose.core.LbcImageSpec
+import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.image.cmp.LbcImage
 import studio.lunabee.compose.webapp.generated.resources.Res
 import studio.lunabee.compose.webapp.generated.resources.allStringResources
