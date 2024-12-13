@@ -26,9 +26,12 @@ import studio.lunabee.compose.foundation.presenter.LBReducer
 import studio.lunabee.compose.foundation.presenter.ReduceResult
 import studio.lunabee.compose.foundation.presenter.asResult
 
+abstract class MultiStateReducer<State : MultiStateUiState, MultiStateNavScope, Action : MultiStateAction> :
+    LBReducer<State, MultiStateUiState, MultiStateNavScope, MultiStateAction, Action>()
+
 class MultiStateDataReducer(
     override val coroutineScope: CoroutineScope,
-) : LBReducer<MultiStateUiState.Data, MultiStateUiState, MultiStateNavScope, MultiStateAction, MultiStateAction.DataAction>() {
+) : MultiStateReducer<MultiStateUiState.Data, MultiStateNavScope, MultiStateAction.DataAction>() {
     override suspend fun reduce(
         actualState: MultiStateUiState.Data,
         action: MultiStateAction.DataAction,
@@ -47,7 +50,7 @@ class MultiStateDataReducer(
 
 class MultiStateErrorReducer(
     override val coroutineScope: CoroutineScope,
-) : LBReducer<MultiStateUiState.Error, MultiStateUiState, MultiStateNavScope, MultiStateAction, MultiStateAction.ErrorAction>() {
+) : MultiStateReducer<MultiStateUiState.Error, MultiStateNavScope, MultiStateAction.ErrorAction>() {
     override suspend fun reduce(
         actualState: MultiStateUiState.Error,
         action: MultiStateAction.ErrorAction,

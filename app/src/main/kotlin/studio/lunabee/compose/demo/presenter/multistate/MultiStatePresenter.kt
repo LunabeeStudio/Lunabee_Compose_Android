@@ -24,24 +24,22 @@ package studio.lunabee.compose.demo.presenter.multistate
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import studio.lunabee.compose.foundation.presenter.LBPresenter
-import studio.lunabee.compose.foundation.presenter.LBReducer
 import studio.lunabee.compose.foundation.presenter.LBSimpleReducer
 import javax.inject.Inject
 
 @HiltViewModel
 class MultiStatePresenter @Inject constructor() : LBPresenter<MultiStateUiState, MultiStateNavScope, MultiStateAction>() {
 
-    val flow = flow<MultiStateAction> {
+    private val flow: Flow<MultiStateAction> = flow {
         while (true) {
             delay(2000)
-            val actions = listOf<MultiStateAction>(
+            val actions = listOf(
                 MultiStateAction.ExampleAction,
                 MultiStateAction.ExampleAllAction,
                 MultiStateAction.ExampleErrorAction,
