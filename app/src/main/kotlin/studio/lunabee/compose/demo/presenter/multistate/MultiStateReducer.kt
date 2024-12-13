@@ -35,8 +35,8 @@ class MultiStateDataReducer(
         performNavigation: (MultiStateNavScope.() -> Unit) -> Unit,
     ): ReduceResult<MultiStateUiState> {
         return when (action) {
-            MultiStateAction.ExampleAction -> MultiStateUiState.Error.asResult()
-            MultiStateAction.ExampleAllAction -> actualState.asResult()
+            MultiStateAction.ExampleAction -> MultiStateUiState.Error(this::class.simpleName!!).asResult()
+            MultiStateAction.ExampleAllAction -> actualState.copy(reducer = this::class.simpleName!!).asResult()
         }
     }
 
@@ -54,8 +54,8 @@ class MultiStateErrorReducer(
         performNavigation: (MultiStateNavScope.() -> Unit) -> Unit,
     ): ReduceResult<MultiStateUiState> {
         return when (action) {
-            MultiStateAction.ExampleAllAction -> MultiStateUiState.Data.asResult()
-            MultiStateAction.ExampleErrorAction -> actualState.asResult()
+            MultiStateAction.ExampleAllAction -> MultiStateUiState.Data(this::class.simpleName!!).asResult()
+            MultiStateAction.ExampleErrorAction -> actualState.copy(reducer = this::class.simpleName!!).asResult()
         }
     }
 

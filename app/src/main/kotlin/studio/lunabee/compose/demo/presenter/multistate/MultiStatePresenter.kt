@@ -52,22 +52,21 @@ class MultiStatePresenter @Inject constructor() : LBPresenter<MultiStateUiState,
 
     override val flows: List<Flow<MultiStateAction>> = listOf(flow)
 
-    override fun getInitialState(): MultiStateUiState = MultiStateUiState.Data
+    override fun getInitialState(): MultiStateUiState = MultiStateUiState.Data("unknown")
     override fun initReducerByState(actualState: MultiStateUiState):
         LBSimpleReducer<MultiStateUiState, MultiStateNavScope, MultiStateAction> {
         return when (actualState) {
-            MultiStateUiState.Data -> MultiStateDataReducer(viewModelScope)
-            MultiStateUiState.Error -> MultiStateErrorReducer(viewModelScope)
+            is MultiStateUiState.Data -> MultiStateDataReducer(viewModelScope)
+            is MultiStateUiState.Error -> MultiStateErrorReducer(viewModelScope)
         }
     }
 
     override val content: @Composable (MultiStateUiState) -> Unit = {
-        val reducer = reducer.collectAsStateWithLifecycle()
         Column {
-            Text("reducer: ${reducer.value.javaClass.simpleName}")
+            Text("reduced by ${it.reducer}")
             when (it) {
-                MultiStateUiState.Data -> Text("Data State")
-                MultiStateUiState.Error -> Text("Error State")
+                is MultiStateUiState.Data -> Text("Data State")
+                is MultiStateUiState.Error -> Text("Error State")
             }
         }
     }

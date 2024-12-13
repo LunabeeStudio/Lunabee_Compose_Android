@@ -51,10 +51,6 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
         actualState: UiState,
     ): LBSimpleReducer<UiState, NavScope, Action>
 
-    val reducer: MutableStateFlow<LBSimpleReducer<UiState, NavScope, Action>> = MutableStateFlow(
-        initReducerByState(actualState = getInitialState())
-    )
-
     private val navigation: MutableStateFlow<(NavScope.() -> Unit)?> = MutableStateFlow(null)
 
     private fun consumeNavigation() {
@@ -73,17 +69,21 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private val uiStateFlow: StateFlow<UiState> by lazy {
+        val reducer: MutableStateFlow<LBSimpleReducer<UiState, NavScope, Action>> = MutableStateFlow(
+            initReducerByState(actualState = getInitialState())
+        )
+
         var actualStateSaved: UiState = getInitialState()
         reducer.flatMapLatest {
             it.collectReducer(
                 flows = flows + userActionChannel.consumeAsFlow(),
                 actualState = { actualStateSaved },
                 performNavigation = ::performNavigation,
-            ).onEach {
-                    reducer.value = initReducerByState(actualState = it)
+            ).onEach { state ->
                 if (actualStateSaved::class != state::class) {
+                    reducer.value = initReducerByState(actualState = state)
                 }
-                actualStateSaved = it
+                actualStateSaved = state
             }
         }.stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
     }
