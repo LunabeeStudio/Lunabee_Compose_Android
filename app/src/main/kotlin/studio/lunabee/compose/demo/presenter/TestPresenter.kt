@@ -80,17 +80,19 @@ class TestPresenter @Inject constructor() : LBPresenter<TestUiState, TestNavScop
     override fun getInitialState(): TestUiState = TestUiState(
         title = "Title",
         subtitle = "Subtitle",
-        onBackClick = { userActionFlow.tryEmit(TestAction.Finish) },
+        onBackClick = { emitUserAction(TestAction.Finish) },
         timer = 0,
-        onTitleChange = { userActionFlow.tryEmit(TestAction.SetTitle(titleList.random())) },
-        refresh = { userActionFlow.tryEmit(TestAction.Refresh(true)) },
+        onTitleChange = { emitUserAction(TestAction.SetTitle(titleList.random())) },
+        refresh = { emitUserAction(TestAction.Refresh(true)) },
         isRefreshing = false,
     )
 
-    override val reducer: LBReducer<TestUiState, TestNavScope, TestAction> = TestReducer(
-        coroutineScope = viewModelScope,
-        performAction = { userActionFlow.tryEmit(it) },
-    )
+    override fun initReducerByState(actualState: TestUiState): LBReducer<TestUiState, TestUiState, TestNavScope, TestAction, TestAction> {
+        return TestReducer(
+            coroutineScope = viewModelScope,
+            performAction = { emitUserAction(it) },
+        )
+    }
 
     override val content: @Composable (TestUiState) -> Unit = { uiState ->
         TestScreen(uiState)

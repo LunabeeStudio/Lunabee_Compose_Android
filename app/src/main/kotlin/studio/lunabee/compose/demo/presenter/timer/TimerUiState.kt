@@ -13,24 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * ReduceResult.kt
+ * TimerUiState.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 11/4/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 11/14/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.presenter
+package studio.lunabee.compose.demo.presenter.timer
 
-data class ReduceResult<UiState>(
-    val uiState: UiState,
-    val sideEffect: ReduceSideEffect?,
-)
+import studio.lunabee.compose.foundation.presenter.PresenterUiState
 
-infix fun <UiState : PresenterUiState> UiState.withSideEffect(sideEffect: ReduceSideEffect): ReduceResult<UiState> =
-    ReduceResult(this, sideEffect)
-
-fun <UiState : PresenterUiState> UiState.asResult(): ReduceResult<UiState> {
-    return ReduceResult(this, null)
-}
-
-typealias ReduceSideEffect = suspend () -> Unit
+data class TimerUiState(
+    val timer: Int,
+) : PresenterUiState

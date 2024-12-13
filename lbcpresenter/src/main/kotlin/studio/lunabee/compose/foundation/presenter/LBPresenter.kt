@@ -28,22 +28,31 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 
 abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> : ViewModel() {
 
-    open val userActionFlow: MutableSharedFlow<Action> = MutableSharedFlow(extraBufferCapacity = 10)
+    private val userActionChannel: Channel<Action> = Channel(Channel.UNLIMITED)
     abstract val flows: List<Flow<Action>>
 
     abstract fun getInitialState(): UiState
 
-    abstract val reducer: LBReducer<UiState, NavScope, Action>
+    abstract fun initReducerByState(
+        actualState: UiState,
+    ): LBReducer<UiState, UiState, NavScope, Action, Action>
+
+    val reducer: MutableStateFlow<LBReducer<UiState, UiState, NavScope, Action, Action>> = MutableStateFlow(
+        initReducerByState(actualState = getInitialState()),
+    )
 
     private val navigation: MutableStateFlow<(NavScope.() -> Unit)?> = MutableStateFlow(null)
 
@@ -55,17 +64,27 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
         navigation.value = navigateAction
     }
 
+    fun emitUserAction(action: Action) {
+        userActionChannel.trySend(action)
+    }
+
     abstract val content: @Composable (UiState) -> Unit
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val uiStateFlow: StateFlow<UiState> by lazy {
         var actualStateSaved: UiState = getInitialState()
-        reducer.collectReducer(
-            flows = flows + userActionFlow,
-            actualState = { actualStateSaved },
-            performNavigation = ::performNavigation,
-        ).onEach {
-            actualStateSaved = it
-        }.stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(1_000), actualStateSaved)
+        reducer.flatMapLatest {
+            it.collectReducer(
+                flows = flows + userActionChannel.consumeAsFlow(),
+                actualState = { actualStateSaved },
+                performNavigation = ::performNavigation,
+            ).onEach {
+                actualStateSaved = it
+                if (actualStateSaved.javaClass != it.javaClass) {
+                    reducer.value = initReducerByState(actualState = it)
+                }
+            }
+        }.stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
     }
 
     @Composable

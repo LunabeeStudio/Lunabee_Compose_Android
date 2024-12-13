@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                         Destinations.ThemeRoute -> getString(R.string.theme_screen_title)
                         Destinations.HapticRoute -> getString(R.string.haptic_screen_title)
                         Destinations.FoundationRoute -> getString(R.string.foundation_screen_title)
-                        else -> ""
+                        else -> destination.route.orEmpty()
                     }
 
                     shouldShowBackNav = Destinations.BackNavigationScreen.contains(destination.route)

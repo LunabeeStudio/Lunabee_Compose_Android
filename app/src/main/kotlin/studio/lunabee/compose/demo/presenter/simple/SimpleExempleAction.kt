@@ -13,24 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * ReduceResult.kt
+ * SimpleExempleAction.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 11/4/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 11/14/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.presenter
+package studio.lunabee.compose.demo.presenter.simple
 
-data class ReduceResult<UiState>(
-    val uiState: UiState,
-    val sideEffect: ReduceSideEffect?,
-)
-
-infix fun <UiState : PresenterUiState> UiState.withSideEffect(sideEffect: ReduceSideEffect): ReduceResult<UiState> =
-    ReduceResult(this, sideEffect)
-
-fun <UiState : PresenterUiState> UiState.asResult(): ReduceResult<UiState> {
-    return ReduceResult(this, null)
+sealed interface SimpleExempleAction {
+    data class NewCheckValue(val value: Boolean) : SimpleExempleAction
+    data object NewValue : SimpleExempleAction
 }
-
-typealias ReduceSideEffect = suspend () -> Unit

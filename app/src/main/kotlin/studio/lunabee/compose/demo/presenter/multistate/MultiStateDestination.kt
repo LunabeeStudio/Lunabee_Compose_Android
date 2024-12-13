@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * ReduceResult.kt
+ * MultiStateDestination.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 11/4/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 12/12/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.presenter
+package studio.lunabee.compose.demo.presenter.multistate
 
-data class ReduceResult<UiState>(
-    val uiState: UiState,
-    val sideEffect: ReduceSideEffect?,
-)
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import studio.lunabee.compose.foundation.presenter.PresentScreen
 
-infix fun <UiState : PresenterUiState> UiState.withSideEffect(sideEffect: ReduceSideEffect): ReduceResult<UiState> =
-    ReduceResult(this, sideEffect)
+data object MultiStateDestination {
+    const val route = "MultiStateDestination"
 
-fun <UiState : PresenterUiState> UiState.asResult(): ReduceResult<UiState> {
-    return ReduceResult(this, null)
+    fun composable(navGraphBuilder: NavGraphBuilder, navScope: MultiStateNavScope) {
+        navGraphBuilder.composable(route) {
+            PresentScreen<MultiStateNavScope, MultiStatePresenter>(navScope)
+        }
+    }
 }
-
-typealias ReduceSideEffect = suspend () -> Unit

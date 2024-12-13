@@ -23,35 +23,41 @@ package studio.lunabee.compose.foundation.presenter
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-abstract class LBReducer<UiState : PresenterUiState, NavScope, Action> {
+abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, NavScope, MainAction, Action : MainAction> {
     abstract val coroutineScope: CoroutineScope
 
     abstract suspend fun reduce(
         actualState: UiState,
         action: Action,
         performNavigation: (NavScope.() -> Unit) -> Unit,
-    ): ReduceResult<UiState>
+    ): ReduceResult<MainUiState>
 
+    @Suppress("UNCHECKED_CAST")
     fun collectReducer(
-        flows: List<Flow<Action>>,
+        flows: List<Flow<MainAction>>,
         actualState: () -> UiState,
         performNavigation: (NavScope.() -> Unit) -> Unit,
-    ): Flow<UiState> {
-        return flows.merge().map { action ->
+    ): Flow<MainUiState> {
+        return flows.merge().filter {
+            filterAction(it)
+        }.map { action ->
             reduce(
                 actualState = actualState(),
-                action = action,
+                action = action as Action,
                 performNavigation = performNavigation,
             )
         }
             .onEach { coroutineScope.launch { it.sideEffect?.invoke() } }
-            .map {
-                it.uiState
-            }
+            .map { it.uiState }
     }
+
+    abstract fun filterAction(
+        action: MainAction,
+    ): Boolean
 }

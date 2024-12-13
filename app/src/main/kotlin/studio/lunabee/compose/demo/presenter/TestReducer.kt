@@ -32,7 +32,7 @@ import kotlin.random.Random
 class TestReducer(
     private val performAction: (TestAction) -> Unit,
     override val coroutineScope: CoroutineScope,
-) : LBReducer<TestUiState, TestNavScope, TestAction>() {
+) : LBReducer<TestUiState, TestUiState, TestNavScope, TestAction, TestAction>() {
     override suspend fun reduce(
         actualState: TestUiState,
         action: TestAction,
@@ -56,5 +56,9 @@ class TestReducer(
                 actualState.copy(isRefreshing = false).asResult()
             }
         }
+    }
+
+    override fun filterAction(action: TestAction): Boolean {
+        return true
     }
 }
