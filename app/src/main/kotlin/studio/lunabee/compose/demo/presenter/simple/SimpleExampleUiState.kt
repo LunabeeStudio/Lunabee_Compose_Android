@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * SimpleExempleAction.kt
+ * SimpleExempleUiState.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 11/14/2024 - for the Lunabee Compose library.
@@ -21,7 +21,11 @@
 
 package studio.lunabee.compose.demo.presenter.simple
 
-sealed interface SimpleExempleAction {
-    data class NewCheckValue(val value: Boolean) : SimpleExempleAction
-    data object NewValue : SimpleExempleAction
-}
+import studio.lunabee.compose.foundation.presenter.PresenterUiState
+
+data class SimpleExampleUiState(
+    val onToggleClick: (Boolean) -> Unit,
+    val onNewValue: () -> Unit,
+    val isChecked: Boolean,
+    val text: String,
+) : PresenterUiState

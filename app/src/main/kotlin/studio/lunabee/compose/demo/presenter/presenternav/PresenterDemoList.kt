@@ -32,7 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import studio.lunabee.compose.demo.presenter.multistate.MultiStateDestination
 import studio.lunabee.compose.demo.presenter.pullToRefresh.PullToRefreshDestination
-import studio.lunabee.compose.demo.presenter.simple.SimpleExempleDestination
+import studio.lunabee.compose.demo.presenter.simple.SimpleExampleDestination
 import studio.lunabee.compose.demo.presenter.timer.TimerDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,7 +45,7 @@ fun PresenterDemoList(
             DestinationRow(
                 "Check box",
             ) {
-                navigate(SimpleExempleDestination.route)
+                navigate(SimpleExampleDestination.route)
             }
         }
         item {

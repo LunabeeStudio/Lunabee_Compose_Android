@@ -35,8 +35,8 @@ import studio.lunabee.compose.demo.presenter.multistate.MultiStateNavScope
 import studio.lunabee.compose.demo.presenter.presenternav.PresenterDemoList
 import studio.lunabee.compose.demo.presenter.pullToRefresh.PullToRefreshDestination
 import studio.lunabee.compose.demo.presenter.pullToRefresh.PullToRefreshNavScope
-import studio.lunabee.compose.demo.presenter.simple.SimpleExempleDestination
-import studio.lunabee.compose.demo.presenter.simple.SimpleExempleNavScope
+import studio.lunabee.compose.demo.presenter.simple.SimpleExampleDestination
+import studio.lunabee.compose.demo.presenter.simple.SimpleExampleNavScope
 import studio.lunabee.compose.demo.presenter.timer.TimerDestination
 import studio.lunabee.compose.demo.presenter.timer.TimerNavScope
 import studio.lunabee.compose.demo.theme.ThemeScreen
@@ -101,7 +101,7 @@ fun MainNavGraph(
             PresenterDemoList { navController.navigate(it) }
         }
 
-        SimpleExempleDestination.composable(this, object : SimpleExempleNavScope {})
+        SimpleExampleDestination.composable(this, object : SimpleExampleNavScope {})
         PullToRefreshDestination.composable(this, object : PullToRefreshNavScope {})
         TimerDestination.composable(this, object : TimerNavScope {})
         MultiStateDestination.composable(this, object : MultiStateNavScope {})

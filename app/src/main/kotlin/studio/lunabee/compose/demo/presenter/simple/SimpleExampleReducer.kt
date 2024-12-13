@@ -27,21 +27,21 @@ import studio.lunabee.compose.foundation.presenter.ReduceResult
 import studio.lunabee.compose.foundation.presenter.asResult
 import kotlin.random.Random
 
-class SimpleExempleReducer(
+class SimpleExampleReducer(
     override val coroutineScope: CoroutineScope,
-) : LBReducer<SimpleExempleUiState, SimpleExempleUiState, SimpleExempleNavScope, SimpleExempleAction, SimpleExempleAction>() {
+) : LBReducer<SimpleExampleUiState, SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction, SimpleExampleAction>() {
     override suspend fun reduce(
-        actualState: SimpleExempleUiState,
-        action: SimpleExempleAction,
-        performNavigation: (SimpleExempleNavScope.() -> Unit) -> Unit,
-    ): ReduceResult<SimpleExempleUiState> {
+        actualState: SimpleExampleUiState,
+        action: SimpleExampleAction,
+        performNavigation: (SimpleExampleNavScope.() -> Unit) -> Unit,
+    ): ReduceResult<SimpleExampleUiState> {
         return when (action) {
-            is SimpleExempleAction.NewCheckValue -> actualState.copy(isChecked = action.value).asResult()
-            SimpleExempleAction.NewValue -> actualState.copy(text = Random.nextInt().toString()).asResult()
+            is SimpleExampleAction.NewCheckValue -> actualState.copy(isChecked = action.value).asResult()
+            SimpleExampleAction.NewValue -> actualState.copy(text = Random.nextInt().toString()).asResult()
         }
     }
 
-    override fun filterAction(action: SimpleExempleAction): Boolean {
+    override fun filterAction(action: SimpleExampleAction): Boolean {
         return true
     }
 }

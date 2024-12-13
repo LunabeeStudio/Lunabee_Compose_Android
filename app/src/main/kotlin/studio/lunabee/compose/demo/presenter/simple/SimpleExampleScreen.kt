@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * SimpleExempleUiState.kt
+ * SimpleExempleScreen.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 11/14/2024 - for the Lunabee Compose library.
@@ -21,11 +21,26 @@
 
 package studio.lunabee.compose.demo.presenter.simple
 
-import studio.lunabee.compose.foundation.presenter.PresenterUiState
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 
-data class SimpleExempleUiState(
-    val onToggleClick: (Boolean) -> Unit,
-    val onNewValue: () -> Unit,
-    val isChecked: Boolean,
-    val text: String,
-) : PresenterUiState
+@Composable
+fun SimpleExempleScreen(
+    uiState: SimpleExampleUiState,
+) {
+    Column {
+        Checkbox(
+            checked = uiState.isChecked,
+            onCheckedChange = { newCheckedValue ->
+                uiState.onToggleClick(newCheckedValue)
+            },
+        )
+        Text(uiState.text)
+        Button(onClick = uiState.onNewValue) {
+            Text("Show Change value")
+        }
+    }
+}

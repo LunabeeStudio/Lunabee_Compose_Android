@@ -25,12 +25,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 
-data object SimpleExempleDestination {
+data object SimpleExampleDestination {
     val route = this.javaClass.simpleName
 
-    fun composable(navGraphBuilder: NavGraphBuilder, navScope: SimpleExempleNavScope) {
+    fun composable(navGraphBuilder: NavGraphBuilder, navScope: SimpleExampleNavScope) {
         navGraphBuilder.composable(route) {
-            val presenter: SimpleExemplePresenter = hiltViewModel()
+            val presenter: SimpleExamplePresenter = hiltViewModel()
             presenter(navScope)
         }
     }

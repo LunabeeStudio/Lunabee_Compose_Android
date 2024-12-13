@@ -21,4 +21,4 @@
 
 package studio.lunabee.compose.demo.presenter.simple
 
-interface SimpleExempleNavScope
+interface SimpleExampleNavScope
