@@ -38,6 +38,8 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 
+typealias LBSimpleReducer<UiState, NavScope, Action> = LBReducer<out UiState, UiState, NavScope, Action, out Action>
+
 abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> : ViewModel() {
 
     private val userActionChannel: Channel<Action> = Channel(Channel.UNLIMITED)
@@ -47,10 +49,10 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
 
     abstract fun initReducerByState(
         actualState: UiState,
-    ): LBReducer<UiState, UiState, NavScope, Action, Action>
+    ): LBSimpleReducer<UiState, NavScope, Action>
 
-    val reducer: MutableStateFlow<LBReducer<UiState, UiState, NavScope, Action, Action>> = MutableStateFlow(
-        initReducerByState(actualState = getInitialState()),
+    val reducer: MutableStateFlow<LBSimpleReducer<UiState, NavScope, Action>> = MutableStateFlow(
+        initReducerByState(actualState = getInitialState())
     )
 
     private val navigation: MutableStateFlow<(NavScope.() -> Unit)?> = MutableStateFlow(null)

@@ -25,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -41,17 +42,19 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
     @Suppress("UNCHECKED_CAST")
     fun collectReducer(
         flows: List<Flow<MainAction>>,
-        actualState: () -> UiState,
+        actualState: () -> MainUiState,
         performNavigation: (NavScope.() -> Unit) -> Unit,
     ): Flow<MainUiState> {
         return flows.merge().filter {
             filterAction(it)
-        }.map { action ->
-            reduce(
-                actualState = actualState(),
-                action = action as Action,
-                performNavigation = performNavigation,
-            )
+        }.mapNotNull { action ->
+            (actualState() as? UiState)?.let {
+                reduce(
+                    actualState = it,
+                    action = action as Action,
+                    performNavigation = performNavigation,
+                )
+            }
         }
             .onEach { coroutineScope.launch { it.sideEffect?.invoke() } }
             .map { it.uiState }

@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import studio.lunabee.compose.foundation.presenter.LBPresenter
 import studio.lunabee.compose.foundation.presenter.LBReducer
+import studio.lunabee.compose.foundation.presenter.LBSimpleReducer
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,11 +54,11 @@ class MultiStatePresenter @Inject constructor() : LBPresenter<MultiStateUiState,
 
     override fun getInitialState(): MultiStateUiState = MultiStateUiState.Data
     override fun initReducerByState(actualState: MultiStateUiState):
-        LBReducer<MultiStateUiState, MultiStateUiState, MultiStateNavScope, MultiStateAction, MultiStateAction> {
+        LBSimpleReducer<MultiStateUiState, MultiStateNavScope, MultiStateAction> {
         return when (actualState) {
             MultiStateUiState.Data -> MultiStateDataReducer(viewModelScope)
             MultiStateUiState.Error -> MultiStateErrorReducer(viewModelScope)
-        } as LBReducer<MultiStateUiState, MultiStateUiState, MultiStateNavScope, MultiStateAction, MultiStateAction>
+        }
     }
 
     override val content: @Composable (MultiStateUiState) -> Unit = {
