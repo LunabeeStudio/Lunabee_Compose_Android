@@ -80,8 +80,8 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
                 actualState = { actualStateSaved },
                 performNavigation = ::performNavigation,
             ).onEach {
-                if (actualStateSaved.javaClass != it.javaClass) {
                     reducer.value = initReducerByState(actualState = it)
+                if (actualStateSaved::class != state::class) {
                 }
                 actualStateSaved = it
             }
