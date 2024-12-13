@@ -21,16 +21,17 @@
 
 package studio.lunabee.compose.demo.presenter.simple
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import studio.lunabee.compose.foundation.presenter.PresentScreen
 
 data object SimpleExempleDestination {
     val route = this.javaClass.simpleName
 
     fun composable(navGraphBuilder: NavGraphBuilder, navScope: SimpleExempleNavScope) {
         navGraphBuilder.composable(route) {
-            PresentScreen<SimpleExempleNavScope, SimpleExemplePresenter>(navScope)
+            val presenter: SimpleExemplePresenter = hiltViewModel()
+            presenter(navScope)
         }
     }
 }

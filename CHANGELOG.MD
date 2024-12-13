@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### LbcPresenter
+
+- New module containing LbcPresenter && LbcReducer
+
 ### LbcUiField
 
 #### Fixed
