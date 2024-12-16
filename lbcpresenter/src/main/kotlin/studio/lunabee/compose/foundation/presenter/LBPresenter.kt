@@ -47,7 +47,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
 
     abstract fun getInitialState(): UiState
 
-    abstract fun initReducerByState(
+    abstract fun getReducerByState(
         actualState: UiState,
     ): LBSimpleReducer<UiState, NavScope, Action>
 
@@ -70,7 +70,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
     @OptIn(ExperimentalCoroutinesApi::class)
     private val uiStateFlow: StateFlow<UiState> by lazy {
         val reducer: MutableStateFlow<LBSimpleReducer<UiState, NavScope, Action>> = MutableStateFlow(
-            initReducerByState(actualState = getInitialState()),
+            getReducerByState(actualState = getInitialState()),
         )
 
         var actualStateSaved: UiState = getInitialState()
@@ -81,7 +81,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
                 performNavigation = ::performNavigation,
             ).onEach { state ->
                 if (actualStateSaved::class != state::class) {
-                    reducer.value = initReducerByState(actualState = state)
+                    reducer.value = getReducerByState(actualState = state)
                 }
                 actualStateSaved = state
             }

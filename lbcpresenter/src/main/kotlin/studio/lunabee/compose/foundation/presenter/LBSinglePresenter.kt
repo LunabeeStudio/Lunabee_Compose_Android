@@ -25,7 +25,7 @@ package studio.lunabee.compose.foundation.presenter
  * Subclass of [LBPresenter] to implement a single state presenter
  */
 abstract class LBSinglePresenter<UiState : PresenterUiState, NavScope : Any, Action> : LBPresenter<UiState, NavScope, Action>() {
-    final override fun initReducerByState(
+    final override fun getReducerByState(
         actualState: UiState,
     ): LBSingleReducer<UiState, NavScope, Action> {
         return initReducer()

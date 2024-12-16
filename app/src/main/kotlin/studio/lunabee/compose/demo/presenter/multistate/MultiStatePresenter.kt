@@ -51,7 +51,7 @@ class MultiStatePresenter @Inject constructor() : LBPresenter<MultiStateUiState,
     override val flows: List<Flow<MultiStateAction>> = listOf(flow)
 
     override fun getInitialState(): MultiStateUiState = MultiStateUiState.Data("unknown")
-    override fun initReducerByState(actualState: MultiStateUiState):
+    override fun getReducerByState(actualState: MultiStateUiState):
         LBSimpleReducer<MultiStateUiState, MultiStateNavScope, MultiStateAction> {
         return when (actualState) {
             is MultiStateUiState.Data -> MultiStateDataReducer(viewModelScope)
