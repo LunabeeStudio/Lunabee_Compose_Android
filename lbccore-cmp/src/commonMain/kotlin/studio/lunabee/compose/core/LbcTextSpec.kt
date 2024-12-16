@@ -34,6 +34,7 @@ import studio.lunabee.compose.core.ext.format
 import kotlin.collections.contentEquals
 import kotlin.collections.contentHashCode
 import kotlin.collections.isEmpty
+import kotlin.js.JsName
 
 @Stable
 sealed class LbcTextSpec {
@@ -45,7 +46,8 @@ sealed class LbcTextSpec {
         @Composable
         get
 
-    abstract suspend fun stringBlocking(): String
+    @JsName("stringBlocking")
+    abstract suspend fun string(): String
 
     @Composable
     protected fun Array<out Any>.resolveArgs(): Array<out Any> {
@@ -63,7 +65,7 @@ sealed class LbcTextSpec {
         return Array(this.size) { idx ->
             val entry = this[idx]
             if (entry is LbcTextSpec) {
-                entry.stringBlocking() // marked as compile error due to Java(?)
+                entry.string() // marked as compile error due to Java(?)
             } else {
                 this[idx]
             }
@@ -86,7 +88,7 @@ sealed class LbcTextSpec {
                 value.format(*args.resolveArgs())
             }
 
-        override suspend fun stringBlocking(): String =
+        override suspend fun string(): String =
             if (args.isEmpty()) {
                 value
             } else {
@@ -122,7 +124,7 @@ sealed class LbcTextSpec {
             @Composable
             get() = value.text
 
-        override suspend fun stringBlocking(): String = value.text
+        override suspend fun string(): String = value.text
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -158,7 +160,7 @@ sealed class LbcTextSpec {
             @Suppress("SpreadOperator")
             get() = stringResource(resource).format(*args.resolveArgs())
 
-        override suspend fun stringBlocking(): String =
+        override suspend fun string(): String =
             @Suppress("SpreadOperator")
             getString(resource, *args.resolveArgsSuspend())
 
@@ -198,7 +200,7 @@ sealed class LbcTextSpec {
             @Suppress("SpreadOperator")
             get() = pluralStringResource(resource, count).format(*args.resolveArgs())
 
-        override suspend fun stringBlocking(): String =
+        override suspend fun string(): String =
             @Suppress("SpreadOperator")
             getPluralString(resource, count, *args.resolveArgsSuspend())
 
@@ -248,7 +250,7 @@ sealed class LbcTextSpec {
                 return stringResource(resource).format(*args.resolveArgs())
             }
 
-        override suspend fun stringBlocking(): String =
+        override suspend fun string(): String =
             @Suppress("SpreadOperator")
             getString(
                 resource = allStringResources[key] ?: fallbackResource,
