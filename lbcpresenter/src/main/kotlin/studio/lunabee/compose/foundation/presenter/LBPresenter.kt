@@ -33,9 +33,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 
 typealias LBSimpleReducer<UiState, NavScope, Action> = LBReducer<out UiState, UiState, NavScope, Action, out Action>
@@ -76,7 +76,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
         var actualStateSaved: UiState = getInitialState()
         reducer.flatMapLatest {
             it.collectReducer(
-                flows = flows + userActionChannel.consumeAsFlow(),
+                flows = flows + userActionChannel.receiveAsFlow(),
                 actualState = { actualStateSaved },
                 performNavigation = ::performNavigation,
             ).onEach { state ->
