@@ -82,6 +82,16 @@ kotlin {
         }
         binaries.executable()
     }
+    js {
+        browser {
+            testTask {
+                useKarma {
+                    useFirefox()
+                }
+            }
+        }
+        binaries.executable()
+    }
 }
 
 tasks.register("sourceJar", Jar::class) {

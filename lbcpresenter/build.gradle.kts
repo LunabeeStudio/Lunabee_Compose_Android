@@ -46,11 +46,24 @@ kotlin {
         freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
     }
 
+    applyDefaultHierarchyTemplate()
+
     sourceSets {
         commonMain.dependencies {
             implementation(compose.ui)
             implementation(compose.runtime)
             implementation(libs.jetbrains.viewmodel)
+        }
+
+        val webMain by creating {
+            dependsOn(commonMain.get())
+        }
+
+        wasmJsMain {
+            dependsOn(webMain)
+        }
+        jsMain {
+            dependsOn(webMain)
         }
     }
 }
