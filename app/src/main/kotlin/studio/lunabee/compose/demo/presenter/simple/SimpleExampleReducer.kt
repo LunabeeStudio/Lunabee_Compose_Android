@@ -22,14 +22,14 @@
 package studio.lunabee.compose.demo.presenter.simple
 
 import kotlinx.coroutines.CoroutineScope
-import studio.lunabee.compose.foundation.presenter.LBReducer
+import studio.lunabee.compose.foundation.presenter.LBSingleReducer
 import studio.lunabee.compose.foundation.presenter.ReduceResult
 import studio.lunabee.compose.foundation.presenter.asResult
 import kotlin.random.Random
 
 class SimpleExampleReducer(
     override val coroutineScope: CoroutineScope,
-) : LBReducer<SimpleExampleUiState, SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction, SimpleExampleAction>() {
+) : LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>() {
     override suspend fun reduce(
         actualState: SimpleExampleUiState,
         action: SimpleExampleAction,
@@ -39,9 +39,5 @@ class SimpleExampleReducer(
             is SimpleExampleAction.NewCheckValue -> actualState.copy(isChecked = action.value).asResult()
             SimpleExampleAction.NewValue -> actualState.copy(text = Random.nextInt().toString()).asResult()
         }
-    }
-
-    override fun filterAction(action: SimpleExampleAction): Boolean {
-        return true
     }
 }

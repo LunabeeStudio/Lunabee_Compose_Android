@@ -25,14 +25,14 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import studio.lunabee.compose.foundation.presenter.LBPresenter
-import studio.lunabee.compose.foundation.presenter.LBReducer
+import studio.lunabee.compose.foundation.presenter.LBSinglePresenter
+import studio.lunabee.compose.foundation.presenter.LBSingleReducer
 import javax.inject.Inject
 
 @HiltViewModel
-class SimpleExamplePresenter @Inject constructor() : LBPresenter<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>() {
-
+class SimpleExamplePresenter @Inject constructor() : LBSinglePresenter<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>() {
     override val flows: List<Flow<SimpleExampleAction>> = listOf()
+
     override fun getInitialState(): SimpleExampleUiState = SimpleExampleUiState(
         onToggleClick = { emitUserAction(SimpleExampleAction.NewCheckValue(it)) },
         onNewValue = { emitUserAction(SimpleExampleAction.NewValue) },
@@ -40,8 +40,7 @@ class SimpleExamplePresenter @Inject constructor() : LBPresenter<SimpleExampleUi
         text = "Init",
     )
 
-    override fun initReducerByState(actualState: SimpleExampleUiState):
-        LBReducer<SimpleExampleUiState, SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction, SimpleExampleAction> {
+    override fun initReducer(): LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction> {
         return SimpleExampleReducer(viewModelScope)
     }
 

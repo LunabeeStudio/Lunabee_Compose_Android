@@ -70,7 +70,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
     @OptIn(ExperimentalCoroutinesApi::class)
     private val uiStateFlow: StateFlow<UiState> by lazy {
         val reducer: MutableStateFlow<LBSimpleReducer<UiState, NavScope, Action>> = MutableStateFlow(
-            initReducerByState(actualState = getInitialState())
+            initReducerByState(actualState = getInitialState()),
         )
 
         var actualStateSaved: UiState = getInitialState()

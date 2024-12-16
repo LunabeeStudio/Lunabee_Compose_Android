@@ -23,7 +23,7 @@ package studio.lunabee.compose.demo.presenter.pullToRefresh
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
-import studio.lunabee.compose.foundation.presenter.LBReducer
+import studio.lunabee.compose.foundation.presenter.LBSingleReducer
 import studio.lunabee.compose.foundation.presenter.ReduceResult
 import studio.lunabee.compose.foundation.presenter.asResult
 import studio.lunabee.compose.foundation.presenter.withSideEffect
@@ -31,7 +31,7 @@ import studio.lunabee.compose.foundation.presenter.withSideEffect
 class PullToRefreshReducer(
     override val coroutineScope: CoroutineScope,
     private val executeAction: (PullToRefreshAction) -> Unit,
-) : LBReducer<PullToRefreshUiState, PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction, PullToRefreshAction>() {
+) : LBSingleReducer<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction>() {
     override suspend fun reduce(
         actualState: PullToRefreshUiState,
         action: PullToRefreshAction,
@@ -44,9 +44,5 @@ class PullToRefreshReducer(
             }
             PullToRefreshAction.StopRefresh -> actualState.copy(isRefreshing = false).asResult()
         }
-    }
-
-    override fun filterAction(action: PullToRefreshAction): Boolean {
-        return true
     }
 }

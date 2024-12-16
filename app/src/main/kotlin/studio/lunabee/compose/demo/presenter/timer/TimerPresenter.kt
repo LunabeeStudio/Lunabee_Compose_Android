@@ -28,13 +28,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import studio.lunabee.compose.foundation.presenter.LBPresenter
-import studio.lunabee.compose.foundation.presenter.LBReducer
+import studio.lunabee.compose.foundation.presenter.LBSinglePresenter
+import studio.lunabee.compose.foundation.presenter.LBSingleReducer
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
-class TimerPresenter @Inject constructor() : LBPresenter<TimerUiState, TimerNavScope, TimerAction>() {
+class TimerPresenter @Inject constructor() : LBSinglePresenter<TimerUiState, TimerNavScope, TimerAction>() {
     private val timerFlow: Flow<TimerAction.NewTimerValue> = flow {
         var value: Int = 0
         while (true) {
@@ -44,12 +44,12 @@ class TimerPresenter @Inject constructor() : LBPresenter<TimerUiState, TimerNavS
     }.map { TimerAction.NewTimerValue(it) }
 
     override val flows: List<Flow<TimerAction>> = listOf(timerFlow)
+
     override fun getInitialState(): TimerUiState = TimerUiState(
         timer = 0,
     )
 
-    override fun initReducerByState(actualState: TimerUiState):
-        LBReducer<TimerUiState, TimerUiState, TimerNavScope, TimerAction, TimerAction> {
+    override fun initReducer(): LBSingleReducer<TimerUiState, TimerNavScope, TimerAction> {
         return TimerReducer(viewModelScope)
     }
 

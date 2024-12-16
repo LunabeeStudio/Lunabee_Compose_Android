@@ -25,13 +25,13 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import studio.lunabee.compose.foundation.presenter.LBPresenter
-import studio.lunabee.compose.foundation.presenter.LBReducer
+import studio.lunabee.compose.foundation.presenter.LBSinglePresenter
+import studio.lunabee.compose.foundation.presenter.LBSingleReducer
 import javax.inject.Inject
 
 @HiltViewModel
 class PullToRefreshPresenter @Inject constructor() :
-    LBPresenter<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction>() {
+    LBSinglePresenter<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction>() {
 
     override val flows: List<Flow<PullToRefreshAction>> = listOf()
     override fun getInitialState(): PullToRefreshUiState = PullToRefreshUiState(
@@ -39,8 +39,7 @@ class PullToRefreshPresenter @Inject constructor() :
         refresh = { emitUserAction(PullToRefreshAction.Refresh) },
     )
 
-    override fun initReducerByState(actualState: PullToRefreshUiState):
-        LBReducer<PullToRefreshUiState, PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction, PullToRefreshAction> =
+    override fun initReducer(): LBSingleReducer<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction> =
         PullToRefreshReducer(
             coroutineScope = viewModelScope,
             executeAction = { emitUserAction(it) },

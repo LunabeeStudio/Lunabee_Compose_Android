@@ -22,13 +22,13 @@
 package studio.lunabee.compose.demo.presenter.timer
 
 import kotlinx.coroutines.CoroutineScope
-import studio.lunabee.compose.foundation.presenter.LBReducer
+import studio.lunabee.compose.foundation.presenter.LBSingleReducer
 import studio.lunabee.compose.foundation.presenter.ReduceResult
 import studio.lunabee.compose.foundation.presenter.asResult
 
 class TimerReducer(
     override val coroutineScope: CoroutineScope,
-) : LBReducer<TimerUiState, TimerUiState, TimerNavScope, TimerAction, TimerAction>() {
+) : LBSingleReducer<TimerUiState, TimerNavScope, TimerAction>() {
     override suspend fun reduce(
         actualState: TimerUiState,
         action: TimerAction,
@@ -37,9 +37,5 @@ class TimerReducer(
         return when (action) {
             is TimerAction.NewTimerValue -> actualState.copy(timer = action.timerValue).asResult()
         }
-    }
-
-    override fun filterAction(action: TimerAction): Boolean {
-        return true
     }
 }
