@@ -13,24 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * ReduceResult.kt
+ * TimerScreen.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 11/4/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 11/14/2024 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.presenter
+package studio.lunabee.compose.demo.presenter.timer
 
-data class ReduceResult<UiState>(
-    val uiState: UiState,
-    val sideEffect: ReduceSideEffect?,
-)
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
-infix fun <UiState : PresenterUiState> UiState.withSideEffect(sideEffect: ReduceSideEffect): ReduceResult<UiState> =
-    ReduceResult(this, sideEffect)
-
-fun <UiState : PresenterUiState> UiState.asResult(): ReduceResult<UiState> {
-    return ReduceResult(this, null)
+@Composable
+fun TimerScreen(
+    uiState: TimerUiState,
+) {
+    Text(
+        uiState.timer.toString(),
+        style = MaterialTheme.typography.titleLarge,
+        modifier = Modifier.padding(16.dp),
+    )
 }
-
-typealias ReduceSideEffect = suspend () -> Unit

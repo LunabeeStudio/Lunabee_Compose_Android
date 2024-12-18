@@ -53,9 +53,11 @@ fun MenuEntry(
 
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
 
-        Text(
-            text = menu.subtitleRes.string,
-            style = MaterialTheme.typography.bodyLarge,
-        )
+        menu.subtitleRes?.let { subtitle ->
+            Text(
+                text = subtitle.string,
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        }
     }
 }

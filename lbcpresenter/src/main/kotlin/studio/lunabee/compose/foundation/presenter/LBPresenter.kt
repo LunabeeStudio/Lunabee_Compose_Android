@@ -27,22 +27,47 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
+
+/**
+ * Typealias to represent a simplify reducer declaration in presenter.
+ */
+typealias LBSimpleReducer<UiState, NavScope, Action> = LBReducer<out UiState, UiState, NavScope, Action, out Action>
 
 abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> : ViewModel() {
 
-    open val userActionFlow: MutableSharedFlow<Action> = MutableSharedFlow(extraBufferCapacity = 10)
+    /**
+     * Channel to send user actions to the active reducer.
+     */
+    private val userActionChannel: Channel<Action> = Channel(Channel.UNLIMITED)
+
+    /**
+     * List of action flows merged and collected by the reducer in addition of the [userActionChannel].
+     */
     abstract val flows: List<Flow<Action>>
 
+    /**
+     * Initial UiState displayed when the presenter is created.
+     */
     abstract fun getInitialState(): UiState
 
-    abstract val reducer: LBReducer<UiState, NavScope, Action>
+    /**
+     * Called every time the [UiState] class changes.
+     * @param actualState the newly displayed [UiState]
+     * @return the new reducer corresponding the [actualState]
+     */
+    abstract fun getReducerByState(
+        actualState: UiState,
+    ): LBSimpleReducer<UiState, NavScope, Action>
 
     private val navigation: MutableStateFlow<(NavScope.() -> Unit)?> = MutableStateFlow(null)
 
@@ -54,19 +79,48 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
         navigation.value = navigateAction
     }
 
-    abstract val content: @Composable (UiState) -> Unit
-
-    private val uiStateFlow: StateFlow<UiState> by lazy {
-        var actualStateSaved: UiState = getInitialState()
-        reducer.collectReducer(
-            flows = flows + userActionFlow,
-            actualState = { actualStateSaved },
-            performNavigation = ::performNavigation,
-        ).onEach {
-            actualStateSaved = it
-        }.stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(1_000), actualStateSaved)
+    /**
+     * Emit a user action to the active reducer via [userActionChannel].
+     */
+    fun emitUserAction(action: Action) {
+        userActionChannel.trySend(action)
     }
 
+    /**
+     * Content of the screen handled by the presenter with the current [UiState].
+     */
+    abstract val content: @Composable (UiState) -> Unit
+
+    /**
+     * StateFlow of the current [UiState] collected in the the [invoke] composable.
+     * Handles the reducer change automatically
+     */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private val uiStateFlow: StateFlow<UiState> by lazy {
+        val reducer: MutableStateFlow<LBSimpleReducer<UiState, NavScope, Action>> = MutableStateFlow(
+            getReducerByState(actualState = getInitialState()),
+        )
+
+        var actualStateSaved: UiState = getInitialState()
+        reducer.flatMapLatest {
+            it.collectReducer(
+                flows = flows + userActionChannel.receiveAsFlow(),
+                actualState = { actualStateSaved },
+                performNavigation = ::performNavigation,
+            ).onEach { state ->
+                if (actualStateSaved::class != state::class) {
+                    reducer.value = getReducerByState(actualState = state)
+                }
+                actualStateSaved = state
+            }
+        }.stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
+    }
+
+    /**
+     * Function called to initialize the presenter and display the screen content.
+     * Handles navigation calls and consumes them automatically
+     * Collect the [uiStateFlow] to display the screen content.
+     */
     @Composable
     operator fun invoke(navScope: NavScope) {
         val navigation by navigation.collectAsStateWithLifecycle()
