@@ -31,14 +31,35 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, NavScope, MainAction, Action : MainAction> {
+    /**
+     * CoroutineScope in witch side effects are executed.
+     */
     abstract val coroutineScope: CoroutineScope
 
+    /**
+     * Emit a user action to the active reducer. Provided by the presenter
+     */
+    abstract val emitUserAction: (Action) -> Unit
+
+    /**
+     * Call each time an [Action] is collected by [collectReducer]
+     * @param actualState the current [UiState] of the screen displayed
+     * @param action the [Action] collected by [collectReducer]
+     * @param performNavigation allows to access the [NavScope] to perform navigation
+     * @return [ReduceResult] containing the new [UiState] and an optional SideEffect to execute right after the [UiState] update
+     */
     abstract suspend fun reduce(
         actualState: UiState,
         action: Action,
         performNavigation: (NavScope.() -> Unit) -> Unit,
     ): ReduceResult<MainUiState>
 
+    /**
+     * Called by the presenter to create the uiStateFlow
+     * merges all the actions [flows] provided by the presenter
+     * @param actualState the current [UiState] of the screen displayed stored by the Presenter
+     * @param performNavigation allows to access the [NavScope] to perform navigation
+     */
     @Suppress("UNCHECKED_CAST")
     fun collectReducer(
         flows: List<Flow<MainAction>>,
@@ -60,6 +81,9 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
             .map { it.uiState }
     }
 
+    /**
+     * Filters action handled by the reduce function
+     */
     abstract fun filterAction(
         action: MainAction,
     ): Boolean

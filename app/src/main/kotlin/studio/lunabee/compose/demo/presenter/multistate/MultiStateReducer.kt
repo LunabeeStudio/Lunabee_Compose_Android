@@ -31,6 +31,7 @@ abstract class MultiStateReducer<State : MultiStateUiState, MultiStateNavScope, 
 
 class MultiStateDataReducer(
     override val coroutineScope: CoroutineScope,
+    override val emitUserAction: (MultiStateAction.DataAction) -> Unit,
 ) : MultiStateReducer<MultiStateUiState.Data, MultiStateNavScope, MultiStateAction.DataAction>() {
     override suspend fun reduce(
         actualState: MultiStateUiState.Data,
@@ -50,6 +51,7 @@ class MultiStateDataReducer(
 
 class MultiStateErrorReducer(
     override val coroutineScope: CoroutineScope,
+    override val emitUserAction: (MultiStateAction.ErrorAction) -> Unit,
 ) : MultiStateReducer<MultiStateUiState.Error, MultiStateNavScope, MultiStateAction.ErrorAction>() {
     override suspend fun reduce(
         actualState: MultiStateUiState.Error,

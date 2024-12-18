@@ -29,6 +29,7 @@ import kotlin.random.Random
 
 class SimpleExampleReducer(
     override val coroutineScope: CoroutineScope,
+    override val emitUserAction: (SimpleExampleAction) -> Unit,
 ) : LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>() {
     override suspend fun reduce(
         actualState: SimpleExampleUiState,

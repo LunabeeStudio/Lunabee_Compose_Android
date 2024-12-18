@@ -50,7 +50,10 @@ class TimerPresenter @Inject constructor() : LBSinglePresenter<TimerUiState, Tim
     )
 
     override fun initReducer(): LBSingleReducer<TimerUiState, TimerNavScope, TimerAction> {
-        return TimerReducer(viewModelScope)
+        return TimerReducer(
+            coroutineScope = viewModelScope,
+            emitUserAction = ::emitUserAction,
+        )
     }
 
     override val content: @Composable (TimerUiState) -> Unit = { TimerScreen(it) }

@@ -54,8 +54,14 @@ class MultiStatePresenter @Inject constructor() : LBPresenter<MultiStateUiState,
     override fun getReducerByState(actualState: MultiStateUiState):
         LBSimpleReducer<MultiStateUiState, MultiStateNavScope, MultiStateAction> {
         return when (actualState) {
-            is MultiStateUiState.Data -> MultiStateDataReducer(viewModelScope)
-            is MultiStateUiState.Error -> MultiStateErrorReducer(viewModelScope)
+            is MultiStateUiState.Data -> MultiStateDataReducer(
+                coroutineScope = viewModelScope,
+                emitUserAction = ::emitUserAction,
+            )
+            is MultiStateUiState.Error -> MultiStateErrorReducer(
+                coroutineScope = viewModelScope,
+                emitUserAction = ::emitUserAction,
+            )
         }
     }
 

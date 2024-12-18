@@ -42,7 +42,7 @@ class PullToRefreshPresenter @Inject constructor() :
     override fun initReducer(): LBSingleReducer<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction> =
         PullToRefreshReducer(
             coroutineScope = viewModelScope,
-            executeAction = { emitUserAction(it) },
+            emitUserAction = ::emitUserAction,
         )
 
     override val content: @Composable (PullToRefreshUiState) -> Unit = { PullToRefreshScreen(it) }

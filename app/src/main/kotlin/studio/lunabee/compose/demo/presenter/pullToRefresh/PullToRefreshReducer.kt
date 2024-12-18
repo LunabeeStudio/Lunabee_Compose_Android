@@ -30,7 +30,7 @@ import studio.lunabee.compose.foundation.presenter.withSideEffect
 
 class PullToRefreshReducer(
     override val coroutineScope: CoroutineScope,
-    private val executeAction: (PullToRefreshAction) -> Unit,
+    override val emitUserAction: (PullToRefreshAction) -> Unit,
 ) : LBSingleReducer<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction>() {
     override suspend fun reduce(
         actualState: PullToRefreshUiState,
@@ -40,7 +40,7 @@ class PullToRefreshReducer(
         return when (action) {
             PullToRefreshAction.Refresh -> actualState.copy(isRefreshing = true) withSideEffect {
                 delay(1000) // Simulate loading
-                executeAction(PullToRefreshAction.StopRefresh)
+                emitUserAction(PullToRefreshAction.StopRefresh)
             }
             PullToRefreshAction.StopRefresh -> actualState.copy(isRefreshing = false).asResult()
         }
