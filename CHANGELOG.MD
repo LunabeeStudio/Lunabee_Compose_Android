@@ -21,6 +21,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### All
 
 - Update dependencies (including compose 1.7 and Android SDK 35)
+- Add branch name in version for snapshots
 
 ### LbcGlance
 
