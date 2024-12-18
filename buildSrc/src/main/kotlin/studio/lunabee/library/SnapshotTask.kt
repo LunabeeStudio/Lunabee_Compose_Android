@@ -34,7 +34,7 @@ abstract class SnapshotTask : DefaultTask() {
         val newContents = file
             .readText()
             .replace(
-                regex = Regex("${project.properties["libName"]}: String = \"[^\"]*")
+                regex = Regex("${project.properties["libName"]}: String = \"[^\"]*"),
             ) { matchResult ->
                 "${matchResult.value}-$branch-${project.properties["counter"]}-SNAPSHOT"
             }
