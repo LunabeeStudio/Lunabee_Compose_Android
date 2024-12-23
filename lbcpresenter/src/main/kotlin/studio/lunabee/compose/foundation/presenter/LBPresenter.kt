@@ -29,11 +29,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -103,19 +103,22 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
         )
 
         var actualStateSaved: UiState = getInitialState()
-        reducer.flatMapLatest {
-            it.collectReducer(
-                flows = flows + userActionChannel.receiveAsFlow(),
-                actualState = { actualStateSaved },
-                performNavigation = ::performNavigation,
-            ).onEach { state ->
-                if (actualStateSaved::class != state::class) {
-                    reducer.emit(getReducerByState(actualState = state))
+        reducer
+            .flatMapLatest {
+                it.collectReducer(
+                    flows = flows + userActionChannel.receiveAsFlow(),
+                    actualState = { actualStateSaved },
+                    performNavigation = ::performNavigation,
+                ).onEach { state ->
+                    if (actualStateSaved::class != state::class) {
+                        reducer.emit(getReducerByState(actualState = state))
+                    }
+                    actualStateSaved = state
+                    if (actualStateSaved::class != state::class) {
+                        delay(100)
+                    }
                 }
-                actualStateSaved = state
             }
-        }
-            .conflate()
             .stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
     }
 
