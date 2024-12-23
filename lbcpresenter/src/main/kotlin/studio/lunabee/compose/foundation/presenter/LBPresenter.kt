@@ -38,6 +38,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * Typealias to represent a simplify reducer declaration in presenter.
@@ -115,7 +116,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
                     }
                     actualStateSaved = state
                     if (actualStateSaved::class != state::class) {
-                        delay(100)
+                        delay(5.seconds)
                     }
                 }
             }
