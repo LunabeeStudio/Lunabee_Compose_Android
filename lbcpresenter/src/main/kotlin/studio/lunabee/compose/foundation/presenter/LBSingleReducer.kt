@@ -26,4 +26,5 @@ package studio.lunabee.compose.foundation.presenter
  */
 abstract class LBSingleReducer<UiState : PresenterUiState, NavScope, Action> : LBReducer<UiState, UiState, NavScope, Action, Action>() {
     final override fun filterAction(action: Action): Boolean = true
+    final override fun filterUiState(actualState: UiState): Boolean = true
 }

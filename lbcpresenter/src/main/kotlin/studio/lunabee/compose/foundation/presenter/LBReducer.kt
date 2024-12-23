@@ -67,7 +67,7 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
         performNavigation: (NavScope.() -> Unit) -> Unit,
     ): Flow<MainUiState> {
         return flows.merge().filter {
-            filterAction(it)
+            filterAction(it) && filterUiState(actualState())
         }.mapNotNull { action ->
             (actualState() as? UiState)?.let {
                 reduce(
@@ -86,5 +86,12 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
      */
     abstract fun filterAction(
         action: MainAction,
+    ): Boolean
+
+    /**
+     * Filters uiState handled by the reduce function
+     */
+    abstract fun filterUiState(
+        actualState: MainUiState,
     ): Boolean
 }

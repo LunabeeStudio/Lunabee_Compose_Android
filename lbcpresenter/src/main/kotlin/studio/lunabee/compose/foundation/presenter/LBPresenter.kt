@@ -29,7 +29,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -38,7 +37,6 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
-import kotlin.time.Duration.Companion.seconds
 
 /**
  * Typealias to represent a simplify reducer declaration in presenter.
@@ -115,9 +113,6 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
                         reducer.emit(getReducerByState(actualState = state))
                     }
                     actualStateSaved = state
-                    if (actualStateSaved::class != state::class) {
-                        delay(5.seconds)
-                    }
                 }
             }
             .stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
