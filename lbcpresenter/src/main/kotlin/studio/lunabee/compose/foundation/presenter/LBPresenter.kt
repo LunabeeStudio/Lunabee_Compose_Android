@@ -109,7 +109,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
                 performNavigation = ::performNavigation,
             ).onEach { state ->
                 if (actualStateSaved::class != state::class) {
-                    reducer.value = getReducerByState(actualState = state)
+                    reducer.emit(getReducerByState(actualState = state))
                 }
                 actualStateSaved = state
             }
