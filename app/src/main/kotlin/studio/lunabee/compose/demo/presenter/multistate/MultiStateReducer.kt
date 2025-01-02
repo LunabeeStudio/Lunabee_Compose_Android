@@ -47,6 +47,10 @@ class MultiStateDataReducer(
     override fun filterAction(action: MultiStateAction): Boolean {
         return action is MultiStateAction.DataAction
     }
+
+    override fun filterUiState(actualState: MultiStateUiState): Boolean {
+        return actualState is MultiStateUiState.Data
+    }
 }
 
 class MultiStateErrorReducer(
@@ -66,5 +70,9 @@ class MultiStateErrorReducer(
 
     override fun filterAction(action: MultiStateAction): Boolean {
         return action is MultiStateAction.ErrorAction
+    }
+
+    override fun filterUiState(actualState: MultiStateUiState): Boolean {
+        return actualState is MultiStateUiState.Error
     }
 }

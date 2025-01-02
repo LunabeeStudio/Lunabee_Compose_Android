@@ -102,18 +102,20 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
         )
 
         var actualStateSaved: UiState = getInitialState()
-        reducer.flatMapLatest {
-            it.collectReducer(
-                flows = flows + userActionChannel.receiveAsFlow(),
-                actualState = { actualStateSaved },
-                performNavigation = ::performNavigation,
-            ).onEach { state ->
-                if (actualStateSaved::class != state::class) {
-                    reducer.value = getReducerByState(actualState = state)
+        reducer
+            .flatMapLatest {
+                it.collectReducer(
+                    flows = flows + userActionChannel.receiveAsFlow(),
+                    actualState = { actualStateSaved },
+                    performNavigation = ::performNavigation,
+                ).onEach { state ->
+                    if (actualStateSaved::class != state::class) {
+                        reducer.emit(getReducerByState(actualState = state))
+                    }
+                    actualStateSaved = state
                 }
-                actualStateSaved = state
             }
-        }.stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
+            .stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
     }
 
     /**
