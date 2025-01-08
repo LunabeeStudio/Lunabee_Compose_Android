@@ -37,6 +37,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 /**
  * Typealias to represent a simplify reducer declaration in presenter.
@@ -83,7 +84,9 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
      * Emit a user action to the active reducer via [userActionChannel].
      */
     fun emitUserAction(action: Action) {
-        userActionChannel.trySend(action)
+        viewModelScope.launch {
+            userActionChannel.send(action)
+        }
     }
 
     /**
