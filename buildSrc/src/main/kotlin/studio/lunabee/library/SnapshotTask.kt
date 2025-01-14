@@ -36,7 +36,7 @@ abstract class SnapshotTask : DefaultTask() {
             .replace(
                 regex = libVersion(),
             ) { matchResult ->
-                "${matchResult.value}-$branch-${project.properties["counter"]}-SNAPSHOT"
+                "${matchResult.value}-alpha-${project.properties["counter"]}-$branch-SNAPSHOT"
             }
         file.writeText(newContents)
 

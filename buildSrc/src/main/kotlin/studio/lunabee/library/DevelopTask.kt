@@ -34,7 +34,7 @@ abstract class DevelopTask : DefaultTask() {
             .replace(
                 regex = libVersion(),
             ) { matchResult ->
-                "${matchResult.value}-dev-${project.properties["counter"]}"
+                "${matchResult.value}-rc-${project.properties["counter"]}"
             }
         file.writeText(newContents)
 
