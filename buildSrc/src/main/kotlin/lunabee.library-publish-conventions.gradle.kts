@@ -22,6 +22,7 @@
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.DefaultAndroidSourceDirectorySet
 import org.gradle.configurationcache.extensions.capitalized
+import studio.lunabee.library.DevelopTask
 import studio.lunabee.library.SnapshotTask
 import studio.lunabee.library.VersionTask
 import java.net.URI
@@ -236,3 +237,4 @@ afterEvaluate {
 
 tasks.register("${project.name}Version", VersionTask::class.java)
 tasks.register("${project.name}setSnapshotVersion", SnapshotTask::class.java)
+tasks.register("${project.name}setDevelopVersion", DevelopTask::class.java)
