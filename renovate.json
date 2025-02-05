@@ -1,6 +1,31 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "local>LunabeeStudio/renovate-config"
-  ]
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended",
+        ":dependencyDashboard"
+    ],
+    "labels": [
+        "💎 Dependencies"
+    ],
+    "packageRules": [
+        {
+            "groupName": "all non-major dependencies",
+            "groupSlug": "all-minor-patch",
+            "matchPackageNames": [
+                "*"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ]
+        },
+        {
+            "groupName": "kotlin monorepo",
+            "matchPackageNames": [
+                "kotlin-android:*",
+                "com.google.devtools.ksp:*",
+                "co.touchlab.skie:*"
+            ]
+        }
+    ]
 }
