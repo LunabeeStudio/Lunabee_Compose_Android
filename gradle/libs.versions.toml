@@ -71,6 +71,7 @@ androidx-lifecycle = "2.8.7"
 javapoet = "1.13.0"
 
 lifecycle-viewmodel-android = "2.8.7"
+core = "1.15.0"
 
 [libraries]
 
@@ -107,3 +108,4 @@ material = { group = "com.google.android.material", name = "material", version.r
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-navigation" }
 zoomable = { group = "net.engawapg.lib", name = "zoomable", version.ref = "zoomable" }
 javapoet = { group = "com.squareup", name = "javapoet", version.ref = "javapoet" }
+core = { group = "androidx.core", name = "core", version.ref = "core" }

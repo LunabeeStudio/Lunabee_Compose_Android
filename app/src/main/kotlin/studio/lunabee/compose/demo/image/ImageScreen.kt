@@ -13,51 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * MenuEntry.kt
+ * ImageScreen.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 2/5/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.common
+package studio.lunabee.compose.demo.image
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import studio.lunabee.compose.R
+import studio.lunabee.compose.core.LbcImageSpec
+import studio.lunabee.compose.image.LbcImage
 
 @Composable
-fun MenuEntry(
-    menu: MenuDescription,
-) {
+fun ImageScreen() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { menu.direction() }
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .defaultMinSize(minHeight = 56.dp),
-        verticalArrangement = Arrangement.Center,
+            .padding(all = 16.dp),
     ) {
-        Text(
-            text = menu.titleRes.string,
-            style = MaterialTheme.typography.labelLarge,
-        )
-
-        Spacer(modifier = Modifier.padding(vertical = 4.dp))
-
-        menu.subtitleRes?.let { subtitle ->
-            Text(
-                text = subtitle.string,
-                style = MaterialTheme.typography.bodyLarge,
-            )
-        }
+        Text("No force")
+        LbcImage(LbcImageSpec.ImageDrawable(R.drawable.sun_moon))
+        Text("UI_MODE_NIGHT_NO")
+        LbcImage(LbcImageSpec.ImageDrawable(R.drawable.sun_moon, Configuration.UI_MODE_NIGHT_NO))
+        Text("UI_MODE_NIGHT_YES")
+        LbcImage(LbcImageSpec.ImageDrawable(R.drawable.sun_moon, Configuration.UI_MODE_NIGHT_YES))
     }
 }

@@ -7,13 +7,19 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### LbcCore
+
+- Add `uiMode` param to `LbcImageSpec.ImageDrawable` to allow day/night force
+
+### LbcImage
+
+- Handle `uiMode` param to allow day/night force
+
 ### LbcPresenter
 
 - New module containing LbcPresenter && LbcReducer
 
 ### LbcUiField
-
-#### Fixed
 
 - **Breaking**: Add an `interactionSource` param to `ComposeTextField` to fix a focus issue when using a time field as first field depending
   on Android API version (reproducible on API 27)
