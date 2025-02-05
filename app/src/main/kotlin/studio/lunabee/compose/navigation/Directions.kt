@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
  * Directions.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/5/2025 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.navigation
