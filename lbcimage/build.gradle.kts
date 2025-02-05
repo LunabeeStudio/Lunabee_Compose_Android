@@ -37,7 +37,9 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.coil.compose)
     implementation(libs.coil.compose.svg)
-
+    implementation(libs.core)
+    implementation(libs.androidx.core)
     implementation(libs.compose.material3)
+
     implementation(project(Modules.LbcCore))
 }
