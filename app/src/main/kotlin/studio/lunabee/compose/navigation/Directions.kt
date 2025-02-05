@@ -65,4 +65,8 @@ class Directions(navController: NavHostController) {
     val navigateToGlanceScreen: ToDirection = {
         navController.navigate(route = Destinations.GlanceRoute)
     }
+
+    val navigateToImageScreen: ToDirection = {
+        navController.navigate(route = Destinations.ImageRoute)
+    }
 }

@@ -30,6 +30,7 @@ import studio.lunabee.compose.demo.crop.CropScreen
 import studio.lunabee.compose.demo.foundation.TextScreen
 import studio.lunabee.compose.demo.glance.GlanceScreen
 import studio.lunabee.compose.demo.haptic.HapticScreen
+import studio.lunabee.compose.demo.image.ImageScreen
 import studio.lunabee.compose.demo.presenter.multistate.MultiStateDestination
 import studio.lunabee.compose.demo.presenter.multistate.MultiStateNavScope
 import studio.lunabee.compose.demo.presenter.presenternav.PresenterDemoList
@@ -99,6 +100,12 @@ fun MainNavGraph(
             route = Destinations.PresenterRoute,
         ) {
             PresenterDemoList { navController.navigate(it) }
+        }
+
+        composable(
+            route = Destinations.ImageRoute,
+        ) {
+            ImageScreen()
         }
 
         SimpleExampleDestination.composable(this, object : SimpleExampleNavScope {})

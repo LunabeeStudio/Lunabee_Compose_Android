@@ -105,6 +105,7 @@ dependencies {
     implementation(project(Modules.LbcUiField))
     implementation(project(Modules.LbcPresenter))
     implementation(project(Modules.LbcGlance))
+    implementation(project(Modules.LbcImage))
 
     androidTestImplementation(project(Modules.LbcAndroidTest))
     androidTestImplementation(libs.compose.ui.test.junit4)
