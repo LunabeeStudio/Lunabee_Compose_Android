@@ -70,7 +70,7 @@ fun LbcImage(
                     contentScale = contentScale,
                     alignment = alignment,
                     colorFilter = colorFilter,
-                    errorPainter = errorPainter
+                    errorPainter = errorPainter,
                 )
             }
         }
