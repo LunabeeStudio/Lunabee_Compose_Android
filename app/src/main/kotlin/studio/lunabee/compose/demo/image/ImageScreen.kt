@@ -35,7 +35,6 @@ import studio.lunabee.compose.image.LbcImage
 
 @Composable
 fun ImageScreen() {
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
