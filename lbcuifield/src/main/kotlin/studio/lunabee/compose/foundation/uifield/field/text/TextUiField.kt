@@ -47,22 +47,23 @@ abstract class TextUiField : UiField<String>() {
             value = valueToDisplayedString(collectedValue),
             onValueChange = { value = it },
             modifier = modifier.onFocusEvent {
-                if (!it.hasFocus && hasBeenCaptured) {
+                if (!it.hasFocus && hasBeenFocused) {
                     checkAndDisplayError()
                 } else {
-                    hasBeenCaptured = true
-                    dismissDismissedError()
+                    hasBeenFocused = true
+                    dismissError()
                 }
             },
             placeholder = placeholder,
+            label = label,
             trailingIcon = { options.forEach { it.Composable(modifier = Modifier) } },
             visualTransformation = collectedVisualTransformation,
-            maxLine = maxLine,
-            readOnly = false,
-            label = label,
-            error = collectedError,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
+            maxLine = maxLine,
+            readOnly = false,
+            error = collectedError,
+            interactionSource = null,
         )
     }
 

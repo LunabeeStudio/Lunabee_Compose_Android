@@ -23,6 +23,8 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id(libs.plugins.compose.plugin.get().pluginId)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -58,6 +60,10 @@ android {
             proguardFiles += getDefaultProguardFile("proguard-android-optimize.txt")
             proguardFiles += File("proguard-rules.pro")
         }
+    }
+
+    hilt {
+        enableAggregatingTask = true
     }
 
     lint {
@@ -97,13 +103,20 @@ dependencies {
     implementation(project(Modules.LbcHaptic))
     implementation(project(Modules.LbcCrop))
     implementation(project(Modules.LbcUiField))
+    implementation(project(Modules.LbcPresenter))
     implementation(project(Modules.LbcGlance))
+    implementation(project(Modules.LbcImage))
 
     androidTestImplementation(project(Modules.LbcAndroidTest))
     androidTestImplementation(libs.compose.ui.test.junit4)
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.kotlin.test.junit)
     debugImplementation(libs.compose.ui.test.manifest)
+
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.dagger.hilt.android)
+    ksp(libs.dagger.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 }
 
 kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JVM_TARGET)

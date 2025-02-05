@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * MenuItem.kt
+ * MenuEntry.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 11/30/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/5/2025 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.common
@@ -32,7 +32,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -48,15 +47,17 @@ fun MenuEntry(
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
-            text = stringResource(id = menu.titleRes),
+            text = menu.titleRes.string,
             style = MaterialTheme.typography.labelLarge,
         )
 
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
 
-        Text(
-            text = stringResource(id = menu.subtitleRes),
-            style = MaterialTheme.typography.bodyLarge,
-        )
+        menu.subtitleRes?.let { subtitle ->
+            Text(
+                text = subtitle.string,
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        }
     }
 }

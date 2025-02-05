@@ -1,9 +1,11 @@
 package studio.lunabee.compose.androidtest.rule
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Environment
 import android.util.Log
 import androidx.test.core.app.takeScreenshot
+import androidx.test.core.app.takeScreenshotNoSync
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
@@ -27,6 +29,7 @@ class LbcPrintRule(
     private val usePublicStorage: Boolean,
     private val deleteOnSuccess: Boolean,
     private val appendTimestamp: Boolean = usePublicStorage,
+    private val verbose: Boolean,
 ) : TestWatcher() {
 
     companion object {
@@ -40,11 +43,13 @@ class LbcPrintRule(
             usePublicStorage: Boolean = false,
             deleteOnSuccess: Boolean = true,
             appendTimestamp: Boolean = usePublicStorage,
+            verbose: Boolean = true,
         ): LbcPrintRule = LbcPrintRule(
             appName = appName,
             usePublicStorage = usePublicStorage,
             deleteOnSuccess = deleteOnSuccess,
             appendTimestamp = appendTimestamp,
+            verbose = verbose,
         )
 
         /**
@@ -57,11 +62,13 @@ class LbcPrintRule(
             usePublicStorage: Boolean = true,
             deleteOnSuccess: Boolean = true,
             appendTimestamp: Boolean = usePublicStorage,
+            verbose: Boolean = true,
         ): LbcPrintRule = LbcPrintRule(
             appName = appName,
             usePublicStorage = usePublicStorage,
             deleteOnSuccess = deleteOnSuccess,
             appendTimestamp = appendTimestamp,
+            verbose = verbose,
         )
     }
 
@@ -100,9 +107,14 @@ class LbcPrintRule(
         } else {
             File(screenshotFolder, subFolder.toString())
         }
+
         val className = d.className.substringAfterLast(".")
         classFolder = File(appFolder, className)
         basePath = File(classFolder, d.methodName).absolutePath
+
+        if (verbose) {
+            Log.v("LbcPrintRule", "Screenshot test path: $basePath")
+        }
     }
 
     fun print(bitmap: Bitmap, suffix: String) {
@@ -113,15 +125,25 @@ class LbcPrintRule(
             screenFile.outputStream().use { outputStream ->
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
             }
+
+            if (verbose) {
+                Log.v("LbcPrintRule", "Screenshot saved to ${screenFile.absolutePath}")
+            }
+
             screenshots += screenFile
         } finally {
             bitmap.recycle()
         }
     }
 
-    fun printWholeScreen(suffix: String) {
+    @SuppressLint("RestrictedApi")
+    fun printWholeScreen(suffix: String, noSync: Boolean = false) {
         val bitmap = try {
-            takeScreenshot()
+            if (noSync) {
+                takeScreenshotNoSync()
+            } else {
+                takeScreenshot()
+            }
         } catch (e: Throwable) {
             Log.e("LbcPrintRule", "screenshot failed", e)
             null
@@ -133,6 +155,9 @@ class LbcPrintRule(
     override fun succeeded(description: Description?) {
         super.succeeded(description)
         if (deleteOnSuccess) {
+            if (verbose && screenshots.isNotEmpty()) {
+                Log.v("LbcPrintRule", "Delete screenshots\n${screenshots.joinToString("\n") { "\t$it" }}")
+            }
             screenshots.forEach(File::delete)
             classFolder.delete() // try delete (fail if not empty)
             appFolder.delete() // try delete (fail if not empty)

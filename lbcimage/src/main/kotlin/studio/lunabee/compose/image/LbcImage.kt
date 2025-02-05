@@ -1,5 +1,6 @@
 package studio.lunabee.compose.image
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
@@ -13,6 +14,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toBitmap
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.decode.SvgDecoder
@@ -44,14 +47,32 @@ fun LbcImage(
         }
 
         is LbcImageSpec.ImageDrawable -> {
-            Image(
-                painter = painterResource(id = imageSpec.drawableRes),
-                contentDescription = contentDescription?.string,
-                modifier = modifier,
-                contentScale = contentScale,
-                alignment = alignment,
-                colorFilter = colorFilter,
-            )
+            if (imageSpec.uiMode == Configuration.UI_MODE_TYPE_UNDEFINED) {
+                Image(
+                    painter = painterResource(id = imageSpec.drawableRes),
+                    contentDescription = contentDescription?.string,
+                    modifier = modifier,
+                    contentScale = contentScale,
+                    alignment = alignment,
+                    colorFilter = colorFilter,
+                )
+            } else {
+                val configuration = Configuration().apply {
+                    uiMode = imageSpec.uiMode
+                }
+                val resources = LocalContext.current.createConfigurationContext(configuration).resources
+                val bitmap = ResourcesCompat.getDrawable(resources, imageSpec.drawableRes, null)!!.toBitmap()
+                LbcImage(
+                    imageSpec = LbcImageSpec.Bitmap(bitmap),
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onState = onState,
+                    contentScale = contentScale,
+                    alignment = alignment,
+                    colorFilter = colorFilter,
+                    errorPainter = errorPainter,
+                )
+            }
         }
 
         is LbcImageSpec.Icon -> {

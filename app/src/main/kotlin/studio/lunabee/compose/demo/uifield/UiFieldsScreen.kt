@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * UifieldsScreen.kt
+ * UiFieldsScreen.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 5/22/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/5/2025 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.demo.uifield
@@ -85,8 +85,8 @@ fun UiFieldsScreen(
             initialValue = "",
             placeholder = LbcTextSpec.Raw("This is a password Text Field"),
             label = LbcTextSpec.Raw("Password"),
-            isFieldInError = {
-                null
+            isFieldInError = { value ->
+                if (value.length < 6) UiFieldError(LbcTextSpec.Raw("At least 6 chars required")) else null
             },
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Next,
@@ -168,9 +168,9 @@ fun UiFieldsScreen(
             .padding(all = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
+        dateAndHourUiField.Composable(modifier = Modifier.fillMaxWidth())
         normalUiTextField.Composable(modifier = Modifier.fillMaxWidth())
         passwordUiTextField.Composable(modifier = Modifier.fillMaxWidth())
-        dateAndHourUiField.Composable(modifier = Modifier.fillMaxWidth())
         dateUiField.Composable(modifier = Modifier.fillMaxWidth())
 
         Button(

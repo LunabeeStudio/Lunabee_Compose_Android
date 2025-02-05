@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,14 @@
  * MenuSection.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 11/30/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/5/2025 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.common
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 
 @Composable
@@ -33,10 +33,10 @@ fun MenuSection(
     LazyColumn {
         items(
             items = menus,
-            key = { it.titleRes },
+            key = { it.titleRes.hashCode() },
         ) { menu ->
             MenuEntry(menu = menu)
-            Divider()
+            HorizontalDivider()
         }
     }
 }

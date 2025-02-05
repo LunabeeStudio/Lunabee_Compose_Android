@@ -7,7 +7,8 @@
 | LbcTheme         | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbctheme?style=for-the-badge)         |
 | LbcCore          | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbccore?style=for-the-badge)          |
 | LbcAndroidTest   | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbcandroidtest?style=for-the-badge)   |
-| LbcHaptic        | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbchaptic?style=for-the-badge)   |
+| LbcHaptic        | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbchaptic?style=for-the-badge)        |
+| LbcPresenter     | ![](https://img.shields.io/maven-central/v/studio.lunabee.compose/lbcpresenter?style=for-the-badge)     |
 
 # Lunabee Jetpack Compose library
 

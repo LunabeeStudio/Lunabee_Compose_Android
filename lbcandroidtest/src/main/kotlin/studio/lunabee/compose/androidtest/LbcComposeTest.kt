@@ -104,7 +104,7 @@ abstract class LbcComposeTest {
     context(ComposeUiTest)
     open fun onFailure(e: Throwable) {
         val suffix = LbcAndroidTestConstants.FailureSuffix + "_${e.javaClass.simpleName}"
-        printRule.printWholeScreen(suffix)
+        printRule.printWholeScreen(suffix, noSync = true)
         val tree = isRoot()
             .waitUntilAtLeastOneExists(true)
             .onFirst()

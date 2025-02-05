@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
  * MainActivity.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/5/2025 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose
@@ -46,11 +46,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import studio.lunabee.compose.common.AppDemoTheme
 import studio.lunabee.compose.navigation.Destinations
 import studio.lunabee.compose.navigation.Directions
 import studio.lunabee.compose.navigation.MainNavGraph
 
+@AndroidEntryPoint
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                         Destinations.ThemeRoute -> getString(R.string.theme_screen_title)
                         Destinations.HapticRoute -> getString(R.string.haptic_screen_title)
                         Destinations.FoundationRoute -> getString(R.string.foundation_screen_title)
-                        else -> ""
+                        else -> destination.route.orEmpty()
                     }
 
                     shouldShowBackNav = Destinations.BackNavigationScreen.contains(destination.route)

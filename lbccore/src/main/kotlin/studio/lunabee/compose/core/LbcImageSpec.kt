@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.core
 
+import android.content.res.Configuration
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -40,6 +41,7 @@ sealed interface LbcImageSpec {
 
     class ImageDrawable(
         @DrawableRes val drawableRes: Int,
+        val uiMode: Int = Configuration.UI_MODE_TYPE_UNDEFINED,
     ) : LbcImageSpec
 
     class Bitmap(
