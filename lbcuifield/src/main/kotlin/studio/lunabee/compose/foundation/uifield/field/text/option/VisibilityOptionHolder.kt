@@ -21,11 +21,10 @@
 
 package studio.lunabee.compose.foundation.uifield.field.text.option
 
-import androidx.compose.ui.text.input.VisualTransformation
 import kotlinx.coroutines.flow.StateFlow
 
 interface VisibilityOptionHolder {
-    val visualTransformation: StateFlow<VisualTransformation>
+    val isValueVisible: StateFlow<Boolean>
     val visibilityOptionData: VisibilityOptionData
 
     fun onVisibilityToggle()

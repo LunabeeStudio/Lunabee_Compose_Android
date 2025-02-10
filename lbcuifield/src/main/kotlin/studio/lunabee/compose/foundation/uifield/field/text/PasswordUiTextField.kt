@@ -21,17 +21,23 @@
 
 package studio.lunabee.compose.foundation.uifield.field.text
 
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.foundation.text.input.KeyboardActionHandler
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusEvent
 import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import studio.lunabee.compose.core.LbcTextSpec
+import studio.lunabee.compose.foundation.uifield.UiField
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
+import studio.lunabee.compose.foundation.uifield.field.style.PasswordUiFieldData
+import studio.lunabee.compose.foundation.uifield.field.style.PasswordUiFieldDataImpl
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
 import studio.lunabee.compose.foundation.uifield.field.text.option.VisibilityFieldOption
@@ -46,26 +52,68 @@ class PasswordUiTextField(
     override val visibilityOptionData: VisibilityOptionData,
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
-    override val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    override val keyboardActions: KeyboardActions = KeyboardActions.Default,
-    override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
+    private val passwordUiFieldData: PasswordUiFieldData = PasswordUiFieldDataImpl(),
     override val onValueChange: (String) -> Unit = {},
-) : TextUiField(), VisibilityOptionHolder {
-    private val mVisualTransformation: MutableStateFlow<VisualTransformation> =
-        MutableStateFlow(PasswordVisualTransformation())
-    override val visualTransformation: StateFlow<VisualTransformation> =
-        mVisualTransformation.asStateFlow()
+    private val maxLine: Int = 1,
+    private val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    private val onKeyboardActions: KeyboardActionHandler = KeyboardActionHandler { /* no-op */ },
+) : UiField<String>(), VisibilityOptionHolder {
+    private val mIsValueVisible: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    override val isValueVisible: StateFlow<Boolean> = mIsValueVisible.asStateFlow()
 
     override fun onVisibilityToggle() {
-        if (visualTransformation.value == VisualTransformation.None) {
-            mVisualTransformation.value = PasswordVisualTransformation()
-        } else {
-            mVisualTransformation.value = VisualTransformation.None
-        }
+        mIsValueVisible.value = !isValueVisible.value
     }
 
-    override val maxLine: Int = 1
     override val options: List<UiFieldOption> = listOf(
         VisibilityFieldOption(),
     )
+
+    @Composable
+    override fun Composable(modifier: Modifier) {
+        val collectedValue by mValue.collectAsState()
+        val collectedIsValueVisible by isValueVisible.collectAsState()
+        val collectedError by error.collectAsState()
+
+        passwordUiFieldData.ComposeTextField(
+            value = collectedValue,
+            onValueChange = { value = it },
+            modifier = modifier.onFocusEvent {
+                if (!it.hasFocus && hasBeenFocused) {
+                    checkAndDisplayError()
+                } else {
+                    hasBeenFocused = true
+                    dismissError()
+                }
+            },
+            placeholder = placeholder,
+            label = label,
+            trailingIcon = if (options.isNotEmpty()) {
+                { options.forEach { it.Composable(modifier = Modifier) } }
+            } else {
+                null
+            },
+            isValueVisible = collectedIsValueVisible,
+            keyboardOptions = keyboardOptions,
+            onKeyboardActions = onKeyboardActions,
+            maxLine = maxLine,
+            readOnly = false,
+            error = collectedError,
+            interactionSource = null,
+        )
+    }
+
+    // Not used here ...
+    override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
+    override fun savedValueToData(value: String): String {
+        return value
+    }
+
+    override fun valueToSavedString(value: String): String {
+        return value
+    }
+
+    override fun valueToDisplayedString(value: String): String {
+        return value
+    }
 }

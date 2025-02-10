@@ -22,7 +22,6 @@
 package studio.lunabee.compose.foundation.uifield.field.style
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
@@ -39,7 +38,7 @@ interface UiFieldStyleData {
         modifier: Modifier,
         placeholder: LbcTextSpec,
         label: LbcTextSpec,
-        trailingIcon: @Composable RowScope.() -> Unit,
+        trailingIcon: @Composable (() -> Unit)? = null,
         visualTransformation: VisualTransformation,
         keyboardOptions: KeyboardOptions,
         keyboardActions: KeyboardActions,

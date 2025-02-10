@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * PasswordUiFieldData.kt
+ * PasswordUiFieldDataImpl.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 2/10/2025 - for the Lunabee Compose library.
@@ -40,20 +40,17 @@ import androidx.compose.ui.text.input.VisualTransformation
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 
-// TODO interface + implem
-class PasswordUiFieldData {
+class PasswordUiFieldDataImpl : PasswordUiFieldData {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun ComposeTextField(
+    override fun ComposeTextField(
         value: String,
         onValueChange: (String) -> Unit,
         modifier: Modifier,
         placeholder: LbcTextSpec,
         label: LbcTextSpec,
-        trailingIcon:
-        @Composable()
-        (() -> Unit)?,
+        trailingIcon: @Composable() (() -> Unit)?,
         isValueVisible: Boolean,
         keyboardOptions: KeyboardOptions,
         onKeyboardActions: KeyboardActionHandler,
@@ -112,7 +109,6 @@ class PasswordUiFieldData {
                             interactionSource = interactionSourceToUse,
                         )
                     },
-
                 )
             },
             modifier = modifier,

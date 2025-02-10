@@ -56,7 +56,11 @@ abstract class TextUiField : UiField<String>() {
             },
             placeholder = placeholder,
             label = label,
-            trailingIcon = { options.forEach { it.Composable(modifier = Modifier) } },
+            trailingIcon = if (options.isNotEmpty()) {
+                { options.forEach { it.Composable(modifier = Modifier) } }
+            } else {
+                null
+            },
             visualTransformation = collectedVisualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,

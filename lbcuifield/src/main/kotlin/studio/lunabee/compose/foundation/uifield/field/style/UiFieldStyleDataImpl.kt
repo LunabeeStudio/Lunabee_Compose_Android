@@ -24,7 +24,6 @@ package studio.lunabee.compose.foundation.uifield.field.style
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
@@ -43,7 +42,7 @@ class UiFieldStyleDataImpl : UiFieldStyleData {
         modifier: Modifier,
         placeholder: LbcTextSpec,
         label: LbcTextSpec,
-        trailingIcon: @Composable RowScope.() -> Unit,
+        trailingIcon: @Composable (() -> Unit)?,
         visualTransformation: VisualTransformation,
         keyboardOptions: KeyboardOptions,
         keyboardActions: KeyboardActions,
@@ -57,7 +56,7 @@ class UiFieldStyleDataImpl : UiFieldStyleData {
             onValueChange = onValueChange,
             modifier = modifier.animateContentSize(),
             placeholder = { Text(text = placeholder.string) },
-            trailingIcon = { Row { trailingIcon() } },
+            trailingIcon = trailingIcon?.let { { Row { trailingIcon() } } },
             label = { Text(text = label.string) },
             maxLines = maxLine,
             readOnly = readOnly,
@@ -71,6 +70,7 @@ class UiFieldStyleDataImpl : UiFieldStyleData {
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
             interactionSource = interactionSource,
+            singleLine = maxLine == 1,
         )
     }
 }

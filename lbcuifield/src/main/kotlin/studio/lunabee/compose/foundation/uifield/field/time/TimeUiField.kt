@@ -69,7 +69,11 @@ abstract class TimeUiField<T> : UiField<T>() {
                 },
             placeholder = placeholder,
             label = label,
-            trailingIcon = { options.forEach { it.Composable(modifier = Modifier) } },
+            trailingIcon = if (options.isNotEmpty()) {
+                { options.forEach { it.Composable(modifier = Modifier) } }
+            } else {
+                null
+            },
             visualTransformation = VisualTransformation.None,
             keyboardOptions = KeyboardOptions.Default,
             keyboardActions = KeyboardActions.Default,

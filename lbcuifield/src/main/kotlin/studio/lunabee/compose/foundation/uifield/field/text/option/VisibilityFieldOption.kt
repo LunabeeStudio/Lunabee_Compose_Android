@@ -25,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.VisualTransformation
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.composable.TrailingAction
@@ -37,7 +36,7 @@ class VisibilityFieldOption : UiFieldOption {
 
     override val clickLabel: LbcTextSpec
         get() {
-            return if (visualTransformation.value == VisualTransformation.None) {
+            return if (isValueVisible.value) {
                 visibilityOptionData.hidePasswordClickLabel
             } else {
                 visibilityOptionData.showPasswordClickLabel
@@ -46,8 +45,8 @@ class VisibilityFieldOption : UiFieldOption {
 
     @Composable
     override fun Composable(modifier: Modifier) {
-        val visualTransformation by visualTransformation.collectAsState()
-        val image = if (visualTransformation == VisualTransformation.None) {
+        val valueVisible by isValueVisible.collectAsState()
+        val image = if (valueVisible) {
             visibilityOptionData.hideIcon
         } else {
             visibilityOptionData.showIcon
