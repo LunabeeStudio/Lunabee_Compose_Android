@@ -40,16 +40,16 @@ import studio.lunabee.compose.foundation.uifield.field.style.PasswordUiFieldData
 import studio.lunabee.compose.foundation.uifield.field.style.PasswordUiFieldDataImpl
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
-import studio.lunabee.compose.foundation.uifield.field.text.option.VisibilityFieldOption
-import studio.lunabee.compose.foundation.uifield.field.text.option.VisibilityOptionData
-import studio.lunabee.compose.foundation.uifield.field.text.option.VisibilityOptionHolder
+import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityFieldOption
+import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityOptionData
+import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityOptionHolder
 
 class PasswordUiTextField(
     override var label: LbcTextSpec,
     override val initialValue: String,
     override var placeholder: LbcTextSpec,
     override val isFieldInError: (String) -> UiFieldError?,
-    override val visibilityOptionData: VisibilityOptionData,
+    override val visibilityOptionData: PasswordVisibilityOptionData,
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
     private val passwordUiFieldData: PasswordUiFieldData = PasswordUiFieldDataImpl(),
@@ -57,7 +57,7 @@ class PasswordUiTextField(
     private val maxLine: Int = 1,
     private val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     private val onKeyboardActions: KeyboardActionHandler = KeyboardActionHandler { /* no-op */ },
-) : UiField<String>(), VisibilityOptionHolder {
+) : UiField<String>(), PasswordVisibilityOptionHolder {
     private val mIsValueVisible: MutableStateFlow<Boolean> = MutableStateFlow(false)
     override val isValueVisible: StateFlow<Boolean> = mIsValueVisible.asStateFlow()
 
@@ -66,7 +66,7 @@ class PasswordUiTextField(
     }
 
     override val options: List<UiFieldOption> = listOf(
-        VisibilityFieldOption(),
+        PasswordVisibilityFieldOption(),
     )
 
     @Composable

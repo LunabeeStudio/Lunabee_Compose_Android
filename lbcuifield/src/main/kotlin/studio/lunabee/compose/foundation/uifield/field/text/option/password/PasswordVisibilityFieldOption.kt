@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
  * VisibilityFieldOption.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/10/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.text.option
+package studio.lunabee.compose.foundation.uifield.field.text.option.password
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -29,8 +29,8 @@ import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.composable.TrailingAction
 
-context(VisibilityOptionHolder)
-class VisibilityFieldOption : UiFieldOption {
+context(PasswordVisibilityOptionHolder)
+class PasswordVisibilityFieldOption : UiFieldOption {
 
     override fun onClick(): Unit = onVisibilityToggle()
 

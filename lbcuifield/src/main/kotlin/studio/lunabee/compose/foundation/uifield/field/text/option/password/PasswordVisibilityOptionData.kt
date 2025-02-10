@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * VisibilityAccessibilityLabels.kt
+ * PasswordVisibilityOptionData.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 5/24/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/10/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.text.option
+package studio.lunabee.compose.foundation.uifield.field.text.option.password
 
 import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
 
-data class VisibilityOptionData(
+data class PasswordVisibilityOptionData(
     val hidePasswordClickLabel: LbcTextSpec,
     val showPasswordClickLabel: LbcTextSpec,
     val showIcon: LbcImageSpec,
