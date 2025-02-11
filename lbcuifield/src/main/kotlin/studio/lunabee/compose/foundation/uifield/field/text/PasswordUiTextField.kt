@@ -77,7 +77,10 @@ class PasswordUiTextField(
 
         passwordUiFieldData.ComposeTextField(
             value = collectedValue,
-            onValueChange = { value = it },
+            onValueChange = {
+                value = it
+                dismissError()
+            },
             modifier = modifier.onFocusEvent {
                 if (!it.hasFocus && hasBeenFocused) {
                     checkAndDisplayError()
