@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2025-02-12
+
+### All
+
+- Update Compose & navigation
+
 ## 2025-02-05
 
 ### LbcCore
