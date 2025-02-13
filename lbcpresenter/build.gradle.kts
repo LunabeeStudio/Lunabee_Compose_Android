@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2024 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,12 @@
  * build.gradle.kts
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 7/29/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 11/18/2024 - for the Lunabee Compose library.
  */
 
 plugins {
     id("lunabee.android-library-conventions")
     id("lunabee.library-publish-conventions")
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -46,9 +44,7 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
     implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.dagger.hilt.android)
-    ksp(libs.dagger.hilt.android.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.android)
 
     implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))

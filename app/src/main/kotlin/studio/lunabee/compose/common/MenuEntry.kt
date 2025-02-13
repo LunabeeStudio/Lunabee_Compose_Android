@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * MenuItem.kt
+ * MenuEntry.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 11/30/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/5/2025 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.common
@@ -53,9 +53,11 @@ fun MenuEntry(
 
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
 
-        Text(
-            text = menu.subtitleRes.string,
-            style = MaterialTheme.typography.bodyLarge,
-        )
+        menu.subtitleRes?.let { subtitle ->
+            Text(
+                text = subtitle.string,
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        }
     }
 }

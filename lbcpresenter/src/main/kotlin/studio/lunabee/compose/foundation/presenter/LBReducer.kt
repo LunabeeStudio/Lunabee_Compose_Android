@@ -23,35 +23,75 @@ package studio.lunabee.compose.foundation.presenter
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-abstract class LBReducer<UiState : PresenterUiState, NavScope, Action> {
+abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, NavScope, MainAction, Action : MainAction> {
+    /**
+     * CoroutineScope in witch side effects are executed.
+     */
     abstract val coroutineScope: CoroutineScope
 
+    /**
+     * Emit a user action to the active reducer. Provided by the presenter
+     */
+    abstract val emitUserAction: (Action) -> Unit
+
+    /**
+     * Call each time an [Action] is collected by [collectReducer]
+     * @param actualState the current [UiState] of the screen displayed
+     * @param action the [Action] collected by [collectReducer]
+     * @param performNavigation allows to access the [NavScope] to perform navigation
+     * @return [ReduceResult] containing the new [UiState] and an optional SideEffect to execute right after the [UiState] update
+     */
     abstract suspend fun reduce(
         actualState: UiState,
         action: Action,
         performNavigation: (NavScope.() -> Unit) -> Unit,
-    ): ReduceResult<UiState>
+    ): ReduceResult<MainUiState>
 
+    /**
+     * Called by the presenter to create the uiStateFlow
+     * merges all the actions [flows] provided by the presenter
+     * @param actualState the current [UiState] of the screen displayed stored by the Presenter
+     * @param performNavigation allows to access the [NavScope] to perform navigation
+     */
+    @Suppress("UNCHECKED_CAST")
     fun collectReducer(
-        flows: List<Flow<Action>>,
-        actualState: () -> UiState,
+        flows: List<Flow<MainAction>>,
+        actualState: () -> MainUiState,
         performNavigation: (NavScope.() -> Unit) -> Unit,
-    ): Flow<UiState> {
-        return flows.merge().map { action ->
-            reduce(
-                actualState = actualState(),
-                action = action,
-                performNavigation = performNavigation,
-            )
+    ): Flow<MainUiState> {
+        return flows.merge().filter {
+            filterAction(it) && filterUiState(actualState())
+        }.mapNotNull { action ->
+            (actualState() as? UiState)?.let {
+                reduce(
+                    actualState = it,
+                    action = action as Action,
+                    performNavigation = performNavigation,
+                )
+            }
         }
             .onEach { coroutineScope.launch { it.sideEffect?.invoke() } }
-            .map {
-                it.uiState
-            }
+            .map { it.uiState }
     }
+
+    /**
+     * Filters action handled by the reduce function
+     */
+    abstract fun filterAction(
+        action: MainAction,
+    ): Boolean
+
+    /**
+     * Filters uiState handled by the reduce function
+     */
+    abstract fun filterUiState(
+        actualState: MainUiState,
+    ): Boolean
 }

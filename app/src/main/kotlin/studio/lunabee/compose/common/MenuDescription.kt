@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * MenuEntry.kt
+ * MenuDescription.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/5/2025 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.common
@@ -26,6 +26,6 @@ import studio.lunabee.compose.navigation.ToDirection
 
 data class MenuDescription(
     val titleRes: LbcTextSpec,
-    val subtitleRes: LbcTextSpec,
+    val subtitleRes: LbcTextSpec?,
     val direction: ToDirection,
 )
