@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * UiFieldData.kt
+ * PasswordUiFieldData.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 5/23/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/10/2025 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.foundation.uifield.field.style
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.KeyboardActionHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.VisualTransformation
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 
-interface UiFieldStyleData {
+interface PasswordUiFieldData {
     @Composable
     fun ComposeTextField(
         value: String,
@@ -38,10 +37,10 @@ interface UiFieldStyleData {
         modifier: Modifier,
         placeholder: LbcTextSpec,
         label: LbcTextSpec,
-        trailingIcon: @Composable (() -> Unit)? = null,
-        visualTransformation: VisualTransformation,
+        trailingIcon: @Composable() (() -> Unit)?,
+        isValueVisible: Boolean,
         keyboardOptions: KeyboardOptions,
-        keyboardActions: KeyboardActions,
+        onKeyboardActions: KeyboardActionHandler,
         maxLine: Int,
         readOnly: Boolean,
         error: UiFieldError?,

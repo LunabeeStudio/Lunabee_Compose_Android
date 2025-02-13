@@ -45,7 +45,10 @@ abstract class TextUiField : UiField<String>() {
         val collectedError by error.collectAsState()
         uiFieldStyleData.ComposeTextField(
             value = valueToDisplayedString(collectedValue),
-            onValueChange = { value = it },
+            onValueChange = {
+                value = it
+                dismissError()
+            },
             modifier = modifier.onFocusEvent {
                 if (!it.hasFocus && hasBeenFocused) {
                     checkAndDisplayError()
@@ -56,7 +59,11 @@ abstract class TextUiField : UiField<String>() {
             },
             placeholder = placeholder,
             label = label,
-            trailingIcon = { options.forEach { it.Composable(modifier = Modifier) } },
+            trailingIcon = if (options.isNotEmpty()) {
+                { options.forEach { it.Composable(modifier = Modifier) } }
+            } else {
+                null
+            },
             visualTransformation = collectedVisualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,16 @@
  * VisibilityOptionHolder.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 5/24/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 2/10/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.field.text.option
+package studio.lunabee.compose.foundation.uifield.field.text.option.password
 
-import androidx.compose.ui.text.input.VisualTransformation
 import kotlinx.coroutines.flow.StateFlow
 
-interface VisibilityOptionHolder {
-    val visualTransformation: StateFlow<VisualTransformation>
-    val visibilityOptionData: VisibilityOptionData
+interface PasswordVisibilityOptionHolder {
+    val isValueVisible: StateFlow<Boolean>
+    val visibilityOptionData: PasswordVisibilityOptionData
 
     fun onVisibilityToggle()
 }

@@ -52,7 +52,7 @@ import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.text.NormalUiTextField
 import studio.lunabee.compose.foundation.uifield.field.text.PasswordUiTextField
-import studio.lunabee.compose.foundation.uifield.field.text.option.VisibilityOptionData
+import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityOptionData
 import studio.lunabee.compose.foundation.uifield.field.time.DateAndHourUiField
 import studio.lunabee.compose.foundation.uifield.field.time.DateUiField
 import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePickerData
@@ -93,7 +93,7 @@ fun UiFieldsScreen(
             ),
             savedStateHandle = savedStateHandle,
             id = "2",
-            visibilityOptionData = VisibilityOptionData(
+            visibilityOptionData = PasswordVisibilityOptionData(
                 hidePasswordClickLabel = LbcTextSpec.Raw("Hide password"),
                 showPasswordClickLabel = LbcTextSpec.Raw("Show password"),
                 showIcon = LbcImageSpec.KtImageVector(Icons.Default.Visibility),
