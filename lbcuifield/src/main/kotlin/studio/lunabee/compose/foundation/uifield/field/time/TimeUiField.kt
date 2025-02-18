@@ -78,7 +78,8 @@ abstract class TimeUiField<T> : UiField<T>() {
             keyboardOptions = KeyboardOptions.Default,
             keyboardActions = KeyboardActions.Default,
             maxLine = 1,
-            readOnly = true,
+            readOnly = readOnly,
+            enabled = enabled,
             error = collectedError,
             interactionSource = interactionSource,
         )

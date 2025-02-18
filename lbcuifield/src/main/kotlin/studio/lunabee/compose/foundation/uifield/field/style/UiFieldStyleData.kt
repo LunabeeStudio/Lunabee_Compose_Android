@@ -44,6 +44,7 @@ interface UiFieldStyleData {
         keyboardActions: KeyboardActions,
         maxLine: Int,
         readOnly: Boolean,
+        enabled: Boolean,
         error: UiFieldError?,
         interactionSource: MutableInteractionSource?,
     )

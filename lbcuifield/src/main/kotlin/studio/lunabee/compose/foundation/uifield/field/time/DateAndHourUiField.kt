@@ -58,6 +58,8 @@ class DateAndHourUiField(
         .ofLocalizedDateTime(FormatStyle.SHORT)
         .withZone(ZoneOffset.UTC),
     override val onValueChange: (LocalDateTime?) -> Unit = {},
+    override val readOnly: Boolean = false,
+    override val enabled: Boolean = true,
 ) : TimeUiField<LocalDateTime?>(), HourPickerHolder, DatePickerHolder {
     override val options: List<UiFieldOption> = listOf(
         DatePickerOption(),

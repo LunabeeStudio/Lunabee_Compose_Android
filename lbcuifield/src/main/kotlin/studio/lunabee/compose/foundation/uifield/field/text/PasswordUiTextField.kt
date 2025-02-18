@@ -54,6 +54,8 @@ class PasswordUiTextField(
     override val savedStateHandle: SavedStateHandle,
     private val passwordUiFieldData: PasswordUiFieldData = PasswordUiFieldDataImpl(),
     override val onValueChange: (String) -> Unit = {},
+    override val readOnly: Boolean = false,
+    override val enabled: Boolean = true,
     private val maxLine: Int = 1,
     private val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     private val onKeyboardActions: KeyboardActionHandler = KeyboardActionHandler { /* no-op */ },
