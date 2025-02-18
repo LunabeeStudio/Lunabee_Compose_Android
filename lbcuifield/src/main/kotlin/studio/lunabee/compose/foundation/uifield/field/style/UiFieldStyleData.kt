@@ -38,7 +38,7 @@ interface UiFieldStyleData {
         modifier: Modifier,
         placeholder: LbcTextSpec,
         label: LbcTextSpec,
-        trailingIcon: @Composable (() -> Unit)? = null,
+        trailingIcon: @Composable (() -> Unit)?,
         visualTransformation: VisualTransformation,
         keyboardOptions: KeyboardOptions,
         keyboardActions: KeyboardActions,
