@@ -48,6 +48,7 @@ class UiFieldStyleDataImpl : UiFieldStyleData {
         keyboardActions: KeyboardActions,
         maxLine: Int,
         readOnly: Boolean,
+        enabled: Boolean,
         error: UiFieldError?,
         interactionSource: MutableInteractionSource?,
     ) {
@@ -60,6 +61,7 @@ class UiFieldStyleDataImpl : UiFieldStyleData {
             label = { Text(text = label.string) },
             maxLines = maxLine,
             readOnly = readOnly,
+            enabled = enabled,
             visualTransformation = visualTransformation,
             isError = error != null,
             supportingText = if (error?.text != null) {

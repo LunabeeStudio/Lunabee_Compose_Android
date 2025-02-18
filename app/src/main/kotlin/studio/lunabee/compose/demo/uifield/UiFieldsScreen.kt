@@ -78,6 +78,7 @@ fun UiFieldsScreen(
             ),
             savedStateHandle = savedStateHandle,
             id = "1",
+            readOnly = true,
         )
     }
     val passwordUiTextField = remember {
@@ -152,6 +153,41 @@ fun UiFieldsScreen(
             ),
         )
     }
+
+    val readOnlyField = remember {
+        NormalUiTextField(
+            initialValue = "Read only field",
+            placeholder = LbcTextSpec.Raw(""),
+            label = LbcTextSpec.Raw("Read only"),
+            isFieldInError = { value ->
+                if (value.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
+            },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Next,
+            ),
+            savedStateHandle = savedStateHandle,
+            id = "5",
+            readOnly = true,
+        )
+    }
+
+    val disabledField = remember {
+        NormalUiTextField(
+            initialValue = "Disabled field",
+            placeholder = LbcTextSpec.Raw(""),
+            label = LbcTextSpec.Raw("Disabled"),
+            isFieldInError = { value ->
+                if (value.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
+            },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Next,
+            ),
+            savedStateHandle = savedStateHandle,
+            id = "6",
+            readOnly = true,
+            enabled = false,
+        )
+    }
     val areFieldsInError by combine(
         normalUiTextField.isInError,
         passwordUiTextField.isInError,
@@ -172,6 +208,8 @@ fun UiFieldsScreen(
         normalUiTextField.Composable(modifier = Modifier.fillMaxWidth())
         passwordUiTextField.Composable(modifier = Modifier.fillMaxWidth())
         dateUiField.Composable(modifier = Modifier.fillMaxWidth())
+        readOnlyField.Composable(modifier = Modifier.fillMaxWidth())
+        disabledField.Composable(modifier = Modifier.fillMaxWidth())
 
         Button(
             onClick = {

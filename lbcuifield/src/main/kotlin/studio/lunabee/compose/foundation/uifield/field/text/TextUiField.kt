@@ -68,7 +68,8 @@ abstract class TextUiField : UiField<String>() {
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
             maxLine = maxLine,
-            readOnly = false,
+            readOnly = readOnly,
+            enabled = enabled,
             error = collectedError,
             interactionSource = null,
         )

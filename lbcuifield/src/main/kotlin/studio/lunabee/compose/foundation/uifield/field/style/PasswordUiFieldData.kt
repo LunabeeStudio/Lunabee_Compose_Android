@@ -37,7 +37,9 @@ interface PasswordUiFieldData {
         modifier: Modifier,
         placeholder: LbcTextSpec,
         label: LbcTextSpec,
-        trailingIcon: @Composable() (() -> Unit)?,
+        trailingIcon:
+        @Composable()
+        (() -> Unit)?,
         isValueVisible: Boolean,
         keyboardOptions: KeyboardOptions,
         onKeyboardActions: KeyboardActionHandler,

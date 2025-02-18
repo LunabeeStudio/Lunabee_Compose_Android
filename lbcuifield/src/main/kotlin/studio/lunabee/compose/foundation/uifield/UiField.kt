@@ -41,6 +41,8 @@ abstract class UiField<T> {
     abstract val uiFieldStyleData: UiFieldStyleData
     abstract val isFieldInError: (T) -> UiFieldError?
     abstract val onValueChange: (T) -> Unit
+    abstract val readOnly: Boolean
+    abstract val enabled: Boolean
 
     protected val mValue: MutableStateFlow<T> by lazy {
         MutableStateFlow(

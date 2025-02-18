@@ -46,6 +46,8 @@ class NormalUiTextField(
     override val keyboardActions: KeyboardActions = KeyboardActions.Default,
     override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
     override val maxLine: Int = 1,
+    override val readOnly: Boolean = false,
+    override val enabled: Boolean = true,
     override val visualTransformation: StateFlow<VisualTransformation> = MutableStateFlow(
         VisualTransformation.None,
     ).asStateFlow(),
