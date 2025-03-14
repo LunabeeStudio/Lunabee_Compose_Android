@@ -30,7 +30,9 @@ import studio.lunabee.compose.foundation.presenter.LBSingleReducer
 import javax.inject.Inject
 
 @HiltViewModel
-class SimpleExamplePresenter @Inject constructor() : LBSinglePresenter<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>() {
+class SimpleExamplePresenter @Inject constructor() : LBSinglePresenter<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>(
+    verbose = true,
+) {
     override val flows: List<Flow<SimpleExampleAction>> = listOf()
 
     override fun getInitialState(): SimpleExampleUiState = SimpleExampleUiState(

@@ -29,7 +29,9 @@ import studio.lunabee.compose.foundation.presenter.asResult
 class TimerReducer(
     override val coroutineScope: CoroutineScope,
     override val emitUserAction: (TimerAction) -> Unit,
-) : LBSingleReducer<TimerUiState, TimerNavScope, TimerAction>() {
+) : LBSingleReducer<TimerUiState, TimerNavScope, TimerAction>(
+    verbose = true,
+) {
     override suspend fun reduce(
         actualState: TimerUiState,
         action: TimerAction,

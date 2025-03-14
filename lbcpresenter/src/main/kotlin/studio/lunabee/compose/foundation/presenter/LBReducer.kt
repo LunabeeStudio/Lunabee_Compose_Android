@@ -27,10 +27,16 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, NavScope, MainAction, Action : MainAction> {
+/**
+ * @property verbose enable verbose logs using kermit logger
+ */
+abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, NavScope, MainAction, Action : MainAction>(
+    private val verbose: Boolean = false,
+) {
     /**
      * CoroutineScope in witch side effects are executed.
      */
@@ -66,19 +72,30 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
         actualState: () -> MainUiState,
         performNavigation: (NavScope.() -> Unit) -> Unit,
     ): Flow<MainUiState> {
-        return flows.merge().filter {
-            filterAction(it) && filterUiState(actualState())
+        val uiStateFlow = flows.merge().filter { action ->
+            filterAction(action) && filterUiState(actualState()).also {
+                log { "Filter (= $it) action <$action>" }
+            }
         }.mapNotNull { action ->
-            (actualState() as? UiState)?.let {
+            val state = actualState()
+            log { "Reducing state <$state> with action <$action>" }
+            (state as? UiState)?.let {
                 reduce(
                     actualState = it,
                     action = action as Action,
                     performNavigation = performNavigation,
-                )
+                ).also {
+                    log { "Reduced state = ${it.uiState}" }
+                }
             }
         }
             .onEach { coroutineScope.launch { it.sideEffect?.invoke() } }
             .map { it.uiState }
+        return if (verbose) {
+            uiStateFlow.onCompletion { throwable -> log { "Reducer completed $throwable" } }
+        } else {
+            uiStateFlow
+        }
     }
 
     /**

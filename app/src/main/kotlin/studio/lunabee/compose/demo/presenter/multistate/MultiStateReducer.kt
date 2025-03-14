@@ -27,7 +27,9 @@ import studio.lunabee.compose.foundation.presenter.ReduceResult
 import studio.lunabee.compose.foundation.presenter.asResult
 
 abstract class MultiStateReducer<State : MultiStateUiState, MultiStateNavScope, Action : MultiStateAction> :
-    LBReducer<State, MultiStateUiState, MultiStateNavScope, MultiStateAction, Action>()
+    LBReducer<State, MultiStateUiState, MultiStateNavScope, MultiStateAction, Action>(
+        verbose = true,
+    )
 
 class MultiStateDataReducer(
     override val coroutineScope: CoroutineScope,

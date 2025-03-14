@@ -36,6 +36,8 @@ androidx-lifecycle = "2.8.7"
 javapoet = "1.13.0"
 lifecycle-viewmodel-android = "2.8.7"
 core = "1.15.0"
+kotlinx-coroutine = "1.10.1"
+touchlab-kermit = "2.0.5"
 
 [libraries]
 
@@ -67,9 +69,11 @@ dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", vers
 junit = { group = "junit", name = "junit", version.ref = "junit-junit" }
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+kotlinx-coroutine-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutine" }
 kotlin-test-junit = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
 material = { group = "com.google.android.material", name = "material", version.ref = "google-android-material" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-navigation" }
 zoomable = { group = "net.engawapg.lib", name = "zoomable", version.ref = "zoomable" }
 javapoet = { group = "com.squareup", name = "javapoet", version.ref = "javapoet" }
 core = { group = "androidx.core", name = "core", version.ref = "core" }
+touchlab-kermit = { group = "co.touchlab", name = "kermit", version.ref = "touchlab-kermit" }

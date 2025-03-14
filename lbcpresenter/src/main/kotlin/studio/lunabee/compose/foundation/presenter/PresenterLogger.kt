@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * LBSingleReducer.kt
+ * PresenterLogger.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 12/16/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 3/14/2025 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.foundation.presenter
 
-/**
- * Subclass of [LBReducer] to implement single state reducer
- *
- * @param verbose enable verbose logs using kermit logger
- * @see LBReducer
- */
-abstract class LBSingleReducer<UiState : PresenterUiState, NavScope, Action>(
-    verbose: Boolean = false,
-) : LBReducer<UiState, UiState, NavScope, Action, Action>(
-    verbose = verbose,
-) {
-    final override fun filterAction(action: Action): Boolean = true
-    final override fun filterUiState(actualState: UiState): Boolean = true
+import co.touchlab.kermit.Logger
+
+internal inline fun log(message: () -> String) {
+    Logger.withTag("LBPresenter").v(message())
 }
