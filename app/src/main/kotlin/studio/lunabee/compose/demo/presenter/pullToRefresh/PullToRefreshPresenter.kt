@@ -31,7 +31,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PullToRefreshPresenter @Inject constructor() :
-    LBSinglePresenter<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction>() {
+    LBSinglePresenter<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction>(
+        verbose = true,
+    ) {
 
     override val flows: List<Flow<PullToRefreshAction>> = listOf()
     override fun getInitialState(): PullToRefreshUiState = PullToRefreshUiState(

@@ -29,7 +29,7 @@ object AndroidConfig {
     const val COMPILE_SDK: Int = BuildConfigs.compileSdk
     const val TARGET_SDK: Int = COMPILE_SDK
     const val MIN_SDK: Int = BuildConfigs.minSdk
-    const val BUILD_TOOLS_VERSION: String = "34.0.0"
+    const val BUILD_TOOLS_VERSION: String = "35.0.1"
 
     const val LIBRARY_URL: String = "https://github.com/LunabeeStudio/Lunabee_Compose_Android"
     const val GROUP_ID: String = "studio.lunabee.compose"
@@ -45,7 +45,7 @@ object AndroidConfig {
     const val LBCUIFIELD_VERSION: String = "1.6.1"
     const val LBCIMAGE_VERSION: String = "1.4.0"
     const val LBCGLANCE_VERSION: String = "1.3.0"
-    const val LBCPRESENTER_VERSION: String = "1.2.0"
+    const val LBCPRESENTER_VERSION: String = "1.3.0"
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_17
     val JVM_TARGET: JvmTarget = JvmTarget.JVM_17

@@ -1,4 +1,3 @@
-
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -6,18 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres    
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 2025-03-14
 
-## LbcUiField
+### LbcPresenter 1.3.0
 
-### 1.6.1
+- Add verbose param to reducer and presenter to get some logs on presenter states
+
+## LbcUiField 1.6.1
+
 - Make `trailingIcon` nullable
 - **Breaking** :
-  -   `PasswordUiTextField` now use `CorePasswordStyleData` and `PasswordVisibilityOptionData`
-  -  `KeyboardActions` has been replaced by `KeyboardActionHandler` (due to the usage of the `BasicSecureTextField`)
-  - Exposition of  `readOnly` and `enabled`
-
-
+    - `PasswordUiTextField` now use `CorePasswordStyleData` and `PasswordVisibilityOptionData`
+    - `KeyboardActions` has been replaced by `KeyboardActionHandler` (due to the usage of the `BasicSecureTextField`)
+    - Exposition of  `readOnly` and `enabled`
 
 ## 2025-02-12
 
@@ -41,7 +41,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### LbcUiField
 
-- **Breaking**: Add an `interactionSource` param to `ComposeTextField` to fix a focus issue when using a time field as first field depending    
+- **Breaking**: Add an `interactionSource` param to `ComposeTextField` to fix a focus issue when using a time field as first field
+  depending    
   on Android API version (reproducible on API 27)
 
 ### LbcAccessibility
@@ -74,6 +75,7 @@ lbcHaptic = "1.1.0"
 lbcUiField = "1.0.1"    
 lbcImage = "1.0.1"    
 ```   
+
 ### LbcImage
 
 - Fallback to `LocalContentColor.current` if no tint provided on `LbcImage`
@@ -107,6 +109,7 @@ lbcHaptic = "1.1.0"
 lbcUiField = "1.0.0"    
 lbcImage = "1.0.0"    
 ```   
+
 ## 2024-03-28
 
 ``` lbcCore 1.3.0    
@@ -119,6 +122,7 @@ lbcHaptic 1.0.0
 lbcImage 1.0.0    
 lbcUiField 1.0.0    
 ```   
+
 ## 1.2.0
 
 ### LbcAndroidTest

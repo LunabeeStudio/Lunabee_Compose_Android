@@ -45,7 +45,14 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.android)
+    implementation(libs.touchlab.kermit)
 
     implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))
+
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlinx.coroutine.test)
+
+    androidTestImplementation(libs.kotlin.test)
+    androidTestImplementation(libs.kotlinx.coroutine.test)
 }

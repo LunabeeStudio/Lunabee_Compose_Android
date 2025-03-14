@@ -23,8 +23,15 @@ package studio.lunabee.compose.foundation.presenter
 
 /**
  * Subclass of [LBReducer] to implement single state reducer
+ *
+ * @param verbose enable verbose logs using kermit logger
+ * @see LBReducer
  */
-abstract class LBSingleReducer<UiState : PresenterUiState, NavScope, Action> : LBReducer<UiState, UiState, NavScope, Action, Action>() {
+abstract class LBSingleReducer<UiState : PresenterUiState, NavScope, Action>(
+    verbose: Boolean = false,
+) : LBReducer<UiState, UiState, NavScope, Action, Action>(
+    verbose = verbose,
+) {
     final override fun filterAction(action: Action): Boolean = true
     final override fun filterUiState(actualState: UiState): Boolean = true
 }
