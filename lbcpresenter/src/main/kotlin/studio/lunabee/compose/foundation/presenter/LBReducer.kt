@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.foundation.presenter
 
+import co.touchlab.kermit.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filter
@@ -111,4 +112,10 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
     abstract fun filterUiState(
         actualState: MainUiState,
     ): Boolean
+
+    private inline fun log(message: () -> String) {
+        if (verbose) {
+            Logger.withTag("LBPresenter").v(message())
+        }
+    }
 }

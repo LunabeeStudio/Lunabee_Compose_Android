@@ -27,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
+import co.touchlab.kermit.Logger
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -140,5 +141,11 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
         }
         val uiState by uiStateFlow.collectAsStateWithLifecycle()
         content(uiState)
+    }
+
+    private inline fun log(message: () -> String) {
+        if (verbose) {
+            Logger.withTag("LBPresenter").v(message())
+        }
     }
 }
