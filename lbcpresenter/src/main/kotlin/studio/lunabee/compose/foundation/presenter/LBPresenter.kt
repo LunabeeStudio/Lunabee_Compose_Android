@@ -27,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
+import co.touchlab.kermit.Logger
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -43,7 +44,12 @@ import kotlinx.coroutines.flow.stateIn
  */
 typealias LBSimpleReducer<UiState, NavScope, Action> = LBReducer<out UiState, UiState, NavScope, Action, out Action>
 
-abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> : ViewModel() {
+/**
+ * @property verbose enable verbose logs using kermit logger
+ */
+abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
+    private val verbose: Boolean = false,
+) : ViewModel() {
 
     /**
      * Channel to send user actions to the active reducer.
@@ -112,6 +118,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
                     if (actualStateSaved::class != state::class) {
                         reducer.emit(getReducerByState(actualState = state))
                     }
+                    log { "Update state <$actualStateSaved> ➡ <$state>" }
                     actualStateSaved = state
                 }
             }
@@ -134,5 +141,11 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action> :
         }
         val uiState by uiStateFlow.collectAsStateWithLifecycle()
         content(uiState)
+    }
+
+    private inline fun log(message: () -> String) {
+        if (verbose) {
+            Logger.withTag("LBPresenter").v(message())
+        }
     }
 }

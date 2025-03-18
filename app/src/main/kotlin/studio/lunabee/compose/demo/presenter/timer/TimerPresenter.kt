@@ -34,7 +34,9 @@ import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
-class TimerPresenter @Inject constructor() : LBSinglePresenter<TimerUiState, TimerNavScope, TimerAction>() {
+class TimerPresenter @Inject constructor() : LBSinglePresenter<TimerUiState, TimerNavScope, TimerAction>(
+    verbose = true,
+) {
     private val timerFlow: Flow<TimerAction.NewTimerValue> = flow {
         var value: Int = 0
         while (true) {
