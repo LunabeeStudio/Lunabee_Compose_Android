@@ -22,9 +22,9 @@
 package studio.lunabee.compose.demo.presenter.multistate
 
 import kotlinx.coroutines.CoroutineScope
-import studio.lunabee.compose.foundation.presenter.LBReducer
-import studio.lunabee.compose.foundation.presenter.ReduceResult
-import studio.lunabee.compose.foundation.presenter.asResult
+import studio.lunabee.compose.presenter.LBReducer
+import studio.lunabee.compose.presenter.ReduceResult
+import studio.lunabee.compose.presenter.asResult
 
 abstract class MultiStateReducer<State : MultiStateUiState, MultiStateNavScope, Action : MultiStateAction> :
     LBReducer<State, MultiStateUiState, MultiStateNavScope, MultiStateAction, Action>(

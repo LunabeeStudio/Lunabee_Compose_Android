@@ -25,8 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import studio.lunabee.compose.foundation.presenter.LBSinglePresenter
-import studio.lunabee.compose.foundation.presenter.LBSingleReducer
+import studio.lunabee.compose.presenter.LBSinglePresenter
+import studio.lunabee.compose.presenter.LBSingleReducer
 import javax.inject.Inject
 
 @HiltViewModel

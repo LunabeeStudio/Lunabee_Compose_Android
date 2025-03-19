@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Lunabee Studio
+ * Copyright (c) 2025 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * PresenterUiState.kt
+ * PresentScreen.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 11/4/2024 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 3/19/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.presenter
+package studio.lunabee.compose.presenter.koin
 
-interface PresenterUiState
+import androidx.compose.runtime.Composable
+import org.koin.compose.viewmodel.koinViewModel
+import studio.lunabee.compose.presenter.LBPresenter
+
+/**
+ * Inject presenter as viewmodel and initialize it.
+ */
+@Composable
+inline fun <NavScope, reified Presenter : LBPresenter<*, NavScope, *>> PresentScreen(navScope: NavScope) {
+    val presenter: Presenter = koinViewModel()
+    presenter.invoke(navScope)
+}

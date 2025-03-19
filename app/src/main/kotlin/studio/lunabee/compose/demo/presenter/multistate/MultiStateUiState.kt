@@ -21,7 +21,7 @@
 
 package studio.lunabee.compose.demo.presenter.multistate
 
-import studio.lunabee.compose.foundation.presenter.PresenterUiState
+import studio.lunabee.compose.presenter.PresenterUiState
 
 sealed interface MultiStateUiState : PresenterUiState {
 

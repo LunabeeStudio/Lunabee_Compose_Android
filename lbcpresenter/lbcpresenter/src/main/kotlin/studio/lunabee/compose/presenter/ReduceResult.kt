@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * PresentScreen.kt
+ * ReduceResult.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 3/19/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.presenter.koin
+package studio.lunabee.compose.presenter
 
-import androidx.compose.runtime.Composable
-import org.koin.compose.viewmodel.koinViewModel
-import studio.lunabee.compose.foundation.presenter.LBPresenter
+data class ReduceResult<UiState>(
+    val uiState: UiState,
+    val sideEffect: ReduceSideEffect?,
+)
 
-/**
- * Inject presenter as viewmodel and initialize it.
- */
-@Composable
-inline fun <NavScope, reified Presenter : LBPresenter<*, NavScope, *>> PresentScreen(navScope: NavScope) {
-    val presenter: Presenter = koinViewModel()
-    presenter.invoke(navScope)
+infix fun <UiState : PresenterUiState> UiState.withSideEffect(sideEffect: ReduceSideEffect): ReduceResult<UiState> =
+    ReduceResult(this, sideEffect)
+
+fun <UiState : PresenterUiState> UiState.asResult(): ReduceResult<UiState> {
+    return ReduceResult(this, null)
 }
+
+typealias ReduceSideEffect = suspend () -> Unit
