@@ -36,7 +36,7 @@ android {
     kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
 }
 
-description = "Way to create screens in android replacing the MVVM pattern"
+description = "Compose implementation of MVI pattern"
 version = AndroidConfig.LBCPRESENTER_VERSION
 
 dependencies {

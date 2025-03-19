@@ -38,6 +38,7 @@ lifecycle-viewmodel-android = "2.8.7"
 core = "1.15.0"
 kotlinx-coroutine = "1.10.1"
 touchlab-kermit = "2.0.5"
+koin = "4.1.0-Beta5"
 
 [libraries]
 
@@ -77,3 +78,6 @@ zoomable = { group = "net.engawapg.lib", name = "zoomable", version.ref = "zooma
 javapoet = { group = "com.squareup", name = "javapoet", version.ref = "javapoet" }
 core = { group = "androidx.core", name = "core", version.ref = "core" }
 touchlab-kermit = { group = "co.touchlab", name = "kermit", version.ref = "touchlab-kermit" }
+koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
+koin-core = { group = "io.insert-koin", name = "koin-core" }
+koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel" }

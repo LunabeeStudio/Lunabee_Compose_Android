@@ -46,6 +46,7 @@ object AndroidConfig {
     const val LBCIMAGE_VERSION: String = "1.4.0"
     const val LBCGLANCE_VERSION: String = "1.3.0"
     const val LBCPRESENTER_VERSION: String = "1.3.0"
+    const val LBCPRESENTER_KOIN_VERSION: String = LBCPRESENTER_VERSION
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_17
     val JVM_TARGET: JvmTarget = JvmTarget.JVM_17
