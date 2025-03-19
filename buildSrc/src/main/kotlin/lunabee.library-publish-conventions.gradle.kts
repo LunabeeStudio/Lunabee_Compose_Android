@@ -219,6 +219,9 @@ fun MavenPublication.setJavaArtifacts() {
 }
 
 signing {
+    setRequired {
+        { gradle.taskGraph.hasTask("publish") }
+    }
     sign(publishing.publications[project.name])
 }
 
