@@ -7,9 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## 2025-03-19
 
-### LbcPresenter-koin 1.3.0
+### LbcPresenter 1.4.0
 
-- Add specific module to use LbcPresenter with Koin
+- Add specific module `lbcpresenter-koin` to use LbcPresenter with Koin
+- Remove `foundation` middle package
 
 ## 2025-03-14
 
