@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## 2025-03-19
 
+### All
+
+- Add `setRequired` block on signing to disable signing for maven local publishing
+
 ### LbcPresenter 1.4.0
 
 - Add specific module `lbcpresenter-koin` to use LbcPresenter with Koin. Provides `PresentScreen` fun to inject presenter as viewmodel
