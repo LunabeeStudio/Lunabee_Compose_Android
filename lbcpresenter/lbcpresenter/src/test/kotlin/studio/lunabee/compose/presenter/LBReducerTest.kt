@@ -16,10 +16,10 @@
  * LBReducerTest.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 3/13/2025 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 3/20/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.presenter
+package studio.lunabee.compose.presenter
 
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.CoroutineScope
