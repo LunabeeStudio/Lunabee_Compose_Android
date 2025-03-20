@@ -21,7 +21,7 @@
 
 package studio.lunabee.compose.demo.presenter.timer
 
-import studio.lunabee.compose.foundation.presenter.PresenterUiState
+import studio.lunabee.compose.presenter.PresenterUiState
 
 data class TimerUiState(
     val timer: Int,

@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres    
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2025-03-19
+
+### All
+
+- Add `setRequired` block on signing to disable signing for maven local publishing
+
+### LbcPresenter 1.4.0
+
+- Add specific module `lbcpresenter-koin` to use LbcPresenter with Koin. Provides `PresentScreen` fun to inject presenter as viewmodel
+- **Breaking:** Remove `foundation` middle package
+
 ## 2025-03-14
 
 ### LbcPresenter 1.3.0
@@ -14,7 +25,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## LbcUiField 1.6.1
 
 - Make `trailingIcon` nullable
-- **Breaking** :
+- **Breaking:**
     - `PasswordUiTextField` now use `CorePasswordStyleData` and `PasswordVisibilityOptionData`
     - `KeyboardActions` has been replaced by `KeyboardActionHandler` (due to the usage of the `BasicSecureTextField`)
     - Exposition of  `readOnly` and `enabled`

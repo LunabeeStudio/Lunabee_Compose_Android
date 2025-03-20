@@ -23,10 +23,10 @@ package studio.lunabee.compose.demo.presenter.pullToRefresh
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
-import studio.lunabee.compose.foundation.presenter.LBSingleReducer
-import studio.lunabee.compose.foundation.presenter.ReduceResult
-import studio.lunabee.compose.foundation.presenter.asResult
-import studio.lunabee.compose.foundation.presenter.withSideEffect
+import studio.lunabee.compose.presenter.LBSingleReducer
+import studio.lunabee.compose.presenter.ReduceResult
+import studio.lunabee.compose.presenter.asResult
+import studio.lunabee.compose.presenter.withSideEffect
 
 class PullToRefreshReducer(
     override val coroutineScope: CoroutineScope,

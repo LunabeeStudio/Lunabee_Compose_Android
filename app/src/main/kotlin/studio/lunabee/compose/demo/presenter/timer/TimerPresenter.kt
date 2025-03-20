@@ -28,8 +28,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import studio.lunabee.compose.foundation.presenter.LBSinglePresenter
-import studio.lunabee.compose.foundation.presenter.LBSingleReducer
+import studio.lunabee.compose.presenter.LBSinglePresenter
+import studio.lunabee.compose.presenter.LBSingleReducer
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 

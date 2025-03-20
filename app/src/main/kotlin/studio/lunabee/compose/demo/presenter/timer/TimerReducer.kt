@@ -22,9 +22,9 @@
 package studio.lunabee.compose.demo.presenter.timer
 
 import kotlinx.coroutines.CoroutineScope
-import studio.lunabee.compose.foundation.presenter.LBSingleReducer
-import studio.lunabee.compose.foundation.presenter.ReduceResult
-import studio.lunabee.compose.foundation.presenter.asResult
+import studio.lunabee.compose.presenter.LBSingleReducer
+import studio.lunabee.compose.presenter.ReduceResult
+import studio.lunabee.compose.presenter.asResult
 
 class TimerReducer(
     override val coroutineScope: CoroutineScope,

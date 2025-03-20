@@ -29,8 +29,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import studio.lunabee.compose.foundation.presenter.LBPresenter
-import studio.lunabee.compose.foundation.presenter.LBSimpleReducer
+import studio.lunabee.compose.presenter.LBPresenter
+import studio.lunabee.compose.presenter.LBSimpleReducer
 import javax.inject.Inject
 
 @HiltViewModel

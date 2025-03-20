@@ -104,6 +104,7 @@ dependencies {
     implementation(project(Modules.LbcCrop))
     implementation(project(Modules.LbcUiField))
     implementation(project(Modules.LbcPresenter))
+    implementation(project(Modules.LbcPresenterKoin))
     implementation(project(Modules.LbcGlance))
     implementation(project(Modules.LbcImage))
 
