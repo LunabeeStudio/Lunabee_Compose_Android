@@ -62,9 +62,9 @@ abstract class UiField<T> {
     var value: T
         get() = mValue.value
         set(value) {
-            onValueChange(value)
             savedStateHandle.set(key = id, valueToSavedString(value))
             mValue.value = value
+            onValueChange(value)
         }
 
     fun checkAndDisplayError(): Boolean {
