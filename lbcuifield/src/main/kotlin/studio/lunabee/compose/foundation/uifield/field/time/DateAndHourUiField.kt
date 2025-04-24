@@ -62,8 +62,8 @@ class DateAndHourUiField(
     override val enabled: Boolean = true,
 ) : TimeUiField<LocalDateTime?>(), HourPickerHolder, DatePickerHolder {
     override val options: List<UiFieldOption> = listOf(
-        DatePickerOption(),
-        HourPickerOption(),
+        DatePickerOption(enabled && !readOnly),
+        HourPickerOption(enabled && !readOnly),
     )
 
     override fun savedValueToData(value: String): LocalDateTime {

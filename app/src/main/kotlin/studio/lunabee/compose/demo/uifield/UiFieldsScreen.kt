@@ -58,6 +58,7 @@ import studio.lunabee.compose.foundation.uifield.field.time.DateUiField
 import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePickerData
 import studio.lunabee.compose.foundation.uifield.field.time.option.hour.HourPickerData
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -188,6 +189,32 @@ fun UiFieldsScreen(
             enabled = false,
         )
     }
+
+    val disabledDateUiField = remember {
+        DateUiField(
+            initialValue = LocalDate.now(),
+            placeholder = LbcTextSpec.Raw(""),
+            enabled = false,
+            label = LbcTextSpec.Raw("Disabled date uifield"),
+            isFieldInError = {
+                null
+            },
+            selectableDates = object : SelectableDates {
+                override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                    return Instant.now().toEpochMilli() < utcTimeMillis
+                }
+            },
+            savedStateHandle = savedStateHandle,
+            id = "7",
+            datePickerData = DatePickerData(
+                datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
+                datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
+                datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
+                icon = LbcImageSpec.KtImageVector(Icons.Default.DateRange),
+            ),
+        )
+    }
+
     val areFieldsInError by combine(
         normalUiTextField.isInError,
         passwordUiTextField.isInError,
@@ -210,6 +237,7 @@ fun UiFieldsScreen(
         dateUiField.Composable(modifier = Modifier.fillMaxWidth())
         readOnlyField.Composable(modifier = Modifier.fillMaxWidth())
         disabledField.Composable(modifier = Modifier.fillMaxWidth())
+        disabledDateUiField.Composable(modifier = Modifier.fillMaxWidth())
 
         Button(
             onClick = {

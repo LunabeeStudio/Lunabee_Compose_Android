@@ -43,7 +43,7 @@ abstract class TimeUiField<T> : UiField<T>() {
         val collectedValue by mValue.collectAsState()
         val collectedError by error.collectAsState()
         // https://stackoverflow.com/a/70335041
-        val interactionSource = if (options.isNotEmpty()) {
+        val interactionSource = if (options.isNotEmpty() && enabled && !readOnly) {
             remember { MutableInteractionSource() }.also { interactionSource ->
                 LaunchedEffect(interactionSource) {
                     interactionSource.interactions.collect { interaction ->
