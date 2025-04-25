@@ -31,7 +31,7 @@ import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.composable.TrailingAction
 
 context(HourPickerHolder)
-class HourPickerOption : UiFieldOption {
+class HourPickerOption(private val enabled: Boolean) : UiFieldOption {
     private val isPickerVisible: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     override val clickLabel: LbcTextSpec = hourPickerData.hourPickerClickLabel
@@ -43,12 +43,14 @@ class HourPickerOption : UiFieldOption {
     @Composable
     override fun Composable(modifier: Modifier) {
         val collectedIsPickedVisible by isPickerVisible.collectAsState()
-        TrailingAction(
-            image = hourPickerData.icon,
-            onClick = { isPickerVisible.value = true },
-            contentDescription = null,
-            modifier = modifier,
-        )
+        if (enabled) {
+            TrailingAction(
+                image = hourPickerData.icon,
+                onClick = { isPickerVisible.value = true },
+                contentDescription = null,
+                modifier = modifier,
+            )
+        }
         if (collectedIsPickedVisible) {
             UiFieldTimePicker(
                 onDismiss = { isPickerVisible.value = false },
