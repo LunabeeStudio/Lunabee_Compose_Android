@@ -377,6 +377,7 @@ fun UiFieldsScreen(
                 passwordUiTextField.checkAndDisplayError()
                 dateAndHourUiField.checkAndDisplayError()
                 dateUiField.checkAndDisplayError()
+                phonePickerField.checkAndDisplayError()
             },
             modifier = Modifier.fillMaxWidth(),
         ) {
