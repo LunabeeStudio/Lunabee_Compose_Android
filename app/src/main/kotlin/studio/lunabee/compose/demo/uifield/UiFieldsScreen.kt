@@ -56,7 +56,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
 import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.CoroutineScope
@@ -90,7 +89,6 @@ import java.time.LocalDateTime
 fun UiFieldsScreen(
     savedStateHandle: SavedStateHandle,
 ) {
-    val context = LocalContext.current
     val normalUiTextField = remember {
         NormalUiTextField(
             initialValue = "Yes yes",

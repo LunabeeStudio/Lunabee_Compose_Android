@@ -60,10 +60,6 @@ internal class PhoneNumberVisualTransformation(
     private val phoneNumberUtil: PhoneNumberUtil = PhoneNumberUtil.getInstance()
     private val prefix = "+$countryPhoneCode"
 
-    init {
-        println("PhoneTransformation !!! uiCount = $countryPhoneCode prefix = $prefix")
-    }
-
     override fun filter(text: AnnotatedString): TransformedText {
         val textFormatted = buildAnnotatedString {
             append(formatPhoneNumber(text.text, phoneNumberUtil))

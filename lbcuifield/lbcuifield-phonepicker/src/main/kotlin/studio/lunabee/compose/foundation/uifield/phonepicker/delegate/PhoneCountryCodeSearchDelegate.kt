@@ -39,7 +39,7 @@ import studio.lunabee.compose.foundation.uifield.phonepicker.SelectedCountryPhon
 import studio.lunabee.compose.foundation.uifield.phonepicker.ext.normalized
 import kotlinx.coroutines.launch
 
-class PhoneCountryPickerSearchDelegate(
+internal class PhoneCountryCodeSearchDelegate(
     savedStateHandle: SavedStateHandle,
     searchFieldLabel: LbcTextSpec?,
     searchFieldPlaceHolder: LbcTextSpec?,

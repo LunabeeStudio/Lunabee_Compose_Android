@@ -52,9 +52,9 @@ import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
-import studio.lunabee.compose.foundation.uifield.phonepicker.delegate.PhoneCountryPickerSearchDelegate
+import studio.lunabee.compose.foundation.uifield.phonepicker.delegate.PhoneCountryCodeSearchDelegate
 import studio.lunabee.compose.foundation.uifield.phonepicker.delegate.PhoneCountryCodeSearchUiState
-
+@Suppress("LongParameterList")
 class PhonePickerUiField(
     override val initialValue: CountryCodeFieldData,
     override var label: LbcTextSpec?,
@@ -89,15 +89,11 @@ class PhonePickerUiField(
         return json.decodeFromString(value)
     }
 
-    fun fullValue(): String {
-        return "+${value.countryCode}${value.phoneNumber}"
-    }
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Composable(modifier: Modifier) {
         val delegate = remember {
-            PhoneCountryPickerSearchDelegate(
+            PhoneCountryCodeSearchDelegate(
                 savedStateHandle = savedStateHandle,
                 searchFieldLabel = countryCodePickerBottomSheetRenderer.searchedFieldLabel,
                 searchFieldPlaceHolder = countryCodePickerBottomSheetRenderer.searchFieldPlaceHolder,

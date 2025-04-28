@@ -37,7 +37,7 @@ android {
     kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
 }
 
-description = "group of ui field to easily create forms in compose"
+description = "phone picker ui field with a way to search for country phone code"
 version = AndroidConfig.LBCUIFIELD_PHONE_PICKER_VERSION
 
 dependencies {
