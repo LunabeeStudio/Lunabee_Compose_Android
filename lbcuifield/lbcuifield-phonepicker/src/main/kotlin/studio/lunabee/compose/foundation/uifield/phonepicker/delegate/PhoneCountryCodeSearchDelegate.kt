@@ -38,6 +38,7 @@ import studio.lunabee.compose.foundation.uifield.phonepicker.CountryCodeSearchIt
 import studio.lunabee.compose.foundation.uifield.phonepicker.SelectedCountryPhoneCode
 import studio.lunabee.compose.foundation.uifield.phonepicker.ext.normalized
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 internal class PhoneCountryCodeSearchDelegate(
     savedStateHandle: SavedStateHandle,
@@ -93,7 +94,7 @@ internal class PhoneCountryCodeSearchDelegate(
     ) {
         coroutineScope.launch {
             allCountryCodes =
-                CCPCountry.getLibraryMasterCountryList(context, CountryCodePicker.Language.FRENCH)
+                CCPCountry.getLibraryMasterCountryList(context, CountryCodePicker.Language.forCountryNameCode(Locale.getDefault().language))
                     .map { country ->
                         CountryCodeSearchItem(
                             name = country.name,
