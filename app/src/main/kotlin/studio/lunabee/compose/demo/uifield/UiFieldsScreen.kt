@@ -321,8 +321,7 @@ fun UiFieldsScreen(
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        modifier = Modifier.clickable { onClick() },
-
+                        modifier = Modifier.clickable { onClick() }
                     ) {
                         LbcImage(
                             imageSpec = countryCodeSearchItem.flag,

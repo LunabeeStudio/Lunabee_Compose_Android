@@ -206,7 +206,7 @@ class PhonePickerUiField(
                     phoneNumber = phoneNumber.nationalNumber.toString(),
                     countryCode = phoneNumber.countryCode.toString(),
                 )
-            } catch (e: RuntimeException) {
+            } catch (e: Exception) {
                 return CountryCodeFieldData(
                     phoneNumber = rawPhoneNumber,
                     countryCode = "",
