@@ -10,6 +10,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 [versions]
 
@@ -39,6 +40,10 @@ core = "1.16.0"
 kotlinx-coroutine = "1.10.2"
 touchlab-kermit = "2.0.5"
 koin = "4.1.0-Beta7"
+hbb20-countrycodepicker = "2.7.0"
+kotlinx-serialization = "1.8.1"
+libphonenumber = "8.13.42"
+normalize = "1.2.0"
 
 [libraries]
 
@@ -81,3 +86,7 @@ touchlab-kermit = { group = "co.touchlab", name = "kermit", version.ref = "touch
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core" }
 koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel" }
+hbb20-countrycodepicker = { group = "com.hbb20", name = "ccp", version.ref = "hbb20-countrycodepicker" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+libphonenumber = { group = "com.googlecode.libphonenumber", name = "libphonenumber", version.ref = "libphonenumber" }
+normalize = { group = "com.doist.x", name = "normalize", version.ref = "normalize" }
