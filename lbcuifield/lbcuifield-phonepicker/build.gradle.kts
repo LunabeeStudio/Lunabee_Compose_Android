@@ -35,12 +35,17 @@ android {
 
     kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
     kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
 }
 
 description = "phone picker ui field with a way to search for country phone code"
 version = AndroidConfig.LBCUIFIELD_PHONE_PICKER_VERSION
 
 dependencies {
+    coreLibraryDesugaring(libs.desugarJdk)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
