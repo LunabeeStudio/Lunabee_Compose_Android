@@ -48,8 +48,8 @@ class PasswordUiFieldDataImpl : PasswordUiFieldData {
         value: String,
         onValueChange: (String) -> Unit,
         modifier: Modifier,
-        placeholder: LbcTextSpec,
-        label: LbcTextSpec,
+        placeholder: LbcTextSpec?,
+        label: LbcTextSpec?,
         trailingIcon:
         @Composable()
         (() -> Unit)?,
@@ -89,8 +89,8 @@ class PasswordUiFieldDataImpl : PasswordUiFieldData {
                     value = state.text.toString(),
                     visualTransformation = VisualTransformation.None,
                     innerTextField = innerTextField,
-                    placeholder = { Text(text = placeholder.string) },
-                    label = { Text(text = label.string) },
+                    placeholder = placeholder?.let { { Text(text = placeholder.string) } },
+                    label = label?.let { { Text(text = label.string) } },
                     leadingIcon = null,
                     trailingIcon = trailingIcon,
                     prefix = null,

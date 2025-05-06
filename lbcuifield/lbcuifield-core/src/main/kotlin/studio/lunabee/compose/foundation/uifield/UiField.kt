@@ -35,8 +35,8 @@ abstract class UiField<T> {
     abstract val id: String
     abstract val savedStateHandle: SavedStateHandle
     abstract val initialValue: T
-    abstract var placeholder: LbcTextSpec
-    abstract var label: LbcTextSpec
+    abstract var placeholder: LbcTextSpec?
+    abstract var label: LbcTextSpec?
     abstract val options: List<UiFieldOption>
     abstract val uiFieldStyleData: UiFieldStyleData
     abstract val isFieldInError: (T) -> UiFieldError?

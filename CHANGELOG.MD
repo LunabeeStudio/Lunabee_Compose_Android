@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres    
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2025-04-28
+
+### LbcUiField : 1.7.0
+- **Breaking:** Move all module code into a `core` module. Clients should now import  `studio.lunabee.compose:lbcuifield-core` 
+- **Breaking** : Make the `placeholder` and `label` fields nullable  for `UiField`
+
+### LbcUiField-PhonePicker : 1.0.0
+- Add new `PhonePickerUiField`
+
+
 ## 2025-03-19
 
 ### All

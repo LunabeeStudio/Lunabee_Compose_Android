@@ -35,8 +35,8 @@ interface PasswordUiFieldData {
         value: String,
         onValueChange: (String) -> Unit,
         modifier: Modifier,
-        placeholder: LbcTextSpec,
-        label: LbcTextSpec,
+        placeholder: LbcTextSpec?,
+        label: LbcTextSpec?,
         trailingIcon:
         @Composable()
         (() -> Unit)?,

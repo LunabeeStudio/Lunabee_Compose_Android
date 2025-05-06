@@ -41,8 +41,8 @@ import java.time.format.FormatStyle
 @OptIn(ExperimentalMaterial3Api::class)
 class DateUiField(
     override val initialValue: LocalDate?,
-    override var label: LbcTextSpec,
-    override var placeholder: LbcTextSpec,
+    override var label: LbcTextSpec?,
+    override var placeholder: LbcTextSpec?,
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
     override val datePickerData: DatePickerData,

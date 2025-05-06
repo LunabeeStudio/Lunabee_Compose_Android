@@ -45,8 +45,8 @@ import java.time.format.FormatStyle
 @OptIn(ExperimentalMaterial3Api::class)
 class DateAndHourUiField(
     override val initialValue: LocalDateTime?,
-    override var label: LbcTextSpec,
-    override var placeholder: LbcTextSpec,
+    override var label: LbcTextSpec?,
+    override var placeholder: LbcTextSpec?,
     override val isFieldInError: (LocalDateTime?) -> UiFieldError?,
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
