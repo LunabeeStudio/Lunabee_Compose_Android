@@ -128,6 +128,20 @@ internal class PhoneCountryCodeSearchDelegate(
             ),
         )
     }
+
+    internal fun updateOnCountryCodeChange(countryCode: String) {
+        if (uiState.value.selectedCountryPhoneCode?.countryCode != countryCode) {
+            allCountryCodes.firstOrNull { it.countryCode == countryCode }?.let { country ->
+                _uiState.value = _uiState.value.copy(
+                    selectedCountryPhoneCode = SelectedCountryPhoneCode(
+                        name = country.name,
+                        flagImage = country.flag,
+                        countryCode = country.countryCode,
+                    ),
+                )
+            }
+        }
+    }
 }
 
 private const val SearchUiFieldId: String = "SearchUiField"
