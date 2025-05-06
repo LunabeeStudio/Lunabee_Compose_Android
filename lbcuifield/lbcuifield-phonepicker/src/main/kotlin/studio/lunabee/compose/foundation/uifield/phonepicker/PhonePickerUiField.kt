@@ -192,6 +192,11 @@ class PhonePickerUiField(
                 },
             )
         }
+
+        LaunchedEffect(collectedValue.countryCode) {
+            delegate.updateOnCountryCodeChange(collectedValue.countryCode)
+        }
+
         LaunchedEffect(Unit) {
             delegate.initCountryCodesList(context, collectedValue)
         }
