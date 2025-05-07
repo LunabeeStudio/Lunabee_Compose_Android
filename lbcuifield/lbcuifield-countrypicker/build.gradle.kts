@@ -27,7 +27,7 @@ plugins {
 
 android {
     resourcePrefix("lbc_uifield_")
-    namespace = "studio.lunabee.compose.uifield.phonepicker"
+    namespace = "studio.lunabee.compose.uifield.countrypicker"
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -41,8 +41,8 @@ android {
     }
 }
 
-description = "phone picker ui field with a way to search for country phone code"
-version = AndroidConfig.LBCUIFIELD_PHONE_PICKER_VERSION
+description = "phone picker ui field with a way to search for country"
+version = AndroidConfig.LBCUIFIELD_COUNTRY_PICKER_VERSION
 
 dependencies {
     coreLibraryDesugaring(libs.desugarJdk)
@@ -50,12 +50,10 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
     implementation(libs.androidx.appcompat)
-    implementation(project(Modules.LbcCore))
     implementation(libs.kotlinx.serialization.json)
+    implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))
     implementation(project(Modules.LbcUiFieldCore))
-    implementation(project(Modules.LbcUiFieldCountryPicker))
     implementation(libs.hbb20.countrycodepicker)
-    implementation(libs.libphonenumber)
     implementation(libs.normalize)
 }

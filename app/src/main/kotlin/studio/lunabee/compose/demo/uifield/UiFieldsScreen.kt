@@ -73,12 +73,13 @@ import studio.lunabee.compose.foundation.uifield.field.time.DateAndHourUiField
 import studio.lunabee.compose.foundation.uifield.field.time.DateUiField
 import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePickerData
 import studio.lunabee.compose.foundation.uifield.field.time.option.hour.HourPickerData
-import studio.lunabee.compose.foundation.uifield.phonepicker.CountryCodePickerBottomSheetRenderer
-import studio.lunabee.compose.foundation.uifield.phonepicker.CountryCodeSearchItem
+import studio.lunabee.compose.foundation.uifield.countrypicker.CountryPickerBottomSheetRenderer
+import studio.lunabee.compose.foundation.uifield.countrypicker.CountrySearchItem
+import studio.lunabee.compose.foundation.uifield.countrypicker.CountryPickerUiField
+import studio.lunabee.compose.foundation.uifield.countrypicker.SelectedCountry
 import studio.lunabee.compose.foundation.uifield.phonepicker.PhoneFieldRenderer
 import studio.lunabee.compose.foundation.uifield.phonepicker.PhoneNumberValidator
 import studio.lunabee.compose.foundation.uifield.phonepicker.PhonePickerUiField
-import studio.lunabee.compose.foundation.uifield.phonepicker.SelectedCountryPhoneCode
 import studio.lunabee.compose.image.LbcImage
 import java.time.Instant
 import java.time.LocalDate
@@ -252,36 +253,57 @@ fun UiFieldsScreen(
             phoneFieldRenderer = object : PhoneFieldRenderer {
                 @Composable
                 override fun FieldContent(
-                    textField: @Composable (((Boolean) -> Unit) -> Unit),
-                    selectedCountry: SelectedCountryPhoneCode?,
+                    textField: @Composable (onFocusChange: (focused: Boolean) -> Unit) -> Unit,
+                    selectedCountry: SelectedCountry?,
                     openCountryPicker: () -> Unit,
                     errorMessage: LbcTextSpec?,
                 ) {
-                    Column {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        ) {
-                            selectedCountry?.let {
-                                LbcImage(
-                                    imageSpec = selectedCountry.flagImage,
-                                    modifier = Modifier
-                                        .size(32.dp)
-                                        .clickable { openCountryPicker() },
-                                )
-                            }
-                            textField {}
-                        }
-                        errorMessage?.let {
-                            Text(
-                                text = errorMessage.string,
-                                color = MaterialTheme.colorScheme.error,
-                            )
-                        }
-                    }
+                    PhoneFieldContent(
+                        textField = textField,
+                        selectedCountry = selectedCountry,
+                        openCountryPicker = openCountryPicker,
+                        errorMessage = errorMessage,
+                    )
                 }
             },
-            countryCodePickerBottomSheetRenderer = object : CountryCodePickerBottomSheetRenderer {
+            countryPickerBottomSheetRenderer =
+            object : CountryPickerBottomSheetRenderer {
+                @Composable
+                override fun BottomSheetHolder(
+                    dismiss: () -> Unit,
+                    searchField: @Composable (() -> Unit),
+                    countriesList: @Composable ((PaddingValues, LazyListState) -> Unit),
+                ) {
+                    CountrySearchBottomSheetHolder(
+                        dismiss = dismiss,
+                        searchField = searchField,
+                        countriesList = countriesList,
+                    )
+                }
+
+                @Composable
+                override fun CountryRow(countrySearchItem: CountrySearchItem, searchedText: String, onClick: () -> Unit) {
+                    CountryBottomSheetCountryRow(countrySearchItem, searchedText, onClick)
+                }
+
+                override val searchedFieldLabel: LbcTextSpec = LbcTextSpec.Raw("Search for a country")
+                override val searchFieldPlaceHolder: LbcTextSpec = LbcTextSpec.Raw("")
+                override val searchFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
+            },
+        )
+    }
+
+    val countryPickerField = remember {
+        CountryPickerUiField(
+            initialValue = CountryPickerUiField.initialValueFromRawCountryName("France"),
+            placeholder = LbcTextSpec.Raw(""),
+            label = LbcTextSpec.Raw("Country"),
+            isFieldInError = { null },
+            id = "9",
+            savedStateHandle = savedStateHandle,
+            onValueChange = {},
+            coroutineScope = CoroutineScope(Dispatchers.Default),
+            countryPickerBottomSheetRenderer = object : CountryPickerBottomSheetRenderer {
 
                 @Composable
                 override fun BottomSheetHolder(
@@ -289,54 +311,16 @@ fun UiFieldsScreen(
                     searchField: @Composable (() -> Unit),
                     countriesList: @Composable ((PaddingValues, LazyListState) -> Unit),
                 ) {
-                    ModalBottomSheet(
-                        onDismissRequest = {
-                            dismiss()
-                        },
-                        sheetState = rememberModalBottomSheetState(),
-                        dragHandle = null,
-                        contentWindowInsets = { WindowInsets(0.dp, 0.dp, 0.dp, 0.dp) },
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                        ) {
-                            searchField()
-
-                            countriesList(
-                                PaddingValues(16.dp),
-                                rememberLazyListState(),
-                            )
-                        }
-                    }
+                    CountrySearchBottomSheetHolder(
+                        dismiss = dismiss,
+                        searchField = searchField,
+                        countriesList = countriesList,
+                    )
                 }
 
                 @Composable
-                override fun CountryRow(
-                    countryCodeSearchItem: CountryCodeSearchItem,
-                    searchedText: String,
-                    onClick: () -> Unit,
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        modifier = Modifier.clickable { onClick() },
-                    ) {
-                        LbcImage(
-                            imageSpec = countryCodeSearchItem.flag,
-                            modifier = Modifier.size(32.dp),
-                        )
-                        Text(
-                            text = countryCodeSearchItem.getAnnotatedName(
-                                searchedText = searchedText,
-                                nonMatchingSpanStyle = SpanStyle(color = MaterialTheme.colorScheme.onSurface),
-                                matchingSpanStyle = SpanStyle(color = MaterialTheme.colorScheme.primary),
-                            ).annotated,
-                            modifier = Modifier
-                                .weight(1f),
-                        )
-                    }
+                override fun CountryRow(countrySearchItem: CountrySearchItem, searchedText: String, onClick: () -> Unit) {
+                    CountryBottomSheetCountryRow(countrySearchItem, searchedText, onClick)
                 }
 
                 override val searchedFieldLabel: LbcTextSpec = LbcTextSpec.Raw("Search for a country")
@@ -369,6 +353,7 @@ fun UiFieldsScreen(
         readOnlyField.Composable(modifier = Modifier.fillMaxWidth())
         disabledField.Composable(modifier = Modifier.fillMaxWidth())
         phonePickerField.Composable(modifier = Modifier.fillMaxWidth())
+        countryPickerField.Composable(modifier = Modifier.fillMaxWidth())
         disabledDateUiField.Composable(modifier = Modifier.fillMaxWidth())
 
         Button(
@@ -390,5 +375,93 @@ fun UiFieldsScreen(
         ) {
             Text(text = "Its All Good")
         }
+    }
+}
+
+@Composable
+private fun PhoneFieldContent(
+    textField: @Composable (onFocusChange: (focused: Boolean) -> Unit) -> Unit,
+    selectedCountry: SelectedCountry?,
+    openCountryPicker: () -> Unit,
+    errorMessage: LbcTextSpec?,
+) {
+    Column {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            selectedCountry?.let {
+                LbcImage(
+                    imageSpec = selectedCountry.flagImage,
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clickable { openCountryPicker() },
+                )
+            }
+            textField {}
+        }
+        errorMessage?.let {
+            Text(
+                text = errorMessage.string,
+                color = MaterialTheme.colorScheme.error,
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun CountrySearchBottomSheetHolder(
+    dismiss: () -> Unit,
+    searchField: @Composable (() -> Unit),
+    countriesList: @Composable ((PaddingValues, LazyListState) -> Unit),
+) {
+    ModalBottomSheet(
+        onDismissRequest = {
+            dismiss()
+        },
+        sheetState = rememberModalBottomSheetState(),
+        dragHandle = null,
+        contentWindowInsets = { WindowInsets(0.dp, 0.dp, 0.dp, 0.dp) },
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+        ) {
+            searchField()
+
+            countriesList(
+                PaddingValues(16.dp),
+                rememberLazyListState(),
+            )
+        }
+    }
+}
+
+@Composable
+private fun CountryBottomSheetCountryRow(
+    countrySearchItem: CountrySearchItem,
+    searchedText: String,
+    onClick: () -> Unit,
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier.clickable { onClick() },
+    ) {
+        LbcImage(
+            imageSpec = countrySearchItem.flag,
+            modifier = Modifier.size(32.dp),
+        )
+        Text(
+            text = countrySearchItem.getAnnotatedName(
+                searchedText = searchedText,
+                nonMatchingSpanStyle = SpanStyle(color = MaterialTheme.colorScheme.onSurface),
+                matchingSpanStyle = SpanStyle(color = MaterialTheme.colorScheme.primary),
+            ).annotated,
+            modifier = Modifier
+                .weight(1f),
+        )
     }
 }

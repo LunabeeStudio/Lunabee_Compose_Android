@@ -104,6 +104,7 @@ dependencies {
     implementation(project(Modules.LbcCrop))
     implementation(project(Modules.LbcUiFieldCore))
     implementation(project(Modules.LbcUiFieldPhonePicker))
+    implementation(project(Modules.LbcUiFieldCountryPicker))
     implementation(project(Modules.LbcPresenter))
     implementation(project(Modules.LbcPresenterKoin))
     implementation(project(Modules.LbcGlance))

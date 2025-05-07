@@ -5,15 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres    
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2025-05-07
+
+### LbcUiField-PhonePicker : 1.1.0
+
+- **Breaking:** Move the code related to the country picker to separate module (more info & documentation
+  here : https://www.notion.so/lunabeestudio/Lunabee-Compose-library-42f4d91d463a4e8492a1a4d3d32a243f?pvs=4#1e3770e99af7805c878becb4d1ebfac7)
+
+### LbcUiField-CountryPicker : 1.0.0
+
+- Add new `CountryPickerUiField`
+
 ## 2025-04-28
 
 ### LbcUiField : 1.7.0
-- **Breaking:** Move all module code into a `core` module. Clients should now import  `studio.lunabee.compose:lbcuifield-core` 
-- **Breaking** : Make the `placeholder` and `label` fields nullable  for `UiField`
+
+- **Breaking:** Move all module code into a `core` module. Clients should now import  `studio.lunabee.compose:lbcuifield-core`
+- **Breaking** : Make the `placeholder` and `label` fields nullable for `UiField`
 
 ### LbcUiField-PhonePicker : 1.0.0
-- Add new `PhonePickerUiField`
 
+- Add new `PhonePickerUiField`
 
 ## 2025-03-19
 

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * CountryCodePickerContent.kt
+ * CountryCodePickerBottomSheetRenderer.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/17/2025 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/7/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.phonepicker
+package studio.lunabee.compose.foundation.uifield.countrypicker
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyListState
@@ -31,7 +31,7 @@ import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
  * Interface to provide a custom rendering of the country code picker bottom sheet.
  * This allows to customize the bottom sheet, the search field, and the country row.
  */
-interface CountryCodePickerBottomSheetRenderer {
+interface CountryPickerBottomSheetRenderer {
 
     /**
      * Holder for the bottom sheet content.
@@ -49,15 +49,15 @@ interface CountryCodePickerBottomSheetRenderer {
     )
 
     /**
-     * Render a row for a country in the country code picker bottom sheet.
+     * Render a row for a country in the country picker bottom sheet.
      *
-     * @param countryCodeSearchItem The [CountryCodeSearchItem] to display.
+     * @param countrySearchItem The [CountrySearchItem] to display.
      * @param searchedText The text entered in the search field.
      * @param onClick The action to perform when the country row is clicked.
      */
     @Composable
     fun CountryRow(
-        countryCodeSearchItem: CountryCodeSearchItem,
+        countrySearchItem: CountrySearchItem,
         searchedText: String,
         onClick: () -> Unit,
     )
