@@ -117,11 +117,9 @@ class CountrySearchDelegate(
     }
 
     fun initWithInitialCountryPhoneCode(
-        context: Context,
         countryPhoneCode: String,
     ) {
         coroutineScope.launch {
-            initCountryCodesList(context)
             allCountryCodes.firstOrNull { it.countryPhoneCode == countryPhoneCode }
                 ?.let { initialCountry ->
                     _uiState.value = uiState.value.copy(
@@ -135,12 +133,6 @@ class CountrySearchDelegate(
 
             updateUiStateWithSearch(searchUiField.value)
         }
-    }
-
-    private fun initCountryCodesList(
-        context: Context,
-    ) {
-        // allCountryCodes =
     }
 
     fun onCountrySelected(searchItem: CountrySearchItem) {
