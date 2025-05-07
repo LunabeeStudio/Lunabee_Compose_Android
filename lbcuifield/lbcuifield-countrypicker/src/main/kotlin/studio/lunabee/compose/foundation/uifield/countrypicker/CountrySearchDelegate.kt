@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * PhoneCountryCodePickerDelegateImpl.kt
+ * PhoneCountryCodeSearchDelegate.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/17/2025 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/7/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.phonepicker.delegate
+package studio.lunabee.compose.foundation.uifield.countrypicker
 
 import android.content.Context
 import androidx.lifecycle.SavedStateHandle
@@ -29,37 +29,46 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
+import studio.lunabee.compose.foundation.uifield.countrypicker.ext.normalized
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.text.NormalUiTextField
-import studio.lunabee.compose.foundation.uifield.phonepicker.CountryCodeFieldData
-import studio.lunabee.compose.foundation.uifield.phonepicker.CountryCodeSearchItem
-import studio.lunabee.compose.foundation.uifield.phonepicker.SelectedCountryPhoneCode
-import studio.lunabee.compose.foundation.uifield.phonepicker.ext.normalized
-import kotlinx.coroutines.launch
 import java.util.Locale
 
-internal class PhoneCountryCodeSearchDelegate(
+class CountrySearchDelegate(
     savedStateHandle: SavedStateHandle,
     searchFieldLabel: LbcTextSpec?,
     searchFieldPlaceHolder: LbcTextSpec?,
     searchFieldStyleData: UiFieldStyleData,
     private val coroutineScope: CoroutineScope,
+    private val context: Context,
 ) {
 
-    private var allCountryCodes: List<CountryCodeSearchItem> = emptyList()
+    private var allCountryCodes: List<CountrySearchItem> =
+        CCPCountry.getLibraryMasterCountryList(context, CountryCodePicker.Language.forCountryNameCode(Locale.getDefault().language))
+            .map { country ->
+                CountrySearchItem(
+                    name = country.name,
+                    countryPhoneCode = country.phoneCode,
+                    flag = LbcImageSpec.ImageDrawable(country.flagID),
+                    isSelected = false,
+                    isoName = country.nameCode,
+                )
+            }
 
-    private val _uiState: MutableStateFlow<PhoneCountryCodeSearchUiState> by lazy {
+    private val _uiState: MutableStateFlow<CountrySearchUiState> by lazy {
         MutableStateFlow(
-            PhoneCountryCodeSearchUiState(
+            CountrySearchUiState(
                 countryCodesToDisplay = allCountryCodes,
                 searchedText = "",
-                selectedCountryPhoneCode = null,
+                selectedCountry = null,
             ),
         )
     }
-    internal val uiState: StateFlow<PhoneCountryCodeSearchUiState> by lazy { _uiState.asStateFlow() }
+
+    val uiState: StateFlow<CountrySearchUiState> by lazy { _uiState.asStateFlow() }
 
     val searchUiField: NormalUiTextField by lazy {
         NormalUiTextField(
@@ -88,28 +97,16 @@ internal class PhoneCountryCodeSearchDelegate(
         )
     }
 
-    internal fun initCountryCodesList(
-        context: Context,
-        initialPhoneNumber: CountryCodeFieldData,
+    internal fun initWithInitialCountryName(
+        countryName: String,
     ) {
         coroutineScope.launch {
-            allCountryCodes =
-                CCPCountry.getLibraryMasterCountryList(context, CountryCodePicker.Language.forCountryNameCode(Locale.getDefault().language))
-                    .map { country ->
-                        CountryCodeSearchItem(
-                            name = country.name,
-                            countryCode = country.phoneCode,
-                            flag = LbcImageSpec.ImageDrawable(country.flagID),
-                            isSelected = false,
-                        )
-                    }
-
-            allCountryCodes.firstOrNull { it.countryCode == initialPhoneNumber.countryCode }
+            allCountryCodes.firstOrNull { it.name == countryName }
                 ?.let { initialCountry ->
                     _uiState.value = uiState.value.copy(
-                        selectedCountryPhoneCode = SelectedCountryPhoneCode(
+                        selectedCountry = SelectedCountry(
                             name = initialCountry.name,
-                            countryCode = initialCountry.countryCode,
+                            countryPhoneCode = initialCountry.countryPhoneCode,
                             flagImage = initialCountry.flag,
                         ),
                     )
@@ -119,24 +116,43 @@ internal class PhoneCountryCodeSearchDelegate(
         }
     }
 
-    internal fun onCountrySelected(searchItem: CountryCodeSearchItem) {
+    fun initWithInitialCountryPhoneCode(
+        countryPhoneCode: String,
+    ) {
+        coroutineScope.launch {
+            allCountryCodes.firstOrNull { it.countryPhoneCode == countryPhoneCode }
+                ?.let { initialCountry ->
+                    _uiState.value = uiState.value.copy(
+                        selectedCountry = SelectedCountry(
+                            name = initialCountry.name,
+                            countryPhoneCode = initialCountry.countryPhoneCode,
+                            flagImage = initialCountry.flag,
+                        ),
+                    )
+                }
+
+            updateUiStateWithSearch(searchUiField.value)
+        }
+    }
+
+    fun onCountrySelected(searchItem: CountrySearchItem) {
         _uiState.value = _uiState.value.copy(
-            selectedCountryPhoneCode = SelectedCountryPhoneCode(
+            selectedCountry = SelectedCountry(
                 name = searchItem.name,
                 flagImage = searchItem.flag,
-                countryCode = searchItem.countryCode,
+                countryPhoneCode = searchItem.countryPhoneCode,
             ),
         )
     }
 
-    internal fun updateOnCountryCodeChange(countryCode: String) {
-        if (uiState.value.selectedCountryPhoneCode?.countryCode != countryCode) {
-            allCountryCodes.firstOrNull { it.countryCode == countryCode }?.let { country ->
+    fun updateOnCountryCodeChange(countryCode: String) {
+        if (uiState.value.selectedCountry?.countryPhoneCode != countryCode) {
+            allCountryCodes.firstOrNull { it.countryPhoneCode == countryCode }?.let { country ->
                 _uiState.value = _uiState.value.copy(
-                    selectedCountryPhoneCode = SelectedCountryPhoneCode(
+                    selectedCountry = SelectedCountry(
                         name = country.name,
                         flagImage = country.flag,
-                        countryCode = country.countryCode,
+                        countryPhoneCode = country.countryPhoneCode,
                     ),
                 )
             }

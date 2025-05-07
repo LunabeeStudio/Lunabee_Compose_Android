@@ -23,6 +23,7 @@ package studio.lunabee.compose.foundation.uifield.phonepicker
 
 import androidx.compose.runtime.Composable
 import studio.lunabee.compose.core.LbcTextSpec
+import studio.lunabee.compose.foundation.uifield.countrypicker.SelectedCountry
 
 /**
  * Interface for rendering the content of a phone field.
@@ -44,7 +45,7 @@ interface PhoneFieldRenderer {
     @Composable
     fun FieldContent(
         textField: @Composable (onFocusChange: (focused: Boolean) -> Unit) -> Unit,
-        selectedCountry: SelectedCountryPhoneCode?,
+        selectedCountry: SelectedCountry?,
         openCountryPicker: () -> Unit,
         errorMessage: LbcTextSpec?,
     )

@@ -13,33 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * PhoneCodeSearchItem.kt
+ * CountryCodeSearchItem.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/22/2025 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/7/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.phonepicker
+package studio.lunabee.compose.foundation.uifield.countrypicker
 
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
-import studio.lunabee.compose.foundation.uifield.phonepicker.ext.normalized
+import studio.lunabee.compose.foundation.uifield.countrypicker.ext.normalized
 
 /**
- * Represents a country code search item.
+ * Represents a country search item.
  *
  * @property name The name of the country.
  * @property countryCode The country phone code (e.g., "33", "1", "225").
  * @property flag The flag of the country as an [LbcImageSpec].
  * @property isSelected Indicates if the country is currently selected.
  */
-data class CountryCodeSearchItem(
+data class CountrySearchItem(
     val name: String,
-    val countryCode: String,
+    val countryPhoneCode: String,
     val flag: LbcImageSpec,
     val isSelected: Boolean,
+    val isoName: String,
 ) {
 
     /**

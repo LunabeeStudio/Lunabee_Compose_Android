@@ -56,5 +56,7 @@ project(":lbcpresenter-koin").projectDir = File("lbcpresenter/lbcpresenter-koin"
 
 include(":lbcuifield-core")
 project(":lbcuifield-core").projectDir = File("lbcuifield/lbcuifield-core")
+include(":lbcuifield-countrypicker")
+project(":lbcuifield-countrypicker").projectDir = File("lbcuifield/lbcuifield-countrypicker")
 include(":lbcuifield-phonepicker")
 project(":lbcuifield-phonepicker").projectDir = File("lbcuifield/lbcuifield-phonepicker")
