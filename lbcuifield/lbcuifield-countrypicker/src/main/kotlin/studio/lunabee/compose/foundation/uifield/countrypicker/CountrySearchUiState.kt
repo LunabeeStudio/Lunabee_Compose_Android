@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * PhoneCountryCodeSearchUiState.kt
+ * CountrySearchUiState.kt
  * Lunabee Compose
  *
  * Created by Lunabee Studio / Date - 5/7/2025 - for the Lunabee Compose library.

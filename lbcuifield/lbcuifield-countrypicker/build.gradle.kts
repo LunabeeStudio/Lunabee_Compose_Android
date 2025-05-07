@@ -41,7 +41,7 @@ android {
     }
 }
 
-description = "phone picker ui field with a way to search for country"
+description = "country picker ui field"
 version = AndroidConfig.LBCUIFIELD_COUNTRY_PICKER_VERSION
 
 dependencies {
