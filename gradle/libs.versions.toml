@@ -42,7 +42,7 @@ touchlab-kermit = "2.0.5"
 koin = "4.1.0-Beta11"
 hbb20-countrycodepicker = "2.7.3"
 kotlinx-serialization = "1.8.1"
-libphonenumber = "8.13.55"
+libphonenumber = "9.0.5"
 normalize = "1.2.0"
 
 [libraries]
