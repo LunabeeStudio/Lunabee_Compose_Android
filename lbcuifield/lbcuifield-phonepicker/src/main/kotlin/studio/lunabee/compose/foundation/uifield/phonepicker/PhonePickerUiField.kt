@@ -68,11 +68,10 @@ class PhonePickerUiField(
     override val onValueChange: (CountryCodeFieldData) -> Unit,
     override val readOnly: Boolean = false,
     override val enabled: Boolean = true,
-    val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    val keyboardActions: KeyboardActions = KeyboardActions.Default,
+    private val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    private val keyboardActions: KeyboardActions = KeyboardActions.Default,
     private val phoneFieldRenderer: PhoneFieldRenderer,
     private val coroutineScope: CoroutineScope,
-    private val countryPickerStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
     private val countryPickerBottomSheetRenderer: CountryPickerBottomSheetRenderer,
 ) : UiField<CountryCodeFieldData>() {
 
