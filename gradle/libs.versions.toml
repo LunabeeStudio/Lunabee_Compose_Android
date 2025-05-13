@@ -11,6 +11,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+jreleaser = { id = "org.jreleaser", version.ref = "jreleaser" }
 
 [versions]
 
@@ -44,6 +45,7 @@ hbb20-countrycodepicker = "2.7.3"
 kotlinx-serialization = "1.8.1"
 libphonenumber = "9.0.5"
 normalize = "1.2.0"
+jreleaser = "1.18.0"
 
 [libraries]
 
@@ -53,6 +55,7 @@ androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "and
 androidx-exifinterface = { group = "androidx.exifinterface", name = "exifinterface", version.ref = "androidx-exifinterface" }
 androidx-glance-widget = { group = "androidx.glance", name = "glance-appwidget", version.ref = "androidx-glance" }
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android-gradle-plugin" }
+jreleaser-gradle-plugin = { group = "org.jreleaser", name = "org.jreleaser.gradle.plugin", version.ref = "jreleaser" }
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidx-test-runner" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-compose-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }

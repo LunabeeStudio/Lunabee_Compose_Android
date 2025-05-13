@@ -32,6 +32,7 @@ enum class PublishType {
 }
 
 plugins {
+    id("org.jreleaser")
     `maven-publish`
     signing
 }
@@ -42,37 +43,39 @@ val publishType: PublishType = when {
     else -> error("Cannot determine the type of publication")
 }
 
+jreleaser {
+    signing {
+        active.set(org.jreleaser.model.Active.ALWAYS)
+        armored.set(true)
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                create("release-deploy") {
+                    active.set(org.jreleaser.model.Active.ALWAYS)
+                    url.set("https://central.sonatype.com/api/v1/publisher")
+                    stagingRepository("target/staging-deploy")
+                }
+            }
+            nexus2 {
+                create("snapshot-deploy") {
+                    active.set(org.jreleaser.model.Active.SNAPSHOT)
+                    snapshotUrl.set("https://central.sonatype.com/repository/maven-snapshots")
+                    applyMavenCentralRules = true
+                    snapshotSupported = true
+                    closeRepository = true
+                    releaseRepository = true
+                    stagingRepository("target/staging-deploy")
+                }
+            }
+        }
+    }
+}
+
 println("Configure publish of ${project.name} with type $publishType")
 
 project.extensions.configure<PublishingExtension>("publishing") {
     setupPublication()
-    afterEvaluate {
-        setupMavenRepository()
-    }
-}
-
-/**
- * Set repository destination depending on [project] and version name.
- * Credentials should be stored in your root gradle.properties, in a non source controlled file.
- */
-fun PublishingExtension.setupMavenRepository() {
-    // The Artifactory repository key to publish to
-    val repoPath = if (project.version.toString().endsWith("-SNAPSHOT")) {
-        "content/repositories/snapshots/"
-    } else {
-        "service/local/staging/deploy/maven2/"
-    }
-    repositories {
-        maven {
-            authentication {
-                credentials.username = project.properties["sonatypeUsername"]?.toString()
-                    ?: System.getenv("SONATYPE_PUBLISH_USERNAME")
-                credentials.password = project.properties["sonatypePassword"]?.toString()
-                    ?: System.getenv("SONATYPE_PUBLISH_PASSWORD")
-            }
-            url = URI.create("https://s01.oss.sonatype.org/$repoPath")
-        }
-    }
 }
 
 /**
@@ -143,25 +146,6 @@ fun MavenPublication.setPom() {
                 id.set("Publisher")
                 name.set("Publisher Lunabee")
                 email.set("publisher@lunabee.com")
-            }
-        }
-
-        withXml {
-            asNode().appendNode("dependencies").apply {
-                fun Dependency.write(scope: String) = appendNode("dependency").apply {
-                    appendNode("groupId", group)
-                    appendNode("artifactId", name)
-                    version?.let { appendNode("version", version) }
-                    appendNode("scope", scope)
-                }
-
-                configurations.findByName("api")?.dependencies?.forEach { dependency ->
-                    dependency.write("implementation")
-                }
-
-                configurations.findByName("implementation")?.dependencies?.forEach { dependency ->
-                    dependency.write("runtime")
-                }
             }
         }
     }
@@ -243,3 +227,5 @@ afterEvaluate {
 tasks.register("${project.name}Version", VersionTask::class.java)
 tasks.register("${project.name}setSnapshotVersion", SnapshotTask::class.java)
 tasks.register("${project.name}setDevelopVersion", DevelopTask::class.java)
+
+private fun String.capitalized(): String = if (this.isEmpty()) this else this[0].titlecase(Locale.getDefault()) + this.substring(1)
