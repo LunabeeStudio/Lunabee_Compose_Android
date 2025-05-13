@@ -13,18 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * StringExt.kt
+ * CountrySearchUiState.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/25/2025 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/7/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.phonepicker.ext
+package studio.lunabee.compose.foundation.uifield.countrypicker
 
-import doist.x.normalize.Form
-import doist.x.normalize.normalize
-
-internal fun String.normalized(): String {
-    return this.lowercase().normalize(Form.NFD)
-        .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
-}
+data class CountrySearchUiState(
+    val countryCodesToDisplay: List<CountrySearchItem>,
+    val searchedText: String,
+    val selectedCountry: SelectedCountry?,
+)

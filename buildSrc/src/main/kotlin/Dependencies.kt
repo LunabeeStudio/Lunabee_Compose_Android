@@ -30,6 +30,7 @@ object Modules {
     const val LbcHaptic: String = ":lbchaptic"
     const val LbcCrop: String = ":lbccrop"
     const val LbcUiFieldCore: String = ":lbcuifield-core"
+    const val LbcUiFieldCountryPicker: String = ":lbcuifield-countrypicker"
     const val LbcUiFieldPhonePicker: String = ":lbcuifield-phonepicker"
     const val LbcGlance: String = ":lbcglance"
     const val LbcPresenter: String = ":lbcpresenter"

@@ -16,15 +16,15 @@
  * SelectedCountry.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 4/22/2025 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 5/7/2025 - for the Lunabee Compose library.
  */
 
-package studio.lunabee.compose.foundation.uifield.phonepicker
+package studio.lunabee.compose.foundation.uifield.countrypicker
 
 import studio.lunabee.compose.core.LbcImageSpec
 
-data class SelectedCountryPhoneCode(
+data class SelectedCountry(
     val name: String,
     val flagImage: LbcImageSpec,
-    val countryCode: String,
+    val countryPhoneCode: String,
 )
