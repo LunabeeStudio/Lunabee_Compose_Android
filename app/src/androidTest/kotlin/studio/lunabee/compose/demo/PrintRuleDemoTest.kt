@@ -66,4 +66,10 @@ class PrintRuleDemoTest : LbcComposeTest() {
     //            .waitUntilExactlyOneExists()
     //            .assertIsDisplayed()
     //    }
+
+    @Test
+    fun getScreenshotDir_exists_test(): Unit = invoke {
+        val dir = printRule.getScreenshotDir()
+        assertTrue(dir.exists())
+    }
 }
