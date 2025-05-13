@@ -37,7 +37,7 @@ object AndroidConfig {
     // ⚠️ Match module name in UPPER_CASE ('-' -> '_')
     const val LBCCORE_VERSION: String = "1.8.0"
     const val LBCFOUNDATION_VERSION: String = "1.9.0"
-    const val LBCANDROIDTEST_VERSION: String = "1.10.0"
+    const val LBCANDROIDTEST_VERSION: String = "1.11.0"
     const val LBCACCESSIBILITY_VERSION: String = "1.11.0"
     const val LBCTHEME_VERSION: String = "1.7.0"
     const val MATERIAL_COLOR_UTILITIES_VERSION: String = "1.7.0"

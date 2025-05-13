@@ -75,6 +75,8 @@ class LbcPrintRule(
     private lateinit var appFolder: File
     private lateinit var classFolder: File
 
+    private lateinit var screenshotFolder: File
+
     lateinit var basePath: String
         private set
 
@@ -88,7 +90,7 @@ class LbcPrintRule(
 
         val context = InstrumentationRegistry.getInstrumentation().targetContext
 
-        val screenshotFolder = if (usePublicStorage) {
+        screenshotFolder = if (usePublicStorage) {
             val publicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             File(publicDirectory, "lbc_screenshots")
         } else {
@@ -150,6 +152,11 @@ class LbcPrintRule(
         }
 
         bitmap?.let { print(it, suffix) }
+    }
+
+    fun getScreenshotDir(): File {
+        screenshotFolder.mkdirs()
+        return screenshotFolder
     }
 
     override fun succeeded(description: Description?) {
