@@ -21,11 +21,11 @@
 
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.DefaultAndroidSourceDirectorySet
-import org.gradle.configurationcache.extensions.capitalized
+import org.jreleaser.model.Signing
 import studio.lunabee.library.DevelopTask
 import studio.lunabee.library.SnapshotTask
 import studio.lunabee.library.VersionTask
-import java.net.URI
+import java.util.Locale
 
 enum class PublishType {
     Android, Java
@@ -47,6 +47,14 @@ jreleaser {
     signing {
         active.set(org.jreleaser.model.Active.ALWAYS)
         armored.set(true)
+        mode.set(Signing.Mode.COMMAND)
+        passphrase.set(System.getenv("PGP_KEY_PASSWORD"))
+
+        command {
+            keyName.set(System.getenv("PGP_KEY_ID"))
+            homeDir.set(System.getenv("PGP_KEY_PATH"))
+        }
+
     }
     deploy {
         maven {

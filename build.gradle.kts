@@ -63,7 +63,7 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
     }
 }
 
-tasks.create("publishList") {
+tasks.register("publishList") {
     doLast {
         val publishProjects = project.allprojects.filter {
             it.tasks.findByName("publish") != null
