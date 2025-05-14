@@ -171,6 +171,25 @@ fun MavenPublication.setPom() {
                 email.set("publisher@lunabee.com")
             }
         }
+
+        withXml {
+            asNode().appendNode("dependencies").apply {
+                fun Dependency.write(scope: String) = appendNode("dependency").apply {
+                    appendNode("groupId", group)
+                    appendNode("artifactId", name)
+                    version?.let { appendNode("version", version) }
+                    appendNode("scope", scope)
+                }
+
+                configurations.findByName("api")?.dependencies?.forEach { dependency ->
+                    dependency.write("implementation")
+                }
+
+                configurations.findByName("implementation")?.dependencies?.forEach { dependency ->
+                    dependency.write("runtime")
+                }
+            }
+        }
     }
 }
 
