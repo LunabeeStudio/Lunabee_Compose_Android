@@ -46,50 +46,59 @@ val publishType: PublishType = when {
 private val sonatypeUsername = project.properties["sonatypeUsername"]?.toString()
 private val sonatypePassword = project.properties["sonatypePassword"]?.toString()
 
+private val stagingDir = layout.buildDirectory.dir("staging-deploy").get().asFile
+
 jreleaser {
-    release {
-        github {
-            commitAuthor.name.set("Lunabee Studio")
-            commitAuthor.email.set("publisher@lunabee.com")
-        }
-    }
+    gitRootSearch.set(true)
     signing {
         active.set(org.jreleaser.model.Active.ALWAYS)
         armored.set(true)
         mode.set(Signing.Mode.FILE)
-        publicKey.set("/Users/rlatapy/Downloads/pgp_maven_central.kbx") // TODO real public key
-        secretKey.set("/Users/rlatapy/Downloads/pgp_maven_central.kbx")
     }
     deploy {
         maven {
             mavenCentral {
-                create("sonatype") {
-                    active.set(org.jreleaser.model.Active.ALWAYS)
+                create("release-deploy") {
+                    active.set(org.jreleaser.model.Active.RELEASE)
                     url.set("https://central.sonatype.com/api/v1/publisher")
-                    stagingRepository("target/staging-deploy")
+                    stagingRepository(stagingDir.path)
                     username.set(sonatypeUsername)
                     password.set(sonatypePassword)
+                    verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
                 }
             }
-            //            nexus2 {
-            //                create("snapshot-deploy") {
-            //                    active.set(org.jreleaser.model.Active.SNAPSHOT)
-            //                    snapshotUrl.set("https://central.sonatype.com/repository/maven-snapshots")
-            //                    applyMavenCentralRules = true
-            //                    snapshotSupported = true
-            //                    closeRepository = true
-            //                    releaseRepository = true
-            //                    stagingRepository("target/staging-deploy")
-            //                }
-            //            }
+            nexus2 {
+                create("snapshot-deploy") {
+                    active.set(org.jreleaser.model.Active.SNAPSHOT)
+                    snapshotUrl.set("https://central.sonatype.com/repository/maven-snapshots")
+                    applyMavenCentralRules = true
+                    snapshotSupported = true
+                    closeRepository = true
+                    releaseRepository = true
+                    stagingRepository(stagingDir.path)
+                }
+            }
+        }
+    }
+
+    release {
+        // Disable release feature
+        github {
+            token.set("fake")
+            skipRelease.set(true)
+            skipTag.set(true)
         }
     }
 }
 
-println("Configure publish of ${project.name} with type $publishType")
-
 project.extensions.configure<PublishingExtension>("publishing") {
     setupPublication()
+
+    repositories {
+        maven {
+            setUrl(stagingDir)
+        }
+    }
 }
 
 /**
