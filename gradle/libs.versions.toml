@@ -14,7 +14,7 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 
 [versions]
 
-ksp = "2.1.20-2.0.1"
+ksp = "2.1.21-2.0.1"
 androidx-activity = "1.10.1"
 androidx-appcompat = "1.7.0"
 androidx-core = "1.16.0"
