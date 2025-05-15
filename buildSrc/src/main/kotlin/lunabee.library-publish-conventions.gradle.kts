@@ -21,17 +21,16 @@
 
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.DefaultAndroidSourceDirectorySet
-import org.gradle.configurationcache.extensions.capitalized
-import studio.lunabee.library.DevelopTask
-import studio.lunabee.library.SnapshotTask
+import org.jreleaser.model.Signing
 import studio.lunabee.library.VersionTask
-import java.net.URI
+import java.util.Locale
 
 enum class PublishType {
     Android, Java
 }
 
 plugins {
+    id("org.jreleaser")
     `maven-publish`
     signing
 }
@@ -42,35 +41,64 @@ val publishType: PublishType = when {
     else -> error("Cannot determine the type of publication")
 }
 
-println("Configure publish of ${project.name} with type $publishType")
+private val mavenCentralUsername = project.properties["mavenCentralUsername"]?.toString()
+private val mavenCentralPassword = project.properties["mavenCentralPassword"]?.toString()
 
-project.extensions.configure<PublishingExtension>("publishing") {
-    setupPublication()
-    afterEvaluate {
-        setupMavenRepository()
+private val stagingDir = layout.buildDirectory.dir("staging-deploy").get().asFile
+
+jreleaser {
+    gitRootSearch.set(true)
+    signing {
+        active.set(org.jreleaser.model.Active.ALWAYS)
+        armored.set(true)
+        mode.set(Signing.Mode.FILE)
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                create("release-deploy") {
+                    active.set(org.jreleaser.model.Active.RELEASE)
+                    url.set("https://central.sonatype.com/api/v1/publisher")
+                    stagingRepository(stagingDir.path)
+                    username.set(mavenCentralUsername)
+                    password.set(mavenCentralPassword)
+                    verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
+                }
+            }
+            nexus2 {
+                create("snapshot-deploy") {
+                    active.set(org.jreleaser.model.Active.SNAPSHOT)
+                    url.set("https://central.sonatype.com/repository/maven-snapshots")
+                    snapshotUrl.set("https://central.sonatype.com/repository/maven-snapshots")
+                    applyMavenCentralRules = true
+                    snapshotSupported = true
+                    closeRepository = true
+                    releaseRepository = true
+                    username.set(mavenCentralUsername)
+                    password.set(mavenCentralPassword)
+                    verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
+                    stagingRepository(stagingDir.path)
+                }
+            }
+        }
+    }
+
+    release {
+        // Disable release feature
+        github {
+            token.set("fake")
+            skipRelease.set(true)
+            skipTag.set(true)
+        }
     }
 }
 
-/**
- * Set repository destination depending on [project] and version name.
- * Credentials should be stored in your root gradle.properties, in a non source controlled file.
- */
-fun PublishingExtension.setupMavenRepository() {
-    // The Artifactory repository key to publish to
-    val repoPath = if (project.version.toString().endsWith("-SNAPSHOT")) {
-        "content/repositories/snapshots/"
-    } else {
-        "service/local/staging/deploy/maven2/"
-    }
+project.extensions.configure<PublishingExtension>("publishing") {
+    setupPublication()
+
     repositories {
         maven {
-            authentication {
-                credentials.username = project.properties["sonatypeUsername"]?.toString()
-                    ?: System.getenv("SONATYPE_PUBLISH_USERNAME")
-                credentials.password = project.properties["sonatypePassword"]?.toString()
-                    ?: System.getenv("SONATYPE_PUBLISH_PASSWORD")
-            }
-            url = URI.create("https://s01.oss.sonatype.org/$repoPath")
+            setUrl(stagingDir)
         }
     }
 }
@@ -241,5 +269,5 @@ afterEvaluate {
 }
 
 tasks.register("${project.name}Version", VersionTask::class.java)
-tasks.register("${project.name}setSnapshotVersion", SnapshotTask::class.java)
-tasks.register("${project.name}setDevelopVersion", DevelopTask::class.java)
+
+private fun String.capitalized(): String = if (this.isEmpty()) this else this[0].titlecase(Locale.getDefault()) + this.substring(1)

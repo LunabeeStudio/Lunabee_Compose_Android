@@ -29,7 +29,6 @@ object AndroidConfig {
     const val COMPILE_SDK: Int = BuildConfigs.compileSdk
     const val TARGET_SDK: Int = COMPILE_SDK
     const val MIN_SDK: Int = BuildConfigs.minSdk
-    const val BUILD_TOOLS_VERSION: String = "35.0.1"
 
     const val LIBRARY_URL: String = "https://github.com/LunabeeStudio/Lunabee_Compose_Android"
     const val GROUP_ID: String = "studio.lunabee.compose"
@@ -37,14 +36,14 @@ object AndroidConfig {
     // ⚠️ Match module name in UPPER_CASE ('-' -> '_')
     const val LBCCORE_VERSION: String = "1.8.0"
     const val LBCFOUNDATION_VERSION: String = "1.9.0"
-    const val LBCANDROIDTEST_VERSION: String = "1.11.0"
+    const val LBCANDROIDTEST_VERSION: String = "1.11.1"
     const val LBCACCESSIBILITY_VERSION: String = "1.11.0"
     const val LBCTHEME_VERSION: String = "1.7.0"
     const val MATERIAL_COLOR_UTILITIES_VERSION: String = "1.7.0"
     const val LBCHAPTIC_VERSION: String = "1.5.0"
-    const val LBCUIFIELD_VERSION: String = "1.7.0"
-    const val LBCUIFIELD_PHONE_PICKER_VERSION: String = "1.1.0"
-    const val LBCUIFIELD_COUNTRY_PICKER_VERSION: String = "1.0.0"
+    const val LBCUIFIELD_CORE_VERSION: String = "1.7.0"
+    const val LBCUIFIELD_PHONEPICKER_VERSION: String = "1.1.0"
+    const val LBCUIFIELD_COUNTRYPICKER_VERSION: String = "1.0.0"
     const val LBCIMAGE_VERSION: String = "1.4.0"
     const val LBCGLANCE_VERSION: String = "1.3.0"
     const val LBCPRESENTER_VERSION: String = "1.4.0"

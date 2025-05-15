@@ -1,3 +1,5 @@
+import studio.lunabee.library.SetAllSnapshotVersionTask
+
 /*
  * Copyright © 2022 Lunabee Studio
  *
@@ -63,11 +65,16 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
     }
 }
 
-tasks.create("publishList") {
+tasks.register("publishList") {
     doLast {
         val publishProjects = project.allprojects.filter {
             it.tasks.findByName("publish") != null
         }.joinToString(";") { it.name }
         println(publishProjects)
     }
+}
+
+tasks.register("setAllSnapshotVersion", SetAllSnapshotVersionTask::class.java) {
+    description = "Set the snapshot version to all published projects"
+    group = "publishing"
 }
