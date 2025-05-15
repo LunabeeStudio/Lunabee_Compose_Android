@@ -22,8 +22,6 @@
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.DefaultAndroidSourceDirectorySet
 import org.jreleaser.model.Signing
-import studio.lunabee.library.DevelopTask
-import studio.lunabee.library.SnapshotTask
 import studio.lunabee.library.VersionTask
 import java.util.Locale
 
@@ -271,7 +269,5 @@ afterEvaluate {
 }
 
 tasks.register("${project.name}Version", VersionTask::class.java)
-tasks.register("${project.name}setSnapshotVersion", SnapshotTask::class.java)
-tasks.register("${project.name}setDevelopVersion", DevelopTask::class.java)
 
 private fun String.capitalized(): String = if (this.isEmpty()) this else this[0].titlecase(Locale.getDefault()) + this.substring(1)
