@@ -43,8 +43,8 @@ val publishType: PublishType = when {
     else -> error("Cannot determine the type of publication")
 }
 
-private val sonatypeUsername = project.properties["sonatypeUsername"]?.toString()
-private val sonatypePassword = project.properties["sonatypePassword"]?.toString()
+private val mavenCentralUsername = project.properties["mavenCentralUsername"]?.toString()
+private val mavenCentralPassword = project.properties["mavenCentralPassword"]?.toString()
 
 private val stagingDir = layout.buildDirectory.dir("staging-deploy").get().asFile
 
@@ -62,19 +62,23 @@ jreleaser {
                     active.set(org.jreleaser.model.Active.RELEASE)
                     url.set("https://central.sonatype.com/api/v1/publisher")
                     stagingRepository(stagingDir.path)
-                    username.set(sonatypeUsername)
-                    password.set(sonatypePassword)
+                    username.set(mavenCentralUsername)
+                    password.set(mavenCentralPassword)
                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
                 }
             }
             nexus2 {
                 create("snapshot-deploy") {
                     active.set(org.jreleaser.model.Active.SNAPSHOT)
+                    url.set("https://central.sonatype.com/repository/maven-snapshots")
                     snapshotUrl.set("https://central.sonatype.com/repository/maven-snapshots")
                     applyMavenCentralRules = true
                     snapshotSupported = true
                     closeRepository = true
                     releaseRepository = true
+                    username.set(mavenCentralUsername)
+                    password.set(mavenCentralPassword)
+                    verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
                     stagingRepository(stagingDir.path)
                 }
             }

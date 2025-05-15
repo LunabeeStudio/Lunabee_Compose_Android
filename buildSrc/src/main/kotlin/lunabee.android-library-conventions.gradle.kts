@@ -34,7 +34,6 @@ val libs: LibrariesForLibs = the<LibrariesForLibs>()
 
 android {
     compileSdk = AndroidConfig.COMPILE_SDK
-    buildToolsVersion = AndroidConfig.BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdk = AndroidConfig.MIN_SDK
