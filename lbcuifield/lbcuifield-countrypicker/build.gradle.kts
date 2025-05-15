@@ -42,7 +42,7 @@ android {
 }
 
 description = "country picker ui field"
-version = AndroidConfig.LBCUIFIELD_COUNTRY_PICKER_VERSION
+version = AndroidConfig.LBCUIFIELD_COUNTRYPICKER_VERSION
 
 dependencies {
     coreLibraryDesugaring(libs.desugarJdk)

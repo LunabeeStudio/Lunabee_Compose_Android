@@ -42,7 +42,7 @@ android {
 }
 
 description = "phone picker ui field with a way to search for country phone code"
-version = AndroidConfig.LBCUIFIELD_PHONE_PICKER_VERSION
+version = AndroidConfig.LBCUIFIELD_PHONEPICKER_VERSION
 
 dependencies {
     coreLibraryDesugaring(libs.desugarJdk)

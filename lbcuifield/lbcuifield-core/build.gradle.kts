@@ -41,7 +41,7 @@ android {
 }
 
 description = "group of ui field to easily create forms in compose"
-version = AndroidConfig.LBCUIFIELD_VERSION
+version = AndroidConfig.LBCUIFIELD_CORE_VERSION
 
 dependencies {
     coreLibraryDesugaring(libs.desugarJdk)
