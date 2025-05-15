@@ -23,21 +23,35 @@ package studio.lunabee.library
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 abstract class SnapshotTask : DefaultTask() {
     @TaskAction
     fun setSnapshotVersion() {
         val file = File(project.rootDir.path + "/buildSrc/src/main/kotlin/AndroidConfig.kt")
+        val branch = getGitBranch()
         val newContents = file
             .readText()
             .replace(
                 regex = libVersion(),
             ) { matchResult ->
-                "${matchResult.value}.${project.properties["counter"]}-SNAPSHOT"
+                "${matchResult.value}-alpha-${project.properties["counter"]}-$branch-SNAPSHOT"
             }
         file.writeText(newContents)
 
         println(newContents)
+    }
+
+    private fun getGitBranch(): String {
+        val output = ByteArrayOutputStream()
+        project.exec {
+            commandLine = "git rev-parse --abbrev-ref HEAD".split(" ")
+            standardOutput = output
+        }
+        return output.toString()
+            .split('/')
+            .last()
+            .trim()
     }
 }
