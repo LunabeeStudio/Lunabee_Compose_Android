@@ -53,5 +53,6 @@ abstract class SnapshotTask : DefaultTask() {
             .split('/')
             .last()
             .trim()
+            .replace("_", "-")
     }
 }
