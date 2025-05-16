@@ -176,6 +176,21 @@ fun MavenPublication.setPom() {
 
         withXml {
             val root = asNode()
+            configurations.findByName("implementation")?.dependencies
+                ?.filter { it.isBoM() }
+                ?.takeIf { it.isNotEmpty() }
+                ?.let { bomDeps ->
+                    val depsNode = root.appendNode("dependencyManagement").appendNode("dependencies")
+                    bomDeps.forEach { bomDep ->
+                        depsNode.appendNode("dependency").apply {
+                            appendNode("groupId", bomDep.group)
+                            appendNode("artifactId", bomDep.name)
+                            appendNode("version", bomDep.version)
+                            appendNode("type", "pom")
+                            appendNode("scope", "import")
+                        }
+                    }
+                }
             root
                 .appendNode("dependencies").apply {
                     fun Dependency.write(scope: String) = appendNode("dependency").apply {
@@ -190,16 +205,9 @@ fun MavenPublication.setPom() {
                     }
 
                     configurations.findByName("implementation")?.dependencies?.forEach { dependency ->
-                        dependency.write("runtime")
+                        if (!dependency.isBoM()) // handle bom specifically
+                            dependency.write("runtime")
                     }
-                }
-            // For compose-bom which is not on maven central
-            root
-                .appendNode("repositories")
-                .appendNode("repository").apply {
-                    appendNode("name", "Google")
-                    appendNode("id", "google")
-                    appendNode("url", "https://maven.google.com/")
                 }
         }
     }
@@ -281,3 +289,5 @@ afterEvaluate {
 tasks.register("${project.name}Version", VersionTask::class.java)
 
 private fun String.capitalized(): String = if (this.isEmpty()) this else this[0].titlecase(Locale.getDefault()) + this.substring(1)
+
+private fun Dependency.isBoM(): Boolean = name.endsWith("-bom")
