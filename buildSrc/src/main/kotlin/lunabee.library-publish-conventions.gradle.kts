@@ -175,22 +175,29 @@ fun MavenPublication.setPom() {
         }
 
         withXml {
-            asNode().appendNode("dependencies").apply {
-                fun Dependency.write(scope: String) = appendNode("dependency").apply {
-                    appendNode("groupId", group)
-                    appendNode("artifactId", name)
-                    version?.let { appendNode("version", version) }
-                    appendNode("scope", scope)
-                }
+            asNode()
+                .appendNode("dependencies").apply {
+                    fun Dependency.write(scope: String) = appendNode("dependency").apply {
+                        appendNode("groupId", group)
+                        appendNode("artifactId", name)
+                        version?.let { appendNode("version", version) }
+                        appendNode("scope", scope)
+                    }
 
-                configurations.findByName("api")?.dependencies?.forEach { dependency ->
-                    dependency.write("implementation")
-                }
+                    configurations.findByName("api")?.dependencies?.forEach { dependency ->
+                        dependency.write("implementation")
+                    }
 
-                configurations.findByName("implementation")?.dependencies?.forEach { dependency ->
-                    dependency.write("runtime")
+                    configurations.findByName("implementation")?.dependencies?.forEach { dependency ->
+                        dependency.write("runtime")
+                    }
                 }
-            }
+                // For compose-bom which is not on maven central
+                .appendNode("repository").apply {
+                    appendNode("name", "Google")
+                    appendNode("id", "google")
+                    appendNode("url", "https://maven.google.com/")
+                }
         }
     }
 }
