@@ -175,7 +175,8 @@ fun MavenPublication.setPom() {
         }
 
         withXml {
-            asNode()
+            val root = asNode()
+            root
                 .appendNode("dependencies").apply {
                     fun Dependency.write(scope: String) = appendNode("dependency").apply {
                         appendNode("groupId", group)
@@ -192,7 +193,9 @@ fun MavenPublication.setPom() {
                         dependency.write("runtime")
                     }
                 }
-                // For compose-bom which is not on maven central
+            // For compose-bom which is not on maven central
+            root
+                .appendNode("repositories")
                 .appendNode("repository").apply {
                     appendNode("name", "Google")
                     appendNode("id", "google")
