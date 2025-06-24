@@ -43,7 +43,7 @@ touchlab-kermit = "2.0.6"
 koin = "4.1.0"
 hbb20-countrycodepicker = "2.7.3"
 kotlinx-serialization = "1.8.1"
-libphonenumber = "9.0.7"
+libphonenumber = "9.0.8"
 normalize = "1.2.0"
 jreleaser = "1.18.0"
 
