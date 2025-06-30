@@ -31,7 +31,7 @@ detekt = "1.23.8"
 google-android-material = "1.12.0"
 junit-junit = "4.13.2"
 kotlin = "2.2.0"
-zoomable = "2.8.0"
+zoomable = "2.8.1"
 dagger-hilt = "2.56.2"
 androidx-hilt-navigation-compose = "1.2.0"
 androidx-lifecycle = "2.9.1"
@@ -45,7 +45,7 @@ hbb20-countrycodepicker = "2.7.3"
 kotlinx-serialization = "1.9.0"
 libphonenumber = "9.0.8"
 normalize = "1.2.0"
-jreleaser = "1.18.0"
+jreleaser = "1.19.0"
 
 [libraries]
 
