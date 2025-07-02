@@ -28,7 +28,7 @@ android {
     resourcePrefix("lbc_at_")
     namespace = "studio.lunabee.compose.androidtest"
 
-    kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
+    kotlinOptions.freeCompilerArgs += "-Xcontext-parameters"
 }
 
 description = "Tools for developing android test"

@@ -31,13 +31,13 @@ import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.composable.TrailingAction
 
-context(DatePickerHolder)
 class DatePickerOption(
     private val enabled: Boolean,
+    private val holder: DatePickerHolder
 ) : UiFieldOption {
     private val isPickerVisible: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
-    override val clickLabel: LbcTextSpec = datePickerData.datePickerClickLabel
+    override val clickLabel: LbcTextSpec = holder.datePickerData.datePickerClickLabel
 
     override fun onClick() {
         isPickerVisible.value = true
@@ -49,7 +49,7 @@ class DatePickerOption(
         val collectedIsPickedVisible by isPickerVisible.collectAsState()
         if (enabled) {
             TrailingAction(
-                image = datePickerData.icon,
+                image = holder.datePickerData.icon,
                 onClick = { isPickerVisible.value = true },
                 contentDescription = null,
                 modifier = modifier,
@@ -57,12 +57,12 @@ class DatePickerOption(
         }
         if (collectedIsPickedVisible) {
             UiFieldDatePicker(
-                date = date,
+                date = holder.date,
                 onDismiss = { isPickerVisible.value = false },
-                onValueChanged = ::onValueDateChanged,
-                cancelLabel = datePickerData.datePickerCancelLabel,
-                confirmLabel = datePickerData.datePickerConfirmLabel,
-                selectableDates = selectableDates,
+                onValueChanged = holder::onValueDateChanged,
+                cancelLabel = holder.datePickerData.datePickerCancelLabel,
+                confirmLabel = holder.datePickerData.datePickerConfirmLabel,
+                selectableDates = holder.selectableDates,
             )
         }
     }

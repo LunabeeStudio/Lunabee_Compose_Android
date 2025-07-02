@@ -68,7 +68,7 @@ class PasswordUiTextField(
     }
 
     override val options: List<UiFieldOption> = listOf(
-        PasswordVisibilityFieldOption(),
+        PasswordVisibilityFieldOption(this),
     )
 
     @Composable

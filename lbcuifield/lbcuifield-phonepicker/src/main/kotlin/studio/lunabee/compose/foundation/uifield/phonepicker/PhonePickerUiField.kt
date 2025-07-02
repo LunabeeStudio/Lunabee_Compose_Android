@@ -75,7 +75,7 @@ class PhonePickerUiField(
     private val countryPickerBottomSheetRenderer: CountryPickerBottomSheetRenderer,
 ) : UiField<CountryCodeFieldData>() {
 
-    private val json = Json { }
+    private val json = Json.Default
 
     override val options: List<UiFieldOption> = emptyList()
 

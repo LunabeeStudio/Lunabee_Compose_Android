@@ -33,6 +33,12 @@ android {
     }
 }
 
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.add("-Xannotation-default-target=param-property")
+    }
+}
+
 description = "A set of tools for Compose"
 version = AndroidConfig.LBCCORE_VERSION
 
