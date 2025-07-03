@@ -33,9 +33,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-    kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
-
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }

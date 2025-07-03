@@ -72,7 +72,7 @@ class CountryPickerUiField(
     private val trailingIcon: @Composable (() -> Unit)? = null,
 ) : UiField<CountryFieldData>() {
 
-    private val json = Json { }
+    private val json = Json.Default
 
     override val options: List<UiFieldOption> = emptyList()
 

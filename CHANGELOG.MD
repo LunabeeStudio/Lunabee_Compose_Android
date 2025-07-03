@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres    
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2025-07-03
+
+### All
+
+```
+LbcAndroidTest 1.12.0
+LbcUiFieldCore 1.8.0
+LbcUiFieldPhonePicker 1.2.0
+LbcUiFieldCountryPicker 1.1.0
+LbcPresenter 1.5.0
+```
+
+- **Breaking:** Migrate from context receiver to context parameters
+
 ## 2025-05-15
 
 ### All
@@ -37,7 +51,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### LbcUiField : 1.7.0
 
 - **Breaking:** Move all module code into a `core` module. Clients should now import  `studio.lunabee.compose:lbcuifield-core`
-- **Breaking** : Make the `placeholder` and `label` fields nullable for `UiField`
+- **Breaking:** Make the `placeholder` and `label` fields nullable for `UiField`
 
 ### LbcUiField-PhonePicker : 1.0.0
 
@@ -114,7 +128,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## 2024-06-27
 
-``` lbcCore = "1.4.0"    
+``` 
+lbcCore = "1.4.0"    
 lbcFoundation = "1.3.0"    
 lbcAndroidTest = "1.2.0"    
 lbcAccessibility = "1.7.0"    

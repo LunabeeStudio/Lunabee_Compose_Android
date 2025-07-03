@@ -101,7 +101,7 @@ abstract class LbcComposeTest {
         }
     }
 
-    context(ComposeUiTest)
+    context(composeTest: ComposeUiTest)
     open fun onFailure(e: Throwable) {
         val suffix = LbcAndroidTestConstants.FailureSuffix + "_${e.javaClass.simpleName}"
         printRule.printWholeScreen(suffix, noSync = true)

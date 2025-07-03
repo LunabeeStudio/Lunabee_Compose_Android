@@ -56,7 +56,7 @@ class DateUiField(
     override val readOnly: Boolean = false,
     override val enabled: Boolean = true,
 ) : TimeUiField<LocalDate?>(), DatePickerHolder {
-    override val options: List<UiFieldOption> = listOf(DatePickerOption(enabled && !readOnly))
+    override val options: List<UiFieldOption> = listOf(DatePickerOption(enabled && !readOnly, this))
     override fun savedValueToData(value: String): LocalDate {
         return LocalDate.parse(value)
     }

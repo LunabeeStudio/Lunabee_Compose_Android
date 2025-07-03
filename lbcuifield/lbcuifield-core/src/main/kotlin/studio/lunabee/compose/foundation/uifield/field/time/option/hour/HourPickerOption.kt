@@ -30,11 +30,10 @@ import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.composable.TrailingAction
 
-context(HourPickerHolder)
-class HourPickerOption(private val enabled: Boolean) : UiFieldOption {
+class HourPickerOption(private val enabled: Boolean, private val holder: HourPickerHolder) : UiFieldOption {
     private val isPickerVisible: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
-    override val clickLabel: LbcTextSpec = hourPickerData.hourPickerClickLabel
+    override val clickLabel: LbcTextSpec = holder.hourPickerData.hourPickerClickLabel
 
     override fun onClick() {
         isPickerVisible.value = true
@@ -45,7 +44,7 @@ class HourPickerOption(private val enabled: Boolean) : UiFieldOption {
         val collectedIsPickedVisible by isPickerVisible.collectAsState()
         if (enabled) {
             TrailingAction(
-                image = hourPickerData.icon,
+                image = holder.hourPickerData.icon,
                 onClick = { isPickerVisible.value = true },
                 contentDescription = null,
                 modifier = modifier,
@@ -54,11 +53,11 @@ class HourPickerOption(private val enabled: Boolean) : UiFieldOption {
         if (collectedIsPickedVisible) {
             UiFieldTimePicker(
                 onDismiss = { isPickerVisible.value = false },
-                hour = dateTime?.hour ?: 0,
-                minutes = dateTime?.minute ?: 0,
-                onValueChanged = ::onValueTimeChanged,
-                confirmLabel = hourPickerData.hourPickerConfirmLabel,
-                cancelLabel = hourPickerData.hourPickerCancelLabel,
+                hour = holder.dateTime?.hour ?: 0,
+                minutes = holder.dateTime?.minute ?: 0,
+                onValueChanged = holder::onValueTimeChanged,
+                confirmLabel = holder.hourPickerData.hourPickerConfirmLabel,
+                cancelLabel = holder.hourPickerData.hourPickerCancelLabel,
             )
         }
     }
