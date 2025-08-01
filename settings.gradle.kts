@@ -19,10 +19,6 @@
  * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
 
-plugins {
-    id("de.fayard.refreshVersions") version "0.60.5"
-}
-
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -43,7 +39,6 @@ include(":lbccore")
 include(":lbccrop")
 include(":lbcfoundation")
 include(":lbcglance")
-include(":lbcglide")
 include(":lbchaptic")
 include(":lbcimage")
 include(":lbctheme")

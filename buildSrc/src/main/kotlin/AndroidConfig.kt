@@ -34,19 +34,19 @@ object AndroidConfig {
     const val GROUP_ID: String = "studio.lunabee.compose"
 
     // ⚠️ Match module name in UPPER_CASE ('-' -> '_')
-    const val LBCCORE_VERSION: String = "1.8.0"
-    const val LBCFOUNDATION_VERSION: String = "1.9.0"
-    const val LBCANDROIDTEST_VERSION: String = "1.12.0"
-    const val LBCACCESSIBILITY_VERSION: String = "1.11.0"
-    const val LBCTHEME_VERSION: String = "1.7.0"
-    const val MATERIAL_COLOR_UTILITIES_VERSION: String = "1.7.0"
-    const val LBCHAPTIC_VERSION: String = "1.5.0"
-    const val LBCUIFIELD_CORE_VERSION: String = "1.8.0"
-    const val LBCUIFIELD_PHONEPICKER_VERSION: String = "1.2.0"
-    const val LBCUIFIELD_COUNTRYPICKER_VERSION: String = "1.1.0"
-    const val LBCIMAGE_VERSION: String = "1.4.0"
-    const val LBCGLANCE_VERSION: String = "1.3.0"
-    const val LBCPRESENTER_VERSION: String = "1.5.0"
+    const val LBCCORE_VERSION: String = "1.9.0"
+    const val LBCFOUNDATION_VERSION: String = "1.10.0"
+    const val LBCANDROIDTEST_VERSION: String = "1.13.0"
+    const val LBCACCESSIBILITY_VERSION: String = "1.12.0"
+    const val LBCTHEME_VERSION: String = "1.8.0"
+    const val MATERIAL_COLOR_UTILITIES_VERSION: String = "1.8.0"
+    const val LBCHAPTIC_VERSION: String = "1.6.0"
+    const val LBCUIFIELD_CORE_VERSION: String = "1.9.0"
+    const val LBCUIFIELD_PHONEPICKER_VERSION: String = "1.3.0"
+    const val LBCUIFIELD_COUNTRYPICKER_VERSION: String = "1.2.0"
+    const val LBCIMAGE_VERSION: String = "1.5.0"
+    const val LBCGLANCE_VERSION: String = "1.4.0"
+    const val LBCPRESENTER_VERSION: String = "1.6.0"
     const val LBCPRESENTER_KOIN_VERSION: String = LBCPRESENTER_VERSION
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_17

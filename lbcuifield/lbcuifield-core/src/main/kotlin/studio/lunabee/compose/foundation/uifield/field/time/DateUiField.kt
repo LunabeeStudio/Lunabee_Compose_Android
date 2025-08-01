@@ -34,9 +34,9 @@ import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePick
 import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePickerHolder
 import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePickerOption
 import java.time.LocalDate
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 class DateUiField(
@@ -51,7 +51,7 @@ class DateUiField(
     override val selectableDates: SelectableDates = DatePickerDefaults.AllDates,
     private val formatter: DateTimeFormatter = DateTimeFormatter
         .ofLocalizedDate(FormatStyle.SHORT)
-        .withZone(ZoneOffset.UTC),
+        .withLocale(Locale.getDefault()),
     override val onValueChange: (LocalDate?) -> Unit = {},
     override val readOnly: Boolean = false,
     override val enabled: Boolean = true,
