@@ -78,3 +78,8 @@ tasks.register("setAllSnapshotVersion", SetAllSnapshotVersionTask::class.java) {
     description = "Set the snapshot version to all published projects"
     group = "publishing"
 }
+
+// Update gradle-wrapper by running `./gradlew wrapper --gradle-version latest`
+tasks.wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+}
