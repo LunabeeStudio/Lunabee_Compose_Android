@@ -19,20 +19,10 @@
  * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
 
-pluginManagement {
-    plugins {
-        id("de.fayard.refreshVersions") version "0.60.5"
-    }
-}
-
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
             from(files("../gradle/libs.versions.toml"))
         }
     }
-}
-
-plugins {
-    id("de.fayard.refreshVersions")
 }
