@@ -32,7 +32,7 @@ abstract class LBSinglePresenter<UiState : PresenterUiState, NavScope : Any, Act
 ) : LBPresenter<UiState, NavScope, Action>(
     verbose = verbose,
 ) {
-    private val reducer = initReducer()
+    private val reducer by lazy { initReducer() }
 
     final override fun getReducerByState(
         actualState: UiState,
