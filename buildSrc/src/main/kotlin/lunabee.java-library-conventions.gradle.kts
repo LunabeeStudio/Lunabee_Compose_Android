@@ -23,7 +23,7 @@ plugins {
     id("java-library")
 }
 
-group = AndroidConfig.GROUP_ID
+group = AndroidConfig.GroupId
 
 java {
     sourceCompatibility = AndroidConfig.JDK_VERSION

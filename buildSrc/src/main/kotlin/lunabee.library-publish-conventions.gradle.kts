@@ -26,7 +26,8 @@ import studio.lunabee.library.VersionTask
 import java.util.Locale
 
 enum class PublishType {
-    Android, Java
+    Android,
+    Java,
 }
 
 plugins {
@@ -44,7 +45,10 @@ val publishType: PublishType = when {
 private val mavenCentralUsername = project.properties["mavenCentralUsername"]?.toString()
 private val mavenCentralPassword = project.properties["mavenCentralPassword"]?.toString()
 
-private val stagingDir = layout.buildDirectory.dir("staging-deploy").get().asFile
+private val stagingDir = layout.buildDirectory
+    .dir("staging-deploy")
+    .get()
+    .asFile
 
 jreleaser {
     gitRootSearch.set(true)
@@ -110,14 +114,16 @@ fun PublishingExtension.setupPublication() {
     publications {
         when (publishType) {
             PublishType.Android -> create<MavenPublication>(project.name) {
-                afterEvaluate { // version is set in project, so use after evaluate
+                afterEvaluate {
+                    // version is set in project, so use after evaluate
                     setProjectDetails()
                     setAndroidArtifacts()
                     setPom()
                 }
             }
             PublishType.Java -> create<MavenPublication>(project.name) {
-                afterEvaluate { // version is set in project, so use after evaluate
+                afterEvaluate {
+                    // version is set in project, so use after evaluate
                     setProjectDetails()
                     setJavaArtifacts()
                     setPom()
@@ -129,12 +135,12 @@ fun PublishingExtension.setupPublication() {
 
 /**
  * Set project details:
- * - groupId will be [AndroidConfig.GROUP_ID]
+ * - groupId will be [AndroidConfig.GroupId]
  * - artifactId will take the name of the current [project]
  * - version will be set in each submodule gradle file
  */
 fun MavenPublication.setProjectDetails() {
-    groupId = AndroidConfig.GROUP_ID
+    groupId = AndroidConfig.GroupId
     artifactId = project.name
     version = project.version.toString()
 }
@@ -146,7 +152,7 @@ fun MavenPublication.setPom() {
     pom {
         name.set(project.name.capitalized())
         description.set(project.description)
-        url.set(AndroidConfig.LIBRARY_URL)
+        url.set(AndroidConfig.LibraryUrl)
 
         organization {
             name.set("Lunabee Studio")
@@ -163,7 +169,7 @@ fun MavenPublication.setPom() {
         scm {
             connection.set("git@github.com:LunabeeStudio/Lunabee_Compose_Android.git")
             developerConnection.set("git@github.com:LunabeeStudio/Lunabee_Compose_Android.git")
-            url.set(AndroidConfig.LIBRARY_URL)
+            url.set(AndroidConfig.LibraryUrl)
         }
 
         developers {
@@ -176,7 +182,9 @@ fun MavenPublication.setPom() {
 
         withXml {
             val root = asNode()
-            configurations.findByName("implementation")?.dependencies
+            configurations
+                .findByName("implementation")
+                ?.dependencies
                 ?.filter { it.isBoM() }
                 ?.takeIf { it.isNotEmpty() }
                 ?.let { bomDeps ->
@@ -192,7 +200,8 @@ fun MavenPublication.setPom() {
                     }
                 }
             root
-                .appendNode("dependencies").apply {
+                .appendNode("dependencies")
+                .apply {
                     fun Dependency.write(scope: String) = appendNode("dependency").apply {
                         appendNode("groupId", group)
                         appendNode("artifactId", name)
@@ -225,7 +234,11 @@ private val Project.android: LibraryExtension
  * - aar
  */
 fun MavenPublication.setAndroidArtifacts() {
-    val mainSourceSets = (project.android.sourceSets.getByName("main").kotlin as DefaultAndroidSourceDirectorySet).srcDirs
+    val mainSourceSets = (
+        project.android.sourceSets
+            .getByName("main")
+            .kotlin as DefaultAndroidSourceDirectorySet
+    ).srcDirs
     val sourceJar by project.tasks.registering(Jar::class) {
         archiveClassifier.set("sources")
         from(mainSourceSets)
@@ -237,7 +250,10 @@ fun MavenPublication.setAndroidArtifacts() {
 
     artifact(sourceJar)
     artifact(javadocJar)
-    val aarBasePath = project.layout.buildDirectory.dir("outputs/aar").get().asFile.path
+    val aarBasePath = project.layout.buildDirectory
+        .dir("outputs/aar")
+        .get()
+        .asFile.path
     val filename = "${project.name.lowercase()}-release.aar"
     artifact("$aarBasePath/$filename")
 
@@ -255,7 +271,12 @@ fun MavenPublication.setAndroidArtifacts() {
  * - jar
  */
 fun MavenPublication.setJavaArtifacts() {
-    artifact(project.layout.buildDirectory.dir("libs/${project.name}-${project.version}.jar").get().asFile)
+    artifact(
+        project.layout.buildDirectory
+            .dir("libs/${project.name}-${project.version}.jar")
+            .get()
+            .asFile,
+    )
     artifact(project.tasks.named("sourcesJar"))
     artifact(project.tasks.named("javadocJar"))
 

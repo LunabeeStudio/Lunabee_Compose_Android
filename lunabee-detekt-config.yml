@@ -52,8 +52,6 @@ ktlint:
   active: true
   autoCorrect: false
   code_style: 'ktlint_official'
-  AnnotationOnSeparateLine:
-    active: true
   ChainWrapping:
     active: false
     autoCorrect: true
@@ -160,6 +158,10 @@ ktlint:
     active: false
   PropertyName:
     constantNamingStyle: pascal_case
+  AnnotationOnSeparateLine:
+    ignoreAnnotated: [ 'Inject' ]
+  FunctionLiteral:
+    maxLineLength: 140
 
 naming:
   FunctionNaming:

@@ -73,7 +73,8 @@ abstract class SetAllSnapshotVersionTask : DefaultTask() {
             commandLine = "git rev-parse --abbrev-ref HEAD".split(" ")
             standardOutput = output
         }
-        return output.toString()
+        return output
+            .toString()
             .split('/')
             .last()
             .trim()

@@ -22,16 +22,17 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
  * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
 
+@Suppress("PropertyName")
 object AndroidConfig {
-    const val VERSION_CODE: Int = 1
-    const val VERSION_NAME: String = BuildConfigs.lunabeeCompose
+    const val VersionCode: Int = 1
+    const val VersionName: String = BuildConfigs.LunabeeCompose
 
-    const val COMPILE_SDK: Int = BuildConfigs.compileSdk
-    const val TARGET_SDK: Int = COMPILE_SDK
-    const val MIN_SDK: Int = BuildConfigs.minSdk
+    const val CompileSdk: Int = BuildConfigs.CompileSdk
+    const val TargetSdk: Int = CompileSdk
+    const val MinSdk: Int = BuildConfigs.MinSdk
 
-    const val LIBRARY_URL: String = "https://github.com/LunabeeStudio/Lunabee_Compose_Android"
-    const val GROUP_ID: String = "studio.lunabee.compose"
+    const val LibraryUrl: String = "https://github.com/LunabeeStudio/Lunabee_Compose_Android"
+    const val GroupId: String = "studio.lunabee.compose"
 
     // ⚠️ Match module name in UPPER_CASE ('-' -> '_')
     const val LBCCORE_VERSION: String = "1.9.0"

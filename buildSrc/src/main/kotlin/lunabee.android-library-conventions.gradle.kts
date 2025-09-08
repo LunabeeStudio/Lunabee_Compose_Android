@@ -27,18 +27,18 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
-group = AndroidConfig.GROUP_ID
+group = AndroidConfig.GroupId
 
 // FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
 val libs: LibrariesForLibs = the<LibrariesForLibs>()
 
 android {
-    compileSdk = AndroidConfig.COMPILE_SDK
+    compileSdk = AndroidConfig.CompileSdk
 
     defaultConfig {
-        minSdk = AndroidConfig.MIN_SDK
+        minSdk = AndroidConfig.MinSdk
         @Suppress("DEPRECATION") // https://stackoverflow.com/questions/76084080/apply-targetsdk-in-android-instrumentation-test
-        targetSdk = AndroidConfig.TARGET_SDK
+        targetSdk = AndroidConfig.TargetSdk
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
