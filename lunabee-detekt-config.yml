@@ -50,8 +50,8 @@ exceptions:
 
 ktlint:
   active: true
-  android: true
-  autoCorrect: true
+  autoCorrect: false
+  code_style: 'ktlint_official'
   AnnotationOnSeparateLine:
     active: true
   ChainWrapping:
@@ -146,12 +146,20 @@ ktlint:
   StringTemplate:
     active: true
     autoCorrect: true
-  TrailingCommaOnDeclarationSite:
-    active: true
-  TrailingCommaOnCallSite:
-    active: true
   ArgumentListWrapping:
     maxLineLength: 140
+  BinaryExpressionWrapping:
+    maxLineLength: 140
+  MultilineExpressionWrapping:
+    active: false
+  NoEmptyFirstLineInClassBody:
+    active: false
+  FunctionSignature:
+    active: false
+  ClassSignature:
+    active: false
+  PropertyName:
+    constantNamingStyle: pascal_case
 
 naming:
   FunctionNaming:
