@@ -159,6 +159,7 @@ ktlint:
   PropertyName:
     constantNamingStyle: pascal_case
   AnnotationOnSeparateLine:
+    autoCorrect: false
     ignoreAnnotated: [ 'Inject' ]
   FunctionLiteral:
     maxLineLength: 140
