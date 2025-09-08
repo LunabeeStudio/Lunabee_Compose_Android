@@ -8,20 +8,20 @@ complexity:
   LongParameterList:
     ignoreDefaultParameters: true
     ignoreAnnotated: [ 'Composable', 'Inject' ]
-    functionThreshold: 10
-    constructorThreshold: 10
+    allowedFunctionParameters: 10
+    allowedConstructorParameters: 10
   TooManyFunctions:
     active: false
   LargeClass:
-    threshold: 1000
+    allowedLines: 1000
   LongMethod:
-    threshold: 250
+    allowedLines: 250
   CyclomaticComplexMethod:
-    threshold: 25
+    allowedComplexity: 25
   NestedBlockDepth:
-    threshold: 10
+    allowedDepth: 10
   ComplexCondition:
-    threshold: 10
+    allowedConditions: 10
 
 empty-blocks:
   EmptyFunctionBlock:
@@ -48,7 +48,7 @@ exceptions:
   TooGenericExceptionCaught:
     active: false
 
-formatting:
+ktlint:
   active: true
   android: true
   autoCorrect: true
@@ -174,5 +174,5 @@ style:
     excludeGuardClauses: true
   NewLineAtEndOfFile:
     active: false # https://detekt.dev/formatting.html#finalnewline
-  UnusedPrivateMember:
+  UnusedPrivateFunction:
     ignoreAnnotated: [ 'Preview' ]

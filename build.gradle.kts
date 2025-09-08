@@ -39,7 +39,7 @@ plugins {
 }
 
 dependencies {
-    detektPlugins(libs.detekt.formatting)
+    detektPlugins(libs.detekt.rules.ktlint.wrapper)
 }
 
 detekt {
@@ -51,25 +51,29 @@ detekt {
     ignoreFailures = true
 }
 
-tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
+tasks.withType<dev.detekt.gradle.Detekt> {
     outputs.upToDateWhen { false }
 
     exclude("**/build/**")
 
     reports {
         xml.required.set(true)
-        xml.outputLocation.set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.xml"))
+        xml.outputLocation
+            .set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.xml"))
 
         html.required.set(true)
-        html.outputLocation.set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.html"))
+        html.outputLocation
+            .set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.html"))
     }
 }
 
 tasks.register("publishList") {
     doLast {
-        val publishProjects = project.allprojects.filter {
-            it.tasks.findByName("publish") != null
-        }.joinToString(";") { it.name }
+        val publishProjects =
+            project.allprojects
+                .filter {
+                    it.tasks.findByName("publish") != null
+                }.joinToString(";") { it.name }
         println(publishProjects)
     }
 }
