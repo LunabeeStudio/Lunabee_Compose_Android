@@ -26,10 +26,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 
 data object MultiStateDestination {
-    const val route = "MultiStateDestination"
+    const val Route = "MultiStateDestination"
 
     fun composable(navGraphBuilder: NavGraphBuilder, navScope: MultiStateNavScope) {
-        navGraphBuilder.composable(route) {
+        navGraphBuilder.composable(Route) {
             val presenter: MultiStatePresenter = hiltViewModel()
             presenter(navScope)
         }
