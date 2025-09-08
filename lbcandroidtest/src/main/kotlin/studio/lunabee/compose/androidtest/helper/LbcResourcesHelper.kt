@@ -100,8 +100,12 @@ object LbcResourcesHelper {
                 val newFile = File(context.cacheDir, folderResource.pathResourceName)
                 newFile.mkdirs()
             } else {
-                javaClass.classLoader!!.getResourceAsStream(folderResource.pathResourceName).use { inputStream ->
-                    File(context.cacheDir, folderResource.pathResourceName).outputStream().use { outputStream ->
+                javaClass.classLoader!!.getResourceAsStream(folderResource.pathResourceName).use {
+                    inputStream
+                    ->
+                    File(context.cacheDir, folderResource.pathResourceName).outputStream().use {
+                        outputStream
+                        ->
                         inputStream.copyTo(outputStream)
                     }
                 }
