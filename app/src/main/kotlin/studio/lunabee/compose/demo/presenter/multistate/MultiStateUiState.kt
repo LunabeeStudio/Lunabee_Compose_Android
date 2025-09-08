@@ -28,5 +28,6 @@ sealed interface MultiStateUiState : PresenterUiState {
     val reducer: String
 
     data class Error(override val reducer: String) : MultiStateUiState
+
     data class Data(override val reducer: String) : MultiStateUiState
 }

@@ -51,98 +51,94 @@ class LbCropUtils(
 
     internal suspend fun cropImage(
         query: CropImageQuery,
-    ): Bitmap {
-        return withContext(coroutineDispatcher) {
-            val originalWidth: Int = query.originalBitmap.width
-            val originalHeight: Int = query.originalBitmap.height
-            val isImageVertical = originalHeight > originalWidth
+    ): Bitmap = withContext(coroutineDispatcher) {
+        val originalWidth: Int = query.originalBitmap.width
+        val originalHeight: Int = query.originalBitmap.height
+        val isImageVertical = originalHeight > originalWidth
 
-            // Transposed the bitmap so that its width is the same as the query.
-            val scale = if (isImageVertical) {
-                query.width / query.originalBitmap.width
-            } else {
-                query.height / query.originalBitmap.height
-            }
+        // Transposed the bitmap so that its width is the same as the query.
+        val scale = if (isImageVertical) {
+            query.width / query.originalBitmap.width
+        } else {
+            query.height / query.originalBitmap.height
+        }
 
-            val matrix = Matrix().apply {
-                setScale(scale, scale)
-            }
+        val matrix = Matrix().apply {
+            setScale(scale, scale)
+        }
 
-            // Create a bitmap that has the same dimension of the crop zone (NO Zoom involved yet !)
-            val scaledBitmap: Bitmap = Bitmap.createBitmap(
-                query.originalBitmap,
-                0,
-                0,
-                query.originalBitmap.width,
-                query.originalBitmap.height,
-                matrix,
+        // Create a bitmap that has the same dimension of the crop zone (NO Zoom involved yet !)
+        val scaledBitmap: Bitmap = Bitmap.createBitmap(
+            query.originalBitmap,
+            0,
+            0,
+            query.originalBitmap.width,
+            query.originalBitmap.height,
+            matrix,
+            false,
+        )
+
+        val scaledImageWidth: Int = scaledBitmap.width
+        val scaledImageHeight: Int = scaledBitmap.height
+
+        // Image has an original zoom, to fits in the crop zone, we need the difference between the original and the one from the query.
+        val zoomToApply: Float = query.scale / query.originalScale
+
+        // Apply the zoom level to the crop zone so that it fits inside the scaled bitmap (as it's displayed)
+        val transposedCropZoneWidth: Float = query.width / zoomToApply
+        val transposedCropZoneHeight: Float = query.height / zoomToApply
+
+        // Compute x & y translation with transposed crop zone
+        // ℹ️ The OffsetX et OffsetY are the distance from the center of the image. To create a bitmap, the starting point is at the
+        // Top left, so we need to transposed the offset into the new referential.
+        val translationY = ((scaledImageHeight - transposedCropZoneHeight) / 2 - (query.offsetY / zoomToApply))
+            .toInt()
+        val translationX = ((scaledImageWidth - transposedCropZoneWidth) / 2 - (query.offsetX / zoomToApply))
+            .toInt()
+
+        // Safe guard in case of miscalculation or too large rounding.
+        val maxY = abs((scaledImageHeight - transposedCropZoneHeight).toInt())
+        val maxX: Int = abs((scaledImageWidth - transposedCropZoneWidth).toInt())
+
+        try {
+            Bitmap.createBitmap(
+                scaledBitmap,
+                min(abs(translationX), maxX),
+                min(abs(translationY), maxY),
+                transposedCropZoneWidth.toInt(),
+                transposedCropZoneHeight.toInt(),
+                null,
                 false,
             )
-
-            val scaledImageWidth: Int = scaledBitmap.width
-            val scaledImageHeight: Int = scaledBitmap.height
-
-            // Image has an original zoom, to fits in the crop zone, we need the difference between the original and the one from the query.
-            val zoomToApply: Float = query.scale / query.originalScale
-
-            // Apply the zoom level to the crop zone so that it fits inside the scaled bitmap (as it's displayed)
-            val transposedCropZoneWidth: Float = query.width / zoomToApply
-            val transposedCropZoneHeight: Float = query.height / zoomToApply
-
-            // Compute x & y translation with transposed crop zone
-            // ℹ️ The OffsetX et OffsetY are the distance from the center of the image. To create a bitmap, the starting point is at the
-            // Top left, so we need to transposed the offset into the new referential.
-            val translationY = ((scaledImageHeight - transposedCropZoneHeight) / 2 - (query.offsetY / zoomToApply)).toInt()
-            val translationX = ((scaledImageWidth - transposedCropZoneWidth) / 2 - (query.offsetX / zoomToApply)).toInt()
-
-            // Safe guard in case of miscalculation or too large rounding.
-            val maxY = abs((scaledImageHeight - transposedCropZoneHeight).toInt())
-            val maxX: Int = abs((scaledImageWidth - transposedCropZoneWidth).toInt())
-
-            try {
-                Bitmap.createBitmap(
-                    scaledBitmap,
-                    min(abs(translationX), maxX),
-                    min(abs(translationY), maxY),
-                    transposedCropZoneWidth.toInt(),
-                    transposedCropZoneHeight.toInt(),
-                    null,
-                    false,
-                )
-            } catch (e: Exception) {
-                Log.e("CropImageException", e.toString())
-                query.originalBitmap
-            }
+        } catch (e: Exception) {
+            Log.e("CropImageException", e.toString())
+            query.originalBitmap
         }
     }
 
     internal suspend fun rotateImage(
         fileUri: Uri,
         rotationAngle: Float,
-    ): Bitmap {
-        return withContext(coroutineDispatcher) {
-            val originalBitmap = BitmapFactory.decodeFile(
-                fileUri.path.orEmpty(),
-            )
+    ): Bitmap = withContext(coroutineDispatcher) {
+        val originalBitmap = BitmapFactory.decodeFile(
+            fileUri.path.orEmpty(),
+        )
 
-            rotateImage(originalBitmap, rotationAngle)
-        }
+        rotateImage(originalBitmap, rotationAngle)
     }
 
     internal suspend fun rotateImage(
         bitmap: Bitmap,
         rotationAngle: Float,
-    ): Bitmap {
-        return withContext(coroutineDispatcher) {
-            Bitmap.createBitmap(
-                bitmap,
-                0,
-                0,
-                bitmap.width,
-                bitmap.height,
-                Matrix().apply { setRotate(rotationAngle) },
-                false,
-            )
-        }
+    ): Bitmap = withContext(coroutineDispatcher) {
+        Bitmap.createBitmap(
+            bitmap,
+            0,
+            0,
+            bitmap.width,
+            bitmap.height,
+            Matrix().apply { setRotate(rotationAngle) },
+            false,
+        )
     }
 }

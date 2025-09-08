@@ -27,6 +27,7 @@ import androidx.navigation.compose.composable
 
 data object PullToRefreshDestination {
     val route = PullToRefreshDestination.javaClass.simpleName
+
     fun composable(navGraphBuilder: NavGraphBuilder, navScope: PullToRefreshNavScope) {
         navGraphBuilder.composable(route) {
             val presenter: PullToRefreshPresenter = hiltViewModel()

@@ -121,8 +121,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
                     log { "Update state <$actualStateSaved> ➡ <$state>" }
                     actualStateSaved = state
                 }
-            }
-            .stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
+            }.stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
     }
 
     /**

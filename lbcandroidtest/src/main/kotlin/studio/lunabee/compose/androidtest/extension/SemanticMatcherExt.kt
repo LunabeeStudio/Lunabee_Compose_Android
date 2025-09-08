@@ -28,8 +28,8 @@ import kotlin.time.Duration
  *     .waitUntilDoesNotExist(this, false, 1.seconds)
  * ```
  */
-context(composeTest: ComposeUiTest)
 @OptIn(ExperimentalTestApi::class)
+context(composeTest: ComposeUiTest)
 fun SemanticsMatcher.waitUntilDoesNotExist(
     useUnmergedTree: Boolean = false,
     timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
@@ -54,8 +54,8 @@ fun SemanticsMatcher.waitUntilDoesNotExist(
  *     .assertIdDisplayed() // additional check
  * ```
  */
-context(composeTest: ComposeUiTest)
 @OptIn(ExperimentalTestApi::class)
+context(composeTest: ComposeUiTest)
 fun SemanticsMatcher.waitUntilExactlyOneExists(
     useUnmergedTree: Boolean = false,
     timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
@@ -80,8 +80,8 @@ fun SemanticsMatcher.waitUntilExactlyOneExists(
  *     .assertIdDisplayed() // additional check
  * ```
  */
-context(composeTest: ComposeUiTest)
 @OptIn(ExperimentalTestApi::class)
+context(composeTest: ComposeUiTest)
 fun SemanticsMatcher.waitUntilNodeCount(
     count: Int,
     useUnmergedTree: Boolean = false,
@@ -110,8 +110,8 @@ fun SemanticsMatcher.waitUntilNodeCount(
  *     .assertIdDisplayed() // additional check
  * ```
  */
-context(composeTest: ComposeUiTest)
 @OptIn(ExperimentalTestApi::class)
+context(composeTest: ComposeUiTest)
 fun SemanticsMatcher.waitUntilAtLeastOneExists(
     useUnmergedTree: Boolean = false,
     timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
@@ -140,25 +140,25 @@ fun SemanticsMatcher.waitUntilAtLeastOneExists(
  *     .performClick() // additional check
  * ```
  */
-context(composeTest: ComposeUiTest)
 @OptIn(ExperimentalTestApi::class)
+context(composeTest: ComposeUiTest)
 fun SemanticsMatcher.waitAndPrintRootToCacheDir(
     printRule: LbcPrintRule,
     suffix: String = "",
     useUnmergedTree: Boolean = false,
     timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
-): SemanticsNodeInteraction {
-    return try {
-        waitUntilExactlyOneExists(useUnmergedTree, timeout)
-        composeTest.printRoot(useUnmergedTree, printRule, suffix)
-        composeTest.onNode(this)
-    } catch (e: ComposeTimeoutException) {
-        composeTest.printRoot(useUnmergedTree = useUnmergedTree, printRule, "${suffix}${LbcAndroidTestConstants.TimeoutSuffix}")
-        throw e
-    } catch (e: AssertionError) {
-        composeTest.printRoot(useUnmergedTree = useUnmergedTree, printRule, "${suffix}${LbcAndroidTestConstants.ErrorSuffix}")
-        throw e
-    }
+): SemanticsNodeInteraction = try {
+    waitUntilExactlyOneExists(useUnmergedTree, timeout)
+    composeTest.printRoot(useUnmergedTree, printRule, suffix)
+    composeTest.onNode(this)
+} catch (e: ComposeTimeoutException) {
+    composeTest
+        .printRoot(useUnmergedTree = useUnmergedTree, printRule, "${suffix}${LbcAndroidTestConstants.TimeoutSuffix}")
+    throw e
+} catch (e: AssertionError) {
+    composeTest
+        .printRoot(useUnmergedTree = useUnmergedTree, printRule, "${suffix}${LbcAndroidTestConstants.ErrorSuffix}")
+    throw e
 }
 
 @OptIn(ExperimentalTestApi::class)
@@ -192,22 +192,20 @@ private fun ComposeUiTest.printRoot(
  *     .waitAndPrintWholeScreenToCacheDir(composeUiTest, printRule, "_suffix", false, 1.seconds)
  * ```
  */
-context(composeTest: ComposeUiTest)
 @OptIn(ExperimentalTestApi::class)
+context(composeTest: ComposeUiTest)
 fun SemanticsMatcher.waitAndPrintWholeScreenToCacheDir(
     printRule: LbcPrintRule,
     suffix: String = "",
     useUnmergedTree: Boolean = false,
     timeout: Duration = LbcAndroidTestConstants.WaitNodeTimeout,
-): SemanticsNodeInteraction {
-    return try {
-        waitUntilAtLeastOneExists(useUnmergedTree, timeout)
-        printRule.printWholeScreen(suffix = suffix)
-        composeTest.onAllNodes(this).filterToOne(this)
-    } catch (e: ComposeTimeoutException) {
-        printRule.printWholeScreen(suffix = "${suffix}${LbcAndroidTestConstants.TimeoutSuffix}")
-        throw e
-    }
+): SemanticsNodeInteraction = try {
+    waitUntilAtLeastOneExists(useUnmergedTree, timeout)
+    printRule.printWholeScreen(suffix = suffix)
+    composeTest.onAllNodes(this).filterToOne(this)
+} catch (e: ComposeTimeoutException) {
+    printRule.printWholeScreen(suffix = "${suffix}${LbcAndroidTestConstants.TimeoutSuffix}")
+    throw e
 }
 
 /**

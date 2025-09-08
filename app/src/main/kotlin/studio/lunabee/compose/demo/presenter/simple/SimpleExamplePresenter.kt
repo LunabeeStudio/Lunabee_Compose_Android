@@ -42,12 +42,10 @@ class SimpleExamplePresenter @Inject constructor() : LBSinglePresenter<SimpleExa
         text = "Init",
     )
 
-    override fun initReducer(): LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction> {
-        return SimpleExampleReducer(
-            coroutineScope = viewModelScope,
-            emitUserAction = ::emitUserAction,
-        )
-    }
+    override fun initReducer(): LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction> = SimpleExampleReducer(
+        coroutineScope = viewModelScope,
+        emitUserAction = ::emitUserAction,
+    )
 
     override val content: @Composable (SimpleExampleUiState) -> Unit = { SimpleExempleScreen(it) }
 }

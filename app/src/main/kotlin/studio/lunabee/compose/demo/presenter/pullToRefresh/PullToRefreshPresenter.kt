@@ -31,21 +31,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PullToRefreshPresenter @Inject constructor() :
-    LBSinglePresenter<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction>(
-        verbose = true,
-    ) {
+    LBSinglePresenter<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction>(verbose = true) {
 
-    override val flows: List<Flow<PullToRefreshAction>> = listOf()
-    override fun getInitialState(): PullToRefreshUiState = PullToRefreshUiState(
-        isRefreshing = false,
-        refresh = { emitUserAction(PullToRefreshAction.Refresh) },
-    )
+        override val flows: List<Flow<PullToRefreshAction>> = listOf()
 
-    override fun initReducer(): LBSingleReducer<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction> =
-        PullToRefreshReducer(
-            coroutineScope = viewModelScope,
-            emitUserAction = ::emitUserAction,
+        override fun getInitialState(): PullToRefreshUiState = PullToRefreshUiState(
+            isRefreshing = false,
+            refresh = { emitUserAction(PullToRefreshAction.Refresh) },
         )
 
-    override val content: @Composable (PullToRefreshUiState) -> Unit = { PullToRefreshScreen(it) }
-}
+        override fun initReducer(): LBSingleReducer<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction> =
+            PullToRefreshReducer(
+                coroutineScope = viewModelScope,
+                emitUserAction = ::emitUserAction,
+            )
+
+        override val content: @Composable (PullToRefreshUiState) -> Unit = { PullToRefreshScreen(it) }
+    }

@@ -23,5 +23,6 @@ package studio.lunabee.compose.demo.presenter.pullToRefresh
 
 sealed interface PullToRefreshAction {
     data object Refresh : PullToRefreshAction
+
     data object StopRefresh : PullToRefreshAction
 }

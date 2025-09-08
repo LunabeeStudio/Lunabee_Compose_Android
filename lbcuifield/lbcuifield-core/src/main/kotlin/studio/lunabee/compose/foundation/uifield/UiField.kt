@@ -82,7 +82,9 @@ abstract class UiField<T> {
     }
 
     abstract fun valueToDisplayedString(value: T): String
+
     abstract fun valueToSavedString(value: T): String
+
     abstract fun savedValueToData(value: String): T
 
     @Composable

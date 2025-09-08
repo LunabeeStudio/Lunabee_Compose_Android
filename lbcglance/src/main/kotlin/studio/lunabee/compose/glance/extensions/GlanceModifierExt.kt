@@ -54,17 +54,16 @@ fun GlanceModifier.cornerRadiusCompat(
     cornerRadius: Dp,
     color: Color,
     size: DpSize,
-): GlanceModifier {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        size(width = size.width, height = size.height)
-            .background(color = color)
-            .cornerRadius(radius = cornerRadius)
-    } else {
-        val radii = FloatArray(size = 8) { cornerRadius.value }
-        val bitmap = ShapeDrawable(RoundRectShape(radii, null, null)).apply {
+): GlanceModifier = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+    size(width = size.width, height = size.height)
+        .background(color = color)
+        .cornerRadius(radius = cornerRadius)
+} else {
+    val radii = FloatArray(size = 8) { cornerRadius.value }
+    val bitmap = ShapeDrawable(RoundRectShape(radii, null, null))
+        .apply {
             paint.color = ColorUtils.setAlphaComponent(color.toArgb(), 255)
         }.toBitmap(width = size.width.value.roundToInt(), height = size.height.value.roundToInt())
-        size(width = size.width, height = size.height)
-            .background(imageProvider = ImageProvider(bitmap = bitmap))
-    }
+    size(width = size.width, height = size.height)
+        .background(imageProvider = ImageProvider(bitmap = bitmap))
 }

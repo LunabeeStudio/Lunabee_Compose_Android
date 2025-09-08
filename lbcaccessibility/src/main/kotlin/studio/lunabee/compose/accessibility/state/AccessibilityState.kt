@@ -71,10 +71,8 @@ fun rememberAccessibilityState(
     accessibilityManager: AccessibilityManager? = remember {
         context.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
     },
-): AccessibilityState {
-    return remember {
-        AccessibilityState(
-            accessibilityManager = accessibilityManager,
-        )
-    }
+): AccessibilityState = remember {
+    AccessibilityState(
+        accessibilityManager = accessibilityManager,
+    )
 }

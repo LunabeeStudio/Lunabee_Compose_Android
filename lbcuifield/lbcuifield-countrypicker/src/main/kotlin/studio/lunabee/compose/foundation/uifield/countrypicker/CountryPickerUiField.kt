@@ -76,17 +76,11 @@ class CountryPickerUiField(
 
     override val options: List<UiFieldOption> = emptyList()
 
-    override fun valueToDisplayedString(value: CountryFieldData): String {
-        return value.countryName
-    }
+    override fun valueToDisplayedString(value: CountryFieldData): String = value.countryName
 
-    override fun valueToSavedString(value: CountryFieldData): String {
-        return json.encodeToString(value)
-    }
+    override fun valueToSavedString(value: CountryFieldData): String = json.encodeToString(value)
 
-    override fun savedValueToData(value: String): CountryFieldData {
-        return json.decodeFromString(value)
-    }
+    override fun savedValueToData(value: String): CountryFieldData = json.decodeFromString(value)
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable

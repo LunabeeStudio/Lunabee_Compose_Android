@@ -33,7 +33,7 @@ import studio.lunabee.compose.foundation.uifield.composable.TrailingAction
 
 class DatePickerOption(
     private val enabled: Boolean,
-    private val holder: DatePickerHolder
+    private val holder: DatePickerHolder,
 ) : UiFieldOption {
     private val isPickerVisible: MutableStateFlow<Boolean> = MutableStateFlow(false)
 

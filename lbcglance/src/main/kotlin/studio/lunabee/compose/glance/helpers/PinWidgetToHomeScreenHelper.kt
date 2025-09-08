@@ -53,7 +53,8 @@ class PinWidgetToHomeScreenHelper(
     }
 
     @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.O)
-    fun isPinSupported(): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && AppWidgetManager.getInstance(context).isRequestPinAppWidgetSupported
-    }
+    fun isPinSupported(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && AppWidgetManager
+        .getInstance(
+            context,
+        ).isRequestPinAppWidgetSupported
 }

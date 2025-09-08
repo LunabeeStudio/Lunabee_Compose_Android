@@ -39,20 +39,14 @@ class MultiStateDataReducer(
         actualState: MultiStateUiState.Data,
         action: MultiStateAction.DataAction,
         performNavigation: (MultiStateNavScope.() -> Unit) -> Unit,
-    ): ReduceResult<MultiStateUiState> {
-        return when (action) {
-            MultiStateAction.ExampleAction -> MultiStateUiState.Error(this::class.simpleName!!).asResult()
-            MultiStateAction.ExampleAllAction -> actualState.copy(reducer = this::class.simpleName!!).asResult()
-        }
+    ): ReduceResult<MultiStateUiState> = when (action) {
+        MultiStateAction.ExampleAction -> MultiStateUiState.Error(this::class.simpleName!!).asResult()
+        MultiStateAction.ExampleAllAction -> actualState.copy(reducer = this::class.simpleName!!).asResult()
     }
 
-    override fun filterAction(action: MultiStateAction): Boolean {
-        return action is MultiStateAction.DataAction
-    }
+    override fun filterAction(action: MultiStateAction): Boolean = action is MultiStateAction.DataAction
 
-    override fun filterUiState(actualState: MultiStateUiState): Boolean {
-        return actualState is MultiStateUiState.Data
-    }
+    override fun filterUiState(actualState: MultiStateUiState): Boolean = actualState is MultiStateUiState.Data
 }
 
 class MultiStateErrorReducer(
@@ -63,18 +57,12 @@ class MultiStateErrorReducer(
         actualState: MultiStateUiState.Error,
         action: MultiStateAction.ErrorAction,
         performNavigation: (MultiStateNavScope.() -> Unit) -> Unit,
-    ): ReduceResult<MultiStateUiState> {
-        return when (action) {
-            MultiStateAction.ExampleAllAction -> MultiStateUiState.Data(this::class.simpleName!!).asResult()
-            MultiStateAction.ExampleErrorAction -> actualState.copy(reducer = this::class.simpleName!!).asResult()
-        }
+    ): ReduceResult<MultiStateUiState> = when (action) {
+        MultiStateAction.ExampleAllAction -> MultiStateUiState.Data(this::class.simpleName!!).asResult()
+        MultiStateAction.ExampleErrorAction -> actualState.copy(reducer = this::class.simpleName!!).asResult()
     }
 
-    override fun filterAction(action: MultiStateAction): Boolean {
-        return action is MultiStateAction.ErrorAction
-    }
+    override fun filterAction(action: MultiStateAction): Boolean = action is MultiStateAction.ErrorAction
 
-    override fun filterUiState(actualState: MultiStateUiState): Boolean {
-        return actualState is MultiStateUiState.Error
-    }
+    override fun filterUiState(actualState: MultiStateUiState): Boolean = actualState is MultiStateUiState.Error
 }

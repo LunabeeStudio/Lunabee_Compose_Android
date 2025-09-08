@@ -69,12 +69,12 @@ class LBReducerTest {
         )
 
         var actualStateSaved = TestUiState(count = 0)
-        val uiStateFlow = reducer.collectReducer(
-            flows = flows,
-            actualState = { actualStateSaved },
-            performNavigation = {},
-        )
-            .onEach { actualStateSaved = it }
+        val uiStateFlow = reducer
+            .collectReducer(
+                flows = flows,
+                actualState = { actualStateSaved },
+                performNavigation = {},
+            ).onEach { actualStateSaved = it }
             .stateIn(coroutineScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
 
         uiStateFlow.first { it.count == 300 }
@@ -87,8 +87,8 @@ class TestReducer(
     override val coroutineScope: CoroutineScope,
     override val emitUserAction: (TestAction) -> Unit,
 ) : LBSingleReducer<TestUiState, TestNavScope, TestAction>(
-    verbose = true,
-) {
+        verbose = true,
+    ) {
 
     override suspend fun reduce(
         actualState: TestUiState,
@@ -110,6 +110,8 @@ interface TestNavScope
 
 sealed interface TestAction {
     data object Increment0 : TestAction
+
     data object Increment1 : TestAction
+
     data object Increment2 : TestAction
 }

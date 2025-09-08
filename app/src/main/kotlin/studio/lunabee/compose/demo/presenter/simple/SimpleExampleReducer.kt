@@ -31,16 +31,14 @@ class SimpleExampleReducer(
     override val coroutineScope: CoroutineScope,
     override val emitUserAction: (SimpleExampleAction) -> Unit,
 ) : LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>(
-    verbose = true,
-) {
+        verbose = true,
+    ) {
     override suspend fun reduce(
         actualState: SimpleExampleUiState,
         action: SimpleExampleAction,
         performNavigation: (SimpleExampleNavScope.() -> Unit) -> Unit,
-    ): ReduceResult<SimpleExampleUiState> {
-        return when (action) {
-            is SimpleExampleAction.NewCheckValue -> actualState.copy(isChecked = action.value).asResult()
-            SimpleExampleAction.NewValue -> actualState.copy(text = Random.nextInt().toString()).asResult()
-        }
+    ): ReduceResult<SimpleExampleUiState> = when (action) {
+        is SimpleExampleAction.NewCheckValue -> actualState.copy(isChecked = action.value).asResult()
+        SimpleExampleAction.NewValue -> actualState.copy(text = Random.nextInt().toString()).asResult()
     }
 }

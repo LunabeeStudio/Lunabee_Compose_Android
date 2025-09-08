@@ -130,12 +130,10 @@ class LbcHapticFeedback(
          * Query whether the vibrator supports all of the given primitives.
          * If a primitive is not supported by the device, then no vibration will occur if it is played.
          */
-        fun isPrimitiveSupported(vibrator: Vibrator, primitiveId: Int): Boolean {
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                vibrator.areAllPrimitivesSupported(primitiveId)
-            } else {
-                false
-            }
+        fun isPrimitiveSupported(vibrator: Vibrator, primitiveId: Int): Boolean = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            vibrator.areAllPrimitivesSupported(primitiveId)
+        } else {
+            false
         }
     }
 }
@@ -150,12 +148,10 @@ fun rememberLbcHapticFeedback(
     hapticFeedBack: HapticFeedback = LocalHapticFeedback.current,
     context: Context = LocalContext.current,
     view: View = LocalView.current,
-): LbcHapticFeedback {
-    return remember {
-        LbcHapticFeedback(
-            hapticFeedBack = hapticFeedBack,
-            vibrator = ContextCompat.getSystemService(context, Vibrator::class.java),
-            view = view,
-        )
-    }
+): LbcHapticFeedback = remember {
+    LbcHapticFeedback(
+        hapticFeedBack = hapticFeedBack,
+        vibrator = ContextCompat.getSystemService(context, Vibrator::class.java),
+        view = view,
+    )
 }

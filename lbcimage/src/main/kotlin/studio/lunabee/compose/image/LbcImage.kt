@@ -97,7 +97,8 @@ fun LbcImage(
 
         is LbcImageSpec.Url -> {
             AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
+                model = ImageRequest
+                    .Builder(LocalContext.current)
                     .data(imageSpec.url)
                     .decoderFactory(SvgDecoder.Factory())
                     .build(),

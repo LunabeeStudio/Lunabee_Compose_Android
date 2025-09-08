@@ -86,7 +86,9 @@ fun TextScreen() {
             rawBaseTextStyle = MaterialTheme.typography.bodyLarge,
             textToHighLightList = getTextToHighlightWithStyle(
                 highlightedText = highlightedText,
-                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold).toSpanStyle(),
+                style = MaterialTheme.typography.bodyLarge
+                    .copy(fontWeight = FontWeight.Bold)
+                    .toSpanStyle(),
                 context = LocalContext.current,
             ),
         )
@@ -96,11 +98,12 @@ fun TextScreen() {
             rawBaseTextStyle = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.Center),
             textToHighLightList = getTextToHighlightWithStyle(
                 highlightedText = highlightedText,
-                style = MaterialTheme.typography.headlineLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Blue,
-                    textDecoration = TextDecoration.Underline,
-                ).toSpanStyle(),
+                style = MaterialTheme.typography.headlineLarge
+                    .copy(
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Blue,
+                        textDecoration = TextDecoration.Underline,
+                    ).toSpanStyle(),
                 context = LocalContext.current,
             ),
         )
@@ -110,11 +113,12 @@ fun TextScreen() {
             rawBaseTextStyle = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.Center),
             textToHighLightList = getTextToHighlightWithStyle(
                 highlightedText = highlightedText,
-                style = MaterialTheme.typography.headlineLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Red,
-                    textDecoration = TextDecoration.LineThrough,
-                ).toSpanStyle(),
+                style = MaterialTheme.typography.headlineLarge
+                    .copy(
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Red,
+                        textDecoration = TextDecoration.LineThrough,
+                    ).toSpanStyle(),
                 context = LocalContext.current,
             ),
         )
@@ -124,10 +128,12 @@ fun TextScreen() {
             rawBaseTextStyle = MaterialTheme.typography.bodySmall.copy(textAlign = TextAlign.Center),
             textToHighLightList = getTextToHighlightWithStyle(
                 highlightedText = stringResource(id = R.string.highlighted_lorem_ipsum),
-                style = MaterialTheme.typography.bodySmall.copy(
-                    fontWeight = FontWeight.Bold,
-                    textDecoration = TextDecoration.combine(listOf(TextDecoration.Underline, TextDecoration.LineThrough)),
-                ).toSpanStyle()
+                style = MaterialTheme.typography.bodySmall
+                    .copy(
+                        fontWeight = FontWeight.Bold,
+                        textDecoration = TextDecoration
+                            .combine(listOf(TextDecoration.Underline, TextDecoration.LineThrough)),
+                    ).toSpanStyle()
                     .copy(
                         brush = Brush.linearGradient(
                             colors = listOf(
@@ -153,8 +159,10 @@ private fun getTextToHighlightWithStyle(
     style: SpanStyle,
     context: Context,
     ignoreCase: Boolean = false,
-): Set<TextToHighlight> {
-    return highlightedText.takeIf { it.isNotEmpty() }?.split(",")?.mapNotNull {
+): Set<TextToHighlight> = highlightedText
+    .takeIf { it.isNotEmpty() }
+    ?.split(",")
+    ?.mapNotNull {
         if (it.isNotEmpty()) {
             TextToHighlight(
                 tag = UUID.randomUUID().toString(),
@@ -167,4 +175,3 @@ private fun getTextToHighlightWithStyle(
             null
         }
     }?.toSet() ?: emptySet()
-}

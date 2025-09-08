@@ -23,5 +23,6 @@ package studio.lunabee.compose.demo.presenter.simple
 
 sealed interface SimpleExampleAction {
     data class NewCheckValue(val value: Boolean) : SimpleExampleAction
+
     data object NewValue : SimpleExampleAction
 }

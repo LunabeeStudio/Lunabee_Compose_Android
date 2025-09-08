@@ -77,39 +77,35 @@ fun rememberTextImageBitmap(
     hyphenationFrequency: Int = 0,
     justificationMode: Int = 0,
     displayMetrics: DisplayMetrics = LocalContext.current.resources.displayMetrics,
-): Bitmap {
-    return remember(text) {
-        textAsBitmap(
-            text = text,
-            color = color,
-            typeface = typeface,
-            textSize = fontSize.toPx(displayMetrics = displayMetrics),
-            letterSpacing = letterSpacing.toPx(displayMetrics = displayMetrics),
-            lineHeight = lineHeight.toPx(displayMetrics = displayMetrics),
-            textAlign = textAlign,
-            ellipsizedWidth = ellipsizedWidth.toPx(displayMetrics),
-            ellipsize = ellipsize,
-            maxLines = maxLines,
-            breakStrategy = breakStrategy,
-            hyphenationFrequency = hyphenationFrequency,
-            justificationMode = justificationMode,
-        )
-    }
+): Bitmap = remember(text) {
+    textAsBitmap(
+        text = text,
+        color = color,
+        typeface = typeface,
+        textSize = fontSize.toPx(displayMetrics = displayMetrics),
+        letterSpacing = letterSpacing.toPx(displayMetrics = displayMetrics),
+        lineHeight = lineHeight.toPx(displayMetrics = displayMetrics),
+        textAlign = textAlign,
+        ellipsizedWidth = ellipsizedWidth.toPx(displayMetrics),
+        ellipsize = ellipsize,
+        maxLines = maxLines,
+        breakStrategy = breakStrategy,
+        hyphenationFrequency = hyphenationFrequency,
+        justificationMode = justificationMode,
+    )
 }
 
 /**
  * Map a [TextAlign] Glance to a [Layout.Alignment] to use it in a static layout.
  */
-fun TextAlign.toLayoutAlignment(): Layout.Alignment {
-    return when (this) {
-        TextAlign.Start,
-        TextAlign.Left,
-        -> Layout.Alignment.ALIGN_NORMAL
-        TextAlign.End,
-        TextAlign.Right,
-        -> Layout.Alignment.ALIGN_OPPOSITE
-        else -> Layout.Alignment.ALIGN_CENTER
-    }
+fun TextAlign.toLayoutAlignment(): Layout.Alignment = when (this) {
+    TextAlign.Start,
+    TextAlign.Left,
+    -> Layout.Alignment.ALIGN_NORMAL
+    TextAlign.End,
+    TextAlign.Right,
+    -> Layout.Alignment.ALIGN_OPPOSITE
+    else -> Layout.Alignment.ALIGN_CENTER
 }
 
 @Suppress("LongParameterList")
@@ -136,7 +132,8 @@ private fun textAsBitmap(
 
     val lineHeightToApply = if (lineHeight == 0f) 0f else abs(lineHeight - textSize)
     val staticLayout = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        val builder = StaticLayout.Builder.obtain(text, 0, text.length, paint, ellipsizedWidth.roundToInt())
+        val builder = StaticLayout.Builder
+            .obtain(text, 0, text.length, paint, ellipsizedWidth.roundToInt())
             .setAlignment(textAlign.toLayoutAlignment())
             .setLineSpacing(lineHeightToApply, 1f)
             .setIncludePad(false)

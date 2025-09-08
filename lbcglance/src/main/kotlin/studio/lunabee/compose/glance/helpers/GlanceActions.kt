@@ -19,11 +19,9 @@ object GlanceActions {
      * redirect the user to application settings (i.e if you want for example to let user enables a permission manually).
      * @param packageName
      */
-    fun getSettingsIntentAction(packageName: String): Action {
-        return actionStartActivity(
-            intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                data = Uri.fromParts("package", packageName, null)
-            },
-        )
-    }
+    fun getSettingsIntentAction(packageName: String): Action = actionStartActivity(
+        intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            data = Uri.fromParts("package", packageName, null)
+        },
+    )
 }

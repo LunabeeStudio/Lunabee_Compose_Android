@@ -30,8 +30,9 @@ package studio.lunabee.compose.presenter
 abstract class LBSingleReducer<UiState : PresenterUiState, NavScope, Action>(
     verbose: Boolean = false,
 ) : LBReducer<UiState, UiState, NavScope, Action, Action>(
-    verbose = verbose,
-) {
+        verbose = verbose,
+    ) {
     final override fun filterAction(action: Action): Boolean = true
+
     final override fun filterUiState(actualState: UiState): Boolean = true
 }
