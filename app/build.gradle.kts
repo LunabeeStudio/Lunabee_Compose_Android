@@ -19,7 +19,6 @@
  * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
 
-@Suppress("ChainMethodContinuation")
 plugins {
     id("com.android.application")
     id("kotlin-android")

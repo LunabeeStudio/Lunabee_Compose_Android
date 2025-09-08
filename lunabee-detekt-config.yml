@@ -163,6 +163,8 @@ ktlint:
     ignoreAnnotated: [ 'Inject' ]
   FunctionLiteral:
     maxLineLength: 140
+  ChainMethodContinuation:
+    excludes: ['**/build.gradle.kts']
 
 naming:
   FunctionNaming:
