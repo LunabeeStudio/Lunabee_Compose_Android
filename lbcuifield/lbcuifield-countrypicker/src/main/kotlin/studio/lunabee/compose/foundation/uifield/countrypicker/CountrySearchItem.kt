@@ -31,7 +31,7 @@ import studio.lunabee.compose.foundation.uifield.countrypicker.ext.normalized
  * Represents a country search item.
  *
  * @property name The name of the country.
- * @property countryCode The country phone code (e.g., "33", "1", "225").
+ * @property countryPhoneCode The country phone code (e.g., "33", "1", "225").
  * @property flag The flag of the country as an [LbcImageSpec].
  * @property isSelected Indicates if the country is currently selected.
  */
@@ -58,32 +58,30 @@ data class CountrySearchItem(
         searchedText: String,
         nonMatchingSpanStyle: SpanStyle,
         matchingSpanStyle: SpanStyle,
-    ): LbcTextSpec.Annotated {
-        return LbcTextSpec.Annotated(
-            buildAnnotatedString {
-                val sanitizedName: String = name.normalized()
-                val sanitizedSearch: String = searchedText.normalized()
+    ): LbcTextSpec.Annotated = LbcTextSpec.Annotated(
+        buildAnnotatedString {
+            val sanitizedName: String = name.normalized()
+            val sanitizedSearch: String = searchedText.normalized()
 
-                if (sanitizedSearch.isNotBlank() && sanitizedName.contains(sanitizedSearch)) {
-                    val startIndex: Int = sanitizedName.indexOf(sanitizedSearch)
-                    val endIndex: Int = startIndex + sanitizedSearch.length
+            if (sanitizedSearch.isNotBlank() && sanitizedName.contains(sanitizedSearch)) {
+                val startIndex: Int = sanitizedName.indexOf(sanitizedSearch)
+                val endIndex: Int = startIndex + sanitizedSearch.length
 
-                    // Append part before match
-                    append(name.substring(0, startIndex))
-                    addStyle(nonMatchingSpanStyle, 0, startIndex)
+                // Append part before match
+                append(name.substring(0, startIndex))
+                addStyle(nonMatchingSpanStyle, 0, startIndex)
 
-                    // Append matched part
-                    append(name.substring(startIndex, endIndex))
-                    addStyle(matchingSpanStyle, startIndex, endIndex)
+                // Append matched part
+                append(name.substring(startIndex, endIndex))
+                addStyle(matchingSpanStyle, startIndex, endIndex)
 
-                    // Append the rest
-                    append(name.substring(endIndex))
-                    addStyle(nonMatchingSpanStyle, endIndex, name.length)
-                } else {
-                    append(name)
-                    addStyle(nonMatchingSpanStyle, 0, name.length)
-                }
-            },
-        )
-    }
+                // Append the rest
+                append(name.substring(endIndex))
+                addStyle(nonMatchingSpanStyle, endIndex, name.length)
+            } else {
+                append(name)
+                addStyle(nonMatchingSpanStyle, 0, name.length)
+            }
+        },
+    )
 }
