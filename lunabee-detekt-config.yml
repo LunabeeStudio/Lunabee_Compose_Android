@@ -50,7 +50,7 @@ exceptions:
 
 ktlint:
   active: true
-  autoCorrect: false
+  autoCorrect: true
   code_style: 'ktlint_official'
   ChainWrapping:
     active: false
