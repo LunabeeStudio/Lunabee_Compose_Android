@@ -221,7 +221,9 @@ fun MavenPublication.setPom() {
                         dependency.write("implementation")
                     }
 
-                    configurations.findByName("implementation")?.dependencies?.forEach { dependency ->
+                    configurations.findByName("implementation")?.dependencies?.forEach {
+                        dependency
+                        ->
                         if (!dependency.isBoM()) {
                             // handle bom specifically
                             dependency.write("runtime")
