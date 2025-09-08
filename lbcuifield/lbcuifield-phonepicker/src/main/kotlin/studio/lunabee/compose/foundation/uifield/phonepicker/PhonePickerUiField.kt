@@ -72,39 +72,35 @@ class PhonePickerUiField(
     private val keyboardActions: KeyboardActions = KeyboardActions.Default,
     private val phoneFieldRenderer: PhoneFieldRenderer,
     private val coroutineScope: CoroutineScope,
-    private val countryPickerBottomSheetRenderer: CountryPickerBottomSheetRenderer,
+    private val countryPickerBottomSheetRenderer: CountryPickerBottomSheetRenderer
 ) : UiField<CountryCodeFieldData>() {
-
     private val json = Json.Default
 
     override val options: List<UiFieldOption> = emptyList()
 
-    override fun valueToDisplayedString(value: CountryCodeFieldData): String {
-        return value.phoneNumber
-    }
+    override fun valueToDisplayedString(value: CountryCodeFieldData): String = value.phoneNumber
 
-    override fun valueToSavedString(value: CountryCodeFieldData): String {
-        return json.encodeToString(value)
-    }
+    override fun valueToSavedString(value: CountryCodeFieldData): String =
+        json.encodeToString(value)
 
-    override fun savedValueToData(value: String): CountryCodeFieldData {
-        return json.decodeFromString(value)
-    }
+    override fun savedValueToData(value: String): CountryCodeFieldData =
+        json.decodeFromString(value)
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Composable(modifier: Modifier) {
         val context = LocalContext.current
-        val delegate = remember {
-            CountrySearchDelegate(
-                savedStateHandle = savedStateHandle,
-                searchFieldLabel = countryPickerBottomSheetRenderer.searchedFieldLabel,
-                searchFieldPlaceHolder = countryPickerBottomSheetRenderer.searchFieldPlaceHolder,
-                searchFieldStyleData = countryPickerBottomSheetRenderer.searchFieldStyleData,
-                coroutineScope = coroutineScope,
-                context = context,
-            )
-        }
+        val delegate =
+            remember {
+                CountrySearchDelegate(
+                    savedStateHandle = savedStateHandle,
+                    searchFieldLabel = countryPickerBottomSheetRenderer.searchedFieldLabel,
+                    searchFieldPlaceHolder = countryPickerBottomSheetRenderer.searchFieldPlaceHolder,
+                    searchFieldStyleData = countryPickerBottomSheetRenderer.searchFieldStyleData,
+                    coroutineScope = coroutineScope,
+                    context = context
+                )
+            }
         val uiState: CountrySearchUiState by delegate.uiState.collectAsStateWithLifecycle()
 
         val collectedValue by mValue.collectAsState()
@@ -120,7 +116,8 @@ class PhonePickerUiField(
                         value = value.copy(phoneNumber = it)
                         dismissError()
                     },
-                    modifier = modifier
+                    modifier =
+                    modifier
                         .onFocusEvent {
                             if (!it.hasFocus && hasBeenFocused) {
                                 checkAndDisplayError()
@@ -132,13 +129,15 @@ class PhonePickerUiField(
                         },
                     placeholder = placeholder,
                     label = label,
-                    trailingIcon = if (options.isNotEmpty()) {
+                    trailingIcon =
+                    if (options.isNotEmpty()) {
                         { options.forEach { it.Composable(modifier = Modifier) } }
                     } else {
                         null
                     },
-                    visualTransformation = PhoneNumberVisualTransformation(
-                        countryPhoneCode = value.countryCode,
+                    visualTransformation =
+                    PhoneNumberVisualTransformation(
+                        countryPhoneCode = value.countryCode
                     ),
                     keyboardOptions = keyboardOptions,
                     keyboardActions = keyboardActions,
@@ -146,12 +145,12 @@ class PhonePickerUiField(
                     readOnly = readOnly,
                     enabled = enabled,
                     error = null, // We let the client handle the error message
-                    interactionSource = null,
+                    interactionSource = null
                 )
             },
             openCountryPicker = { isPickerBottomSheetVisible = true },
             selectedCountry = uiState.selectedCountry,
-            errorMessage = collectedError?.text,
+            errorMessage = collectedError?.text
         )
 
         if (isPickerBottomSheetVisible) {
@@ -161,14 +160,14 @@ class PhonePickerUiField(
                 },
                 searchField = {
                     delegate.searchUiField.Composable(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth()
                     )
                 },
                 countriesList = { contentPadding, lazyListState ->
                     LazyColumn(
                         modifier = Modifier.fillMaxWidth(),
                         contentPadding = contentPadding,
-                        state = lazyListState,
+                        state = lazyListState
                     ) {
                         // Top anchor
                         item {
@@ -182,7 +181,7 @@ class PhonePickerUiField(
                                     value = value.copy(countryCode = country.countryPhoneCode)
                                     delegate.onCountrySelected(country)
                                     isPickerBottomSheetVisible = false
-                                },
+                                }
                             )
                         }
                     }
@@ -190,7 +189,7 @@ class PhonePickerUiField(
                     LaunchedEffect(uiState.countryCodesToDisplay) {
                         lazyListState.scrollToItem(0)
                     }
-                },
+                }
             )
         }
 
@@ -204,19 +203,17 @@ class PhonePickerUiField(
     }
 
     companion object {
-        fun initialValueFromRawPhoneNumber(
-            rawPhoneNumber: String,
-        ): CountryCodeFieldData {
+        fun initialValueFromRawPhoneNumber(rawPhoneNumber: String): CountryCodeFieldData {
             try {
                 val phoneNumber = PhoneNumberUtil.getInstance().parse(rawPhoneNumber, null)
                 return CountryCodeFieldData(
                     phoneNumber = phoneNumber.nationalNumber.toString(),
-                    countryCode = phoneNumber.countryCode.toString(),
+                    countryCode = phoneNumber.countryCode.toString()
                 )
             } catch (e: Exception) {
                 return CountryCodeFieldData(
                     phoneNumber = rawPhoneNumber,
-                    countryCode = "",
+                    countryCode = ""
                 )
             }
         }

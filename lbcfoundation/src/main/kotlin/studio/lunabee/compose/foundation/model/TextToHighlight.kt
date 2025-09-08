@@ -38,13 +38,10 @@ data class TextToHighlight(
     val text: String,
     val style: SpanStyle,
     val ignoreCase: Boolean = true,
-    val action: (() -> Unit)? = null,
+    val action: (() -> Unit)? = null
 ) {
-    override fun equals(other: Any?): Boolean {
-        return text.equals(other = (other as? TextToHighlight)?.text, ignoreCase = ignoreCase)
-    }
+    override fun equals(other: Any?): Boolean =
+        text.equals(other = (other as? TextToHighlight)?.text, ignoreCase = ignoreCase)
 
-    override fun hashCode(): Int {
-        return text.hashCode()
-    }
+    override fun hashCode(): Int = text.hashCode()
 }

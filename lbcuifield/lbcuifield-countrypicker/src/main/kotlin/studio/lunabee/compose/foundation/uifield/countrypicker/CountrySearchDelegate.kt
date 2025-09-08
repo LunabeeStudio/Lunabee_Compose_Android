@@ -43,18 +43,21 @@ class CountrySearchDelegate(
     searchFieldPlaceHolder: LbcTextSpec?,
     searchFieldStyleData: UiFieldStyleData,
     private val coroutineScope: CoroutineScope,
-    private val context: Context,
+    private val context: Context
 ) {
-
     private var allCountryCodes: List<CountrySearchItem> =
-        CCPCountry.getLibraryMasterCountryList(context, CountryCodePicker.Language.forCountryNameCode(Locale.getDefault().language))
-            .map { country ->
+        CCPCountry
+            .getLibraryMasterCountryList(
+                context,
+                CountryCodePicker.Language
+                    .forCountryNameCode(Locale.getDefault().language)
+            ).map { country ->
                 CountrySearchItem(
                     name = country.name,
                     countryPhoneCode = country.phoneCode,
                     flag = LbcImageSpec.ImageDrawable(country.flagID),
                     isSelected = false,
-                    isoName = country.nameCode,
+                    isoName = country.nameCode
                 )
             }
 
@@ -63,8 +66,8 @@ class CountrySearchDelegate(
             CountrySearchUiState(
                 countryCodesToDisplay = allCountryCodes,
                 searchedText = "",
-                selectedCountry = null,
-            ),
+                selectedCountry = null
+            )
         )
     }
 
@@ -79,7 +82,7 @@ class CountrySearchDelegate(
             isFieldInError = { null },
             savedStateHandle = savedStateHandle,
             uiFieldStyleData = searchFieldStyleData,
-            onValueChange = ::onSearchedTextChange,
+            onValueChange = ::onSearchedTextChange
         )
     }
 
@@ -88,47 +91,52 @@ class CountrySearchDelegate(
     }
 
     private fun updateUiStateWithSearch(searchedText: String) {
-        _uiState.value = uiState.value.copy(
-            countryCodesToDisplay = allCountryCodes.filter { country ->
-                country.name.normalized()
-                    .contains(searchedText.normalized())
-            },
-            searchedText = searchedText,
-        )
+        _uiState.value =
+            uiState.value.copy(
+                countryCodesToDisplay =
+                allCountryCodes.filter { country ->
+                    country.name
+                        .normalized()
+                        .contains(searchedText.normalized())
+                },
+                searchedText = searchedText
+            )
     }
 
-    internal fun initWithInitialCountryName(
-        countryName: String,
-    ) {
+    internal fun initWithInitialCountryName(countryName: String) {
         coroutineScope.launch {
-            allCountryCodes.firstOrNull { it.name == countryName }
+            allCountryCodes
+                .firstOrNull { it.name == countryName }
                 ?.let { initialCountry ->
-                    _uiState.value = uiState.value.copy(
-                        selectedCountry = SelectedCountry(
-                            name = initialCountry.name,
-                            countryPhoneCode = initialCountry.countryPhoneCode,
-                            flagImage = initialCountry.flag,
-                        ),
-                    )
+                    _uiState.value =
+                        uiState.value.copy(
+                            selectedCountry =
+                            SelectedCountry(
+                                name = initialCountry.name,
+                                countryPhoneCode = initialCountry.countryPhoneCode,
+                                flagImage = initialCountry.flag
+                            )
+                        )
                 }
 
             updateUiStateWithSearch(searchUiField.value)
         }
     }
 
-    fun initWithInitialCountryPhoneCode(
-        countryPhoneCode: String,
-    ) {
+    fun initWithInitialCountryPhoneCode(countryPhoneCode: String) {
         coroutineScope.launch {
-            allCountryCodes.firstOrNull { it.countryPhoneCode == countryPhoneCode }
+            allCountryCodes
+                .firstOrNull { it.countryPhoneCode == countryPhoneCode }
                 ?.let { initialCountry ->
-                    _uiState.value = uiState.value.copy(
-                        selectedCountry = SelectedCountry(
-                            name = initialCountry.name,
-                            countryPhoneCode = initialCountry.countryPhoneCode,
-                            flagImage = initialCountry.flag,
-                        ),
-                    )
+                    _uiState.value =
+                        uiState.value.copy(
+                            selectedCountry =
+                            SelectedCountry(
+                                name = initialCountry.name,
+                                countryPhoneCode = initialCountry.countryPhoneCode,
+                                flagImage = initialCountry.flag
+                            )
+                        )
                 }
 
             updateUiStateWithSearch(searchUiField.value)
@@ -136,25 +144,29 @@ class CountrySearchDelegate(
     }
 
     fun onCountrySelected(searchItem: CountrySearchItem) {
-        _uiState.value = _uiState.value.copy(
-            selectedCountry = SelectedCountry(
-                name = searchItem.name,
-                flagImage = searchItem.flag,
-                countryPhoneCode = searchItem.countryPhoneCode,
-            ),
-        )
+        _uiState.value =
+            _uiState.value.copy(
+                selectedCountry =
+                SelectedCountry(
+                    name = searchItem.name,
+                    flagImage = searchItem.flag,
+                    countryPhoneCode = searchItem.countryPhoneCode
+                )
+            )
     }
 
     fun updateOnCountryCodeChange(countryCode: String) {
         if (uiState.value.selectedCountry?.countryPhoneCode != countryCode) {
             allCountryCodes.firstOrNull { it.countryPhoneCode == countryCode }?.let { country ->
-                _uiState.value = _uiState.value.copy(
-                    selectedCountry = SelectedCountry(
-                        name = country.name,
-                        flagImage = country.flag,
-                        countryPhoneCode = country.countryPhoneCode,
-                    ),
-                )
+                _uiState.value =
+                    _uiState.value.copy(
+                        selectedCountry =
+                        SelectedCountry(
+                            name = country.name,
+                            flagImage = country.flag,
+                            countryPhoneCode = country.countryPhoneCode
+                        )
+                    )
             }
         }
     }

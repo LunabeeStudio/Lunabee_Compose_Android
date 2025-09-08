@@ -17,39 +17,41 @@ import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalTestApi::class)
 class PrintRuleDemoTest : LbcComposeTest() {
-
     @Test
-    fun print_screenshot_on_timeout_test(): Unit = invoke {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
+    fun print_screenshot_on_timeout_test(): Unit =
+        invoke {
+            val context = InstrumentationRegistry.getInstrumentation().targetContext
 
-        setContent {
-            Text("foo")
+            setContent {
+                Text("foo")
+            }
+
+            val error =
+                runCatching {
+                    hasText("bar")
+                        .waitAndPrintRootToCacheDir(printRule, timeout = 200.milliseconds)
+                        .assertIsDisplayed()
+                }.exceptionOrNull()
+            assertIs<ComposeTimeoutException>(error)
+
+            val base = File(printRule.basePath)
+            val parentFile = base.parentFile!!
+            assertTrue(parentFile.exists())
+
+            val files = parentFile.listFiles()!!
+            assertEquals(1, files.size)
+            assertEquals(
+                File(context.cacheDir, "screenshot/PrintRuleDemoTest/print_screenshot_on_timeout_test_0_TIMEOUT.jpeg")
+                    .absolutePath,
+                files.first().absolutePath
+            )
+
+            // assert(false) // Make the test fail to check if screenshots still exist in device cache storage
         }
 
-        val error = runCatching {
-            hasText("bar")
-                .waitAndPrintRootToCacheDir(printRule, timeout = 200.milliseconds)
-                .assertIsDisplayed()
-        }.exceptionOrNull()
-        assertIs<ComposeTimeoutException>(error)
-
-        val base = File(printRule.basePath)
-        val parentFile = base.parentFile!!
-        assertTrue(parentFile.exists())
-
-        val files = parentFile.listFiles()!!
-        assertEquals(1, files.size)
-        assertEquals(
-            File(context.cacheDir, "screenshot/PrintRuleDemoTest/print_screenshot_on_timeout_test_0_TIMEOUT.jpeg").absolutePath,
-            files.first().absolutePath,
-        )
-
-        // assert(false) // Make the test fail to check if screenshots still exist in device cache storage
-    }
-
-    /**
-     * Screenshot on failure testing (manual testing)
-     */
+    // /**
+    //  * Screenshot on failure testing (manual testing)
+    //  */
     //    @Test
     //    fun print_screenshot_on_failure_test(): Unit = invoke {
     //        setContent {
@@ -68,8 +70,9 @@ class PrintRuleDemoTest : LbcComposeTest() {
     //    }
 
     @Test
-    fun getScreenshotDir_exists_test(): Unit = invoke {
-        val dir = printRule.getScreenshotDir()
-        assertTrue(dir.exists())
-    }
+    fun getScreenshotDir_exists_test(): Unit =
+        invoke {
+            val dir = printRule.getScreenshotDir()
+            assertTrue(dir.exists())
+        }
 }

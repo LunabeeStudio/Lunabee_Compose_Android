@@ -32,7 +32,7 @@ fun LbcImage(
     contentScale: ContentScale = ContentScale.Fit,
     alignment: Alignment = Alignment.Center,
     colorFilter: ColorFilter? = null,
-    errorPainter: Painter? = null,
+    errorPainter: Painter? = null
 ) {
     when (imageSpec) {
         is LbcImageSpec.Bitmap -> {
@@ -42,7 +42,7 @@ fun LbcImage(
                 modifier = modifier,
                 contentScale = contentScale,
                 alignment = alignment,
-                colorFilter = colorFilter,
+                colorFilter = colorFilter
             )
         }
 
@@ -54,14 +54,21 @@ fun LbcImage(
                     modifier = modifier,
                     contentScale = contentScale,
                     alignment = alignment,
-                    colorFilter = colorFilter,
+                    colorFilter = colorFilter
                 )
             } else {
-                val configuration = Configuration().apply {
-                    uiMode = imageSpec.uiMode
-                }
-                val resources = LocalContext.current.createConfigurationContext(configuration).resources
-                val bitmap = ResourcesCompat.getDrawable(resources, imageSpec.drawableRes, null)!!.toBitmap()
+                val configuration =
+                    Configuration().apply {
+                        uiMode = imageSpec.uiMode
+                    }
+                val resources =
+                    LocalContext.current
+                        .createConfigurationContext(configuration)
+                        .resources
+                val bitmap =
+                    ResourcesCompat
+                        .getDrawable(resources, imageSpec.drawableRes, null)!!
+                        .toBitmap()
                 LbcImage(
                     imageSpec = LbcImageSpec.Bitmap(bitmap),
                     modifier = modifier,
@@ -70,34 +77,40 @@ fun LbcImage(
                     contentScale = contentScale,
                     alignment = alignment,
                     colorFilter = colorFilter,
-                    errorPainter = errorPainter,
+                    errorPainter = errorPainter
                 )
             }
         }
 
         is LbcImageSpec.Icon -> {
-            val tint = imageSpec.tint.invoke().takeIf { it != Color.Unspecified } ?: LocalContentColor.current
+            val tint =
+                imageSpec.tint.invoke().takeIf { it != Color.Unspecified }
+                    ?: LocalContentColor.current
             Icon(
                 painter = painterResource(id = imageSpec.drawableRes),
                 contentDescription = contentDescription?.string,
                 modifier = modifier,
-                tint = tint,
+                tint = tint
             )
         }
 
         is LbcImageSpec.KtImageVector -> {
-            val tint = imageSpec.tint.invoke().takeIf { it != Color.Unspecified } ?: LocalContentColor.current
+            val tint =
+                imageSpec.tint.invoke().takeIf { it != Color.Unspecified }
+                    ?: LocalContentColor.current
             Icon(
                 imageVector = imageSpec.icon,
                 contentDescription = contentDescription?.string,
                 modifier = modifier,
-                tint = tint,
+                tint = tint
             )
         }
 
         is LbcImageSpec.Url -> {
             AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
+                model =
+                ImageRequest
+                    .Builder(LocalContext.current)
                     .data(imageSpec.url)
                     .decoderFactory(SvgDecoder.Factory())
                     .build(),
@@ -109,7 +122,7 @@ fun LbcImage(
                 onError = onState,
                 onLoading = onState,
                 onSuccess = onState,
-                colorFilter = colorFilter,
+                colorFilter = colorFilter
             )
         }
 
@@ -124,7 +137,7 @@ fun LbcImage(
                 onError = onState,
                 onLoading = onState,
                 onSuccess = onState,
-                colorFilter = colorFilter,
+                colorFilter = colorFilter
             )
 
         is LbcImageSpec.Uri ->
@@ -138,7 +151,7 @@ fun LbcImage(
                 onError = onState,
                 onLoading = onState,
                 onSuccess = onState,
-                colorFilter = colorFilter,
+                colorFilter = colorFilter
             )
     }
 }

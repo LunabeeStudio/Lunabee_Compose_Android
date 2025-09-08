@@ -32,7 +32,6 @@ import java.io.File
 import javax.inject.Inject
 
 abstract class SetAllSnapshotVersionTask : DefaultTask() {
-
     @get:Option(option = "buildNumber", description = "Build number to append to the snapshot version")
     @get:Input
     abstract val buildNumber: Property<Int>
@@ -41,26 +40,29 @@ abstract class SetAllSnapshotVersionTask : DefaultTask() {
 
     @TaskAction
     fun setSnapshotVersion() {
-        val projectsVersionVal = project.allprojects
-            .filter { it.plugins.hasPlugin("maven-publish") }
-            .map {
-                it.name
-                    .replace("-", "_")
-                    .uppercase()
-                    .plus("_VERSION")
-            }
+        val projectsVersionVal =
+            project.allprojects
+                .filter { it.plugins.hasPlugin("maven-publish") }
+                .map {
+                    it.name
+                        .replace("-", "_")
+                        .uppercase()
+                        .plus("_VERSION")
+                }
         println(projectsVersionVal.joinToString("\n"))
 
-        val androidConfig = File(project.rootDir.path + "/buildSrc/src/main/kotlin/AndroidConfig.kt")
+        val androidConfig =
+            File(project.rootDir.path + "/buildSrc/src/main/kotlin/AndroidConfig.kt")
         val branch = getGitBranch()
         var newContents = androidConfig.readText()
         projectsVersionVal.forEach { projectVersionVal ->
-            newContents = newContents
-                .replace(
-                    regex = Regex("$projectVersionVal: String = \"[^\"]*"),
-                ) { matchResult ->
-                    "${matchResult.value}-alpha-${buildNumber.get()}-$branch-SNAPSHOT"
-                }
+            newContents =
+                newContents
+                    .replace(
+                        regex = Regex("$projectVersionVal: String = \"[^\"]*")
+                    ) { matchResult ->
+                        "${matchResult.value}-alpha-${buildNumber.get()}-$branch-SNAPSHOT"
+                    }
         }
         androidConfig.writeText(newContents)
 
@@ -73,7 +75,8 @@ abstract class SetAllSnapshotVersionTask : DefaultTask() {
             commandLine = "git rev-parse --abbrev-ref HEAD".split(" ")
             standardOutput = output
         }
-        return output.toString()
+        return output
+            .toString()
             .split('/')
             .last()
             .trim()

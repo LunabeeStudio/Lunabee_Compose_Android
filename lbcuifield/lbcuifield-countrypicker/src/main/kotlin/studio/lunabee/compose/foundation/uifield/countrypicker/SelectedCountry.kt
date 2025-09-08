@@ -26,5 +26,5 @@ import studio.lunabee.compose.core.LbcImageSpec
 data class SelectedCountry(
     val name: String,
     val flagImage: LbcImageSpec,
-    val countryPhoneCode: String,
+    val countryPhoneCode: String
 )

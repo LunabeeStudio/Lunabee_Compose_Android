@@ -50,7 +50,7 @@ class UiFieldStyleDataImpl : UiFieldStyleData {
         readOnly: Boolean,
         enabled: Boolean,
         error: UiFieldError?,
-        interactionSource: MutableInteractionSource?,
+        interactionSource: MutableInteractionSource?
     ) {
         OutlinedTextField(
             value = value,
@@ -64,7 +64,8 @@ class UiFieldStyleDataImpl : UiFieldStyleData {
             enabled = enabled,
             visualTransformation = visualTransformation,
             isError = error != null,
-            supportingText = if (error?.text != null) {
+            supportingText =
+            if (error?.text != null) {
                 { Text(text = error.text.string) }
             } else {
                 null
@@ -72,7 +73,7 @@ class UiFieldStyleDataImpl : UiFieldStyleData {
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
             interactionSource = interactionSource,
-            singleLine = maxLine == 1,
+            singleLine = maxLine == 1
         )
     }
 }

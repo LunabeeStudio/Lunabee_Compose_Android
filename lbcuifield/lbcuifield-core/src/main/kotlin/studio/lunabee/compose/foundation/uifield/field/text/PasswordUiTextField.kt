@@ -58,8 +58,9 @@ class PasswordUiTextField(
     override val enabled: Boolean = true,
     private val maxLine: Int = 1,
     private val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    private val onKeyboardActions: KeyboardActionHandler = KeyboardActionHandler { /* no-op */ },
-) : UiField<String>(), PasswordVisibilityOptionHolder {
+    private val onKeyboardActions: KeyboardActionHandler = KeyboardActionHandler { /* no-op */ }
+) : UiField<String>(),
+    PasswordVisibilityOptionHolder {
     private val mIsValueVisible: MutableStateFlow<Boolean> = MutableStateFlow(false)
     override val isValueVisible: StateFlow<Boolean> = mIsValueVisible.asStateFlow()
 
@@ -67,9 +68,10 @@ class PasswordUiTextField(
         mIsValueVisible.value = !isValueVisible.value
     }
 
-    override val options: List<UiFieldOption> = listOf(
-        PasswordVisibilityFieldOption(this),
-    )
+    override val options: List<UiFieldOption> =
+        listOf(
+            PasswordVisibilityFieldOption(this)
+        )
 
     @Composable
     override fun Composable(modifier: Modifier) {
@@ -83,7 +85,8 @@ class PasswordUiTextField(
                 value = it
                 dismissError()
             },
-            modifier = modifier.onFocusEvent {
+            modifier =
+            modifier.onFocusEvent {
                 if (!it.hasFocus && hasBeenFocused) {
                     checkAndDisplayError()
                 } else {
@@ -93,7 +96,8 @@ class PasswordUiTextField(
             },
             placeholder = placeholder,
             label = label,
-            trailingIcon = if (options.isNotEmpty()) {
+            trailingIcon =
+            if (options.isNotEmpty()) {
                 { options.forEach { it.Composable(modifier = Modifier) } }
             } else {
                 null
@@ -104,21 +108,16 @@ class PasswordUiTextField(
             maxLine = maxLine,
             readOnly = false,
             error = collectedError,
-            interactionSource = null,
+            interactionSource = null
         )
     }
 
     // Not used here ...
     override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
-    override fun savedValueToData(value: String): String {
-        return value
-    }
 
-    override fun valueToSavedString(value: String): String {
-        return value
-    }
+    override fun savedValueToData(value: String): String = value
 
-    override fun valueToDisplayedString(value: String): String {
-        return value
-    }
+    override fun valueToSavedString(value: String): String = value
+
+    override fun valueToDisplayedString(value: String): String = value
 }

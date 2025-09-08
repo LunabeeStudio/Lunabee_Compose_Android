@@ -32,7 +32,8 @@ import kotlin.test.assertEquals
 
 class LbcTextSpecTest {
     @get:Rule
-    val composeTestRule: AndroidComposeTestRule<ActivityScenarioRule<ComponentActivity>, ComponentActivity> =
+    val composeTestRule:
+        AndroidComposeTestRule<ActivityScenarioRule<ComponentActivity>, ComponentActivity> =
         createAndroidComposeRule()
 
     private val context: Context
@@ -78,15 +79,22 @@ class LbcTextSpecTest {
 
     @Test
     fun stringRes_test() {
-        val expectedTest = composeTestRule.activity.getString(studio.lunabee.compose.core.test.R.string.test)
-        val actualTest = LbcTextSpec.StringResource(id = studio.lunabee.compose.core.test.R.string.test)
+        val expectedTest =
+            composeTestRule.activity
+                .getString(studio.lunabee.compose.core.test.R.string.test)
+        val actualTest =
+            LbcTextSpec
+                .StringResource(id = studio.lunabee.compose.core.test.R.string.test)
 
         val stringParam = "foo"
         val intParam = 123
-        val expectedTestArgs = composeTestRule
-            .activity
-            .getString(studio.lunabee.compose.core.test.R.string.test_args, stringParam, intParam)
-        val actualTestArgs = LbcTextSpec.StringResource(id = studio.lunabee.compose.core.test.R.string.test_args, stringParam, intParam)
+        val expectedTestArgs =
+            composeTestRule
+                .activity
+                .getString(studio.lunabee.compose.core.test.R.string.test_args, stringParam, intParam)
+        val actualTestArgs =
+            LbcTextSpec
+                .StringResource(id = studio.lunabee.compose.core.test.R.string.test_args, stringParam, intParam)
 
         assertEquals(expectedTest, actualTest.string(context))
         assertEquals(expectedTestArgs, actualTestArgs.string(context))
@@ -104,15 +112,22 @@ class LbcTextSpecTest {
     @Test
     fun stringRes_recursive_test() {
         val intParam = 123
-        val stringParam = composeTestRule.activity.getString(studio.lunabee.compose.core.test.R.string.test)
-        val stringParamTextSpec = LbcTextSpec.StringResource(id = studio.lunabee.compose.core.test.R.string.test)
+        val stringParam =
+            composeTestRule.activity
+                .getString(studio.lunabee.compose.core.test.R.string.test)
+        val stringParamTextSpec =
+            LbcTextSpec
+                .StringResource(id = studio.lunabee.compose.core.test.R.string.test)
 
-        val expectedTestArgs = composeTestRule.activity.getString(
-            studio.lunabee.compose.core.test.R.string.test_args,
-            stringParam,
-            intParam,
-        )
-        val actualTestArgs = LbcTextSpec.StringResource(studio.lunabee.compose.core.test.R.string.test_args, stringParamTextSpec, intParam)
+        val expectedTestArgs =
+            composeTestRule.activity.getString(
+                studio.lunabee.compose.core.test.R.string.test_args,
+                stringParam,
+                intParam
+            )
+        val actualTestArgs =
+            LbcTextSpec
+                .StringResource(studio.lunabee.compose.core.test.R.string.test_args, stringParamTextSpec, intParam)
 
         assertEquals(expectedTestArgs, actualTestArgs.string(context))
         assertEquals(AnnotatedString(expectedTestArgs), actualTestArgs.annotated(context))
@@ -124,17 +139,23 @@ class LbcTextSpecTest {
 
     @Test
     fun pluralsRes_test() {
-        val expectedTestOne = composeTestRule
-            .activity
-            .resources
-            .getQuantityString(studio.lunabee.compose.core.test.R.plurals.test_args_plural, 1, 1)
-        val actualTestOne = LbcTextSpec.PluralsResource(studio.lunabee.compose.core.test.R.plurals.test_args_plural, 1, 1)
+        val expectedTestOne =
+            composeTestRule
+                .activity
+                .resources
+                .getQuantityString(studio.lunabee.compose.core.test.R.plurals.test_args_plural, 1, 1)
+        val actualTestOne =
+            LbcTextSpec
+                .PluralsResource(studio.lunabee.compose.core.test.R.plurals.test_args_plural, 1, 1)
 
-        val expectedTestMany = composeTestRule
-            .activity
-            .resources
-            .getQuantityString(studio.lunabee.compose.core.test.R.plurals.test_args_plural, 2, 2)
-        val actualTestMany = LbcTextSpec.PluralsResource(studio.lunabee.compose.core.test.R.plurals.test_args_plural, 2, 2)
+        val expectedTestMany =
+            composeTestRule
+                .activity
+                .resources
+                .getQuantityString(studio.lunabee.compose.core.test.R.plurals.test_args_plural, 2, 2)
+        val actualTestMany =
+            LbcTextSpec
+                .PluralsResource(studio.lunabee.compose.core.test.R.plurals.test_args_plural, 2, 2)
 
         assertEquals(expectedTestOne, actualTestOne.string(context))
         assertEquals(expectedTestMany, actualTestMany.string(context))
@@ -151,30 +172,36 @@ class LbcTextSpecTest {
 
     @Test
     fun stringByName_test() {
-        val expectedTest = composeTestRule.activity.getString(studio.lunabee.compose.core.test.R.string.test)
+        val expectedTest =
+            composeTestRule.activity
+                .getString(studio.lunabee.compose.core.test.R.string.test)
         val actualTest = LbcTextSpec.StringByNameResource(name = "test", fallbackId = -1)
-        val actualFallbackTest = LbcTextSpec.StringByNameResource(
-            name = "does_not_exist",
-            fallbackId = studio.lunabee.compose.core.test.R.string.test,
-        )
+        val actualFallbackTest =
+            LbcTextSpec.StringByNameResource(
+                name = "does_not_exist",
+                fallbackId = studio.lunabee.compose.core.test.R.string.test
+            )
 
         val stringParam = "foo"
         val intParam = 123
-        val expectedTestArgs = composeTestRule
-            .activity
-            .getString(studio.lunabee.compose.core.test.R.string.test_args, stringParam, intParam)
-        val actualTestArgs = LbcTextSpec.StringByNameResource(
-            name = "test_args",
-            fallbackId = -1,
-            stringParam,
-            intParam,
-        )
-        val actualTestFallbackArgs = LbcTextSpec.StringByNameResource(
-            name = "does_not_exist",
-            fallbackId = studio.lunabee.compose.core.test.R.string.test_args,
-            stringParam,
-            intParam,
-        )
+        val expectedTestArgs =
+            composeTestRule
+                .activity
+                .getString(studio.lunabee.compose.core.test.R.string.test_args, stringParam, intParam)
+        val actualTestArgs =
+            LbcTextSpec.StringByNameResource(
+                name = "test_args",
+                fallbackId = -1,
+                stringParam,
+                intParam
+            )
+        val actualTestFallbackArgs =
+            LbcTextSpec.StringByNameResource(
+                name = "does_not_exist",
+                fallbackId = studio.lunabee.compose.core.test.R.string.test_args,
+                stringParam,
+                intParam
+            )
 
         assertEquals(expectedTest, actualTest.string(context))
         assertEquals(expectedTest, actualFallbackTest.string(context))

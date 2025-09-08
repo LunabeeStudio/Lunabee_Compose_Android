@@ -63,33 +63,42 @@ import java.util.Locale
 @Composable
 fun ThemeScreen() {
     var colorHex: String by rememberSaveable { mutableStateOf(value = "") }
-    val customColor = try {
-        Color(android.graphics.Color.parseColor("#${colorHex.replace("#", "")}"))
-    } catch (e: Exception) {
-        null
-    }
+    val customColor =
+        try {
+            Color(android.graphics.Color.parseColor("#${colorHex.replace("#", "")}"))
+        } catch (e: Exception) {
+            null
+        }
 
-    val customColorScheme = customColor?.let {
-        LbcThemeUtilities.getMaterialColorSchemeFromColor(it, isInDarkMode = isSystemInDarkTheme())
-    }
+    val customColorScheme =
+        customColor?.let {
+            LbcThemeUtilities
+                .getMaterialColorSchemeFromColor(it, isInDarkMode = isSystemInDarkTheme())
+        }
     AppDemoTheme(
-        customColorScheme = customColorScheme,
+        customColorScheme = customColorScheme
     ) {
         Column {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
-                    .padding(all = 16.dp),
+                    .padding(all = 16.dp)
             ) {
                 OutlinedTextField(
                     value = colorHex,
                     onValueChange = { colorHex = it },
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .fillMaxWidth()
                         .weight(1f),
-                    label = { Text(text = stringResource(id = R.string.material3_theme_color_label)) },
-                    placeholder = { Text(text = stringResource(id = R.string.material3_theme_color_placeholder)) },
+                    label = {
+                        Text(text = stringResource(id = R.string.material3_theme_color_label))
+                    },
+                    placeholder = {
+                        Text(text = stringResource(id = R.string.material3_theme_color_placeholder))
+                    }
                 )
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -98,7 +107,7 @@ fun ThemeScreen() {
                     BoxWithColorHex(
                         color = customColor,
                         modifier = Modifier.padding(top = 8.dp),
-                        name = "Seed",
+                        name = "Seed"
                     )
 
                     Spacer(modifier = Modifier.width(16.dp))
@@ -107,57 +116,71 @@ fun ThemeScreen() {
                 BoxWithColorHex(
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(top = 8.dp),
-                    name = "Primary",
+                    name = "Primary"
                 )
             }
 
             val colorMap = getPalette(customColor, MaterialTheme.colorScheme)
 
             LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier =
+                Modifier
+                    .fillMaxSize()
             ) {
                 item {
                     Text(
                         text = stringResource(id = R.string.material3_theme_primary_explanation),
-                        modifier = Modifier
-                            .padding(horizontal = 16.dp),
+                        modifier =
+                        Modifier
+                            .padding(horizontal = 16.dp)
                     )
                 }
 
                 items(
-                    items = colorMap,
+                    items = colorMap
                 ) { (colorName, color) ->
                     Text(
                         text = colorName,
-                        modifier = Modifier
+                        modifier =
+                        Modifier
                             .padding(all = 16.dp),
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleLarge
                     )
 
                     LazyRow {
                         item {
                             BoxWithColorHex(
                                 color = color,
-                                modifier = Modifier
+                                modifier =
+                                Modifier
                                     .wrapContentWidth()
-                                    .padding(all = 8.dp),
+                                    .padding(all = 8.dp)
                             )
                         }
 
                         for (i in 5 until 100 step 5) {
                             item {
-                                val tone = LbcThemeUtilities.getToneForColor(color = color, tone = i)
+                                val tone =
+                                    LbcThemeUtilities
+                                        .getToneForColor(color = color, tone = i)
 
                                 BoxWithColorHex(
                                     color = tone,
-                                    modifier = Modifier
+                                    modifier =
+                                    Modifier
                                         .wrapContentWidth()
-                                        .padding(all = 8.dp),
+                                        .padding(all = 8.dp)
                                 ) {
                                     Text(
                                         text = (100 - i).toString(),
-                                        color = if (tone.luminance() >= 0.5) Color.Black else Color.White,
+                                        color =
+                                        if (tone.luminance() >=
+                                            0.5
+                                        ) {
+                                            Color.Black
+                                        } else {
+                                            Color.White
+                                        }
                                     )
                                 }
                             }
@@ -174,33 +197,35 @@ fun BoxWithColorHex(
     color: Color,
     modifier: Modifier = Modifier,
     name: String? = null,
-    innerText: @Composable (() -> Unit)? = null,
+    innerText: @Composable (() -> Unit)? = null
 ) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .size(50.dp)
                 .clip(shape = RoundedCornerShape(size = 4.dp))
                 .drawBehind { drawRect(color) },
-            contentAlignment = Alignment.Center,
+            contentAlignment = Alignment.Center
         ) {
             innerText?.invoke()
         }
 
-        val colorText = buildString {
-            append(color.hexValue)
-            if (name != null) {
-                appendLine()
-                append(name)
+        val colorText =
+            buildString {
+                append(color.hexValue)
+                if (name != null) {
+                    appendLine()
+                    append(name)
+                }
             }
-        }
         Text(
             text = colorText,
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodySmall
         )
     }
 }

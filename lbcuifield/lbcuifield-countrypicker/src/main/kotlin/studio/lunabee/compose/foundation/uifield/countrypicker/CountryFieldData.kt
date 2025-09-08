@@ -24,7 +24,4 @@ package studio.lunabee.compose.foundation.uifield.countrypicker
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CountryFieldData(
-    val countryName: String,
-    val countryIsoName: String,
-)
+data class CountryFieldData(val countryName: String, val countryIsoName: String)

@@ -32,7 +32,9 @@ import androidx.glance.LocalContext
  */
 @Suppress("unused")
 @Composable
-fun glanceStringResource(@StringRes id: Int, vararg args: Any): String = LocalContext.current.getString(id, *args)
+fun glanceStringResource(@StringRes id: Int, vararg args: Any): String =
+    LocalContext.current
+        .getString(id, *args)
 
 /**
  * As the default pluralResource method is not supported in a Glance context,

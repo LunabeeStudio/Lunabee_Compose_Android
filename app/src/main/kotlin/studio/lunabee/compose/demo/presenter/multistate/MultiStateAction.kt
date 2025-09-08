@@ -23,9 +23,12 @@ package studio.lunabee.compose.demo.presenter.multistate
 
 sealed interface MultiStateAction {
     sealed interface DataAction : MultiStateAction
+
     sealed interface ErrorAction : MultiStateAction
 
     object ExampleAction : DataAction
+
     object ExampleErrorAction : ErrorAction
+
     object ExampleAllAction : ErrorAction, DataAction
 }

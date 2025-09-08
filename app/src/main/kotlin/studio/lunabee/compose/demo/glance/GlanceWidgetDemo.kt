@@ -72,13 +72,14 @@ class GlanceWidgetDemo : GlanceAppWidget() {
     fun Render() {
         GlanceRoot {
             Column(
-                modifier = GlanceModifier
+                modifier =
+                GlanceModifier
                     .cornerRadiusCompat(
                         cornerRadius = 16.dp,
                         color = Color(0xFFE5DDC8),
-                        size = DpSize(LocalSize.current.width, LocalSize.current.height),
+                        size = DpSize(LocalSize.current.width, LocalSize.current.height)
                     ),
-                horizontalAlignment = Alignment.Horizontal.CenterHorizontally,
+                horizontalAlignment = Alignment.Horizontal.CenterHorizontally
             ) {
                 Spacer(modifier = GlanceModifier.defaultWeight())
 
@@ -86,20 +87,22 @@ class GlanceWidgetDemo : GlanceAppWidget() {
                     viewFlipperLayout = R.layout.glance_view_flipper,
                     viewFlipperViewId = R.id.glance_view_flipper,
                     flipInterval = 2.seconds,
-                    modifier = GlanceModifier
-                        .size(60.dp),
+                    modifier =
+                    GlanceModifier
+                        .size(60.dp)
                 ) {
                     listOf(
                         R.drawable.ic_view_flipper_1,
                         R.drawable.ic_view_flipper_2,
                         R.drawable.ic_view_flipper_3,
-                        R.drawable.ic_view_flipper_4,
+                        R.drawable.ic_view_flipper_4
                     ).forEach { resId ->
                         Image(
                             provider = ImageProvider(resId = resId),
                             contentDescription = null,
-                            modifier = GlanceModifier
-                                .size(size = 48.dp),
+                            modifier =
+                            GlanceModifier
+                                .size(size = 48.dp)
                         )
                     }
                 }
@@ -111,9 +114,10 @@ class GlanceWidgetDemo : GlanceAppWidget() {
                     color = Color.Black,
                     fontSize = 14.sp,
                     typeface = ResourcesCompat.getFont(LocalContext.current, R.font.robot_regular)!!,
-                    modifier = GlanceModifier
+                    modifier =
+                    GlanceModifier
                         .fillMaxWidth(),
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Center
                 )
 
                 Spacer(modifier = GlanceModifier.height(8.dp))
@@ -122,9 +126,10 @@ class GlanceWidgetDemo : GlanceAppWidget() {
                 // Glance button if you don't have specific font or an ImageProvider/ColorProvider with the Modifier.
                 GlanceBackground(
                     background = R.drawable.widget_button_gradient_bg,
-                    modifier = GlanceModifier
+                    modifier =
+                    GlanceModifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
+                        .padding(horizontal = 16.dp)
                 ) {
                     GlanceTypefaceButton(
                         text = "Open the app",
@@ -132,9 +137,10 @@ class GlanceWidgetDemo : GlanceAppWidget() {
                         fontSize = 12.sp,
                         typeface = ResourcesCompat.getFont(LocalContext.current, R.font.write)!!,
                         action = actionStartActivity(MainActivity::class.java),
-                        modifier = GlanceModifier
+                        modifier =
+                        GlanceModifier
                             .fillMaxWidth()
-                            .height(height = 48.dp),
+                            .height(height = 48.dp)
                     )
                 }
                 Spacer(modifier = GlanceModifier.defaultWeight())

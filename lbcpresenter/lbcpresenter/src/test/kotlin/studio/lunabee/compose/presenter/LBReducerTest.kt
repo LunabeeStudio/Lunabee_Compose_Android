@@ -37,63 +37,65 @@ import kotlin.random.Random
 import kotlin.test.Test
 
 class LBReducerTest {
-
     @Test
-    fun collectReducer_concurrent_test(): TestResult = runTest {
-        val coroutineScope = CoroutineScope(Dispatchers.IO) // make sure we have multiple threads
+    fun collectReducer_concurrent_test(): TestResult =
+        runTest {
+            val coroutineScope = CoroutineScope(Dispatchers.IO) // make sure we have multiple threads
 
-        val flows: List<Flow<TestAction>> = listOf(
-            flow {
-                repeat(100) {
-                    delay(Random.nextLong(0, 1))
-                    emit(TestAction.Increment0)
-                }
-            },
-            flow {
-                repeat(100) {
-                    delay(Random.nextLong(0, 1))
-                    emit(TestAction.Increment1)
-                }
-            },
-            flow {
-                repeat(100) {
-                    delay(Random.nextLong(0, 1))
-                    emit(TestAction.Increment2)
-                }
-            },
-        )
+            val flows: List<Flow<TestAction>> =
+                listOf(
+                    flow {
+                        repeat(100) {
+                            delay(Random.nextLong(0, 1))
+                            emit(TestAction.Increment0)
+                        }
+                    },
+                    flow {
+                        repeat(100) {
+                            delay(Random.nextLong(0, 1))
+                            emit(TestAction.Increment1)
+                        }
+                    },
+                    flow {
+                        repeat(100) {
+                            delay(Random.nextLong(0, 1))
+                            emit(TestAction.Increment2)
+                        }
+                    }
+                )
 
-        val reducer = TestReducer(
-            coroutineScope = coroutineScope,
-            emitUserAction = {},
-        )
+            val reducer =
+                TestReducer(
+                    coroutineScope = coroutineScope,
+                    emitUserAction = {}
+                )
 
-        var actualStateSaved = TestUiState(count = 0)
-        val uiStateFlow = reducer.collectReducer(
-            flows = flows,
-            actualState = { actualStateSaved },
-            performNavigation = {},
-        )
-            .onEach { actualStateSaved = it }
-            .stateIn(coroutineScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
+            var actualStateSaved = TestUiState(count = 0)
+            val uiStateFlow =
+                reducer
+                    .collectReducer(
+                        flows = flows,
+                        actualState = { actualStateSaved },
+                        performNavigation = {}
+                    ).onEach { actualStateSaved = it }
+                    .stateIn(coroutineScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
 
-        uiStateFlow.first { it.count == 300 }
+            uiStateFlow.first { it.count == 300 }
 
-        assertEquals(TestUiState(count = 300), actualStateSaved)
-    }
+            assertEquals(TestUiState(count = 300), actualStateSaved)
+        }
 }
 
 class TestReducer(
     override val coroutineScope: CoroutineScope,
-    override val emitUserAction: (TestAction) -> Unit,
+    override val emitUserAction: (TestAction) -> Unit
 ) : LBSingleReducer<TestUiState, TestNavScope, TestAction>(
-    verbose = true,
+    verbose = true
 ) {
-
     override suspend fun reduce(
         actualState: TestUiState,
         action: TestAction,
-        performNavigation: (TestNavScope.() -> Unit) -> Unit,
+        performNavigation: (TestNavScope.() -> Unit) -> Unit
     ): ReduceResult<TestUiState> =
         when (action) {
             TestAction.Increment0 -> actualState.copy(count = actualState.count + 1).asResult()
@@ -102,14 +104,14 @@ class TestReducer(
         }
 }
 
-data class TestUiState(
-    val count: Int,
-) : PresenterUiState
+data class TestUiState(val count: Int) : PresenterUiState
 
 interface TestNavScope
 
 sealed interface TestAction {
     data object Increment0 : TestAction
+
     data object Increment1 : TestAction
+
     data object Increment2 : TestAction
 }

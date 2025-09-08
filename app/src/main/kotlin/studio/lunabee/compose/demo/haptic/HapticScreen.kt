@@ -39,19 +39,25 @@ import studio.lunabee.compose.foundation.haptic.rememberLbcHapticFeedback
 @Composable
 fun HapticScreen() {
     val lbcHapticFeedback: LbcHapticFeedback = rememberLbcHapticFeedback()
-    val supportedEffect: List<LbcHapticEffect> = remember { lbcHapticFeedback.getSupportedHapticEffect() }
+    val supportedEffect: List<LbcHapticEffect> =
+        remember {
+            lbcHapticFeedback
+                .getSupportedHapticEffect()
+        }
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
-            .padding(all = 16.dp),
+            .padding(all = 16.dp)
     ) {
         items(items = LbcHapticFeedback.AllEffects) { effect ->
             Button(
                 enabled = supportedEffect.contains(effect),
                 onClick = { lbcHapticFeedback.perform(hapticEffect = effect) },
-                modifier = Modifier
-                    .padding(all = 8.dp),
+                modifier =
+                Modifier
+                    .padding(all = 8.dp)
             ) {
                 Text(text = "${effect.javaClass.simpleName}\n(code = ${effect.hapticId})")
             }

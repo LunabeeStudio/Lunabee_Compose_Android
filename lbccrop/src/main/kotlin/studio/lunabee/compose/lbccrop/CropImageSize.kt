@@ -21,10 +21,7 @@
 
 package studio.lunabee.compose.lbccrop
 
-data class CropImageSize(
-    val width: Int,
-    val height: Int,
-) {
+data class CropImageSize(val width: Int, val height: Int) {
     companion object {
         val Zero: CropImageSize = CropImageSize(width = 0, height = 0)
     }

@@ -54,38 +54,38 @@ class DateAndHourUiField(
     override val selectableDates: SelectableDates = DatePickerDefaults.AllDates,
     override val datePickerData: DatePickerData,
     override val hourPickerData: HourPickerData,
-    private val formatter: DateTimeFormatter = DateTimeFormatter
-        .ofLocalizedDateTime(FormatStyle.SHORT)
-        .withZone(ZoneOffset.UTC),
+    private val formatter: DateTimeFormatter =
+        DateTimeFormatter
+            .ofLocalizedDateTime(FormatStyle.SHORT)
+            .withZone(ZoneOffset.UTC),
     override val onValueChange: (LocalDateTime?) -> Unit = {},
     override val readOnly: Boolean = false,
-    override val enabled: Boolean = true,
-) : TimeUiField<LocalDateTime?>(), HourPickerHolder, DatePickerHolder {
-    override val options: List<UiFieldOption> = listOf(
-        DatePickerOption(enabled && !readOnly, this),
-        HourPickerOption(enabled && !readOnly, this),
-    )
+    override val enabled: Boolean = true
+) : TimeUiField<LocalDateTime?>(),
+    HourPickerHolder,
+    DatePickerHolder {
+    override val options: List<UiFieldOption> =
+        listOf(
+            DatePickerOption(enabled && !readOnly, this),
+            HourPickerOption(enabled && !readOnly, this)
+        )
 
-    override fun savedValueToData(value: String): LocalDateTime {
-        return LocalDateTime.parse(value)
-    }
+    override fun savedValueToData(value: String): LocalDateTime = LocalDateTime.parse(value)
 
-    override fun valueToSavedString(value: LocalDateTime?): String {
-        return value.toString()
-    }
+    override fun valueToSavedString(value: LocalDateTime?): String = value.toString()
 
-    override fun valueToDisplayedString(value: LocalDateTime?): String {
-        return value?.let(formatter::format).orEmpty()
-    }
+    override fun valueToDisplayedString(value: LocalDateTime?): String =
+        value?.let(formatter::format).orEmpty()
 
     override val date: LocalDate?
         get() = value?.toLocalDate()
 
     override fun onValueDateChanged(date: LocalDate) {
-        value = (value ?: LocalDateTime.now().withHour(0).withMinute(0))
-            .withDayOfMonth(date.dayOfMonth)
-            .withMonth(date.monthValue)
-            .withYear(date.year)
+        value =
+            (value ?: LocalDateTime.now().withHour(0).withMinute(0))
+                .withDayOfMonth(date.dayOfMonth)
+                .withMonth(date.monthValue)
+                .withYear(date.year)
         checkAndDisplayError()
     }
 
@@ -93,9 +93,10 @@ class DateAndHourUiField(
         get() = value
 
     override fun onValueTimeChanged(hours: Int, minutes: Int) {
-        value = (value ?: LocalDateTime.now())
-            .withHour(hours)
-            .withMinute(minutes)
+        value =
+            (value ?: LocalDateTime.now())
+                .withHour(hours)
+                .withMinute(minutes)
         checkAndDisplayError()
     }
 }

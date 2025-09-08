@@ -76,9 +76,9 @@ fun rememberTextImageBitmap(
     breakStrategy: Int = 0,
     hyphenationFrequency: Int = 0,
     justificationMode: Int = 0,
-    displayMetrics: DisplayMetrics = LocalContext.current.resources.displayMetrics,
-): Bitmap {
-    return remember(text) {
+    displayMetrics: DisplayMetrics = LocalContext.current.resources.displayMetrics
+): Bitmap =
+    remember(text) {
         textAsBitmap(
             text = text,
             color = color,
@@ -92,25 +92,23 @@ fun rememberTextImageBitmap(
             maxLines = maxLines,
             breakStrategy = breakStrategy,
             hyphenationFrequency = hyphenationFrequency,
-            justificationMode = justificationMode,
+            justificationMode = justificationMode
         )
     }
-}
 
 /**
  * Map a [TextAlign] Glance to a [Layout.Alignment] to use it in a static layout.
  */
-fun TextAlign.toLayoutAlignment(): Layout.Alignment {
-    return when (this) {
+fun TextAlign.toLayoutAlignment(): Layout.Alignment =
+    when (this) {
         TextAlign.Start,
-        TextAlign.Left,
+        TextAlign.Left
         -> Layout.Alignment.ALIGN_NORMAL
         TextAlign.End,
-        TextAlign.Right,
+        TextAlign.Right
         -> Layout.Alignment.ALIGN_OPPOSITE
         else -> Layout.Alignment.ALIGN_CENTER
     }
-}
 
 @Suppress("LongParameterList")
 private fun textAsBitmap(
@@ -126,7 +124,7 @@ private fun textAsBitmap(
     maxLines: Int,
     breakStrategy: Int,
     hyphenationFrequency: Int,
-    justificationMode: Int,
+    justificationMode: Int
 ): Bitmap {
     val paint = TextPaint(Paint.ANTI_ALIAS_FLAG)
     paint.textSize = textSize
@@ -135,38 +133,43 @@ private fun textAsBitmap(
     paint.letterSpacing = letterSpacing
 
     val lineHeightToApply = if (lineHeight == 0f) 0f else abs(lineHeight - textSize)
-    val staticLayout = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        val builder = StaticLayout.Builder.obtain(text, 0, text.length, paint, ellipsizedWidth.roundToInt())
-            .setAlignment(textAlign.toLayoutAlignment())
-            .setLineSpacing(lineHeightToApply, 1f)
-            .setIncludePad(false)
-            .setEllipsizedWidth(ellipsizedWidth.roundToInt())
-            .setEllipsize(ellipsize)
-            .setMaxLines(maxLines)
-            .setBreakStrategy(breakStrategy)
-            .setHyphenationFrequency(hyphenationFrequency)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setJustificationMode(justificationMode)
+    val staticLayout =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val builder =
+                StaticLayout.Builder
+                    .obtain(text, 0, text.length, paint, ellipsizedWidth.roundToInt())
+                    .setAlignment(textAlign.toLayoutAlignment())
+                    .setLineSpacing(lineHeightToApply, 1f)
+                    .setIncludePad(false)
+                    .setEllipsizedWidth(ellipsizedWidth.roundToInt())
+                    .setEllipsize(ellipsize)
+                    .setMaxLines(maxLines)
+                    .setBreakStrategy(breakStrategy)
+                    .setHyphenationFrequency(hyphenationFrequency)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                builder.setJustificationMode(justificationMode)
+            }
+            builder.build()
+        } else {
+            @Suppress("DEPRECATION")
+            StaticLayout(
+                text,
+                0,
+                text.length,
+                paint,
+                ellipsizedWidth.roundToInt(),
+                textAlign.toLayoutAlignment(),
+                lineHeightToApply,
+                1f,
+                false,
+                ellipsize,
+                ellipsizedWidth.roundToInt()
+            )
         }
-        builder.build()
-    } else {
-        @Suppress("DEPRECATION")
-        StaticLayout(
-            text,
-            0,
-            text.length,
-            paint,
-            ellipsizedWidth.roundToInt(),
-            textAlign.toLayoutAlignment(),
-            lineHeightToApply,
-            1f,
-            false,
-            ellipsize,
-            ellipsizedWidth.roundToInt(),
-        )
-    }
 
-    val image = Bitmap.createBitmap(staticLayout.width, staticLayout.height, Bitmap.Config.ARGB_8888)
+    val image =
+        Bitmap
+            .createBitmap(staticLayout.width, staticLayout.height, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(image)
     staticLayout.draw(canvas)
     return image

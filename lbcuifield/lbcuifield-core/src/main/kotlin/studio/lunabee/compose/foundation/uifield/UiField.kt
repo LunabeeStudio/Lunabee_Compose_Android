@@ -46,7 +46,7 @@ abstract class UiField<T> {
 
     protected val mValue: MutableStateFlow<T> by lazy {
         MutableStateFlow(
-            savedStateHandle.get<String>(id)?.let(::savedValueToData) ?: initialValue,
+            savedStateHandle.get<String>(id)?.let(::savedValueToData) ?: initialValue
         )
     }
 
@@ -82,7 +82,9 @@ abstract class UiField<T> {
     }
 
     abstract fun valueToDisplayedString(value: T): String
+
     abstract fun valueToSavedString(value: T): String
+
     abstract fun savedValueToData(value: String): T
 
     @Composable

@@ -24,5 +24,5 @@ package studio.lunabee.compose.foundation.uifield.countrypicker
 data class CountrySearchUiState(
     val countryCodesToDisplay: List<CountrySearchItem>,
     val searchedText: String,
-    val selectedCountry: SelectedCountry?,
+    val selectedCountry: SelectedCountry?
 )

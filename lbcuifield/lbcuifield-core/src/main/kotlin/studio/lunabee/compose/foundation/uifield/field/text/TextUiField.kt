@@ -49,7 +49,8 @@ abstract class TextUiField : UiField<String>() {
                 value = it
                 dismissError()
             },
-            modifier = modifier.onFocusEvent {
+            modifier =
+            modifier.onFocusEvent {
                 if (!it.hasFocus && hasBeenFocused) {
                     checkAndDisplayError()
                 } else {
@@ -59,7 +60,8 @@ abstract class TextUiField : UiField<String>() {
             },
             placeholder = placeholder,
             label = label,
-            trailingIcon = if (options.isNotEmpty()) {
+            trailingIcon =
+            if (options.isNotEmpty()) {
                 { options.forEach { it.Composable(modifier = Modifier) } }
             } else {
                 null
@@ -71,13 +73,11 @@ abstract class TextUiField : UiField<String>() {
             readOnly = readOnly,
             enabled = enabled,
             error = collectedError,
-            interactionSource = null,
+            interactionSource = null
         )
     }
 
-    override fun valueToDisplayedString(value: String): String {
-        return value
-    }
+    override fun valueToDisplayedString(value: String): String = value
 
     override fun valueToSavedString(value: String): String = value
 

@@ -29,9 +29,8 @@ class LbcPrintRule(
     private val usePublicStorage: Boolean,
     private val deleteOnSuccess: Boolean,
     private val appendTimestamp: Boolean = usePublicStorage,
-    private val verbose: Boolean,
+    private val verbose: Boolean
 ) : TestWatcher() {
-
     companion object {
         /**
          * Factory for internal storage print rule
@@ -43,14 +42,15 @@ class LbcPrintRule(
             usePublicStorage: Boolean = false,
             deleteOnSuccess: Boolean = true,
             appendTimestamp: Boolean = usePublicStorage,
-            verbose: Boolean = true,
-        ): LbcPrintRule = LbcPrintRule(
-            appName = appName,
-            usePublicStorage = usePublicStorage,
-            deleteOnSuccess = deleteOnSuccess,
-            appendTimestamp = appendTimestamp,
-            verbose = verbose,
-        )
+            verbose: Boolean = true
+        ): LbcPrintRule =
+            LbcPrintRule(
+                appName = appName,
+                usePublicStorage = usePublicStorage,
+                deleteOnSuccess = deleteOnSuccess,
+                appendTimestamp = appendTimestamp,
+                verbose = verbose
+            )
 
         /**
          * Factory for public storage print rule
@@ -62,14 +62,15 @@ class LbcPrintRule(
             usePublicStorage: Boolean = true,
             deleteOnSuccess: Boolean = true,
             appendTimestamp: Boolean = usePublicStorage,
-            verbose: Boolean = true,
-        ): LbcPrintRule = LbcPrintRule(
-            appName = appName,
-            usePublicStorage = usePublicStorage,
-            deleteOnSuccess = deleteOnSuccess,
-            appendTimestamp = appendTimestamp,
-            verbose = verbose,
-        )
+            verbose: Boolean = true
+        ): LbcPrintRule =
+            LbcPrintRule(
+                appName = appName,
+                usePublicStorage = usePublicStorage,
+                deleteOnSuccess = deleteOnSuccess,
+                appendTimestamp = appendTimestamp,
+                verbose = verbose
+            )
     }
 
     private lateinit var appFolder: File
@@ -90,12 +91,15 @@ class LbcPrintRule(
 
         val context = InstrumentationRegistry.getInstrumentation().targetContext
 
-        screenshotFolder = if (usePublicStorage) {
-            val publicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-            File(publicDirectory, "lbc_screenshots")
-        } else {
-            File(context.cacheDir, "screenshot")
-        }
+        screenshotFolder =
+            if (usePublicStorage) {
+                val publicDirectory =
+                    Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                File(publicDirectory, "lbc_screenshots")
+            } else {
+                File(context.cacheDir, "screenshot")
+            }
 
         val subFolder = StringBuilder(appName.orEmpty())
         if (appendTimestamp) {
@@ -104,11 +108,12 @@ class LbcPrintRule(
             }
             subFolder.append(System.currentTimeMillis())
         }
-        appFolder = if (subFolder.isEmpty()) {
-            screenshotFolder
-        } else {
-            File(screenshotFolder, subFolder.toString())
-        }
+        appFolder =
+            if (subFolder.isEmpty()) {
+                screenshotFolder
+            } else {
+                File(screenshotFolder, subFolder.toString())
+            }
 
         val className = d.className.substringAfterLast(".")
         classFolder = File(appFolder, className)
@@ -140,16 +145,17 @@ class LbcPrintRule(
 
     @SuppressLint("RestrictedApi")
     fun printWholeScreen(suffix: String, noSync: Boolean = false) {
-        val bitmap = try {
-            if (noSync) {
-                takeScreenshotNoSync()
-            } else {
-                takeScreenshot()
+        val bitmap =
+            try {
+                if (noSync) {
+                    takeScreenshotNoSync()
+                } else {
+                    takeScreenshot()
+                }
+            } catch (e: Throwable) {
+                Log.e("LbcPrintRule", "screenshot failed", e)
+                null
             }
-        } catch (e: Throwable) {
-            Log.e("LbcPrintRule", "screenshot failed", e)
-            null
-        }
 
         bitmap?.let { print(it, suffix) }
     }
@@ -163,7 +169,13 @@ class LbcPrintRule(
         super.succeeded(description)
         if (deleteOnSuccess) {
             if (verbose && screenshots.isNotEmpty()) {
-                Log.v("LbcPrintRule", "Delete screenshots\n${screenshots.joinToString("\n") { "\t$it" }}")
+                Log
+                    .v(
+                        "LbcPrintRule",
+                        "Delete screenshots\n${screenshots.joinToString("\n") {
+                            "\t$it"
+                        }}"
+                    )
             }
             screenshots.forEach(File::delete)
             classFolder.delete() // try delete (fail if not empty)

@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import studio.lunabee.compose.core.LbcTextSpec
 
 interface UiFieldOption {
-
     val clickLabel: LbcTextSpec
 
     fun onClick()

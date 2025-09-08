@@ -49,23 +49,25 @@ fun GlanceTypefaceButton(
     modifier: GlanceModifier = GlanceModifier,
     textAlign: TextAlign = TextAlign.Center,
     letterSpacing: TextUnit = 0.sp,
-    lineHeight: TextUnit = 0.sp,
+    lineHeight: TextUnit = 0.sp
 ) {
     Box(
-        modifier = modifier
+        modifier =
+        modifier
             .clickable(onClick = action),
-        contentAlignment = Alignment.Center,
+        contentAlignment = Alignment.Center
     ) {
         GlanceTypefaceText(
             text = text,
             color = color,
             fontSize = fontSize,
             typeface = typeface,
-            modifier = GlanceModifier
+            modifier =
+            GlanceModifier
                 .fillMaxWidth(),
             textAlign = textAlign,
             letterSpacing = letterSpacing,
-            lineHeight = lineHeight,
+            lineHeight = lineHeight
         )
     }
 }

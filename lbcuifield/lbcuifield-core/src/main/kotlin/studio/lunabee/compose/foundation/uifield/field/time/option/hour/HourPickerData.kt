@@ -28,5 +28,5 @@ data class HourPickerData(
     val hourPickerConfirmLabel: LbcTextSpec,
     val hourPickerCancelLabel: LbcTextSpec,
     val hourPickerClickLabel: LbcTextSpec,
-    val icon: LbcImageSpec,
+    val icon: LbcImageSpec
 )

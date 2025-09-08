@@ -26,7 +26,8 @@ import studio.lunabee.library.VersionTask
 import java.util.Locale
 
 enum class PublishType {
-    Android, Java
+    Android,
+    Java
 }
 
 plugins {
@@ -35,16 +36,21 @@ plugins {
     signing
 }
 
-val publishType: PublishType = when {
-    project.plugins.hasPlugin("android-library") -> PublishType.Android
-    project.plugins.hasPlugin("java-library") -> PublishType.Java
-    else -> error("Cannot determine the type of publication")
-}
+val publishType: PublishType =
+    when {
+        project.plugins.hasPlugin("android-library") -> PublishType.Android
+        project.plugins.hasPlugin("java-library") -> PublishType.Java
+        else -> error("Cannot determine the type of publication")
+    }
 
 private val mavenCentralUsername = project.properties["mavenCentralUsername"]?.toString()
 private val mavenCentralPassword = project.properties["mavenCentralPassword"]?.toString()
 
-private val stagingDir = layout.buildDirectory.dir("staging-deploy").get().asFile
+private val stagingDir =
+    layout.buildDirectory
+        .dir("staging-deploy")
+        .get()
+        .asFile
 
 jreleaser {
     gitRootSearch.set(true)
@@ -109,32 +115,36 @@ project.extensions.configure<PublishingExtension>("publishing") {
 fun PublishingExtension.setupPublication() {
     publications {
         when (publishType) {
-            PublishType.Android -> create<MavenPublication>(project.name) {
-                afterEvaluate { // version is set in project, so use after evaluate
-                    setProjectDetails()
-                    setAndroidArtifacts()
-                    setPom()
+            PublishType.Android ->
+                create<MavenPublication>(project.name) {
+                    afterEvaluate {
+                        // version is set in project, so use after evaluate
+                        setProjectDetails()
+                        setAndroidArtifacts()
+                        setPom()
+                    }
                 }
-            }
-            PublishType.Java -> create<MavenPublication>(project.name) {
-                afterEvaluate { // version is set in project, so use after evaluate
-                    setProjectDetails()
-                    setJavaArtifacts()
-                    setPom()
+            PublishType.Java ->
+                create<MavenPublication>(project.name) {
+                    afterEvaluate {
+                        // version is set in project, so use after evaluate
+                        setProjectDetails()
+                        setJavaArtifacts()
+                        setPom()
+                    }
                 }
-            }
         }
     }
 }
 
 /**
  * Set project details:
- * - groupId will be [AndroidConfig.GROUP_ID]
+ * - groupId will be [AndroidConfig.GroupId]
  * - artifactId will take the name of the current [project]
  * - version will be set in each submodule gradle file
  */
 fun MavenPublication.setProjectDetails() {
-    groupId = AndroidConfig.GROUP_ID
+    groupId = AndroidConfig.GroupId
     artifactId = project.name
     version = project.version.toString()
 }
@@ -146,7 +156,7 @@ fun MavenPublication.setPom() {
     pom {
         name.set(project.name.capitalized())
         description.set(project.description)
-        url.set(AndroidConfig.LIBRARY_URL)
+        url.set(AndroidConfig.LibraryUrl)
 
         organization {
             name.set("Lunabee Studio")
@@ -163,7 +173,7 @@ fun MavenPublication.setPom() {
         scm {
             connection.set("git@github.com:LunabeeStudio/Lunabee_Compose_Android.git")
             developerConnection.set("git@github.com:LunabeeStudio/Lunabee_Compose_Android.git")
-            url.set(AndroidConfig.LIBRARY_URL)
+            url.set(AndroidConfig.LibraryUrl)
         }
 
         developers {
@@ -176,11 +186,16 @@ fun MavenPublication.setPom() {
 
         withXml {
             val root = asNode()
-            configurations.findByName("implementation")?.dependencies
+            configurations
+                .findByName("implementation")
+                ?.dependencies
                 ?.filter { it.isBoM() }
                 ?.takeIf { it.isNotEmpty() }
                 ?.let { bomDeps ->
-                    val depsNode = root.appendNode("dependencyManagement").appendNode("dependencies")
+                    val depsNode =
+                        root
+                            .appendNode("dependencyManagement")
+                            .appendNode("dependencies")
                     bomDeps.forEach { bomDep ->
                         depsNode.appendNode("dependency").apply {
                             appendNode("groupId", bomDep.group)
@@ -192,13 +207,15 @@ fun MavenPublication.setPom() {
                     }
                 }
             root
-                .appendNode("dependencies").apply {
-                    fun Dependency.write(scope: String) = appendNode("dependency").apply {
-                        appendNode("groupId", group)
-                        appendNode("artifactId", name)
-                        version?.let { appendNode("version", version) }
-                        appendNode("scope", scope)
-                    }
+                .appendNode("dependencies")
+                .apply {
+                    fun Dependency.write(scope: String) =
+                        appendNode("dependency").apply {
+                            appendNode("groupId", group)
+                            appendNode("artifactId", name)
+                            version?.let { appendNode("version", version) }
+                            appendNode("scope", scope)
+                        }
 
                     configurations.findByName("api")?.dependencies?.forEach { dependency ->
                         dependency.write("implementation")
@@ -225,7 +242,12 @@ private val Project.android: LibraryExtension
  * - aar
  */
 fun MavenPublication.setAndroidArtifacts() {
-    val mainSourceSets = (project.android.sourceSets.getByName("main").kotlin as DefaultAndroidSourceDirectorySet).srcDirs
+    val mainSourceSets =
+        (
+            project.android.sourceSets
+                .getByName("main")
+                .kotlin as DefaultAndroidSourceDirectorySet
+            ).srcDirs
     val sourceJar by project.tasks.registering(Jar::class) {
         archiveClassifier.set("sources")
         from(mainSourceSets)
@@ -237,7 +259,11 @@ fun MavenPublication.setAndroidArtifacts() {
 
     artifact(sourceJar)
     artifact(javadocJar)
-    val aarBasePath = project.layout.buildDirectory.dir("outputs/aar").get().asFile.path
+    val aarBasePath =
+        project.layout.buildDirectory
+            .dir("outputs/aar")
+            .get()
+            .asFile.path
     val filename = "${project.name.lowercase()}-release.aar"
     artifact("$aarBasePath/$filename")
 
@@ -255,7 +281,12 @@ fun MavenPublication.setAndroidArtifacts() {
  * - jar
  */
 fun MavenPublication.setJavaArtifacts() {
-    artifact(project.layout.buildDirectory.dir("libs/${project.name}-${project.version}.jar").get().asFile)
+    artifact(
+        project.layout.buildDirectory
+            .dir("libs/${project.name}-${project.version}.jar")
+            .get()
+            .asFile
+    )
     artifact(project.tasks.named("sourcesJar"))
     artifact(project.tasks.named("javadocJar"))
 
@@ -278,18 +309,29 @@ signing {
 afterEvaluate {
     tasks.withType(PublishToMavenRepository::class.java) {
         when (publishType) {
-            PublishType.Android -> dependsOn(
-                tasks.named("bundleReleaseAar"),
-            )
-            PublishType.Java -> dependsOn(
-                tasks.withType(Jar::class.java),
-            )
+            PublishType.Android ->
+                dependsOn(
+                    tasks.named("bundleReleaseAar")
+                )
+            PublishType.Java ->
+                dependsOn(
+                    tasks.withType(Jar::class.java)
+                )
         }
     }
 }
 
 tasks.register("${project.name}Version", VersionTask::class.java)
 
-private fun String.capitalized(): String = if (this.isEmpty()) this else this[0].titlecase(Locale.getDefault()) + this.substring(1)
+private fun String.capitalized(): String =
+    if (this.isEmpty()) {
+        this
+    } else {
+        this[0].titlecase(
+            Locale
+                .getDefault()
+        ) +
+            this.substring(1)
+    }
 
 private fun Dependency.isBoM(): Boolean = name.endsWith("-bom")

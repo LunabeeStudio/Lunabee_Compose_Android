@@ -35,20 +35,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MenuEntry(
-    menu: MenuDescription,
-) {
+fun MenuEntry(menu: MenuDescription) {
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .clickable { menu.direction() }
             .padding(horizontal = 16.dp, vertical = 8.dp)
             .defaultMinSize(minHeight = 56.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = menu.titleRes.string,
-            style = MaterialTheme.typography.labelLarge,
+            style = MaterialTheme.typography.labelLarge
         )
 
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
@@ -56,7 +55,7 @@ fun MenuEntry(
         menu.subtitleRes?.let { subtitle ->
             Text(
                 text = subtitle.string,
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge
             )
         }
     }

@@ -55,95 +55,115 @@ fun TextScreen() {
     var highlightedText: String by rememberSaveable { mutableStateOf(value = "") }
 
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
-            .padding(all = 16.dp),
+            .padding(all = 16.dp)
     ) {
         OutlinedTextField(
             value = rawText,
             onValueChange = { rawText = it },
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(vertical = 4.dp),
             placeholder = {
                 Text(text = stringResource(id = R.string.text_screen_base_text_placeholder))
-            },
+            }
         )
 
         OutlinedTextField(
             value = highlightedText,
             onValueChange = { highlightedText = it },
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(vertical = 4.dp),
             placeholder = {
                 Text(text = stringResource(id = R.string.text_screen_highlight_placeholder))
-            },
+            }
         )
 
         StyledTextItem(
             rawBaseText = rawText,
             rawBaseTextStyle = MaterialTheme.typography.bodyLarge,
-            textToHighLightList = getTextToHighlightWithStyle(
+            textToHighLightList =
+            getTextToHighlightWithStyle(
                 highlightedText = highlightedText,
-                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold).toSpanStyle(),
-                context = LocalContext.current,
-            ),
+                style =
+                MaterialTheme.typography.bodyLarge
+                    .copy(fontWeight = FontWeight.Bold)
+                    .toSpanStyle(),
+                context = LocalContext.current
+            )
         )
 
         StyledTextItem(
             rawBaseText = rawText,
             rawBaseTextStyle = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.Center),
-            textToHighLightList = getTextToHighlightWithStyle(
+            textToHighLightList =
+            getTextToHighlightWithStyle(
                 highlightedText = highlightedText,
-                style = MaterialTheme.typography.headlineLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Blue,
-                    textDecoration = TextDecoration.Underline,
-                ).toSpanStyle(),
-                context = LocalContext.current,
-            ),
+                style =
+                MaterialTheme.typography.headlineLarge
+                    .copy(
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Blue,
+                        textDecoration = TextDecoration.Underline
+                    ).toSpanStyle(),
+                context = LocalContext.current
+            )
         )
 
         StyledTextItem(
             rawBaseText = rawText,
             rawBaseTextStyle = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.Center),
-            textToHighLightList = getTextToHighlightWithStyle(
+            textToHighLightList =
+            getTextToHighlightWithStyle(
                 highlightedText = highlightedText,
-                style = MaterialTheme.typography.headlineLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Red,
-                    textDecoration = TextDecoration.LineThrough,
-                ).toSpanStyle(),
-                context = LocalContext.current,
-            ),
+                style =
+                MaterialTheme.typography.headlineLarge
+                    .copy(
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Red,
+                        textDecoration = TextDecoration.LineThrough
+                    ).toSpanStyle(),
+                context = LocalContext.current
+            )
         )
 
         StyledTextItem(
             rawBaseText = stringResource(id = R.string.lorem_ipsum),
             rawBaseTextStyle = MaterialTheme.typography.bodySmall.copy(textAlign = TextAlign.Center),
-            textToHighLightList = getTextToHighlightWithStyle(
+            textToHighLightList =
+            getTextToHighlightWithStyle(
                 highlightedText = stringResource(id = R.string.highlighted_lorem_ipsum),
-                style = MaterialTheme.typography.bodySmall.copy(
-                    fontWeight = FontWeight.Bold,
-                    textDecoration = TextDecoration.combine(listOf(TextDecoration.Underline, TextDecoration.LineThrough)),
-                ).toSpanStyle()
+                style =
+                MaterialTheme.typography.bodySmall
                     .copy(
-                        brush = Brush.linearGradient(
-                            colors = listOf(
+                        fontWeight = FontWeight.Bold,
+                        textDecoration =
+                        TextDecoration
+                            .combine(listOf(TextDecoration.Underline, TextDecoration.LineThrough))
+                    ).toSpanStyle()
+                    .copy(
+                        brush =
+                        Brush.linearGradient(
+                            colors =
+                            listOf(
                                 Color(0xFF9400D3),
                                 Color(0xFF4B0082),
                                 Color(0xFF0000FF),
                                 Color(0xFF00FF00),
                                 Color(0xFFFFFF00),
                                 Color(0xFFFF7F00),
-                                Color(0xFFFF0000),
-                            ),
-                        ),
+                                Color(0xFFFF0000)
+                            )
+                        )
                     ),
                 context = LocalContext.current,
-                ignoreCase = true,
-            ),
+                ignoreCase = true
+            )
         )
     }
 }
@@ -152,19 +172,21 @@ private fun getTextToHighlightWithStyle(
     highlightedText: String,
     style: SpanStyle,
     context: Context,
-    ignoreCase: Boolean = false,
-): Set<TextToHighlight> {
-    return highlightedText.takeIf { it.isNotEmpty() }?.split(",")?.mapNotNull {
-        if (it.isNotEmpty()) {
-            TextToHighlight(
-                tag = UUID.randomUUID().toString(),
-                text = it,
-                style = style,
-                action = { Toast.makeText(context, it, Toast.LENGTH_LONG).show() },
-                ignoreCase = ignoreCase,
-            )
-        } else {
-            null
-        }
-    }?.toSet() ?: emptySet()
-}
+    ignoreCase: Boolean = false
+): Set<TextToHighlight> =
+    highlightedText
+        .takeIf { it.isNotEmpty() }
+        ?.split(",")
+        ?.mapNotNull {
+            if (it.isNotEmpty()) {
+                TextToHighlight(
+                    tag = UUID.randomUUID().toString(),
+                    text = it,
+                    style = style,
+                    action = { Toast.makeText(context, it, Toast.LENGTH_LONG).show() },
+                    ignoreCase = ignoreCase
+                )
+            } else {
+                null
+            }
+        }?.toSet() ?: emptySet()

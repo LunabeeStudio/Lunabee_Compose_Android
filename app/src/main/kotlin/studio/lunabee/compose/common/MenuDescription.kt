@@ -27,5 +27,5 @@ import studio.lunabee.compose.navigation.ToDirection
 data class MenuDescription(
     val titleRes: LbcTextSpec,
     val subtitleRes: LbcTextSpec?,
-    val direction: ToDirection,
+    val direction: ToDirection
 )

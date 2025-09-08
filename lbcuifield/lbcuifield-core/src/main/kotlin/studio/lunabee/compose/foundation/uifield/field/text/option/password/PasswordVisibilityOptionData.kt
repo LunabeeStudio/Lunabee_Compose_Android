@@ -28,5 +28,5 @@ data class PasswordVisibilityOptionData(
     val hidePasswordClickLabel: LbcTextSpec,
     val showPasswordClickLabel: LbcTextSpec,
     val showIcon: LbcImageSpec,
-    val hideIcon: LbcImageSpec,
+    val hideIcon: LbcImageSpec
 )

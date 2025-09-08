@@ -23,14 +23,14 @@ plugins {
     id("java-library")
 }
 
-group = AndroidConfig.GROUP_ID
+group = AndroidConfig.GroupId
 
 java {
-    sourceCompatibility = AndroidConfig.JDK_VERSION
-    targetCompatibility = AndroidConfig.JDK_VERSION
+    sourceCompatibility = AndroidConfig.JdkVersion
+    targetCompatibility = AndroidConfig.JdkVersion
 
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JDK_VERSION.toString()))
+        languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JdkVersion.toString()))
     }
 
     withJavadocJar()

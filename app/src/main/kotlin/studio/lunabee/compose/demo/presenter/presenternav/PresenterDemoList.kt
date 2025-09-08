@@ -34,36 +34,35 @@ import studio.lunabee.compose.demo.presenter.simple.SimpleExampleDestination
 import studio.lunabee.compose.demo.presenter.timer.TimerDestination
 
 @Composable
-fun PresenterDemoList(
-    navigate: (String) -> Unit,
-) {
-    val menus = listOf(
-        MenuDescription(
-            titleRes = LbcTextSpec.Raw("Check box"),
-            subtitleRes = null,
-            direction = { navigate(SimpleExampleDestination.route) },
-        ),
-        MenuDescription(
-            titleRes = LbcTextSpec.Raw("Timer"),
-            subtitleRes = null,
-            direction = { navigate(TimerDestination.route) },
-        ),
-        MenuDescription(
-            titleRes = LbcTextSpec.Raw("Pull to refresh"),
-            subtitleRes = null,
-            direction = { navigate(PullToRefreshDestination.route) },
-        ),
-        MenuDescription(
-            titleRes = LbcTextSpec.Raw("Multi state"),
-            subtitleRes = null,
-            direction = { navigate(MultiStateDestination.route) },
-        ),
-    )
+fun PresenterDemoList(navigate: (String) -> Unit) {
+    val menus =
+        listOf(
+            MenuDescription(
+                titleRes = LbcTextSpec.Raw("Check box"),
+                subtitleRes = null,
+                direction = { navigate(SimpleExampleDestination.route) }
+            ),
+            MenuDescription(
+                titleRes = LbcTextSpec.Raw("Timer"),
+                subtitleRes = null,
+                direction = { navigate(TimerDestination.route) }
+            ),
+            MenuDescription(
+                titleRes = LbcTextSpec.Raw("Pull to refresh"),
+                subtitleRes = null,
+                direction = { navigate(PullToRefreshDestination.route) }
+            ),
+            MenuDescription(
+                titleRes = LbcTextSpec.Raw("Multi state"),
+                subtitleRes = null,
+                direction = { navigate(MultiStateDestination.Route) }
+            )
+        )
 
     LazyColumn {
         items(
             items = menus,
-            key = { it.titleRes.hashCode() },
+            key = { it.titleRes.hashCode() }
         ) { menu ->
             MenuEntry(menu = menu)
             HorizontalDivider()

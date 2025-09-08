@@ -42,12 +42,17 @@ fun UiFieldDatePicker(
     onValueChanged: (LocalDate) -> Unit,
     confirmLabel: LbcTextSpec,
     cancelLabel: LbcTextSpec,
-    selectableDates: SelectableDates,
+    selectableDates: SelectableDates
 ) {
-    val state = rememberDatePickerState(
-        initialSelectedDateMillis = date?.atStartOfDay()?.toInstant(ZoneOffset.UTC)?.toEpochMilli(),
-        selectableDates = selectableDates,
-    )
+    val state =
+        rememberDatePickerState(
+            initialSelectedDateMillis =
+            date
+                ?.atStartOfDay()
+                ?.toInstant(ZoneOffset.UTC)
+                ?.toEpochMilli(),
+            selectableDates = selectableDates
+        )
     DatePickerDialog(
         onDismissRequest = onDismiss,
         content = {
@@ -58,19 +63,23 @@ fun UiFieldDatePicker(
                 onClick = {
                     state.selectedDateMillis?.let {
                         onDismiss()
-                        onValueChanged(LocalDateTime.ofEpochSecond(it / 1000, 0, ZoneOffset.UTC).toLocalDate())
+                        onValueChanged(
+                            LocalDateTime
+                                .ofEpochSecond(it / 1000, 0, ZoneOffset.UTC)
+                                .toLocalDate()
+                        )
                     }
-                },
+                }
             ) {
                 Text(text = confirmLabel.string)
             }
         },
         dismissButton = {
             TextButton(
-                onClick = onDismiss,
+                onClick = onDismiss
             ) {
                 Text(text = cancelLabel.string)
             }
-        },
+        }
     )
 }

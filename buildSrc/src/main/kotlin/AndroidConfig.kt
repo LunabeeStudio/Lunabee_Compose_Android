@@ -23,32 +23,59 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
  */
 
 object AndroidConfig {
-    const val VERSION_CODE: Int = 1
-    const val VERSION_NAME: String = BuildConfigs.lunabeeCompose
+    const val VersionCode: Int = 1
+    const val VersionName: String = BuildConfigs.LunabeeCompose
 
-    const val COMPILE_SDK: Int = BuildConfigs.compileSdk
-    const val TARGET_SDK: Int = COMPILE_SDK
-    const val MIN_SDK: Int = BuildConfigs.minSdk
+    const val CompileSdk: Int = BuildConfigs.CompileSdk
+    const val TargetSdk: Int = CompileSdk
+    const val MinSdk: Int = BuildConfigs.MinSdk
 
-    const val LIBRARY_URL: String = "https://github.com/LunabeeStudio/Lunabee_Compose_Android"
-    const val GROUP_ID: String = "studio.lunabee.compose"
+    const val LibraryUrl: String = "https://github.com/LunabeeStudio/Lunabee_Compose_Android"
+    const val GroupId: String = "studio.lunabee.compose"
 
+    @Suppress("PropertyName")
     // ⚠️ Match module name in UPPER_CASE ('-' -> '_')
     const val LBCCORE_VERSION: String = "1.9.0"
+
+    @Suppress("PropertyName")
     const val LBCFOUNDATION_VERSION: String = "1.10.0"
+
+    @Suppress("PropertyName")
     const val LBCANDROIDTEST_VERSION: String = "1.13.0"
+
+    @Suppress("PropertyName")
     const val LBCACCESSIBILITY_VERSION: String = "1.12.0"
+
+    @Suppress("PropertyName")
     const val LBCTHEME_VERSION: String = "1.8.0"
+
+    @Suppress("PropertyName")
     const val MATERIAL_COLOR_UTILITIES_VERSION: String = "1.8.0"
+
+    @Suppress("PropertyName")
     const val LBCHAPTIC_VERSION: String = "1.6.0"
+
+    @Suppress("PropertyName")
     const val LBCUIFIELD_CORE_VERSION: String = "1.9.0"
+
+    @Suppress("PropertyName")
     const val LBCUIFIELD_PHONEPICKER_VERSION: String = "1.3.0"
+
+    @Suppress("PropertyName")
     const val LBCUIFIELD_COUNTRYPICKER_VERSION: String = "1.2.0"
+
+    @Suppress("PropertyName")
     const val LBCIMAGE_VERSION: String = "1.5.0"
+
+    @Suppress("PropertyName")
     const val LBCGLANCE_VERSION: String = "1.4.0"
+
+    @Suppress("PropertyName")
     const val LBCPRESENTER_VERSION: String = "1.6.2"
+
+    @Suppress("PropertyName")
     const val LBCPRESENTER_KOIN_VERSION: String = LBCPRESENTER_VERSION
 
-    val JDK_VERSION: JavaVersion = JavaVersion.VERSION_17
-    val JVM_TARGET: JvmTarget = JvmTarget.JVM_17
+    val JdkVersion: JavaVersion = JavaVersion.VERSION_17
+    val JvmTarget: JvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
 }

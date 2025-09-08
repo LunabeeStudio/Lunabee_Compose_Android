@@ -36,13 +36,16 @@ import androidx.compose.ui.platform.LocalContext
  * This state is based on [AccessibilityManager] (https://developer.android.com/reference/android/view/accessibility/AccessibilityManager).
  */
 @Stable
-class AccessibilityState internal constructor(
-    accessibilityManager: AccessibilityManager?,
-) {
-    private var _isAccessibilityEnabled: Boolean by mutableStateOf(value = accessibilityManager?.isEnabled ?: false)
+class AccessibilityState internal constructor(accessibilityManager: AccessibilityManager?) {
+    private var _isAccessibilityEnabled: Boolean by mutableStateOf(
+        value =
+        accessibilityManager?.isEnabled ?: false
+    )
 
     private var _isTouchExplorationEnabled: Boolean by mutableStateOf(
-        value = accessibilityManager?.let { am -> am.isEnabled && am.isTouchExplorationEnabled } ?: false,
+        value =
+        accessibilityManager?.let { am -> am.isEnabled && am.isTouchExplorationEnabled }
+            ?: false
     )
 
     /**
@@ -59,8 +62,14 @@ class AccessibilityState internal constructor(
 
     init {
         accessibilityManager?.apply {
-            addAccessibilityStateChangeListener { isAccessibilityEnabled -> _isAccessibilityEnabled = isAccessibilityEnabled }
-            addTouchExplorationStateChangeListener { isTouchExplorationEnabled -> _isTouchExplorationEnabled = isTouchExplorationEnabled }
+            addAccessibilityStateChangeListener { isAccessibilityEnabled ->
+                _isAccessibilityEnabled =
+                    isAccessibilityEnabled
+            }
+            addTouchExplorationStateChangeListener { isTouchExplorationEnabled ->
+                _isTouchExplorationEnabled =
+                    isTouchExplorationEnabled
+            }
         }
     }
 }
@@ -68,13 +77,13 @@ class AccessibilityState internal constructor(
 @Composable
 fun rememberAccessibilityState(
     context: Context = LocalContext.current,
-    accessibilityManager: AccessibilityManager? = remember {
-        context.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
-    },
-): AccessibilityState {
-    return remember {
+    accessibilityManager: AccessibilityManager? =
+        remember {
+            context.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
+        }
+): AccessibilityState =
+    remember {
         AccessibilityState(
-            accessibilityManager = accessibilityManager,
+            accessibilityManager = accessibilityManager
         )
     }
-}

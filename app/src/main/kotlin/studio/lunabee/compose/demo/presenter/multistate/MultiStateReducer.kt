@@ -26,55 +26,70 @@ import studio.lunabee.compose.presenter.LBReducer
 import studio.lunabee.compose.presenter.ReduceResult
 import studio.lunabee.compose.presenter.asResult
 
-abstract class MultiStateReducer<State : MultiStateUiState, MultiStateNavScope, Action : MultiStateAction> :
-    LBReducer<State, MultiStateUiState, MultiStateNavScope, MultiStateAction, Action>(
-        verbose = true,
-    )
+abstract class MultiStateReducer<
+    State : MultiStateUiState,
+    MultiStateNavScope,
+    Action : MultiStateAction
+    > : LBReducer<
+    State,
+    MultiStateUiState,
+    MultiStateNavScope,
+    MultiStateAction,
+    Action
+    >(
+    verbose = true
+)
 
 class MultiStateDataReducer(
     override val coroutineScope: CoroutineScope,
-    override val emitUserAction: (MultiStateAction.DataAction) -> Unit,
+    override val emitUserAction: (MultiStateAction.DataAction) -> Unit
 ) : MultiStateReducer<MultiStateUiState.Data, MultiStateNavScope, MultiStateAction.DataAction>() {
     override suspend fun reduce(
         actualState: MultiStateUiState.Data,
         action: MultiStateAction.DataAction,
-        performNavigation: (MultiStateNavScope.() -> Unit) -> Unit,
-    ): ReduceResult<MultiStateUiState> {
-        return when (action) {
-            MultiStateAction.ExampleAction -> MultiStateUiState.Error(this::class.simpleName!!).asResult()
-            MultiStateAction.ExampleAllAction -> actualState.copy(reducer = this::class.simpleName!!).asResult()
+        performNavigation: (MultiStateNavScope.() -> Unit) -> Unit
+    ): ReduceResult<MultiStateUiState> =
+        when (action) {
+            MultiStateAction.ExampleAction ->
+                MultiStateUiState
+                    .Error(this::class.simpleName!!)
+                    .asResult()
+            MultiStateAction.ExampleAllAction ->
+                actualState
+                    .copy(reducer = this::class.simpleName!!)
+                    .asResult()
         }
-    }
 
-    override fun filterAction(action: MultiStateAction): Boolean {
-        return action is MultiStateAction.DataAction
-    }
+    override fun filterAction(action: MultiStateAction): Boolean =
+        action is MultiStateAction.DataAction
 
-    override fun filterUiState(actualState: MultiStateUiState): Boolean {
-        return actualState is MultiStateUiState.Data
-    }
+    override fun filterUiState(actualState: MultiStateUiState): Boolean =
+        actualState is MultiStateUiState.Data
 }
 
 class MultiStateErrorReducer(
     override val coroutineScope: CoroutineScope,
-    override val emitUserAction: (MultiStateAction.ErrorAction) -> Unit,
+    override val emitUserAction: (MultiStateAction.ErrorAction) -> Unit
 ) : MultiStateReducer<MultiStateUiState.Error, MultiStateNavScope, MultiStateAction.ErrorAction>() {
     override suspend fun reduce(
         actualState: MultiStateUiState.Error,
         action: MultiStateAction.ErrorAction,
-        performNavigation: (MultiStateNavScope.() -> Unit) -> Unit,
-    ): ReduceResult<MultiStateUiState> {
-        return when (action) {
-            MultiStateAction.ExampleAllAction -> MultiStateUiState.Data(this::class.simpleName!!).asResult()
-            MultiStateAction.ExampleErrorAction -> actualState.copy(reducer = this::class.simpleName!!).asResult()
+        performNavigation: (MultiStateNavScope.() -> Unit) -> Unit
+    ): ReduceResult<MultiStateUiState> =
+        when (action) {
+            MultiStateAction.ExampleAllAction ->
+                MultiStateUiState
+                    .Data(this::class.simpleName!!)
+                    .asResult()
+            MultiStateAction.ExampleErrorAction ->
+                actualState
+                    .copy(reducer = this::class.simpleName!!)
+                    .asResult()
         }
-    }
 
-    override fun filterAction(action: MultiStateAction): Boolean {
-        return action is MultiStateAction.ErrorAction
-    }
+    override fun filterAction(action: MultiStateAction): Boolean =
+        action is MultiStateAction.ErrorAction
 
-    override fun filterUiState(actualState: MultiStateUiState): Boolean {
-        return actualState is MultiStateUiState.Error
-    }
+    override fun filterUiState(actualState: MultiStateUiState): Boolean =
+        actualState is MultiStateUiState.Error
 }

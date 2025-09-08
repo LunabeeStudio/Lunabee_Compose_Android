@@ -37,29 +37,30 @@ import androidx.compose.ui.text.input.VisualTransformation
 import studio.lunabee.compose.foundation.uifield.UiField
 
 abstract class TimeUiField<T> : UiField<T>() {
-
     @Composable
     override fun Composable(modifier: Modifier) {
         val collectedValue by mValue.collectAsState()
         val collectedError by error.collectAsState()
         // https://stackoverflow.com/a/70335041
-        val interactionSource = if (options.isNotEmpty() && enabled && !readOnly) {
-            remember { MutableInteractionSource() }.also { interactionSource ->
-                LaunchedEffect(interactionSource) {
-                    interactionSource.interactions.collect { interaction ->
-                        if (interaction is PressInteraction.Release) {
-                            options.firstOrNull()?.onClick()
+        val interactionSource =
+            if (options.isNotEmpty() && enabled && !readOnly) {
+                remember { MutableInteractionSource() }.also { interactionSource ->
+                    LaunchedEffect(interactionSource) {
+                        interactionSource.interactions.collect { interaction ->
+                            if (interaction is PressInteraction.Release) {
+                                options.firstOrNull()?.onClick()
+                            }
                         }
                     }
                 }
+            } else {
+                null
             }
-        } else {
-            null
-        }
         uiFieldStyleData.ComposeTextField(
             value = valueToDisplayedString(collectedValue),
             onValueChange = {},
-            modifier = modifier
+            modifier =
+            modifier
                 .fillMaxWidth()
                 .onFocusEvent {
                     if (it.hasFocus) {
@@ -69,7 +70,8 @@ abstract class TimeUiField<T> : UiField<T>() {
                 },
             placeholder = placeholder,
             label = label,
-            trailingIcon = if (options.isNotEmpty()) {
+            trailingIcon =
+            if (options.isNotEmpty()) {
                 { options.forEach { it.Composable(modifier = Modifier) } }
             } else {
                 null
@@ -81,7 +83,7 @@ abstract class TimeUiField<T> : UiField<T>() {
             readOnly = readOnly,
             enabled = enabled,
             error = collectedError,
-            interactionSource = interactionSource,
+            interactionSource = interactionSource
         )
     }
 }

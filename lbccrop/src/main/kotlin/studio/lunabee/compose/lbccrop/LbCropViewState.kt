@@ -51,9 +51,8 @@ class LbCropViewState(
     coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO,
     val zoomState: ZoomState,
     context: Context,
-    private val finalImageMinSize: CropImageSize = CropImageSize.Zero,
+    private val finalImageMinSize: CropImageSize = CropImageSize.Zero
 ) {
-
     val tempFile: File = File(context.cacheDir, LbCropConst.TempFile)
 
     private val cropUtils = LbCropUtils(coroutineDispatcher)
@@ -77,33 +76,34 @@ class LbCropViewState(
         if (originalBitmap.width == 0 || originalBitmap.height == 0) {
             throw LbCropNullImageThrowable()
         } else {
-            val rotatedBitmap = when (originalOrientation) {
-                ExifInterface.ORIENTATION_ROTATE_90 -> {
-                    cropUtils.rotateImage(
-                        bitmap = originalBitmap,
-                        rotationAngle = 90f,
-                    )
+            val rotatedBitmap =
+                when (originalOrientation) {
+                    ExifInterface.ORIENTATION_ROTATE_90 -> {
+                        cropUtils.rotateImage(
+                            bitmap = originalBitmap,
+                            rotationAngle = 90f
+                        )
+                    }
+                    ExifInterface.ORIENTATION_ROTATE_180 -> {
+                        cropUtils.rotateImage(
+                            bitmap = originalBitmap,
+                            rotationAngle = 180f
+                        )
+                    }
+                    ExifInterface.ORIENTATION_ROTATE_270 -> {
+                        cropUtils.rotateImage(
+                            bitmap = originalBitmap,
+                            rotationAngle = 270f
+                        )
+                    }
+                    else -> originalBitmap
                 }
-                ExifInterface.ORIENTATION_ROTATE_180 -> {
-                    cropUtils.rotateImage(
-                        bitmap = originalBitmap,
-                        rotationAngle = 180f,
-                    )
-                }
-                ExifInterface.ORIENTATION_ROTATE_270 -> {
-                    cropUtils.rotateImage(
-                        bitmap = originalBitmap,
-                        rotationAngle = 270f,
-                    )
-                }
-                else -> originalBitmap
-            }
             cropUtils.saveBitmapInFile(
                 bitmap = rotatedBitmap,
                 destinationFile = tempFile,
                 onSuccess = {
                     readyToCompose = true
-                },
+                }
             )
         }
     }
@@ -124,23 +124,24 @@ class LbCropViewState(
 
         // Image fit the crop zone in only one dimens, we need to find the zoom level so that the image fit in both dimension
         val imageRatio: Float = imageWidthPx / imageHeightPx
-        minScale = if (isImageVertical) {
-            // In that case, the image initially fits the crop zone height.
-            val currentHeight = cropZoneHeightPx
-            val currentWidth = currentHeight * imageRatio
-            cropZoneWidthPx / currentWidth
-        } else {
-            // In that case, the image initially fits the crop zone width.
-            val currentWidth = cropZoneWidthPx // Image already fit width
-            val currentHeight = currentWidth / imageRatio
-            cropZoneHeightPx / currentHeight
-        }
+        minScale =
+            if (isImageVertical) {
+                // In that case, the image initially fits the crop zone height.
+                val currentHeight = cropZoneHeightPx
+                val currentWidth = currentHeight * imageRatio
+                cropZoneWidthPx / currentWidth
+            } else {
+                // In that case, the image initially fits the crop zone width.
+                val currentWidth = cropZoneWidthPx // Image already fit width
+                val currentHeight = currentWidth / imageRatio
+                cropZoneHeightPx / currentHeight
+            }
 
         computeMaxScale()
 
         zoomState.changeScale(
             targetScale = minScale,
-            position = Offset(0f, 0f),
+            position = Offset(0f, 0f)
         )
     }
 
@@ -151,32 +152,35 @@ class LbCropViewState(
     }
 
     suspend fun crop(): Bitmap {
-        val bitmap = BitmapFactory.decodeFile(
-            tempFile.path,
-        )
-        val cropQuery = CropImageQuery(
-            originalBitmap = bitmap,
-            offsetX = zoomState.offsetX,
-            offsetY = zoomState.offsetY,
-            width = cropZoneWidthPx,
-            height = cropZoneHeightPx,
-            scale = zoomState.scale,
-            originalScale = minScale,
-        )
+        val bitmap =
+            BitmapFactory.decodeFile(
+                tempFile.path
+            )
+        val cropQuery =
+            CropImageQuery(
+                originalBitmap = bitmap,
+                offsetX = zoomState.offsetX,
+                offsetY = zoomState.offsetY,
+                width = cropZoneWidthPx,
+                height = cropZoneHeightPx,
+                scale = zoomState.scale,
+                originalScale = minScale
+            )
         return cropUtils.cropImage(cropQuery)
     }
 
     suspend fun rotate() {
-        val rotatedBitmap = cropUtils.rotateImage(
-            fileUri = tempFile.toUri(),
-            rotationAngle = LbCropConst.RotationAngleIncrement,
-        )
+        val rotatedBitmap =
+            cropUtils.rotateImage(
+                fileUri = tempFile.toUri(),
+                rotationAngle = LbCropConst.RotationAngleIncrement
+            )
         cropUtils.saveBitmapInFile(
             bitmap = rotatedBitmap,
             destinationFile = tempFile,
             onSuccess = {
                 key = UUID.randomUUID()
-            },
+            }
         )
     }
 
@@ -191,11 +195,12 @@ fun rememberLbCropViewState(
     originalOrientation: Int,
     coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO,
     context: Context = LocalContext.current,
-    finalImageMinSize: CropImageSize = CropImageSize.Zero,
+    finalImageMinSize: CropImageSize = CropImageSize.Zero
 ): LbCropViewState {
-    val zoomState = rememberZoomState(
-        maxScale = Float.MAX_VALUE,
-    )
+    val zoomState =
+        rememberZoomState(
+            maxScale = Float.MAX_VALUE
+        )
     return remember {
         LbCropViewState(
             originalBitmap = originalBitmap,
@@ -203,7 +208,7 @@ fun rememberLbCropViewState(
             coroutineDispatcher = coroutineDispatcher,
             zoomState = zoomState,
             context = context,
-            finalImageMinSize = finalImageMinSize,
+            finalImageMinSize = finalImageMinSize
         )
     }
 }

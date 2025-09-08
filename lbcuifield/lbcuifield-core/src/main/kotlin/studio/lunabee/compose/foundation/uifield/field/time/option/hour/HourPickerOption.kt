@@ -30,7 +30,8 @@ import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.composable.TrailingAction
 
-class HourPickerOption(private val enabled: Boolean, private val holder: HourPickerHolder) : UiFieldOption {
+class HourPickerOption(private val enabled: Boolean, private val holder: HourPickerHolder) :
+    UiFieldOption {
     private val isPickerVisible: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     override val clickLabel: LbcTextSpec = holder.hourPickerData.hourPickerClickLabel
@@ -47,7 +48,7 @@ class HourPickerOption(private val enabled: Boolean, private val holder: HourPic
                 image = holder.hourPickerData.icon,
                 onClick = { isPickerVisible.value = true },
                 contentDescription = null,
-                modifier = modifier,
+                modifier = modifier
             )
         }
         if (collectedIsPickedVisible) {
@@ -57,7 +58,7 @@ class HourPickerOption(private val enabled: Boolean, private val holder: HourPic
                 minutes = holder.dateTime?.minute ?: 0,
                 onValueChanged = holder::onValueTimeChanged,
                 confirmLabel = holder.hourPickerData.hourPickerConfirmLabel,
-                cancelLabel = holder.hourPickerData.hourPickerCancelLabel,
+                cancelLabel = holder.hourPickerData.hourPickerCancelLabel
             )
         }
     }

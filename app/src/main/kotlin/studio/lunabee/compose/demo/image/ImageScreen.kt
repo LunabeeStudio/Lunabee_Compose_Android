@@ -36,9 +36,10 @@ import studio.lunabee.compose.image.LbcImage
 @Composable
 fun ImageScreen() {
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
-            .padding(all = 16.dp),
+            .padding(all = 16.dp)
     ) {
         Text("No force")
         LbcImage(LbcImageSpec.ImageDrawable(R.drawable.sun_moon))

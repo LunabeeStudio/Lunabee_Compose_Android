@@ -33,15 +33,15 @@ internal fun TrailingAction(
     image: LbcImageSpec,
     onClick: () -> Unit,
     contentDescription: LbcTextSpec?,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     IconButton(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier
     ) {
         LbcImage(
             imageSpec = image,
-            contentDescription = contentDescription,
+            contentDescription = contentDescription
         )
     }
 }

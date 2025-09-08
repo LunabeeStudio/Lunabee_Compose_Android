@@ -48,9 +48,8 @@ typealias LBSimpleReducer<UiState, NavScope, Action> = LBReducer<out UiState, Ui
  * @property verbose enable verbose logs using kermit logger
  */
 abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
-    private val verbose: Boolean = false,
+    private val verbose: Boolean = false
 ) : ViewModel() {
-
     /**
      * Channel to send user actions to the active reducer.
      */
@@ -71,9 +70,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
      * @param actualState the newly displayed [UiState]
      * @return the new reducer corresponding the [actualState]
      */
-    abstract fun getReducerByState(
-        actualState: UiState,
-    ): LBSimpleReducer<UiState, NavScope, Action>
+    abstract fun getReducerByState(actualState: UiState): LBSimpleReducer<UiState, NavScope, Action>
 
     private val navigation: MutableStateFlow<(NavScope.() -> Unit)?> = MutableStateFlow(null)
 
@@ -103,26 +100,27 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
      */
     @OptIn(ExperimentalCoroutinesApi::class)
     private val uiStateFlow: StateFlow<UiState> by lazy {
-        val reducer: MutableStateFlow<LBSimpleReducer<UiState, NavScope, Action>> = MutableStateFlow(
-            getReducerByState(actualState = getInitialState()),
-        )
+        val reducer: MutableStateFlow<LBSimpleReducer<UiState, NavScope, Action>> =
+            MutableStateFlow(
+                getReducerByState(actualState = getInitialState())
+            )
 
         var actualStateSaved: UiState = getInitialState()
         reducer
             .flatMapLatest {
-                it.collectReducer(
-                    flows = flows + userActionChannel.receiveAsFlow(),
-                    actualState = { actualStateSaved },
-                    performNavigation = ::performNavigation,
-                ).onEach { state ->
-                    if (actualStateSaved::class != state::class) {
-                        reducer.emit(getReducerByState(actualState = state))
+                it
+                    .collectReducer(
+                        flows = flows + userActionChannel.receiveAsFlow(),
+                        actualState = { actualStateSaved },
+                        performNavigation = ::performNavigation
+                    ).onEach { state ->
+                        if (actualStateSaved::class != state::class) {
+                            reducer.emit(getReducerByState(actualState = state))
+                        }
+                        log { "Update state <$actualStateSaved> ➡ <$state>" }
+                        actualStateSaved = state
                     }
-                    log { "Update state <$actualStateSaved> ➡ <$state>" }
-                    actualStateSaved = state
-                }
-            }
-            .stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
+            }.stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
     }
 
     /**

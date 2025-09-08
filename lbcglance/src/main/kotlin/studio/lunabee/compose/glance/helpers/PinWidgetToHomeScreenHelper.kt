@@ -19,41 +19,42 @@ import androidx.glance.appwidget.GlanceAppWidgetReceiver
  * This feature is only available on API O+ and there is no equivalent on older API unfortunately.
  * @see <a href="https://developer.android.com/develop/ui/views/appwidgets/discoverability#pin">Documentation</a>
  */
-class PinWidgetToHomeScreenHelper(
-    private val context: Context,
-) {
+class PinWidgetToHomeScreenHelper(private val context: Context) {
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun <T : GlanceAppWidget, R : GlanceAppWidgetReceiver> pin(
         widgetClass: Class<T>,
         receiverClass: Class<R>,
-        prepareIntent: Intent.(existingAppWidgetIds: IntArray) -> Unit = { },
+        prepareIntent: Intent.(existingAppWidgetIds: IntArray) -> Unit = { }
     ) {
         val appWidgetManager = AppWidgetManager.getInstance(context)
         val provider = ComponentName(context, receiverClass)
         val glanceAppWidgetManager = GlanceAppWidgetManager(context)
 
         // Get existing app widget id for the widget before adding the new one.
-        val existingAppWidgetIds: IntArray = glanceAppWidgetManager
-            .getGlanceIds(widgetClass)
-            .map { glanceId -> glanceAppWidgetManager.getAppWidgetId(glanceId = glanceId) }
-            .toIntArray()
+        val existingAppWidgetIds: IntArray =
+            glanceAppWidgetManager
+                .getGlanceIds(widgetClass)
+                .map { glanceId -> glanceAppWidgetManager.getAppWidgetId(glanceId = glanceId) }
+                .toIntArray()
 
         // This intent will be trigger when the widget is added (i.e the user has picked it in the system bottom sheet).
-        val intent = Intent(context, receiverClass).apply {
-            action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-            prepareIntent(existingAppWidgetIds)
-        }
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            0,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
-        )
+        val intent =
+            Intent(context, receiverClass).apply {
+                action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+                prepareIntent(existingAppWidgetIds)
+            }
+        val pendingIntent =
+            PendingIntent.getBroadcast(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
         appWidgetManager.requestPinAppWidget(provider, null, pendingIntent)
     }
 
     @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.O)
-    fun isPinSupported(): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && AppWidgetManager.getInstance(context).isRequestPinAppWidgetSupported
-    }
+    fun isPinSupported(): Boolean =
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
+            AppWidgetManager.getInstance(context).isRequestPinAppWidgetSupported
 }

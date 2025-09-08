@@ -30,14 +30,12 @@ import androidx.glance.layout.Box
  * Apply automatically [appWidgetBackground] to your widget.
  */
 @Composable
-fun GlanceRoot(
-    modifier: GlanceModifier = GlanceModifier,
-    content: @Composable () -> Unit,
-) {
+fun GlanceRoot(modifier: GlanceModifier = GlanceModifier, content: @Composable () -> Unit) {
     Box(
-        modifier = GlanceModifier
+        modifier =
+        GlanceModifier
             .appWidgetBackground()
             .then(other = modifier),
-        content = content,
+        content = content
     )
 }

@@ -152,6 +152,8 @@ ktlint:
     active: true
   ArgumentListWrapping:
     maxLineLength: 140
+  PropertyName:
+    constantNamingStyle: pascal_case
 
 naming:
   FunctionNaming:

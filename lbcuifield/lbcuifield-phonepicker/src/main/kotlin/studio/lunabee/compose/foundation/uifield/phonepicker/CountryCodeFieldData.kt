@@ -24,11 +24,6 @@ package studio.lunabee.compose.foundation.uifield.phonepicker
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CountryCodeFieldData(
-    val phoneNumber: String,
-    val countryCode: String,
-) {
-    fun fullNumber(): String {
-        return "+$countryCode$phoneNumber"
-    }
+data class CountryCodeFieldData(val phoneNumber: String, val countryCode: String) {
+    fun fullNumber(): String = "+$countryCode$phoneNumber"
 }

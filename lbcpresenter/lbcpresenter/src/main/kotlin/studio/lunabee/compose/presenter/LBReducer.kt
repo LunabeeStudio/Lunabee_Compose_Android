@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
  * @property verbose enable verbose logs using kermit logger
  */
 abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, NavScope, MainAction, Action : MainAction>(
-    private val verbose: Boolean = false,
+    private val verbose: Boolean = false
 ) {
     /**
      * CoroutineScope in witch side effects are executed.
@@ -58,7 +58,7 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
     abstract suspend fun reduce(
         actualState: UiState,
         action: Action,
-        performNavigation: (NavScope.() -> Unit) -> Unit,
+        performNavigation: (NavScope.() -> Unit) -> Unit
     ): ReduceResult<MainUiState>
 
     /**
@@ -71,27 +71,30 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
     fun collectReducer(
         flows: List<Flow<MainAction>>,
         actualState: () -> MainUiState,
-        performNavigation: (NavScope.() -> Unit) -> Unit,
+        performNavigation: (NavScope.() -> Unit) -> Unit
     ): Flow<MainUiState> {
-        val uiStateFlow = flows.merge().filter { action ->
-            filterAction(action) && filterUiState(actualState()).also {
-                log { "Filter (= $it) action <$action>" }
-            }
-        }.mapNotNull { action ->
-            val state = actualState()
-            log { "Reducing state <$state> with action <$action>" }
-            (state as? UiState)?.let {
-                reduce(
-                    actualState = it,
-                    action = action as Action,
-                    performNavigation = performNavigation,
-                ).also {
-                    log { "Reduced state = ${it.uiState}" }
-                }
-            }
-        }
-            .onEach { coroutineScope.launch { it.sideEffect?.invoke() } }
-            .map { it.uiState }
+        val uiStateFlow =
+            flows
+                .merge()
+                .filter { action ->
+                    filterAction(action) &&
+                        filterUiState(actualState()).also {
+                            log { "Filter (= $it) action <$action>" }
+                        }
+                }.mapNotNull { action ->
+                    val state = actualState()
+                    log { "Reducing state <$state> with action <$action>" }
+                    (state as? UiState)?.let {
+                        reduce(
+                            actualState = it,
+                            action = action as Action,
+                            performNavigation = performNavigation
+                        ).also {
+                            log { "Reduced state = ${it.uiState}" }
+                        }
+                    }
+                }.onEach { coroutineScope.launch { it.sideEffect?.invoke() } }
+                .map { it.uiState }
         return if (verbose) {
             uiStateFlow.onCompletion { throwable -> log { "Reducer completed $throwable" } }
         } else {
@@ -102,16 +105,12 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
     /**
      * Filters action handled by the reduce function
      */
-    abstract fun filterAction(
-        action: MainAction,
-    ): Boolean
+    abstract fun filterAction(action: MainAction): Boolean
 
     /**
      * Filters uiState handled by the reduce function
      */
-    abstract fun filterUiState(
-        actualState: MainUiState,
-    ): Boolean
+    abstract fun filterUiState(actualState: MainUiState): Boolean
 
     private inline fun log(message: () -> String) {
         if (verbose) {

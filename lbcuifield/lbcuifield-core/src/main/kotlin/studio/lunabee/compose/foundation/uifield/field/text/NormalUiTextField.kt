@@ -48,8 +48,9 @@ class NormalUiTextField(
     override val maxLine: Int = 1,
     override val readOnly: Boolean = false,
     override val enabled: Boolean = true,
-    override val visualTransformation: StateFlow<VisualTransformation> = MutableStateFlow(
-        VisualTransformation.None,
-    ).asStateFlow(),
-    override val onValueChange: (String) -> Unit = {},
+    override val visualTransformation: StateFlow<VisualTransformation> =
+        MutableStateFlow(
+            VisualTransformation.None
+        ).asStateFlow(),
+    override val onValueChange: (String) -> Unit = {}
 ) : TextUiField()

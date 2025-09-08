@@ -29,12 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TimerScreen(
-    uiState: TimerUiState,
-) {
+fun TimerScreen(uiState: TimerUiState) {
     Text(
         uiState.timer.toString(),
         style = MaterialTheme.typography.titleLarge,
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier.padding(16.dp)
     )
 }

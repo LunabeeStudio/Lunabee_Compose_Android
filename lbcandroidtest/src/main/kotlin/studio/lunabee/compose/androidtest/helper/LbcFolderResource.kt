@@ -40,7 +40,18 @@ import java.io.File
  * ```
  * Then you can use it with [LbcResourcesHelper.copyFolderResourceToDeviceFile].
  */
-data class LbcFolderResource(val resourceName: String, val isDirectory: Boolean, val parentResource: LbcFolderResource?) {
+data class LbcFolderResource(
+    val resourceName: String,
+    val isDirectory: Boolean,
+    val parentResource: LbcFolderResource?
+) {
     val pathResourceName: String
-        get() = if (parentResource == null) resourceName else parentResource.pathResourceName + File.separator + resourceName
+        get() =
+            if (parentResource ==
+                null
+            ) {
+                resourceName
+            } else {
+                parentResource.pathResourceName + File.separator + resourceName
+            }
 }

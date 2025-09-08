@@ -46,6 +46,6 @@ interface PasswordUiFieldData {
         maxLine: Int,
         readOnly: Boolean,
         error: UiFieldError?,
-        interactionSource: MutableInteractionSource?,
+        interactionSource: MutableInteractionSource?
     )
 }

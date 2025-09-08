@@ -26,11 +26,12 @@ import java.util.Locale
 
 object PhoneNumberValidator {
     private val phoneNumberUtil = PhoneNumberUtil.getInstance()
-    fun isValid(phoneNumber: String): Boolean {
-        return try {
-            phoneNumberUtil.isValidNumber(phoneNumberUtil.parse(phoneNumber, Locale.getDefault().country))
+
+    fun isValid(phoneNumber: String): Boolean =
+        try {
+            phoneNumberUtil
+                .isValidNumber(phoneNumberUtil.parse(phoneNumber, Locale.getDefault().country))
         } catch (e: Exception) {
             false
         }
-    }
 }

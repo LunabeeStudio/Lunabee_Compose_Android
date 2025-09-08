@@ -35,7 +35,7 @@ class LbcAccessibilityUtilsTest {
         assertEquals(
             expected = expectedCleanString,
             actual = stringToClear.cleanForAccessibility(),
-            message = "This string should be cleared from any emojis",
+            message = "This string should be cleared from any emojis"
         )
     }
 
@@ -46,7 +46,7 @@ class LbcAccessibilityUtilsTest {
         assertEquals(
             expected = currencyString,
             actual = currencyString.cleanForAccessibility(),
-            message = "This string should not have changed",
+            message = "This string should not have changed"
         )
     }
 }

@@ -27,5 +27,5 @@ data class SimpleExampleUiState(
     val onToggleClick: (Boolean) -> Unit,
     val onNewValue: () -> Unit,
     val isChecked: Boolean,
-    val text: String,
+    val text: String
 ) : PresenterUiState

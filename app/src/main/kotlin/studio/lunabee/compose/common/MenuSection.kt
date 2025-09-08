@@ -27,13 +27,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 
 @Composable
-fun MenuSection(
-    menus: List<MenuDescription>,
-) {
+fun MenuSection(menus: List<MenuDescription>) {
     LazyColumn {
         items(
             items = menus,
-            key = { it.titleRes.hashCode() },
+            key = { it.titleRes.hashCode() }
         ) { menu ->
             MenuEntry(menu = menu)
             HorizontalDivider()

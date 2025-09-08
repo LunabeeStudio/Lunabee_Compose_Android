@@ -58,27 +58,28 @@ fun GlanceTypefaceText(
     maxLines: Int = Int.MAX_VALUE,
     breakStrategy: Int = 0,
     hyphenationFrequency: Int = 0,
-    justificationMode: Int = 0,
+    justificationMode: Int = 0
 ) {
-    val bitmap = rememberTextImageBitmap(
-        text = text,
-        color = color,
-        fontSize = fontSize,
-        typeface = typeface,
-        textAlign = textAlign,
-        letterSpacing = letterSpacing,
-        lineHeight = lineHeight,
-        ellipsizedWidth = ellipsizedWidth,
-        ellipsize = ellipsize,
-        maxLines = maxLines,
-        breakStrategy = breakStrategy,
-        hyphenationFrequency = hyphenationFrequency,
-        justificationMode = justificationMode,
-    )
+    val bitmap =
+        rememberTextImageBitmap(
+            text = text,
+            color = color,
+            fontSize = fontSize,
+            typeface = typeface,
+            textAlign = textAlign,
+            letterSpacing = letterSpacing,
+            lineHeight = lineHeight,
+            ellipsizedWidth = ellipsizedWidth,
+            ellipsize = ellipsize,
+            maxLines = maxLines,
+            breakStrategy = breakStrategy,
+            hyphenationFrequency = hyphenationFrequency,
+            justificationMode = justificationMode
+        )
 
     Image(
         modifier = modifier,
         provider = remember { ImageProvider(bitmap = bitmap) },
-        contentDescription = text,
+        contentDescription = text
     )
 }

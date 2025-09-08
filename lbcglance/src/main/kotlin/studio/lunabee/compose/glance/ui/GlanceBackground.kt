@@ -19,18 +19,19 @@ fun GlanceBackground(
     @DrawableRes background: Int,
     modifier: GlanceModifier = GlanceModifier,
     contentAlignment: Alignment = Alignment.Center,
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
     Box(
         modifier = modifier,
-        contentAlignment = contentAlignment,
+        contentAlignment = contentAlignment
     ) {
-        val remoteViews = RemoteViews(LocalContext.current.packageName, R.layout.lbc_glance_widget_background)
+        val remoteViews =
+            RemoteViews(LocalContext.current.packageName, R.layout.lbc_glance_widget_background)
         remoteViews.setInt(R.id.lbc_glance_widget_background, "setBackgroundResource", background)
         AndroidRemoteViews(
             remoteViews = remoteViews,
             containerViewId = R.id.lbc_glance_widget_background,
-            content = content,
+            content = content
         )
     }
 }

@@ -37,21 +37,23 @@ import com.google.android.material.color.DynamicColors
 fun AppDemoTheme(
     isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
     customColorScheme: ColorScheme? = null,
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
-    val isMaterialYouEnabled = !LocalInspectionMode.current && DynamicColors.isDynamicColorAvailable()
+    val isMaterialYouEnabled =
+        !LocalInspectionMode.current && DynamicColors.isDynamicColorAvailable()
 
     @Suppress("NewApi") // Already check by isDynamicColorAvailable
-    val colorScheme = when {
-        customColorScheme != null -> customColorScheme
-        isMaterialYouEnabled && isSystemInDarkTheme -> dynamicDarkColorScheme(context = LocalContext.current)
-        isMaterialYouEnabled -> dynamicLightColorScheme(context = LocalContext.current)
-        isSystemInDarkTheme -> darkColorScheme()
-        else -> lightColorScheme()
-    }
+    val colorScheme =
+        when {
+            customColorScheme != null -> customColorScheme
+            isMaterialYouEnabled && isSystemInDarkTheme -> dynamicDarkColorScheme(context = LocalContext.current)
+            isMaterialYouEnabled -> dynamicLightColorScheme(context = LocalContext.current)
+            isSystemInDarkTheme -> darkColorScheme()
+            else -> lightColorScheme()
+        }
 
     MaterialTheme(
         colorScheme = colorScheme,
-        content = content,
+        content = content
     )
 }

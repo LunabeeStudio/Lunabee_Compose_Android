@@ -13,10 +13,7 @@ import studio.lunabee.compose.androidtest.rule.LbcPrintRule
  *          .printToCacheDir(printRule, "_suffix")
  * ```
  */
-fun SemanticsNodeInteraction.printToCacheDir(
-    printRule: LbcPrintRule,
-    suffix: String = "",
-) {
+fun SemanticsNodeInteraction.printToCacheDir(printRule: LbcPrintRule, suffix: String = "") {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         printRule.print(captureToImage().asAndroidBitmap(), suffix)
     }

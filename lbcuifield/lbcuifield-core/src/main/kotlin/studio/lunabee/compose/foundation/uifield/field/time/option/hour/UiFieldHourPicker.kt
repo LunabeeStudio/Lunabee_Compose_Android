@@ -54,12 +54,13 @@ fun UiFieldTimePicker(
     onDismiss: () -> Unit,
     onValueChanged: (Int, Int) -> Unit,
     confirmLabel: LbcTextSpec,
-    cancelLabel: LbcTextSpec,
+    cancelLabel: LbcTextSpec
 ) {
-    val state = rememberTimePickerState(
-        initialHour = hour,
-        initialMinute = minutes,
-    )
+    val state =
+        rememberTimePickerState(
+            initialHour = hour,
+            initialMinute = minutes
+        )
     TimePickerDialog(
         onDismiss = onDismiss,
         content = {
@@ -70,18 +71,18 @@ fun UiFieldTimePicker(
                 onClick = {
                     onValueChanged(state.hour, state.minute)
                     onDismiss()
-                },
+                }
             ) {
                 Text(text = confirmLabel.string)
             }
         },
         cancelButton = {
             TextButton(
-                onClick = onDismiss,
+                onClick = onDismiss
             ) {
                 Text(text = cancelLabel.string)
             }
-        },
+        }
     )
 }
 
@@ -96,32 +97,34 @@ fun TimePickerDialog(
     cancelButton: @Composable () -> Unit,
     onDismiss: () -> Unit,
     toggle: @Composable RowScope.() -> Unit = {},
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
     Dialog(
         onDismissRequest = onDismiss,
-        properties = DialogProperties(usePlatformDefaultWidth = false),
+        properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Surface(
             shape = MaterialTheme.shapes.extraLarge,
             tonalElevation = 6.dp,
-            modifier = Modifier
+            modifier =
+            Modifier
                 .width(IntrinsicSize.Min)
                 .background(
                     shape = MaterialTheme.shapes.extraLarge,
-                    color = MaterialTheme.colorScheme.surface,
-                ),
+                    color = MaterialTheme.colorScheme.surface
+                )
         ) {
             Column(
                 modifier = Modifier.padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.padding(20.dp))
                 content()
                 Row(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .height(40.dp)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
                 ) {
                     toggle()
                     Spacer(modifier = Modifier.weight(1f))

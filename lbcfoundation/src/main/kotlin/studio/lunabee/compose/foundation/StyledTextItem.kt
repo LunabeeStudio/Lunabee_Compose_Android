@@ -59,47 +59,56 @@ fun StyledTextItem(
     softWrap: Boolean = true,
     overflow: TextOverflow = TextOverflow.Clip,
     maxLines: Int = Int.MAX_VALUE,
-    onTextLayout: (TextLayoutResult) -> Unit = { },
+    onTextLayout: (TextLayoutResult) -> Unit = { }
 ) {
-    val annotatedString = buildAnnotatedString {
-        // Default style use for non highlighted text.
-        pushStyle(style = rawBaseTextStyle.toSpanStyle())
+    val annotatedString =
+        buildAnnotatedString {
+            // Default style use for non highlighted text.
+            pushStyle(style = rawBaseTextStyle.toSpanStyle())
 
-        var index = 0
-        while (index < rawBaseText.length) {
-            // Check if we have a corresponding text to highlight
-            val textToHighlight = textToHighLightList.firstOrNull { textToHighLight ->
-                rawBaseText.indexOf(string = textToHighLight.text, startIndex = index, ignoreCase = textToHighLight.ignoreCase) == index
-            }
-            if (textToHighlight == null) {
-                // Append raw text with default style until we reach startIndexOfTextColor
-                append(text = rawBaseText[index].toString())
-                index++
-            } else {
-                // Substring to keep initial case.
-                val textToAppend = rawBaseText.substring(startIndex = index, endIndex = index + textToHighlight.text.length)
+            var index = 0
+            while (index < rawBaseText.length) {
+                // Check if we have a corresponding text to highlight
+                val textToHighlight =
+                    textToHighLightList.firstOrNull { textToHighLight ->
+                        rawBaseText.indexOf(string = textToHighLight.text, startIndex = index, ignoreCase = textToHighLight.ignoreCase) ==
+                            index
+                    }
+                if (textToHighlight == null) {
+                    // Append raw text with default style until we reach startIndexOfTextColor
+                    append(text = rawBaseText[index].toString())
+                    index++
+                } else {
+                    // Substring to keep initial case.
+                    val textToAppend =
+                        rawBaseText.substring(
+                            startIndex = index,
+                            endIndex =
+                            index + textToHighlight.text.length
+                        )
 
-                // Set a tag to retrieve our annotation later if needed for a click for example.
-                // Set a start and an end index to retrieve this annotation later when clicking on it.
-                addLink(
-                    LinkAnnotation.Clickable(
-                        tag = textToHighlight.tag,
-                        styles = TextLinkStyles(textToHighlight.style),
-                        linkInteractionListener = textToHighlight.action?.let { action ->
-                            LinkInteractionListener { action() }
-                        },
-                    ),
-                    start = index,
-                    end = index + textToHighlight.text.length,
-                )
+                    // Set a tag to retrieve our annotation later if needed for a click for example.
+                    // Set a start and an end index to retrieve this annotation later when clicking on it.
+                    addLink(
+                        LinkAnnotation.Clickable(
+                            tag = textToHighlight.tag,
+                            styles = TextLinkStyles(textToHighlight.style),
+                            linkInteractionListener =
+                            textToHighlight.action?.let { action ->
+                                LinkInteractionListener { action() }
+                            }
+                        ),
+                        start = index,
+                        end = index + textToHighlight.text.length
+                    )
 
-                append(text = textToAppend)
+                    append(text = textToAppend)
 
-                // Skip index of highlighted text.
-                index += textToHighlight.text.length
+                    // Skip index of highlighted text.
+                    index += textToHighlight.text.length
+                }
             }
         }
-    }
 
     ClickableText(
         text = annotatedString,
@@ -110,7 +119,12 @@ fun StyledTextItem(
                 // So at this point, we are sure to have only one.
                 .getOrNull(index = 0)
                 // Find TextToHighlight object corresponding to range tag.
-                ?.let { range -> textToHighLightList.firstOrNull { textToHighlight -> textToHighlight.tag == range.tag } }
+                ?.let { range ->
+                    textToHighLightList.firstOrNull { textToHighlight ->
+                        textToHighlight.tag ==
+                            range.tag
+                    }
+                }
                 // Execute action.
                 ?.action
                 ?.invoke()
@@ -119,6 +133,6 @@ fun StyledTextItem(
         softWrap = softWrap,
         overflow = overflow,
         maxLines = maxLines,
-        onTextLayout = onTextLayout,
+        onTextLayout = onTextLayout
     )
 }

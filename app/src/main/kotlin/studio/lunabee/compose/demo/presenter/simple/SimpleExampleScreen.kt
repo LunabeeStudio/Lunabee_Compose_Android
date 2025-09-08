@@ -28,15 +28,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun SimpleExempleScreen(
-    uiState: SimpleExampleUiState,
-) {
+fun SimpleExempleScreen(uiState: SimpleExampleUiState) {
     Column {
         Checkbox(
             checked = uiState.isChecked,
             onCheckedChange = { newCheckedValue ->
                 uiState.onToggleClick(newCheckedValue)
-            },
+            }
         )
         Text(uiState.text)
         Button(onClick = uiState.onNewValue) {

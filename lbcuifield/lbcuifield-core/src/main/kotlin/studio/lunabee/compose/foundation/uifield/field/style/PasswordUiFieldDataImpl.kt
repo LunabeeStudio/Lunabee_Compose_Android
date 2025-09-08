@@ -41,7 +41,6 @@ import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 
 class PasswordUiFieldDataImpl : PasswordUiFieldData {
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun ComposeTextField(
@@ -59,7 +58,7 @@ class PasswordUiFieldDataImpl : PasswordUiFieldData {
         maxLine: Int,
         readOnly: Boolean,
         error: UiFieldError?,
-        interactionSource: MutableInteractionSource?,
+        interactionSource: MutableInteractionSource?
     ) {
         val colors = OutlinedTextFieldDefaults.colors()
         val state = remember { TextFieldState(value) }
@@ -67,7 +66,8 @@ class PasswordUiFieldDataImpl : PasswordUiFieldData {
 
         BasicSecureTextField(
             state = state,
-            textObfuscationMode = if (isValueVisible) {
+            textObfuscationMode =
+            if (isValueVisible) {
                 TextObfuscationMode.Visible
             } else {
                 TextObfuscationMode.RevealLastTyped
@@ -76,12 +76,13 @@ class PasswordUiFieldDataImpl : PasswordUiFieldData {
             textStyle = MaterialTheme.typography.bodyLarge.copy(color = colors.focusedTextColor),
             keyboardOptions = keyboardOptions,
             interactionSource = interactionSourceToUse,
-            cursorBrush = SolidColor(
+            cursorBrush =
+            SolidColor(
                 if (error != null) {
                     colors.errorCursorColor
                 } else {
                     colors.cursorColor
-                },
+                }
             ),
             onKeyboardAction = onKeyboardActions,
             decorator = { innerTextField ->
@@ -95,7 +96,8 @@ class PasswordUiFieldDataImpl : PasswordUiFieldData {
                     trailingIcon = trailingIcon,
                     prefix = null,
                     suffix = null,
-                    supportingText = if (error?.text != null) {
+                    supportingText =
+                    if (error?.text != null) {
                         { Text(text = error.text.string) }
                     } else {
                         null
@@ -108,12 +110,12 @@ class PasswordUiFieldDataImpl : PasswordUiFieldData {
                         OutlinedTextFieldDefaults.Container(
                             enabled = !readOnly,
                             isError = error != null,
-                            interactionSource = interactionSourceToUse,
+                            interactionSource = interactionSourceToUse
                         )
-                    },
+                    }
                 )
             },
-            modifier = modifier,
+            modifier = modifier
         )
 
         LaunchedEffect(state.text) {

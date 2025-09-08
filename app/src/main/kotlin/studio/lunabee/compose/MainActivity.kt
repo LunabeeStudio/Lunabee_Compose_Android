@@ -71,15 +71,17 @@ class MainActivity : AppCompatActivity() {
 
             LaunchedEffect(navController) {
                 navController.addOnDestinationChangedListener { _, destination, _ ->
-                    title = when (destination.route) {
-                        Destinations.MainRoute -> getString(R.string.application_name)
-                        Destinations.ThemeRoute -> getString(R.string.theme_screen_title)
-                        Destinations.HapticRoute -> getString(R.string.haptic_screen_title)
-                        Destinations.FoundationRoute -> getString(R.string.foundation_screen_title)
-                        else -> destination.route.orEmpty()
-                    }
+                    title =
+                        when (destination.route) {
+                            Destinations.MainRoute -> getString(R.string.application_name)
+                            Destinations.ThemeRoute -> getString(R.string.theme_screen_title)
+                            Destinations.HapticRoute -> getString(R.string.haptic_screen_title)
+                            Destinations.FoundationRoute -> getString(R.string.foundation_screen_title)
+                            else -> destination.route.orEmpty()
+                        }
 
-                    shouldShowBackNav = Destinations.BackNavigationScreen.contains(destination.route)
+                    shouldShowBackNav =
+                        Destinations.BackNavigationScreen.contains(destination.route)
                 }
             }
 
@@ -88,28 +90,30 @@ class MainActivity : AppCompatActivity() {
                     topBar = {
                         TopAppBar(
                             title = { Text(text = title) },
-                            navigationIcon = if (shouldShowBackNav) {
+                            navigationIcon =
+                            if (shouldShowBackNav) {
                                 {
                                     IconButton(onClick = directions.navigateToPreviousScreen) {
                                         Icon(
                                             painter = painterResource(id = R.drawable.ic_back),
-                                            contentDescription = null,
+                                            contentDescription = null
                                         )
                                     }
                                 }
                             } else {
                                 { }
-                            },
+                            }
                         )
-                    },
+                    }
                 ) { paddingValues ->
                     Box(
-                        modifier = Modifier
-                            .padding(paddingValues = paddingValues),
+                        modifier =
+                        Modifier
+                            .padding(paddingValues = paddingValues)
                     ) {
                         MainNavGraph(
                             navController = navController,
-                            directions = directions,
+                            directions = directions
                         )
                     }
                 }
@@ -121,18 +125,20 @@ class MainActivity : AppCompatActivity() {
         // For status bar color with elevation.
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        val isDark = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
-            Configuration.UI_MODE_NIGHT_YES
+        val isDark =
+            (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+                Configuration.UI_MODE_NIGHT_YES
         // Don't use SystemBarStyle.auto for navigation bar because it always add a scrim (cf doc)
-        val navigationBarStyle = if (isDark) {
-            SystemBarStyle.dark(scrim = Color.TRANSPARENT)
-        } else {
-            SystemBarStyle.light(scrim = Color.TRANSPARENT, darkScrim = Color.TRANSPARENT)
-        }
+        val navigationBarStyle =
+            if (isDark) {
+                SystemBarStyle.dark(scrim = Color.TRANSPARENT)
+            } else {
+                SystemBarStyle.light(scrim = Color.TRANSPARENT, darkScrim = Color.TRANSPARENT)
+            }
         val statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
         enableEdgeToEdge(
             statusBarStyle = statusBarStyle,
-            navigationBarStyle = navigationBarStyle,
+            navigationBarStyle = navigationBarStyle
         )
     }
 }

@@ -24,9 +24,9 @@ package studio.lunabee.compose.demo.presenter.multistate
 import studio.lunabee.compose.presenter.PresenterUiState
 
 sealed interface MultiStateUiState : PresenterUiState {
-
     val reducer: String
 
     data class Error(override val reducer: String) : MultiStateUiState
+
     data class Data(override val reducer: String) : MultiStateUiState
 }

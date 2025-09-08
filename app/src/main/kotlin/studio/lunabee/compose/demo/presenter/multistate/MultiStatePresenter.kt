@@ -34,36 +34,41 @@ import studio.lunabee.compose.presenter.LBSimpleReducer
 import javax.inject.Inject
 
 @HiltViewModel
-class MultiStatePresenter @Inject constructor() : LBPresenter<MultiStateUiState, MultiStateNavScope, MultiStateAction>() {
-
-    private val flow: Flow<MultiStateAction> = flow {
-        while (true) {
-            delay(2000)
-            val actions = listOf(
-                MultiStateAction.ExampleAction,
-                MultiStateAction.ExampleAllAction,
-                MultiStateAction.ExampleErrorAction,
-            )
-            emit(actions.random())
+class MultiStatePresenter @Inject constructor() :
+    LBPresenter<MultiStateUiState, MultiStateNavScope, MultiStateAction>() {
+    private val flow: Flow<MultiStateAction> =
+        flow {
+            while (true) {
+                delay(2000)
+                val actions =
+                    listOf(
+                        MultiStateAction.ExampleAction,
+                        MultiStateAction.ExampleAllAction,
+                        MultiStateAction.ExampleErrorAction
+                    )
+                emit(actions.random())
+            }
         }
-    }
 
     override val flows: List<Flow<MultiStateAction>> = listOf(flow)
 
     override fun getInitialState(): MultiStateUiState = MultiStateUiState.Data("unknown")
-    override fun getReducerByState(actualState: MultiStateUiState):
-        LBSimpleReducer<MultiStateUiState, MultiStateNavScope, MultiStateAction> {
-        return when (actualState) {
-            is MultiStateUiState.Data -> MultiStateDataReducer(
-                coroutineScope = viewModelScope,
-                emitUserAction = ::emitUserAction,
-            )
-            is MultiStateUiState.Error -> MultiStateErrorReducer(
-                coroutineScope = viewModelScope,
-                emitUserAction = ::emitUserAction,
-            )
+
+    override fun getReducerByState(
+        actualState: MultiStateUiState
+    ): LBSimpleReducer<MultiStateUiState, MultiStateNavScope, MultiStateAction> =
+        when (actualState) {
+            is MultiStateUiState.Data ->
+                MultiStateDataReducer(
+                    coroutineScope = viewModelScope,
+                    emitUserAction = ::emitUserAction
+                )
+            is MultiStateUiState.Error ->
+                MultiStateErrorReducer(
+                    coroutineScope = viewModelScope,
+                    emitUserAction = ::emitUserAction
+                )
         }
-    }
 
     override val content: @Composable (MultiStateUiState) -> Unit = {
         Column {

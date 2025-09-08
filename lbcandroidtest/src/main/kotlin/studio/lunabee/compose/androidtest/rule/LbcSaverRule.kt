@@ -36,10 +36,7 @@ class LbcSaverRule : ComposeContentTestRule by createAndroidComposeRule<Componen
         StateRestorationTester(composeTestRule = this)
     }
 
-    operator fun invoke(
-        content: @Composable () -> Unit,
-        block: ComposeContentTestRule.() -> Unit,
-    ) {
+    operator fun invoke(content: @Composable () -> Unit, block: ComposeContentTestRule.() -> Unit) {
         stateRestoration.setContent(content)
         block(this)
     }

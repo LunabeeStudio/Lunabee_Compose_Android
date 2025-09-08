@@ -69,39 +69,33 @@ class CountryPickerUiField(
     override val enabled: Boolean = true,
     private val coroutineScope: CoroutineScope,
     private val countryPickerBottomSheetRenderer: CountryPickerBottomSheetRenderer,
-    private val trailingIcon: @Composable (() -> Unit)? = null,
+    private val trailingIcon: @Composable (() -> Unit)? = null
 ) : UiField<CountryFieldData>() {
-
     private val json = Json.Default
 
     override val options: List<UiFieldOption> = emptyList()
 
-    override fun valueToDisplayedString(value: CountryFieldData): String {
-        return value.countryName
-    }
+    override fun valueToDisplayedString(value: CountryFieldData): String = value.countryName
 
-    override fun valueToSavedString(value: CountryFieldData): String {
-        return json.encodeToString(value)
-    }
+    override fun valueToSavedString(value: CountryFieldData): String = json.encodeToString(value)
 
-    override fun savedValueToData(value: String): CountryFieldData {
-        return json.decodeFromString(value)
-    }
+    override fun savedValueToData(value: String): CountryFieldData = json.decodeFromString(value)
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Composable(modifier: Modifier) {
         val context = LocalContext.current
-        val delegate = remember {
-            CountrySearchDelegate(
-                savedStateHandle = savedStateHandle,
-                searchFieldLabel = countryPickerBottomSheetRenderer.searchedFieldLabel,
-                searchFieldPlaceHolder = countryPickerBottomSheetRenderer.searchFieldPlaceHolder,
-                searchFieldStyleData = countryPickerBottomSheetRenderer.searchFieldStyleData,
-                coroutineScope = coroutineScope,
-                context = context,
-            )
-        }
+        val delegate =
+            remember {
+                CountrySearchDelegate(
+                    savedStateHandle = savedStateHandle,
+                    searchFieldLabel = countryPickerBottomSheetRenderer.searchedFieldLabel,
+                    searchFieldPlaceHolder = countryPickerBottomSheetRenderer.searchFieldPlaceHolder,
+                    searchFieldStyleData = countryPickerBottomSheetRenderer.searchFieldStyleData,
+                    coroutineScope = coroutineScope,
+                    context = context
+                )
+            }
         val uiState: CountrySearchUiState by delegate.uiState.collectAsStateWithLifecycle()
 
         val collectedValue by mValue.collectAsState()
@@ -116,7 +110,8 @@ class CountryPickerUiField(
             onValueChange = {
                 dismissError()
             },
-            modifier = modifier
+            modifier =
+            modifier
                 .onFocusEvent {
                     if (it.hasFocus) {
                         isPickerBottomSheetVisible = true
@@ -138,7 +133,7 @@ class CountryPickerUiField(
             readOnly = readOnly,
             enabled = enabled,
             error = collectedError,
-            interactionSource = null,
+            interactionSource = null
         )
 
         if (isPickerBottomSheetVisible) {
@@ -150,14 +145,14 @@ class CountryPickerUiField(
                 },
                 searchField = {
                     delegate.searchUiField.Composable(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth()
                     )
                 },
                 countriesList = { contentPadding, lazyListState ->
                     LazyColumn(
                         modifier = Modifier.fillMaxWidth(),
                         contentPadding = contentPadding,
-                        state = lazyListState,
+                        state = lazyListState
                     ) {
                         // Top anchor
                         item {
@@ -168,14 +163,15 @@ class CountryPickerUiField(
                                 countrySearchItem = country,
                                 searchedText = uiState.searchedText,
                                 onClick = {
-                                    value = CountryFieldData(
-                                        countryName = country.name,
-                                        countryIsoName = country.isoName,
-                                    )
+                                    value =
+                                        CountryFieldData(
+                                            countryName = country.name,
+                                            countryIsoName = country.isoName
+                                        )
                                     delegate.onCountrySelected(country)
                                     isPickerBottomSheetVisible = false
                                     dismissError()
-                                },
+                                }
                             )
                         }
                     }
@@ -183,7 +179,7 @@ class CountryPickerUiField(
                     LaunchedEffect(uiState.countryCodesToDisplay) {
                         lazyListState.scrollToItem(0)
                     }
-                },
+                }
             )
         }
 
@@ -193,15 +189,17 @@ class CountryPickerUiField(
     }
 
     companion object {
-        fun initialValueFromRawCountryName(
-            countryName: String,
-        ): CountryFieldData {
-            return Locale.getAvailableLocales().firstOrNull { it.displayCountry == countryName }?.let {
-                return CountryFieldData(
-                    countryName = countryName,
-                    countryIsoName = it.isO3Country,
-                )
-            } ?: CountryFieldData("", "")
+        fun initialValueFromRawCountryName(countryName: String): CountryFieldData {
+            return Locale
+                .getAvailableLocales()
+                .firstOrNull {
+                    it.displayCountry == countryName
+                }?.let {
+                    return CountryFieldData(
+                        countryName = countryName,
+                        countryIsoName = it.isO3Country
+                    )
+                } ?: CountryFieldData("", "")
         }
     }
 }

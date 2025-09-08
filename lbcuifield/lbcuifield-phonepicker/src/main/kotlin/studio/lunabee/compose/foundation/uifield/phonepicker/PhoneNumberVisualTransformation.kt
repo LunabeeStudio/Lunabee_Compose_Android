@@ -53,48 +53,49 @@ import kotlin.text.isDigit
  * Created by Lunabee Studio / Date - 4/18/2025 - for the Lunabee Compose library.
  */
 
-internal class PhoneNumberVisualTransformation(
-    private val countryPhoneCode: String,
-) : VisualTransformation {
-
+internal class PhoneNumberVisualTransformation(private val countryPhoneCode: String) :
+    VisualTransformation {
     private val phoneNumberUtil: PhoneNumberUtil = PhoneNumberUtil.getInstance()
     private val prefix = "+$countryPhoneCode"
 
     override fun filter(text: AnnotatedString): TransformedText {
-        val textFormatted = buildAnnotatedString {
-            append(formatPhoneNumber(text.text, phoneNumberUtil))
-        }
-        val phoneOffsetTranslator = object : OffsetMapping {
-            override fun originalToTransformed(offset: Int): Int {
-                var index = prefix.length
-                var digitRemaining = offset
-                while (digitRemaining > 0 && index < textFormatted.text.length) {
-                    if (textFormatted.text[index].isDigit()) {
-                        digitRemaining--
+        val textFormatted =
+            buildAnnotatedString {
+                append(formatPhoneNumber(text.text, phoneNumberUtil))
+            }
+        val phoneOffsetTranslator =
+            object : OffsetMapping {
+                override fun originalToTransformed(offset: Int): Int {
+                    var index = prefix.length
+                    var digitRemaining = offset
+                    while (digitRemaining > 0 && index < textFormatted.text.length) {
+                        if (textFormatted.text[index].isDigit()) {
+                            digitRemaining--
+                        }
+                        index++
                     }
-                    index++
+                    return index
                 }
-                return index
-            }
 
-            override fun transformedToOriginal(offset: Int): Int {
-                if (offset <= prefix.length) return 0
-                val suffixBeforeSelection =
-                    textFormatted.text.substring((prefix.length) until offset)
-                return suffixBeforeSelection.filter { it.isDigit() }.length
+                override fun transformedToOriginal(offset: Int): Int {
+                    if (offset <= prefix.length) return 0
+                    val suffixBeforeSelection =
+                        textFormatted.text.substring((prefix.length) until offset)
+                    return suffixBeforeSelection.filter { it.isDigit() }.length
+                }
             }
-        }
         return TransformedText(textFormatted, phoneOffsetTranslator)
     }
 
     private fun formatPhoneNumber(
         rawPhoneNumber: String,
-        phoneNumberUtil: PhoneNumberUtil,
+        phoneNumberUtil: PhoneNumberUtil
     ): String {
         val fullPhoneNumber = prefix + rawPhoneNumber
         return try {
             val phoneNumber = phoneNumberUtil.parse(fullPhoneNumber, Locale.getDefault().country)
-            return phoneNumberUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)
+            return phoneNumberUtil
+                .format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)
         } catch (e: Exception) {
             fullPhoneNumber
         }

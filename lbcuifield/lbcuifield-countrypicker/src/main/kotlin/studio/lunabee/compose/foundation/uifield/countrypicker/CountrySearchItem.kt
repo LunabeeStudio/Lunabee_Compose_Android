@@ -40,9 +40,8 @@ data class CountrySearchItem(
     val countryPhoneCode: String,
     val flag: LbcImageSpec,
     val isSelected: Boolean,
-    val isoName: String,
+    val isoName: String
 ) {
-
     /**
      * Returns an [LbcTextSpec.Annotated] representation of the country's name, with parts of the name
      * matching the [searchedText] highlighted using the provided [matchingSpanStyle].
@@ -57,9 +56,9 @@ data class CountrySearchItem(
     fun getAnnotatedName(
         searchedText: String,
         nonMatchingSpanStyle: SpanStyle,
-        matchingSpanStyle: SpanStyle,
-    ): LbcTextSpec.Annotated {
-        return LbcTextSpec.Annotated(
+        matchingSpanStyle: SpanStyle
+    ): LbcTextSpec.Annotated =
+        LbcTextSpec.Annotated(
             buildAnnotatedString {
                 val sanitizedName: String = name.normalized()
                 val sanitizedSearch: String = searchedText.normalized()
@@ -83,7 +82,6 @@ data class CountrySearchItem(
                     append(name)
                     addStyle(nonMatchingSpanStyle, 0, name.length)
                 }
-            },
+            }
         )
-    }
 }

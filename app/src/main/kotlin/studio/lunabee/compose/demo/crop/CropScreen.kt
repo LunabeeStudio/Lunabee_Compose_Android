@@ -53,34 +53,43 @@ import studio.lunabee.compose.lbccrop.rememberLbCropViewState
 @Composable
 fun CropScreen() {
     val context = LocalContext.current
-    var bitmap: Bitmap by remember { mutableStateOf(BitmapFactory.decodeResource(context.resources, R.drawable.oss117)) }
+    var bitmap: Bitmap by remember {
+        mutableStateOf(
+            BitmapFactory
+                .decodeResource(context.resources, R.drawable.oss117)
+        )
+    }
     var showCropView: Boolean by rememberSaveable { mutableStateOf(true) }
-    val state = rememberLbCropViewState(
-        originalBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.oss117),
-        originalOrientation = 1,
-        finalImageMinSize = CropImageSize(
-            width = 500,
-            height = 500,
-        ),
-    )
+    val state =
+        rememberLbCropViewState(
+            originalBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.oss117),
+            originalOrientation = 1,
+            finalImageMinSize =
+            CropImageSize(
+                width = 500,
+                height = 500
+            )
+        )
     val coroutineScope = rememberCoroutineScope()
 
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (showCropView) {
             Text(
                 text = stringResource(id = R.string.crop_screen_description),
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier.padding(16.dp)
             )
             LbCropView(
                 state = state,
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
-                    .aspectRatio(1.2f),
+                    .aspectRatio(1.2f)
             )
 
             Button(
@@ -91,25 +100,27 @@ fun CropScreen() {
                         showCropView = false
                     }
                 },
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(16.dp)
             ) {
                 Text(text = stringResource(id = R.string.crop_screen_crop_button))
             }
         } else {
             Image(
                 bitmap = bitmap.asImageBitmap(),
-                contentDescription = null,
+                contentDescription = null
             )
 
             Button(
                 onClick = {
                     showCropView = true
                 },
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(16.dp)
             ) {
                 Text(text = stringResource(id = R.string.crop_screen_retry_button))
             }

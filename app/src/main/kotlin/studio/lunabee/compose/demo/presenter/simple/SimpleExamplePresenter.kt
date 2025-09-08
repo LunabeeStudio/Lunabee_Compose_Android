@@ -30,24 +30,25 @@ import studio.lunabee.compose.presenter.LBSingleReducer
 import javax.inject.Inject
 
 @HiltViewModel
-class SimpleExamplePresenter @Inject constructor() : LBSinglePresenter<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>(
-    verbose = true,
-) {
+class SimpleExamplePresenter @Inject constructor() :
+    LBSinglePresenter<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>(
+        verbose = true
+    ) {
     override val flows: List<Flow<SimpleExampleAction>> = listOf()
 
-    override fun getInitialState(): SimpleExampleUiState = SimpleExampleUiState(
-        onToggleClick = { emitUserAction(SimpleExampleAction.NewCheckValue(it)) },
-        onNewValue = { emitUserAction(SimpleExampleAction.NewValue) },
-        isChecked = false,
-        text = "Init",
-    )
-
-    override fun initReducer(): LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction> {
-        return SimpleExampleReducer(
-            coroutineScope = viewModelScope,
-            emitUserAction = ::emitUserAction,
+    override fun getInitialState(): SimpleExampleUiState =
+        SimpleExampleUiState(
+            onToggleClick = { emitUserAction(SimpleExampleAction.NewCheckValue(it)) },
+            onNewValue = { emitUserAction(SimpleExampleAction.NewValue) },
+            isChecked = false,
+            text = "Init"
         )
-    }
+
+    override fun initReducer(): LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction> =
+        SimpleExampleReducer(
+            coroutineScope = viewModelScope,
+            emitUserAction = ::emitUserAction
+        )
 
     override val content: @Composable (SimpleExampleUiState) -> Unit = { SimpleExempleScreen(it) }
 }

@@ -38,18 +38,17 @@ object LbcThemeUtilities {
      * @param isInDarkMode
      */
     @JvmStatic
-    fun getMaterialColorSchemeFromColor(
-        color: Color,
-        isInDarkMode: Boolean,
-    ): ColorScheme {
+    fun getMaterialColorSchemeFromColor(color: Color, isInDarkMode: Boolean): ColorScheme {
         val sourceColorHct = Hct.fromInt(color.toArgb())
-        val schemeTonalSpot = if (isInDarkMode) {
-            SchemeTonalSpot(sourceColorHct, true, 0.0)
-        } else {
-            SchemeTonalSpot(sourceColorHct, false, 0.0)
-        }
+        val schemeTonalSpot =
+            if (isInDarkMode) {
+                SchemeTonalSpot(sourceColorHct, true, 0.0)
+            } else {
+                SchemeTonalSpot(sourceColorHct, false, 0.0)
+            }
         return schemeToColorScheme(
-            scheme = DynamicScheme(
+            scheme =
+            DynamicScheme(
                 sourceColorHct,
                 Variant.NEUTRAL,
                 isInDarkMode,
@@ -58,8 +57,8 @@ object LbcThemeUtilities {
                 schemeTonalSpot.secondaryPalette,
                 schemeTonalSpot.tertiaryPalette,
                 schemeTonalSpot.neutralPalette,
-                schemeTonalSpot.neutralVariantPalette,
-            ),
+                schemeTonalSpot.neutralVariantPalette
+            )
         )
     }
 
@@ -85,7 +84,13 @@ object LbcThemeUtilities {
             secondary = Color(color = dynamicColors.secondary().getArgb(scheme)),
             onSecondary = Color(color = dynamicColors.onSecondary().getArgb(scheme)),
             secondaryContainer = Color(color = dynamicColors.secondaryContainer().getArgb(scheme)),
-            onSecondaryContainer = Color(color = dynamicColors.onSecondaryContainer().getArgb(scheme)),
+            onSecondaryContainer =
+            Color(
+                color =
+                dynamicColors
+                    .onSecondaryContainer()
+                    .getArgb(scheme)
+            ),
             tertiary = Color(color = dynamicColors.tertiary().getArgb(scheme)),
             onTertiary = Color(color = dynamicColors.onTertiary().getArgb(scheme)),
             tertiaryContainer = Color(color = dynamicColors.tertiaryContainer().getArgb(scheme)),
@@ -109,10 +114,28 @@ object LbcThemeUtilities {
             surfaceBright = Color(color = dynamicColors.surfaceBright().getArgb(scheme)),
             surfaceDim = Color(color = dynamicColors.surfaceDim().getArgb(scheme)),
             surfaceContainer = Color(color = dynamicColors.surfaceContainer().getArgb(scheme)),
-            surfaceContainerHigh = Color(color = dynamicColors.surfaceContainerHigh().getArgb(scheme)),
-            surfaceContainerHighest = Color(color = dynamicColors.surfaceContainerHighest().getArgb(scheme)),
+            surfaceContainerHigh =
+            Color(
+                color =
+                dynamicColors
+                    .surfaceContainerHigh()
+                    .getArgb(scheme)
+            ),
+            surfaceContainerHighest =
+            Color(
+                color =
+                dynamicColors
+                    .surfaceContainerHighest()
+                    .getArgb(scheme)
+            ),
             surfaceContainerLow = Color(color = dynamicColors.surfaceContainerLow().getArgb(scheme)),
-            surfaceContainerLowest = Color(color = dynamicColors.surfaceContainerLowest().getArgb(scheme)),
+            surfaceContainerLowest =
+            Color(
+                color =
+                dynamicColors
+                    .surfaceContainerLowest()
+                    .getArgb(scheme)
+            )
         )
     }
 }

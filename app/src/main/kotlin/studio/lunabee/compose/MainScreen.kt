@@ -28,51 +28,50 @@ import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.navigation.Directions
 
 @Composable
-fun MainScreen(
-    directions: Directions,
-) {
+fun MainScreen(directions: Directions) {
     MenuSection(
-        menus = listOf(
+        menus =
+        listOf(
             MenuDescription(
                 titleRes = LbcTextSpec.StringResource(R.string.foundation_screen_title),
                 subtitleRes = LbcTextSpec.StringResource(R.string.foundation_screen_subtitle),
-                direction = directions.navigateToFoundation,
+                direction = directions.navigateToFoundation
             ),
             MenuDescription(
                 titleRes = LbcTextSpec.StringResource(R.string.haptic_screen_title),
                 subtitleRes = LbcTextSpec.StringResource(R.string.haptic_screen_subtitle),
-                direction = directions.navigateToHaptic,
+                direction = directions.navigateToHaptic
             ),
             MenuDescription(
                 titleRes = LbcTextSpec.StringResource(R.string.theme_screen_title),
                 subtitleRes = LbcTextSpec.StringResource(R.string.theme_screen_subtitle),
-                direction = directions.navigateToTheme,
+                direction = directions.navigateToTheme
             ),
             MenuDescription(
                 titleRes = LbcTextSpec.StringResource(R.string.crop_screen_title),
                 subtitleRes = LbcTextSpec.StringResource(R.string.crop_screen_subtitle),
-                direction = directions.navigateToCrop,
+                direction = directions.navigateToCrop
             ),
             MenuDescription(
                 titleRes = LbcTextSpec.StringResource(R.string.uiFields_screen_title),
                 subtitleRes = LbcTextSpec.StringResource(R.string.uiFields_screen_subtitle),
-                direction = directions.navigateToUiFields,
+                direction = directions.navigateToUiFields
             ),
             MenuDescription(
                 titleRes = LbcTextSpec.Raw("Presenter"),
                 subtitleRes = LbcTextSpec.Raw("Composable architecture with presenter"),
-                direction = directions.navigateToPresenterScreen,
+                direction = directions.navigateToPresenterScreen
             ),
             MenuDescription(
                 titleRes = LbcTextSpec.StringResource(R.string.glance_title),
                 subtitleRes = LbcTextSpec.StringResource(R.string.glance_description),
-                direction = directions.navigateToGlanceScreen,
+                direction = directions.navigateToGlanceScreen
             ),
             MenuDescription(
                 titleRes = LbcTextSpec.StringResource(R.string.image_title),
                 subtitleRes = LbcTextSpec.StringResource(R.string.image_description),
-                direction = directions.navigateToImageScreen,
-            ),
-        ),
+                direction = directions.navigateToImageScreen
+            )
+        )
     )
 }

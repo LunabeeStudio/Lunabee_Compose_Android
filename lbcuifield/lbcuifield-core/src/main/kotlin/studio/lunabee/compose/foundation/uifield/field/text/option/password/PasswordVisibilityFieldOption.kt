@@ -29,8 +29,8 @@ import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.composable.TrailingAction
 
-class PasswordVisibilityFieldOption(private val holder: PasswordVisibilityOptionHolder) : UiFieldOption {
-
+class PasswordVisibilityFieldOption(private val holder: PasswordVisibilityOptionHolder) :
+    UiFieldOption {
     override fun onClick(): Unit = holder.onVisibilityToggle()
 
     override val clickLabel: LbcTextSpec
@@ -45,17 +45,18 @@ class PasswordVisibilityFieldOption(private val holder: PasswordVisibilityOption
     @Composable
     override fun Composable(modifier: Modifier) {
         val valueVisible by holder.isValueVisible.collectAsState()
-        val image = if (valueVisible) {
-            holder.visibilityOptionData.hideIcon
-        } else {
-            holder.visibilityOptionData.showIcon
-        }
+        val image =
+            if (valueVisible) {
+                holder.visibilityOptionData.hideIcon
+            } else {
+                holder.visibilityOptionData.showIcon
+            }
 
         TrailingAction(
             image = image,
             onClick = ::onClick,
             modifier = modifier,
-            contentDescription = clickLabel,
+            contentDescription = clickLabel
         )
     }
 }

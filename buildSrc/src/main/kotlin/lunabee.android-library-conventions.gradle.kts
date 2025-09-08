@@ -27,24 +27,24 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
-group = AndroidConfig.GROUP_ID
+group = AndroidConfig.GroupId
 
 // FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
 val libs: LibrariesForLibs = the<LibrariesForLibs>()
 
 android {
-    compileSdk = AndroidConfig.COMPILE_SDK
+    compileSdk = AndroidConfig.CompileSdk
 
     defaultConfig {
-        minSdk = AndroidConfig.MIN_SDK
+        minSdk = AndroidConfig.MinSdk
         @Suppress("DEPRECATION") // https://stackoverflow.com/questions/76084080/apply-targetsdk-in-android-instrumentation-test
-        targetSdk = AndroidConfig.TARGET_SDK
+        targetSdk = AndroidConfig.TargetSdk
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
-        sourceCompatibility = AndroidConfig.JDK_VERSION
-        targetCompatibility = AndroidConfig.JDK_VERSION
+        sourceCompatibility = AndroidConfig.JdkVersion
+        targetCompatibility = AndroidConfig.JdkVersion
     }
 
     publishing {
@@ -59,10 +59,10 @@ dependencies {
     androidTestImplementation(libs.androidx.test.runner)
 }
 
-kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JVM_TARGET)
+kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JvmTarget)
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JDK_VERSION.toString()))
+        languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JdkVersion.toString()))
     }
 }

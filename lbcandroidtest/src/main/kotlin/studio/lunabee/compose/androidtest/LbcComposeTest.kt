@@ -66,7 +66,7 @@ abstract class LbcComposeTest {
      */
     operator fun invoke(
         effectContext: CoroutineContext = EmptyCoroutineContext,
-        block: ComposeUiTest.() -> Unit,
+        block: ComposeUiTest.() -> Unit
     ) {
         runComposeUiTest(effectContext = effectContext) {
             try {
@@ -86,11 +86,11 @@ abstract class LbcComposeTest {
     inline operator fun <reified A : ComponentActivity> invoke(
         clazz: Class<A>,
         effectContext: CoroutineContext = EmptyCoroutineContext,
-        noinline block: AndroidComposeUiTest<A>.() -> Unit,
+        noinline block: AndroidComposeUiTest<A>.() -> Unit
     ) {
         runAndroidComposeUiTest(
             activityClass = clazz,
-            effectContext = effectContext,
+            effectContext = effectContext
         ) {
             try {
                 block()
@@ -105,10 +105,11 @@ abstract class LbcComposeTest {
     open fun onFailure(e: Throwable) {
         val suffix = LbcAndroidTestConstants.FailureSuffix + "_${e.javaClass.simpleName}"
         printRule.printWholeScreen(suffix, noSync = true)
-        val tree = isRoot()
-            .waitUntilAtLeastOneExists(true)
-            .onFirst()
-            .printToString()
+        val tree =
+            isRoot()
+                .waitUntilAtLeastOneExists(true)
+                .onFirst()
+                .printToString()
         Log.e("ON_FAILURE", tree)
     }
 }

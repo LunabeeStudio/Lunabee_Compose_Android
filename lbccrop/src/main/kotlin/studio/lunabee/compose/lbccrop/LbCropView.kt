@@ -43,46 +43,47 @@ import kotlinx.coroutines.launch
 import net.engawapg.lib.zoomable.zoomable
 
 @Composable
-fun LbCropView(
-    state: LbCropViewState,
-    modifier: Modifier = Modifier,
-) {
+fun LbCropView(state: LbCropViewState, modifier: Modifier = Modifier) {
     val coroutineScope = rememberCoroutineScope()
     var repositioningJob: Job? = null
 
     if (state.readyToCompose) {
-        val painter = rememberAsyncImagePainter(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(state.tempFile.toUri())
-                .memoryCacheKey(state.key.toString())
-                .build(),
-            onState = {
-                when (it) {
-                    is AsyncImagePainter.State.Success -> {
-                        coroutineScope.launch {
-                            state.onImageReady(it.painter.intrinsicSize)
+        val painter =
+            rememberAsyncImagePainter(
+                model =
+                ImageRequest
+                    .Builder(LocalContext.current)
+                    .data(state.tempFile.toUri())
+                    .memoryCacheKey(state.key.toString())
+                    .build(),
+                onState = {
+                    when (it) {
+                        is AsyncImagePainter.State.Success -> {
+                            coroutineScope.launch {
+                                state.onImageReady(it.painter.intrinsicSize)
+                            }
+                        }
+                        else -> {
+                            // no-op
                         }
                     }
-                    else -> {
-                        /* no-op */
-                    }
                 }
-            },
-        )
+            )
 
         Image(
             painter = painter,
-            modifier = modifier
+            modifier =
+            modifier
                 .zIndex(1f)
                 .clipToBounds()
                 .onGloballyPositioned {
                     state.setCropZoneSize(it.size.toSize())
-                }
-                .zoomable(
+                }.zoomable(
                     state.zoomState,
-                    zoomEnabled = state.zoomState.scale <= state.maxScale * LbCropConst.MaxZoomSafeGard,
+                    zoomEnabled =
+                    state.zoomState.scale <= state.maxScale * LbCropConst.MaxZoomSafeGard
                 ),
-            contentDescription = null,
+            contentDescription = null
         )
     }
 
@@ -90,22 +91,28 @@ fun LbCropView(
         if (state.readyToCompose) {
             repositioningJob?.cancel()
             if (state.zoomState.scale < state.minScale) {
-                repositioningJob = coroutineScope.launch {
-                    delay(LbCropConst.RepositionningDelayMs)
-                    state.zoomState.changeScale(
-                        targetScale = state.minScale,
-                        position = Offset(state.zoomState.offsetX, state.zoomState.offsetY),
-                    )
-                }
+                repositioningJob =
+                    coroutineScope.launch {
+                        delay(LbCropConst.RepositionningDelayMs)
+                        state.zoomState.changeScale(
+                            targetScale = state.minScale,
+                            position = Offset(state.zoomState.offsetX, state.zoomState.offsetY)
+                        )
+                    }
             } else if (state.zoomState.scale > state.maxScale) {
-                repositioningJob = coroutineScope.launch {
-                    delay(LbCropConst.RepositionningDelayMs)
-                    val scaleDiff = state.maxScale / state.zoomState.scale
-                    state.zoomState.changeScale(
-                        targetScale = state.maxScale,
-                        position = Offset(state.zoomState.offsetX / scaleDiff, state.zoomState.offsetY / scaleDiff),
-                    )
-                }
+                repositioningJob =
+                    coroutineScope.launch {
+                        delay(LbCropConst.RepositionningDelayMs)
+                        val scaleDiff = state.maxScale / state.zoomState.scale
+                        state.zoomState.changeScale(
+                            targetScale = state.maxScale,
+                            position =
+                            Offset(
+                                state.zoomState.offsetX / scaleDiff,
+                                state.zoomState.offsetY / scaleDiff
+                            )
+                        )
+                    }
             }
         }
     }

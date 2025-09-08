@@ -34,7 +34,6 @@ import androidx.compose.ui.text.AnnotatedString
 
 @Stable
 sealed class LbcTextSpec {
-
     abstract val annotated: AnnotatedString
         @ReadOnlyComposable @Composable
         get
@@ -44,12 +43,13 @@ sealed class LbcTextSpec {
         get
 
     abstract fun string(context: Context): String
+
     open fun annotated(context: Context): AnnotatedString = AnnotatedString(string(context))
 
     @Composable
     @ReadOnlyComposable
-    protected fun Array<out Any>.resolveArgs(): Array<out Any> {
-        return Array(this.size) { idx ->
+    protected fun Array<out Any>.resolveArgs(): Array<out Any> =
+        Array(this.size) { idx ->
             val entry = this[idx]
             if (entry is LbcTextSpec) {
                 entry.string // marked as compile error due to Java(?)
@@ -57,10 +57,9 @@ sealed class LbcTextSpec {
                 this[idx]
             }
         }
-    }
 
-    protected fun Array<out Any>.resolveArgsContext(context: Context): Array<out Any> {
-        return Array(this.size) { idx ->
+    protected fun Array<out Any>.resolveArgsContext(context: Context): Array<out Any> =
+        Array(this.size) { idx ->
             val entry = this[idx]
             if (entry is LbcTextSpec) {
                 entry.string(context) // marked as compile error due to Java(?)
@@ -68,7 +67,6 @@ sealed class LbcTextSpec {
                 this[idx]
             }
         }
-    }
 
     class Raw(private val value: String, private vararg val args: Any) : LbcTextSpec() {
         override val annotated: AnnotatedString
@@ -81,20 +79,20 @@ sealed class LbcTextSpec {
             @Composable
             @ReadOnlyComposable
             @Suppress("SpreadOperator")
-            get() = if (args.isEmpty()) {
-                value
-            } else {
-                value.format(*args.resolveArgs())
-            }
+            get() =
+                if (args.isEmpty()) {
+                    value
+                } else {
+                    value.format(*args.resolveArgs())
+                }
 
-        override fun string(context: Context): String {
-            return if (args.isEmpty()) {
+        override fun string(context: Context): String =
+            if (args.isEmpty()) {
                 value
             } else {
                 @Suppress("SpreadOperator")
                 value.format(*args.resolveArgsContext(context))
             }
-        }
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -107,13 +105,9 @@ sealed class LbcTextSpec {
             return true
         }
 
-        override fun hashCode(): Int {
-            return value.hashCode()
-        }
+        override fun hashCode(): Int = value.hashCode()
 
-        override fun toString(): String {
-            return "value = $value"
-        }
+        override fun toString(): String = "value = $value"
     }
 
     class Annotated(private val value: AnnotatedString) : LbcTextSpec() {
@@ -142,19 +136,12 @@ sealed class LbcTextSpec {
             return true
         }
 
-        override fun hashCode(): Int {
-            return value.hashCode()
-        }
+        override fun hashCode(): Int = value.hashCode()
 
-        override fun toString(): String {
-            return "value = ${value.text}"
-        }
+        override fun toString(): String = "value = ${value.text}"
     }
 
-    class StringResource(
-        @StringRes val id: Int,
-        vararg val args: Any,
-    ) : LbcTextSpec() {
+    class StringResource(@StringRes val id: Int, vararg val args: Any) : LbcTextSpec() {
         override val annotated: AnnotatedString
             @Composable
             @ReadOnlyComposable
@@ -191,12 +178,8 @@ sealed class LbcTextSpec {
         }
     }
 
-    class PluralsResource(
-        @PluralsRes val id: Int,
-        val count: Int,
-        vararg val args: Any,
-    ) : LbcTextSpec() {
-
+    class PluralsResource(@PluralsRes val id: Int, val count: Int, vararg val args: Any) :
+        LbcTextSpec() {
         override val annotated: AnnotatedString
             @Composable
             @ReadOnlyComposable
@@ -238,7 +221,7 @@ sealed class LbcTextSpec {
     class StringByNameResource(
         private val name: String,
         @StringRes private val fallbackId: Int,
-        private vararg val args: Any,
+        private vararg val args: Any
     ) : LbcTextSpec() {
         override val annotated: AnnotatedString
             @Composable
@@ -250,11 +233,21 @@ sealed class LbcTextSpec {
             @Composable
             @ReadOnlyComposable
             @Suppress("SpreadOperator")
-            get() = stringResource(getStringIdByName(LocalContext.current, name) ?: fallbackId, *args.resolveArgs())
+            get() =
+                stringResource(
+                    getStringIdByName(LocalContext.current, name) ?: fallbackId,
+                    *args
+                        .resolveArgs()
+                )
 
         override fun string(context: Context): String {
             @Suppress("SpreadOperator")
-            return context.getString(getStringIdByName(context, name) ?: fallbackId, *args.resolveArgsContext(context))
+            return context
+                .getString(
+                    getStringIdByName(context, name) ?: fallbackId,
+                    *args
+                        .resolveArgsContext(context)
+                )
         }
 
         override fun equals(other: Any?): Boolean {

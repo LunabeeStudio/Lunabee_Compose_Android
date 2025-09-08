@@ -25,16 +25,17 @@ fun GlanceViewFlipper(
     @IdRes viewFlipperViewId: Int,
     flipInterval: Duration,
     modifier: GlanceModifier = GlanceModifier,
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
     val context = LocalContext.current
     val remoteViews = RemoteViews(context.packageName, viewFlipperLayout)
-    remoteViews.setInt(viewFlipperViewId, "setFlipInterval", flipInterval.inWholeMilliseconds.toInt())
+    remoteViews
+        .setInt(viewFlipperViewId, "setFlipInterval", flipInterval.inWholeMilliseconds.toInt())
 
     AndroidRemoteViews(
         modifier = modifier,
         remoteViews = remoteViews,
         containerViewId = viewFlipperViewId,
-        content = content,
+        content = content
     )
 }

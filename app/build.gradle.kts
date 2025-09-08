@@ -22,7 +22,11 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id(libs.plugins.compose.plugin.get().pluginId)
+    id(
+        libs.plugins.compose.plugin
+            .get()
+            .pluginId
+    )
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
 }
@@ -30,21 +34,22 @@ plugins {
 android {
     namespace = "studio.lunabee.compose"
 
-    compileSdk = AndroidConfig.COMPILE_SDK
+    compileSdk = AndroidConfig.CompileSdk
 
     defaultConfig {
-        minSdk = AndroidConfig.MIN_SDK
-        targetSdk = AndroidConfig.TARGET_SDK
+        minSdk = AndroidConfig.MinSdk
+        targetSdk = AndroidConfig.TargetSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        versionCode = System.getenv(EnvConfig.ENV_VERSION_CODE)?.toInt() ?: AndroidConfig.VERSION_CODE
-        versionName = System.getenv(EnvConfig.ENV_VERSION_NAME) ?: AndroidConfig.VERSION_NAME
+        versionCode =
+            System.getenv(EnvConfig.EnvVersionCode)?.toInt() ?: AndroidConfig.VersionCode
+        versionName = System.getenv(EnvConfig.EnvVersionName) ?: AndroidConfig.VersionName
     }
 
     compileOptions {
-        sourceCompatibility = AndroidConfig.JDK_VERSION
-        targetCompatibility = AndroidConfig.JDK_VERSION
+        sourceCompatibility = AndroidConfig.JdkVersion
+        targetCompatibility = AndroidConfig.JdkVersion
     }
 
     buildTypes {
@@ -125,10 +130,10 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 }
 
-kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JVM_TARGET)
+kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JvmTarget)
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JDK_VERSION.toString()))
+        languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JdkVersion.toString()))
     }
 }

@@ -40,14 +40,16 @@ import studio.lunabee.compose.glance.helpers.PinWidgetToHomeScreenHelper
 @Composable
 fun GlanceScreen() {
     val context: Context = LocalContext.current
-    val pinWidgetHelper: PinWidgetToHomeScreenHelper = remember {
-        PinWidgetToHomeScreenHelper(context)
-    }
+    val pinWidgetHelper: PinWidgetToHomeScreenHelper =
+        remember {
+            PinWidgetToHomeScreenHelper(context)
+        }
 
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
-            .padding(all = 16.dp),
+            .padding(all = 16.dp)
     ) {
         if (pinWidgetHelper.isPinSupported()) {
             // Used for demo purpose directly in the Composable.
@@ -55,11 +57,13 @@ fun GlanceScreen() {
             Button(
                 onClick = {
                     coroutineScope.launch {
-                        pinWidgetHelper.pin(GlanceWidgetDemo::class.java, GlanceWidgetDemoReceiver::class.java)
+                        pinWidgetHelper
+                            .pin(GlanceWidgetDemo::class.java, GlanceWidgetDemoReceiver::class.java)
                     }
                 },
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier =
+                Modifier
+                    .fillMaxWidth()
             ) {
                 Text(text = "Pin the widget!")
             }

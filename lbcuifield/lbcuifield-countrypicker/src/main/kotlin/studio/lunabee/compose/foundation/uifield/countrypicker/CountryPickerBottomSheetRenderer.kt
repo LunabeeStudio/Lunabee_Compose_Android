@@ -32,7 +32,6 @@ import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
  * This allows to customize the bottom sheet, the search field, and the country row.
  */
 interface CountryPickerBottomSheetRenderer {
-
     /**
      * Holder for the bottom sheet content.
      *
@@ -45,7 +44,8 @@ interface CountryPickerBottomSheetRenderer {
     fun BottomSheetHolder(
         dismiss: () -> Unit,
         searchField: @Composable () -> Unit,
-        countriesList: @Composable (contentPadding: PaddingValues, lazyListState: LazyListState) -> Unit,
+        countriesList:
+        @Composable (contentPadding: PaddingValues, lazyListState: LazyListState) -> Unit
     )
 
     /**
@@ -56,11 +56,7 @@ interface CountryPickerBottomSheetRenderer {
      * @param onClick The action to perform when the country row is clicked.
      */
     @Composable
-    fun CountryRow(
-        countrySearchItem: CountrySearchItem,
-        searchedText: String,
-        onClick: () -> Unit,
-    )
+    fun CountryRow(countrySearchItem: CountrySearchItem, searchedText: String, onClick: () -> Unit)
 
     /**
      * The label of search field.

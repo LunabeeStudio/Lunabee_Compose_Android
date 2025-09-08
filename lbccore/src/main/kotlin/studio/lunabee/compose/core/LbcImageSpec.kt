@@ -28,35 +28,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed interface LbcImageSpec {
-
     class Icon(
         @DrawableRes val drawableRes: Int,
-        val tint: @Composable () -> Color = { Color.Unspecified },
+        val tint: @Composable () -> Color = { Color.Unspecified }
     ) : LbcImageSpec
 
     class KtImageVector(
         val icon: ImageVector,
-        val tint: @Composable () -> Color = { Color.Unspecified },
+        val tint: @Composable () -> Color = { Color.Unspecified }
     ) : LbcImageSpec
 
     class ImageDrawable(
         @DrawableRes val drawableRes: Int,
-        val uiMode: Int = Configuration.UI_MODE_TYPE_UNDEFINED,
+        val uiMode: Int = Configuration.UI_MODE_TYPE_UNDEFINED
     ) : LbcImageSpec
 
-    class Bitmap(
-        val bitmap: android.graphics.Bitmap,
-    ) : LbcImageSpec
+    class Bitmap(val bitmap: android.graphics.Bitmap) : LbcImageSpec
 
-    class ByteArray(
-        val byteArray: kotlin.ByteArray,
-    ) : LbcImageSpec
+    class ByteArray(val byteArray: kotlin.ByteArray) : LbcImageSpec
 
-    class Url(
-        val url: String,
-    ) : LbcImageSpec
+    class Url(val url: String) : LbcImageSpec
 
-    class Uri(
-        val uri: android.net.Uri,
-    ) : LbcImageSpec
+    class Uri(val uri: android.net.Uri) : LbcImageSpec
 }

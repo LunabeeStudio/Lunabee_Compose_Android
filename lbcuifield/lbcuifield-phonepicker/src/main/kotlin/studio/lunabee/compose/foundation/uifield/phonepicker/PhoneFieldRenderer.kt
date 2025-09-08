@@ -32,7 +32,6 @@ import studio.lunabee.compose.foundation.uifield.countrypicker.SelectedCountry
  * It provides a composable function to render the field content.
  */
 interface PhoneFieldRenderer {
-
     /**
      * Composable function to render the content of a phone field.
      *
@@ -47,6 +46,6 @@ interface PhoneFieldRenderer {
         textField: @Composable (onFocusChange: (focused: Boolean) -> Unit) -> Unit,
         selectedCountry: SelectedCountry?,
         openCountryPicker: () -> Unit,
-        errorMessage: LbcTextSpec?,
+        errorMessage: LbcTextSpec?
     )
 }

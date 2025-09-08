@@ -32,14 +32,15 @@ object Destinations {
     const val GlanceRoute: String = "GlanceRoute"
     const val ImageRoute: String = "ImageRoute"
 
-    val BackNavigationScreen: List<String> = listOf(
-        FoundationRoute,
-        ThemeRoute,
-        HapticRoute,
-        CropRoute,
-        UiFieldRoute,
-        PresenterRoute,
-        GlanceRoute,
-        ImageRoute,
-    )
+    val BackNavigationScreen: List<String> =
+        listOf(
+            FoundationRoute,
+            ThemeRoute,
+            HapticRoute,
+            CropRoute,
+            UiFieldRoute,
+            PresenterRoute,
+            GlanceRoute,
+            ImageRoute
+        )
 }

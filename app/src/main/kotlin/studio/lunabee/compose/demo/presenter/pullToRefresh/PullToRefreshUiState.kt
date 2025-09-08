@@ -23,7 +23,5 @@ package studio.lunabee.compose.demo.presenter.pullToRefresh
 
 import studio.lunabee.compose.presenter.PresenterUiState
 
-data class PullToRefreshUiState(
-    val isRefreshing: Boolean,
-    val refresh: () -> Unit,
-) : PresenterUiState
+data class PullToRefreshUiState(val isRefreshing: Boolean, val refresh: () -> Unit) :
+    PresenterUiState

@@ -30,5 +30,5 @@ data class CropImageQuery(
     val width: Float,
     val height: Float,
     val scale: Float,
-    val originalScale: Float,
+    val originalScale: Float
 )

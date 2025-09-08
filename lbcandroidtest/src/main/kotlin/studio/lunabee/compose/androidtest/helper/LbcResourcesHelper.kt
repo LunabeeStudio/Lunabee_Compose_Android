@@ -14,11 +14,10 @@ object LbcResourcesHelper {
      *
      * @param pathResource exact path resource name (ex: "dev/myFile.txt"). This param does not accept folder.
      */
-    inline fun readResourceAsString(pathResource: String): String {
-        return javaClass.classLoader!!.getResourceAsStream(pathResource).use {
+    inline fun readResourceAsString(pathResource: String): String =
+        javaClass.classLoader!!.getResourceAsStream(pathResource).use {
             it.bufferedReader().readText()
         }
-    }
 
     /**
      * Get content of a test resource file as [ByteArray].
@@ -29,11 +28,10 @@ object LbcResourcesHelper {
      *
      * @param pathResource exact path resource name (ex: "dev/myFile.txt"). This param does not accept folder.
      */
-    inline fun readResourceAsBytes(pathResource: String): ByteArray {
-        return javaClass.classLoader!!.getResourceAsStream(pathResource).use {
+    inline fun readResourceAsBytes(pathResource: String): ByteArray =
+        javaClass.classLoader!!.getResourceAsStream(pathResource).use {
             it.readBytes()
         }
-    }
 
     /**
      * Copy resource content to a specific file in the tested device.
@@ -87,7 +85,7 @@ object LbcResourcesHelper {
         folderResources: List<LbcFolderResource>,
         deviceDestinationFile: File,
         context: Context,
-        overrideExistingFolder: Boolean = true,
+        overrideExistingFolder: Boolean = true
     ) {
         if (overrideExistingFolder) {
             deviceDestinationFile.deleteRecursively()

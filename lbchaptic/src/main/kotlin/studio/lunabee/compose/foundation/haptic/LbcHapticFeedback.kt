@@ -37,12 +37,15 @@ import androidx.core.content.ContextCompat
 class LbcHapticFeedback(
     val vibrator: Vibrator?,
     val hapticFeedBack: HapticFeedback,
-    private val view: View,
+    private val view: View
 ) {
     /**
      * Perform an haptic feedback. If it's not supported, [fallback] will be used. To avoid an infinite loop, [fallback] is also tested.
      */
-    fun perform(hapticEffect: LbcHapticEffect, fallback: LbcHapticEffect? = LbcHapticEffect.Compose.LongPress) {
+    fun perform(
+        hapticEffect: LbcHapticEffect,
+        fallback: LbcHapticEffect? = LbcHapticEffect.Compose.LongPress
+    ) {
         if (vibrator == null) return
         val supportedHapticEffect = getSupportedHapticEffect()
         (hapticEffect.takeIf { supportedHapticEffect.contains(it) } ?: fallback)?.let { effect ->
@@ -61,13 +64,22 @@ class LbcHapticFeedback(
         }
     }
 
-    private fun performFeedbackConstants(view: View, hapticEffect: LbcHapticEffect.FeedbackConstants) {
+    private fun performFeedbackConstants(
+        view: View,
+        hapticEffect: LbcHapticEffect.FeedbackConstants
+    ) {
         view.performHapticFeedback(hapticEffect.hapticId)
     }
 
     private fun performCompositionPrimitives(hapticEffect: LbcHapticEffect.CompositionPrimitives) {
         if (vibrator != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            vibrator.vibrate(VibrationEffect.startComposition().addPrimitive(hapticEffect.hapticId).compose())
+            vibrator
+                .vibrate(
+                    VibrationEffect
+                        .startComposition()
+                        .addPrimitive(hapticEffect.hapticId)
+                        .compose()
+                )
         }
     }
 
@@ -107,36 +119,36 @@ class LbcHapticFeedback(
     }
 
     companion object {
-        val AllEffects: List<LbcHapticEffect> = listOf(
-            LbcHapticEffect.Compose.TextHandleMove,
-            LbcHapticEffect.Compose.LongPress,
-            LbcHapticEffect.Predefined.Tick,
-            LbcHapticEffect.Predefined.Click,
-            LbcHapticEffect.Predefined.HeavyClick,
-            LbcHapticEffect.Predefined.DoubleClick,
-            LbcHapticEffect.FeedbackConstants.Confirm,
-            LbcHapticEffect.FeedbackConstants.Reject,
-            LbcHapticEffect.CompositionPrimitives.Tick,
-            LbcHapticEffect.CompositionPrimitives.Click,
-            LbcHapticEffect.CompositionPrimitives.SlowRise,
-            LbcHapticEffect.CompositionPrimitives.QuickRise,
-            LbcHapticEffect.CompositionPrimitives.QuickFall,
-            LbcHapticEffect.CompositionPrimitives.LowTick,
-            LbcHapticEffect.CompositionPrimitives.Spin,
-            LbcHapticEffect.CompositionPrimitives.Thud,
-        )
+        val AllEffects: List<LbcHapticEffect> =
+            listOf(
+                LbcHapticEffect.Compose.TextHandleMove,
+                LbcHapticEffect.Compose.LongPress,
+                LbcHapticEffect.Predefined.Tick,
+                LbcHapticEffect.Predefined.Click,
+                LbcHapticEffect.Predefined.HeavyClick,
+                LbcHapticEffect.Predefined.DoubleClick,
+                LbcHapticEffect.FeedbackConstants.Confirm,
+                LbcHapticEffect.FeedbackConstants.Reject,
+                LbcHapticEffect.CompositionPrimitives.Tick,
+                LbcHapticEffect.CompositionPrimitives.Click,
+                LbcHapticEffect.CompositionPrimitives.SlowRise,
+                LbcHapticEffect.CompositionPrimitives.QuickRise,
+                LbcHapticEffect.CompositionPrimitives.QuickFall,
+                LbcHapticEffect.CompositionPrimitives.LowTick,
+                LbcHapticEffect.CompositionPrimitives.Spin,
+                LbcHapticEffect.CompositionPrimitives.Thud
+            )
 
         /**
          * Query whether the vibrator supports all of the given primitives.
          * If a primitive is not supported by the device, then no vibration will occur if it is played.
          */
-        fun isPrimitiveSupported(vibrator: Vibrator, primitiveId: Int): Boolean {
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        fun isPrimitiveSupported(vibrator: Vibrator, primitiveId: Int): Boolean =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 vibrator.areAllPrimitivesSupported(primitiveId)
             } else {
                 false
             }
-        }
     }
 }
 
@@ -149,13 +161,12 @@ class LbcHapticFeedback(
 fun rememberLbcHapticFeedback(
     hapticFeedBack: HapticFeedback = LocalHapticFeedback.current,
     context: Context = LocalContext.current,
-    view: View = LocalView.current,
-): LbcHapticFeedback {
-    return remember {
+    view: View = LocalView.current
+): LbcHapticFeedback =
+    remember {
         LbcHapticFeedback(
             hapticFeedBack = hapticFeedBack,
             vibrator = ContextCompat.getSystemService(context, Vibrator::class.java),
-            view = view,
+            view = view
         )
     }
-}

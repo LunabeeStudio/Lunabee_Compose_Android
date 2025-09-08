@@ -35,24 +35,24 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PullToRefreshScreen(
-    uiState: PullToRefreshUiState,
-) {
+fun PullToRefreshScreen(uiState: PullToRefreshUiState) {
     PullToRefreshBox(
         isRefreshing = uiState.isRefreshing,
         onRefresh = uiState.refresh,
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier =
+        Modifier
+            .fillMaxSize()
     ) {
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
         ) {
             repeat(100) {
                 Text(
                     text = it.toString(),
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(16.dp)
                 )
             }
         }

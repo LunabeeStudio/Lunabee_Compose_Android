@@ -28,5 +28,5 @@ data class DatePickerData(
     val datePickerConfirmLabel: LbcTextSpec,
     val datePickerCancelLabel: LbcTextSpec,
     val datePickerClickLabel: LbcTextSpec,
-    val icon: LbcImageSpec,
+    val icon: LbcImageSpec
 )

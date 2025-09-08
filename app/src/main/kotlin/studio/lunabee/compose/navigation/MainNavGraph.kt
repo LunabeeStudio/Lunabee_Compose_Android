@@ -44,66 +44,63 @@ import studio.lunabee.compose.demo.theme.ThemeScreen
 import studio.lunabee.compose.demo.uifield.UiFieldsScreen
 
 @Composable
-fun MainNavGraph(
-    navController: NavHostController,
-    directions: Directions,
-) {
+fun MainNavGraph(navController: NavHostController, directions: Directions) {
     NavHost(
         navController = navController,
-        startDestination = Destinations.MainRoute,
+        startDestination = Destinations.MainRoute
     ) {
         composable(
-            route = Destinations.MainRoute,
+            route = Destinations.MainRoute
         ) {
             MainScreen(directions = directions)
         }
 
         composable(
-            route = Destinations.FoundationRoute,
+            route = Destinations.FoundationRoute
         ) {
             TextScreen()
         }
 
         composable(
-            route = Destinations.HapticRoute,
+            route = Destinations.HapticRoute
         ) {
             HapticScreen()
         }
 
         composable(
-            route = Destinations.ThemeRoute,
+            route = Destinations.ThemeRoute
         ) {
             ThemeScreen()
         }
 
         composable(
-            route = Destinations.CropRoute,
+            route = Destinations.CropRoute
         ) {
             CropScreen()
         }
 
         composable(
-            route = Destinations.UiFieldRoute,
+            route = Destinations.UiFieldRoute
         ) {
             UiFieldsScreen(
-                it.savedStateHandle,
+                it.savedStateHandle
             )
         }
 
         composable(
-            route = Destinations.GlanceRoute,
+            route = Destinations.GlanceRoute
         ) {
             GlanceScreen()
         }
 
         composable(
-            route = Destinations.PresenterRoute,
+            route = Destinations.PresenterRoute
         ) {
             PresenterDemoList { navController.navigate(it) }
         }
 
         composable(
-            route = Destinations.ImageRoute,
+            route = Destinations.ImageRoute
         ) {
             ImageScreen()
         }

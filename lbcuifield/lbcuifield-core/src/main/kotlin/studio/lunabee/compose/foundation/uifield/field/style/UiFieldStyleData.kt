@@ -46,6 +46,6 @@ interface UiFieldStyleData {
         readOnly: Boolean,
         enabled: Boolean,
         error: UiFieldError?,
-        interactionSource: MutableInteractionSource?,
+        interactionSource: MutableInteractionSource?
     )
 }
