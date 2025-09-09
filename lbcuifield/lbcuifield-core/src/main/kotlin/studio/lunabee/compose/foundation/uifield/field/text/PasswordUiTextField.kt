@@ -110,15 +110,10 @@ class PasswordUiTextField(
 
     // Not used here ...
     override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
-    override fun savedValueToData(value: String): String {
-        return value
-    }
 
-    override fun valueToSavedString(value: String): String {
-        return value
-    }
+    override fun savedValueToData(value: String): String = value
 
-    override fun valueToDisplayedString(value: String): String {
-        return value
-    }
+    override fun valueToSavedString(value: String): String = value
+
+    override fun valueToDisplayedString(value: String): String = value
 }

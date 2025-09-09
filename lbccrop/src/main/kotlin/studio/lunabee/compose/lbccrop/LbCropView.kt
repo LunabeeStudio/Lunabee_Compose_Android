@@ -52,7 +52,8 @@ fun LbCropView(
 
     if (state.readyToCompose) {
         val painter = rememberAsyncImagePainter(
-            model = ImageRequest.Builder(LocalContext.current)
+            model = ImageRequest
+                .Builder(LocalContext.current)
                 .data(state.tempFile.toUri())
                 .memoryCacheKey(state.key.toString())
                 .build(),
@@ -64,7 +65,7 @@ fun LbCropView(
                         }
                     }
                     else -> {
-                        /* no-op */
+                        // no-op
                     }
                 }
             },
@@ -77,8 +78,7 @@ fun LbCropView(
                 .clipToBounds()
                 .onGloballyPositioned {
                     state.setCropZoneSize(it.size.toSize())
-                }
-                .zoomable(
+                }.zoomable(
                     state.zoomState,
                     zoomEnabled = state.zoomState.scale <= state.maxScale * LbCropConst.MaxZoomSafeGard,
                 ),

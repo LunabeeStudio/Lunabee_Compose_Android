@@ -8,7 +8,7 @@
 
 # Do not remove, use as "id" instead of alias, this is why it is not detected.
 compose-plugin = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detekt = { id = "dev.detekt", version.ref = "detekt" }
 
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
@@ -29,7 +29,7 @@ androidx-test-runner = "1.7.0"
 android-tools-desugar_jdk_libs = "2.1.5"
 coil = "2.7.0"
 compose-bom = "2025.07.00"
-detekt = "1.23.8"
+detekt = "2.0.0-alpha.0"
 google-android-material = "1.12.0"
 junit-junit = "4.13.2"
 kotlin = "2.2.0"
@@ -71,7 +71,7 @@ compose-ui-test = { group = "androidx.compose.ui", name = "ui-test" }
 compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 desugarJdk = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-tools-desugar_jdk_libs" }
-detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
+detekt-rules-ktlint-wrapper = { group = "dev.detekt", name = "detekt-rules-ktlint-wrapper", version.ref = "detekt" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycle-viewmodel-android" }
 dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger-hilt" }

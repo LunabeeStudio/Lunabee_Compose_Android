@@ -79,17 +79,11 @@ class PhonePickerUiField(
 
     override val options: List<UiFieldOption> = emptyList()
 
-    override fun valueToDisplayedString(value: CountryCodeFieldData): String {
-        return value.phoneNumber
-    }
+    override fun valueToDisplayedString(value: CountryCodeFieldData): String = value.phoneNumber
 
-    override fun valueToSavedString(value: CountryCodeFieldData): String {
-        return json.encodeToString(value)
-    }
+    override fun valueToSavedString(value: CountryCodeFieldData): String = json.encodeToString(value)
 
-    override fun savedValueToData(value: String): CountryCodeFieldData {
-        return json.decodeFromString(value)
-    }
+    override fun savedValueToData(value: String): CountryCodeFieldData = json.decodeFromString(value)
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable

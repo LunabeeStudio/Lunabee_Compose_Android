@@ -8,20 +8,20 @@ complexity:
   LongParameterList:
     ignoreDefaultParameters: true
     ignoreAnnotated: [ 'Composable', 'Inject' ]
-    functionThreshold: 10
-    constructorThreshold: 10
+    allowedFunctionParameters: 10
+    allowedConstructorParameters: 10
   TooManyFunctions:
     active: false
   LargeClass:
-    threshold: 1000
+    allowedLines: 1000
   LongMethod:
-    threshold: 250
+    allowedLines: 250
   CyclomaticComplexMethod:
-    threshold: 25
+    allowedComplexity: 25
   NestedBlockDepth:
-    threshold: 10
+    allowedDepth: 10
   ComplexCondition:
-    threshold: 10
+    allowedConditions: 10
 
 empty-blocks:
   EmptyFunctionBlock:
@@ -48,12 +48,10 @@ exceptions:
   TooGenericExceptionCaught:
     active: false
 
-formatting:
+ktlint:
   active: true
-  android: true
   autoCorrect: true
-  AnnotationOnSeparateLine:
-    active: true
+  code_style: 'ktlint_official'
   ChainWrapping:
     active: false
     autoCorrect: true
@@ -146,12 +144,27 @@ formatting:
   StringTemplate:
     active: true
     autoCorrect: true
-  TrailingCommaOnDeclarationSite:
-    active: true
-  TrailingCommaOnCallSite:
-    active: true
   ArgumentListWrapping:
     maxLineLength: 140
+  BinaryExpressionWrapping:
+    maxLineLength: 140
+  MultilineExpressionWrapping:
+    active: false
+  NoEmptyFirstLineInClassBody:
+    active: false
+  FunctionSignature:
+    active: false
+  ClassSignature:
+    active: false
+  PropertyName:
+    constantNamingStyle: pascal_case
+  AnnotationOnSeparateLine:
+    autoCorrect: false
+    ignoreAnnotated: [ 'Inject' ]
+  FunctionLiteral:
+    maxLineLength: 140
+  ChainMethodContinuation:
+    excludes: ['**/build.gradle.kts']
 
 naming:
   FunctionNaming:
@@ -174,5 +187,5 @@ style:
     excludeGuardClauses: true
   NewLineAtEndOfFile:
     active: false # https://detekt.dev/formatting.html#finalnewline
-  UnusedPrivateMember:
+  UnusedPrivateFunction:
     ignoreAnnotated: [ 'Preview' ]

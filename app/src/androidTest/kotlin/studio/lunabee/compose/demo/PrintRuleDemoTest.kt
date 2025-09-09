@@ -40,16 +40,17 @@ class PrintRuleDemoTest : LbcComposeTest() {
         val files = parentFile.listFiles()!!
         assertEquals(1, files.size)
         assertEquals(
-            File(context.cacheDir, "screenshot/PrintRuleDemoTest/print_screenshot_on_timeout_test_0_TIMEOUT.jpeg").absolutePath,
+            File(context.cacheDir, "screenshot/PrintRuleDemoTest/print_screenshot_on_timeout_test_0_TIMEOUT.jpeg")
+                .absolutePath,
             files.first().absolutePath,
         )
 
         // assert(false) // Make the test fail to check if screenshots still exist in device cache storage
     }
 
-    /**
-     * Screenshot on failure testing (manual testing)
-     */
+    // /**
+    //  * Screenshot on failure testing (manual testing)
+    //  */
     //    @Test
     //    fun print_screenshot_on_failure_test(): Unit = invoke {
     //        setContent {

@@ -47,8 +47,12 @@ class CountrySearchDelegate(
 ) {
 
     private var allCountryCodes: List<CountrySearchItem> =
-        CCPCountry.getLibraryMasterCountryList(context, CountryCodePicker.Language.forCountryNameCode(Locale.getDefault().language))
-            .map { country ->
+        CCPCountry
+            .getLibraryMasterCountryList(
+                context,
+                CountryCodePicker.Language
+                    .forCountryNameCode(Locale.getDefault().language),
+            ).map { country ->
                 CountrySearchItem(
                     name = country.name,
                     countryPhoneCode = country.phoneCode,
@@ -90,7 +94,8 @@ class CountrySearchDelegate(
     private fun updateUiStateWithSearch(searchedText: String) {
         _uiState.value = uiState.value.copy(
             countryCodesToDisplay = allCountryCodes.filter { country ->
-                country.name.normalized()
+                country.name
+                    .normalized()
                     .contains(searchedText.normalized())
             },
             searchedText = searchedText,
@@ -101,7 +106,8 @@ class CountrySearchDelegate(
         countryName: String,
     ) {
         coroutineScope.launch {
-            allCountryCodes.firstOrNull { it.name == countryName }
+            allCountryCodes
+                .firstOrNull { it.name == countryName }
                 ?.let { initialCountry ->
                     _uiState.value = uiState.value.copy(
                         selectedCountry = SelectedCountry(
@@ -120,7 +126,8 @@ class CountrySearchDelegate(
         countryPhoneCode: String,
     ) {
         coroutineScope.launch {
-            allCountryCodes.firstOrNull { it.countryPhoneCode == countryPhoneCode }
+            allCountryCodes
+                .firstOrNull { it.countryPhoneCode == countryPhoneCode }
                 ?.let { initialCountry ->
                     _uiState.value = uiState.value.copy(
                         selectedCountry = SelectedCountry(

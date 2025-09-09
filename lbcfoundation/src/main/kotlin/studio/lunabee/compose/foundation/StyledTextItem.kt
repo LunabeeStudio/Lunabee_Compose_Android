@@ -77,7 +77,8 @@ fun StyledTextItem(
                 index++
             } else {
                 // Substring to keep initial case.
-                val textToAppend = rawBaseText.substring(startIndex = index, endIndex = index + textToHighlight.text.length)
+                val textToAppend = rawBaseText
+                    .substring(startIndex = index, endIndex = index + textToHighlight.text.length)
 
                 // Set a tag to retrieve our annotation later if needed for a click for example.
                 // Set a start and an end index to retrieve this annotation later when clicking on it.

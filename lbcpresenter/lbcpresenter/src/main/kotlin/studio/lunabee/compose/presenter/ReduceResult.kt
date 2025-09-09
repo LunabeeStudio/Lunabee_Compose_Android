@@ -29,8 +29,6 @@ data class ReduceResult<UiState>(
 infix fun <UiState : PresenterUiState> UiState.withSideEffect(sideEffect: ReduceSideEffect): ReduceResult<UiState> =
     ReduceResult(this, sideEffect)
 
-fun <UiState : PresenterUiState> UiState.asResult(): ReduceResult<UiState> {
-    return ReduceResult(this, null)
-}
+fun <UiState : PresenterUiState> UiState.asResult(): ReduceResult<UiState> = ReduceResult(this, null)
 
 typealias ReduceSideEffect = suspend () -> Unit

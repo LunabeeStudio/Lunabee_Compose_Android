@@ -57,17 +57,12 @@ class DateUiField(
     override val enabled: Boolean = true,
 ) : TimeUiField<LocalDate?>(), DatePickerHolder {
     override val options: List<UiFieldOption> = listOf(DatePickerOption(enabled && !readOnly, this))
-    override fun savedValueToData(value: String): LocalDate {
-        return LocalDate.parse(value)
-    }
 
-    override fun valueToSavedString(value: LocalDate?): String {
-        return value?.let(LocalDate::toString).orEmpty()
-    }
+    override fun savedValueToData(value: String): LocalDate = LocalDate.parse(value)
 
-    override fun valueToDisplayedString(value: LocalDate?): String {
-        return value?.let(formatter::format).orEmpty()
-    }
+    override fun valueToSavedString(value: LocalDate?): String = value?.let(LocalDate::toString).orEmpty()
+
+    override fun valueToDisplayedString(value: LocalDate?): String = value?.let(formatter::format).orEmpty()
 
     override val date: LocalDate?
         get() = value

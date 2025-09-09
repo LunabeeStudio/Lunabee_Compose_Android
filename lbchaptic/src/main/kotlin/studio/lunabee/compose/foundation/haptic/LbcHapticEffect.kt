@@ -35,9 +35,8 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 sealed interface LbcHapticEffect {
     val hapticId: Int
 
-    fun isSupported(vibrator: Vibrator): Boolean {
-        return LbcHapticFeedback.isPrimitiveSupported(vibrator = vibrator, primitiveId = hapticId)
-    }
+    fun isSupported(vibrator: Vibrator): Boolean = LbcHapticFeedback
+        .isPrimitiveSupported(vibrator = vibrator, primitiveId = hapticId)
 
     sealed interface Predefined : LbcHapticEffect {
         data object Tick : Predefined {

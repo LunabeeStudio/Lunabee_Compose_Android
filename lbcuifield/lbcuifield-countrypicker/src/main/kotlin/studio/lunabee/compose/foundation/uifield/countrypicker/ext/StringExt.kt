@@ -24,7 +24,7 @@ package studio.lunabee.compose.foundation.uifield.countrypicker.ext
 import doist.x.normalize.Form
 import doist.x.normalize.normalize
 
-internal fun String.normalized(): String {
-    return this.lowercase().normalize(Form.NFD)
-        .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
-}
+internal fun String.normalized(): String = this
+    .lowercase()
+    .normalize(Form.NFD)
+    .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")

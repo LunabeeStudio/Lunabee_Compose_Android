@@ -66,17 +66,11 @@ class DateAndHourUiField(
         HourPickerOption(enabled && !readOnly, this),
     )
 
-    override fun savedValueToData(value: String): LocalDateTime {
-        return LocalDateTime.parse(value)
-    }
+    override fun savedValueToData(value: String): LocalDateTime = LocalDateTime.parse(value)
 
-    override fun valueToSavedString(value: LocalDateTime?): String {
-        return value.toString()
-    }
+    override fun valueToSavedString(value: LocalDateTime?): String = value.toString()
 
-    override fun valueToDisplayedString(value: LocalDateTime?): String {
-        return value?.let(formatter::format).orEmpty()
-    }
+    override fun valueToDisplayedString(value: LocalDateTime?): String = value?.let(formatter::format).orEmpty()
 
     override val date: LocalDate?
         get() = value?.toLocalDate()

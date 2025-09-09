@@ -75,9 +75,7 @@ abstract class TextUiField : UiField<String>() {
         )
     }
 
-    override fun valueToDisplayedString(value: String): String {
-        return value
-    }
+    override fun valueToDisplayedString(value: String): String = value
 
     override fun valueToSavedString(value: String): String = value
 

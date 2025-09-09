@@ -73,24 +73,25 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
         actualState: () -> MainUiState,
         performNavigation: (NavScope.() -> Unit) -> Unit,
     ): Flow<MainUiState> {
-        val uiStateFlow = flows.merge().filter { action ->
-            filterAction(action) && filterUiState(actualState()).also {
-                log { "Filter (= $it) action <$action>" }
-            }
-        }.mapNotNull { action ->
-            val state = actualState()
-            log { "Reducing state <$state> with action <$action>" }
-            (state as? UiState)?.let {
-                reduce(
-                    actualState = it,
-                    action = action as Action,
-                    performNavigation = performNavigation,
-                ).also {
-                    log { "Reduced state = ${it.uiState}" }
+        val uiStateFlow = flows
+            .merge()
+            .filter { action ->
+                filterAction(action) && filterUiState(actualState()).also {
+                    log { "Filter (= $it) action <$action>" }
                 }
-            }
-        }
-            .onEach { coroutineScope.launch { it.sideEffect?.invoke() } }
+            }.mapNotNull { action ->
+                val state = actualState()
+                log { "Reducing state <$state> with action <$action>" }
+                (state as? UiState)?.let {
+                    reduce(
+                        actualState = it,
+                        action = action as Action,
+                        performNavigation = performNavigation,
+                    ).also {
+                        log { "Reduced state = ${it.uiState}" }
+                    }
+                }
+            }.onEach { coroutineScope.launch { it.sideEffect?.invoke() } }
             .map { it.uiState }
         return if (verbose) {
             uiStateFlow.onCompletion { throwable -> log { "Reducer completed $throwable" } }

@@ -29,16 +29,12 @@ package studio.lunabee.compose.presenter
  */
 abstract class LBSinglePresenter<UiState : PresenterUiState, NavScope : Any, Action>(
     verbose: Boolean = false,
-) : LBPresenter<UiState, NavScope, Action>(
-    verbose = verbose,
-) {
+) : LBPresenter<UiState, NavScope, Action>(verbose = verbose) {
     private val reducer by lazy { initReducer() }
 
     final override fun getReducerByState(
         actualState: UiState,
-    ): LBSingleReducer<UiState, NavScope, Action> {
-        return reducer
-    }
+    ): LBSingleReducer<UiState, NavScope, Action> = reducer
 
     abstract fun initReducer(): LBSingleReducer<UiState, NavScope, Action>
 }

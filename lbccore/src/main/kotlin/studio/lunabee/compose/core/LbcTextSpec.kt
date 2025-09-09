@@ -44,29 +44,26 @@ sealed class LbcTextSpec {
         get
 
     abstract fun string(context: Context): String
+
     open fun annotated(context: Context): AnnotatedString = AnnotatedString(string(context))
 
     @Composable
     @ReadOnlyComposable
-    protected fun Array<out Any>.resolveArgs(): Array<out Any> {
-        return Array(this.size) { idx ->
-            val entry = this[idx]
-            if (entry is LbcTextSpec) {
-                entry.string // marked as compile error due to Java(?)
-            } else {
-                this[idx]
-            }
+    protected fun Array<out Any>.resolveArgs(): Array<out Any> = Array(this.size) { idx ->
+        val entry = this[idx]
+        if (entry is LbcTextSpec) {
+            entry.string // marked as compile error due to Java(?)
+        } else {
+            this[idx]
         }
     }
 
-    protected fun Array<out Any>.resolveArgsContext(context: Context): Array<out Any> {
-        return Array(this.size) { idx ->
-            val entry = this[idx]
-            if (entry is LbcTextSpec) {
-                entry.string(context) // marked as compile error due to Java(?)
-            } else {
-                this[idx]
-            }
+    protected fun Array<out Any>.resolveArgsContext(context: Context): Array<out Any> = Array(this.size) { idx ->
+        val entry = this[idx]
+        if (entry is LbcTextSpec) {
+            entry.string(context) // marked as compile error due to Java(?)
+        } else {
+            this[idx]
         }
     }
 
@@ -87,13 +84,11 @@ sealed class LbcTextSpec {
                 value.format(*args.resolveArgs())
             }
 
-        override fun string(context: Context): String {
-            return if (args.isEmpty()) {
-                value
-            } else {
-                @Suppress("SpreadOperator")
-                value.format(*args.resolveArgsContext(context))
-            }
+        override fun string(context: Context): String = if (args.isEmpty()) {
+            value
+        } else {
+            @Suppress("SpreadOperator")
+            value.format(*args.resolveArgsContext(context))
         }
 
         override fun equals(other: Any?): Boolean {
@@ -107,13 +102,9 @@ sealed class LbcTextSpec {
             return true
         }
 
-        override fun hashCode(): Int {
-            return value.hashCode()
-        }
+        override fun hashCode(): Int = value.hashCode()
 
-        override fun toString(): String {
-            return "value = $value"
-        }
+        override fun toString(): String = "value = $value"
     }
 
     class Annotated(private val value: AnnotatedString) : LbcTextSpec() {
@@ -142,13 +133,9 @@ sealed class LbcTextSpec {
             return true
         }
 
-        override fun hashCode(): Int {
-            return value.hashCode()
-        }
+        override fun hashCode(): Int = value.hashCode()
 
-        override fun toString(): String {
-            return "value = ${value.text}"
-        }
+        override fun toString(): String = "value = ${value.text}"
     }
 
     class StringResource(

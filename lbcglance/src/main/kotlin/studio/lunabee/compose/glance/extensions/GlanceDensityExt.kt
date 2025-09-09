@@ -30,14 +30,10 @@ import androidx.core.util.TypedValueCompat
  * As LocalDensity is not available in Glance context, use the following method to convert
  * [TextUnit] to [Float] with the current device's display metrics.
  */
-fun TextUnit.toPx(displayMetrics: DisplayMetrics): Float {
-    return TypedValueCompat.spToPx(value, displayMetrics)
-}
+fun TextUnit.toPx(displayMetrics: DisplayMetrics): Float = TypedValueCompat.spToPx(value, displayMetrics)
 
 /**
  * As LocalDensity is not available in Glance context, use the following method to convert
  * [Dp] to [Float] with the current device's display metrics.
  */
-fun Dp.toPx(displayMetrics: DisplayMetrics): Float {
-    return TypedValueCompat.dpToPx(value, displayMetrics)
-}
+fun Dp.toPx(displayMetrics: DisplayMetrics): Float = TypedValueCompat.dpToPx(value, displayMetrics)

@@ -29,16 +29,12 @@ import studio.lunabee.compose.presenter.asResult
 class TimerReducer(
     override val coroutineScope: CoroutineScope,
     override val emitUserAction: (TimerAction) -> Unit,
-) : LBSingleReducer<TimerUiState, TimerNavScope, TimerAction>(
-    verbose = true,
-) {
+) : LBSingleReducer<TimerUiState, TimerNavScope, TimerAction>(verbose = true) {
     override suspend fun reduce(
         actualState: TimerUiState,
         action: TimerAction,
         performNavigation: (TimerNavScope.() -> Unit) -> Unit,
-    ): ReduceResult<TimerUiState> {
-        return when (action) {
-            is TimerAction.NewTimerValue -> actualState.copy(timer = action.timerValue).asResult()
-        }
+    ): ReduceResult<TimerUiState> = when (action) {
+        is TimerAction.NewTimerValue -> actualState.copy(timer = action.timerValue).asResult()
     }
 }

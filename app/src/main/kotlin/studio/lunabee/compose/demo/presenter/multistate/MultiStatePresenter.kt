@@ -51,18 +51,17 @@ class MultiStatePresenter @Inject constructor() : LBPresenter<MultiStateUiState,
     override val flows: List<Flow<MultiStateAction>> = listOf(flow)
 
     override fun getInitialState(): MultiStateUiState = MultiStateUiState.Data("unknown")
+
     override fun getReducerByState(actualState: MultiStateUiState):
-        LBSimpleReducer<MultiStateUiState, MultiStateNavScope, MultiStateAction> {
-        return when (actualState) {
-            is MultiStateUiState.Data -> MultiStateDataReducer(
-                coroutineScope = viewModelScope,
-                emitUserAction = ::emitUserAction,
-            )
-            is MultiStateUiState.Error -> MultiStateErrorReducer(
-                coroutineScope = viewModelScope,
-                emitUserAction = ::emitUserAction,
-            )
-        }
+        LBSimpleReducer<MultiStateUiState, MultiStateNavScope, MultiStateAction> = when (actualState) {
+        is MultiStateUiState.Data -> MultiStateDataReducer(
+            coroutineScope = viewModelScope,
+            emitUserAction = ::emitUserAction,
+        )
+        is MultiStateUiState.Error -> MultiStateErrorReducer(
+            coroutineScope = viewModelScope,
+            emitUserAction = ::emitUserAction,
+        )
     }
 
     override val content: @Composable (MultiStateUiState) -> Unit = {

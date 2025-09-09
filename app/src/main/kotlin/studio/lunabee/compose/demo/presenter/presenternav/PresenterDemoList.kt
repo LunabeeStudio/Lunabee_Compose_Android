@@ -56,7 +56,7 @@ fun PresenterDemoList(
         MenuDescription(
             titleRes = LbcTextSpec.Raw("Multi state"),
             subtitleRes = null,
-            direction = { navigate(MultiStateDestination.route) },
+            direction = { navigate(MultiStateDestination.Route) },
         ),
     )
 
