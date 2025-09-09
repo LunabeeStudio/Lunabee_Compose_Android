@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.createBitmap
 import androidx.glance.LocalContext
 import androidx.glance.LocalSize
 import androidx.glance.text.TextAlign
@@ -131,39 +132,21 @@ private fun textAsBitmap(
     paint.letterSpacing = letterSpacing
 
     val lineHeightToApply = if (lineHeight == 0f) 0f else abs(lineHeight - textSize)
-    val staticLayout = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        val builder = StaticLayout.Builder
-            .obtain(text, 0, text.length, paint, ellipsizedWidth.roundToInt())
-            .setAlignment(textAlign.toLayoutAlignment())
-            .setLineSpacing(lineHeightToApply, 1f)
-            .setIncludePad(false)
-            .setEllipsizedWidth(ellipsizedWidth.roundToInt())
-            .setEllipsize(ellipsize)
-            .setMaxLines(maxLines)
-            .setBreakStrategy(breakStrategy)
-            .setHyphenationFrequency(hyphenationFrequency)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setJustificationMode(justificationMode)
-        }
-        builder.build()
-    } else {
-        @Suppress("DEPRECATION")
-        StaticLayout(
-            text,
-            0,
-            text.length,
-            paint,
-            ellipsizedWidth.roundToInt(),
-            textAlign.toLayoutAlignment(),
-            lineHeightToApply,
-            1f,
-            false,
-            ellipsize,
-            ellipsizedWidth.roundToInt(),
-        )
+    val builder = StaticLayout.Builder
+        .obtain(text, 0, text.length, paint, ellipsizedWidth.roundToInt())
+        .setAlignment(textAlign.toLayoutAlignment())
+        .setLineSpacing(lineHeightToApply, 1f)
+        .setIncludePad(false)
+        .setEllipsizedWidth(ellipsizedWidth.roundToInt())
+        .setEllipsize(ellipsize)
+        .setMaxLines(maxLines)
+        .setBreakStrategy(breakStrategy)
+        .setHyphenationFrequency(hyphenationFrequency)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        builder.setJustificationMode(justificationMode)
     }
-
-    val image = Bitmap.createBitmap(staticLayout.width, staticLayout.height, Bitmap.Config.ARGB_8888)
+    val staticLayout = builder.build()
+    val image = createBitmap(staticLayout.width, staticLayout.height)
     val canvas = Canvas(image)
     staticLayout.draw(canvas)
     return image

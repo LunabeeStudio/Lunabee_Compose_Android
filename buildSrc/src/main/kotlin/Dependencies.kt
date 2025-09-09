@@ -39,6 +39,6 @@ object Modules {
 
 object BuildConfigs {
     const val LunabeeCompose: String = "_"
-    const val CompileSdk: Int = 35
-    const val MinSdk: Int = 21
+    const val CompileSdk: Int = 36
+    const val MinSdk: Int = 23
 }
