@@ -103,11 +103,12 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
      */
     @OptIn(ExperimentalCoroutinesApi::class)
     private val uiStateFlow: StateFlow<UiState> by lazy {
+        var actualStateSaved: UiState = getInitialState()
+
         val reducer: MutableStateFlow<LBSimpleReducer<UiState, NavScope, Action>> = MutableStateFlow(
-            getReducerByState(actualState = getInitialState()),
+            getReducerByState(actualState = actualStateSaved),
         )
 
-        var actualStateSaved: UiState = getInitialState()
         reducer
             .flatMapLatest {
                 it
