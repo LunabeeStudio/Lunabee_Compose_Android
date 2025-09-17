@@ -7,8 +7,32 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2025-09-17
+
+```
+LbccoreVersion 1.10.0
+LbcfoundationVersion 1.11.0
+LbcandroidtestVersion 1.14.0
+LbcaccessibilityVersion 1.13.0
+LbcthemeVersion 1.9.0
+MaterialColorUtilitiesVersion 1.9.0
+LbchapticVersion 1.7.0
+LbcuifieldCoreVersion 1.10.0
+LbcuifieldPhonepickerVersion 1.4.0
+LbcuifieldCountrypickerVersion 1.3.0
+LbcimageVersion 1.6.0
+LbcglanceVersion 1.5.0
+LbcpresenterVersion 1.7.0
+```
+
+### All
+
 - Update Android SDK to 36
 - Update min SDK to 23
+
+### LbcPresenter
+
+- Fix presenter calls `getInitialState` twice
 
 ## 2025-09-08
 
@@ -17,14 +41,17 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## 2025-08-20
 
 ### LbcPresenter
+
 - Fix single reducer if sealed interface uiState.
 
 ## 2025-08-01
 
 ### All
+
 - Update all dependencies.
 
 ### LbcUiField
+
 - Fix date formatting to String.
 
 ## 2025-07-03
