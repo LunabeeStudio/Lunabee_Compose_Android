@@ -21,7 +21,7 @@
 
 package studio.lunabee.compose.foundation
 
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.LinkAnnotation
@@ -102,20 +102,8 @@ fun StyledTextItem(
         }
     }
 
-    ClickableText(
+    BasicText(
         text = annotatedString,
-        onClick = { offset ->
-            annotatedString
-                // Only get annotation in the range of click. Use same start and end to only get the elements clicked.
-                .getStringAnnotations(start = offset, end = offset)
-                // So at this point, we are sure to have only one.
-                .getOrNull(index = 0)
-                // Find TextToHighlight object corresponding to range tag.
-                ?.let { range -> textToHighLightList.firstOrNull { textToHighlight -> textToHighlight.tag == range.tag } }
-                // Execute action.
-                ?.action
-                ?.invoke()
-        },
         modifier = modifier,
         softWrap = softWrap,
         overflow = overflow,
