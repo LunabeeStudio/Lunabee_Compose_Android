@@ -198,8 +198,23 @@ class PhonePickerUiField(
     }
 
     companion object {
+        /**
+         * Creates a [CountryCodeFieldData] instance by parsing a raw phone number string.
+         *
+         * This function attempts to parse the [rawPhoneNumber] using Google's `libphonenumber` library.
+         * If successful, it extracts the national number and the country code.
+         * If parsing fails (e.g., the format is invalid), it returns a [CountryCodeFieldData]
+         * with the original [rawPhoneNumber] as the phone number and uses the [fallbackCountryCode].
+         *
+         * @param rawPhoneNumber The raw phone number string to parse. It may or may not include a country code.
+         * @param fallbackCountryCode An optional country code to use if the [rawPhoneNumber] cannot be parsed.
+         *   If null, the country code will be empty.
+         * @return A [CountryCodeFieldData] instance containing the parsed phone number and country code,
+         *   or the raw number and fallback code on failure.
+         */
         fun initialValueFromRawPhoneNumber(
             rawPhoneNumber: String,
+            fallbackCountryCode: String? = null,
         ): CountryCodeFieldData {
             try {
                 val phoneNumber = PhoneNumberUtil.getInstance().parse(rawPhoneNumber, null)
@@ -210,7 +225,7 @@ class PhonePickerUiField(
             } catch (e: Exception) {
                 return CountryCodeFieldData(
                     phoneNumber = rawPhoneNumber,
-                    countryCode = "",
+                    countryCode = fallbackCountryCode.orEmpty(),
                 )
             }
         }
