@@ -57,8 +57,8 @@ tasks.withType<dev.detekt.gradle.Detekt> {
     exclude("**/build/**")
 
     reports {
-        xml.required.set(true)
-        xml.outputLocation
+        checkstyle.required.set(true)
+        checkstyle.outputLocation
             .set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.xml"))
 
         html.required.set(true)
