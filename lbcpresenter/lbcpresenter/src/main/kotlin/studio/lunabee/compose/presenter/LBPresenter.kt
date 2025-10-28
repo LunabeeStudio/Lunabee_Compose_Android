@@ -88,7 +88,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
     }
 
     private fun consumeContextActivityAction() {
-        navigation.value = null
+        contextActionFlow.value = null
     }
 
     private fun useActivityContext(action: suspend (Context) -> Unit) {
