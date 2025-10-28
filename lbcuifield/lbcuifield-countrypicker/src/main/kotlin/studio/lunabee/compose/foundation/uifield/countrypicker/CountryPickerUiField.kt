@@ -46,41 +46,59 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.serialization.json.Json
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiField
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
-import java.util.Locale
 
+/**
+ * A [UiField] implementation for selecting a country from a list presented in a bottom sheet.
+ *
+ * This field displays the selected country's name. When the user focuses on the field, a bottom sheet appears, allowing them
+ * to search for and select a country. The field's value is the ISO 3166-1 alpha-2 country code (e.g., "US", "FR").
+ *
+ * It uses the [hbb20.CountryCodePicker-Android](https://github.com/hbb20/CountryCodePicker-Android) library for country data.
+ *
+ * @param initialValue The initial ISO 3166-1 alpha-2 country code to be displayed.
+ * @param label The label for the text field, as a [LbcTextSpec].
+ * @param placeholder The placeholder text to be displayed when the field is empty, as a [LbcTextSpec].
+ * @param id A unique identifier for the field, used for state saving.
+ * @param savedStateHandle The [SavedStateHandle] used to persist the field's state across process death.
+ * @param isFieldInError A lambda function that determines if the current value is in an error state. It should return a
+ * [UiFieldError] if there is an error, or `null` otherwise.
+ * @param uiFieldStyleData The styling data for the text field, implementing [UiFieldStyleData]. Defaults to [UiFieldStyleDataImpl].
+ * @param onValueChange A callback that is invoked when the selected country changes. The new value is the country's ISO code.
+ * @param readOnly A boolean indicating whether the field is read-only. If `true`, the user cannot change the value.
+ * @param enabled A boolean indicating whether the field is enabled. If `false`, the field is disabled and does not respond to
+ * user input.
+ * @param coroutineScope The [CoroutineScope] used for managing background operations, such as country search.
+ */
 @Suppress("LongParameterList")
 class CountryPickerUiField(
-    override val initialValue: CountryFieldData,
+    override val initialValue: String,
     override var label: LbcTextSpec?,
     override var placeholder: LbcTextSpec?,
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
-    override val isFieldInError: (CountryFieldData?) -> UiFieldError?,
+    override val isFieldInError: (String?) -> UiFieldError?,
     override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
-    override val onValueChange: (CountryFieldData) -> Unit,
+    override val onValueChange: (String) -> Unit,
     override val readOnly: Boolean = false,
     override val enabled: Boolean = true,
     private val coroutineScope: CoroutineScope,
     private val countryPickerBottomSheetRenderer: CountryPickerBottomSheetRenderer,
     private val trailingIcon: @Composable (() -> Unit)? = null,
-) : UiField<CountryFieldData>() {
-
-    private val json = Json.Default
+) : UiField<String>() {
 
     override val options: List<UiFieldOption> = emptyList()
 
-    override fun valueToDisplayedString(value: CountryFieldData): String = value.countryName
+    override fun valueToDisplayedString(value: String): String = value
 
-    override fun valueToSavedString(value: CountryFieldData): String = json.encodeToString(value)
+    override fun valueToSavedString(value: String): String = value
 
-    override fun savedValueToData(value: String): CountryFieldData = json.decodeFromString(value)
+    override fun savedValueToData(value: String): String = value
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -106,7 +124,7 @@ class CountryPickerUiField(
         val focusManager = LocalFocusManager.current
 
         uiFieldStyleData.ComposeTextField(
-            value = valueToDisplayedString(collectedValue),
+            value = delegate.displayNameFromIso(value),
             onValueChange = {
                 dismissError()
             },
@@ -162,10 +180,7 @@ class CountryPickerUiField(
                                 countrySearchItem = country,
                                 searchedText = uiState.searchedText,
                                 onClick = {
-                                    value = CountryFieldData(
-                                        countryName = country.name,
-                                        countryIsoName = country.isoName,
-                                    )
+                                    value = country.isoName
                                     delegate.onCountrySelected(country)
                                     isPickerBottomSheetVisible = false
                                     dismissError()
@@ -182,20 +197,7 @@ class CountryPickerUiField(
         }
 
         LaunchedEffect(Unit) {
-            delegate.initWithInitialCountryName(collectedValue.countryName)
-        }
-    }
-
-    companion object {
-        fun initialValueFromRawCountryName(
-            countryName: String,
-        ): CountryFieldData {
-            return Locale.getAvailableLocales().firstOrNull { it.displayCountry == countryName }?.let {
-                return CountryFieldData(
-                    countryName = countryName,
-                    countryIsoName = it.isO3Country,
-                )
-            } ?: CountryFieldData("", "")
+            delegate.initWithInitialCountryName(collectedValue)
         }
     }
 }

@@ -103,11 +103,11 @@ class CountrySearchDelegate(
     }
 
     internal fun initWithInitialCountryName(
-        countryName: String,
+        isoCountry: String,
     ) {
         coroutineScope.launch {
             allCountryCodes
-                .firstOrNull { it.name == countryName }
+                .firstOrNull { it.isoName == isoCountry }
                 ?.let { initialCountry ->
                     _uiState.value = uiState.value.copy(
                         selectedCountry = SelectedCountry(
@@ -165,6 +165,11 @@ class CountrySearchDelegate(
             }
         }
     }
+
+    internal fun displayNameFromIso(iso: String): String = allCountryCodes
+        .firstOrNull { it.isoName == iso }
+        ?.name
+        .orEmpty()
 }
 
 private const val SearchUiFieldId: String = "SearchUiField"

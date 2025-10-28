@@ -148,7 +148,7 @@ fun UiFieldsScreen(savedStateHandle: SavedStateHandle) {
 @Composable
 private fun rememberCountryPickerField(savedStateHandle: SavedStateHandle): CountryPickerUiField = remember {
     CountryPickerUiField(
-        initialValue = CountryPickerUiField.initialValueFromRawCountryName("France"),
+        initialValue = "FR",
         placeholder = LbcTextSpec.Raw(""),
         label = LbcTextSpec.Raw("Country"),
         isFieldInError = { null },
@@ -192,7 +192,7 @@ private fun rememberCountryPickerField(savedStateHandle: SavedStateHandle): Coun
 @Composable
 private fun rememberPhonePickerField(savedStateHandle: SavedStateHandle): PhonePickerUiField = remember {
     PhonePickerUiField(
-        initialValue = PhonePickerUiField.initialValueFromRawPhoneNumber("+33798818854"),
+        initialValue = PhonePickerUiField.initialValueFromRawPhoneNumber("+3379881"),
         placeholder = LbcTextSpec.Raw(""),
         label = LbcTextSpec.Raw("Phone number"),
         isFieldInError = { phone ->
