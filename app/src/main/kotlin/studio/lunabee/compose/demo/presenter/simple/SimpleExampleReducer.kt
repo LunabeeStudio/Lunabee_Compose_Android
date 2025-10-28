@@ -21,24 +21,31 @@
 
 package studio.lunabee.compose.demo.presenter.simple
 
+import android.content.Context
+import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import studio.lunabee.compose.presenter.LBSingleReducer
 import studio.lunabee.compose.presenter.ReduceResult
 import studio.lunabee.compose.presenter.asResult
+import studio.lunabee.compose.presenter.withSideEffect
 import kotlin.random.Random
 
 class SimpleExampleReducer(
     override val coroutineScope: CoroutineScope,
     override val emitUserAction: (SimpleExampleAction) -> Unit,
-) : LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>(
-        verbose = true,
-    ) {
+) : LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction>(verbose = true) {
     override suspend fun reduce(
         actualState: SimpleExampleUiState,
         action: SimpleExampleAction,
         performNavigation: (SimpleExampleNavScope.() -> Unit) -> Unit,
+        useActivityContext: (suspend (Context) -> Unit) -> Unit,
     ): ReduceResult<SimpleExampleUiState> = when (action) {
         is SimpleExampleAction.NewCheckValue -> actualState.copy(isChecked = action.value).asResult()
         SimpleExampleAction.NewValue -> actualState.copy(text = Random.nextInt().toString()).asResult()
+        SimpleExampleAction.ShowToast -> actualState withSideEffect {
+            useActivityContext { context ->
+                Toast.makeText(context, "Toast from reducer with ui context", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

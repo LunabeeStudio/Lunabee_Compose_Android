@@ -33,6 +33,7 @@ LbcpresenterVersion 1.7.0
 ### LbcPresenter
 
 - Fix presenter calls `getInitialState` twice
+- Add `useActivityContext` in presenter and reducer
 
 ## 2025-09-08
 

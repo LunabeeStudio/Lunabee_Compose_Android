@@ -108,9 +108,9 @@ fun MainNavGraph(
             ImageScreen()
         }
 
-        SimpleExampleDestination.composable(this, object : SimpleExampleNavScope {})
-        PullToRefreshDestination.composable(this, object : PullToRefreshNavScope {})
-        TimerDestination.composable(this, object : TimerNavScope {})
-        MultiStateDestination.composable(this, object : MultiStateNavScope {})
+        SimpleExampleDestination.composable(this, object : SimpleExampleNavScope {}, navController.context)
+        PullToRefreshDestination.composable(this, object : PullToRefreshNavScope {}, navController.context)
+        TimerDestination.composable(this, object : TimerNavScope {}, navController.context)
+        MultiStateDestination.composable(this, object : MultiStateNavScope {}, navController.context)
     }
 }

@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.demo.presenter.multistate
 
+import android.content.Context
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -28,10 +29,10 @@ import androidx.navigation.compose.composable
 data object MultiStateDestination {
     const val Route = "MultiStateDestination"
 
-    fun composable(navGraphBuilder: NavGraphBuilder, navScope: MultiStateNavScope) {
+    fun composable(navGraphBuilder: NavGraphBuilder, navScope: MultiStateNavScope, context: Context) {
         navGraphBuilder.composable(Route) {
             val presenter: MultiStatePresenter = hiltViewModel()
-            presenter(navScope)
+            presenter(navScope, context)
         }
     }
 }

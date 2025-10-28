@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.presenter
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -76,6 +77,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
     ): LBSimpleReducer<UiState, NavScope, Action>
 
     private val navigation: MutableStateFlow<(NavScope.() -> Unit)?> = MutableStateFlow(null)
+    private val contextActionFlow: MutableStateFlow<(suspend (Context) -> Unit)?> = MutableStateFlow(null)
 
     private fun consumeNavigation() {
         navigation.value = null
@@ -83,6 +85,14 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
 
     private fun performNavigation(navigateAction: NavScope.() -> Unit) {
         navigation.value = navigateAction
+    }
+
+    private fun consumeContextActivityAction() {
+        navigation.value = null
+    }
+
+    private fun useActivityContext(action: suspend (Context) -> Unit) {
+        contextActionFlow.value = action
     }
 
     /**
@@ -116,6 +126,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
                         flows = flows + userActionChannel.receiveAsFlow(),
                         actualState = { actualStateSaved },
                         performNavigation = ::performNavigation,
+                        useActivityContext = ::useActivityContext,
                     ).onEach { state ->
                         if (actualStateSaved::class != state::class) {
                             reducer.emit(getReducerByState(actualState = state))
@@ -132,14 +143,23 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
      * Collect the [uiStateFlow] to display the screen content.
      */
     @Composable
-    operator fun invoke(navScope: NavScope) {
-        val navigation by navigation.collectAsStateWithLifecycle()
+    operator fun invoke(navScope: NavScope, context: Context) {
+        val navigation: (NavScope.() -> Unit)? by navigation.collectAsStateWithLifecycle()
         navigation?.let {
             LaunchedEffect(navigation) {
                 it(navScope)
                 consumeNavigation()
             }
         }
+
+        val contextAction by contextActionFlow.collectAsStateWithLifecycle()
+        contextAction?.let {
+            LaunchedEffect(contextAction) {
+                it(context)
+                consumeContextActivityAction()
+            }
+        }
+
         val uiState by uiStateFlow.collectAsStateWithLifecycle()
         content(uiState)
     }

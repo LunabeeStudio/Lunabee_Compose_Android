@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.demo.presenter.timer
 
+import android.content.Context
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -28,10 +29,10 @@ import androidx.navigation.compose.composable
 data object TimerDestination {
     val route = TimerDestination.javaClass.simpleName
 
-    fun composable(navGraphBuilder: NavGraphBuilder, navScope: TimerNavScope) {
+    fun composable(navGraphBuilder: NavGraphBuilder, navScope: TimerNavScope, context: Context) {
         navGraphBuilder.composable(route) {
             val presenter: TimerPresenter = hiltViewModel()
-            presenter(navScope)
+            presenter(navScope, context)
         }
     }
 }

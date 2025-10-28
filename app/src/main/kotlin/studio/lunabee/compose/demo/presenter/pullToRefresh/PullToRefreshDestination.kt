@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.demo.presenter.pullToRefresh
 
+import android.content.Context
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -28,10 +29,10 @@ import androidx.navigation.compose.composable
 data object PullToRefreshDestination {
     val route = PullToRefreshDestination.javaClass.simpleName
 
-    fun composable(navGraphBuilder: NavGraphBuilder, navScope: PullToRefreshNavScope) {
+    fun composable(navGraphBuilder: NavGraphBuilder, navScope: PullToRefreshNavScope, context: Context) {
         navGraphBuilder.composable(route) {
             val presenter: PullToRefreshPresenter = hiltViewModel()
-            presenter(navScope)
+            presenter(navScope, context)
         }
     }
 }

@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.demo.presenter.pullToRefresh
 
+import android.content.Context
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import studio.lunabee.compose.presenter.LBSingleReducer
@@ -36,6 +37,7 @@ class PullToRefreshReducer(
         actualState: PullToRefreshUiState,
         action: PullToRefreshAction,
         performNavigation: (PullToRefreshNavScope.() -> Unit) -> Unit,
+        useActivityContext: (suspend (Context) -> Unit) -> Unit,
     ): ReduceResult<PullToRefreshUiState> = when (action) {
         PullToRefreshAction.Refresh -> actualState.copy(isRefreshing = true) withSideEffect {
             delay(1000) // Simulate loading

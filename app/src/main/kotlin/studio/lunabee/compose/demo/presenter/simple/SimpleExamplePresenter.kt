@@ -38,6 +38,7 @@ class SimpleExamplePresenter @Inject constructor() : LBSinglePresenter<SimpleExa
     override fun getInitialState(): SimpleExampleUiState = SimpleExampleUiState(
         onToggleClick = { emitUserAction(SimpleExampleAction.NewCheckValue(it)) },
         onNewValue = { emitUserAction(SimpleExampleAction.NewValue) },
+        onShowToastClick = { emitUserAction(SimpleExampleAction.ShowToast) },
         isChecked = false,
         text = "Init",
     )

@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.presenter
 
+import android.content.Context
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -59,6 +60,7 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
         actualState: UiState,
         action: Action,
         performNavigation: (NavScope.() -> Unit) -> Unit,
+        useActivityContext: (suspend (Context) -> Unit) -> Unit,
     ): ReduceResult<MainUiState>
 
     /**
@@ -72,6 +74,7 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
         flows: List<Flow<MainAction>>,
         actualState: () -> MainUiState,
         performNavigation: (NavScope.() -> Unit) -> Unit,
+        useActivityContext: (suspend (Context) -> Unit) -> Unit,
     ): Flow<MainUiState> {
         val uiStateFlow = flows
             .merge()
@@ -87,6 +90,7 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
                         actualState = it,
                         action = action as Action,
                         performNavigation = performNavigation,
+                        useActivityContext = useActivityContext,
                     ).also {
                         log { "Reduced state = ${it.uiState}" }
                     }
