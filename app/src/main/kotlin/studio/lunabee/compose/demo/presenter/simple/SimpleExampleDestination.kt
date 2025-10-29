@@ -21,7 +21,6 @@
 
 package studio.lunabee.compose.demo.presenter.simple
 
-import android.content.Context
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -29,10 +28,10 @@ import androidx.navigation.compose.composable
 data object SimpleExampleDestination {
     val route = this.javaClass.simpleName
 
-    fun composable(navGraphBuilder: NavGraphBuilder, navScope: SimpleExampleNavScope, context: Context) {
+    fun composable(navGraphBuilder: NavGraphBuilder, navScope: SimpleExampleNavScope) {
         navGraphBuilder.composable(route) {
             val presenter: SimpleExamplePresenter = hiltViewModel()
-            presenter(navScope, context)
+            presenter(navScope)
         }
     }
 }

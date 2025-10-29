@@ -21,7 +21,6 @@
 
 package studio.lunabee.compose.presenter.koin
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import org.koin.compose.viewmodel.koinViewModel
 import studio.lunabee.compose.presenter.LBPresenter
@@ -30,7 +29,7 @@ import studio.lunabee.compose.presenter.LBPresenter
  * Inject presenter as viewmodel and initialize it.
  */
 @Composable
-inline fun <NavScope, reified Presenter : LBPresenter<*, NavScope, *>> PresentScreen(navScope: NavScope, context: Context) {
+inline fun <NavScope, reified Presenter : LBPresenter<*, NavScope, *>> PresentScreen(navScope: NavScope) {
     val presenter: Presenter = koinViewModel()
-    presenter.invoke(navScope, context)
+    presenter.invoke(navScope)
 }

@@ -21,7 +21,7 @@
 
 package studio.lunabee.compose.demo.presenter.multistate
 
-import android.content.Context
+import android.app.Activity
 import kotlinx.coroutines.CoroutineScope
 import studio.lunabee.compose.presenter.LBReducer
 import studio.lunabee.compose.presenter.ReduceResult
@@ -40,7 +40,7 @@ class MultiStateDataReducer(
         actualState: MultiStateUiState.Data,
         action: MultiStateAction.DataAction,
         performNavigation: (MultiStateNavScope.() -> Unit) -> Unit,
-        useActivityContext: (suspend (Context) -> Unit) -> Unit,
+        useActivity: (suspend (Activity) -> Unit) -> Unit,
     ): ReduceResult<MultiStateUiState> = when (action) {
         MultiStateAction.ExampleAction -> MultiStateUiState.Error(this::class.simpleName!!).asResult()
         MultiStateAction.ExampleAllAction -> actualState.copy(reducer = this::class.simpleName!!).asResult()
@@ -59,7 +59,7 @@ class MultiStateErrorReducer(
         actualState: MultiStateUiState.Error,
         action: MultiStateAction.ErrorAction,
         performNavigation: (MultiStateNavScope.() -> Unit) -> Unit,
-        useActivityContext: (suspend (Context) -> Unit) -> Unit,
+        useActivity: (suspend (Activity) -> Unit) -> Unit,
     ): ReduceResult<MultiStateUiState> = when (action) {
         MultiStateAction.ExampleAllAction -> MultiStateUiState.Data(this::class.simpleName!!).asResult()
         MultiStateAction.ExampleErrorAction -> actualState.copy(reducer = this::class.simpleName!!).asResult()

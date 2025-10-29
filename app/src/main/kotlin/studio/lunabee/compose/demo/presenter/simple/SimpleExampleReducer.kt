@@ -21,7 +21,7 @@
 
 package studio.lunabee.compose.demo.presenter.simple
 
-import android.content.Context
+import android.app.Activity
 import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import studio.lunabee.compose.presenter.LBSingleReducer
@@ -38,12 +38,12 @@ class SimpleExampleReducer(
         actualState: SimpleExampleUiState,
         action: SimpleExampleAction,
         performNavigation: (SimpleExampleNavScope.() -> Unit) -> Unit,
-        useActivityContext: (suspend (Context) -> Unit) -> Unit,
+        useActivity: (suspend (Activity) -> Unit) -> Unit,
     ): ReduceResult<SimpleExampleUiState> = when (action) {
         is SimpleExampleAction.NewCheckValue -> actualState.copy(isChecked = action.value).asResult()
         SimpleExampleAction.NewValue -> actualState.copy(text = Random.nextInt().toString()).asResult()
         SimpleExampleAction.ShowToast -> actualState withSideEffect {
-            useActivityContext { context ->
+            useActivity { context ->
                 Toast.makeText(context, "Toast from reducer with ui context", Toast.LENGTH_SHORT).show()
             }
         }

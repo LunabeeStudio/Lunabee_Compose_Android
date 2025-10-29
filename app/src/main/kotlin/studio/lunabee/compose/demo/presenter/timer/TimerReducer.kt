@@ -21,7 +21,7 @@
 
 package studio.lunabee.compose.demo.presenter.timer
 
-import android.content.Context
+import android.app.Activity
 import kotlinx.coroutines.CoroutineScope
 import studio.lunabee.compose.presenter.LBSingleReducer
 import studio.lunabee.compose.presenter.ReduceResult
@@ -35,7 +35,7 @@ class TimerReducer(
         actualState: TimerUiState,
         action: TimerAction,
         performNavigation: (TimerNavScope.() -> Unit) -> Unit,
-        useActivityContext: (suspend (Context) -> Unit) -> Unit,
+        useActivity: (suspend (Activity) -> Unit) -> Unit,
     ): ReduceResult<TimerUiState> = when (action) {
         is TimerAction.NewTimerValue -> actualState.copy(timer = action.timerValue).asResult()
     }

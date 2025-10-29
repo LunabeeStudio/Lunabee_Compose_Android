@@ -21,7 +21,6 @@
 
 package studio.lunabee.compose.presenter
 
-import android.content.Context
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -75,7 +74,7 @@ class LBReducerTest {
                 flows = flows,
                 actualState = { actualStateSaved },
                 performNavigation = {},
-                useActivityContext = {},
+                useActivity = {},
             ).onEach { actualStateSaved = it }
             .stateIn(coroutineScope, started = SharingStarted.WhileSubscribed(5_000), actualStateSaved)
 
@@ -94,7 +93,7 @@ class TestReducer(
         actualState: TestUiState,
         action: TestAction,
         performNavigation: (TestNavScope.() -> Unit) -> Unit,
-        useActivityContext: (suspend (Context) -> Unit) -> Unit,
+        useActivity: (suspend (Activity) -> Unit) -> Unit,
     ): ReduceResult<TestUiState> =
         when (action) {
             TestAction.Increment0 -> actualState.copy(count = actualState.count + 1).asResult()
