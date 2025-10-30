@@ -32,8 +32,11 @@ LbcpresenterVersion 1.7.0
 
 ### LbcPresenter
 
-- Fix presenter calls `getInitialState` twice
+## 2025-10-30
 - Add `useActivity` in presenter and reducer
+
+## 2025-09-18
+- Fix presenter calls `getInitialState` twice
 
 ## 2025-09-08
 

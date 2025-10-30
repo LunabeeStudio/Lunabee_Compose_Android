@@ -21,6 +21,7 @@
 
 package studio.lunabee.compose.presenter
 
+import android.app.Activity
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
