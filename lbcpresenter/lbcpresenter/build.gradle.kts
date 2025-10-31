@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.android)
+    implementation(libs.activity.compose)
     implementation(libs.touchlab.kermit)
 
     implementation(project(Modules.LbcCore))

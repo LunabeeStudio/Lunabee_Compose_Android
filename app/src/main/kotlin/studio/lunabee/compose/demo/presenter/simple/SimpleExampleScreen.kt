@@ -42,5 +42,8 @@ fun SimpleExempleScreen(
         Button(onClick = uiState.onNewValue) {
             Text("Show Change value")
         }
+        Button(onClick = uiState.onShowToastClick) {
+            Text("Show Toast From Reducer")
+        }
     }
 }

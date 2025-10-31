@@ -25,4 +25,6 @@ sealed interface SimpleExampleAction {
     data class NewCheckValue(val value: Boolean) : SimpleExampleAction
 
     data object NewValue : SimpleExampleAction
+
+    data object ShowToast : SimpleExampleAction
 }

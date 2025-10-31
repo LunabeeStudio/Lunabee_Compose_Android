@@ -21,6 +21,8 @@
 
 package studio.lunabee.compose.presenter
 
+import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -76,6 +78,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
     ): LBSimpleReducer<UiState, NavScope, Action>
 
     private val navigation: MutableStateFlow<(NavScope.() -> Unit)?> = MutableStateFlow(null)
+    private val activityActionFlow: MutableStateFlow<(suspend (Activity) -> Unit)?> = MutableStateFlow(null)
 
     private fun consumeNavigation() {
         navigation.value = null
@@ -83,6 +86,14 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
 
     private fun performNavigation(navigateAction: NavScope.() -> Unit) {
         navigation.value = navigateAction
+    }
+
+    private fun consumeContextActivityAction() {
+        activityActionFlow.value = null
+    }
+
+    private fun useActivity(action: suspend (Activity) -> Unit) {
+        activityActionFlow.value = action
     }
 
     /**
@@ -116,6 +127,7 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
                         flows = flows + userActionChannel.receiveAsFlow(),
                         actualState = { actualStateSaved },
                         performNavigation = ::performNavigation,
+                        useActivity = ::useActivity,
                     ).onEach { state ->
                         if (actualStateSaved::class != state::class) {
                             reducer.emit(getReducerByState(actualState = state))
@@ -133,13 +145,28 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
      */
     @Composable
     operator fun invoke(navScope: NavScope) {
-        val navigation by navigation.collectAsStateWithLifecycle()
+        val navigation: (NavScope.() -> Unit)? by navigation.collectAsStateWithLifecycle()
         navigation?.let {
             LaunchedEffect(navigation) {
                 it(navScope)
                 consumeNavigation()
             }
         }
+
+        val activityAction by activityActionFlow.collectAsStateWithLifecycle()
+        activityAction?.let { action ->
+            LocalActivity.current?.let { activity ->
+                if (!activity.isFinishing && !activity.isDestroyed) {
+                    LaunchedEffect(activityAction) {
+                        action(activity)
+                        consumeContextActivityAction()
+                    }
+                } else {
+                    log { "Trying to use an activity that is finishing or destroyed: $activity" }
+                }
+            }
+        }
+
         val uiState by uiStateFlow.collectAsStateWithLifecycle()
         content(uiState)
     }

@@ -7,6 +7,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2025-10-30
+
+```
+LbcpresenterVersion 1.8.0
+```
+
+- Add `useActivity` in presenter and reducer
+
 ## 2025-09-17
 
 ```
