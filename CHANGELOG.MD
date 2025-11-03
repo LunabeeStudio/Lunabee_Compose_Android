@@ -13,7 +13,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 LbcpresenterVersion 1.8.0
 ```
 
-- Add `useActivity` in presenter and reducer
+- Add `useActivity` in presenter and reducer. Use [presenter_migration_1.8.0.py](tools/presenter_migration_1.8.0.py) for migration.
 
 ## 2025-09-17
 
