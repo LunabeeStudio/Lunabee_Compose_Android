@@ -10,11 +10,21 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## 2025-12-05
 
 ```
-LbcCoreVersion 1.11.0
+LbcCore 1.11.0
 ```
 
 - Deprecates `LbcTextSpec` functions using `Context` in favor of using `Resources` to be aligned with Compose lint rule
-https://googlesamples.github.io/android-custom-lint-rules/checks/LocalContextResourcesRead.md.html
+  https://googlesamples.github.io/android-custom-lint-rules/checks/LocalContextResourcesRead.md.html
+
+```
+LbcUifieldCore 1.12.0
+LbcUifieldPhonepicker 1.7.0
+LbcUifieldCountrypicker 1.6.0
+LbcImage 1.7.0
+LbcPresenter 1.9.0
+```
+
+- Use LbcCore 1.11.0
 
 ## 2025-10-30
 
