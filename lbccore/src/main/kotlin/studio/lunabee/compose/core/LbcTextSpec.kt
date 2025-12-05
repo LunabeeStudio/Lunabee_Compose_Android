@@ -47,18 +47,20 @@ sealed class LbcTextSpec {
         """
         Use string(resources: Resources) instead with LocalResources.current
         See https://googlesamples.github.io/android-custom-lint-rules/checks/LocalContextResourcesRead.md.html
-    """
+    """,
     )
     fun string(context: Context): String = string(context.resources)
+
     abstract fun string(resources: Resources): String
 
     @Deprecated(
         """
         Use annotated(resources: Resources) instead with LocalResources.current
         See https://googlesamples.github.io/android-custom-lint-rules/checks/LocalContextResourcesRead.md.html
-    """
+    """,
     )
     fun annotated(context: Context): AnnotatedString = annotated(context.resources)
+
     open fun annotated(resources: Resources): AnnotatedString = AnnotatedString(string(resources))
 
     @Composable
@@ -258,7 +260,8 @@ sealed class LbcTextSpec {
 
         override fun string(resources: Resources): String {
             @Suppress("SpreadOperator")
-            return resources.getString(getStringIdByName(resources, name) ?: fallbackId, *args.resolveArgsContext(resources))
+            return resources
+                .getString(getStringIdByName(resources, name) ?: fallbackId, *args.resolveArgsContext(resources))
         }
 
         override fun equals(other: Any?): Boolean {
@@ -282,8 +285,6 @@ sealed class LbcTextSpec {
         }
 
         @StringRes
-        private fun getStringIdByName(resources: Resources, name: String): Int? {
-            return resources.getIdentifier(name, "string", packageName).takeIf { id -> id != 0 }
-        }
+        private fun getStringIdByName(resources: Resources, name: String): Int? = resources.getIdentifier(name, "string", packageName).takeIf { id -> id != 0 }
     }
 }

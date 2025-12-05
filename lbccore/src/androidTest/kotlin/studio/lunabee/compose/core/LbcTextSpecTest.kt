@@ -163,7 +163,7 @@ class LbcTextSpecTest {
         val actualFallbackTest = LbcTextSpec.StringByNameResource(
             name = "does_not_exist",
             fallbackId = studio.lunabee.compose.core.test.R.string.test,
-            context = context
+            context = context,
         )
 
         val stringParam = "foo"
