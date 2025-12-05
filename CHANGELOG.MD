@@ -7,6 +7,15 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2025-12-05
+
+```
+LbcCoreVersion 1.11.0
+```
+
+- Deprecates `LbcTextSpec` functions using `Context` in favor of using `Resources` to be aligned with Compose lint rule
+https://googlesamples.github.io/android-custom-lint-rules/checks/LocalContextResourcesRead.md.html
+
 ## 2025-10-30
 
 ```

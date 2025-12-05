@@ -38,12 +38,15 @@ class LbcTextSpecTest {
     private val context: Context
         get() = composeTestRule.activity.baseContext
 
+    private val resource
+        get() = context.resources
+
     @Test
     fun raw_test() {
         val expected = "test"
         val textSpec = LbcTextSpec.Raw(value = expected)
-        assertEquals(expected, textSpec.string(context))
-        assertEquals(AnnotatedString(expected), textSpec.annotated(context))
+        assertEquals(expected, textSpec.string(resource))
+        assertEquals(AnnotatedString(expected), textSpec.annotated(resource))
         composeTestRule.setContent {
             assertEquals(expected, textSpec.string)
             assertEquals(AnnotatedString(expected), textSpec.annotated)
@@ -56,8 +59,8 @@ class LbcTextSpecTest {
         val test = "test %s"
         val expected = test.format(param)
         val textSpec = LbcTextSpec.Raw(value = test, param)
-        assertEquals(expected, textSpec.string(context))
-        assertEquals(AnnotatedString(expected), textSpec.annotated(context))
+        assertEquals(expected, textSpec.string(resource))
+        assertEquals(AnnotatedString(expected), textSpec.annotated(resource))
         composeTestRule.setContent {
             assertEquals(expected, textSpec.string)
             assertEquals(AnnotatedString(expected), textSpec.annotated)
@@ -68,8 +71,8 @@ class LbcTextSpecTest {
     fun annotated_test() {
         val expected = AnnotatedString("test")
         val textSpec = LbcTextSpec.Annotated(value = expected)
-        assertEquals(expected, textSpec.annotated(context))
-        assertEquals(expected.text, textSpec.string(context))
+        assertEquals(expected, textSpec.annotated(resource))
+        assertEquals(expected.text, textSpec.string(resource))
         composeTestRule.setContent {
             assertEquals(expected, textSpec.annotated)
             assertEquals(expected.text, textSpec.string)
@@ -89,10 +92,10 @@ class LbcTextSpecTest {
         val actualTestArgs = LbcTextSpec
             .StringResource(id = studio.lunabee.compose.core.test.R.string.test_args, stringParam, intParam)
 
-        assertEquals(expectedTest, actualTest.string(context))
-        assertEquals(expectedTestArgs, actualTestArgs.string(context))
-        assertEquals(AnnotatedString(expectedTest), actualTest.annotated(context))
-        assertEquals(AnnotatedString(expectedTestArgs), actualTestArgs.annotated(context))
+        assertEquals(expectedTest, actualTest.string(resource))
+        assertEquals(expectedTestArgs, actualTestArgs.string(resource))
+        assertEquals(AnnotatedString(expectedTest), actualTest.annotated(resource))
+        assertEquals(AnnotatedString(expectedTestArgs), actualTestArgs.annotated(resource))
         composeTestRule.setContent {
             assertEquals(expectedTest, actualTest.string)
             assertEquals(expectedTestArgs, actualTestArgs.string)
@@ -116,8 +119,8 @@ class LbcTextSpecTest {
         val actualTestArgs = LbcTextSpec
             .StringResource(studio.lunabee.compose.core.test.R.string.test_args, stringParamTextSpec, intParam)
 
-        assertEquals(expectedTestArgs, actualTestArgs.string(context))
-        assertEquals(AnnotatedString(expectedTestArgs), actualTestArgs.annotated(context))
+        assertEquals(expectedTestArgs, actualTestArgs.string(resource))
+        assertEquals(AnnotatedString(expectedTestArgs), actualTestArgs.annotated(resource))
         composeTestRule.setContent {
             assertEquals(expectedTestArgs, actualTestArgs.string)
             assertEquals(AnnotatedString(expectedTestArgs), actualTestArgs.annotated)
@@ -140,10 +143,10 @@ class LbcTextSpecTest {
         val actualTestMany = LbcTextSpec
             .PluralsResource(studio.lunabee.compose.core.test.R.plurals.test_args_plural, 2, 2)
 
-        assertEquals(expectedTestOne, actualTestOne.string(context))
-        assertEquals(expectedTestMany, actualTestMany.string(context))
-        assertEquals(AnnotatedString(expectedTestOne), actualTestOne.annotated(context))
-        assertEquals(AnnotatedString(expectedTestMany), actualTestMany.annotated(context))
+        assertEquals(expectedTestOne, actualTestOne.string(resource))
+        assertEquals(expectedTestMany, actualTestMany.string(resource))
+        assertEquals(AnnotatedString(expectedTestOne), actualTestOne.annotated(resource))
+        assertEquals(AnnotatedString(expectedTestMany), actualTestMany.annotated(resource))
         composeTestRule.setContent {
             assertEquals(expectedTestOne, actualTestOne.string)
             assertEquals(expectedTestMany, actualTestMany.string)
@@ -156,10 +159,11 @@ class LbcTextSpecTest {
     @Test
     fun stringByName_test() {
         val expectedTest = composeTestRule.activity.getString(studio.lunabee.compose.core.test.R.string.test)
-        val actualTest = LbcTextSpec.StringByNameResource(name = "test", fallbackId = -1)
+        val actualTest = LbcTextSpec.StringByNameResource(name = "test", fallbackId = -1, context = context)
         val actualFallbackTest = LbcTextSpec.StringByNameResource(
             name = "does_not_exist",
             fallbackId = studio.lunabee.compose.core.test.R.string.test,
+            context = context,
         )
 
         val stringParam = "foo"
@@ -170,24 +174,26 @@ class LbcTextSpecTest {
         val actualTestArgs = LbcTextSpec.StringByNameResource(
             name = "test_args",
             fallbackId = -1,
+            context = context,
             stringParam,
             intParam,
         )
         val actualTestFallbackArgs = LbcTextSpec.StringByNameResource(
             name = "does_not_exist",
             fallbackId = studio.lunabee.compose.core.test.R.string.test_args,
+            context = context,
             stringParam,
             intParam,
         )
 
-        assertEquals(expectedTest, actualTest.string(context))
-        assertEquals(expectedTest, actualFallbackTest.string(context))
-        assertEquals(expectedTestArgs, actualTestArgs.string(context))
-        assertEquals(expectedTestArgs, actualTestFallbackArgs.string(context))
-        assertEquals(AnnotatedString(expectedTest), actualTest.annotated(context))
-        assertEquals(AnnotatedString(expectedTest), actualFallbackTest.annotated(context))
-        assertEquals(AnnotatedString(expectedTestArgs), actualTestArgs.annotated(context))
-        assertEquals(AnnotatedString(expectedTestArgs), actualTestFallbackArgs.annotated(context))
+        assertEquals(expectedTest, actualTest.string(resource))
+        assertEquals(expectedTest, actualFallbackTest.string(resource))
+        assertEquals(expectedTestArgs, actualTestArgs.string(resource))
+        assertEquals(expectedTestArgs, actualTestFallbackArgs.string(resource))
+        assertEquals(AnnotatedString(expectedTest), actualTest.annotated(resource))
+        assertEquals(AnnotatedString(expectedTest), actualFallbackTest.annotated(resource))
+        assertEquals(AnnotatedString(expectedTestArgs), actualTestArgs.annotated(resource))
+        assertEquals(AnnotatedString(expectedTestArgs), actualTestFallbackArgs.annotated(resource))
         composeTestRule.setContent {
             assertEquals(expectedTest, actualTest.string)
             assertEquals(expectedTest, actualFallbackTest.string)

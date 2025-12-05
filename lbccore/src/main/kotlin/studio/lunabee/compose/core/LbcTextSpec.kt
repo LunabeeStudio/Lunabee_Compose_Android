@@ -27,7 +27,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -43,25 +43,41 @@ sealed class LbcTextSpec {
         @ReadOnlyComposable @Composable
         get
 
-    abstract fun string(context: Context): String
+    @Deprecated(
+        """
+        Use string(resources: Resources) instead with LocalResources.current
+        See https://googlesamples.github.io/android-custom-lint-rules/checks/LocalContextResourcesRead.md.html
+    """,
+    )
+    fun string(context: Context): String = string(context.resources)
 
-    open fun annotated(context: Context): AnnotatedString = AnnotatedString(string(context))
+    abstract fun string(resources: Resources): String
+
+    @Deprecated(
+        """
+        Use annotated(resources: Resources) instead with LocalResources.current
+        See https://googlesamples.github.io/android-custom-lint-rules/checks/LocalContextResourcesRead.md.html
+    """,
+    )
+    fun annotated(context: Context): AnnotatedString = annotated(context.resources)
+
+    open fun annotated(resources: Resources): AnnotatedString = AnnotatedString(string(resources))
 
     @Composable
     @ReadOnlyComposable
     protected fun Array<out Any>.resolveArgs(): Array<out Any> = Array(this.size) { idx ->
         val entry = this[idx]
         if (entry is LbcTextSpec) {
-            entry.string // marked as compile error due to Java(?)
+            entry.string
         } else {
             this[idx]
         }
     }
 
-    protected fun Array<out Any>.resolveArgsContext(context: Context): Array<out Any> = Array(this.size) { idx ->
+    protected fun Array<out Any>.resolveArgsContext(resources: Resources): Array<out Any> = Array(this.size) { idx ->
         val entry = this[idx]
         if (entry is LbcTextSpec) {
-            entry.string(context) // marked as compile error due to Java(?)
+            entry.string(resources)
         } else {
             this[idx]
         }
@@ -84,11 +100,11 @@ sealed class LbcTextSpec {
                 value.format(*args.resolveArgs())
             }
 
-        override fun string(context: Context): String = if (args.isEmpty()) {
+        override fun string(resources: Resources): String = if (args.isEmpty()) {
             value
         } else {
             @Suppress("SpreadOperator")
-            value.format(*args.resolveArgsContext(context))
+            value.format(*args.resolveArgsContext(resources))
         }
 
         override fun equals(other: Any?): Boolean {
@@ -118,9 +134,9 @@ sealed class LbcTextSpec {
             @ReadOnlyComposable
             get() = value.text
 
-        override fun string(context: Context): String = value.text
+        override fun string(resources: Resources): String = value.text
 
-        override fun annotated(context: Context): AnnotatedString = this.value
+        override fun annotated(resources: Resources): AnnotatedString = this.value
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -154,9 +170,9 @@ sealed class LbcTextSpec {
             @Suppress("SpreadOperator")
             get() = stringResource(id, *args.resolveArgs())
 
-        override fun string(context: Context): String {
+        override fun string(resources: Resources): String {
             @Suppress("SpreadOperator")
-            return context.getString(id, *args.resolveArgsContext(context))
+            return resources.getString(id, *args.resolveArgsContext(resources))
         }
 
         override fun equals(other: Any?): Boolean {
@@ -196,9 +212,9 @@ sealed class LbcTextSpec {
             @Suppress("SpreadOperator")
             get() = pluralStringResource(id, count, *args.resolveArgs())
 
-        override fun string(context: Context): String {
+        override fun string(resources: Resources): String {
             @Suppress("SpreadOperator")
-            return context.resources.getQuantityString(id, count, *args.resolveArgsContext(context))
+            return resources.getQuantityString(id, count, *args.resolveArgsContext(resources))
         }
 
         override fun equals(other: Any?): Boolean {
@@ -225,8 +241,11 @@ sealed class LbcTextSpec {
     class StringByNameResource(
         private val name: String,
         @StringRes private val fallbackId: Int,
+        context: Context,
         private vararg val args: Any,
     ) : LbcTextSpec() {
+        private val packageName = context.packageName
+
         override val annotated: AnnotatedString
             @Composable
             @ReadOnlyComposable
@@ -237,11 +256,12 @@ sealed class LbcTextSpec {
             @Composable
             @ReadOnlyComposable
             @Suppress("SpreadOperator")
-            get() = stringResource(getStringIdByName(LocalContext.current, name) ?: fallbackId, *args.resolveArgs())
+            get() = stringResource(getStringIdByName(LocalResources.current, name) ?: fallbackId, *args.resolveArgs())
 
-        override fun string(context: Context): String {
+        override fun string(resources: Resources): String {
             @Suppress("SpreadOperator")
-            return context.getString(getStringIdByName(context, name) ?: fallbackId, *args.resolveArgsContext(context))
+            return resources
+                .getString(getStringIdByName(resources, name) ?: fallbackId, *args.resolveArgsContext(resources))
         }
 
         override fun equals(other: Any?): Boolean {
@@ -265,9 +285,11 @@ sealed class LbcTextSpec {
         }
 
         @StringRes
-        private fun getStringIdByName(context: Context, name: String): Int? {
-            val res: Resources = context.resources
-            return res.getIdentifier(name, "string", context.packageName).takeIf { id -> id != 0 }
-        }
+        private fun getStringIdByName(resources: Resources, name: String): Int? = resources
+            .getIdentifier(
+                name,
+                "string",
+                packageName,
+            ).takeIf { id -> id != 0 }
     }
 }
