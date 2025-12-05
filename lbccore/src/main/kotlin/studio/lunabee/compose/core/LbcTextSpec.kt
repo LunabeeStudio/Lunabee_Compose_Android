@@ -285,6 +285,11 @@ sealed class LbcTextSpec {
         }
 
         @StringRes
-        private fun getStringIdByName(resources: Resources, name: String): Int? = resources.getIdentifier(name, "string", packageName).takeIf { id -> id != 0 }
+        private fun getStringIdByName(resources: Resources, name: String): Int? = resources
+            .getIdentifier(
+            name,
+            "string",
+            packageName,
+        ).takeIf { id -> id != 0 }
     }
 }
