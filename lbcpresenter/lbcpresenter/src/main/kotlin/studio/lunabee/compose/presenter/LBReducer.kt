@@ -95,7 +95,12 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
                         log { "Reduced state = ${it.uiState}" }
                     }
                 }
-            }.onEach { coroutineScope.launch { it.sideEffect?.invoke() } }
+            }.onEach {
+                coroutineScope.launch {
+                    log { "Running side effect" }
+                    it.sideEffect?.invoke()
+                }
+            }
             .map { it.uiState }
         return if (verbose) {
             uiStateFlow.onCompletion { throwable -> log { "Reducer completed $throwable" } }

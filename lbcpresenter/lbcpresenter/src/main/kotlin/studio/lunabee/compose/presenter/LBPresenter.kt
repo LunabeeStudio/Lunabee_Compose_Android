@@ -33,6 +33,7 @@ import co.touchlab.kermit.Logger
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -78,7 +79,10 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
     ): LBSimpleReducer<UiState, NavScope, Action>
 
     private val navigation: MutableStateFlow<(NavScope.() -> Unit)?> = MutableStateFlow(null)
-    private val activityActionFlow: MutableStateFlow<(suspend (Activity) -> Unit)?> = MutableStateFlow(null)
+    private val activityActionFlow = MutableSharedFlow<suspend (Activity) -> Unit>(
+        replay = 0,
+        extraBufferCapacity = 10,
+    )
 
     private fun consumeNavigation() {
         navigation.value = null
@@ -88,12 +92,8 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
         navigation.value = navigateAction
     }
 
-    private fun consumeContextActivityAction() {
-        activityActionFlow.value = null
-    }
-
     private fun useActivity(action: suspend (Activity) -> Unit) {
-        activityActionFlow.value = action
+        activityActionFlow.tryEmit(action)
     }
 
     /**
@@ -148,19 +148,18 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
         val navigation: (NavScope.() -> Unit)? by navigation.collectAsStateWithLifecycle()
         navigation?.let {
             LaunchedEffect(navigation) {
+                log { "Running navigation" }
                 it(navScope)
                 consumeNavigation()
             }
         }
 
-        val activityAction by activityActionFlow.collectAsStateWithLifecycle()
-        activityAction?.let { action ->
-            LocalActivity.current?.let { activity ->
-                if (!activity.isFinishing && !activity.isDestroyed) {
-                    LaunchedEffect(activityAction) {
-                        action(activity)
-                        consumeContextActivityAction()
-                    }
+        val activity = LocalActivity.current
+        LaunchedEffect(activity) {
+            activityActionFlow.collect { action ->
+                if (activity != null && !activity.isFinishing && !activity.isDestroyed) {
+                    log { "Running activity lambda" }
+                    action(activity)
                 } else {
                     log { "Trying to use an activity that is finishing or destroyed: $activity" }
                 }
