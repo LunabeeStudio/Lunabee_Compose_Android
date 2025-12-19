@@ -48,6 +48,7 @@ kotlinx-serialization = "1.9.0"
 libphonenumber = "9.0.20"
 normalize = "1.2.0"
 jreleaser = "1.20.0"
+robolectric = "4.16"
 
 [libraries]
 
@@ -97,3 +98,6 @@ libphonenumber = { group = "com.googlecode.libphonenumber", name = "libphonenumb
 normalize = { group = "com.doist.x", name = "normalize", version.ref = "normalize" }
 androidxUiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidxUiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+androidxComposeUiTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidxComposeUiTestJunit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
