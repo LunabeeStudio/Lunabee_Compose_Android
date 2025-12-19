@@ -7,6 +7,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2025-12-22
+
+```
+LbcPresenter 1.9.1
+```
+
+- Fix `useActivity` lambda never called when chained with another Action calling `useActivity`
+
 ## 2025-12-05
 
 ```
