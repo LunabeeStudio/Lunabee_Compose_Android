@@ -23,7 +23,6 @@ package studio.lunabee.compose.presenter
 
 import android.app.Activity
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import co.touchlab.kermit.CommonWriter
@@ -46,7 +45,7 @@ import kotlin.test.assertTrue
 class LBSinglePresenterTest {
 
     @get:Rule
-    private val rule: ComposeContentTestRule = createComposeRule()
+    val rule: ComposeContentTestRule = createComposeRule()
 
     @Before
     fun setup() {
@@ -54,7 +53,7 @@ class LBSinglePresenterTest {
     }
 
     @Test
-    fun concurrent_useActivity_test(): TestResult = runTest {
+    fun multi_useActivity_call_test(): TestResult = runTest {
         val presenter = ActivityTestPresenter(this)
         val reducer = presenter.getReducerByState(TestUiState) as ActivityTestReducer
 
@@ -72,7 +71,7 @@ class LBSinglePresenterTest {
     }
 
     private class ActivityTestPresenter(private val scope: CoroutineScope) : LBSinglePresenter<TestUiState, Unit, TestAction>(
-        verbose = true
+        verbose = true,
     ) {
         override fun initReducer(): ActivityTestReducer = ActivityTestReducer(
             coroutineScope = scope,
@@ -80,7 +79,9 @@ class LBSinglePresenterTest {
         )
 
         override val flows: List<Flow<TestAction>> = emptyList()
+
         override fun getInitialState(): TestUiState = TestUiState
+
         override val content: @Composable ((TestUiState) -> Unit) = {}
     }
 

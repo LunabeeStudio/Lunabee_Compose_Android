@@ -100,8 +100,7 @@ abstract class LBReducer<UiState : MainUiState, MainUiState : PresenterUiState, 
                     log { "Running side effect" }
                     it.sideEffect?.invoke()
                 }
-            }
-            .map { it.uiState }
+            }.map { it.uiState }
         return if (verbose) {
             uiStateFlow.onCompletion { throwable -> log { "Reducer completed $throwable" } }
         } else {

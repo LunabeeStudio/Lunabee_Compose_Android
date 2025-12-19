@@ -26,8 +26,11 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -155,13 +158,16 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
         }
 
         val activity = LocalActivity.current
-        LaunchedEffect(activity) {
-            activityActionFlow.collect { action ->
-                if (activity != null && !activity.isFinishing && !activity.isDestroyed) {
-                    log { "Running activity lambda" }
-                    action(activity)
-                } else {
-                    log { "Trying to use an activity that is finishing or destroyed: $activity" }
+        val lifecycleOwner = LocalLifecycleOwner.current
+        LaunchedEffect(lifecycleOwner) {
+            lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                activityActionFlow.collect { action ->
+                    if (activity != null && !activity.isFinishing && !activity.isDestroyed) {
+                        log { "Running activity lambda" }
+                        action(activity)
+                    } else {
+                        log { "Trying to use an activity that is finishing or destroyed: $activity" }
+                    }
                 }
             }
         }
