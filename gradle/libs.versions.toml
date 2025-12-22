@@ -95,3 +95,5 @@ hbb20-countrycodepicker = { group = "com.hbb20", name = "ccp", version.ref = "hb
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 libphonenumber = { group = "com.googlecode.libphonenumber", name = "libphonenumber", version.ref = "libphonenumber" }
 normalize = { group = "com.doist.x", name = "normalize", version.ref = "normalize" }
+androidxUiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidxUiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }

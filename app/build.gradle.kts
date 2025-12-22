@@ -96,6 +96,7 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
     implementation(libs.compose.material.icons.extended)
+    implementation(libs.androidxUiToolingPreview)
 
     coreLibraryDesugaring(libs.desugarJdk)
 
@@ -123,6 +124,8 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    debugImplementation(libs.androidxUiTooling)
 }
 
 kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JVM_TARGET)

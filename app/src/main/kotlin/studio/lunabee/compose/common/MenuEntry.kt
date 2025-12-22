@@ -47,13 +47,13 @@ fun MenuEntry(
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
-            text = menu.titleRes.string,
+            text = menu.title.string,
             style = MaterialTheme.typography.labelLarge,
         )
 
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
 
-        menu.subtitleRes?.let { subtitle ->
+        menu.subtitle?.let { subtitle ->
             Text(
                 text = subtitle.string,
                 style = MaterialTheme.typography.bodyLarge,

@@ -26,9 +26,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import studio.lunabee.compose.common.CoreDemoBox
+import studio.lunabee.compose.common.CorePreview
 
 @Composable
-fun SimpleExempleScreen(
+fun SimpleExampleScreen(
     uiState: SimpleExampleUiState,
 ) {
     Column {
@@ -45,5 +47,25 @@ fun SimpleExempleScreen(
         Button(onClick = uiState.onShowToastClick) {
             Text("Show Toast From Reducer")
         }
+        Button(onClick = uiState.onShowCascadeToastClick) {
+            Text("Cascade use activity toast")
+        }
+    }
+}
+
+@CorePreview
+@Composable
+private fun SimpleExampleScreenPreview() {
+    CoreDemoBox {
+        SimpleExampleScreen(
+            uiState = SimpleExampleUiState(
+                onToggleClick = {},
+                onNewValue = {},
+                onShowToastClick = {},
+                isChecked = true,
+                text = "Hello Preview",
+                onShowCascadeToastClick = {},
+            ),
+        )
     }
 }

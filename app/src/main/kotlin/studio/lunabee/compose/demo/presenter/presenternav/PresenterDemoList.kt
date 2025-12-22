@@ -39,23 +39,23 @@ fun PresenterDemoList(
 ) {
     val menus = listOf(
         MenuDescription(
-            titleRes = LbcTextSpec.Raw("Check box"),
-            subtitleRes = null,
+            title = LbcTextSpec.Raw("Common stuff"),
+            subtitle = null,
             direction = { navigate(SimpleExampleDestination.route) },
         ),
         MenuDescription(
-            titleRes = LbcTextSpec.Raw("Timer"),
-            subtitleRes = null,
+            title = LbcTextSpec.Raw("Timer"),
+            subtitle = null,
             direction = { navigate(TimerDestination.route) },
         ),
         MenuDescription(
-            titleRes = LbcTextSpec.Raw("Pull to refresh"),
-            subtitleRes = null,
+            title = LbcTextSpec.Raw("Pull to refresh"),
+            subtitle = null,
             direction = { navigate(PullToRefreshDestination.route) },
         ),
         MenuDescription(
-            titleRes = LbcTextSpec.Raw("Multi state"),
-            subtitleRes = null,
+            title = LbcTextSpec.Raw("Multi state"),
+            subtitle = null,
             direction = { navigate(MultiStateDestination.Route) },
         ),
     )
@@ -63,7 +63,7 @@ fun PresenterDemoList(
     LazyColumn {
         items(
             items = menus,
-            key = { it.titleRes.hashCode() },
+            key = { it.title.hashCode() },
         ) { menu ->
             MenuEntry(menu = menu)
             HorizontalDivider()
