@@ -30,8 +30,6 @@ version = AndroidConfig.LBCROBOLECTRICTEST_VERSION
 android {
     resourcePrefix("lbc_robolectrictest_")
     namespace = "studio.lunabee.compose.robolectrictest"
-
-    testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 dependencies {
