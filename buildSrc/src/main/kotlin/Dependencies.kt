@@ -35,6 +35,7 @@ object Modules {
     const val LbcGlance: String = ":lbcglance"
     const val LbcPresenter: String = ":lbcpresenter"
     const val LbcPresenterKoin: String = ":lbcpresenter-koin"
+    const val LbcRobolectricTest: String = ":lbcrobolectrictest"
 }
 
 object BuildConfigs {

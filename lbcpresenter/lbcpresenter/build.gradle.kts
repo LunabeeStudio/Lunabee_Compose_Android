@@ -31,8 +31,6 @@ android {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 description = "Compose implementation of MVI pattern"
@@ -55,8 +53,8 @@ dependencies {
     testImplementation(libs.robolectric)
     testImplementation(libs.androidxComposeUiTestJunit)
 
+    testImplementation(project(Modules.LbcRobolectricTest))
+
     androidTestImplementation(libs.kotlin.test)
     androidTestImplementation(libs.kotlinx.coroutine.test)
-
-    debugImplementation(libs.androidxComposeUiTestManifest)
 }

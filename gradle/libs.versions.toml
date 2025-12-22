@@ -99,5 +99,4 @@ normalize = { group = "com.doist.x", name = "normalize", version.ref = "normaliz
 androidxUiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidxUiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
-androidxComposeUiTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidxComposeUiTestJunit = { group = "androidx.compose.ui", name = "ui-test-junit4" }

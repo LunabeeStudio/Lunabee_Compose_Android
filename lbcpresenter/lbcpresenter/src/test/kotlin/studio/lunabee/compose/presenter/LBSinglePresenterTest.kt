@@ -35,14 +35,19 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
+import org.junit.rules.TestWatcher
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import studio.lunabee.compose.robolectrictest.LbcInjectComponentActivityRule
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(RobolectricTestRunner::class)
 class LBSinglePresenterTest {
+
+    @get:Rule(order = Rule.DEFAULT_ORDER - 1)
+    val addActivityToRobolectricRule: TestWatcher = LbcInjectComponentActivityRule()
 
     @get:Rule
     val rule: ComposeContentTestRule = createComposeRule()
