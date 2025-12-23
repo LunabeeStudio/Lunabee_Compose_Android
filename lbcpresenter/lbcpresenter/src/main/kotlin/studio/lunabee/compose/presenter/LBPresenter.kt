@@ -26,13 +26,18 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -78,7 +83,10 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
     ): LBSimpleReducer<UiState, NavScope, Action>
 
     private val navigation: MutableStateFlow<(NavScope.() -> Unit)?> = MutableStateFlow(null)
-    private val activityActionFlow: MutableStateFlow<(suspend (Activity) -> Unit)?> = MutableStateFlow(null)
+    private val activityActionFlow = MutableSharedFlow<suspend (Activity) -> Unit>(
+        replay = 1,
+        extraBufferCapacity = 10,
+    )
 
     private fun consumeNavigation() {
         navigation.value = null
@@ -88,12 +96,8 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
         navigation.value = navigateAction
     }
 
-    private fun consumeContextActivityAction() {
-        activityActionFlow.value = null
-    }
-
     private fun useActivity(action: suspend (Activity) -> Unit) {
-        activityActionFlow.value = action
+        activityActionFlow.tryEmit(action)
     }
 
     /**
@@ -143,26 +147,34 @@ abstract class LBPresenter<UiState : PresenterUiState, NavScope : Any, Action>(
      * Handles navigation calls and consumes them automatically
      * Collect the [uiStateFlow] to display the screen content.
      */
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Composable
     operator fun invoke(navScope: NavScope) {
         val navigation: (NavScope.() -> Unit)? by navigation.collectAsStateWithLifecycle()
         navigation?.let {
             LaunchedEffect(navigation) {
+                log { "Running navigation" }
                 it(navScope)
                 consumeNavigation()
             }
         }
 
-        val activityAction by activityActionFlow.collectAsStateWithLifecycle()
-        activityAction?.let { action ->
-            LocalActivity.current?.let { activity ->
-                if (!activity.isFinishing && !activity.isDestroyed) {
-                    LaunchedEffect(activityAction) {
-                        action(activity)
-                        consumeContextActivityAction()
-                    }
-                } else {
-                    log { "Trying to use an activity that is finishing or destroyed: $activity" }
+        val activity by rememberUpdatedState(LocalActivity.current)
+        val lifecycleOwner = LocalLifecycleOwner.current
+        LaunchedEffect(lifecycleOwner) {
+            log { "Starting activity effect" }
+            lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                log { "Lifecycle started for activity effect" }
+                activityActionFlow.collect { action ->
+                    activityActionFlow.resetReplayCache()
+                    activity?.let {
+                        if (!it.isFinishing && !it.isDestroyed) {
+                            log { "Running activity lambda" }
+                            action(it)
+                        } else {
+                            log { "Trying to use an activity that is finishing or destroyed: $activity" }
+                        }
+                    } ?: log { "Activity is null" }
                 }
             }
         }

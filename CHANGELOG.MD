@@ -7,11 +7,19 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2025-12-22
+
+**LbcPresenter 1.9.1**
+
+- Fix `useActivity` lambda never called when chained with another Action calling `useActivity`
+
+**LbcRobolectricTest 1.0.0**
+
+- Add junit rule to inject `ComponentActivity` in Robolectric tests when using release target
+
 ## 2025-12-05
 
-```
-LbcCore 1.11.0
-```
+**LbcCore 1.11.0**
 
 - Deprecates `LbcTextSpec` functions using `Context` in favor of using `Resources` to be aligned with Compose lint rule
   https://googlesamples.github.io/android-custom-lint-rules/checks/LocalContextResourcesRead.md.html

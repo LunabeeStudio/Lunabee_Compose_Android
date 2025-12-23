@@ -13,30 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * MenuSection.kt
+ * PreviewUtils.kt
  * Lunabee Compose
  *
- * Created by Lunabee Studio / Date - 2/5/2025 - for the Lunabee Compose library.
+ * Created by Lunabee Studio / Date - 12/22/2025 - for the Lunabee Compose library.
  */
 
 package studio.lunabee.compose.common
 
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.HorizontalDivider
+import android.content.res.Configuration
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+
+@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+annotation class CorePreview
 
 @Composable
-fun MenuSection(
-    menus: List<MenuDescription>,
-) {
-    LazyColumn {
-        items(
-            items = menus,
-            key = { it.title.hashCode() },
-        ) { menu ->
-            MenuEntry(menu = menu)
-            HorizontalDivider()
-        }
+fun CoreDemoBox(content: @Composable (BoxScope.() -> Unit)) {
+    AppDemoTheme {
+        Box(Modifier.background(MaterialTheme.colorScheme.background), content = content)
     }
 }

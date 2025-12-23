@@ -21,17 +21,29 @@
 
 package studio.lunabee.compose.demo.presenter.simple
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import studio.lunabee.compose.common.CoreDemoBox
+import studio.lunabee.compose.common.CorePreview
 
 @Composable
-fun SimpleExempleScreen(
+fun SimpleExampleScreen(
     uiState: SimpleExampleUiState,
 ) {
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
         Checkbox(
             checked = uiState.isChecked,
             onCheckedChange = { newCheckedValue ->
@@ -45,5 +57,25 @@ fun SimpleExempleScreen(
         Button(onClick = uiState.onShowToastClick) {
             Text("Show Toast From Reducer")
         }
+        Button(onClick = uiState.onShowCascadeToastClick) {
+            Text("Cascade use activity toast")
+        }
+    }
+}
+
+@CorePreview
+@Composable
+private fun SimpleExampleScreenPreview() {
+    CoreDemoBox {
+        SimpleExampleScreen(
+            uiState = SimpleExampleUiState(
+                onToggleClick = {},
+                onNewValue = {},
+                onShowToastClick = {},
+                isChecked = true,
+                text = "Hello Preview",
+                onShowCascadeToastClick = {},
+            ),
+        )
     }
 }

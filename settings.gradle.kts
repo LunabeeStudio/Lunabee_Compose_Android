@@ -43,6 +43,7 @@ include(":lbchaptic")
 include(":lbcimage")
 include(":lbctheme")
 include(":material-color-utilities")
+include(":lbcrobolectrictest")
 
 include(":lbcpresenter")
 project(":lbcpresenter").projectDir = File("lbcpresenter/lbcpresenter")

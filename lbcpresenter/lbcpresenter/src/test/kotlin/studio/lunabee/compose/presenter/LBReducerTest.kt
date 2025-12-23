@@ -83,36 +83,36 @@ class LBReducerTest {
 
         assertEquals(TestUiState(count = 300), actualStateSaved)
     }
-}
 
-class TestReducer(
-    override val coroutineScope: CoroutineScope,
-    override val emitUserAction: (TestAction) -> Unit,
-) : LBSingleReducer<TestUiState, TestNavScope, TestAction>(verbose = true) {
+    private class TestReducer(
+        override val coroutineScope: CoroutineScope,
+        override val emitUserAction: (TestAction) -> Unit,
+    ) : LBSingleReducer<TestUiState, TestNavScope, TestAction>(verbose = true) {
 
-    override suspend fun reduce(
-        actualState: TestUiState,
-        action: TestAction,
-        performNavigation: (TestNavScope.() -> Unit) -> Unit,
-        useActivity: (suspend (Activity) -> Unit) -> Unit,
-    ): ReduceResult<TestUiState> =
-        when (action) {
-            TestAction.Increment0 -> actualState.copy(count = actualState.count + 1).asResult()
-            TestAction.Increment1 -> actualState.copy(count = actualState.count + 1).asResult()
-            TestAction.Increment2 -> actualState.copy(count = actualState.count + 1).asResult()
-        }
-}
+        override suspend fun reduce(
+            actualState: TestUiState,
+            action: TestAction,
+            performNavigation: (TestNavScope.() -> Unit) -> Unit,
+            useActivity: (suspend (Activity) -> Unit) -> Unit,
+        ): ReduceResult<TestUiState> =
+            when (action) {
+                TestAction.Increment0 -> actualState.copy(count = actualState.count + 1).asResult()
+                TestAction.Increment1 -> actualState.copy(count = actualState.count + 1).asResult()
+                TestAction.Increment2 -> actualState.copy(count = actualState.count + 1).asResult()
+            }
+    }
 
-data class TestUiState(
-    val count: Int,
-) : PresenterUiState
+    private data class TestUiState(
+        val count: Int,
+    ) : PresenterUiState
 
-interface TestNavScope
+    private interface TestNavScope
 
-sealed interface TestAction {
-    data object Increment0 : TestAction
+    private sealed interface TestAction {
+        data object Increment0 : TestAction
 
-    data object Increment1 : TestAction
+        data object Increment1 : TestAction
 
-    data object Increment2 : TestAction
+        data object Increment2 : TestAction
+    }
 }

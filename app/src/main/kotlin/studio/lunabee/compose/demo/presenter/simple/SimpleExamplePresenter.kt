@@ -26,7 +26,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import studio.lunabee.compose.presenter.LBSinglePresenter
-import studio.lunabee.compose.presenter.LBSingleReducer
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,14 +38,15 @@ class SimpleExamplePresenter @Inject constructor() : LBSinglePresenter<SimpleExa
         onToggleClick = { emitUserAction(SimpleExampleAction.NewCheckValue(it)) },
         onNewValue = { emitUserAction(SimpleExampleAction.NewValue) },
         onShowToastClick = { emitUserAction(SimpleExampleAction.ShowToast) },
+        onShowCascadeToastClick = { emitUserAction(SimpleExampleAction.ShowCascadeToast1) },
         isChecked = false,
         text = "Init",
     )
 
-    override fun initReducer(): LBSingleReducer<SimpleExampleUiState, SimpleExampleNavScope, SimpleExampleAction> = SimpleExampleReducer(
+    override fun initReducer(): SimpleExampleReducer = SimpleExampleReducer(
         coroutineScope = viewModelScope,
         emitUserAction = ::emitUserAction,
     )
 
-    override val content: @Composable (SimpleExampleUiState) -> Unit = { SimpleExempleScreen(it) }
+    override val content: @Composable (SimpleExampleUiState) -> Unit = { SimpleExampleScreen(it) }
 }

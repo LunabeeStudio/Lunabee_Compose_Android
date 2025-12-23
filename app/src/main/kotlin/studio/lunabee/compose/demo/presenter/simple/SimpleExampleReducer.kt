@@ -22,6 +22,7 @@
 package studio.lunabee.compose.demo.presenter.simple
 
 import android.app.Activity
+import android.util.Log
 import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import studio.lunabee.compose.presenter.LBSingleReducer
@@ -45,6 +46,19 @@ class SimpleExampleReducer(
         SimpleExampleAction.ShowToast -> actualState withSideEffect {
             useActivity { context ->
                 Toast.makeText(context, "Toast from reducer with ui context", Toast.LENGTH_SHORT).show()
+            }
+        }
+        SimpleExampleAction.ShowCascadeToast1 -> actualState withSideEffect {
+            useActivity { context ->
+                Log.d("multi_use_activity", "1st use activity call")
+                Toast.makeText(context, "1st toast", Toast.LENGTH_SHORT).show()
+            }
+            emitUserAction(SimpleExampleAction.ShowCascadeToast2)
+        }
+        SimpleExampleAction.ShowCascadeToast2 -> actualState withSideEffect {
+            useActivity { context ->
+                Log.d("multi_use_activity", "2nd use activity call")
+                Toast.makeText(context, "2nd toast", Toast.LENGTH_SHORT).show()
             }
         }
     }

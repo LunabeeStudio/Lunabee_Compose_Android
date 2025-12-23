@@ -27,4 +27,8 @@ sealed interface SimpleExampleAction {
     data object NewValue : SimpleExampleAction
 
     data object ShowToast : SimpleExampleAction
+
+    data object ShowCascadeToast1 : SimpleExampleAction
+
+    data object ShowCascadeToast2 : SimpleExampleAction
 }

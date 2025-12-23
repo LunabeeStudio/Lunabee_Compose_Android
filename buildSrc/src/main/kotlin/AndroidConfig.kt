@@ -47,8 +47,9 @@ object AndroidConfig {
     const val LBCUIFIELD_COUNTRYPICKER_VERSION: String = "1.6.0"
     const val LBCIMAGE_VERSION: String = "1.7.0"
     const val LBCGLANCE_VERSION: String = "1.5.0"
-    const val LBCPRESENTER_VERSION: String = "1.9.0"
+    const val LBCPRESENTER_VERSION: String = "1.9.1"
     const val LBCPRESENTER_KOIN_VERSION: String = LBCPRESENTER_VERSION
+    const val LBCROBOLECTRICTEST_VERSION: String = "1.0.0"
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_21
     val JVM_TARGET: JvmTarget = JvmTarget.JVM_21

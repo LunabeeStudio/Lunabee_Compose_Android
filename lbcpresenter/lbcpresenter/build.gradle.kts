@@ -50,6 +50,10 @@ dependencies {
 
     testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlinx.coroutine.test)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidxComposeUiTestJunit)
+
+    testImplementation(project(Modules.LbcRobolectricTest))
 
     androidTestImplementation(libs.kotlin.test)
     androidTestImplementation(libs.kotlinx.coroutine.test)
