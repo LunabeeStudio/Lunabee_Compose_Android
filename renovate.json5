@@ -26,15 +26,6 @@
                 "com.google.devtools.ksp:*",
                 "co.touchlab.skie:*"
             ]
-        },
-        // Skip 1.21.0 because of https://github.com/jreleaser/jreleaser/issues/2009
-        {
-            "matchPackageNames": [
-                "org.jreleaser:org.jreleaser.gradle.plugin"
-            ],
-            "ignoreVersions": [
-                "1.21.0"
-            ]
         }
     ]
 }
