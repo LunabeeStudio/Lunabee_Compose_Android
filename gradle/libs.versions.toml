@@ -17,7 +17,7 @@ jreleaser = { id = "org.jreleaser", version.ref = "jreleaser" }
 
 [versions]
 
-ksp = "2.3.3"
+ksp = "2.3.4"
 androidx-activity = "1.12.1"
 androidx-appcompat = "1.7.1"
 androidx-core = "1.17.0"
