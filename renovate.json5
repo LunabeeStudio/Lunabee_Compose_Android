@@ -1,69 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    ":dependencyDashboard"
-  ],
-  "labels": [
-    "💎 Dependencies"
+    "config:recommended"
   ],
   "packageRules": [
     {
-      "groupName": "kotlin dependencies",
-      "groupSlug": "kotlin-dependencies",
-      "matchPackageNames": [
-        "org.jetbrains.kotlin.multiplatform",
-        "org.jetbrains.kotlin.plugin.compose",
-        "org.jetbrains.kotlin.plugin.serialization",
-        "org.jetbrains.kotlin.jvm"
+      "groupName": "Kotlin dependencies",
+      "matchPackagePatterns": [
+        "^org\\.jetbrains\\.kotlin"
       ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
+      "matchUpdateTypes": ["major", "minor", "patch"]
+    },
+    {
+      "groupName": "All other non-major dependencies",
+      "matchUpdateTypes": ["minor", "patch"],
+      "excludePackagePatterns": [
+        "^org\\.jetbrains\\.kotlin"
       ]
-    },
-    {
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "matchPackageNames": [
-        "*"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ]
-    },
-    {
-      "matchCurrentVersion": "0",
-      "enabled": false
-    },
-    {
-      "matchDatasources": [
-        "maven"
-      ],
-      "matchPackageNames": [
-        "/studio.lunabee:.*/"
-      ],
-      "registryUrls": [
-        "https://artifactory.lunabee.studio/artifactory/libs-release-local",
-        "https://artifactory.lunabee.studio/artifactory/libs-snapshot-local",
-        "https://artifactory.lunabee.studio/artifactory/lunabee-gradle-plugin"
-      ]
-    },
-    {
-      "matchPackageNames": [
-        "/androidx\\.room:.*/"
-      ],
-      "groupName": "androidx-room dependencies",
-      "groupSlug": "androidx-room-all",
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ]
-    },
-    {
-      "matchPackageNames": ["org.jetbrains.kotlinx:kotlinx-datetime"],
-      "allowedVersions": "!/0\\.6\\.x-compat$/"
     }
   ]
 }
