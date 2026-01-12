@@ -32,7 +32,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Lunabee Kotlin Library"
 
-include("app")
+include("demo-compose")
 
 include(":lbcaccessibility")
 project(":lbcaccessibility").projectDir = File("compose/lbcaccessibility")
