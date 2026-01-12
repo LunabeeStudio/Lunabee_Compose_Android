@@ -3,6 +3,9 @@
   "extends": [
     "config:recommended"
   ],
+  "labels": [
+    "💎 Dependencies"
+  ],
   "packageRules": [
     {
       "groupName": "Kotlin dependencies",
