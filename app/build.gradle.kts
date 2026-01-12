@@ -124,7 +124,7 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.android.compiler)
     //noinspection UseTomlInstead FIXME wait for dagger update https://github.com/google/dagger/issues/5001
-    ksp("org.jetbrains.kotlin:kotlin-metadata-jvm:2.3.0-Beta1")
+    ksp("org.jetbrains.kotlin:kotlin-metadata-jvm:2.3.0")
     implementation(libs.androidx.hilt.navigation.compose)
 
     debugImplementation(libs.androidxUiTooling)
