@@ -34,6 +34,7 @@ rootProject.name = "Lunabee Kotlin Library"
 
 include("demo-compose")
 
+// region Compose
 include(":lbcaccessibility")
 project(":lbcaccessibility").projectDir = File("compose/lbcaccessibility")
 include(":lbcandroidtest")
@@ -64,5 +65,6 @@ include(":lbcuifield-countrypicker")
 project(":lbcuifield-countrypicker").projectDir = File("compose/lbcuifield/lbcuifield-countrypicker")
 include(":lbcuifield-phonepicker")
 project(":lbcuifield-phonepicker").projectDir = File("compose/lbcuifield/lbcuifield-phonepicker")
+// endregion
 
 include(":material-color-utilities")
