@@ -4,7 +4,7 @@ plugins {
 }
 
 description = "Lunabee Studio Kotlin logger"
-version = AndroidConfig.LBLOGGER_KERMIT
+version = AndroidConfig.LBLOGGER_KERMIT_VERSION
 
 kotlin {
     jvm()

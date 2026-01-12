@@ -19,6 +19,8 @@
  * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
 
+rootProject.name = "buildSrc"
+
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {

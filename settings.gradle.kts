@@ -19,6 +19,8 @@
  * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -30,7 +32,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Lunabee Kotlin Library"
+rootProject.name = "Lunabee_Kotlin_Library"
 
 include("demo-compose")
 
@@ -70,5 +72,20 @@ project(":lbcuifield-phonepicker").projectDir = File("compose/lbcuifield/lbcuifi
 include(":material-color-utilities")
 
 include("lblogger-kermit")
-project(":lblogger-kermit").projectDir = File("lblogger/lblogger-kermit")
+project(":lblogger-kermit").projectDir = File("common/lblogger/lblogger-kermit")
+include("lbcore")
+project(":lbcore").projectDir = File("common/lbcore/lbcore")
+include("lbextensions")
+project(":lbextensions").projectDir = File("common/lbextensions")
 
+/*
+lbBom = { group = "studio.lunabee", name = "lunabee-bom", version.ref = "lbBom" }
+lbTest = { group = "studio.lunabee", name = "lbtest" }
+lbktorCore = { group = "studio.lunabee", name = "lbktor-core" }
+lbktorJson = { group = "studio.lunabee", name = "lbktor-json" }
+lbktorKermit = { group = "studio.lunabee", name = "lbktor-kermit" }
+lbloadingCompose = { group = "studio.lunabee", name = "lbloading-compose" }
+lbloadingCore = { group = "studio.lunabee", name = "lbloading-core" }
+lbloadingKoin = { group = "studio.lunabee", name = "lbloading-koin" }
+lbloggerCrashlyticsAndroid = { group = "studio.lunabee", name = "lblogger-kermit-crashlytics-android" }
+ */

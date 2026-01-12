@@ -48,13 +48,13 @@ dependencies {
     implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))
 
-    testImplementation(libs.kotlin.test)
-    testImplementation(libs.kotlinx.coroutine.test)
+    testImplementation(libs.kotlinTest)
+    testImplementation(libs.kotlinxCoroutinesTest)
     testImplementation(libs.robolectric)
     testImplementation(libs.androidxComposeUiTestJunit)
 
     testImplementation(project(Modules.LbcRobolectricTest))
 
-    androidTestImplementation(libs.kotlin.test)
-    androidTestImplementation(libs.kotlinx.coroutine.test)
+    androidTestImplementation(libs.kotlinTest)
+    androidTestImplementation(libs.kotlinxCoroutinesTest)
 }

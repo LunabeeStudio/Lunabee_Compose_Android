@@ -35,7 +35,7 @@ android {
 dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.activity.compose)
-    implementation(libs.kotlin.test)
+    implementation(libs.kotlinTest)
     implementation(libs.androidxComposeUiTestJunit)
     implementation(libs.robolectric)
 }
