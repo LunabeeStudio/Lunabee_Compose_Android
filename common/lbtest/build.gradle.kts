@@ -4,13 +4,14 @@ plugins {
 }
 
 description = "Lunabee Studio Kotlin test library"
+version = AndroidConfig.LBTEST_VERSION
 
 kotlin {
     jvm()
 
     sourceSets {
         commonMain.dependencies {
-            api(libs.kotlin.test)
+            api(libs.kotlinTest)
         }
         jvmTest.dependencies {
         }

@@ -77,10 +77,11 @@ include("lbcore")
 project(":lbcore").projectDir = File("common/lbcore/lbcore")
 include("lbextensions")
 project(":lbextensions").projectDir = File("common/lbextensions")
+include("lbtest")
+project(":lbtest").projectDir = File("common/lbtest")
 
 /*
 lbBom = { group = "studio.lunabee", name = "lunabee-bom", version.ref = "lbBom" }
-lbTest = { group = "studio.lunabee", name = "lbtest" }
 lbktorCore = { group = "studio.lunabee", name = "lbktor-core" }
 lbktorJson = { group = "studio.lunabee", name = "lbktor-json" }
 lbktorKermit = { group = "studio.lunabee", name = "lbktor-kermit" }
