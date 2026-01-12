@@ -8,11 +8,11 @@ Glance, the main idea here is to provide only Composable or methods that can be 
 ## Create a widget
 
 You can check the demo app to see how to create a widget:
-- Package [glance](../app/src/main/kotlin/studio/lunabee/compose/demo/glance)
-    - [GlanceWidgetDemo.kt](../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceWidgetDemo.kt): declaration of the widget and the receiver.
-    - [GlanceScreen.kt](../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceScreen.kt): demonstration of [PinWidgetToHomeScreenHelper.kt](src/main/kotlin/studio/lunabee/compose/glance/helpers/PinWidgetToHomeScreenHelper.kt)
-    - [widget_demo_info.xml](../app/src/main/res/xml/widget_demo_info.xml): provides info about the widget (size, description, preview...)
-    - [AndroidManifest.xml](../app/src/main/AndroidManifest.xml): register the receiver.
+- Package [glance](../../app/src/main/kotlin/studio/lunabee/compose/demo/glance)
+    - [GlanceWidgetDemo.kt](../../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceWidgetDemo.kt): declaration of the widget and the receiver.
+    - [GlanceScreen.kt](../../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceScreen.kt): demonstration of [PinWidgetToHomeScreenHelper.kt](src/main/kotlin/studio/lunabee/compose/glance/helpers/PinWidgetToHomeScreenHelper.kt)
+    - [widget_demo_info.xml](../../app/src/main/res/xml/widget_demo_info.xml): provides info about the widget (size, description, preview...)
+    - [AndroidManifest.xml](../../app/src/main/AndroidManifest.xml): register the receiver.
 
 Note that this demo app does not provide a configuration Activity. You can consult the following [documentation](https://developer.android.com/develop/ui/views/appwidgets/configuration) to implement it.
 
@@ -42,7 +42,7 @@ With [GlanceRoot.kt](src/main/kotlin/studio/lunabee/compose/glance/ui/GlanceRoot
 #### GlanceBackground
 
 With [GlanceBackground.kt](src/main/kotlin/studio/lunabee/compose/glance/ui/GlanceBackground.kt), you can add a XML background behind any other view. 
-Check the sample in [GlanceWidgetDemo.kt](../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceWidgetDemo.kt).
+Check the sample in [GlanceWidgetDemo.kt](../../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceWidgetDemo.kt).
 
 ⚠️ If you have a background with a simple `Color` or an image, use directly `GlanceModifier.background` on your view.
 
@@ -50,7 +50,7 @@ Check the sample in [GlanceWidgetDemo.kt](../app/src/main/kotlin/studio/lunabee/
 
 With [GlanceTypefaceText.kt](src/main/kotlin/studio/lunabee/compose/glance/ui/GlanceTypefaceText.kt), you can use your custom font to display a text in a widget.
 This feature is not supported by the default API (even in pure XML). Your text will be displayed as an image.
-Check the sample in [GlanceWidgetDemo.kt](../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceWidgetDemo.kt).
+Check the sample in [GlanceWidgetDemo.kt](../../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceWidgetDemo.kt).
 
 ⚠️ If you don't have any specific font to use, use directly `Text` composable.
 
@@ -58,7 +58,7 @@ Check the sample in [GlanceWidgetDemo.kt](../app/src/main/kotlin/studio/lunabee/
 
 With [GlanceTypefaceButton.kt](src/main/kotlin/studio/lunabee/compose/glance/ui/GlanceTypefaceButton.kt), you can use your custom font to display a button in a widget.
 It uses, under the hood, the `GlanceTypefaceText`
-Check the sample in [GlanceWidgetDemo.kt](../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceWidgetDemo.kt).
+Check the sample in [GlanceWidgetDemo.kt](../../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceWidgetDemo.kt).
 
 ⚠️ If you don't have any specific font to use, use directly `Button` composable.
 
@@ -66,4 +66,4 @@ Check the sample in [GlanceWidgetDemo.kt](../app/src/main/kotlin/studio/lunabee/
 
 With [GlanceViewFlipper.kt](src/main/kotlin/studio/lunabee/compose/glance/ui/GlanceViewFlipper.kt), you can change view with animation.
 As the `ViewFlipper` does not expose all its methods to the `RemoteViews`, you need to provide a XML layout with your animations as XML.
-Check the sample in [GlanceWidgetDemo.kt](../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceWidgetDemo.kt).
+Check the sample in [GlanceWidgetDemo.kt](../../app/src/main/kotlin/studio/lunabee/compose/demo/glance/GlanceWidgetDemo.kt).

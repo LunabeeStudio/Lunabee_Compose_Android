@@ -30,29 +30,39 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Lunabee Compose"
+rootProject.name = "Lunabee Kotlin Library"
 
 include("app")
+
 include(":lbcaccessibility")
+project(":lbcaccessibility").projectDir = File("compose/lbcaccessibility")
 include(":lbcandroidtest")
+project(":lbcandroidtest").projectDir = File("compose/lbcandroidtest")
 include(":lbccore")
+project(":lbccore").projectDir = File("compose/lbccore")
 include(":lbccrop")
+project(":lbccrop").projectDir = File("compose/lbccrop")
 include(":lbcfoundation")
+project(":lbcfoundation").projectDir = File("compose/lbcfoundation")
 include(":lbcglance")
+project(":lbcglance").projectDir = File("compose/lbcglance")
 include(":lbchaptic")
+project(":lbchaptic").projectDir = File("compose/lbchaptic")
 include(":lbcimage")
+project(":lbcimage").projectDir = File("compose/lbcimage")
 include(":lbctheme")
-include(":material-color-utilities")
+project(":lbctheme").projectDir = File("compose/lbctheme")
 include(":lbcrobolectrictest")
-
+project(":lbcrobolectrictest").projectDir = File("compose/lbcrobolectrictest")
 include(":lbcpresenter")
-project(":lbcpresenter").projectDir = File("lbcpresenter/lbcpresenter")
+project(":lbcpresenter").projectDir = File("compose/lbcpresenter/lbcpresenter")
 include(":lbcpresenter-koin")
-project(":lbcpresenter-koin").projectDir = File("lbcpresenter/lbcpresenter-koin")
-
+project(":lbcpresenter-koin").projectDir = File("compose/lbcpresenter/lbcpresenter-koin")
 include(":lbcuifield-core")
-project(":lbcuifield-core").projectDir = File("lbcuifield/lbcuifield-core")
+project(":lbcuifield-core").projectDir = File("compose/lbcuifield/lbcuifield-core")
 include(":lbcuifield-countrypicker")
-project(":lbcuifield-countrypicker").projectDir = File("lbcuifield/lbcuifield-countrypicker")
+project(":lbcuifield-countrypicker").projectDir = File("compose/lbcuifield/lbcuifield-countrypicker")
 include(":lbcuifield-phonepicker")
-project(":lbcuifield-phonepicker").projectDir = File("lbcuifield/lbcuifield-phonepicker")
+project(":lbcuifield-phonepicker").projectDir = File("compose/lbcuifield/lbcuifield-phonepicker")
+
+include(":material-color-utilities")
