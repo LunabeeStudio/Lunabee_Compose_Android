@@ -68,3 +68,7 @@ project(":lbcuifield-phonepicker").projectDir = File("compose/lbcuifield/lbcuifi
 // endregion
 
 include(":material-color-utilities")
+
+include("lblogger-kermit")
+project(":lblogger-kermit").projectDir = File("lblogger/lblogger-kermit")
+

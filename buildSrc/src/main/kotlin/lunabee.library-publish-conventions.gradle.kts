@@ -28,6 +28,7 @@ import java.util.Locale
 enum class PublishType {
     Android,
     Java,
+    Kmp,
 }
 
 plugins {
@@ -39,6 +40,7 @@ plugins {
 val publishType: PublishType = when {
     project.plugins.hasPlugin("android-library") -> PublishType.Android
     project.plugins.hasPlugin("java-library") -> PublishType.Java
+    project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform") -> PublishType.Kmp
     else -> error("Cannot determine the type of publication")
 }
 
@@ -116,18 +118,25 @@ fun PublishingExtension.setupPublication() {
     publications {
         when (publishType) {
             PublishType.Android -> create<MavenPublication>(project.name) {
+                // version is set in project, so use after evaluate
                 afterEvaluate {
-                    // version is set in project, so use after evaluate
                     setProjectDetails()
                     setAndroidArtifacts()
                     setPom()
                 }
             }
             PublishType.Java -> create<MavenPublication>(project.name) {
+                // version is set in project, so use after evaluate
                 afterEvaluate {
-                    // version is set in project, so use after evaluate
                     setProjectDetails()
                     setJavaArtifacts()
+                    setPom()
+                }
+            }
+            PublishType.Kmp -> publications.withType<MavenPublication> {
+                // version is set in project, so use after evaluate
+                afterEvaluate {
+                    // KMP plugin already setup publication stuff, just setup Pom
                     setPom()
                 }
             }
@@ -240,7 +249,7 @@ fun MavenPublication.setAndroidArtifacts() {
         project.android.sourceSets
             .getByName("main")
             .kotlin as DefaultAndroidSourceDirectorySet
-    ).srcDirs
+        ).srcDirs
     val sourceJar by project.tasks.registering(Jar::class) {
         archiveClassifier.set("sources")
         from(mainSourceSets)
@@ -295,7 +304,9 @@ signing {
             gradle.taskGraph.hasTask("publish")
         }
     }
-    sign(publishing.publications[project.name])
+    publishing.publications.forEach {
+        sign(it)
+    }
 }
 
 afterEvaluate {
@@ -304,7 +315,9 @@ afterEvaluate {
             PublishType.Android -> dependsOn(
                 tasks.named("bundleReleaseAar"),
             )
-            PublishType.Java -> dependsOn(
+            PublishType.Kmp,
+            PublishType.Java,
+            -> dependsOn(
                 tasks.withType(Jar::class.java),
             )
         }

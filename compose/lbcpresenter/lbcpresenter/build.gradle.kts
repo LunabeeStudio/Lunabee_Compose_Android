@@ -43,7 +43,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.android)
     implementation(libs.activity.compose)
-    implementation(libs.touchlab.kermit)
+    implementation(libs.touchlabKermit)
 
     implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))

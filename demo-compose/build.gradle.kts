@@ -116,7 +116,7 @@ dependencies {
 
     androidTestImplementation(project(Modules.LbcAndroidTest))
     androidTestImplementation(libs.compose.ui.test.junit4)
-    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.junit4)
     androidTestImplementation(libs.kotlin.test.junit)
     debugImplementation(libs.compose.ui.test.manifest)
 
