@@ -54,8 +54,10 @@ jreleaser {
     gitRootSearch.set(true)
     signing {
         active.set(org.jreleaser.model.Active.ALWAYS)
-        armored.set(true)
-        mode.set(Signing.Mode.FILE)
+        pgp {
+            armored.set(true)
+            mode.set(Signing.Mode.FILE)
+        }
     }
     deploy {
         maven {
