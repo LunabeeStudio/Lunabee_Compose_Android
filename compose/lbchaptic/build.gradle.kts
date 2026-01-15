@@ -33,6 +33,7 @@ version = AndroidConfig.LBCHAPTIC_VERSION
 
 dependencies {
     implementation(platform(libs.composeBom))
-    implementation(libs.composeUi)
+
     implementation(libs.androidxAppcompat)
+    implementation(libs.composeUi)
 }

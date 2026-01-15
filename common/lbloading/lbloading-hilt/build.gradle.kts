@@ -36,16 +36,16 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.hiltAndroid)
+    implementation(platform(libs.composeBom))
+
     ksp(libs.hiltAndroidCompiler)
 
+    implementation(libs.androidxLifecycleRuntimeCompose)
+    implementation(libs.composeFoundation)
+    implementation(libs.hiltAndroid)
     implementation(libs.hiltCore)
 
-    implementation(platform(libs.composeBom))
-    implementation(libs.composeFoundation)
-    implementation(libs.androidxLifecycleRuntimeCompose)
-
     implementation(projects.lbcoreCompose)
-    api(projects.lbloadingCore)
     api(projects.lbloadingCompose)
+    api(projects.lbloadingCore)
 }

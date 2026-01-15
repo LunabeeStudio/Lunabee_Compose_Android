@@ -34,15 +34,14 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.androidxActivityCompose)
-
     implementation(platform(libs.composeBom))
+
+    implementation(libs.androidxActivityCompose)
+    implementation(libs.androidxLifecycleRuntimeCompose)
     implementation(libs.composeFoundation)
     implementation(libs.composeMaterial3)
-    implementation(libs.androidxLifecycleRuntimeCompose)
 
     implementation(projects.lbcoreCompose)
-    api(projects.lbloadingCore)
-
     lintPublish(projects.lbloadingChecks)
+    api(projects.lbloadingCore)
 }

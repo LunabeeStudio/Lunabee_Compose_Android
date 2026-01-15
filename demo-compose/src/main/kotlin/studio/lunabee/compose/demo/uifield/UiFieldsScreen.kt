@@ -152,35 +152,35 @@ private fun rememberCountryPickerField(savedStateHandle: SavedStateHandle): Coun
         onValueChange = {},
         coroutineScope = CoroutineScope(Dispatchers.Default),
         countryPickerBottomSheetRenderer =
-            object : CountryPickerBottomSheetRenderer {
-                @Composable
-                override fun BottomSheetHolder(
-                    dismiss: () -> Unit,
-                    searchField: @Composable (() -> Unit),
-                    countriesList: @Composable ((PaddingValues, LazyListState) -> Unit),
-                ) {
-                    CountrySearchBottomSheetHolder(
-                        dismiss = dismiss,
-                        searchField = searchField,
-                        countriesList = countriesList,
-                    )
-                }
+        object : CountryPickerBottomSheetRenderer {
+            @Composable
+            override fun BottomSheetHolder(
+                dismiss: () -> Unit,
+                searchField: @Composable (() -> Unit),
+                countriesList: @Composable ((PaddingValues, LazyListState) -> Unit),
+            ) {
+                CountrySearchBottomSheetHolder(
+                    dismiss = dismiss,
+                    searchField = searchField,
+                    countriesList = countriesList,
+                )
+            }
 
-                @Composable
-                override fun CountryRow(
-                    countrySearchItem: CountrySearchItem,
-                    searchedText: String,
-                    onClick: () -> Unit,
-                ) {
-                    CountryBottomSheetCountryRow(countrySearchItem, searchedText, onClick)
-                }
+            @Composable
+            override fun CountryRow(
+                countrySearchItem: CountrySearchItem,
+                searchedText: String,
+                onClick: () -> Unit,
+            ) {
+                CountryBottomSheetCountryRow(countrySearchItem, searchedText, onClick)
+            }
 
-                override val searchedFieldLabel: LbcTextSpec =
-                    LbcTextSpec
-                        .Raw("Search for a country")
-                override val searchFieldPlaceHolder: LbcTextSpec = LbcTextSpec.Raw("")
-                override val searchFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
-            },
+            override val searchedFieldLabel: LbcTextSpec =
+                LbcTextSpec
+                    .Raw("Search for a country")
+            override val searchFieldPlaceHolder: LbcTextSpec = LbcTextSpec.Raw("")
+            override val searchFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
+        },
     )
 }
 
@@ -201,52 +201,52 @@ private fun rememberPhonePickerField(savedStateHandle: SavedStateHandle): PhoneP
         onValueChange = {},
         coroutineScope = CoroutineScope(Dispatchers.Default),
         phoneFieldRenderer =
-            object : PhoneFieldRenderer {
-                @Composable
-                override fun FieldContent(
-                    textField: @Composable (onFocusChange: (focused: Boolean) -> Unit) -> Unit,
-                    selectedCountry: SelectedCountry?,
-                    openCountryPicker: () -> Unit,
-                    errorMessage: LbcTextSpec?,
-                ) {
-                    PhoneFieldContent(
-                        textField = textField,
-                        selectedCountry = selectedCountry,
-                        openCountryPicker = openCountryPicker,
-                        errorMessage = errorMessage,
-                    )
-                }
-            },
+        object : PhoneFieldRenderer {
+            @Composable
+            override fun FieldContent(
+                textField: @Composable (onFocusChange: (focused: Boolean) -> Unit) -> Unit,
+                selectedCountry: SelectedCountry?,
+                openCountryPicker: () -> Unit,
+                errorMessage: LbcTextSpec?,
+            ) {
+                PhoneFieldContent(
+                    textField = textField,
+                    selectedCountry = selectedCountry,
+                    openCountryPicker = openCountryPicker,
+                    errorMessage = errorMessage,
+                )
+            }
+        },
         countryPickerBottomSheetRenderer =
-            object : CountryPickerBottomSheetRenderer {
-                @Composable
-                override fun BottomSheetHolder(
-                    dismiss: () -> Unit,
-                    searchField: @Composable (() -> Unit),
-                    countriesList: @Composable ((PaddingValues, LazyListState) -> Unit),
-                ) {
-                    CountrySearchBottomSheetHolder(
-                        dismiss = dismiss,
-                        searchField = searchField,
-                        countriesList = countriesList,
-                    )
-                }
+        object : CountryPickerBottomSheetRenderer {
+            @Composable
+            override fun BottomSheetHolder(
+                dismiss: () -> Unit,
+                searchField: @Composable (() -> Unit),
+                countriesList: @Composable ((PaddingValues, LazyListState) -> Unit),
+            ) {
+                CountrySearchBottomSheetHolder(
+                    dismiss = dismiss,
+                    searchField = searchField,
+                    countriesList = countriesList,
+                )
+            }
 
-                @Composable
-                override fun CountryRow(
-                    countrySearchItem: CountrySearchItem,
-                    searchedText: String,
-                    onClick: () -> Unit,
-                ) {
-                    CountryBottomSheetCountryRow(countrySearchItem, searchedText, onClick)
-                }
+            @Composable
+            override fun CountryRow(
+                countrySearchItem: CountrySearchItem,
+                searchedText: String,
+                onClick: () -> Unit,
+            ) {
+                CountryBottomSheetCountryRow(countrySearchItem, searchedText, onClick)
+            }
 
-                override val searchedFieldLabel: LbcTextSpec =
-                    LbcTextSpec
-                        .Raw("Search for a country")
-                override val searchFieldPlaceHolder: LbcTextSpec = LbcTextSpec.Raw("")
-                override val searchFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
-            },
+            override val searchedFieldLabel: LbcTextSpec =
+                LbcTextSpec
+                    .Raw("Search for a country")
+            override val searchFieldPlaceHolder: LbcTextSpec = LbcTextSpec.Raw("")
+            override val searchFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
+        },
     )
 }
 
@@ -262,19 +262,19 @@ private fun rememberDisabledDateUiField(savedStateHandle: SavedStateHandle): Dat
             null
         },
         selectableDates =
-            object : SelectableDates {
-                override fun isSelectableDate(utcTimeMillis: Long): Boolean =
-                    Instant.now().toEpochMilli() < utcTimeMillis
-            },
+        object : SelectableDates {
+            override fun isSelectableDate(utcTimeMillis: Long): Boolean =
+                Instant.now().toEpochMilli() < utcTimeMillis
+        },
         savedStateHandle = savedStateHandle,
         id = "7",
         datePickerData =
-            DatePickerData(
-                datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
-                datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
-                datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
-                icon = LbcImageSpec.KtImageVector(Icons.Default.DateRange),
-            ),
+        DatePickerData(
+            datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
+            datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
+            datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
+            icon = LbcImageSpec.KtImageVector(Icons.Default.DateRange),
+        ),
     )
 }
 
@@ -288,9 +288,9 @@ private fun rememberDisabledField(savedStateHandle: SavedStateHandle): NormalUiT
             if (value.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
         },
         keyboardOptions =
-            KeyboardOptions(
-                imeAction = ImeAction.Next,
-            ),
+        KeyboardOptions(
+            imeAction = ImeAction.Next,
+        ),
         savedStateHandle = savedStateHandle,
         id = "6",
         readOnly = true,
@@ -308,9 +308,9 @@ private fun rememberReadOnlyField(savedStateHandle: SavedStateHandle): NormalUiT
             if (value.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
         },
         keyboardOptions =
-            KeyboardOptions(
-                imeAction = ImeAction.Next,
-            ),
+        KeyboardOptions(
+            imeAction = ImeAction.Next,
+        ),
         savedStateHandle = savedStateHandle,
         id = "5",
         readOnly = true,
@@ -328,19 +328,19 @@ private fun rememberDateUiField(savedStateHandle: SavedStateHandle): DateUiField
             null
         },
         selectableDates =
-            object : SelectableDates {
-                override fun isSelectableDate(utcTimeMillis: Long): Boolean =
-                    Instant.now().toEpochMilli() < utcTimeMillis
-            },
+        object : SelectableDates {
+            override fun isSelectableDate(utcTimeMillis: Long): Boolean =
+                Instant.now().toEpochMilli() < utcTimeMillis
+        },
         savedStateHandle = savedStateHandle,
         id = "4",
         datePickerData =
-            DatePickerData(
-                datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
-                datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
-                datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
-                icon = LbcImageSpec.KtImageVector(Icons.Default.DateRange),
-            ),
+        DatePickerData(
+            datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
+            datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
+            datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
+            icon = LbcImageSpec.KtImageVector(Icons.Default.DateRange),
+        ),
     )
 }
 
@@ -364,19 +364,19 @@ private fun rememberDateAndHourUiField(savedStateHandle: SavedStateHandle): Date
         savedStateHandle = savedStateHandle,
         id = "3",
         datePickerData =
-            DatePickerData(
-                datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
-                datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
-                datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
-                icon = LbcImageSpec.KtImageVector(Icons.Default.DateRange),
-            ),
+        DatePickerData(
+            datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
+            datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
+            datePickerCancelLabel = LbcTextSpec.Raw("Cancel"),
+            icon = LbcImageSpec.KtImageVector(Icons.Default.DateRange),
+        ),
         hourPickerData =
-            HourPickerData(
-                hourPickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
-                hourPickerCancelLabel = LbcTextSpec.Raw("Cancel"),
-                hourPickerClickLabel = LbcTextSpec.Raw("Picker Hour"),
-                icon = LbcImageSpec.KtImageVector(Icons.Default.AccessTime),
-            ),
+        HourPickerData(
+            hourPickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
+            hourPickerCancelLabel = LbcTextSpec.Raw("Cancel"),
+            hourPickerClickLabel = LbcTextSpec.Raw("Picker Hour"),
+            icon = LbcImageSpec.KtImageVector(Icons.Default.AccessTime),
+        ),
     )
 }
 
@@ -396,18 +396,18 @@ private fun rememberPasswordUiTextField(savedStateHandle: SavedStateHandle): Pas
             }
         },
         keyboardOptions =
-            KeyboardOptions(
-                imeAction = ImeAction.Next,
-            ),
+        KeyboardOptions(
+            imeAction = ImeAction.Next,
+        ),
         savedStateHandle = savedStateHandle,
         id = "2",
         visibilityOptionData =
-            PasswordVisibilityOptionData(
-                hidePasswordClickLabel = LbcTextSpec.Raw("Hide password"),
-                showPasswordClickLabel = LbcTextSpec.Raw("Show password"),
-                showIcon = LbcImageSpec.KtImageVector(Icons.Default.Visibility),
-                hideIcon = LbcImageSpec.KtImageVector(Icons.Default.VisibilityOff),
-            ),
+        PasswordVisibilityOptionData(
+            hidePasswordClickLabel = LbcTextSpec.Raw("Hide password"),
+            showPasswordClickLabel = LbcTextSpec.Raw("Show password"),
+            showIcon = LbcImageSpec.KtImageVector(Icons.Default.Visibility),
+            hideIcon = LbcImageSpec.KtImageVector(Icons.Default.VisibilityOff),
+        ),
     )
 }
 
@@ -421,9 +421,9 @@ private fun rememberNormalUiTextField(savedStateHandle: SavedStateHandle): Norma
             if (value.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
         },
         keyboardOptions =
-            KeyboardOptions(
-                imeAction = ImeAction.Next,
-            ),
+        KeyboardOptions(
+            imeAction = ImeAction.Next,
+        ),
         savedStateHandle = savedStateHandle,
         id = "1",
         readOnly = true,
@@ -446,9 +446,9 @@ private fun PhoneFieldContent(
                 LbcImage(
                     imageSpec = selectedCountry.flagImage,
                     modifier =
-                        Modifier
-                            .size(32.dp)
-                            .clickable { openCountryPicker() },
+                    Modifier
+                        .size(32.dp)
+                        .clickable { openCountryPicker() },
                 )
             }
             textField {}
@@ -479,9 +479,9 @@ private fun CountrySearchBottomSheetHolder(
     ) {
         Column(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
         ) {
             searchField()
 
@@ -510,15 +510,15 @@ private fun CountryBottomSheetCountryRow(
         )
         Text(
             text =
-                countrySearchItem
-                    .getAnnotatedName(
-                        searchedText = searchedText,
-                        nonMatchingSpanStyle = SpanStyle(color = MaterialTheme.colorScheme.onSurface),
-                        matchingSpanStyle = SpanStyle(color = MaterialTheme.colorScheme.primary),
-                    ).annotated,
+            countrySearchItem
+                .getAnnotatedName(
+                    searchedText = searchedText,
+                    nonMatchingSpanStyle = SpanStyle(color = MaterialTheme.colorScheme.onSurface),
+                    matchingSpanStyle = SpanStyle(color = MaterialTheme.colorScheme.primary),
+                ).annotated,
             modifier =
-                Modifier
-                    .weight(1f),
+            Modifier
+                .weight(1f),
         )
     }
 }

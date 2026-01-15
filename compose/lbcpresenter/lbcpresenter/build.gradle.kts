@@ -33,23 +33,23 @@ version = AndroidConfig.LBCPRESENTER_VERSION
 
 dependencies {
     implementation(platform(libs.composeBom))
-    implementation(libs.composeUi)
-    implementation(libs.composeMaterial3)
+
+    implementation(libs.androidxActivityCompose)
     implementation(libs.androidxLifecycleRuntimeCompose)
     implementation(libs.androidxLifecycleViewmodelAndroid)
-    implementation(libs.androidxActivityCompose)
+    implementation(libs.composeMaterial3)
+    implementation(libs.composeUi)
     implementation(libs.touchlabKermit)
 
     implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))
 
+    androidTestImplementation(libs.kotlinTest)
+    androidTestImplementation(libs.kotlinxCoroutinesTest)
+
+    testImplementation(project(Modules.LbcRobolectricTest))
+    testImplementation(libs.androidxComposeUiTestJunit)
     testImplementation(libs.kotlinTest)
     testImplementation(libs.kotlinxCoroutinesTest)
     testImplementation(libs.robolectric)
-    testImplementation(libs.androidxComposeUiTestJunit)
-
-    testImplementation(project(Modules.LbcRobolectricTest))
-
-    androidTestImplementation(libs.kotlinTest)
-    androidTestImplementation(libs.kotlinxCoroutinesTest)
 }

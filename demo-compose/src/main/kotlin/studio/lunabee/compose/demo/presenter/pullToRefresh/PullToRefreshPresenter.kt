@@ -28,18 +28,18 @@ import javax.inject.Inject
 class PullToRefreshPresenter @Inject constructor() :
     LBSinglePresenter<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction>(verbose = true) {
 
-        override val flows: List<Flow<PullToRefreshAction>> = listOf()
+    override val flows: List<Flow<PullToRefreshAction>> = listOf()
 
-        override fun getInitialState(): PullToRefreshUiState = PullToRefreshUiState(
-            isRefreshing = false,
-            refresh = { emitUserAction(PullToRefreshAction.Refresh) },
+    override fun getInitialState(): PullToRefreshUiState = PullToRefreshUiState(
+        isRefreshing = false,
+        refresh = { emitUserAction(PullToRefreshAction.Refresh) },
+    )
+
+    override fun initReducer(): LBSingleReducer<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction> =
+        PullToRefreshReducer(
+            coroutineScope = viewModelScope,
+            emitUserAction = ::emitUserAction,
         )
 
-        override fun initReducer(): LBSingleReducer<PullToRefreshUiState, PullToRefreshNavScope, PullToRefreshAction> =
-            PullToRefreshReducer(
-                coroutineScope = viewModelScope,
-                emitUserAction = ::emitUserAction,
-            )
-
-        override val content: @Composable (PullToRefreshUiState) -> Unit = { PullToRefreshScreen(it) }
-    }
+    override val content: @Composable (PullToRefreshUiState) -> Unit = { PullToRefreshScreen(it) }
+}

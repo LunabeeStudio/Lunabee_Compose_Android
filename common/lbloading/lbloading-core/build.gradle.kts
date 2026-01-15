@@ -28,6 +28,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project.dependencies.platform(libs.kotlinxCoroutinesBom))
+
             implementation(libs.kotlinxCoroutinesCore)
 
             implementation(projects.lbcore)

@@ -31,6 +31,7 @@ kotlin {
         }
         jvmTest.dependencies {
             implementation(project.dependencies.platform(libs.junitJupiterBom))
+
             implementation(libs.junitJupiter)
             implementation(libs.junitJupiterPlatformLauncher)
         }

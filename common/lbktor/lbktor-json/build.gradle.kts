@@ -30,6 +30,7 @@ kotlin {
             implementation(libs.ktorClientCore)
             implementation(libs.ktorContentNegotiation)
             api(libs.ktorJsonSerialization)
+
             implementation(project(":lbktor-core"))
         }
     }

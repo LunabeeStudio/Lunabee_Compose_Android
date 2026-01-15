@@ -33,5 +33,6 @@ version = AndroidConfig.LBCFOUNDATION_VERSION
 
 dependencies {
     implementation(platform(libs.composeBom))
+
     implementation(libs.composeFoundation)
 }

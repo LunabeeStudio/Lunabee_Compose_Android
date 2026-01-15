@@ -7,6 +7,36 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+```
+LbccoreVersion 1.12.0
+LbcfoundationVersion 1.12.0
+LbcandroidtestVersion 1.15.0
+LbcaccessibilityVersion 1.14.0
+LbcthemeVersion 1.10.0
+MaterialColorUtilitiesVersion 1.10.0
+LbchapticVersion 1.8.0
+LbcuifieldCoreVersion 1.13.0
+LbcuifieldPhonepickerVersion 1.8.0
+LbcuifieldCountrypickerVersion 1.7.0
+LbcimageVersion 1.8.0
+LbcglanceVersion 1.6.0
+LbcpresenterVersion 1.10.0
+LbcrobolectrictestVersion 1.1.0
+LbloggerKermitVersion 4.10.0
+LbcoreVersion 4.10.0
+LbextensionsVersion 4.10.0
+LbtestVersion 4.10.0
+LbktorVersion 4.10.0
+LbloadingVersion 4.10.0
+LbplatformVersion 4.10.0
+```
+
+- Add some Lunabee internal libraries. Split modules in `compose` and `common` directories
+    - `compose` -> contains current compose libraries
+    - `common` -> various internal libraries, now open-source
+- Rework maven publish stuff to publish every libraries on maven central
+- Deps update
+
 ## 2025-12-22
 
 **LbcPresenter 1.9.1**

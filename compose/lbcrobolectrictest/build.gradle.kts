@@ -29,8 +29,9 @@ android {
 
 dependencies {
     implementation(platform(libs.composeBom))
+
     implementation(libs.androidxActivityCompose)
-    implementation(libs.kotlinTest)
     implementation(libs.androidxComposeUiTestJunit)
+    implementation(libs.kotlinTest)
     implementation(libs.robolectric)
 }

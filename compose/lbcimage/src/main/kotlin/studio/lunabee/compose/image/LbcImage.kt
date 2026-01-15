@@ -61,36 +61,18 @@ fun LbcImage(
                 colorFilter = colorFilter,
             )
         }
-
         is LbcImageSpec.ImageDrawable -> {
-            if (imageSpec.uiMode == Configuration.UI_MODE_TYPE_UNDEFINED) {
-                Image(
-                    painter = painterResource(id = imageSpec.drawableRes),
-                    contentDescription = contentDescription?.string,
-                    modifier = modifier,
-                    contentScale = contentScale,
-                    alignment = alignment,
-                    colorFilter = colorFilter,
-                )
-            } else {
-                val configuration = Configuration().apply {
-                    uiMode = imageSpec.uiMode
-                }
-                val resources = LocalContext.current.createConfigurationContext(configuration).resources
-                val bitmap = ResourcesCompat.getDrawable(resources, imageSpec.drawableRes, null)!!.toBitmap()
-                LbcImage(
-                    imageSpec = LbcImageSpec.Bitmap(bitmap),
-                    modifier = modifier,
-                    contentDescription = contentDescription,
-                    onState = onState,
-                    contentScale = contentScale,
-                    alignment = alignment,
-                    colorFilter = colorFilter,
-                    errorPainter = errorPainter,
-                )
-            }
+            DrawableImage(
+                imageSpec = imageSpec,
+                contentDescription = contentDescription,
+                modifier = modifier,
+                contentScale = contentScale,
+                alignment = alignment,
+                colorFilter = colorFilter,
+                onState = onState,
+                errorPainter = errorPainter,
+            )
         }
-
         is LbcImageSpec.Icon -> {
             val tint = imageSpec.tint.invoke().takeIf { it != Color.Unspecified } ?: LocalContentColor.current
             Icon(
@@ -100,7 +82,6 @@ fun LbcImage(
                 tint = tint,
             )
         }
-
         is LbcImageSpec.KtImageVector -> {
             val tint = imageSpec.tint.invoke().takeIf { it != Color.Unspecified } ?: LocalContentColor.current
             Icon(
@@ -110,7 +91,6 @@ fun LbcImage(
                 tint = tint,
             )
         }
-
         is LbcImageSpec.Url -> {
             AsyncImage(
                 model = ImageRequest
@@ -129,7 +109,6 @@ fun LbcImage(
                 colorFilter = colorFilter,
             )
         }
-
         is LbcImageSpec.ByteArray ->
             AsyncImage(
                 model = imageSpec.byteArray,
@@ -143,7 +122,6 @@ fun LbcImage(
                 onSuccess = onState,
                 colorFilter = colorFilter,
             )
-
         is LbcImageSpec.Uri ->
             AsyncImage(
                 model = imageSpec.uri,
@@ -157,5 +135,44 @@ fun LbcImage(
                 onSuccess = onState,
                 colorFilter = colorFilter,
             )
+    }
+}
+
+@Composable
+private fun DrawableImage(
+    imageSpec: LbcImageSpec.ImageDrawable,
+    contentDescription: LbcTextSpec?,
+    modifier: Modifier,
+    contentScale: ContentScale,
+    alignment: Alignment,
+    colorFilter: ColorFilter?,
+    onState: ((AsyncImagePainter.State) -> Unit)?,
+    errorPainter: Painter?,
+) {
+    if (imageSpec.uiMode == Configuration.UI_MODE_TYPE_UNDEFINED) {
+        Image(
+            painter = painterResource(id = imageSpec.drawableRes),
+            contentDescription = contentDescription?.string,
+            modifier = modifier,
+            contentScale = contentScale,
+            alignment = alignment,
+            colorFilter = colorFilter,
+        )
+    } else {
+        val configuration = Configuration().apply {
+            uiMode = imageSpec.uiMode
+        }
+        val resources = LocalContext.current.createConfigurationContext(configuration).resources
+        val bitmap = ResourcesCompat.getDrawable(resources, imageSpec.drawableRes, null)!!.toBitmap()
+        LbcImage(
+            imageSpec = LbcImageSpec.Bitmap(bitmap),
+            modifier = modifier,
+            contentDescription = contentDescription,
+            onState = onState,
+            contentScale = contentScale,
+            alignment = alignment,
+            colorFilter = colorFilter,
+            errorPainter = errorPainter,
+        )
     }
 }

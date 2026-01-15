@@ -29,12 +29,13 @@ version = AndroidConfig.LBCIMAGE_VERSION
 
 dependencies {
     implementation(platform(libs.composeBom))
-    implementation(libs.composeFoundation)
+
+    implementation(libs.androidxCore)
     implementation(libs.coilCompose)
     implementation(libs.coilComposeSvg)
-    implementation(libs.core)
-    implementation(libs.androidxCore)
+    implementation(libs.composeFoundation)
     implementation(libs.composeMaterial3)
+    implementation(libs.core)
 
     implementation(project(Modules.LbcCore))
 }

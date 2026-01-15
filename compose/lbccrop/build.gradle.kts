@@ -32,10 +32,11 @@ description = "Helper to perform image croping in compose"
 version = AndroidConfig.LBCHAPTIC_VERSION
 
 dependencies {
-    implementation(libs.androidxExifinterface)
     implementation(platform(libs.composeBom))
-    implementation(libs.composeUi)
+
     implementation(libs.androidxAppcompat)
-    implementation(libs.zoomable)
+    implementation(libs.androidxExifinterface)
     implementation(libs.coilCompose)
+    implementation(libs.composeUi)
+    implementation(libs.zoomable)
 }

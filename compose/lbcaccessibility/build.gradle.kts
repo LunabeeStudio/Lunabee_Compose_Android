@@ -33,6 +33,7 @@ version = AndroidConfig.LBCACCESSIBILITY_VERSION
 
 dependencies {
     implementation(platform(libs.composeBom))
+
     implementation(libs.composeFoundation)
 
     testImplementation(libs.kotlinTest)

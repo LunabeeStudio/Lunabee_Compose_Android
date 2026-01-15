@@ -28,12 +28,14 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project.dependencies.platform(libs.kotlinxCoroutinesBom))
+
             implementation(libs.kotlinxCoroutinesCore)
+
             api(projects.lbloggerKermit)
         }
         jvmTest.dependencies {
-            implementation(libs.kotlinTest)
             implementation(project.dependencies.platform(libs.junitJupiterBom))
+
             implementation(libs.junitJupiter)
             implementation(libs.kotlinTest)
             implementation(libs.kotlinxCoroutinesTest)

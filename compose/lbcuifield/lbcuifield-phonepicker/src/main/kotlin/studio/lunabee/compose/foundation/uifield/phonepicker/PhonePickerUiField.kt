@@ -19,8 +19,8 @@ package studio.lunabee.compose.foundation.uifield.phonepicker
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -144,43 +144,7 @@ class PhonePickerUiField(
         )
 
         if (isPickerBottomSheetVisible) {
-            countryPickerBottomSheetRenderer.BottomSheetHolder(
-                dismiss = {
-                    isPickerBottomSheetVisible = false
-                },
-                searchField = {
-                    delegate.searchUiField.Composable(
-                        modifier = Modifier.fillMaxWidth(),
-                    )
-                },
-                countriesList = { contentPadding, lazyListState ->
-                    LazyColumn(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentPadding = contentPadding,
-                        state = lazyListState,
-                    ) {
-                        // Top anchor
-                        item {
-                            Box(modifier = Modifier.size(1.dp))
-                        }
-                        items(uiState.countryCodesToDisplay) { country ->
-                            countryPickerBottomSheetRenderer.CountryRow(
-                                countrySearchItem = country,
-                                searchedText = uiState.searchedText,
-                                onClick = {
-                                    value = value.copy(countryCode = country.countryPhoneCode)
-                                    delegate.onCountrySelected(country)
-                                    isPickerBottomSheetVisible = false
-                                },
-                            )
-                        }
-                    }
-
-                    LaunchedEffect(uiState.countryCodesToDisplay) {
-                        lazyListState.scrollToItem(0)
-                    }
-                },
-            )
+            CountryPickerBottomSheet(delegate, uiState) { isPickerBottomSheetVisible = false }
         }
 
         LaunchedEffect(collectedValue.countryCode) {
@@ -190,6 +154,51 @@ class PhonePickerUiField(
         LaunchedEffect(Unit) {
             delegate.initWithInitialCountryPhoneCode(collectedValue.countryCode)
         }
+    }
+
+    @Composable
+    private fun CountryPickerBottomSheet(
+        delegate: CountrySearchDelegate,
+        uiState: CountrySearchUiState,
+        dismiss: () -> Unit,
+    ) {
+        countryPickerBottomSheetRenderer.BottomSheetHolder(
+            dismiss = {
+                dismiss()
+            },
+            searchField = {
+                delegate.searchUiField.Composable(
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            },
+            countriesList = { contentPadding, lazyListState ->
+                LazyColumn(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = contentPadding,
+                    state = lazyListState,
+                ) {
+                    // Top anchor
+                    item {
+                        Box(modifier = Modifier.size(1.dp))
+                    }
+                    items(uiState.countryCodesToDisplay) { country ->
+                        countryPickerBottomSheetRenderer.CountryRow(
+                            countrySearchItem = country,
+                            searchedText = uiState.searchedText,
+                            onClick = {
+                                value = value.copy(countryCode = country.countryPhoneCode)
+                                delegate.onCountrySelected(country)
+                                dismiss()
+                            },
+                        )
+                    }
+                }
+
+                LaunchedEffect(uiState.countryCodesToDisplay) {
+                    lazyListState.scrollToItem(0)
+                }
+            },
+        )
     }
 
     companion object {

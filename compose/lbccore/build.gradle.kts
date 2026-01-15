@@ -39,11 +39,13 @@ version = AndroidConfig.LBCCORE_VERSION
 
 dependencies {
     implementation(platform(libs.composeBom))
+
     implementation(libs.composeFoundation)
 
+    debugImplementation(libs.composeUiTestManifest)
+
+    androidTestImplementation(libs.androidxTestRunner)
     androidTestImplementation(libs.composeUiTest)
     androidTestImplementation(libs.composeUiTestJunit4)
-    androidTestImplementation(libs.androidxTestRunner)
     androidTestImplementation(libs.kotlinTest)
-    debugImplementation(libs.composeUiTestManifest)
 }

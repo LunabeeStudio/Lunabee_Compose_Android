@@ -81,48 +81,48 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.googleAndroidMaterial)
-    implementation(libs.androidxAppcompat)
-    implementation(libs.androidxCore)
-    implementation(libs.androidxActivityCompose)
-    implementation(libs.navigationCompose)
-
-    implementation(platform(libs.composeBom))
-    implementation(libs.composeFoundation)
-    implementation(libs.composeMaterial3)
-    implementation(libs.composeMaterialIconsExtended)
-    implementation(libs.androidxUiToolingPreview)
-
     coreLibraryDesugaring(libs.desugarJdk)
 
-    implementation(projects.lbcaccessibility)
-    implementation(projects.lbcfoundation)
-    implementation(projects.lbctheme)
-    implementation(projects.lbccore)
-    implementation(projects.lbchaptic)
-    implementation(projects.lbccrop)
-    implementation(projects.lbcuifieldCore)
-    implementation(projects.lbcuifieldPhonepicker)
-    implementation(projects.lbcuifieldCountrypicker)
-    implementation(projects.lbcpresenter)
-    implementation(projects.lbcpresenterKoin)
-    implementation(projects.lbcglance)
-    implementation(projects.lbcimage)
+    implementation(platform(libs.composeBom))
 
-    androidTestImplementation(projects.lbcandroidtest)
-    androidTestImplementation(libs.composeUiTestJunit4)
-    androidTestImplementation(libs.junit4)
-    androidTestImplementation(libs.kotlinTestJunit)
-    debugImplementation(libs.composeUiTestManifest)
-
-    implementation(libs.androidxLifecycleRuntimeCompose)
-    implementation(libs.hiltAndroid)
     ksp(libs.hiltAndroidCompiler)
     //noinspection UseTomlInstead FIXME wait for dagger update https://github.com/google/dagger/issues/5001
     ksp("org.jetbrains.kotlin:kotlin-metadata-jvm:2.3.0")
+
+    implementation(libs.androidxActivityCompose)
+    implementation(libs.androidxAppcompat)
+    implementation(libs.androidxCore)
     implementation(libs.androidxHiltNavigationCompose)
+    implementation(libs.androidxLifecycleRuntimeCompose)
+    implementation(libs.androidxUiToolingPreview)
+    implementation(libs.composeFoundation)
+    implementation(libs.composeMaterial3)
+    implementation(libs.composeMaterialIconsExtended)
+    implementation(libs.googleAndroidMaterial)
+    implementation(libs.hiltAndroid)
+    implementation(libs.navigationCompose)
+
+    implementation(projects.lbcaccessibility)
+    implementation(projects.lbccore)
+    implementation(projects.lbccrop)
+    implementation(projects.lbcfoundation)
+    implementation(projects.lbcglance)
+    implementation(projects.lbchaptic)
+    implementation(projects.lbcimage)
+    implementation(projects.lbcpresenter)
+    implementation(projects.lbcpresenterKoin)
+    implementation(projects.lbctheme)
+    implementation(projects.lbcuifieldCore)
+    implementation(projects.lbcuifieldCountrypicker)
+    implementation(projects.lbcuifieldPhonepicker)
 
     debugImplementation(libs.androidxUiTooling)
+    debugImplementation(libs.composeUiTestManifest)
+
+    androidTestImplementation(libs.composeUiTestJunit4)
+    androidTestImplementation(libs.junit4)
+    androidTestImplementation(libs.kotlinTestJunit)
+    androidTestImplementation(projects.lbcandroidtest)
 }
 
 kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JVM_TARGET)

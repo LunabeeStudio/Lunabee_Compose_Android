@@ -38,16 +38,19 @@ version = AndroidConfig.LBCUIFIELD_PHONEPICKER_VERSION
 
 dependencies {
     coreLibraryDesugaring(libs.desugarJdk)
+
     implementation(platform(libs.composeBom))
-    implementation(libs.composeUi)
-    implementation(libs.composeMaterial3)
+
     implementation(libs.androidxAppcompat)
-    implementation(project(Modules.LbcCore))
+    implementation(libs.composeMaterial3)
+    implementation(libs.composeUi)
+    implementation(libs.hbb20Countrycodepicker)
     implementation(libs.kotlinxSerializationJson)
+    implementation(libs.libphonenumber)
+    implementation(libs.normalize)
+
+    implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))
     implementation(project(Modules.LbcUiFieldCore))
     implementation(project(Modules.LbcUiFieldCountryPicker))
-    implementation(libs.hbb20Countrycodepicker)
-    implementation(libs.libphonenumber)
-    implementation(libs.normalize)
 }

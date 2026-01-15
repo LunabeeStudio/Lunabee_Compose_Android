@@ -16,50 +16,13 @@
 
 import studio.lunabee.library.SetAllSnapshotVersionTask
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath(libs.agp)
-        classpath(libs.kotlinGradlePlugin)
-    }
-}
-
 plugins {
-    alias(libs.plugins.detekt)
+    alias(libs.plugins.lbDetekt)
 }
 
-dependencies {
-    detektPlugins(libs.detektRulesKtlintWrapper)
-}
-
-detekt {
-    parallel = true
-    source.setFrom(files(rootProject.rootDir))
-    buildUponDefaultConfig = true
-    config.setFrom(files("$projectDir/lunabee-detekt-config.yml"))
-    autoCorrect = true
-    ignoreFailures = true
-}
-
-tasks.withType<dev.detekt.gradle.Detekt> {
-    outputs.upToDateWhen { false }
-
-    exclude("**/build/**")
-
-    reports {
-        checkstyle.required.set(true)
-        checkstyle.outputLocation
-            .set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.xml"))
-
-        html.required.set(true)
-        html.outputLocation
-            .set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.html"))
-    }
+lbDetekt {
+    val customConfig = File(project.rootProject.layout.projectDirectory.asFile, "/lunabee-detekt-config.yml")
+    config.setFrom(files(lunabeeConfig, customConfig))
 }
 
 tasks.register("publishList") {

@@ -35,14 +35,14 @@ kotlin {
 
 dependencies {
     implementation(platform(libs.composeBom))
-    implementation(libs.composeFoundation)
-    implementation(libs.androidxLifecycleRuntimeCompose)
-
     implementation(platform(libs.koinBom))
-    implementation(libs.koinCore)
+
+    implementation(libs.androidxLifecycleRuntimeCompose)
+    implementation(libs.composeFoundation)
     implementation(libs.koinCompose)
+    implementation(libs.koinCore)
 
     implementation(projects.lbcoreCompose)
-    api(projects.lbloadingCore)
     api(projects.lbloadingCompose)
+    api(projects.lbloadingCore)
 }

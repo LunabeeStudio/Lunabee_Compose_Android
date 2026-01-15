@@ -29,6 +29,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.ktorClientCore)
             implementation(libs.ktorLogging)
+
             implementation(projects.lbloggerKermit)
         }
     }

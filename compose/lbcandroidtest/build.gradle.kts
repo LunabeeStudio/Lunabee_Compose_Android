@@ -35,8 +35,9 @@ version = AndroidConfig.LBCANDROIDTEST_VERSION
 
 dependencies {
     implementation(platform(libs.composeBom))
+
+    implementation(libs.androidxTestRunner)
     implementation(libs.composeFoundation)
     implementation(libs.composeUiTest)
     implementation(libs.composeUiTestJunit4)
-    implementation(libs.androidxTestRunner)
 }

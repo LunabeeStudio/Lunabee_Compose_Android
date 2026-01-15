@@ -33,6 +33,7 @@ version = AndroidConfig.LBCTHEME_VERSION
 
 dependencies {
     implementation(platform(libs.composeBom))
+
     implementation(libs.composeMaterial3)
 
     implementation(project(Modules.MaterialColorUtilities))

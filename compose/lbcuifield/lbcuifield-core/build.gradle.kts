@@ -37,10 +37,13 @@ version = AndroidConfig.LBCUIFIELD_CORE_VERSION
 
 dependencies {
     coreLibraryDesugaring(libs.desugarJdk)
+
     implementation(platform(libs.composeBom))
-    implementation(libs.composeUi)
-    implementation(libs.composeMaterial3)
+
     implementation(libs.androidxAppcompat)
+    implementation(libs.composeMaterial3)
+    implementation(libs.composeUi)
+
     implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))
 }
