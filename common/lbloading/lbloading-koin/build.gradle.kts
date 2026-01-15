@@ -36,7 +36,7 @@ kotlin {
 dependencies {
     implementation(platform(libs.composeBom))
     implementation(libs.composeFoundation)
-    implementation(libs.lifecycleRuntimeCompose)
+    implementation(libs.androidxLifecycleRuntimeCompose)
 
     implementation(platform(libs.koinBom))
     implementation(libs.koinCore)

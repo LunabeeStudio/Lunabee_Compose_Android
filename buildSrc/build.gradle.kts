@@ -31,6 +31,7 @@ dependencies {
     implementation(libs.jreleaserGradlePlugin)
     implementation(libs.javapoet)
     implementation(libs.touchlabSkie)
+    implementation(libs.dokkaGradlePlugin)
 
     implementation(gradleApi())
     implementation(localGroovy())

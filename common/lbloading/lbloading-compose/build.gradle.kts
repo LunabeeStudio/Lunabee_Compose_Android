@@ -39,7 +39,7 @@ dependencies {
     implementation(platform(libs.composeBom))
     implementation(libs.composeFoundation)
     implementation(libs.composeMaterial3)
-    implementation(libs.lifecycleRuntimeCompose)
+    implementation(libs.androidxLifecycleRuntimeCompose)
 
     implementation(projects.lbcoreCompose)
     api(projects.lbloadingCore)

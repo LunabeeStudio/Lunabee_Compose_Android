@@ -16,6 +16,7 @@
 
 plugins {
     id("java-library")
+    id("org.jetbrains.dokka")
 }
 
 java {
@@ -26,6 +27,5 @@ java {
         languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JDK_VERSION.toString()))
     }
 
-    withJavadocJar()
     withSourcesJar()
 }

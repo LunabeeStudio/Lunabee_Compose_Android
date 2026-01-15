@@ -9,10 +9,8 @@
 # Do not remove, use as "id" instead of alias, this is why it is not detected.
 composePlugin = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 detekt = { id = "dev.detekt", version.ref = "detekt" }
-
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-jreleaser = { id = "org.jreleaser", version.ref = "jreleaser" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 
 [versions]
@@ -23,7 +21,7 @@ androidxAppcompat = "1.7.1"
 androidxCore = "1.17.0"
 androidxExifinterface = "1.4.2"
 androidxGlance = "1.1.1"
-androidGradlePlugin = "8.13.2"
+agp = "8.13.2"
 androidxNavigation = "2.9.6"
 androidxTestRunner = "1.7.0"
 androidToolsDesugarJdkLibs = "2.1.5"
@@ -56,16 +54,15 @@ ktor = "3.3.3"
 lint = "31.13.2"
 mockk = "1.14.7"
 androidxFragment = "1.8.9"
-googleMaterial = "1.13.0"
+dokka = "2.1.0"
 
 [libraries]
 
 androidxAppcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppcompat" }
-activityCompose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidxCore = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
 androidxExifinterface = { group = "androidx.exifinterface", name = "exifinterface", version.ref = "androidxExifinterface" }
 androidxGlanceWidget = { group = "androidx.glance", name = "glance-appwidget", version.ref = "androidxGlance" }
-agp = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+agp = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 jreleaserGradlePlugin = { group = "org.jreleaser", name = "org.jreleaser.gradle.plugin", version.ref = "jreleaser" }
 androidxTestRunner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
 coilCompose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
@@ -90,7 +87,6 @@ kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plu
 kotlinTest = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
 kotlinxCoroutinesTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test" }
 kotlinTestJunit = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
-material = { group = "com.google.android.material", name = "material", version.ref = "googleAndroidMaterial" }
 navigationCompose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 zoomable = { group = "net.engawapg.lib", name = "zoomable", version.ref = "zoomable" }
 javapoet = { group = "com.squareup", name = "javapoet", version.ref = "javapoet" }
@@ -123,7 +119,6 @@ ktorLogging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "
 lintApi = { group = "com.android.tools.lint", name = "lint-api", version.ref = "lint" }
 lintChecks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "lint" }
 androidxActivityCompose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
-lifecycleRuntimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 kotlinxCoroutinesAndroid = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 androidxLifecycleCommon = { group = "androidx.lifecycle", name = "lifecycle-common", version.ref = "androidxLifecycle" }
 androidxLifecycleProcess = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "androidxLifecycle" }
@@ -137,4 +132,5 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 hiltAndroidCompiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger" }
 hiltCore = { group = "com.google.dagger", name = "hilt-core", version.ref = "dagger" }
 androidxFragmentKtx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidxFragment" }
-googleAndroidMaterial = { group = "com.google.android.material", name = "material", version.ref = "googleMaterial" }
+googleAndroidMaterial = { group = "com.google.android.material", name = "material", version.ref = "googleAndroidMaterial" }
+dokkaGradlePlugin = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "dokka" }

@@ -37,7 +37,7 @@ dependencies {
     implementation(libs.composeMaterial3)
     implementation(libs.androidxLifecycleRuntimeCompose)
     implementation(libs.androidxLifecycleViewmodelAndroid)
-    implementation(libs.activityCompose)
+    implementation(libs.androidxActivityCompose)
     implementation(libs.touchlabKermit)
 
     implementation(project(Modules.LbcCore))

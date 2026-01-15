@@ -19,6 +19,7 @@ import org.gradle.accessors.dm.LibrariesForLibs
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("org.jetbrains.dokka")
 }
 
 // FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
@@ -41,7 +42,6 @@ android {
 
     publishing {
         singleVariant("release") {
-            withJavadocJar()
             withSourcesJar()
         }
     }

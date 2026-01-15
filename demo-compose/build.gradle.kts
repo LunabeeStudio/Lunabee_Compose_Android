@@ -81,10 +81,10 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.material)
+    implementation(libs.googleAndroidMaterial)
     implementation(libs.androidxAppcompat)
     implementation(libs.androidxCore)
-    implementation(libs.activityCompose)
+    implementation(libs.androidxActivityCompose)
     implementation(libs.navigationCompose)
 
     implementation(platform(libs.composeBom))
