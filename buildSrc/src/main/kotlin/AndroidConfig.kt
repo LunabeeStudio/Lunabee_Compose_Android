@@ -47,7 +47,7 @@ object AndroidConfig {
     const val TargetSdk: Int = CompileSdk
     const val MinSdk: Int = BuildConfigs.MinSdk
 
-    const val LibraryUrl: String = "https://github.com/LunabeeStudio/Lunabee_Compose_Android"
+    const val LibraryUrl: String = "https://github.com/LunabeeStudio/LBAndroid"
     const val GroupId: String = "studio.lunabee.compose"
 
     // ⚠️ Match module name in UPPER_CASE ('-' -> '_')
@@ -72,7 +72,10 @@ object AndroidConfig {
     const val LBTEST_VERSION: String = "4.10.0"
     const val LBKTOR_VERSION: String = "4.10.0"
     const val LBLOADING_VERSION: String = "4.10.0"
+    const val LBPLATFORM_VERSION: String = "4.10.0"
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_21
     val JVM_TARGET: JvmTarget = JvmTarget.JVM_21
+
+    fun commonVersionName(): String = System.getenv(EnvConfig.EnvVersionName) ?: LBPLATFORM_VERSION
 }

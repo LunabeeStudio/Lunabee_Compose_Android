@@ -66,6 +66,8 @@ project(":lbcuifield-phonepicker").projectDir = File("compose/lbcuifield/lbcuifi
 // endregion
 
 // region Common
+include("lbplatform")
+project(":lbplatform").projectDir = File("common/lbplatform")
 include("lblogger-kermit")
 project(":lblogger-kermit").projectDir = File("common/lblogger/lblogger-kermit")
 include("lblogger-kermit-crashlytics")
@@ -96,6 +98,4 @@ include(":lbloading-hilt")
 project(":lbloading-hilt").projectDir = File("common/lbloading/lbloading-hilt")
 include(":lbloading-koin")
 project(":lbloading-koin").projectDir = File("common/lbloading/lbloading-koin")
-include(":lbloading-checks")
-project(":lbloading-checks").projectDir = File("common/lbloading/lbloading-compose/checks")
 // endregion

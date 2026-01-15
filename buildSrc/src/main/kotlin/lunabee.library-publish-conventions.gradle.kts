@@ -24,6 +24,7 @@ enum class PublishType {
     Android,
     Java,
     Kmp,
+    Bom,
 }
 
 plugins {
@@ -36,6 +37,7 @@ val publishType: PublishType = when {
     project.plugins.hasPlugin("android-library") -> PublishType.Android
     project.plugins.hasPlugin("java-library") -> PublishType.Java
     project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform") -> PublishType.Kmp
+    project.plugins.hasPlugin("java-platform") -> PublishType.Bom
     else -> error("Cannot determine the type of publication")
 }
 
@@ -135,6 +137,12 @@ fun PublishingExtension.setupPublication() {
                     setPom()
                 }
             }
+            PublishType.Bom -> create<MavenPublication>(project.name) {
+                afterEvaluate {
+                    setProjectDetails()
+                    setPom()
+                }
+            }
         }
     }
 }
@@ -173,8 +181,8 @@ fun MavenPublication.setPom() {
         }
 
         scm {
-            connection.set("git@github.com:LunabeeStudio/Lunabee_Compose_Android.git")
-            developerConnection.set("git@github.com:LunabeeStudio/Lunabee_Compose_Android.git")
+            connection.set("git@github.com:LunabeeStudio/LBAndroid.git")
+            developerConnection.set("git@github.com:LunabeeStudio/LBAndroid.git")
             url.set(AndroidConfig.LibraryUrl)
         }
 
@@ -244,7 +252,7 @@ fun MavenPublication.setAndroidArtifacts() {
         project.android.sourceSets
             .getByName("main")
             .kotlin as DefaultAndroidSourceDirectorySet
-    ).srcDirs
+        ).srcDirs
     val sourceJar by project.tasks.registering(Jar::class) {
         archiveClassifier.set("sources")
         from(mainSourceSets)
@@ -312,6 +320,7 @@ afterEvaluate {
             )
             PublishType.Kmp,
             PublishType.Java,
+            PublishType.Bom,
             -> dependsOn(
                 tasks.withType(Jar::class.java),
             )
