@@ -17,7 +17,6 @@
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("co.touchlab.skie")
-    id("org.jetbrains.dokka")
 }
 
 group = "studio.lunabee"

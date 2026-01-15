@@ -15,6 +15,10 @@
  */
 
 import com.android.build.gradle.LibraryExtension
+import gradle.kotlin.dsl.accessors._546d18a30197be8c083950d12ac356bf.dokkaGeneratePublicationHtml
+import gradle.kotlin.dsl.accessors._546d18a30197be8c083950d12ac356bf.dokkaGeneratePublicationJavadoc
+import gradle.kotlin.dsl.accessors._546d18a30197be8c083950d12ac356bf.jreleaser
+import gradle.kotlin.dsl.accessors._546d18a30197be8c083950d12ac356bf.signing
 import org.jreleaser.model.Signing
 import studio.lunabee.library.VersionTask
 import java.util.Locale
@@ -30,6 +34,8 @@ plugins {
     id("org.jreleaser")
     `maven-publish`
     signing
+    id("org.jetbrains.dokka")
+    id("org.jetbrains.dokka-javadoc")
 }
 
 private val lunabeeGroupId: String = when (project.buildFile.relativeTo(rootDir).path.substringBefore("/")) {
@@ -125,14 +131,20 @@ fun PublishingExtension.setupPublication() {
                     setProjectDetails()
                     from(components["release"])
                 }
+                val (dokkaJavadocJar, dokkaHtmlJar) = setupDokkaTasks()
+                artifact(dokkaJavadocJar)
+                artifact(dokkaHtmlJar)
                 setPom()
             }
             PublishType.Java -> create<MavenPublication>(project.name) {
                 // version is set in project, so use after evaluate
                 afterEvaluate {
                     setProjectDetails()
-                    from(components["java"])
                 }
+                val (dokkaJavadocJar, dokkaHtmlJar) = setupDokkaTasks()
+                from(components["java"])
+                artifact(dokkaJavadocJar)
+                artifact(dokkaHtmlJar)
                 setPom()
             }
             PublishType.Kmp -> publications.withType<MavenPublication> {
@@ -162,9 +174,28 @@ fun MavenPublication.setProjectDetails() {
 }
 
 /**
+ * Setup Dokka manually to workaround https://github.com/Kotlin/dokka/issues/2956
+ */
+private fun setupDokkaTasks(): Pair<TaskProvider<Jar>, TaskProvider<Jar>> {
+    val dokkaJavadocJar by tasks.registering(Jar::class) {
+        description = "A Javadoc JAR containing Dokka Javadoc"
+        from(tasks.dokkaGeneratePublicationJavadoc.flatMap { it.outputDirectory })
+        archiveClassifier.set("javadoc")
+    }
+
+    val dokkaHtmlJar by tasks.registering(Jar::class) {
+        description = "A HTML Documentation JAR containing Dokka HTML"
+        from(tasks.dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
+        archiveClassifier.set("html-doc")
+    }
+
+    return dokkaJavadocJar to dokkaHtmlJar
+}
+
+/**
  * Set POM file details.
  */
-fun MavenPublication.setPom() {
+private fun MavenPublication.setPom() {
     pom {
         name.set(project.name.capitalized())
         description.set(project.description)

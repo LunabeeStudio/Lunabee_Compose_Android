@@ -16,7 +16,6 @@
 
 plugins {
     id("java-library")
-    id("org.jetbrains.dokka")
 }
 
 java {
