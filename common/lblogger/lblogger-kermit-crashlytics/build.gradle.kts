@@ -23,15 +23,20 @@ description = "Lunabee Studio Kotlin crashlytics for Kermit logger"
 version = AndroidConfig.LBLOGGER_KERMIT_VERSION
 
 kotlin {
+    androidLibrary {
+        namespace = "com.lunabee.lblogger.kermit"
+
+        androidResources {
+            this.additionalParameters += "resourcePrefix"
+        }
+        // FIXME https://kotlinlang.slack.com/archives/C0B8M7BUY/p1768493093074589?thread_ts=1766590721.514959&cid=C0B8M7BUY
+        //  resourcePrefix("lb_log")
+    }
+
     sourceSets {
         commonMain.dependencies {
             implementation(libs.touchlabKermit)
             implementation(libs.touchlabKermitCrashlytics)
         }
     }
-}
-
-android {
-    namespace = "com.lunabee.lblogger.kermit"
-    resourcePrefix("lb_log")
 }
