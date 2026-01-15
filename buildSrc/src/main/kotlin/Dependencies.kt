@@ -14,16 +14,6 @@
  * limitations under the License.
  */
 
-object Modules {
-    const val LbcCore: String = ":lbccore"
-    const val LbcImage: String = ":lbcimage"
-    const val MaterialColorUtilities: String = ":material-color-utilities"
-    const val LbcUiFieldCore: String = ":lbcuifield-core"
-    const val LbcUiFieldCountryPicker: String = ":lbcuifield-countrypicker"
-    const val LbcPresenter: String = ":lbcpresenter"
-    const val LbcRobolectricTest: String = ":lbcrobolectrictest"
-}
-
 object BuildConfigs {
     const val LunabeeCompose: String = "_"
     const val CompileSdk: Int = 36

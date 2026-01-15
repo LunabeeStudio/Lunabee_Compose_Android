@@ -36,5 +36,5 @@ dependencies {
 
     implementation(libs.composeMaterial3)
 
-    implementation(project(Modules.MaterialColorUtilities))
+    implementation(projects.materialColorUtilities)
 }

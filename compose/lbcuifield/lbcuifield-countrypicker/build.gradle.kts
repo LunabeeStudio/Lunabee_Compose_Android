@@ -48,7 +48,7 @@ dependencies {
     implementation(libs.kotlinxSerializationJson)
     implementation(libs.normalize)
 
-    implementation(project(Modules.LbcCore))
-    implementation(project(Modules.LbcImage))
-    implementation(project(Modules.LbcUiFieldCore))
+    implementation(projects.lbccore)
+    implementation(projects.lbcimage)
+    implementation(projects.lbcuifieldCore)
 }

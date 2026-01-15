@@ -41,15 +41,15 @@ dependencies {
     implementation(libs.composeUi)
     implementation(libs.touchlabKermit)
 
-    implementation(project(Modules.LbcCore))
-    implementation(project(Modules.LbcImage))
+    implementation(projects.lbccore)
+    implementation(projects.lbcimage)
 
     androidTestImplementation(libs.kotlinTest)
     androidTestImplementation(libs.kotlinxCoroutinesTest)
 
-    testImplementation(project(Modules.LbcRobolectricTest))
     testImplementation(libs.androidxComposeUiTestJunit)
     testImplementation(libs.kotlinTest)
     testImplementation(libs.kotlinxCoroutinesTest)
+    testImplementation(projects.lbcrobolectrictest)
     testImplementation(libs.robolectric)
 }

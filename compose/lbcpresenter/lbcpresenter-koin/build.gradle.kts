@@ -35,5 +35,5 @@ dependencies {
     implementation(libs.koinComposeViewmodel)
     implementation(libs.koinCore)
 
-    api(project(Modules.LbcPresenter))
+    api(projects.lbcpresenter)
 }

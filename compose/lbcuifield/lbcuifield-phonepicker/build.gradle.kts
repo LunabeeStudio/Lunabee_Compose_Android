@@ -49,8 +49,8 @@ dependencies {
     implementation(libs.libphonenumber)
     implementation(libs.normalize)
 
-    implementation(project(Modules.LbcCore))
-    implementation(project(Modules.LbcImage))
-    implementation(project(Modules.LbcUiFieldCore))
-    implementation(project(Modules.LbcUiFieldCountryPicker))
+    implementation(projects.lbccore)
+    implementation(projects.lbcimage)
+    implementation(projects.lbcuifieldCore)
+    implementation(projects.lbcuifieldCountrypicker)
 }

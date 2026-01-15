@@ -44,6 +44,6 @@ dependencies {
     implementation(libs.composeMaterial3)
     implementation(libs.composeUi)
 
-    implementation(project(Modules.LbcCore))
-    implementation(project(Modules.LbcImage))
+    implementation(projects.lbccore)
+    implementation(projects.lbcimage)
 }

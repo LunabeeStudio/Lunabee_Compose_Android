@@ -37,5 +37,5 @@ dependencies {
     implementation(libs.composeMaterial3)
     implementation(libs.core)
 
-    implementation(project(Modules.LbcCore))
+    implementation(projects.lbccore)
 }
