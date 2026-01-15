@@ -15,7 +15,6 @@
  */
 
 import com.android.build.gradle.LibraryExtension
-import com.android.build.gradle.internal.api.DefaultAndroidSourceDirectorySet
 import org.jreleaser.model.Signing
 import studio.lunabee.library.VersionTask
 import java.util.Locale
@@ -33,10 +32,16 @@ plugins {
     signing
 }
 
-val publishType: PublishType = when {
+private val lunabeeGroupId: String = when (project.buildFile.relativeTo(rootDir).path.substringBefore("/")) {
+    "common" -> "studio.lunabee"
+    "compose" -> "studio.lunabee.compose"
+    else -> error("Cannot determine the group id of publication (${project.name})")
+}
+
+private val publishType: PublishType = when {
+    project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform") -> PublishType.Kmp
     project.plugins.hasPlugin("android-library") -> PublishType.Android
     project.plugins.hasPlugin("java-library") -> PublishType.Java
-    project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform") -> PublishType.Kmp
     project.plugins.hasPlugin("java-platform") -> PublishType.Bom
     else -> error("Cannot determine the type of publication")
 }
@@ -118,30 +123,27 @@ fun PublishingExtension.setupPublication() {
                 // version is set in project, so use after evaluate
                 afterEvaluate {
                     setProjectDetails()
-                    setAndroidArtifacts()
-                    setPom()
+                    from(components["release"])
                 }
+                setPom()
             }
             PublishType.Java -> create<MavenPublication>(project.name) {
                 // version is set in project, so use after evaluate
                 afterEvaluate {
                     setProjectDetails()
-                    setJavaArtifacts()
-                    setPom()
+                    from(components["java"])
                 }
+                setPom()
             }
             PublishType.Kmp -> publications.withType<MavenPublication> {
-                // version is set in project, so use after evaluate
-                afterEvaluate {
-                    // KMP plugin already setup publication stuff, just setup Pom
-                    setPom()
-                }
+                // KMP plugin already setup publication stuff, just setup Pom
+                setPom()
             }
             PublishType.Bom -> create<MavenPublication>(project.name) {
                 afterEvaluate {
                     setProjectDetails()
-                    setPom()
                 }
+                setPom()
             }
         }
     }
@@ -149,12 +151,12 @@ fun PublishingExtension.setupPublication() {
 
 /**
  * Set project details:
- * - groupId will be [AndroidConfig.GroupId]
+ * - groupId will be [lunabeeGroupId]
  * - artifactId will take the name of the current [project]
  * - version will be set in each submodule gradle file
  */
 fun MavenPublication.setProjectDetails() {
-    groupId = AndroidConfig.GroupId
+    groupId = lunabeeGroupId
     artifactId = project.name
     version = project.version.toString()
 }
@@ -193,113 +195,11 @@ fun MavenPublication.setPom() {
                 email.set("publisher@lunabee.com")
             }
         }
-
-        withXml {
-            val root = asNode()
-            configurations
-                .findByName("implementation")
-                ?.dependencies
-                ?.filter { it.isBoM() }
-                ?.takeIf { it.isNotEmpty() }
-                ?.let { bomDeps ->
-                    val depsNode = root.appendNode("dependencyManagement").appendNode("dependencies")
-                    bomDeps.forEach { bomDep ->
-                        depsNode.appendNode("dependency").apply {
-                            appendNode("groupId", bomDep.group)
-                            appendNode("artifactId", bomDep.name)
-                            appendNode("version", bomDep.version)
-                            appendNode("type", "pom")
-                            appendNode("scope", "import")
-                        }
-                    }
-                }
-            root
-                .appendNode("dependencies")
-                .apply {
-                    fun Dependency.write(scope: String) = appendNode("dependency").apply {
-                        appendNode("groupId", group)
-                        appendNode("artifactId", name)
-                        version?.let { appendNode("version", version) }
-                        appendNode("scope", scope)
-                    }
-
-                    configurations.findByName("api")?.dependencies?.forEach { dependency ->
-                        dependency.write("implementation")
-                    }
-
-                    configurations.findByName("implementation")?.dependencies?.forEach { dependency ->
-                        if (!dependency.isBoM()) {
-                            // handle bom specifically
-                            dependency.write("runtime")
-                        }
-                    }
-                }
-        }
     }
 }
 
 private val Project.android: LibraryExtension
     get() = (this as ExtensionAware).extensions.getByName("android") as LibraryExtension
-
-/**
- * Set additional artifacts to upload
- * - sources
- * - javadoc
- * - aar
- */
-fun MavenPublication.setAndroidArtifacts() {
-    val mainSourceSets = (
-        project.android.sourceSets
-            .getByName("main")
-            .kotlin as DefaultAndroidSourceDirectorySet
-        ).srcDirs
-    val sourceJar by project.tasks.registering(Jar::class) {
-        archiveClassifier.set("sources")
-        from(mainSourceSets)
-    }
-    val javadocJar by project.tasks.registering(Jar::class) {
-        archiveClassifier.set("javadoc")
-        from(mainSourceSets)
-    }
-
-    artifact(sourceJar)
-    artifact(javadocJar)
-    val aarBasePath = project.layout.buildDirectory
-        .dir("outputs/aar")
-        .get()
-        .asFile.path
-    val filename = "${project.name.lowercase()}-release.aar"
-    artifact("$aarBasePath/$filename")
-
-    project.afterEvaluate {
-        project.tasks.named("sign${project.name.capitalized()}Publication") {
-            dependsOn("bundleReleaseAar")
-        }
-    }
-}
-
-/**
- * Set additional artifacts to upload
- * - sources
- * - javadoc
- * - jar
- */
-fun MavenPublication.setJavaArtifacts() {
-    artifact(
-        project.layout.buildDirectory
-            .dir("libs/${project.name}-${project.version}.jar")
-            .get()
-            .asFile,
-    )
-    artifact(project.tasks.named("sourcesJar"))
-    artifact(project.tasks.named("javadocJar"))
-
-    project.afterEvaluate {
-        project.tasks.named("sign${project.name.capitalized()}Publication") {
-            dependsOn("jar")
-        }
-    }
-}
 
 signing {
     setRequired {

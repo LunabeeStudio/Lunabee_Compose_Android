@@ -48,7 +48,6 @@ object AndroidConfig {
     const val MinSdk: Int = BuildConfigs.MinSdk
 
     const val LibraryUrl: String = "https://github.com/LunabeeStudio/LBAndroid"
-    const val GroupId: String = "studio.lunabee.compose"
 
     // ⚠️ Match module name in UPPER_CASE ('-' -> '_')
     const val LBCCORE_VERSION: String = "1.11.0"

@@ -30,9 +30,10 @@ dependencyResolutionManagement {
 rootProject.name = "Lunabee_Kotlin_Library"
 
 include("demo-compose")
-include(":material-color-utilities")
 
 // region Compose
+include(":material-color-utilities")
+project(":material-color-utilities").projectDir = File("compose/material-color-utilities")
 include(":lbcaccessibility")
 project(":lbcaccessibility").projectDir = File("compose/lbcaccessibility")
 include(":lbcandroidtest")

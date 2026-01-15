@@ -21,8 +21,6 @@ plugins {
     id("kotlin-android")
 }
 
-group = AndroidConfig.GroupId
-
 // FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
 val libs: LibrariesForLibs = the<LibrariesForLibs>()
 

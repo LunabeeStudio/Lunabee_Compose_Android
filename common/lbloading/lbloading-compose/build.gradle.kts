@@ -19,7 +19,7 @@ plugins {
     id("lunabee.library-publish-conventions")
 }
 
-description = "A global blocking loading view for Compose & using Hilt"
+description = "A global blocking loading view for Compose"
 version = AndroidConfig.LBLOADING_VERSION
 
 android {

@@ -49,7 +49,7 @@ import kotlin.text.isDigit
  */
 
 internal class PhoneNumberVisualTransformation(
-    private val countryPhoneCode: String,
+    countryPhoneCode: String,
 ) : VisualTransformation {
 
     private val phoneNumberUtil: PhoneNumberUtil = PhoneNumberUtil.getInstance()
