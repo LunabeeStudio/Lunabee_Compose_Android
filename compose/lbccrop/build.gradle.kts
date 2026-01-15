@@ -1,5 +1,5 @@
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -16,10 +16,10 @@ description = "Helper to perform image croping in compose"
 version = AndroidConfig.LBCHAPTIC_VERSION
 
 dependencies {
-    implementation(libs.androidx.exifinterface)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.ui)
-    implementation(libs.androidx.appcompat)
+    implementation(libs.androidxExifinterface)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeUi)
+    implementation(libs.androidxAppcompat)
     implementation(libs.zoomable)
-    implementation(libs.coil.compose)
+    implementation(libs.coilCompose)
 }

@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -37,8 +37,8 @@ description = "A set of methods and composable for accessibility"
 version = AndroidConfig.LBCACCESSIBILITY_VERSION
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.foundation)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeFoundation)
 
     testImplementation(libs.kotlinTest)
 }

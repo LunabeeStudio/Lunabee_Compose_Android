@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -37,6 +37,6 @@ description = "A set of custom components from androidx.composable.foundation"
 version = AndroidConfig.LBCFOUNDATION_VERSION
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.foundation)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeFoundation)
 }

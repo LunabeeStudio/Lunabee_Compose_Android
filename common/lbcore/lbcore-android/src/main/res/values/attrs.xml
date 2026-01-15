@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="lb_spacing_small" format="reference" />
+    <attr name="lb_spacing_medium" format="reference" />
+    <attr name="lb_spacing_large" format="reference" />
+    <attr name="lb_spacing_huge" format="reference" />
+
+    <attr name="lb_font_size_small" format="reference" />
+    <attr name="lb_font_size_medium" format="reference" />
+    <attr name="lb_font_size_large" format="reference" />
+    <attr name="lb_font_size_huge" format="reference" />
+</resources>

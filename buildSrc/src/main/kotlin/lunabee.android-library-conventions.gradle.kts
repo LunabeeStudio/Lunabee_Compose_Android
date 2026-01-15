@@ -24,7 +24,6 @@ import org.gradle.accessors.dm.LibrariesForLibs
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 group = AndroidConfig.GroupId
@@ -56,7 +55,7 @@ android {
 }
 
 dependencies {
-    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidxTestRunner)
 }
 
 kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JVM_TARGET)

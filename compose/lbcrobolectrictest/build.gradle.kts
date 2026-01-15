@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -33,8 +33,8 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.activity.compose)
+    implementation(platform(libs.composeBom))
+    implementation(libs.activityCompose)
     implementation(libs.kotlinTest)
     implementation(libs.androidxComposeUiTestJunit)
     implementation(libs.robolectric)

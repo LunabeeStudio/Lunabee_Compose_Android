@@ -30,10 +30,10 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.android.gradle.plugin)
-    implementation(libs.kotlin.gradle.plugin)
-    implementation(libs.compose.plugin)
-    implementation(libs.jreleaser.gradle.plugin)
+    implementation(libs.agp)
+    implementation(libs.kotlinGradlePlugin)
+    implementation(libs.composePlugin)
+    implementation(libs.jreleaserGradlePlugin)
     implementation(libs.javapoet)
     implementation(libs.touchlabSkie)
 

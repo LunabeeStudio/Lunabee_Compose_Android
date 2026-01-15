@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -39,9 +39,9 @@ description = "Tools for developing android test"
 version = AndroidConfig.LBCANDROIDTEST_VERSION
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.foundation)
-    implementation(libs.compose.ui.test)
-    implementation(libs.compose.ui.test.junit4)
-    implementation(libs.androidx.test.runner)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeFoundation)
+    implementation(libs.composeUiTest)
+    implementation(libs.composeUiTestJunit4)
+    implementation(libs.androidxTestRunner)
 }

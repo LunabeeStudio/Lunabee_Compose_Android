@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Lb.ThemeOverlay" parent="ThemeOverlay.MaterialComponents" />
+
+    <style name="Lb.ThemeOverlay.Toolbar" parent="ThemeOverlay.MaterialComponents.ActionBar" />
+
+    <style name="Lb.ThemeOverlay.Toolbar.Surface">
+        <item name="android:background">?colorSurface</item>
+    </style>
+
+    <style name="Lb.ThemeOverlay.PopUp">
+        <item name="android:colorBackground">?colorSurface</item>
+        <item name="android:textColor">?colorOnSurface</item>
+    </style>
+
+</resources>

@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -37,12 +37,12 @@ description = "Compose implementation of MVI pattern"
 version = AndroidConfig.LBCPRESENTER_VERSION
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.ui)
-    implementation(libs.compose.material3)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.android)
-    implementation(libs.activity.compose)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeUi)
+    implementation(libs.composeMaterial3)
+    implementation(libs.androidxLifecycleRuntimeCompose)
+    implementation(libs.androidxLifecycleViewmodelAndroid)
+    implementation(libs.activityCompose)
     implementation(libs.touchlabKermit)
 
     implementation(project(Modules.LbcCore))

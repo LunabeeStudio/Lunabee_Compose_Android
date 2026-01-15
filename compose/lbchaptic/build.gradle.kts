@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -37,7 +37,7 @@ description = "Helper to perform haptics feedback from compose"
 version = AndroidConfig.LBCHAPTIC_VERSION
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.ui)
-    implementation(libs.androidx.appcompat)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeUi)
+    implementation(libs.androidxAppcompat)
 }

@@ -29,8 +29,8 @@ buildscript {
     }
 
     dependencies {
-        classpath(libs.android.gradle.plugin)
-        classpath(libs.kotlin.gradle.plugin)
+        classpath(libs.agp)
+        classpath(libs.kotlinGradlePlugin)
     }
 }
 
@@ -39,7 +39,7 @@ plugins {
 }
 
 dependencies {
-    detektPlugins(libs.detekt.rules.ktlint.wrapper)
+    detektPlugins(libs.detektRulesKtlintWrapper)
 }
 
 detekt {

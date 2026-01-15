@@ -35,6 +35,7 @@ dependencyResolutionManagement {
 rootProject.name = "Lunabee_Kotlin_Library"
 
 include("demo-compose")
+include(":material-color-utilities")
 
 // region Compose
 include(":lbcaccessibility")
@@ -69,24 +70,37 @@ include(":lbcuifield-phonepicker")
 project(":lbcuifield-phonepicker").projectDir = File("compose/lbcuifield/lbcuifield-phonepicker")
 // endregion
 
-include(":material-color-utilities")
-
+// region Common
 include("lblogger-kermit")
 project(":lblogger-kermit").projectDir = File("common/lblogger/lblogger-kermit")
+include("lblogger-kermit-crashlytics")
+project(":lblogger-kermit-crashlytics").projectDir = File("common/lblogger/lblogger-kermit-crashlytics")
 include("lbcore")
 project(":lbcore").projectDir = File("common/lbcore/lbcore")
+include("lbcore-compose")
+project(":lbcore-compose").projectDir = File("common/lbcore/lbcore-compose")
+include("lbcore-android")
+project(":lbcore-android").projectDir = File("common/lbcore/lbcore-android")
 include("lbextensions")
 project(":lbextensions").projectDir = File("common/lbextensions")
 include("lbtest")
 project(":lbtest").projectDir = File("common/lbtest")
-
-/*
-lbBom = { group = "studio.lunabee", name = "lunabee-bom", version.ref = "lbBom" }
-lbktorCore = { group = "studio.lunabee", name = "lbktor-core" }
-lbktorJson = { group = "studio.lunabee", name = "lbktor-json" }
-lbktorKermit = { group = "studio.lunabee", name = "lbktor-kermit" }
-lbloadingCompose = { group = "studio.lunabee", name = "lbloading-compose" }
-lbloadingCore = { group = "studio.lunabee", name = "lbloading-core" }
-lbloadingKoin = { group = "studio.lunabee", name = "lbloading-koin" }
-lbloggerCrashlyticsAndroid = { group = "studio.lunabee", name = "lblogger-kermit-crashlytics-android" }
- */
+include(":lbktor-core")
+project(":lbktor-core").projectDir = File("common/lbktor/lbktor-core")
+include(":lbktor-kermit")
+project(":lbktor-kermit").projectDir = File("common/lbktor/lbktor-kermit")
+include(":lbktor-json")
+project(":lbktor-json").projectDir = File("common/lbktor/lbktor-json")
+include(":lbloading-core")
+project(":lbloading-core").projectDir = File("common/lbloading/lbloading-core")
+include(":lbloading-checks")
+project(":lbloading-checks").projectDir = File("common/lbloading/lbloading-compose/checks")
+include(":lbloading-compose")
+project(":lbloading-compose").projectDir = File("common/lbloading/lbloading-compose")
+include(":lbloading-hilt")
+project(":lbloading-hilt").projectDir = File("common/lbloading/lbloading-hilt")
+include(":lbloading-koin")
+project(":lbloading-koin").projectDir = File("common/lbloading/lbloading-koin")
+include(":lbloading-checks")
+project(":lbloading-checks").projectDir = File("common/lbloading/lbloading-compose/checks")
+// endregion

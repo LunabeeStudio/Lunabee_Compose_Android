@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -33,13 +33,13 @@ description = "Provide image composable displaying imageSpec data"
 version = AndroidConfig.LBCIMAGE_VERSION
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.foundation)
-    implementation(libs.coil.compose)
-    implementation(libs.coil.compose.svg)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeFoundation)
+    implementation(libs.coilCompose)
+    implementation(libs.coilComposeSvg)
     implementation(libs.core)
-    implementation(libs.androidx.core)
-    implementation(libs.compose.material3)
+    implementation(libs.androidxCore)
+    implementation(libs.composeMaterial3)
 
     implementation(project(Modules.LbcCore))
 }

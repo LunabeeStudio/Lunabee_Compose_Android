@@ -20,9 +20,9 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
-    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
@@ -43,14 +43,14 @@ version = AndroidConfig.LBCUIFIELD_COUNTRYPICKER_VERSION
 
 dependencies {
     coreLibraryDesugaring(libs.desugarJdk)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.ui)
-    implementation(libs.compose.material3)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.kotlinx.serialization.json)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeUi)
+    implementation(libs.composeMaterial3)
+    implementation(libs.androidxAppcompat)
+    implementation(libs.kotlinxSerializationJson)
     implementation(project(Modules.LbcCore))
     implementation(project(Modules.LbcImage))
     implementation(project(Modules.LbcUiFieldCore))
-    implementation(libs.hbb20.countrycodepicker)
+    implementation(libs.hbb20Countrycodepicker)
     implementation(libs.normalize)
 }

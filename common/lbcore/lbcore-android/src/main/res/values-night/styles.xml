@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Lb.ThemeOverlay" parent="ThemeOverlay.MaterialComponents.Dark" />
+
+    <style name="Lb.ThemeOverlay.Toolbar" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+    <!-- Override background from light mode -->
+    <style name="Lb.ThemeOverlay.Toolbar.Surface" />
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="lb_font_size_small">12sp</dimen>
+    <dimen name="lb_font_size_medium">14sp</dimen>
+    <dimen name="lb_font_size_large">18sp</dimen>
+    <dimen name="lb_font_size_huge">24sp</dimen>
+
+    <dimen name="lb_spacing_small">4dp</dimen>
+    <dimen name="lb_spacing_medium">8dp</dimen>
+    <dimen name="lb_spacing_large">16dp</dimen>
+    <dimen name="lb_spacing_huge">32dp</dimen>
+</resources>

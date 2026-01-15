@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Definitions of attributes to be exposed as public -->
+<resources>
+    <public name="Lb.ThemeOverlay.Core" type="style" />
+    <public name="Lb.ThemeOverlay.Core.Toolbar" type="style" />
+    <public name="Lb.ThemeOverlay.Core.Toolbar.Surface" type="style" />
+    <public name="Lb.ThemeOverlay.Core.PopUp" type="style" />
+    <public name="Lb.Widget.Core.Toolbar" type="style" />
+    <public name="Lb.Widget.Core.Toolbar.Surface" type="style" />
+    <public name="Lb.Widget.Core.CollapsingToolbar.FullScreen" type="style" />
+
+    <public name="lb_toolbar_shadow" type="layout" />
+
+    <public name="lb_spacing_small" type="attr" />
+    <public name="lb_spacing_medium" type="attr" />
+    <public name="lb_spacing_large" type="attr" />
+    <public name="lb_spacing_huge" type="attr" />
+
+    <public name="lb_font_size_small" type="attr" />
+    <public name="lb_font_size_medium" type="attr" />
+    <public name="lb_font_size_large" type="attr" />
+    <public name="lb_font_size_huge" type="attr" />
+</resources>

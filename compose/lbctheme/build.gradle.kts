@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -37,8 +37,8 @@ description = "Function to build dynamic theme with Material3 algorithm"
 version = AndroidConfig.LBCTHEME_VERSION
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.material3)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeMaterial3)
 
     implementation(project(Modules.MaterialColorUtilities))
 }

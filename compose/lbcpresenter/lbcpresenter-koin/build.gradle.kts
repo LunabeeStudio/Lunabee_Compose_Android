@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -33,12 +33,12 @@ description = "Koin integration for LBPresenter"
 version = AndroidConfig.LBCPRESENTER_KOIN_VERSION
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.ui)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeUi)
 
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.compose.viewmodel)
-    implementation(libs.koin.core)
+    implementation(platform(libs.koinBom))
+    implementation(libs.koinComposeViewmodel)
+    implementation(libs.koinCore)
 
     api(project(Modules.LbcPresenter))
 }

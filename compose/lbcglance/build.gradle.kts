@@ -20,7 +20,7 @@
  */
 
 plugins {
-    id("lunabee.android-library-conventions")
+    id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
 }
 
@@ -33,6 +33,6 @@ description = "Provide tools to build widget with Glance"
 version = AndroidConfig.LBCGLANCE_VERSION
 
 dependencies {
-    implementation(libs.androidx.core)
-    api(libs.androidx.glance.widget)
+    implementation(libs.androidxCore)
+    api(libs.androidxGlanceWidget)
 }

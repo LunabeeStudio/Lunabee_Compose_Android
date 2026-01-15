@@ -22,9 +22,9 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id(libs.plugins.compose.plugin.get().pluginId)
+    id(libs.plugins.composePlugin.get().pluginId)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -87,15 +87,15 @@ kotlin {
 
 dependencies {
     implementation(libs.material)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core)
-    implementation(libs.activity.compose)
-    implementation(libs.navigation.compose)
+    implementation(libs.androidxAppcompat)
+    implementation(libs.androidxCore)
+    implementation(libs.activityCompose)
+    implementation(libs.navigationCompose)
 
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.foundation)
-    implementation(libs.compose.material3)
-    implementation(libs.compose.material.icons.extended)
+    implementation(platform(libs.composeBom))
+    implementation(libs.composeFoundation)
+    implementation(libs.composeMaterial3)
+    implementation(libs.composeMaterialIconsExtended)
     implementation(libs.androidxUiToolingPreview)
 
     coreLibraryDesugaring(libs.desugarJdk)
@@ -115,17 +115,17 @@ dependencies {
     implementation(project(Modules.LbcImage))
 
     androidTestImplementation(project(Modules.LbcAndroidTest))
-    androidTestImplementation(libs.compose.ui.test.junit4)
+    androidTestImplementation(libs.composeUiTestJunit4)
     androidTestImplementation(libs.junit4)
-    androidTestImplementation(libs.kotlin.test.junit)
-    debugImplementation(libs.compose.ui.test.manifest)
+    androidTestImplementation(libs.kotlinTestJunit)
+    debugImplementation(libs.composeUiTestManifest)
 
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.dagger.hilt.android)
-    ksp(libs.dagger.hilt.android.compiler)
+    implementation(libs.androidxLifecycleRuntimeCompose)
+    implementation(libs.hiltAndroid)
+    ksp(libs.hiltAndroidCompiler)
     //noinspection UseTomlInstead FIXME wait for dagger update https://github.com/google/dagger/issues/5001
     ksp("org.jetbrains.kotlin:kotlin-metadata-jvm:2.3.0")
-    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidxHiltNavigationCompose)
 
     debugImplementation(libs.androidxUiTooling)
 }
