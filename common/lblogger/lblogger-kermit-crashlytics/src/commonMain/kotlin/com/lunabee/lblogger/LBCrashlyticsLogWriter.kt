@@ -31,9 +31,7 @@ class LBCrashlyticsLogWriter(
         return shouldLog(severity, tag, message, throwable)
     }
 
-    override fun isLoggable(tag: String, severity: Severity): Boolean {
-        return severity > Severity.Debug
-    }
+    override fun isLoggable(tag: String, severity: Severity): Boolean = severity > Severity.Debug
 
     override fun log(severity: Severity, message: String, tag: String, throwable: Throwable?) {
         if (!isLoggable(severity, throwable, tag, message)) return

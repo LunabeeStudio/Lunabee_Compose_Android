@@ -6,6 +6,7 @@ actual class AtomicBoolean private constructor(private val atomicBoolean: Atomic
     actual constructor(initialValue: Boolean) : this(AtomicReference(initialValue))
 
     actual fun compareAndSet(expect: Boolean, update: Boolean): Boolean = atomicBoolean.compareAndSet(expect, update)
+
     actual val value: Boolean
         get() = atomicBoolean.value
 

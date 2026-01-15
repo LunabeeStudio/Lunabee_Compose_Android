@@ -3,7 +3,7 @@ package com.lunabee.lblogger
 import co.touchlab.kermit.Logger
 import org.jetbrains.annotations.NonNls
 
-/**
+/*
  * Timber like extensions
  */
 

@@ -23,8 +23,8 @@ import kotlin.time.Duration.Companion.milliseconds
 fun rememberShowDelayedLoading(
     shouldShowLoading: Boolean,
     shouldHideLoading: Boolean = !shouldShowLoading,
-    minLoadingShowDuration: Duration = LBLoadingVisibilityDelayDelegate.DEFAULT_MIN_LOADING_SHOW_DURATION_MS.milliseconds,
-    delayBeforeShow: Duration = LBLoadingVisibilityDelayDelegate.DEFAULT_DELAY_BEFORE_SHOW_MS.milliseconds,
+    minLoadingShowDuration: Duration = LBLoadingVisibilityDelayDelegate.DefaultMinLoadingShowDurationMs.milliseconds,
+    delayBeforeShow: Duration = LBLoadingVisibilityDelayDelegate.DefaultDelayBeforeShowMs.milliseconds,
 ): State<Boolean> {
     val loadingDelegate = remember(minLoadingShowDuration, delayBeforeShow) {
         LBLoadingVisibilityDelayDelegate(

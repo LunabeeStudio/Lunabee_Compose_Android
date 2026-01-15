@@ -5,9 +5,9 @@ import android.net.ConnectivityManager
 
 @Suppress("DEPRECATION")
 object NetworkUtils {
-    private const val TYPE_NOT_CONNECTED = 0
-    const val TYPE_WIFI: Int = 1
-    const val TYPE_MOBILE: Int = 2
+    private const val TypeNotConnected = 0
+    const val TypeWifi: Int = 1
+    const val TypeMobile: Int = 2
 
     fun getConnectivityStatus(context: Context): Int {
         val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -15,16 +15,16 @@ object NetworkUtils {
 
         return when (activeNetwork?.type) {
             ConnectivityManager.TYPE_WIFI -> {
-                TYPE_WIFI
+                TypeWifi
             }
             ConnectivityManager.TYPE_MOBILE -> {
-                TYPE_MOBILE
+                TypeMobile
             }
-            else -> TYPE_NOT_CONNECTED
+            else -> TypeNotConnected
         }
     }
 
     fun isConnected(context: Context): Boolean = getConnectivityStatus(
         context,
-    ) != TYPE_NOT_CONNECTED
+    ) != TypeNotConnected
 }

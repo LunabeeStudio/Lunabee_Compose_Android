@@ -53,10 +53,8 @@ sealed class LBResult<out T> {
     /**
      * Cast [LBResult] to [LBFlowResult]
      */
-    fun asFlowResult(): LBFlowResult<T> {
-        return when (this) {
-            is Success -> LBFlowResult.Success(successData)
-            is Failure -> LBFlowResult.Failure(throwable, failureData)
-        }
+    fun asFlowResult(): LBFlowResult<T> = when (this) {
+        is Success -> LBFlowResult.Success(successData)
+        is Failure -> LBFlowResult.Failure(throwable, failureData)
     }
 }

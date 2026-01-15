@@ -8,10 +8,11 @@ import java.util.Locale
  *
  * @return A diacritic free String.
  */
-fun String.removeAccents(): String = Normalizer.normalize(
-    this,
-    Normalizer.Form.NFD,
-).replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
+fun String.removeAccents(): String = Normalizer
+    .normalize(
+        this,
+        Normalizer.Form.NFD,
+    ).replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
 
 /**
  * Remove the diacritics from a string and lowercase the result.
@@ -24,4 +25,11 @@ fun String.transformForSearch(): String = this.removeAccents().lowercase(Locale.
  * Capitalize the string according to the locale
  * @return The capitalized string
  */
-fun String.titlecaseFirstChar(): String = replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+fun String.titlecaseFirstChar(): String = replaceFirstChar {
+    if (it.isLowerCase()) {
+        it.titlecase(Locale.getDefault())
+    } else {
+        it
+            .toString()
+    }
+}

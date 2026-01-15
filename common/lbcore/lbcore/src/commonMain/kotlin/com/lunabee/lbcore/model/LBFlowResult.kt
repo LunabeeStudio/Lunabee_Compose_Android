@@ -63,12 +63,10 @@ sealed class LBFlowResult<out T> {
      * Throw [IllegalStateException] when called with a [Loading] result.
      */
     @Throws(IllegalStateException::class)
-    fun asResult(): LBResult<T> {
-        return when (this) {
-            is Loading -> error("Loading cannot be cast to LBResult")
-            is Success -> LBResult.Success(successData)
-            is Failure -> LBResult.Failure(throwable, failureData)
-        }
+    fun asResult(): LBResult<T> = when (this) {
+        is Loading -> error("Loading cannot be cast to LBResult")
+        is Success -> LBResult.Success(successData)
+        is Failure -> LBResult.Failure(throwable, failureData)
     }
 
     companion object {
@@ -80,9 +78,11 @@ sealed class LBFlowResult<out T> {
          */
         @OptIn(ExperimentalTypeInference::class)
         inline fun <T, R> Flow<LBFlowResult<T>>.transformResult(
-            @BuilderInference crossinline transformError: suspend FlowCollector<LBFlowResult<R>>.(value: Failure<T>) -> Unit =
+            @BuilderInference crossinline transformError:
+                suspend FlowCollector<LBFlowResult<R>>.(value: Failure<T>) -> Unit =
                 FlowCollector<LBFlowResult<R>>::transformError,
-            @BuilderInference crossinline transformLoading: suspend FlowCollector<LBFlowResult<R>>.(value: Loading<T>) -> Unit =
+            @BuilderInference crossinline transformLoading:
+                suspend FlowCollector<LBFlowResult<R>>.(value: Loading<T>) -> Unit =
                 FlowCollector<LBFlowResult<R>>::transformLoading,
             @BuilderInference crossinline transform: suspend FlowCollector<LBFlowResult<R>>.(value: Success<T>) -> Unit =
                 FlowCollector<LBFlowResult<R>>::transformSuccess,

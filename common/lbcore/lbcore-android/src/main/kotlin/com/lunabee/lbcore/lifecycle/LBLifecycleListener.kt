@@ -5,5 +5,6 @@ package com.lunabee.lbcore.lifecycle
  */
 interface LBLifecycleListener {
     fun onAppEnterInBackground()
+
     fun onAppEnterInForeground()
 }

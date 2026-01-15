@@ -8,7 +8,9 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.yield
 
 enum class GlobalLoadingState(val isBlocking: Boolean, val isLoading: Boolean) {
-    None(false, false), Blocking(true, false), Loading(true, true)
+    None(false, false),
+    Blocking(true, false),
+    Loading(true, true),
 }
 
 /**

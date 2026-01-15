@@ -35,8 +35,7 @@ class LoadingManagerTest {
             emit(LBFlowResult.Loading(Unit)) // already loading
             rawLoadingManager.stopLoading() // external call to stop, do not record
             emit(LBFlowResult.Loading(Unit))
-        }
-            .withLoading(loadingManager)
+        }.withLoading(loadingManager)
             .collect()
 
         verify(exactly = 2) { loadingManager.startLoading() }
@@ -49,8 +48,7 @@ class LoadingManagerTest {
             flow {
                 emit(LBFlowResult.Loading(Unit))
                 error("Flow failure")
-            }
-                .withLoading(loadingManager)
+            }.withLoading(loadingManager)
                 .collect()
         }
 
@@ -63,8 +61,7 @@ class LoadingManagerTest {
         assertThrows<IllegalStateException> {
             flow {
                 emit(LBFlowResult.Loading(Unit))
-            }
-                .withLoading(loadingManager)
+            }.withLoading(loadingManager)
                 .collect {
                     error("collect failure")
                 }
@@ -79,8 +76,7 @@ class LoadingManagerTest {
         val job = flow {
             emit(LBFlowResult.Loading(Unit))
             while (true) yield()
-        }
-            .withLoading(loadingManager)
+        }.withLoading(loadingManager)
             .launchIn(backgroundScope)
 
         yield()

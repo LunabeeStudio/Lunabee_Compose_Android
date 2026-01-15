@@ -15,19 +15,18 @@ fun <T : Any> Iterable<T?>.joinToStringNotNull(
     limit: Int = -1,
     truncated: CharSequence = "…",
     transform: ((T) -> CharSequence)? = null,
-): String {
-    return this.filterNotNull()
-        .filter {
-            (it as? String)?.isNotEmpty() ?: true
-        }.joinToString(
-            separator,
-            prefix,
-            postfix,
-            limit,
-            truncated,
-            transform,
-        )
-}
+): String = this
+    .filterNotNull()
+    .filter {
+        (it as? String)?.isNotEmpty() ?: true
+    }.joinToString(
+        separator,
+        prefix,
+        postfix,
+        limit,
+        truncated,
+        transform,
+    )
 
 /**
  * Creates a string from all the elements that are not null separated using [separator]
@@ -46,16 +45,15 @@ fun <T : Any> Sequence<T?>.joinToStringNotNull(
     limit: Int = -1,
     truncated: CharSequence = "…",
     transform: ((T) -> CharSequence)? = null,
-): String {
-    return this.filterNotNull()
-        .filter {
-            (it as? String)?.isNotEmpty() ?: true
-        }.joinToString(
-            separator,
-            prefix,
-            postfix,
-            limit,
-            truncated,
-            transform,
-        )
-}
+): String = this
+    .filterNotNull()
+    .filter {
+        (it as? String)?.isNotEmpty() ?: true
+    }.joinToString(
+        separator,
+        prefix,
+        postfix,
+        limit,
+        truncated,
+        transform,
+    )

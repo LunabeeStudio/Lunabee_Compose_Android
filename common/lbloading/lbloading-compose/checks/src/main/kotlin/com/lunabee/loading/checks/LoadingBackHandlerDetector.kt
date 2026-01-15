@@ -34,7 +34,9 @@ class LoadingBackHandlerDetector : Detector(), SourceCodeScanner {
 
     override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
         if ((method.containingFile as? ClsFileImpl)?.packageName == "androidx.activity.compose") {
-            val quickfixData = LintFix.create().replace()
+            val quickfixData = LintFix
+                .create()
+                .replace()
                 .name("Replace by `LoadingBackHandler`")
                 .sharedName("Replace all by `LoadingBackHandler`")
                 .text("BackHandler")

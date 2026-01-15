@@ -41,6 +41,7 @@ fun LoadingBlockBackView(
 }
 
 object BlockingViewScope
+
 interface LoadingViewScope : AnimatedVisibilityScope {
     val loadingContentDescription: String?
 }
@@ -96,8 +97,8 @@ private fun AnimatedLoadingContent(
 /**
  * A default loading composable to be used in LoadingView
  */
-context(loadingViewScope: LoadingViewScope)
 @Composable
+context(loadingViewScope: LoadingViewScope)
 fun DefaultLoadingContent(
     modifier: Modifier = Modifier,
     background: Brush = SolidColor(MaterialTheme.colorScheme.scrim.copy(ScrimOpacity)),
@@ -111,8 +112,7 @@ fun DefaultLoadingContent(
                     liveRegion = LiveRegionMode.Polite
                     this.contentDescription = loadingContentDescription
                 }
-            }
-            .then(modifier)
+            }.then(modifier)
             .drawBehind { drawRect(background) },
     ) {
         progressIndicator()

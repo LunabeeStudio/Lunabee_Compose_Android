@@ -24,6 +24,7 @@ class LBKtorKermit private constructor(
                     this.level = plugin.logLevel.toKtorLogLevel()
                     this.logger = object : Logger {
                         val delegate = LBLogger.get(name = "LBKtorKermitDefault")
+
                         override fun log(message: String): Unit = delegate.d(messageString = message)
                     }
                 },
@@ -44,8 +45,7 @@ class LBKtorKermit private constructor(
         None,
         ;
 
-        internal fun toKtorLogLevel(): io.ktor.client.plugins.logging.LogLevel {
-            return io.ktor.client.plugins.logging.LogLevel.valueOf(name.uppercase())
-        }
+        internal fun toKtorLogLevel(): io.ktor.client.plugins.logging.LogLevel = io.ktor.client.plugins.logging.LogLevel
+            .valueOf(name.uppercase())
     }
 }

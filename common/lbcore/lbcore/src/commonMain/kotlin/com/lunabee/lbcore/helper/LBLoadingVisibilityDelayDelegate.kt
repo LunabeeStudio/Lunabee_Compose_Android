@@ -20,8 +20,8 @@ import kotlin.time.Duration.Companion.milliseconds
  * @property delayBeforeShow Delay before showing the loading
  */
 class LBLoadingVisibilityDelayDelegate(
-    var minLoadingShowDuration: Duration = DEFAULT_MIN_LOADING_SHOW_DURATION_MS.milliseconds,
-    var delayBeforeShow: Duration = DEFAULT_DELAY_BEFORE_SHOW_MS.milliseconds,
+    var minLoadingShowDuration: Duration = DefaultMinLoadingShowDurationMs.milliseconds,
+    var delayBeforeShow: Duration = DefaultDelayBeforeShowMs.milliseconds,
 ) {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
@@ -91,13 +91,11 @@ class LBLoadingVisibilityDelayDelegate(
     /**
      * @return True if a hide or show job is active
      */
-    fun isActive(): Boolean {
-        return showJob?.isActive == true || hideJob?.isActive == true
-    }
+    fun isActive(): Boolean = showJob?.isActive == true || hideJob?.isActive == true
 
     companion object {
-        const val DEFAULT_MIN_LOADING_SHOW_DURATION_MS: Long = 500L
-        const val DEFAULT_DELAY_BEFORE_SHOW_MS: Long = 500L
+        const val DefaultMinLoadingShowDurationMs: Long = 500L
+        const val DefaultDelayBeforeShowMs: Long = 500L
     }
 }
 

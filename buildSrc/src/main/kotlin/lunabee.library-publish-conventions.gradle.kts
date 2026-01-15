@@ -249,7 +249,7 @@ fun MavenPublication.setAndroidArtifacts() {
         project.android.sourceSets
             .getByName("main")
             .kotlin as DefaultAndroidSourceDirectorySet
-        ).srcDirs
+    ).srcDirs
     val sourceJar by project.tasks.registering(Jar::class) {
         archiveClassifier.set("sources")
         from(mainSourceSets)
