@@ -189,3 +189,11 @@ style:
     active: false # https://detekt.dev/formatting.html#finalnewline
   UnusedPrivateFunction:
     ignoreAnnotated: [ 'Preview' ]
+
+comments:
+  AbsentOrWrongFileLicense:
+    active: true
+    licenseTemplateFile: "detekt-license.template"
+    licenseTemplateIsRegex: true
+    excludes:
+      - 'gradlew'
