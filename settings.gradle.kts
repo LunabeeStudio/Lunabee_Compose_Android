@@ -43,7 +43,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Lunabee_Kotlin_Library"
+rootProject.name = "LBAndroid"
 
 include("demo-compose")
 

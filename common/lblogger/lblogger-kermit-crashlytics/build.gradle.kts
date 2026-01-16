@@ -29,7 +29,7 @@ kotlin {
         androidResources {
             this.additionalParameters += "resourcePrefix"
         }
-        // FIXME https://kotlinlang.slack.com/archives/C0B8M7BUY/p1768493093074589?thread_ts=1766590721.514959&cid=C0B8M7BUY
+        // FIXME http://issuetracker.google.com/issues/470478219
         //  resourcePrefix("lb_log")
     }
 
