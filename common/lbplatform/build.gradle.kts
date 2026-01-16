@@ -28,6 +28,7 @@ dependencies {
         addModule(projects.lbcoreAndroid.name)
         addModule(projects.lbcoreCompose.name)
         addModule(projects.lbextensions.name)
+        addModule(projects.lbextensionsAndroid.name)
         addKmpModule(projects.lbktorCore.name, Target.Jvm)
         addKmpModule(projects.lbktorJson.name, Target.Jvm)
         addKmpModule(projects.lbktorKermit.name, Target.Jvm)

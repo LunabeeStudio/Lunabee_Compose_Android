@@ -8,27 +8,28 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## Unreleased
 
 ```
-LbccoreVersion 1.12.0
-LbcfoundationVersion 1.12.0
-LbcandroidtestVersion 1.15.0
-LbcaccessibilityVersion 1.14.0
-LbcthemeVersion 1.10.0
-MaterialColorUtilitiesVersion 1.10.0
-LbchapticVersion 1.8.0
-LbcuifieldCoreVersion 1.13.0
-LbcuifieldPhonepickerVersion 1.8.0
-LbcuifieldCountrypickerVersion 1.7.0
-LbcimageVersion 1.8.0
-LbcglanceVersion 1.6.0
-LbcpresenterVersion 1.10.0
-LbcrobolectrictestVersion 1.1.0
-LbloggerKermitVersion 4.9.0
-LbcoreVersion 4.9.0
-LbextensionsVersion 4.9.0
-LbtestVersion 4.9.0
-LbktorVersion 4.9.0
-LbloadingVersion 4.9.0
-LbplatformVersion 4.9.0
+Lbccore 1.12.0
+Lbcfoundation 1.12.0
+Lbcandroidtest 1.15.0
+Lbcaccessibility 1.14.0
+Lbctheme 1.10.0
+MaterialColorUtilities 1.10.0
+Lbchaptic 1.8.0
+LbcuifieldCore 1.13.0
+LbcuifieldPhonepicker 1.8.0
+LbcuifieldCountrypicker 1.7.0
+Lbcimage 1.8.0
+Lbcglance 1.6.0
+Lbcpresenter 1.10.0
+Lbcrobolectrictest 1.1.0
+LbloggerKermit 4.9.0
+Lbcore 4.9.0
+Lbextensions 4.9.0
+LbextensionsAndroid 4.9.0
+Lbtest 4.9.0
+Lbktor 4.9.0
+Lbloading 4.9.0
+Lbplatform 4.9.0
 ```
 
 - Add some Lunabee internal libraries. Split modules in `compose` and `common` directories

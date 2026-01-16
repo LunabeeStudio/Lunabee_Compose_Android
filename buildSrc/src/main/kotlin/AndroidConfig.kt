@@ -72,6 +72,7 @@ object AndroidConfig {
     const val LBKTOR_VERSION: String = "4.9.0"
     const val LBLOADING_VERSION: String = "4.9.0"
     const val LBPLATFORM_VERSION: String = "4.9.0"
+    const val LBEXTENSIONS_ANDROID_VERSION: String = "4.9.0"
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_21
     val JVM_TARGET: JvmTarget = JvmTarget.JVM_21

@@ -24,6 +24,9 @@ androidxGlance = "1.1.1"
 androidxHiltNavigationCompose = "1.3.0"
 androidxLifecycle = "2.10.0"
 androidxNavigation = "2.9.6"
+androidxPreference = "1.2.1"
+androidxRecyclerview = "1.4.0"
+androidxTestCore = "1.7.0"
 androidxTestRunner = "1.7.0"
 coil = "2.7.0"
 composeBom = "2026.01.00"
@@ -70,6 +73,9 @@ androidxLifecycleProcess = { group = "androidx.lifecycle", name = "lifecycle-pro
 androidxLifecycleRuntime = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "androidxLifecycle" }
 androidxLifecycleRuntimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidxLifecycleViewmodelAndroid = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycleViewmodelAndroid" }
+androidxPreferenceKtx = { group = "androidx.preference", name = "preference-ktx", version.ref = "androidxPreference" }
+androidxRecyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "androidxRecyclerview" }
+androidxTestCoreKtx = { group = "androidx.test", name = "core-ktx", version.ref = "androidxTestCore" }
 androidxTestRunner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
 androidxUiTest = { module = "androidx.compose.ui:ui-test" }
 androidxUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4" }
