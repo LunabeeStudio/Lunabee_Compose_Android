@@ -29,8 +29,7 @@ android {
 
     defaultConfig {
         minSdk = AndroidConfig.MinSdk
-        @Suppress("DEPRECATION") // https://stackoverflow.com/questions/76084080/apply-targetsdk-in-android-instrumentation-test
-        targetSdk = AndroidConfig.TargetSdk
+        testOptions.targetSdk = AndroidConfig.TargetSdk
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

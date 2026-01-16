@@ -86,8 +86,6 @@ dependencies {
     implementation(platform(libs.composeBom))
 
     ksp(libs.hiltAndroidCompiler)
-    //noinspection UseTomlInstead FIXME wait for dagger update https://github.com/google/dagger/issues/5001
-    ksp("org.jetbrains.kotlin:kotlin-metadata-jvm:2.3.0")
 
     implementation(libs.androidxActivityCompose)
     implementation(libs.androidxAppcompat)
