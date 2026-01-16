@@ -1,0 +1,43 @@
+/*
+ * Copyright (c) 2026 Lunabee Studio
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.lunabee.lbloading
+
+import androidx.activity.compose.BackHandler
+import androidx.compose.runtime.Composable
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
+/**
+ * Wrapper around [BackHandler] compliant with the global loading view by using the [LoadingManager]
+ * @see BackHandler
+ *
+ * @param enabled if this BackHandler should be enabled when there is no loading
+ * @param onBack the action invoked by pressing the system back when there is no loading
+ */
+@Composable
+fun LoadingBackHandler(
+    loadingManager: LoadingManager,
+    enabled: Boolean = true,
+    onBack: () -> Unit,
+) {
+    val loadingState = loadingManager.loadingState.collectAsStateWithLifecycle()
+    val isBlocking = loadingState.value.isBlocking
+    BackHandler(enabled || isBlocking) {
+        if (!isBlocking) {
+            onBack()
+        }
+    }
+}

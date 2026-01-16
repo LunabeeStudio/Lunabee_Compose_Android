@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2026 Lunabee Studio
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="application_name" translatable="false">Lunabee Compose Android</string>
+
+    <!-- MainScreen -->
+    <string name="haptic_screen_title">"Haptics"</string>
+    <string name="haptic_screen_subtitle">"Haptics API"</string>
+    <string name="foundation_screen_title">"Foundation"</string>
+    <string name="foundation_screen_subtitle">"Derivated components from androidx.compose.foundation"</string>
+    <string name="theme_screen_title">"Theme"</string>
+    <string name="theme_screen_subtitle">"Tools to create custom Material3 theme"</string>
+    <string name="crop_screen_title">"Crop"</string>
+    <string name="crop_screen_subtitle">"Component to zoom and crop images."</string>
+    <string name="uiFields_screen_title">"UiFields"</string>
+    <string name="uiFields_screen_subtitle">"Components allowing form creation in Compose"</string>
+
+    <!-- TextScreen -->
+    <string name="text_screen_highlight_placeholder">"Separate text to highlight by a comma"</string>
+    <string name="text_screen_base_text_placeholder">"Base raw text"</string>
+
+    <!-- Material3Screen -->
+    <string name="material3_theme_primary_explanation">Color displayed at the end is the primary color generated based on the seed color you enter.</string>
+
+    <!-- ThemeScreen -->
+    <string name="material3_theme_color_placeholder">"#EEFF00"</string>
+    <string name="material3_theme_color_label">"Hexadecimal color"</string>
+
+    <!-- CropScreen -->
+    <string name="crop_screen_description">Move and zoom within the image to achieve the desired framing.</string>
+    <string name="crop_screen_crop_button">Validate</string>
+    <string name="crop_screen_retry_button">Retry</string>
+
+    <!-- GlanceScreen -->
+    <string name="glance_title">Glance</string>
+    <string name="glance_description">Glance actions.</string>
+
+    <!-- Common -->
+    <string name="lorem_ipsum">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</string>
+    <string name="highlighted_lorem_ipsum">"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</string>
+
+    <!-- ImageScreen -->
+    <string name="image_title">Image</string>
+    <string name="image_description">Image loading.</string>
+</resources>

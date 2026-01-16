@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2026 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,31 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Dependencies.kt
- * Lunabee Compose
- *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
-
-object Modules {
-    const val LbcAccessibility: String = ":lbcaccessibility"
-    const val LbcFoundation: String = ":lbcfoundation"
-    const val LbcTheme: String = ":lbctheme"
-    const val LbcCore: String = ":lbccore"
-    const val LbcImage: String = ":lbcimage"
-    const val LbcAndroidTest: String = ":lbcandroidtest"
-    const val MaterialColorUtilities: String = ":material-color-utilities"
-    const val LbcHaptic: String = ":lbchaptic"
-    const val LbcCrop: String = ":lbccrop"
-    const val LbcUiFieldCore: String = ":lbcuifield-core"
-    const val LbcUiFieldCountryPicker: String = ":lbcuifield-countrypicker"
-    const val LbcUiFieldPhonePicker: String = ":lbcuifield-phonepicker"
-    const val LbcGlance: String = ":lbcglance"
-    const val LbcPresenter: String = ":lbcpresenter"
-    const val LbcPresenterKoin: String = ":lbcpresenter-koin"
-    const val LbcRobolectricTest: String = ":lbcrobolectrictest"
-}
 
 object BuildConfigs {
     const val LunabeeCompose: String = "_"

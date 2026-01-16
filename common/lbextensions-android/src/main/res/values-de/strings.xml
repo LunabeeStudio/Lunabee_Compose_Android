@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lbe_common_yesterday">Gestern</string>
+    <string name="lbe_common_today">Heute</string>
+    <string name="lbe_common_tomorrow">Morgen</string>
+    <string name="lbe_intent_send_email">E-Mail senden…</string>
+    <string name="lbe_intent_phone_sms">Kontakt über…</string>
+</resources>
