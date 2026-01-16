@@ -22,13 +22,13 @@ LbcimageVersion 1.8.0
 LbcglanceVersion 1.6.0
 LbcpresenterVersion 1.10.0
 LbcrobolectrictestVersion 1.1.0
-LbloggerKermitVersion 4.10.0
-LbcoreVersion 4.10.0
-LbextensionsVersion 4.10.0
-LbtestVersion 4.10.0
-LbktorVersion 4.10.0
-LbloadingVersion 4.10.0
-LbplatformVersion 4.10.0
+LbloggerKermitVersion 4.9.0
+LbcoreVersion 4.9.0
+LbextensionsVersion 4.9.0
+LbtestVersion 4.9.0
+LbktorVersion 4.9.0
+LbloadingVersion 4.9.0
+LbplatformVersion 4.9.0
 ```
 
 - Add some Lunabee internal libraries. Split modules in `compose` and `common` directories
