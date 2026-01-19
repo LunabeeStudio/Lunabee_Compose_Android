@@ -15,10 +15,6 @@
  */
 
 import com.android.build.gradle.LibraryExtension
-import gradle.kotlin.dsl.accessors._546d18a30197be8c083950d12ac356bf.dokkaGeneratePublicationHtml
-import gradle.kotlin.dsl.accessors._546d18a30197be8c083950d12ac356bf.dokkaGeneratePublicationJavadoc
-import gradle.kotlin.dsl.accessors._546d18a30197be8c083950d12ac356bf.jreleaser
-import gradle.kotlin.dsl.accessors._546d18a30197be8c083950d12ac356bf.signing
 import org.jreleaser.model.Signing
 import studio.lunabee.library.VersionTask
 import java.util.Locale
@@ -36,12 +32,6 @@ plugins {
     signing
     id("org.jetbrains.dokka")
     id("org.jetbrains.dokka-javadoc")
-}
-
-private val lunabeeGroupId: String = when (project.buildFile.relativeTo(rootDir).path.substringBefore("/")) {
-    "common" -> "studio.lunabee"
-    "compose" -> "studio.lunabee.compose"
-    else -> error("Cannot determine the group id of publication (${project.name})")
 }
 
 private val publishType: PublishType = when {
@@ -162,15 +152,13 @@ fun PublishingExtension.setupPublication() {
 }
 
 /**
- * Set project details:
- * - groupId will be [lunabeeGroupId]
- * - artifactId will take the name of the current [project]
- * - version will be set in each submodule gradle file
+ * Setup Maven publication from project details
  */
 fun MavenPublication.setProjectDetails() {
-    groupId = lunabeeGroupId
+    groupId = project.group.toString()
     artifactId = project.name
     version = project.version.toString()
+    logger.log(LogLevel.INFO, "Set publication details: groupId=$groupId, artifactId=$artifactId, version=$version")
 }
 
 /**

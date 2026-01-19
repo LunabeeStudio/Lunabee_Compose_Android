@@ -1,7 +1,0 @@
-<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
-    <string name="lbe_common_yesterday">Yesterday</string>
-    <string name="lbe_common_today">Today</string>
-    <string name="lbe_common_tomorrow">Tomorrow</string>
-    <string name="lbe_intent_send_email">Send email…</string>
-    <string name="lbe_intent_phone_sms">Contact via…</string>
-</resources>

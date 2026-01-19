@@ -25,6 +25,21 @@ lbDetekt {
     config.setFrom(files(lunabeeConfig, customConfig))
 }
 
+/*
+ * Build group id based on real project path
+ */
+project.allprojects {
+    val relativePath = projectDir.relativeTo(rootDir).path
+    val groupSegments =
+        relativePath
+            .split("/")
+            .dropWhile { it == "common" } // use root for common
+            .dropLast(1) // drop project name
+            .let { listOf("studio", "lunabee") + it } // add base group id
+
+    group = groupSegments.joinToString(".")
+}
+
 tasks.register("publishList") {
     doLast {
         val publishProjects =
