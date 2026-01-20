@@ -20,22 +20,20 @@ plugins {
 }
 
 android {
-    resourcePrefix("lbc_image_")
-    namespace = "studio.lunabee.compose.image"
+    resourcePrefix("lbc_presenter_")
+    namespace = "studio.lunabee.compose.presenter.koin"
 }
 
-description = "Provide image composable displaying imageSpec data"
-version = AndroidConfig.LBCIMAGE_VERSION
+description = "Koin integration for LBPresenter"
+version = AndroidConfig.LBCPRESENTER_KOIN_VERSION
 
 dependencies {
     implementation(platform(libs.composeBom))
+    implementation(platform(libs.koinBom))
 
-    implementation(libs.androidxCore)
-    implementation(libs.coilCompose)
-    implementation(libs.coilComposeSvg)
-    implementation(libs.composeFoundation)
-    implementation(libs.composeMaterial3)
-    implementation(libs.core)
+    implementation(libs.composeUi)
+    implementation(libs.koinComposeViewmodel)
+    implementation(libs.koinCore)
 
-    implementation(projects.lbccore)
+    api(projects.compose.presenter)
 }

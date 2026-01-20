@@ -18,18 +18,18 @@ package studio.lunabee.loading.hilt
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.lunabee.lbloading.BlockingViewScope
-import com.lunabee.lbloading.DefaultBlockingContent
-import com.lunabee.lbloading.DefaultLoadingContent
-import com.lunabee.lbloading.LoadingManager
-import com.lunabee.lbloading.LoadingViewScope
+import studio.lunabee.loading.BlockingViewScope
+import studio.lunabee.loading.DefaultBlockingContent
+import studio.lunabee.loading.DefaultLoadingContent
+import studio.lunabee.loading.LoadingManager
+import studio.lunabee.loading.LoadingViewScope
 
 /**
  * Add an empty [BackHandler] to block back action according to [LoadingManager] state
  */
 @Composable
 fun LoadingBlockBackView() {
-    com.lunabee.lbloading.LoadingBlockBackView(loadingManager = rememberLoadingManager())
+    studio.lunabee.lbloading.LoadingBlockBackView(loadingManager = rememberLoadingManager())
 }
 
 /**
@@ -46,7 +46,7 @@ fun LoadingView(
     blockingContent: @Composable (BlockingViewScope.() -> Unit) = { DefaultBlockingContent() },
     loadingContent: @Composable (LoadingViewScope.() -> Unit) = { DefaultLoadingContent() },
 ) {
-    com.lunabee.lbloading.LoadingView(
+    studio.lunabee.lbloading.LoadingView(
         contentDescription = contentDescription,
         loadingManager = rememberLoadingManager(),
         modifier = modifier,

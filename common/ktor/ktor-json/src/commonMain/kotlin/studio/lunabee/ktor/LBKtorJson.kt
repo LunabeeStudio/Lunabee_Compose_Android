@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lunabee.ktor
+package studio.lunabee.ktor
 
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest

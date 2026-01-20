@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lunabee.loading.checks
+package studio.lunabee.loading.checks
 
 import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Detector
@@ -56,7 +56,7 @@ class LoadingBackHandlerDetector : Detector(), SourceCodeScanner {
                 .name("Replace by `LoadingBackHandler`")
                 .sharedName("Replace all by `LoadingBackHandler`")
                 .text("BackHandler")
-                .with("com.lunabee.lbloading.LoadingBackHandler")
+                .with("studio.lunabee.lbloading.LoadingBackHandler")
                 .shortenNames()
                 .reformat(true)
                 .build()

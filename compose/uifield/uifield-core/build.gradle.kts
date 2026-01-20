@@ -20,20 +20,30 @@ plugins {
 }
 
 android {
-    resourcePrefix("lbc_presenter_")
-    namespace = "studio.lunabee.compose.presenter.koin"
+    resourcePrefix("lbc_uifield_")
+    namespace = "studio.lunabee.compose.uifield"
+
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
 }
 
-description = "Koin integration for LBPresenter"
-version = AndroidConfig.LBCPRESENTER_KOIN_VERSION
+description = "group of ui field to easily create forms in compose"
+version = AndroidConfig.LBCUIFIELD_CORE_VERSION
 
 dependencies {
+    coreLibraryDesugaring(libs.desugarJdk)
+
     implementation(platform(libs.composeBom))
-    implementation(platform(libs.koinBom))
 
+    implementation(libs.androidxAppcompat)
+    implementation(libs.composeMaterial3)
     implementation(libs.composeUi)
-    implementation(libs.koinComposeViewmodel)
-    implementation(libs.koinCore)
 
-    api(projects.lbcpresenter)
+    implementation(projects.compose.core)
+    implementation(projects.compose.image)
 }

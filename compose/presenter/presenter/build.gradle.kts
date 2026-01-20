@@ -17,40 +17,39 @@
 plugins {
     id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
-    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
-    resourcePrefix("lbc_uifield_")
-    namespace = "studio.lunabee.compose.uifield.phonepicker"
+    resourcePrefix("lbc_presenter_")
+    namespace = "studio.lunabee.compose.presenter"
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-    }
 }
 
-description = "phone picker ui field with a way to search for country phone code"
-version = AndroidConfig.LBCUIFIELD_PHONEPICKER_VERSION
+description = "Compose implementation of MVI pattern"
+version = AndroidConfig.LBCPRESENTER_VERSION
 
 dependencies {
-    coreLibraryDesugaring(libs.desugarJdk)
-
     implementation(platform(libs.composeBom))
 
-    implementation(libs.androidxAppcompat)
+    implementation(libs.androidxActivityCompose)
+    implementation(libs.androidxLifecycleRuntimeCompose)
+    implementation(libs.androidxLifecycleViewmodelAndroid)
     implementation(libs.composeMaterial3)
     implementation(libs.composeUi)
-    implementation(libs.hbb20Countrycodepicker)
-    implementation(libs.kotlinxSerializationJson)
-    implementation(libs.libphonenumber)
-    implementation(libs.normalize)
+    implementation(libs.touchlabKermit)
 
-    implementation(projects.lbccore)
-    implementation(projects.lbcimage)
-    implementation(projects.lbcuifieldCore)
-    implementation(projects.lbcuifieldCountrypicker)
+    implementation(projects.compose.core)
+    implementation(projects.compose.image)
+
+    androidTestImplementation(libs.kotlinTest)
+    androidTestImplementation(libs.kotlinxCoroutinesTest)
+
+    testImplementation(libs.androidxComposeUiTestJunit)
+    testImplementation(libs.kotlinTest)
+    testImplementation(libs.kotlinxCoroutinesTest)
+    testImplementation(projects.compose.robolectrictest)
+    testImplementation(libs.robolectric)
 }

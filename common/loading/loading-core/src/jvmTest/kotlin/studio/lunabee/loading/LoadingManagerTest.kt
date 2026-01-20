@@ -16,7 +16,7 @@
 
 package studio.lunabee.loading
 
-import com.lunabee.lbcore.model.LBFlowResult
+import studio.lunabee.core.model.LBFlowResult
 import io.mockk.spyk
 import io.mockk.verify
 import kotlinx.coroutines.flow.collect

@@ -38,7 +38,7 @@ import androidx.core.view.isNotEmpty
 import androidx.core.view.iterator
 import androidx.core.view.minusAssign
 import androidx.core.view.size
-import com.lunabee.lbextensions.content.colorFromAttribute
+import studio.lunabee.extensions.content.colorFromAttribute
 
 /**
  * Returns the menu at [index].

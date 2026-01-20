@@ -20,7 +20,7 @@ plugins {
 }
 
 android {
-    namespace = "com.lunabee.corecompose"
+    namespace = "studio.lunabee.corecompose"
     resourcePrefix("lb_")
 }
 

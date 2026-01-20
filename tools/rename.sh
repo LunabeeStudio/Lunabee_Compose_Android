@@ -14,4 +14,9 @@
 # limitations under the License.
 #
 
-studio.lunabee.loading.checks.LoadingIssueRegistry
+find . -depth -type d -name 'lbc*' -print0 | while IFS= read -r -d '' dir; do
+    parent=$(dirname "$dir")
+    base=$(basename "$dir")
+    newbase="${base#lbc}"   # <-- removes prefix 'lbc'
+    mv "$dir" "$parent/$newbase"
+done

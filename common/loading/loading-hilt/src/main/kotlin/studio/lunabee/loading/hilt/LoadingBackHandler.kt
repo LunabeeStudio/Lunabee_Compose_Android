@@ -30,7 +30,7 @@ fun LoadingBackHandler(
     enabled: Boolean = true,
     onBack: () -> Unit,
 ) {
-    com.lunabee.lbloading.LoadingBackHandler(
+    studio.lunabee.lbloading.LoadingBackHandler(
         loadingManager = rememberLoadingManager(),
         enabled = enabled,
         onBack = onBack,

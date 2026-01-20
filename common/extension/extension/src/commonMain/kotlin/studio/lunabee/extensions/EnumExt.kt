@@ -17,7 +17,7 @@
 package studio.lunabee.extension
 
 import co.touchlab.kermit.Logger
-import com.lunabee.lblogger.LBLogger
+import studio.lunabee.logger.LBLogger
 
 inline fun <reified T : Enum<T>> enumValueOfOrNull(name: String?, logger: Logger? = EnumExt.enumLogger): T? = try {
     name?.let { enumValueOf<T>(it) }

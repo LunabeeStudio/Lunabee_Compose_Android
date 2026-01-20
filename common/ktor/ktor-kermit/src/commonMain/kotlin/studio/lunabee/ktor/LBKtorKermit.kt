@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.lunabee.ktor
+package studio.lunabee.ktor
 
-import com.lunabee.lblogger.LBLogger
+import studio.lunabee.logger.LBLogger
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpClientPlugin
 import io.ktor.client.plugins.logging.Logger

@@ -24,7 +24,7 @@ version = AndroidConfig.LOGGER_KERMIT_VERSION
 
 kotlin {
     androidLibrary {
-        namespace = "com.lunabee.logger.kermit"
+        namespace = "studio.lunabee.logger.kermit"
 
         androidResources {
             this.additionalParameters += "resourcePrefix"

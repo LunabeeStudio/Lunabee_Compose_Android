@@ -29,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.lunabee.lbextensions.view.refreshLift
+import studio.lunabee.extensions.view.refreshLift
 
 /**
  * Hide [floatingActionButton] when the recyclerView is scrolling and show it again when the

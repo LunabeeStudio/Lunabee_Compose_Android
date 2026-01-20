@@ -18,8 +18,8 @@ package studio.lunabee.extension.view
 
 import android.text.SpannableString
 import android.widget.TextView
-import com.lunabee.lbextensions.utils.links.LinkTouchMovementMethod
-import com.lunabee.lbextensions.utils.links.TouchableSpan
+import studio.lunabee.extensions.utils.links.LinkTouchMovementMethod
+import studio.lunabee.extensions.utils.links.TouchableSpan
 
 /**
  * Set the textView text value and a clickable link into it

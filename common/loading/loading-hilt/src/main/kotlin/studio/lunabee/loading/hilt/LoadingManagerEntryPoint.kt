@@ -19,7 +19,7 @@ package studio.lunabee.loading.hilt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.lunabee.lbloading.LoadingManager
+import studio.lunabee.loading.LoadingManager
 import dagger.hilt.EntryPoint
 import dagger.hilt.EntryPoints
 import dagger.hilt.InstallIn

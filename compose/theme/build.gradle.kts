@@ -17,38 +17,24 @@
 plugins {
     id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
-    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
-    resourcePrefix("lbc_uifield_")
-    namespace = "studio.lunabee.compose.uifield.countrypicker"
+    namespace = "studio.lunabee.compose.theme"
+    resourcePrefix("lbc_th_")
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-    }
 }
 
-description = "country picker ui field"
-version = AndroidConfig.LBCUIFIELD_COUNTRYPICKER_VERSION
+description = "Function to build dynamic theme with Material3 algorithm"
+version = AndroidConfig.LBCTHEME_VERSION
 
 dependencies {
-    coreLibraryDesugaring(libs.desugarJdk)
-
     implementation(platform(libs.composeBom))
 
-    implementation(libs.androidxAppcompat)
     implementation(libs.composeMaterial3)
-    implementation(libs.composeUi)
-    implementation(libs.hbb20Countrycodepicker)
-    implementation(libs.kotlinxSerializationJson)
-    implementation(libs.normalize)
 
-    implementation(projects.lbccore)
-    implementation(projects.lbcimage)
-    implementation(projects.lbcuifieldCore)
+    implementation(projects.compose.materialColorUtilities)
 }

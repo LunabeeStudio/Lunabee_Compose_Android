@@ -24,7 +24,7 @@ version = AndroidConfig.LOADING_VERSION
 
 android {
     resourcePrefix("lb_loading_")
-    namespace = "com.lunabee.loading.koin"
+    namespace = "studio.lunabee.loading.koin"
 }
 
 kotlin {

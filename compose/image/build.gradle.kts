@@ -20,21 +20,22 @@ plugins {
 }
 
 android {
-    namespace = "studio.lunabee.compose.theme"
-    resourcePrefix("lbc_th_")
-
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+    resourcePrefix("lbc_image_")
+    namespace = "studio.lunabee.compose.image"
 }
 
-description = "Function to build dynamic theme with Material3 algorithm"
-version = AndroidConfig.LBCTHEME_VERSION
+description = "Provide image composable displaying imageSpec data"
+version = AndroidConfig.LBCIMAGE_VERSION
 
 dependencies {
     implementation(platform(libs.composeBom))
 
+    implementation(libs.androidxCore)
+    implementation(libs.coilCompose)
+    implementation(libs.coilComposeSvg)
+    implementation(libs.composeFoundation)
     implementation(libs.composeMaterial3)
+    implementation(libs.core)
 
-    implementation(projects.materialColorUtilities)
+    implementation(projects.compose.core)
 }

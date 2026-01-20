@@ -17,11 +17,12 @@
 plugins {
     id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
     resourcePrefix("lbc_uifield_")
-    namespace = "studio.lunabee.compose.uifield"
+    namespace = "studio.lunabee.compose.uifield.countrypicker"
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -32,8 +33,8 @@ android {
     }
 }
 
-description = "group of ui field to easily create forms in compose"
-version = AndroidConfig.LBCUIFIELD_CORE_VERSION
+description = "country picker ui field"
+version = AndroidConfig.LBCUIFIELD_COUNTRYPICKER_VERSION
 
 dependencies {
     coreLibraryDesugaring(libs.desugarJdk)
@@ -43,7 +44,11 @@ dependencies {
     implementation(libs.androidxAppcompat)
     implementation(libs.composeMaterial3)
     implementation(libs.composeUi)
+    implementation(libs.hbb20Countrycodepicker)
+    implementation(libs.kotlinxSerializationJson)
+    implementation(libs.normalize)
 
-    implementation(projects.lbccore)
-    implementation(projects.lbcimage)
+    implementation(projects.compose.core)
+    implementation(projects.compose.image)
+    implementation(projects.compose.uifieldCore)
 }

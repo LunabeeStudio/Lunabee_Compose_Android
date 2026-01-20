@@ -17,39 +17,40 @@
 plugins {
     id("lunabee.android-compose-library-conventions")
     id("lunabee.library-publish-conventions")
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
-    resourcePrefix("lbc_presenter_")
-    namespace = "studio.lunabee.compose.presenter"
+    resourcePrefix("lbc_uifield_")
+    namespace = "studio.lunabee.compose.uifield.phonepicker"
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
 }
 
-description = "Compose implementation of MVI pattern"
-version = AndroidConfig.LBCPRESENTER_VERSION
+description = "phone picker ui field with a way to search for country phone code"
+version = AndroidConfig.LBCUIFIELD_PHONEPICKER_VERSION
 
 dependencies {
+    coreLibraryDesugaring(libs.desugarJdk)
+
     implementation(platform(libs.composeBom))
 
-    implementation(libs.androidxActivityCompose)
-    implementation(libs.androidxLifecycleRuntimeCompose)
-    implementation(libs.androidxLifecycleViewmodelAndroid)
+    implementation(libs.androidxAppcompat)
     implementation(libs.composeMaterial3)
     implementation(libs.composeUi)
-    implementation(libs.touchlabKermit)
+    implementation(libs.hbb20Countrycodepicker)
+    implementation(libs.kotlinxSerializationJson)
+    implementation(libs.libphonenumber)
+    implementation(libs.normalize)
 
-    implementation(projects.lbccore)
-    implementation(projects.lbcimage)
-
-    androidTestImplementation(libs.kotlinTest)
-    androidTestImplementation(libs.kotlinxCoroutinesTest)
-
-    testImplementation(libs.androidxComposeUiTestJunit)
-    testImplementation(libs.kotlinTest)
-    testImplementation(libs.kotlinxCoroutinesTest)
-    testImplementation(projects.lbcrobolectrictest)
-    testImplementation(libs.robolectric)
+    implementation(projects.compose.core)
+    implementation(projects.compose.image)
+    implementation(projects.compose.uifieldCore)
+    implementation(projects.compose.uifieldCountrypicker)
 }

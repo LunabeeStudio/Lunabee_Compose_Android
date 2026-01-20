@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lunabee.loading.checks
+package studio.lunabee.loading.checks
 
 import com.android.tools.lint.client.api.IssueRegistry
 import com.android.tools.lint.client.api.Vendor

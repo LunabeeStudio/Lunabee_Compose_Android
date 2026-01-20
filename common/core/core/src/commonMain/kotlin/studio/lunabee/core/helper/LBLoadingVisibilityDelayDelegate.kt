@@ -17,8 +17,8 @@
 package studio.lunabee.core.helper
 
 import co.touchlab.kermit.Logger
-import com.lunabee.lbcore.model.AtomicBoolean
-import com.lunabee.lblogger.LBLogger
+import studio.lunabee.core.model.AtomicBoolean
+import studio.lunabee.logger.LBLogger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

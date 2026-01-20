@@ -16,7 +16,7 @@
 
 package studio.lunabee.core
 
-import com.lunabee.lbtest.assertNot
+import studio.lunabee.test.assertNot
 import kotlin.test.Test
 import kotlin.test.assertContains
 

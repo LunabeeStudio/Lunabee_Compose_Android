@@ -16,7 +16,7 @@
 
 package studio.lunabee.loading
 
-import com.lunabee.lbcore.helper.LBLoadingVisibilityDelayDelegate
+import studio.lunabee.core.helper.LBLoadingVisibilityDelayDelegate
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
