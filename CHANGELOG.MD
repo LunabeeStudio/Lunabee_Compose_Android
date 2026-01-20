@@ -39,6 +39,7 @@ Lbplatform 4.9.0
     - `common` -> various internal libraries, now open-source
 - Rework maven publish stuff to publish every libraries on maven central
 - Deps update
+- **break:** Remove `lb` prefix from module name & package
 
 ## 2025-12-22
 
