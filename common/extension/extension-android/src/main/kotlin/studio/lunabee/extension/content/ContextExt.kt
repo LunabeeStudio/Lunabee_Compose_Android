@@ -42,10 +42,10 @@ import androidx.annotation.PluralsRes
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
-import studio.lunabee.extensions.R
-import studio.lunabee.extensions.content.res.getColorStateList
-import studio.lunabee.extensions.content.res.getDrawable
-import studio.lunabee.extensions.content.res.use
+import studio.lunabee.extension.R
+import studio.lunabee.extension.content.res.getColorStateList
+import studio.lunabee.extension.content.res.getDrawable
+import studio.lunabee.extension.content.res.use
 
 /**
  * Check if the night theme is enabled.

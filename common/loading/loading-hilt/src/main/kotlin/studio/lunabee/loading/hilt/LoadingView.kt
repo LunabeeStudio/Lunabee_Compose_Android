@@ -29,7 +29,7 @@ import studio.lunabee.loading.LoadingViewScope
  */
 @Composable
 fun LoadingBlockBackView() {
-    studio.lunabee.lbloading.LoadingBlockBackView(loadingManager = rememberLoadingManager())
+    studio.lunabee.loading.LoadingBlockBackView(loadingManager = rememberLoadingManager())
 }
 
 /**
@@ -46,7 +46,7 @@ fun LoadingView(
     blockingContent: @Composable (BlockingViewScope.() -> Unit) = { DefaultBlockingContent() },
     loadingContent: @Composable (LoadingViewScope.() -> Unit) = { DefaultLoadingContent() },
 ) {
-    studio.lunabee.lbloading.LoadingView(
+    studio.lunabee.loading.LoadingView(
         contentDescription = contentDescription,
         loadingManager = rememberLoadingManager(),
         modifier = modifier,

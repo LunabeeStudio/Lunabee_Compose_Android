@@ -31,7 +31,7 @@ fun LoadingBackHandler(
     enabled: Boolean = true,
     onBack: () -> Unit,
 ) {
-    studio.lunabee.lbloading.LoadingBackHandler(
+    studio.lunabee.loading.LoadingBackHandler(
         loadingManager = koinInject(),
         enabled = enabled,
         onBack = onBack,

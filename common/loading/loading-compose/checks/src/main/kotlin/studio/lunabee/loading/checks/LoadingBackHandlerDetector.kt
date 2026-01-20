@@ -56,7 +56,7 @@ class LoadingBackHandlerDetector : Detector(), SourceCodeScanner {
                 .name("Replace by `LoadingBackHandler`")
                 .sharedName("Replace all by `LoadingBackHandler`")
                 .text("BackHandler")
-                .with("studio.lunabee.lbloading.LoadingBackHandler")
+                .with("studio.lunabee.loading.LoadingBackHandler")
                 .shortenNames()
                 .reformat(true)
                 .build()

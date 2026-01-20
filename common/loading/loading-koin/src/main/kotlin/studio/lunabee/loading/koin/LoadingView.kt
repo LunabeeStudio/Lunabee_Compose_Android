@@ -30,7 +30,7 @@ import org.koin.compose.koinInject
  */
 @Composable
 fun LoadingBlockBackView() {
-    studio.lunabee.lbloading.LoadingBlockBackView(loadingManager = koinInject())
+    studio.lunabee.loading.LoadingBlockBackView(loadingManager = koinInject())
 }
 
 /**
@@ -47,7 +47,7 @@ fun LoadingView(
     blockingContent: @Composable (BlockingViewScope.() -> Unit) = { DefaultBlockingContent() },
     loadingContent: @Composable (LoadingViewScope.() -> Unit) = { DefaultLoadingContent() },
 ) {
-    studio.lunabee.lbloading.LoadingView(
+    studio.lunabee.loading.LoadingView(
         contentDescription = contentDescription,
         loadingManager = koinInject(),
         modifier = modifier,

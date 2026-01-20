@@ -21,9 +21,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
-import studio.lunabee.extensions.BitmapUtils
-import studio.lunabee.extensions.downscaleAndCrop
-import studio.lunabee.extensions.downscaleAndCropPreR
+import studio.lunabee.extension.BitmapUtils
+import studio.lunabee.extension.downscaleAndCrop
+import studio.lunabee.extension.downscaleAndCropPreR
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test

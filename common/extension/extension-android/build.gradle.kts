@@ -20,7 +20,7 @@ plugins {
 }
 
 android {
-    namespace = "studio.lunabee.extensions"
+    namespace = "studio.lunabee.extension"
     resourcePrefix("lb_e_")
 }
 
