@@ -1,7 +1,5 @@
-import studio.lunabee.library.SetAllSnapshotVersionTask
-
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2026 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,57 +12,32 @@ import studio.lunabee.library.SetAllSnapshotVersionTask
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * build.gradle.kts
- * Lunabee Compose
- *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath(libs.android.gradle.plugin)
-        classpath(libs.kotlin.gradle.plugin)
-    }
-}
+import studio.lunabee.library.SetAllSnapshotVersionTask
 
 plugins {
-    alias(libs.plugins.detekt)
+    alias(libs.plugins.lbDetekt)
 }
 
-dependencies {
-    detektPlugins(libs.detekt.rules.ktlint.wrapper)
+lbDetekt {
+    val customConfig = File(project.rootProject.layout.projectDirectory.asFile, "/lunabee-detekt-config.yml")
+    config.setFrom(files(lunabeeConfig, customConfig))
 }
 
-detekt {
-    parallel = true
-    source.setFrom(files(rootProject.rootDir))
-    buildUponDefaultConfig = true
-    config.setFrom(files("$projectDir/lunabee-detekt-config.yml"))
-    autoCorrect = true
-    ignoreFailures = true
-}
+/*
+ * Build group id based on real project path
+ */
+project.allprojects {
+    val relativePath = projectDir.relativeTo(rootDir).path
+    val groupSegments =
+        relativePath
+            .split("/")
+            .dropWhile { it == "common" } // use root for common
+            .dropLast(1) // drop project name
+            .let { listOf("studio", "lunabee") + it } // add base group id
 
-tasks.withType<dev.detekt.gradle.Detekt> {
-    outputs.upToDateWhen { false }
-
-    exclude("**/build/**")
-
-    reports {
-        checkstyle.required.set(true)
-        checkstyle.outputLocation
-            .set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.xml"))
-
-        html.required.set(true)
-        html.outputLocation
-            .set(file("${layout.buildDirectory.asFile.get().path}/reports/detekt/detekt-report.html"))
-    }
+    group = groupSegments.joinToString(".")
 }
 
 tasks.register("publishList") {

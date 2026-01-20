@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Lunabee Studio
+ * Copyright (c) 2026 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,11 +12,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * lunabee.android-library-conventions.gradle.kts
- * Lunabee Compose
- *
- * Created by Lunabee Studio / Date - 1/25/2024 - for the Lunabee Compose library.
  */
 
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -24,10 +19,7 @@ import org.gradle.accessors.dm.LibrariesForLibs
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("org.jetbrains.kotlin.plugin.compose")
 }
-
-group = AndroidConfig.GroupId
 
 // FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
 val libs: LibrariesForLibs = the<LibrariesForLibs>()
@@ -37,8 +29,7 @@ android {
 
     defaultConfig {
         minSdk = AndroidConfig.MinSdk
-        @Suppress("DEPRECATION") // https://stackoverflow.com/questions/76084080/apply-targetsdk-in-android-instrumentation-test
-        targetSdk = AndroidConfig.TargetSdk
+        testOptions.targetSdk = AndroidConfig.TargetSdk
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -49,14 +40,13 @@ android {
 
     publishing {
         singleVariant("release") {
-            withJavadocJar()
             withSourcesJar()
         }
     }
 }
 
 dependencies {
-    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidxTestRunner)
 }
 
 kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JVM_TARGET)

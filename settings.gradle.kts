@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2026 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,12 +12,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * settings.gradle.kts
- * Lunabee Compose
- *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+        mavenLocal()
+    }
+}
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -27,32 +39,82 @@ dependencyResolutionManagement {
         maven {
             url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
         }
+        mavenLocal()
     }
 }
 
-rootProject.name = "Lunabee Compose"
+rootProject.name = "LBAndroid"
 
-include("app")
-include(":lbcaccessibility")
-include(":lbcandroidtest")
-include(":lbccore")
-include(":lbccrop")
-include(":lbcfoundation")
-include(":lbcglance")
-include(":lbchaptic")
-include(":lbcimage")
-include(":lbctheme")
+include("demo-compose")
+
+// region Compose
 include(":material-color-utilities")
+project(":material-color-utilities").projectDir = File("compose/material-color-utilities")
+include(":lbcaccessibility")
+project(":lbcaccessibility").projectDir = File("compose/lbcaccessibility")
+include(":lbcandroidtest")
+project(":lbcandroidtest").projectDir = File("compose/lbctest/lbcandroidtest")
+include(":lbccore")
+project(":lbccore").projectDir = File("compose/lbccore")
+include(":lbccrop")
+project(":lbccrop").projectDir = File("compose/lbccrop")
+include(":lbcfoundation")
+project(":lbcfoundation").projectDir = File("compose/lbcfoundation")
+include(":lbcglance")
+project(":lbcglance").projectDir = File("compose/lbcglance")
+include(":lbchaptic")
+project(":lbchaptic").projectDir = File("compose/lbchaptic")
+include(":lbcimage")
+project(":lbcimage").projectDir = File("compose/lbcimage")
+include(":lbctheme")
+project(":lbctheme").projectDir = File("compose/lbctheme")
 include(":lbcrobolectrictest")
-
+project(":lbcrobolectrictest").projectDir = File("compose/lbctest/lbcrobolectrictest")
 include(":lbcpresenter")
-project(":lbcpresenter").projectDir = File("lbcpresenter/lbcpresenter")
+project(":lbcpresenter").projectDir = File("compose/lbcpresenter/lbcpresenter")
 include(":lbcpresenter-koin")
-project(":lbcpresenter-koin").projectDir = File("lbcpresenter/lbcpresenter-koin")
-
+project(":lbcpresenter-koin").projectDir = File("compose/lbcpresenter/lbcpresenter-koin")
 include(":lbcuifield-core")
-project(":lbcuifield-core").projectDir = File("lbcuifield/lbcuifield-core")
+project(":lbcuifield-core").projectDir = File("compose/lbcuifield/lbcuifield-core")
 include(":lbcuifield-countrypicker")
-project(":lbcuifield-countrypicker").projectDir = File("lbcuifield/lbcuifield-countrypicker")
+project(":lbcuifield-countrypicker").projectDir = File("compose/lbcuifield/lbcuifield-countrypicker")
 include(":lbcuifield-phonepicker")
-project(":lbcuifield-phonepicker").projectDir = File("lbcuifield/lbcuifield-phonepicker")
+project(":lbcuifield-phonepicker").projectDir = File("compose/lbcuifield/lbcuifield-phonepicker")
+// endregion
+
+// region Common
+include("lbplatform")
+project(":lbplatform").projectDir = File("common/lbplatform")
+include("lblogger-kermit")
+project(":lblogger-kermit").projectDir = File("common/lblogger/lblogger-kermit")
+include("lblogger-kermit-crashlytics")
+project(":lblogger-kermit-crashlytics").projectDir = File("common/lblogger/lblogger-kermit-crashlytics")
+include("lbcore")
+project(":lbcore").projectDir = File("common/lbcore/lbcore")
+include("lbcore-compose")
+project(":lbcore-compose").projectDir = File("common/lbcore/lbcore-compose")
+include("lbcore-android")
+project(":lbcore-android").projectDir = File("common/lbcore/lbcore-android")
+include("lbextensions")
+project(":lbextensions").projectDir = File("common/lbextensions/lbextensions")
+include("lbextensions-android")
+project(":lbextensions-android").projectDir = File("common/lbextensions/lbextensions-android")
+include("lbtest")
+project(":lbtest").projectDir = File("common/lbtest")
+include(":lbktor-core")
+project(":lbktor-core").projectDir = File("common/lbktor/lbktor-core")
+include(":lbktor-kermit")
+project(":lbktor-kermit").projectDir = File("common/lbktor/lbktor-kermit")
+include(":lbktor-json")
+project(":lbktor-json").projectDir = File("common/lbktor/lbktor-json")
+include(":lbloading-core")
+project(":lbloading-core").projectDir = File("common/lbloading/lbloading-core")
+include(":lbloading-checks")
+project(":lbloading-checks").projectDir = File("common/lbloading/lbloading-compose/checks")
+include(":lbloading-compose")
+project(":lbloading-compose").projectDir = File("common/lbloading/lbloading-compose")
+include(":lbloading-hilt")
+project(":lbloading-hilt").projectDir = File("common/lbloading/lbloading-hilt")
+include(":lbloading-koin")
+project(":lbloading-koin").projectDir = File("common/lbloading/lbloading-koin")
+// endregion

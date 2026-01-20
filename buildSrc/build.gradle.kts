@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Lunabee Studio
+ * Copyright (c) 2026 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,11 +12,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * build.gradle.kts
- * Lunabee Compose
- *
- * Created by Lunabee Studio / Date - 4/8/2022 - for the Lunabee Compose library.
  */
 
 plugins {
@@ -30,11 +25,13 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.android.gradle.plugin)
-    implementation(libs.kotlin.gradle.plugin)
-    implementation(libs.compose.plugin)
-    implementation(libs.jreleaser.gradle.plugin)
+    implementation(libs.agp)
+    implementation(libs.kotlinGradlePlugin)
+    implementation(libs.composePlugin)
+    implementation(libs.jreleaserGradlePlugin)
     implementation(libs.javapoet)
+    implementation(libs.touchlabSkie)
+    implementation(libs.dokkaGradlePlugin)
 
     implementation(gradleApi())
     implementation(localGroovy())

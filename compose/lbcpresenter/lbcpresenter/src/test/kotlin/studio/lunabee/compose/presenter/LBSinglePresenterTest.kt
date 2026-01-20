@@ -1,0 +1,126 @@
+/*
+ * Copyright (c) 2026 Lunabee Studio
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package studio.lunabee.compose.presenter
+
+import android.app.Activity
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.compose.ui.test.junit4.createComposeRule
+import co.touchlab.kermit.CommonWriter
+import co.touchlab.kermit.Logger
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.test.TestResult
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
+import org.junit.Before
+import org.junit.Rule
+import org.junit.rules.TestWatcher
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import studio.lunabee.compose.robolectrictest.LbcInjectComponentActivityRule
+import kotlin.test.Test
+import kotlin.test.assertTrue
+
+@OptIn(ExperimentalCoroutinesApi::class)
+@RunWith(RobolectricTestRunner::class)
+class LBSinglePresenterTest {
+
+    @get:Rule(order = Rule.DEFAULT_ORDER - 1)
+    val addActivityToRobolectricRule: TestWatcher = LbcInjectComponentActivityRule()
+
+    @get:Rule
+    val rule: ComposeContentTestRule = createComposeRule()
+
+    @Before
+    fun setup() {
+        Logger.addLogWriter(CommonWriter())
+    }
+
+    @Test
+    fun multi_useActivity_call_test(): TestResult = runTest {
+        val presenter = ActivityTestPresenter(this)
+        val reducer = presenter.getReducerByState(TestUiState) as ActivityTestReducer
+
+        rule.setContent {
+            presenter.invoke(Unit)
+        }
+
+        presenter.emitUserAction(TestAction.TestAction0)
+
+        rule.waitForIdle()
+        advanceUntilIdle()
+
+        assertTrue(reducer.action1, "action1 should be true")
+        assertTrue(reducer.action2, "action2 should be true")
+    }
+
+    private class ActivityTestPresenter(private val scope: CoroutineScope) : LBSinglePresenter<TestUiState, Unit, TestAction>(
+        verbose = true,
+    ) {
+        override fun initReducer(): ActivityTestReducer = ActivityTestReducer(
+            coroutineScope = scope,
+            emitUserAction = ::emitUserAction,
+        )
+
+        override val flows: List<Flow<TestAction>> = emptyList()
+
+        override fun getInitialState(): TestUiState = TestUiState
+
+        override val content: @Composable ((TestUiState) -> Unit) = {}
+    }
+
+    private class ActivityTestReducer(
+        override val coroutineScope: CoroutineScope,
+        override val emitUserAction: (TestAction) -> Unit,
+    ) : LBSingleReducer<TestUiState, Unit, TestAction>(verbose = true) {
+
+        var action1 = false
+        var action2 = false
+
+        override suspend fun reduce(
+            actualState: TestUiState,
+            action: TestAction,
+            performNavigation: (Unit.() -> Unit) -> Unit,
+            useActivity: (suspend (Activity) -> Unit) -> Unit,
+        ): ReduceResult<TestUiState> =
+            when (action) {
+                TestAction.TestAction0 -> actualState.withSideEffect {
+                    useActivity {
+                        action1 = true
+                    }
+                    emitUserAction(TestAction.TestAction1)
+                }
+                TestAction.TestAction1 -> actualState.withSideEffect {
+                    useActivity {
+                        action2 = true
+                    }
+                }
+            }
+    }
+
+    private object TestUiState : PresenterUiState {
+        override fun toString(): String = "TestUiState"
+    }
+
+    private sealed interface TestAction {
+        data object TestAction0 : TestAction
+
+        data object TestAction1 : TestAction
+    }
+}

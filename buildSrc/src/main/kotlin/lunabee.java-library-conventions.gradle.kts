@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Lunabee Studio
+ * Copyright (c) 2026 Lunabee Studio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,18 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * lunabee.java-library-conventions.gradle.kts
- * Lunabee Compose
- *
- * Created by Lunabee Studio / Date - 1/25/2024 - for the Lunabee Compose library.
  */
 
 plugins {
     id("java-library")
 }
-
-group = AndroidConfig.GroupId
 
 java {
     sourceCompatibility = AndroidConfig.JDK_VERSION
@@ -33,6 +26,5 @@ java {
         languageVersion.set(JavaLanguageVersion.of(AndroidConfig.JDK_VERSION.toString()))
     }
 
-    withJavadocJar()
     withSourcesJar()
 }

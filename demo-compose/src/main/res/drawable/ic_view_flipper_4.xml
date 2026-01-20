@@ -1,0 +1,37 @@
+<!--
+  ~ Copyright (c) 2026 Lunabee Studio
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="1024"
+    android:viewportHeight="1024">
+  <path
+      android:pathData="M691.8,917.8c0,8.7 -7,15.7 -15.7,15.7H357.5a15.7,15.7 0,0 1,-15.8 -15.7V119.4c0,-8.6 7,-15.7 15.8,-15.7h318.5c8.6,0 15.7,7 15.7,15.7v798.4z"
+      android:fillColor="#58808C"/>
+  <path
+      android:pathData="M514.7,267.3m-102.3,0a102.3,102.3 0,1 0,204.7 0,102.3 102.3,0 1,0 -204.7,0Z"
+      android:fillColor="#D0431F"/>
+  <path
+      android:pathData="M514.7,518.7m-102.3,0a102.3,102.3 0,1 0,204.5 0,102.3 102.3,0 1,0 -204.5,0Z"
+      android:fillColor="#E1D250"/>
+  <path
+      android:pathData="M514.7,770m-102.3,0a102.3,102.3 0,1 0,204.5 0,102.3 102.3,0 1,0 -204.5,0Z"
+      android:fillColor="#6CAA3D"/>
+  <path
+      android:pathData="M868.9,146.2h-177.2v200.5h5.7l171.5,-134.8zM868.9,409.6h-177.2v200.5h5.7l171.5,-134.7zM868.9,677h-177.2v200.6h5.7l171.5,-134.7zM164.5,146.2h177.2v200.5H336L164.5,211.9zM164.5,409.6h177.2v200.5H336L164.5,475.4zM164.5,677h177.2v200.6H336l-171.5,-134.7z"
+      android:fillColor="#667B81"/>
+</vector>
