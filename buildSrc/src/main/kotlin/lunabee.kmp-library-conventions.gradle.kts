@@ -19,8 +19,6 @@ plugins {
     id("co.touchlab.skie")
 }
 
-group = "studio.lunabee"
-
 tasks.withType<Test> {
     useJUnitPlatform()
 }

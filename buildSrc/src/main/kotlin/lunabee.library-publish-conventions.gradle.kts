@@ -138,7 +138,7 @@ fun PublishingExtension.setupPublication() {
                 artifact(dokkaHtmlJar)
             }
             PublishType.Kmp -> publications.withType<MavenPublication> {
-                // KMP plugin already setup publication stuff, just setup Pom
+                setProjectDetails()
                 setPom()
             }
             PublishType.Bom -> create<MavenPublication>(project.name) {
@@ -155,7 +155,7 @@ fun PublishingExtension.setupPublication() {
 /**
  * Setup Maven publication from project details
  */
-fun MavenPublication.setProjectDetails() {
+private fun MavenPublication.setProjectDetails() {
     this.groupId = project.group.toString()
     this.artifactId = if (publishType == PublishType.Bom) "lunabee-bom" else project.name
     this.version = project.version.toString()
