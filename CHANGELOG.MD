@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2026-01-20
+
 ```
 Lbccore 1.12.0
 Lbcfoundation 1.12.0
