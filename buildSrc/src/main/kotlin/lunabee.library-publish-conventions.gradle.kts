@@ -16,7 +16,6 @@
 
 import com.android.build.gradle.LibraryExtension
 import org.jreleaser.model.Signing
-import studio.lunabee.library.VersionTask
 import java.util.Locale
 
 enum class PublishType {
@@ -217,9 +216,6 @@ private fun MavenPublication.setPom() {
     }
 }
 
-private val Project.android: LibraryExtension
-    get() = (this as ExtensionAware).extensions.getByName("android") as LibraryExtension
-
 signing {
     setRequired {
         {
@@ -247,8 +243,10 @@ afterEvaluate {
     }
 }
 
-tasks.register("${project.name}Version", VersionTask::class.java)
+tasks.register("PrintVersion") {
+    doLast {
+        println(project.version)
+    }
+}
 
 private fun String.capitalized(): String = if (this.isEmpty()) this else this[0].titlecase(Locale.getDefault()) + this.substring(1)
-
-private fun Dependency.isBoM(): Boolean = name.endsWith("-bom")
