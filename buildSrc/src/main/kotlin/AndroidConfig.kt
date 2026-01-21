@@ -65,17 +65,17 @@ object AndroidConfig {
     const val LBCPRESENTER_VERSION: String = "1.10.0"
     const val LBCPRESENTER_KOIN_VERSION: String = LBCPRESENTER_VERSION
     const val LBCROBOLECTRICTEST_VERSION: String = "1.1.0"
-    const val LBLOGGER_KERMIT_VERSION: String = "4.9.0"
-    const val LBCORE_VERSION: String = "4.9.0"
-    const val LBEXTENSIONS_VERSION: String = "4.9.0"
-    const val LBTEST_VERSION: String = "4.9.0"
-    const val LBKTOR_VERSION: String = "4.9.0"
-    const val LBLOADING_VERSION: String = "4.9.0"
-    const val LBPLATFORM_VERSION: String = "4.9.0"
-    const val LBEXTENSIONS_ANDROID_VERSION: String = "4.9.0"
+    const val LOGGER_KERMIT_VERSION: String = "4.9.0"
+    const val CORE_VERSION: String = "4.9.0"
+    const val EXTENSIONS_VERSION: String = "4.9.0"
+    const val TEST_VERSION: String = "4.9.0"
+    const val KTOR_VERSION: String = "4.9.0"
+    const val LOADING_VERSION: String = "4.9.0"
+    const val PLATFORM_VERSION: String = "4.9.0"
+    const val EXTENSIONS_ANDROID_VERSION: String = "4.9.0"
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_21
     val JVM_TARGET: JvmTarget = JvmTarget.JVM_21
 
-    fun commonVersionName(): String = System.getenv(EnvConfig.EnvVersionName) ?: LBPLATFORM_VERSION
+    fun commonVersionName(): String = System.getenv(EnvConfig.EnvVersionName) ?: PLATFORM_VERSION
 }

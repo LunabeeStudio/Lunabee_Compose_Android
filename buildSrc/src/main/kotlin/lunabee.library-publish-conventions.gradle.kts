@@ -99,14 +99,14 @@ jreleaser {
     }
 }
 
-project.extensions.configure<PublishingExtension>("publishing") {
-    setupPublication()
-
+publishing {
     repositories {
         maven {
             setUrl(stagingDir)
         }
     }
+
+    setupPublication()
 }
 
 /**
@@ -120,32 +120,32 @@ fun PublishingExtension.setupPublication() {
                 afterEvaluate {
                     setProjectDetails()
                     from(components["release"])
+                    setPom()
                 }
                 val (dokkaJavadocJar, dokkaHtmlJar) = setupDokkaTasks()
                 artifact(dokkaJavadocJar)
                 artifact(dokkaHtmlJar)
-                setPom()
             }
             PublishType.Java -> create<MavenPublication>(project.name) {
                 // version is set in project, so use after evaluate
                 afterEvaluate {
                     setProjectDetails()
+                    setPom()
                 }
                 val (dokkaJavadocJar, dokkaHtmlJar) = setupDokkaTasks()
                 from(components["java"])
                 artifact(dokkaJavadocJar)
                 artifact(dokkaHtmlJar)
-                setPom()
             }
             PublishType.Kmp -> publications.withType<MavenPublication> {
-                // KMP plugin already setup publication stuff, just setup Pom
                 setPom()
             }
             PublishType.Bom -> create<MavenPublication>(project.name) {
                 afterEvaluate {
                     setProjectDetails()
+                    from(components["javaPlatform"])
+                    setPom()
                 }
-                setPom()
             }
         }
     }
@@ -154,10 +154,10 @@ fun PublishingExtension.setupPublication() {
 /**
  * Setup Maven publication from project details
  */
-fun MavenPublication.setProjectDetails() {
-    groupId = project.group.toString()
-    artifactId = project.name
-    version = project.version.toString()
+private fun MavenPublication.setProjectDetails() {
+    this.groupId = project.group.toString()
+    this.artifactId = if (publishType == PublishType.Bom) "lunabee-bom" else project.name
+    this.version = project.version.toString()
     logger.log(LogLevel.INFO, "Set publication details: groupId=$groupId, artifactId=$artifactId, version=$version")
 }
 
