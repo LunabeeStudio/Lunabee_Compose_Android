@@ -1,5 +1,3 @@
-import org.gradle.api.internal.catalog.DelegatingProjectDependency
-
 /*
  * Copyright (c) 2026 Lunabee Studio
  *
@@ -15,6 +13,8 @@ import org.gradle.api.internal.catalog.DelegatingProjectDependency
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import org.gradle.api.internal.catalog.DelegatingProjectDependency
 
 plugins {
     `java-platform`

@@ -41,9 +41,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import studio.lunabee.compose.R
-import studio.lunabee.compose.lbccrop.CropImageSize
-import studio.lunabee.compose.lbccrop.LbCropView
-import studio.lunabee.compose.lbccrop.rememberLbCropViewState
+import studio.lunabee.compose.crop.CropImageSize
+import studio.lunabee.compose.crop.LbCropView
+import studio.lunabee.compose.crop.rememberLbCropViewState
 
 @Composable
 fun CropScreen() {

@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-package studio.lunabee.compose.lbccrop
+package studio.lunabee.compose.crop
 
 class LbCropNullImageThrowable : Throwable()
