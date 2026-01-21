@@ -21,35 +21,36 @@ plugins {
     id("lunabee.library-publish-conventions")
 }
 
-val rootProject: String = "studio.lunabee"
+val rootProjectGroup: String = "studio.lunabee"
 description = "Lunabee libraries bill of materials"
 version = AndroidConfig.commonVersionName()
 
 dependencies {
     constraints {
-        addModule(projects.core)
+        addJvmModule(projects.core)
         addModule(projects.coreAndroid)
         addModule(projects.coreCompose)
-
-        addModule(projects.ktorCore)
-        addModule(projects.ktorJson)
-        addModule(projects.ktorKermit)
-
-        addModule(projects.loadingCompose)
-        addModule(projects.loadingChecks)
-        addModule(projects.loadingCore)
-        addModule(projects.loadingHilt)
-        addModule(projects.loadingKoin)
-
-        addModule(projects.loggerKermit)
-        addModule(projects.loggerKermitCrashlytics)
-
         addModule(projects.extension)
         addModule(projects.extensionAndroid)
+        addJvmModule(projects.ktorCore)
+        addJvmModule(projects.ktorJson)
+        addJvmModule(projects.ktorKermit)
+        addModule(projects.loadingCompose)
+        addModule(projects.loadingChecks)
+        addJvmModule(projects.loadingCore)
+        addModule(projects.loadingHilt)
+        addModule(projects.loadingKoin)
+        addJvmModule(projects.loggerKermit)
+        addModule(projects.loggerKermitCrashlytics)
         addModule(projects.test)
     }
 }
 
-fun DependencyConstraintHandlerScope.addModule(module: DelegatingProjectDependency) {
-    api(project(":${module.name.substringAfterLast(':')}"))
+private fun DependencyConstraintHandlerScope.addModule(module: DelegatingProjectDependency) {
+    this@addModule.api(module)
+}
+
+private fun DependencyConstraintHandlerScope.addJvmModule(module: DelegatingProjectDependency) {
+    addModule(module)
+    this@addJvmModule.api(mapOf("group" to module.group, "name" to module.name + "-jvm", "version" to module.version))
 }

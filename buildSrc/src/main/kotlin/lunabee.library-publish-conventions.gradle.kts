@@ -99,14 +99,14 @@ jreleaser {
     }
 }
 
-project.extensions.configure<PublishingExtension>("publishing") {
-    setupPublication()
-
+publishing {
     repositories {
         maven {
             setUrl(stagingDir)
         }
     }
+
+    setupPublication()
 }
 
 /**
@@ -138,7 +138,6 @@ fun PublishingExtension.setupPublication() {
                 artifact(dokkaHtmlJar)
             }
             PublishType.Kmp -> publications.withType<MavenPublication> {
-                setProjectDetails()
                 setPom()
             }
             PublishType.Bom -> create<MavenPublication>(project.name) {
