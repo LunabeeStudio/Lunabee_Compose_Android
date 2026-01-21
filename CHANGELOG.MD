@@ -7,7 +7,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
-## 2026-01-20
+## 2026-01-21
 
 ```
 Lbccore 1.12.0
@@ -39,7 +39,9 @@ Lbplatform 4.9.0
     - `common` -> various internal libraries, now open-source
 - Rework maven publish stuff to publish every libraries on maven central
 - Deps update
-- **break:** Remove `lb` prefix from module name & package
+- **break:**
+    - Remove `lb` prefix from module name & package
+    - Change package `com.lunabee` to `studio.lunabee`
 
 ## 2025-12-22
 
