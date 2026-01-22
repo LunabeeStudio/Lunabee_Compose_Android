@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.LibraryExtension
 import org.jreleaser.model.Signing
 import java.util.Locale
 
@@ -243,9 +242,9 @@ afterEvaluate {
     }
 }
 
-tasks.register("PrintVersion") {
+tasks.register("PrintCoordinates") {
     doLast {
-        println(project.version)
+        println("${project.group}:${project.name}:${project.version}")
     }
 }
 
