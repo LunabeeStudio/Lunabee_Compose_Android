@@ -83,12 +83,6 @@ jreleaser {
                     //  https://github.com/jreleaser/jreleaser/issues/1746
                     applyMavenCentralRules = false
                     artifactOverride {
-                        artifactId.set("jvm")
-                    }
-                    artifactOverride {
-                        artifactId.set("android")
-                    }
-                    artifactOverride {
                         artifactId.set("iosx64")
                         this.jar = false
                     }
@@ -118,12 +112,6 @@ jreleaser {
 
                     // FIXME
                     //  https://github.com/jreleaser/jreleaser/issues/1746
-                    artifactOverride {
-                        artifactId.set("jvm")
-                    }
-                    artifactOverride {
-                        artifactId.set("android")
-                    }
                     artifactOverride {
                         artifactId.set("iosx64")
                         this.jar = false
