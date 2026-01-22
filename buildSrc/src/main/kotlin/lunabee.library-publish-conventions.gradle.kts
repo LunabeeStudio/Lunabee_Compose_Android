@@ -67,6 +67,9 @@ jreleaser {
                     username.set(mavenCentralUsername)
                     password.set(mavenCentralPassword)
                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
+                    artifactOverride {
+                        this.jar = false // https://github.com/jreleaser/jreleaser/issues/1746
+                    }
                 }
             }
             nexus2 {
@@ -82,6 +85,9 @@ jreleaser {
                     password.set(mavenCentralPassword)
                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
                     stagingRepository(stagingDir.path)
+                    artifactOverride {
+                        this.jar = false
+                    }
                 }
             }
         }
@@ -227,17 +233,9 @@ signing {
 }
 
 afterEvaluate {
-    tasks.withType(PublishToMavenRepository::class.java) {
-        when (publishType) {
-            PublishType.Android -> dependsOn(
-                tasks.named("bundleReleaseAar"),
-            )
-            PublishType.Kmp,
-            PublishType.Java,
-            PublishType.Bom,
-            -> dependsOn(
-                tasks.withType(Jar::class.java),
-            )
+    if (publishType == PublishType.Android) {
+        tasks.withType<PublishToMavenRepository>().configureEach {
+            dependsOn(tasks.named("bundleReleaseAar"))
         }
     }
 }
