@@ -67,8 +67,18 @@ jreleaser {
                     username.set(mavenCentralUsername)
                     password.set(mavenCentralPassword)
                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
+                    // https://github.com/jreleaser/jreleaser/issues/1746
                     artifactOverride {
-                        this.jar = false // https://github.com/jreleaser/jreleaser/issues/1746
+                        artifactId.set("core-iosx64")
+                        this.jar = false
+                    }
+                    artifactOverride {
+                        artifactId.set("core-iosarm64")
+                        this.jar = false
+                    }
+                    artifactOverride {
+                        artifactId.set("core-iossimulatorarm64")
+                        this.jar = false
                     }
                 }
             }
