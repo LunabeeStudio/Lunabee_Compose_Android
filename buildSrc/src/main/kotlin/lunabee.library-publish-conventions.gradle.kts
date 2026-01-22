@@ -68,19 +68,32 @@ jreleaser {
                     password.set(mavenCentralPassword)
                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
 
-                    // FIXME https://github.com/jreleaser/jreleaser/issues/1746
+                    // FIXME
+                    //  https://github.com/jreleaser/jreleaser/issues/1746
+                    //  https://github.com/Kotlin/dokka/issues/1753
                     applyMavenCentralRules = false
+                    artifactOverride {
+                        artifactId.set("jvm")
+                        this.javadocJar = false
+                    }
+                    artifactOverride {
+                        artifactId.set("android")
+                        this.javadocJar = false
+                    }
                     artifactOverride {
                         artifactId.set("core-iosx64")
                         this.jar = false
+                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("core-iosarm64")
                         this.jar = false
+                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("core-iossimulatorarm64")
                         this.jar = false
+                        this.javadocJar = false
                     }
                 }
             }
@@ -97,17 +110,32 @@ jreleaser {
                     password.set(mavenCentralPassword)
                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
                     stagingRepository(stagingDir.path)
+
+                    // FIXME
+                    //  https://github.com/jreleaser/jreleaser/issues/1746
+                    //  https://github.com/Kotlin/dokka/issues/1753
+                    artifactOverride {
+                        artifactId.set("jvm")
+                        this.javadocJar = false
+                    }
+                    artifactOverride {
+                        artifactId.set("android")
+                        this.javadocJar = false
+                    }
                     artifactOverride {
                         artifactId.set("core-iosx64")
                         this.jar = false
+                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("core-iosarm64")
                         this.jar = false
+                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("core-iossimulatorarm64")
                         this.jar = false
+                        this.javadocJar = false
                     }
                 }
             }
