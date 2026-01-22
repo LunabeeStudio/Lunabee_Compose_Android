@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import org.jreleaser.model.Signing
 import java.util.Locale
 
 enum class PublishType {
@@ -86,52 +85,6 @@ jreleaser {
                     artifactOverride {
                         artifactId.set("${project.name.get()}-iossimulatorarm64")
                         this.jar = false
-                    }
-
-                    signing {
-                        active.set(org.jreleaser.model.Active.ALWAYS)
-                        pgp {
-                            armored.set(true)
-                            mode.set(Signing.Mode.FILE)
-                        }
-                    }
-                }
-            }
-            nexus2 {
-                create("snapshot-deploy") {
-                    active.set(org.jreleaser.model.Active.SNAPSHOT)
-                    url.set("https://central.sonatype.com/repository/maven-snapshots")
-                    snapshotUrl.set("https://central.sonatype.com/repository/maven-snapshots")
-                    applyMavenCentralRules = false
-                    snapshotSupported = true
-                    closeRepository = true
-                    releaseRepository = true
-                    username.set(mavenCentralUsername)
-                    password.set(mavenCentralPassword)
-                    verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
-                    stagingRepository(stagingDir.path)
-
-                    // FIXME
-                    //  https://github.com/jreleaser/jreleaser/issues/1746
-                    artifactOverride {
-                        artifactId.set("${project.name.get()}-iosx64")
-                        this.jar = false
-                    }
-                    artifactOverride {
-                        artifactId.set("${project.name.get()}-iosarm64")
-                        this.jar = false
-                    }
-                    artifactOverride {
-                        artifactId.set("${project.name.get()}-iossimulatorarm64")
-                        this.jar = false
-                    }
-
-                    signing {
-                        active.set(org.jreleaser.model.Active.ALWAYS)
-                        pgp {
-                            armored.set(true)
-                            mode.set(Signing.Mode.FILE)
-                        }
                     }
                 }
             }
@@ -268,14 +221,8 @@ private fun MavenPublication.setPom() {
 }
 
 signing {
-    setRequired {
-        {
-            gradle.taskGraph.hasTask("publish")
-        }
-    }
-    publishing.publications.forEach {
-        sign(it)
-    }
+    setRequired { gradle.taskGraph.hasTask("publish") }
+    publishing.publications.all { sign(this) }
 }
 
 afterEvaluate {
