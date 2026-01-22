@@ -221,7 +221,7 @@ private fun MavenPublication.setPom() {
 }
 
 signing {
-    setRequired { gradle.taskGraph.hasTask("publish") }
+    isRequired = true
     publishing.publications.all { sign(this) }
 }
 
