@@ -83,15 +83,15 @@ jreleaser {
                     //  https://github.com/jreleaser/jreleaser/issues/1746
                     applyMavenCentralRules = false
                     artifactOverride {
-                        artifactId.set("iosx64")
+                        artifactId.set("${project.name.get()}-iosx64")
                         this.jar = false
                     }
                     artifactOverride {
-                        artifactId.set("iosarm64")
+                        artifactId.set("${project.name.get()}-iosarm64")
                         this.jar = false
                     }
                     artifactOverride {
-                        artifactId.set("iossimulatorarm64")
+                        artifactId.set("${project.name.get()}-iossimulatorarm64")
                         this.jar = false
                     }
                 }
@@ -113,15 +113,15 @@ jreleaser {
                     // FIXME
                     //  https://github.com/jreleaser/jreleaser/issues/1746
                     artifactOverride {
-                        artifactId.set("iosx64")
+                        artifactId.set("${project.name.get()}-iosx64")
                         this.jar = false
                     }
                     artifactOverride {
-                        artifactId.set("iosarm64")
+                        artifactId.set("${project.name.get()}-iosarm64")
                         this.jar = false
                     }
                     artifactOverride {
-                        artifactId.set("iossimulatorarm64")
+                        artifactId.set("${project.name.get()}-iossimulatorarm64")
                         this.jar = false
                     }
                 }
