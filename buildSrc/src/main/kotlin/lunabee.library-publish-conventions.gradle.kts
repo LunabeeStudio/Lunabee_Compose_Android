@@ -47,17 +47,6 @@ private val stagingDir = layout.buildDirectory
     .get()
     .asFile
 
-//  https://github.com/Kotlin/dokka/issues/1753
-private val emptyJavadocJar = if (publishType == PublishType.Kmp) {
-    tasks.register<Jar>("emptyJavadocJar") {
-        group = "publishing"
-        description = "Empty placeholder JAR for javadoc"
-        archiveClassifier.set("javadoc")
-    }
-} else {
-    null
-}
-
 jreleaser {
     gitRootSearch.set(true)
     deploy {
@@ -127,6 +116,7 @@ fun PublishingExtension.setupPublication() {
                 val (dokkaJavadocJar, dokkaHtmlJar) = setupDokkaTasks()
                 artifact(dokkaJavadocJar)
                 artifact(dokkaHtmlJar)
+                setupSigning(this)
             }
             PublishType.Java -> create<MavenPublication>(project.name) {
                 // version is set in project, so use after evaluate
@@ -138,10 +128,18 @@ fun PublishingExtension.setupPublication() {
                 from(components["java"])
                 artifact(dokkaJavadocJar)
                 artifact(dokkaHtmlJar)
+                setupSigning(this)
             }
             PublishType.Kmp -> publications.withType<MavenPublication> {
-                artifact(emptyJavadocJar)
+                //  https://github.com/Kotlin/dokka/issues/1753
+                val emptyDocsTask = tasks.register("${this.name}EmptyDocs", Jar::class.java) {
+                    archiveClassifier = "javadoc"
+                    archiveBaseName = "${project.name}-${this.name}"
+                }
+                artifact(emptyDocsTask)
+
                 setPom()
+                setupSigning(this)
             }
             PublishType.Bom -> create<MavenPublication>(project.name) {
                 afterEvaluate {
@@ -149,6 +147,7 @@ fun PublishingExtension.setupPublication() {
                     from(components["javaPlatform"])
                     setPom()
                 }
+                setupSigning(this)
             }
         }
     }
@@ -220,12 +219,14 @@ private fun MavenPublication.setPom() {
     }
 }
 
-signing {
-    isRequired = true
-    val signingKey: String? by project
-    val signingPassword: String? by project
-    useInMemoryPgpKeys(signingKey, signingPassword)
-    sign(configurations.archives.get())
+private fun setupSigning(publication: MavenPublication) {
+    signing {
+        isRequired = true
+        val signingKey: String? by project
+        val signingPassword: String? by project
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        val tasks = sign(publication)
+    }
 }
 
 afterEvaluate {
