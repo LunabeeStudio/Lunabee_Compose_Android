@@ -67,7 +67,9 @@ jreleaser {
                     username.set(mavenCentralUsername)
                     password.set(mavenCentralPassword)
                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
-                    // https://github.com/jreleaser/jreleaser/issues/1746
+
+                    // FIXME https://github.com/jreleaser/jreleaser/issues/1746
+                    applyMavenCentralRules = false
                     artifactOverride {
                         artifactId.set("core-iosx64")
                         this.jar = false
@@ -87,7 +89,7 @@ jreleaser {
                     active.set(org.jreleaser.model.Active.SNAPSHOT)
                     url.set("https://central.sonatype.com/repository/maven-snapshots")
                     snapshotUrl.set("https://central.sonatype.com/repository/maven-snapshots")
-                    applyMavenCentralRules = true
+                    applyMavenCentralRules = false
                     snapshotSupported = true
                     closeRepository = true
                     releaseRepository = true
@@ -96,6 +98,15 @@ jreleaser {
                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
                     stagingRepository(stagingDir.path)
                     artifactOverride {
+                        artifactId.set("core-iosx64")
+                        this.jar = false
+                    }
+                    artifactOverride {
+                        artifactId.set("core-iosarm64")
+                        this.jar = false
+                    }
+                    artifactOverride {
+                        artifactId.set("core-iossimulatorarm64")
                         this.jar = false
                     }
                 }
