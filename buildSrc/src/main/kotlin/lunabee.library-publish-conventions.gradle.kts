@@ -75,13 +75,6 @@ jreleaser {
                     // FIXME
                     //  https://github.com/jreleaser/jreleaser/issues/1746
                     applyMavenCentralRules = false
-                    signing {
-                        active.set(org.jreleaser.model.Active.ALWAYS)
-                        pgp {
-                            armored.set(true)
-                            mode.set(Signing.Mode.FILE)
-                        }
-                    }
                     artifactOverride {
                         artifactId.set("${project.name.get()}-iosx64")
                         this.jar = false
@@ -93,6 +86,14 @@ jreleaser {
                     artifactOverride {
                         artifactId.set("${project.name.get()}-iossimulatorarm64")
                         this.jar = false
+                    }
+
+                    signing {
+                        active.set(org.jreleaser.model.Active.ALWAYS)
+                        pgp {
+                            armored.set(true)
+                            mode.set(Signing.Mode.FILE)
+                        }
                     }
                 }
             }
@@ -110,14 +111,6 @@ jreleaser {
                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
                     stagingRepository(stagingDir.path)
 
-                    signing {
-                        active.set(org.jreleaser.model.Active.ALWAYS)
-                        pgp {
-                            armored.set(true)
-                            mode.set(Signing.Mode.FILE)
-                        }
-                    }
-
                     // FIXME
                     //  https://github.com/jreleaser/jreleaser/issues/1746
                     artifactOverride {
@@ -131,6 +124,14 @@ jreleaser {
                     artifactOverride {
                         artifactId.set("${project.name.get()}-iossimulatorarm64")
                         this.jar = false
+                    }
+
+                    signing {
+                        active.set(org.jreleaser.model.Active.ALWAYS)
+                        pgp {
+                            armored.set(true)
+                            mode.set(Signing.Mode.FILE)
+                        }
                     }
                 }
             }
