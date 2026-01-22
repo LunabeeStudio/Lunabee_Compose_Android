@@ -59,7 +59,6 @@ private val emptyJavadocJar = if (publishType == PublishType.Kmp) {
     null
 }
 
-
 jreleaser {
     gitRootSearch.set(true)
     signing {
