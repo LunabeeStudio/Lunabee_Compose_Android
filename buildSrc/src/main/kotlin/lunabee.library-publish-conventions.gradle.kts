@@ -48,6 +48,18 @@ private val stagingDir = layout.buildDirectory
     .get()
     .asFile
 
+//  https://github.com/Kotlin/dokka/issues/1753
+private val emptyJavadocJar = if (publishType == PublishType.Kmp) {
+    tasks.register<Jar>("emptyJavadocJar") {
+        group = "publishing"
+        description = "Empty placeholder JAR for javadoc"
+        archiveClassifier.set("javadoc")
+    }
+} else {
+    null
+}
+
+
 jreleaser {
     gitRootSearch.set(true)
     signing {
@@ -70,30 +82,24 @@ jreleaser {
 
                     // FIXME
                     //  https://github.com/jreleaser/jreleaser/issues/1746
-                    //  https://github.com/Kotlin/dokka/issues/1753
                     applyMavenCentralRules = false
                     artifactOverride {
                         artifactId.set("jvm")
-                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("android")
-                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("core-iosx64")
                         this.jar = false
-                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("core-iosarm64")
                         this.jar = false
-                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("core-iossimulatorarm64")
                         this.jar = false
-                        this.javadocJar = false
                     }
                 }
             }
@@ -113,29 +119,23 @@ jreleaser {
 
                     // FIXME
                     //  https://github.com/jreleaser/jreleaser/issues/1746
-                    //  https://github.com/Kotlin/dokka/issues/1753
                     artifactOverride {
                         artifactId.set("jvm")
-                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("android")
-                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("core-iosx64")
                         this.jar = false
-                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("core-iosarm64")
                         this.jar = false
-                        this.javadocJar = false
                     }
                     artifactOverride {
                         artifactId.set("core-iossimulatorarm64")
                         this.jar = false
-                        this.javadocJar = false
                     }
                 }
             }
@@ -191,6 +191,7 @@ fun PublishingExtension.setupPublication() {
                 artifact(dokkaHtmlJar)
             }
             PublishType.Kmp -> publications.withType<MavenPublication> {
+                artifact(emptyJavadocJar)
                 setPom()
             }
             PublishType.Bom -> create<MavenPublication>(project.name) {
