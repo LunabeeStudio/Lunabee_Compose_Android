@@ -222,7 +222,10 @@ private fun MavenPublication.setPom() {
 
 signing {
     isRequired = true
-    publishing.publications.all { sign(this) }
+    val signingKey: String? by project
+    val signingPassword: String? by project
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign(configurations.archives.get())
 }
 
 afterEvaluate {
