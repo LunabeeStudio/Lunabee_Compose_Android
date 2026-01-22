@@ -89,15 +89,15 @@ jreleaser {
                         artifactId.set("android")
                     }
                     artifactOverride {
-                        artifactId.set("core-iosx64")
+                        artifactId.set("iosx64")
                         this.jar = false
                     }
                     artifactOverride {
-                        artifactId.set("core-iosarm64")
+                        artifactId.set("iosarm64")
                         this.jar = false
                     }
                     artifactOverride {
-                        artifactId.set("core-iossimulatorarm64")
+                        artifactId.set("iossimulatorarm64")
                         this.jar = false
                     }
                 }
@@ -125,15 +125,15 @@ jreleaser {
                         artifactId.set("android")
                     }
                     artifactOverride {
-                        artifactId.set("core-iosx64")
+                        artifactId.set("iosx64")
                         this.jar = false
                     }
                     artifactOverride {
-                        artifactId.set("core-iosarm64")
+                        artifactId.set("iosarm64")
                         this.jar = false
                     }
                     artifactOverride {
-                        artifactId.set("core-iossimulatorarm64")
+                        artifactId.set("iossimulatorarm64")
                         this.jar = false
                     }
                 }
