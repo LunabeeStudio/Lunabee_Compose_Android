@@ -137,8 +137,9 @@ fun PublishingExtension.setupPublication() {
                     archiveBaseName = "${project.name}-${this.name}"
                 }
                 artifact(emptyDocsTask)
-
-                setPom()
+                afterEvaluate {
+                    setPom()
+                }
                 setupSigning(this)
             }
             PublishType.Bom -> create<MavenPublication>(project.name) {
@@ -225,7 +226,7 @@ private fun setupSigning(publication: MavenPublication) {
         val signingKey: String? by project
         val signingPassword: String? by project
         useInMemoryPgpKeys(signingKey, signingPassword)
-        val tasks = sign(publication)
+        sign(publication)
     }
 }
 
