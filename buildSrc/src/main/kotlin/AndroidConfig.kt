@@ -77,5 +77,5 @@ object AndroidConfig {
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_21
     val JVM_TARGET: JvmTarget = JvmTarget.JVM_21
 
-    fun commonVersionName(): String = System.getenv(EnvConfig.EnvVersionName) ?: PLATFORM_VERSION
+    fun commonVersionName(): String = System.getenv(EnvConfig.EnvVersionName)?.takeIf { it.isNotBlank() } ?: PLATFORM_VERSION
 }
