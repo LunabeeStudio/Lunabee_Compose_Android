@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import org.jreleaser.model.Signing
 import java.util.Locale
 
 enum class PublishType {
@@ -50,13 +49,6 @@ private val stagingDir = layout.buildDirectory
 
 jreleaser {
     gitRootSearch.set(true)
-    signing {
-        active.set(org.jreleaser.model.Active.ALWAYS)
-        pgp {
-            armored.set(true)
-            mode.set(Signing.Mode.FILE)
-        }
-    }
     deploy {
         maven {
             mavenCentral {
@@ -67,21 +59,22 @@ jreleaser {
                     username.set(mavenCentralUsername)
                     password.set(mavenCentralPassword)
                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
-                }
-            }
-            nexus2 {
-                create("snapshot-deploy") {
-                    active.set(org.jreleaser.model.Active.SNAPSHOT)
-                    url.set("https://central.sonatype.com/repository/maven-snapshots")
-                    snapshotUrl.set("https://central.sonatype.com/repository/maven-snapshots")
-                    applyMavenCentralRules = true
-                    snapshotSupported = true
-                    closeRepository = true
-                    releaseRepository = true
-                    username.set(mavenCentralUsername)
-                    password.set(mavenCentralPassword)
-                    verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
-                    stagingRepository(stagingDir.path)
+
+                    // FIXME
+                    //  https://github.com/jreleaser/jreleaser/issues/1746
+                    applyMavenCentralRules = false
+                    artifactOverride {
+                        artifactId.set("${project.name.get()}-iosx64")
+                        this.jar = false
+                    }
+                    artifactOverride {
+                        artifactId.set("${project.name.get()}-iosarm64")
+                        this.jar = false
+                    }
+                    artifactOverride {
+                        artifactId.set("${project.name.get()}-iossimulatorarm64")
+                        this.jar = false
+                    }
                 }
             }
         }
@@ -123,6 +116,7 @@ fun PublishingExtension.setupPublication() {
                 val (dokkaJavadocJar, dokkaHtmlJar) = setupDokkaTasks()
                 artifact(dokkaJavadocJar)
                 artifact(dokkaHtmlJar)
+                setupSigning(this)
             }
             PublishType.Java -> create<MavenPublication>(project.name) {
                 // version is set in project, so use after evaluate
@@ -134,9 +128,19 @@ fun PublishingExtension.setupPublication() {
                 from(components["java"])
                 artifact(dokkaJavadocJar)
                 artifact(dokkaHtmlJar)
+                setupSigning(this)
             }
             PublishType.Kmp -> publications.withType<MavenPublication> {
-                setPom()
+                //  https://github.com/Kotlin/dokka/issues/1753
+                val emptyDocsTask = tasks.register("${this.name}EmptyDocs", Jar::class.java) {
+                    archiveClassifier = "javadoc"
+                    archiveBaseName = "${project.name}-${this.name}"
+                }
+                artifact(emptyDocsTask)
+                afterEvaluate {
+                    setPom()
+                }
+                setupSigning(this)
             }
             PublishType.Bom -> create<MavenPublication>(project.name) {
                 afterEvaluate {
@@ -144,6 +148,7 @@ fun PublishingExtension.setupPublication() {
                     from(components["javaPlatform"])
                     setPom()
                 }
+                setupSigning(this)
             }
         }
     }
@@ -215,29 +220,20 @@ private fun MavenPublication.setPom() {
     }
 }
 
-signing {
-    setRequired {
-        {
-            gradle.taskGraph.hasTask("publish")
-        }
-    }
-    publishing.publications.forEach {
-        sign(it)
+private fun setupSigning(publication: MavenPublication) {
+    signing {
+        isRequired = true
+        val signingKey: String? by project
+        val signingPassword: String? by project
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign(publication)
     }
 }
 
 afterEvaluate {
-    tasks.withType(PublishToMavenRepository::class.java) {
-        when (publishType) {
-            PublishType.Android -> dependsOn(
-                tasks.named("bundleReleaseAar"),
-            )
-            PublishType.Kmp,
-            PublishType.Java,
-            PublishType.Bom,
-            -> dependsOn(
-                tasks.withType(Jar::class.java),
-            )
+    if (publishType == PublishType.Android) {
+        tasks.withType<PublishToMavenRepository>().configureEach {
+            dependsOn(tasks.named("bundleReleaseAar"))
         }
     }
 }
