@@ -20,6 +20,10 @@
       "excludePackagePatterns": [
         "^org\\.jetbrains\\.kotlin"
       ]
+    },
+    {
+      "matchPackageNames": ["org.jetbrains.kotlinx:kotlinx-datetime"],
+      "allowedVersions": "!/0\\.6\\.x-compat$/"
     }
   ]
 }
