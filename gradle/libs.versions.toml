@@ -31,7 +31,7 @@ androidxTestRunner = "1.7.0"
 coil = "2.7.0"
 composeBom = "2026.01.00"
 core = "1.17.0"
-dagger = "2.59"
+dagger = "2.58"
 dokka = "2.1.0"
 googleAndroidMaterial = "1.13.0"
 hbb20Countrycodepicker = "2.7.3"
@@ -55,7 +55,7 @@ normalize = "1.3.3"
 robolectric = "4.16.1"
 touchlabKermit = "2.0.8"
 touchlabSkie = "0.10.9"
-zoomable = "2.9.1-test01"
+zoomable = "2.9.0"
 
 [libraries]
 
