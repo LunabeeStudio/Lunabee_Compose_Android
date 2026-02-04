@@ -46,4 +46,3 @@ dependencyResolutionManagement {
 rootProject.name = "LBAndroid"
 
 include("logger-kermit-crashlytics")
-project(":logger-kermit-crashlytics").projectDir = File("common/logger/logger-kermit-crashlytics")

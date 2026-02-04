@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import studio.lunabee.library.SetAllSnapshotVersionTask
-
 /*
  * Build group id based on real project path
  */
@@ -40,11 +38,6 @@ tasks.register("publishList") {
                 }.joinToString(";") { it.name }
         println(publishProjects)
     }
-}
-
-tasks.register("setAllSnapshotVersion", SetAllSnapshotVersionTask::class.java) {
-    description = "Set the snapshot version to all published projects"
-    group = "publishing"
 }
 
 // Update gradle-wrapper by running `./gradlew wrapper --gradle-version latest`

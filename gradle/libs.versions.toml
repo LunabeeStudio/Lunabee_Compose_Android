@@ -9,14 +9,9 @@
 agp = "9.0.0"
 jreleaser = "1.22.0"
 kotlin = "2.3.0"
-touchlabKermit = "2.0.8"
-touchlabSkie = "0.10.9"
 
 [libraries]
 
 agp = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 jreleaserGradlePlugin = { group = "org.jreleaser", name = "org.jreleaser.gradle.plugin", version.ref = "jreleaser" }
 kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-touchlabKermit = { group = "co.touchlab", name = "kermit", version.ref = "touchlabKermit" }
-touchlabKermitCrashlytics = { group = "co.touchlab", name = "kermit-crashlytics", version.ref = "touchlabKermit" }
-touchlabSkie = { group = "co.touchlab.skie", name = "co.touchlab.skie.gradle.plugin", version.ref = "touchlabSkie" }

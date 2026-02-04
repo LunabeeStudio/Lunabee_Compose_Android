@@ -14,29 +14,7 @@
  * limitations under the License.
  */
 
-plugins {
-    id("org.jetbrains.kotlin.multiplatform")
-    id("co.touchlab.skie")
-}
+package studio.lunabee.logger
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
-kotlin {
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64(),
-    ).forEach {
-        it.binaries.framework {
-            baseName = project.name
-            isStatic = true
-        }
-    }
-
-    compilerOptions {
-        freeCompilerArgs.add("-Xexpect-actual-classes")
-        freeCompilerArgs.add("-opt-in=kotlin.time.ExperimentalTime")
-    }
+class Hello {
 }
