@@ -16,15 +16,6 @@
 
 import studio.lunabee.library.SetAllSnapshotVersionTask
 
-plugins {
-    alias(libs.plugins.lbDetekt)
-}
-
-lbDetekt {
-    val customConfig = File(project.rootProject.layout.projectDirectory.asFile, "/lunabee-detekt-config.yml")
-    config.setFrom(files(lunabeeConfig, customConfig))
-}
-
 /*
  * Build group id based on real project path
  */

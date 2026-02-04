@@ -50,32 +50,5 @@ object AndroidConfig {
     const val LibraryUrl: String = "https://github.com/LunabeeStudio/LBAndroid"
 
     // ⚠️ Match module name in UPPER_CASE ('-' -> '_')
-    const val LBCCORE_VERSION: String = "1.12.0"
-    const val LBCFOUNDATION_VERSION: String = "1.12.0"
-    const val LBCANDROIDTEST_VERSION: String = "1.15.0"
-    const val LBCACCESSIBILITY_VERSION: String = "1.14.0"
-    const val LBCTHEME_VERSION: String = "1.10.0"
-    const val MATERIAL_COLOR_UTILITIES_VERSION: String = "1.10.0"
-    const val LBCHAPTIC_VERSION: String = "1.8.0"
-    const val LBCUIFIELD_CORE_VERSION: String = "1.13.0"
-    const val LBCUIFIELD_PHONEPICKER_VERSION: String = "1.8.0"
-    const val LBCUIFIELD_COUNTRYPICKER_VERSION: String = "1.7.0"
-    const val LBCIMAGE_VERSION: String = "1.8.0"
-    const val LBCGLANCE_VERSION: String = "1.6.0"
-    const val LBCPRESENTER_VERSION: String = "1.10.0"
-    const val LBCPRESENTER_KOIN_VERSION: String = LBCPRESENTER_VERSION
-    const val LBCROBOLECTRICTEST_VERSION: String = "1.1.0"
     const val LOGGER_KERMIT_VERSION: String = "4.9.0"
-    const val CORE_VERSION: String = "4.9.0"
-    const val EXTENSIONS_VERSION: String = "4.9.0"
-    const val TEST_VERSION: String = "4.9.0"
-    const val KTOR_VERSION: String = "4.9.0"
-    const val LOADING_VERSION: String = "4.9.0"
-    const val PLATFORM_VERSION: String = "4.9.0"
-    const val EXTENSIONS_ANDROID_VERSION: String = "4.9.0"
-
-    val JDK_VERSION: JavaVersion = JavaVersion.VERSION_21
-    val JVM_TARGET: JvmTarget = JvmTarget.JVM_21
-
-    fun commonVersionName(): String = System.getenv(EnvConfig.EnvVersionName)?.takeIf { it.isNotBlank() } ?: PLATFORM_VERSION
 }

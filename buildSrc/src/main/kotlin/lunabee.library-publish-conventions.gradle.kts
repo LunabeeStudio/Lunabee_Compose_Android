@@ -26,8 +26,6 @@ enum class PublishType {
 plugins {
     `maven-publish`
     signing
-    id("org.jetbrains.dokka")
-    id("org.jetbrains.dokka-javadoc")
 }
 
 private val publishType: PublishType = when {
@@ -47,46 +45,46 @@ private val stagingDir = layout.buildDirectory
     .asFile
 
 // jreleaser {
-//    gitRootSearch.set(true)
-//    deploy {
-//        maven {
-//            mavenCentral {
-//                create("release-deploy") {
-//                    active.set(org.jreleaser.model.Active.RELEASE)
-//                    url.set("https://central.sonatype.com/api/v1/publisher")
-//                    stagingRepository(stagingDir.path)
-//                    username.set(mavenCentralUsername)
-//                    password.set(mavenCentralPassword)
-//                    verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
+//     gitRootSearch.set(true)
+//     deploy {
+//         maven {
+//             mavenCentral {
+//                 create("release-deploy") {
+//                     active.set(org.jreleaser.model.Active.RELEASE)
+//                     url.set("https://central.sonatype.com/api/v1/publisher")
+//                     stagingRepository(stagingDir.path)
+//                     username.set(mavenCentralUsername)
+//                     password.set(mavenCentralPassword)
+//                     verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
 //
-//                    // FIXME
-//                    //  https://github.com/jreleaser/jreleaser/issues/1746
-//                    applyMavenCentralRules = false
-//                    artifactOverride {
-//                        artifactId.set("${project.name.get()}-iosx64")
-//                        this.jar = false
-//                    }
-//                    artifactOverride {
-//                        artifactId.set("${project.name.get()}-iosarm64")
-//                        this.jar = false
-//                    }
-//                    artifactOverride {
-//                        artifactId.set("${project.name.get()}-iossimulatorarm64")
-//                        this.jar = false
-//                    }
-//                }
-//            }
-//        }
-//    }
+//                     // FIXME
+//                     //  https://github.com/jreleaser/jreleaser/issues/1746
+//                     applyMavenCentralRules = false
+//                     artifactOverride {
+//                         artifactId.set("${project.name.get()}-iosx64")
+//                         this.jar = false
+//                     }
+//                     artifactOverride {
+//                         artifactId.set("${project.name.get()}-iosarm64")
+//                         this.jar = false
+//                     }
+//                     artifactOverride {
+//                         artifactId.set("${project.name.get()}-iossimulatorarm64")
+//                         this.jar = false
+//                     }
+//                 }
+//             }
+//         }
+//     }
 //
-//    release {
-//        // Disable release feature
-//        github {
-//            token.set("fake")
-//            skipRelease.set(true)
-//            skipTag.set(true)
-//        }
-//    }
+//     release {
+//         // Disable release feature
+//         github {
+//             token.set("fake")
+//             skipRelease.set(true)
+//             skipTag.set(true)
+//         }
+//     }
 // }
 
 publishing {
@@ -112,9 +110,6 @@ fun PublishingExtension.setupPublication() {
                     from(components["release"])
                     setPom()
                 }
-                val (dokkaJavadocJar, dokkaHtmlJar) = setupDokkaTasks()
-                artifact(dokkaJavadocJar)
-                artifact(dokkaHtmlJar)
                 setupSigning(this)
             }
             PublishType.Java -> create<MavenPublication>(project.name) {
@@ -123,19 +118,10 @@ fun PublishingExtension.setupPublication() {
                     setProjectDetails()
                     setPom()
                 }
-                val (dokkaJavadocJar, dokkaHtmlJar) = setupDokkaTasks()
                 from(components["java"])
-                artifact(dokkaJavadocJar)
-                artifact(dokkaHtmlJar)
                 setupSigning(this)
             }
             PublishType.Kmp -> publications.withType<MavenPublication> {
-                //  https://github.com/Kotlin/dokka/issues/1753
-                val emptyDocsTask = tasks.register("${this.name}EmptyDocs", Jar::class.java) {
-                    archiveClassifier = "javadoc"
-                    archiveBaseName = "${project.name}-${this.name}"
-                }
-                artifact(emptyDocsTask)
                 afterEvaluate {
                     setPom()
                 }
@@ -161,25 +147,6 @@ private fun MavenPublication.setProjectDetails() {
     this.artifactId = if (publishType == PublishType.Bom) "lunabee-bom" else project.name
     this.version = project.version.toString()
     logger.log(LogLevel.INFO, "Set publication details: groupId=$groupId, artifactId=$artifactId, version=$version")
-}
-
-/**
- * Setup Dokka manually to workaround https://github.com/Kotlin/dokka/issues/2956
- */
-private fun setupDokkaTasks(): Pair<TaskProvider<Jar>, TaskProvider<Jar>> {
-    val dokkaJavadocJar by tasks.registering(Jar::class) {
-        description = "A Javadoc JAR containing Dokka Javadoc"
-        from(tasks.dokkaGeneratePublicationJavadoc.flatMap { it.outputDirectory })
-        archiveClassifier.set("javadoc")
-    }
-
-    val dokkaHtmlJar by tasks.registering(Jar::class) {
-        description = "A HTML Documentation JAR containing Dokka HTML"
-        from(tasks.dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
-        archiveClassifier.set("html-doc")
-    }
-
-    return dokkaJavadocJar to dokkaHtmlJar
 }
 
 /**
