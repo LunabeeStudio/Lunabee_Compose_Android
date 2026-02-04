@@ -17,7 +17,6 @@
 
 plugins {
     id("com.android.library")
-    id("kotlin-android")
 }
 
 val libs = extensions
