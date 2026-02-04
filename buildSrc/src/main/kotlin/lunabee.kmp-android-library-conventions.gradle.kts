@@ -15,8 +15,8 @@
  */
 
 plugins {
-    id("lunabee.kmp-library-conventions")
     id("com.android.kotlin.multiplatform.library")
+    id("org.jetbrains.kotlin.multiplatform")
 }
 
 kotlin {
@@ -24,4 +24,24 @@ kotlin {
         compileSdk = AndroidConfig.CompileSdk
         minSdk = AndroidConfig.MinSdk
     }
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+    ).forEach {
+        it.binaries.framework {
+            baseName = project.name
+            isStatic = true
+        }
+    }
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+        freeCompilerArgs.add("-opt-in=kotlin.time.ExperimentalTime")
+    }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

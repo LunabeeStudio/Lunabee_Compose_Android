@@ -58,8 +58,7 @@ touchlabSkie = "0.10.9"
 zoomable = "2.9.0"
 
 [libraries]
-
-agp = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+agp = { group = "com.android.library", name = "com.android.library.gradle.plugin", version.ref = "agp" }
 androidxActivityCompose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidxAppcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppcompat" }
 androidxComposeUiTestJunit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
