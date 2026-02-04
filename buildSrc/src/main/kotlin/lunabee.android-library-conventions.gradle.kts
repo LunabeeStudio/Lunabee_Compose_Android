@@ -18,7 +18,6 @@ import org.gradle.accessors.dm.LibrariesForLibs
 
 plugins {
     id("com.android.library")
-    id("kotlin-android")
 }
 
 // FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192

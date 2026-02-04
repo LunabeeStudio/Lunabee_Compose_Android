@@ -24,7 +24,6 @@ enum class PublishType {
 }
 
 plugins {
-    id("org.jreleaser")
     `maven-publish`
     signing
     id("org.jetbrains.dokka")
@@ -47,48 +46,48 @@ private val stagingDir = layout.buildDirectory
     .get()
     .asFile
 
-jreleaser {
-    gitRootSearch.set(true)
-    deploy {
-        maven {
-            mavenCentral {
-                create("release-deploy") {
-                    active.set(org.jreleaser.model.Active.RELEASE)
-                    url.set("https://central.sonatype.com/api/v1/publisher")
-                    stagingRepository(stagingDir.path)
-                    username.set(mavenCentralUsername)
-                    password.set(mavenCentralPassword)
-                    verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
-
-                    // FIXME
-                    //  https://github.com/jreleaser/jreleaser/issues/1746
-                    applyMavenCentralRules = false
-                    artifactOverride {
-                        artifactId.set("${project.name.get()}-iosx64")
-                        this.jar = false
-                    }
-                    artifactOverride {
-                        artifactId.set("${project.name.get()}-iosarm64")
-                        this.jar = false
-                    }
-                    artifactOverride {
-                        artifactId.set("${project.name.get()}-iossimulatorarm64")
-                        this.jar = false
-                    }
-                }
-            }
-        }
-    }
-
-    release {
-        // Disable release feature
-        github {
-            token.set("fake")
-            skipRelease.set(true)
-            skipTag.set(true)
-        }
-    }
-}
+//jreleaser {
+//    gitRootSearch.set(true)
+//    deploy {
+//        maven {
+//            mavenCentral {
+//                create("release-deploy") {
+//                    active.set(org.jreleaser.model.Active.RELEASE)
+//                    url.set("https://central.sonatype.com/api/v1/publisher")
+//                    stagingRepository(stagingDir.path)
+//                    username.set(mavenCentralUsername)
+//                    password.set(mavenCentralPassword)
+//                    verifyPom.set(false) // FIXME https://github.com/jreleaser/jreleaser.github.io/issues/85
+//
+//                    // FIXME
+//                    //  https://github.com/jreleaser/jreleaser/issues/1746
+//                    applyMavenCentralRules = false
+//                    artifactOverride {
+//                        artifactId.set("${project.name.get()}-iosx64")
+//                        this.jar = false
+//                    }
+//                    artifactOverride {
+//                        artifactId.set("${project.name.get()}-iosarm64")
+//                        this.jar = false
+//                    }
+//                    artifactOverride {
+//                        artifactId.set("${project.name.get()}-iossimulatorarm64")
+//                        this.jar = false
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    release {
+//        // Disable release feature
+//        github {
+//            token.set("fake")
+//            skipRelease.set(true)
+//            skipTag.set(true)
+//        }
+//    }
+//}
 
 publishing {
     repositories {
