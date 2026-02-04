@@ -45,4 +45,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "LBAndroid"
 
-include("logger-kermit-crashlytics")
+include("my-android-library")

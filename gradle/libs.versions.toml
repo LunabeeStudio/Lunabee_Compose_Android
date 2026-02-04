@@ -1,20 +1,14 @@
-
 [bundles]
 
 
 [plugins]
 
-androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
-
-
 [versions]
 
 agp = "9.0.0"
 jreleaser = "1.22.0"
-kotlin = "2.3.0"
 
 [libraries]
 
 agp = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 jreleaserGradlePlugin = { group = "org.jreleaser", name = "org.jreleaser.gradle.plugin", version.ref = "jreleaser" }
-kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }

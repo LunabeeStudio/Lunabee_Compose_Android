@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package studio.lunabee.logger
+package studio.lunabee
 
 class Hello {
 }

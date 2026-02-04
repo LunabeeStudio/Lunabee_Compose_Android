@@ -15,14 +15,13 @@
  */
 
 plugins {
-//    alias(libs.plugins.androidKotlinMultiplatformLibrary)
     id("com.android.kotlin.multiplatform.library")
     id("org.jetbrains.kotlin.multiplatform")
 }
 
 kotlin {
     androidLibrary {
-        namespace = "studio.lunabee.logger.kermit"
+        namespace = "studio.lunabee"
         compileSdk = AndroidConfig.CompileSdk
         minSdk = AndroidConfig.MinSdk
     }
@@ -37,18 +36,4 @@ kotlin {
             isStatic = true
         }
     }
-
-    compilerOptions {
-        freeCompilerArgs.add("-Xexpect-actual-classes")
-        freeCompilerArgs.add("-opt-in=kotlin.time.ExperimentalTime")
-    }
 }
-
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
-
-description = "Lunabee Studio Kotlin crashlytics for Kermit logger"
-version = AndroidConfig.LOGGER_KERMIT_VERSION
-
