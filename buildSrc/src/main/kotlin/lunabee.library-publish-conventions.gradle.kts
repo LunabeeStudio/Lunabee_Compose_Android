@@ -46,7 +46,7 @@ private val stagingDir = layout.buildDirectory
     .get()
     .asFile
 
-//jreleaser {
+// jreleaser {
 //    gitRootSearch.set(true)
 //    deploy {
 //        maven {
@@ -87,7 +87,7 @@ private val stagingDir = layout.buildDirectory
 //            skipTag.set(true)
 //        }
 //    }
-//}
+// }
 
 publishing {
     repositories {
