@@ -4,6 +4,9 @@
 
 [plugins]
 
+androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+
+
 [versions]
 
 agp = "9.0.0"
