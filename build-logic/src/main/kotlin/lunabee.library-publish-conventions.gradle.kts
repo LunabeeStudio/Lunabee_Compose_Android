@@ -187,10 +187,11 @@ private fun setupDokkaTasks(): Pair<TaskProvider<Jar>, TaskProvider<Jar>> {
  * Set POM file details.
  */
 private fun MavenPublication.setPom() {
+    val repoUrl = "https://github.com/LunabeeStudio/LBAndroid"
     pom {
         name.set(project.name.capitalized())
         description.set(project.description)
-        url.set(AndroidConfig.LibraryUrl)
+        url.set(repoUrl)
 
         organization {
             name.set("Lunabee Studio")
@@ -207,7 +208,7 @@ private fun MavenPublication.setPom() {
         scm {
             connection.set("git@github.com:LunabeeStudio/LBAndroid.git")
             developerConnection.set("git@github.com:LunabeeStudio/LBAndroid.git")
-            url.set(AndroidConfig.LibraryUrl)
+            url.set(repoUrl)
         }
 
         developers {

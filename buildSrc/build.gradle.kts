@@ -28,13 +28,9 @@ dependencies {
     implementation(libs.agp)
     implementation(libs.kotlinGradlePlugin)
     implementation(libs.composePlugin)
-    implementation(libs.jreleaserGradlePlugin)
     implementation(libs.javapoet)
     implementation(libs.touchlabSkie)
-    implementation(libs.dokkaGradlePlugin)
 
     implementation(gradleApi())
     implementation(localGroovy())
-
-    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }

@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-import org.gradle.accessors.dm.LibrariesForLibs
-
 plugins {
     id("com.android.library")
-    id("kotlin-android")
 }
 
-// FIXME workaround https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
-val libs: LibrariesForLibs = the<LibrariesForLibs>()
+val libs = extensions
+    .getByType<VersionCatalogsExtension>()
+    .named("libs")
 
 android {
     compileSdk = AndroidConfig.CompileSdk
@@ -46,7 +44,7 @@ android {
 }
 
 dependencies {
-    androidTestImplementation(libs.androidxTestRunner)
+    androidTestImplementation(libs.findLibrary("androidxTestRunner").get())
 }
 
 kotlin.compilerOptions.jvmTarget.set(AndroidConfig.JVM_TARGET)

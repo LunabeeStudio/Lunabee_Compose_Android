@@ -16,7 +16,6 @@
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
     id(libs.plugins.composePlugin.get().pluginId)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)

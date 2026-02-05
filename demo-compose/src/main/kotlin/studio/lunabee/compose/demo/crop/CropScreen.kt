@@ -36,7 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
@@ -47,11 +47,11 @@ import studio.lunabee.compose.crop.rememberLbCropViewState
 
 @Composable
 fun CropScreen() {
-    val context = LocalContext.current
-    var bitmap: Bitmap by remember { mutableStateOf(BitmapFactory.decodeResource(context.resources, R.drawable.oss117)) }
+    val resources = LocalResources.current
+    var bitmap: Bitmap by remember { mutableStateOf(BitmapFactory.decodeResource(resources, R.drawable.oss117)) }
     var showCropView: Boolean by rememberSaveable { mutableStateOf(true) }
     val state = rememberLbCropViewState(
-        originalBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.oss117),
+        originalBitmap = BitmapFactory.decodeResource(resources, R.drawable.oss117),
         originalOrientation = 1,
         finalImageMinSize = CropImageSize(
             width = 500,

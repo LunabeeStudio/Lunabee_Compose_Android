@@ -15,26 +15,16 @@
  */
 
 plugins {
-    id("lunabee.android-compose-library-conventions")
-    id("lunabee.library-publish-conventions")
+    `kotlin-dsl`
 }
 
-android {
-    namespace = "studio.lunabee.compose.theme"
-    // resourcePrefix("lbc_th_")
-
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
 }
-
-description = "Function to build dynamic theme with Material3 algorithm"
-version = AndroidConfig.LBCTHEME_VERSION
 
 dependencies {
-    implementation(platform(libs.composeBom))
-
-    implementation(libs.composeMaterial3)
-
-    implementation(projects.compose.materialColorUtilities)
+    implementation(libs.dokkaGradlePlugin)
+    implementation(libs.jreleaserGradlePlugin)
 }

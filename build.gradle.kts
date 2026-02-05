@@ -16,6 +16,12 @@
 
 import studio.lunabee.library.SetAllSnapshotVersionTask
 
+buildscript {
+    dependencies {
+        classpath(libs.jreleaserGradlePlugin)
+    }
+}
+
 plugins {
     alias(libs.plugins.lbDetekt)
 }
