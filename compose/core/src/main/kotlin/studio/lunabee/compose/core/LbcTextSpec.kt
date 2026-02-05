@@ -237,11 +237,13 @@ sealed class LbcTextSpec {
 
     @SuppressLint("DiscouragedApi")
     @Discouraged(
-        message = ("Use of this function is discouraged because resource reflection makes "
+        message = (
+            "Use of this function is discouraged because resource reflection makes "
             + "it harder to perform build optimizations and compile-time "
             + "verification of code. It is much more efficient to retrieve "
             + "resources by identifier (e.g. `R.foo.bar`) than by name (e.g. "
-            + "`getIdentifier(\"bar\", \"foo\", null)`).")
+            + "`getIdentifier(\"bar\", \"foo\", null)`)."
+        ),
     )
     class StringByNameResource(
         private val name: String,
