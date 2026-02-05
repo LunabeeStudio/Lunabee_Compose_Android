@@ -59,6 +59,7 @@ fun LbCropView(
                             state.onImageReady(it.painter.intrinsicSize)
                         }
                     }
+
                     else -> {
                         // no-op
                     }

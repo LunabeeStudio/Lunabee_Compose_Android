@@ -62,9 +62,11 @@ class LBCrashlyticsLogWriter(
             // Log with exception -> send exception wrapped in a LogWrapperException to add some context (severity, tag)
             throwable != null ->
                 crashlyticsCalls.sendHandledException(LogWrapperException(formatedMessage, throwable))
+
             // Error log without exception -> create a LogWrapperException if recordErrorMessage enabled
             severity >= Severity.Error && recordErrorMessage ->
                 crashlyticsCalls.sendHandledException(LogWrapperException(formatedMessage, null))
+
             // Fallback default log
             else ->
                 crashlyticsCalls.logMessage(formatedMessage)

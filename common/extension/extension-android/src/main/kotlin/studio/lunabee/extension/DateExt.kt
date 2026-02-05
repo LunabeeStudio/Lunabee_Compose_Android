@@ -120,7 +120,7 @@ fun Date.yearsCountSinceDate(originDate: Date): Int {
         val a = toCalendar()
         val b = originDate.toCalendar()
         var diff = a.getYear() - b.getYear()
-        if (b.getMonth() > a.getMonth() || a.getMonth() == b.getMonth() && b.get(Calendar.DATE) > a.get(Calendar.DATE)) {
+        if ((b.getMonth() > a.getMonth()) || ((a.getMonth() == b.getMonth()) && (b.get(Calendar.DATE) > a.get(Calendar.DATE)))) {
             diff--
         }
         diff
@@ -139,7 +139,7 @@ fun Date.yearsSince(originDate: Date): Int {
         val a = toCalendar()
         val b = originDate.toCalendar()
         var diff = a.getYear() - b.getYear()
-        if (b.getMonth() > a.getMonth() || a.getMonth() == b.getMonth() && b.get(Calendar.DATE) > a.get(Calendar.DATE)) {
+        if ((b.getMonth() > a.getMonth()) || ((a.getMonth() == b.getMonth()) && (b.get(Calendar.DATE) > a.get(Calendar.DATE)))) {
             diff--
         }
         diff

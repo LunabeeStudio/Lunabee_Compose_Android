@@ -248,6 +248,7 @@ fun SemanticsNodeInteraction.consoleLog(
     val config = semanticsNode.config
     val (type, value) = when {
         config.getOrNull(SemanticsProperties.Text) != null -> SemanticsProperties.Text.name to config[SemanticsProperties.Text]
+
         config.getOrNull(SemanticsProperties.ContentDescription) != null ->
             SemanticsProperties.ContentDescription.name to config[SemanticsProperties.ContentDescription]
 

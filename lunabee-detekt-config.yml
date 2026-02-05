@@ -4,8 +4,9 @@ config:
 comments:
   AbsentOrWrongFileLicense:
     active: true
-    licenseTemplateFile: "detekt-license.template"
-    licenseTemplateIsRegex: true
     excludes:
       - 'gradlew'
       - 'gradlew/wrapper/*'
+    licenseTemplate: |
+      /*
+       * Copyright (c)

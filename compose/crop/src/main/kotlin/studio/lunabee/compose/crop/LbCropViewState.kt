@@ -79,18 +79,21 @@ class LbCropViewState(
                         rotationAngle = 90f,
                     )
                 }
+
                 ExifInterface.ORIENTATION_ROTATE_180 -> {
                     cropUtils.rotateImage(
                         bitmap = originalBitmap,
                         rotationAngle = 180f,
                     )
                 }
+
                 ExifInterface.ORIENTATION_ROTATE_270 -> {
                     cropUtils.rotateImage(
                         bitmap = originalBitmap,
                         rotationAngle = 270f,
                     )
                 }
+
                 else -> originalBitmap
             }
             cropUtils.saveBitmapInFile(

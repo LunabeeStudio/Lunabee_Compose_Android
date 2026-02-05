@@ -38,6 +38,7 @@ class PullToRefreshReducer(
             delay(1000) // Simulate loading
             emitUserAction(PullToRefreshAction.StopRefresh)
         }
+
         PullToRefreshAction.StopRefresh -> actualState.copy(isRefreshing = false).asResult()
     }
 }

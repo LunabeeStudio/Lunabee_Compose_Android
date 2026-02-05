@@ -33,9 +33,11 @@ object NetworkUtils {
             ConnectivityManager.TYPE_WIFI -> {
                 TypeWifi
             }
+
             ConnectivityManager.TYPE_MOBILE -> {
                 TypeMobile
             }
+
             else -> TypeNotConnected
         }
     }

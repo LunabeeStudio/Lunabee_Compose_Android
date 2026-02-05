@@ -61,6 +61,7 @@ fun LbcImage(
                 colorFilter = colorFilter,
             )
         }
+
         is LbcImageSpec.ImageDrawable -> {
             DrawableImage(
                 imageSpec = imageSpec,
@@ -73,6 +74,7 @@ fun LbcImage(
                 errorPainter = errorPainter,
             )
         }
+
         is LbcImageSpec.Icon -> {
             val tint = imageSpec.tint.invoke().takeIf { it != Color.Unspecified } ?: LocalContentColor.current
             Icon(
@@ -82,6 +84,7 @@ fun LbcImage(
                 tint = tint,
             )
         }
+
         is LbcImageSpec.KtImageVector -> {
             val tint = imageSpec.tint.invoke().takeIf { it != Color.Unspecified } ?: LocalContentColor.current
             Icon(
@@ -91,6 +94,7 @@ fun LbcImage(
                 tint = tint,
             )
         }
+
         is LbcImageSpec.Url -> {
             AsyncImage(
                 model = ImageRequest
@@ -109,6 +113,7 @@ fun LbcImage(
                 colorFilter = colorFilter,
             )
         }
+
         is LbcImageSpec.ByteArray ->
             AsyncImage(
                 model = imageSpec.byteArray,
@@ -122,6 +127,7 @@ fun LbcImage(
                 onSuccess = onState,
                 colorFilter = colorFilter,
             )
+
         is LbcImageSpec.Uri ->
             AsyncImage(
                 model = imageSpec.uri,

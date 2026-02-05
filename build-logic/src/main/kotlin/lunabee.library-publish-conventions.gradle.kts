@@ -118,6 +118,7 @@ fun PublishingExtension.setupPublication() {
                 artifact(dokkaHtmlJar)
                 setupSigning(this)
             }
+
             PublishType.Java -> create<MavenPublication>(project.name) {
                 // version is set in project, so use after evaluate
                 afterEvaluate {
@@ -130,6 +131,7 @@ fun PublishingExtension.setupPublication() {
                 artifact(dokkaHtmlJar)
                 setupSigning(this)
             }
+
             PublishType.Kmp -> publications.withType<MavenPublication> {
                 //  https://github.com/Kotlin/dokka/issues/1753
                 val emptyDocsTask = tasks.register("${this.name}EmptyDocs", Jar::class.java) {
@@ -142,6 +144,7 @@ fun PublishingExtension.setupPublication() {
                 }
                 setupSigning(this)
             }
+
             PublishType.Bom -> create<MavenPublication>(project.name) {
                 afterEvaluate {
                     setProjectDetails()

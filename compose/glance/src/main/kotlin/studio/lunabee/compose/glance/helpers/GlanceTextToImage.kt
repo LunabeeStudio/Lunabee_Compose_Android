@@ -98,9 +98,11 @@ fun TextAlign.toLayoutAlignment(): Layout.Alignment = when (this) {
     TextAlign.Start,
     TextAlign.Left,
     -> Layout.Alignment.ALIGN_NORMAL
+
     TextAlign.End,
     TextAlign.Right,
     -> Layout.Alignment.ALIGN_OPPOSITE
+
     else -> Layout.Alignment.ALIGN_CENTER
 }
 
