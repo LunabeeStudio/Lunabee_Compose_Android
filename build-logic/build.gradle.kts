@@ -25,6 +25,6 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.jreleaserGradlePlugin)
     implementation(libs.dokkaGradlePlugin)
+    implementation(libs.jreleaserGradlePlugin)
 }
