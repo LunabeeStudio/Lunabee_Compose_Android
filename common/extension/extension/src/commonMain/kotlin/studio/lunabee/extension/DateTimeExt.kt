@@ -35,12 +35,14 @@ fun Instant.truncateTo(unit: DateTimeUnit): Instant = when (unit) {
     is DateTimeUnit.DayBased ->
         Instant
             .fromEpochMilliseconds(this.toEpochMilliseconds().let { it - it % unit.days.days.inWholeMilliseconds })
+
     is DateTimeUnit.MonthBased -> {
         val localDateTime = this.toLocalDateTime(TimeZone.UTC)
         val month = (localDateTime.month.ordinal + 1).let { it - it % unit.months }
         LocalDateTime(localDateTime.year, month.coerceAtLeast(1), 1, 0, 0)
             .toInstant(TimeZone.UTC)
     }
+
     is DateTimeUnit.TimeBased ->
         Instant
             .fromEpochMilliseconds(this.toEpochMilliseconds().let { it - it % unit.duration.inWholeMilliseconds })

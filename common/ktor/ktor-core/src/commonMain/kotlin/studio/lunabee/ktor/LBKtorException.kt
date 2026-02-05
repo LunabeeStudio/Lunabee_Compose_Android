@@ -87,11 +87,14 @@ class LBKtorExceptionHandler private constructor(
                     is kotlin.coroutines.cancellation.CancellationException,
                     is LBKtorException,
                     -> throw exception
+
                     is ContentConvertException,
                     is NoTransformationFoundException,
                     is SerializationException,
                     -> throw plugin.mapErr(LBKtorException.Decoding(cause = exception))
+
                     is IOException -> throw plugin.mapErr(LBKtorException.IO(cause = exception))
+
                     else -> throw plugin.mapErr(LBKtorException.Unexpected(cause = exception))
                 }
             }

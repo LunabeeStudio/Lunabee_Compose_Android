@@ -106,6 +106,7 @@ class LBSinglePresenterTest {
                     }
                     emitUserAction(TestAction.TestAction1)
                 }
+
                 TestAction.TestAction1 -> actualState.withSideEffect {
                     useActivity {
                         action2 = true

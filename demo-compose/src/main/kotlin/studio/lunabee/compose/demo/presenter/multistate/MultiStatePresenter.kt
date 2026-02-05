@@ -53,6 +53,7 @@ class MultiStatePresenter @Inject constructor() : LBPresenter<MultiStateUiState,
             coroutineScope = viewModelScope,
             emitUserAction = ::emitUserAction,
         )
+
         is MultiStateUiState.Error -> MultiStateErrorReducer(
             coroutineScope = viewModelScope,
             emitUserAction = ::emitUserAction,

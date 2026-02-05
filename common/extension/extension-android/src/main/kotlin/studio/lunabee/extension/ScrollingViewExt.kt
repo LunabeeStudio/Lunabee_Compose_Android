@@ -53,7 +53,7 @@ fun RecyclerView.hideFabOnScrollBehavior(
 
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
-                    if (dy > 0 || dy < 0 && fab.isShown) {
+                    if ((dy > 0) || ((dy < 0) && fab.isShown)) {
                         fab.hide()
                     }
                 }

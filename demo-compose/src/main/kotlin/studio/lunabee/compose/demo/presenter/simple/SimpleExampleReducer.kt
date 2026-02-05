@@ -37,12 +37,15 @@ class SimpleExampleReducer(
         useActivity: (suspend (Activity) -> Unit) -> Unit,
     ): ReduceResult<SimpleExampleUiState> = when (action) {
         is SimpleExampleAction.NewCheckValue -> actualState.copy(isChecked = action.value).asResult()
+
         SimpleExampleAction.NewValue -> actualState.copy(text = Random.nextInt().toString()).asResult()
+
         SimpleExampleAction.ShowToast -> actualState withSideEffect {
             useActivity { context ->
                 Toast.makeText(context, "Toast from reducer with ui context", Toast.LENGTH_SHORT).show()
             }
         }
+
         SimpleExampleAction.ShowCascadeToast1 -> actualState withSideEffect {
             useActivity { context ->
                 Log.d("multi_use_activity", "1st use activity call")
@@ -50,6 +53,7 @@ class SimpleExampleReducer(
             }
             emitUserAction(SimpleExampleAction.ShowCascadeToast2)
         }
+
         SimpleExampleAction.ShowCascadeToast2 -> actualState withSideEffect {
             useActivity { context ->
                 Log.d("multi_use_activity", "2nd use activity call")
