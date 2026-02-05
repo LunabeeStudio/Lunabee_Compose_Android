@@ -45,6 +45,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "LBAndroid"
 
+includeBuild("build-logic")
+
 include("demo-compose")
 
 // region Compose

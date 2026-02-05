@@ -47,8 +47,6 @@ object AndroidConfig {
     const val TargetSdk: Int = CompileSdk
     const val MinSdk: Int = BuildConfigs.MinSdk
 
-    const val LibraryUrl: String = "https://github.com/LunabeeStudio/LBAndroid"
-
     // ⚠️ Match module name in UPPER_CASE ('-' -> '_')
     const val LBCCORE_VERSION: String = "1.12.0"
     const val LBCFOUNDATION_VERSION: String = "1.12.0"

@@ -14,23 +14,12 @@
  * limitations under the License.
  */
 
-plugins {
-    `kotlin-dsl`
-}
+rootProject.name = "build-logic"
 
-repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
-}
-
-dependencies {
-    implementation(libs.agp)
-    implementation(libs.kotlinGradlePlugin)
-    implementation(libs.composePlugin)
-    implementation(libs.javapoet)
-    implementation(libs.touchlabSkie)
-
-    implementation(gradleApi())
-    implementation(localGroovy())
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
 }
