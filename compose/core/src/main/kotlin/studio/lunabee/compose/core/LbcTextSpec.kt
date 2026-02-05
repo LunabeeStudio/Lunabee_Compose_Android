@@ -15,8 +15,10 @@
  */
 package studio.lunabee.compose.core
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
+import androidx.annotation.Discouraged
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
@@ -233,6 +235,14 @@ sealed class LbcTextSpec {
         }
     }
 
+    @SuppressLint("DiscouragedApi")
+    @Discouraged(
+        message = ("Use of this function is discouraged because resource reflection makes "
+            + "it harder to perform build optimizations and compile-time "
+            + "verification of code. It is much more efficient to retrieve "
+            + "resources by identifier (e.g. `R.foo.bar`) than by name (e.g. "
+            + "`getIdentifier(\"bar\", \"foo\", null)`).")
+    )
     class StringByNameResource(
         private val name: String,
         @StringRes private val fallbackId: Int,
@@ -263,6 +273,7 @@ sealed class LbcTextSpec {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
 
+            @SuppressLint("DiscouragedApi")
             other as StringByNameResource
 
             if (name != other.name) return false

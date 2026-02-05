@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (c) 2026 Lunabee Studio
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,9 +15,8 @@
   ~ limitations under the License.
   -->
 
-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MonochromeLauncherIcon">
-    <background android:drawable="@drawable/ic_launcher_background" />
-    <foreground android:drawable="@drawable/ic_launcher_foreground" />
-</adaptive-icon>
+<data-extraction-rules>
+    <cloud-backup>
+        <!--  https://developer.android.com/guide/topics/data/autobackup#IncludingFiles  -->
+    </cloud-backup>
+</data-extraction-rules>

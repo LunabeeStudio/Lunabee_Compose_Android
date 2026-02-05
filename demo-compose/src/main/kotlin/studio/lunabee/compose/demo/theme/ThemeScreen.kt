@@ -54,12 +54,13 @@ import studio.lunabee.compose.R
 import studio.lunabee.compose.common.AppDemoTheme
 import studio.lunabee.compose.theme.LbcThemeUtilities
 import java.util.Locale
+import androidx.core.graphics.toColorInt
 
 @Composable
 fun ThemeScreen() {
     var colorHex: String by rememberSaveable { mutableStateOf(value = "") }
     val customColor = try {
-        Color(android.graphics.Color.parseColor("#${colorHex.replace("#", "")}"))
+        Color("#${colorHex.replace("#", "")}".toColorInt())
     } catch (e: Exception) {
         null
     }

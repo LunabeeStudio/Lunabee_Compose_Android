@@ -24,7 +24,7 @@ import studio.lunabee.compose.presenter.LBPresenter
  * Inject presenter as viewmodel and initialize it.
  */
 @Composable
-inline fun <NavScope, reified Presenter : LBPresenter<*, NavScope, *>> PresentScreen(navScope: NavScope) {
+inline fun <NavScope : Any, reified Presenter : LBPresenter<*, NavScope, *>> PresentScreen(navScope: NavScope) {
     val presenter: Presenter = koinViewModel()
     presenter.invoke(navScope)
 }
