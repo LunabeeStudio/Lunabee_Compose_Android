@@ -25,7 +25,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 
-interface UiFieldStyleData {
+fun interface UiFieldStyleData {
     @Composable
     fun ComposeTextField(
         value: String,

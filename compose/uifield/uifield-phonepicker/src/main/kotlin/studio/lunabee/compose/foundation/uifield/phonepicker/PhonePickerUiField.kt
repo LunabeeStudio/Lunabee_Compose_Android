@@ -42,14 +42,14 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
 import studio.lunabee.compose.core.LbcTextSpec
-import studio.lunabee.compose.foundation.uifield.UiField
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.countrypicker.CountryPickerBottomSheetRenderer
 import studio.lunabee.compose.foundation.uifield.countrypicker.CountrySearchDelegate
 import studio.lunabee.compose.foundation.uifield.countrypicker.CountrySearchUiState
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
+import studio.lunabee.compose.foundation.uifield.field.style.DefaultUiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
-import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
+import studio.lunabee.compose.foundation.uifield.field.text.TextUiField
 
 @Suppress("LongParameterList")
 class PhonePickerUiField(
@@ -59,7 +59,7 @@ class PhonePickerUiField(
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
     override val isFieldInError: (CountryCodeFieldData) -> UiFieldError?,
-    override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
+    override val uiFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData(),
     override val onValueChange: (CountryCodeFieldData) -> Unit,
     override val readOnly: Boolean = false,
     override val enabled: Boolean = true,
@@ -68,7 +68,7 @@ class PhonePickerUiField(
     private val phoneFieldRenderer: PhoneFieldRenderer,
     private val coroutineScope: CoroutineScope,
     private val countryPickerBottomSheetRenderer: CountryPickerBottomSheetRenderer,
-) : UiField<CountryCodeFieldData>() {
+) : TextUiField<CountryCodeFieldData>() {
 
     private val json = Json.Default
 

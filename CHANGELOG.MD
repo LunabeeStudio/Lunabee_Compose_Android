@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+```
+LbcuifieldCore 1.14.0
+```
+
+- Fix define `label` & `placeholder` as `val` instead of `var`
+
 ## 2026-02-11
 
 ```

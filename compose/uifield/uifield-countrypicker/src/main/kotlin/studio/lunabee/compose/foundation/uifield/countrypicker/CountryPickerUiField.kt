@@ -45,8 +45,9 @@ import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiField
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
+import studio.lunabee.compose.foundation.uifield.field.style.DefaultUiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
-import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
+import studio.lunabee.compose.foundation.uifield.field.text.TextUiField
 
 /**
  * A [UiField] implementation for selecting a country from a list presented in a bottom sheet.
@@ -63,7 +64,7 @@ import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImp
  * @param savedStateHandle The [SavedStateHandle] used to persist the field's state across process death.
  * @param isFieldInError A lambda function that determines if the current value is in an error state. It should return a
  * [UiFieldError] if there is an error, or `null` otherwise.
- * @param uiFieldStyleData The styling data for the text field, implementing [UiFieldStyleData]. Defaults to [UiFieldStyleDataImpl].
+ * @param uiFieldStyleData The styling data for the text field, implementing [UiFieldStyleData]. Defaults to [DefaultUiFieldStyleData].
  * @param onValueChange A callback that is invoked when the selected country changes. The new value is the country's ISO code.
  * @param readOnly A boolean indicating whether the field is read-only. If `true`, the user cannot change the value.
  * @param enabled A boolean indicating whether the field is enabled. If `false`, the field is disabled and does not respond to
@@ -78,14 +79,14 @@ class CountryPickerUiField(
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
     override val isFieldInError: (String?) -> UiFieldError?,
-    override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl(),
+    override val uiFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData(),
     override val onValueChange: (String) -> Unit,
     override val readOnly: Boolean = false,
     override val enabled: Boolean = true,
     private val coroutineScope: CoroutineScope,
     private val countryPickerBottomSheetRenderer: CountryPickerBottomSheetRenderer,
     private val trailingIcon: @Composable (() -> Unit)? = null,
-) : UiField<String>() {
+) : TextUiField<String>() {
 
     override val options: List<UiFieldOption> = emptyList()
 

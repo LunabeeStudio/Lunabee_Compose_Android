@@ -24,16 +24,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
-import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 
 abstract class UiField<T> {
     abstract val id: String
     abstract val savedStateHandle: SavedStateHandle
     abstract val initialValue: T
-    abstract var placeholder: LbcTextSpec?
-    abstract var label: LbcTextSpec?
+    abstract val placeholder: LbcTextSpec?
+    abstract val label: LbcTextSpec?
     abstract val options: List<UiFieldOption>
-    abstract val uiFieldStyleData: UiFieldStyleData
     abstract val isFieldInError: (T) -> UiFieldError?
     abstract val onValueChange: (T) -> Unit
     abstract val readOnly: Boolean

@@ -33,8 +33,6 @@ import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.PasswordUiFieldData
 import studio.lunabee.compose.foundation.uifield.field.style.PasswordUiFieldDataImpl
-import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
-import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
 import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityFieldOption
 import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityOptionData
 import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityOptionHolder
@@ -102,9 +100,6 @@ class PasswordUiTextField(
             interactionSource = null,
         )
     }
-
-    // Not used here ...
-    override val uiFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
 
     override fun savedValueToData(value: String): String = value
 

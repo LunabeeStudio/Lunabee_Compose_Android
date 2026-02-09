@@ -64,7 +64,7 @@ import studio.lunabee.compose.foundation.uifield.countrypicker.CountrySearchItem
 import studio.lunabee.compose.foundation.uifield.countrypicker.SelectedCountry
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
-import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleDataImpl
+import studio.lunabee.compose.foundation.uifield.field.style.DefaultUiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.text.NormalUiTextField
 import studio.lunabee.compose.foundation.uifield.field.text.PasswordUiTextField
 import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityOptionData
@@ -179,7 +179,7 @@ private fun rememberCountryPickerField(savedStateHandle: SavedStateHandle): Coun
                 LbcTextSpec
                     .Raw("Search for a country")
             override val searchFieldPlaceHolder: LbcTextSpec = LbcTextSpec.Raw("")
-            override val searchFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
+            override val searchFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData()
         },
     )
 }
@@ -245,7 +245,7 @@ private fun rememberPhonePickerField(savedStateHandle: SavedStateHandle): PhoneP
                 LbcTextSpec
                     .Raw("Search for a country")
             override val searchFieldPlaceHolder: LbcTextSpec = LbcTextSpec.Raw("")
-            override val searchFieldStyleData: UiFieldStyleData = UiFieldStyleDataImpl()
+            override val searchFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData()
         },
     )
 }

@@ -29,7 +29,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 
-class UiFieldStyleDataImpl : UiFieldStyleData {
+class DefaultUiFieldStyleData : UiFieldStyleData {
     @Composable
     override fun ComposeTextField(
         value: String,

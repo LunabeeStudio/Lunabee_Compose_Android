@@ -29,9 +29,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.text.input.VisualTransformation
-import studio.lunabee.compose.foundation.uifield.UiField
+import studio.lunabee.compose.foundation.uifield.field.text.TextUiField
 
-abstract class TimeUiField<T> : UiField<T>() {
+abstract class TimeUiField<T> : TextUiField<T>() {
+
+    //    override val visualTransformation: StateFlow<VisualTransformation> = MutableStateFlow(VisualTransformation.None)
+    //    override val keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+    //    override val keyboardActions: KeyboardActions = KeyboardActions.Default
+    //    override val maxLine: Int = 1
 
     @Composable
     override fun Composable(modifier: Modifier) {
