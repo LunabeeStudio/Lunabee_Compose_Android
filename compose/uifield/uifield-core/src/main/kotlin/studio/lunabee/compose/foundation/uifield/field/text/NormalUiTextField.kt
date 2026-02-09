@@ -36,8 +36,8 @@ import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 
 class NormalUiTextField(
     override val initialValue: String = "",
-    override var label: LbcTextSpec?,
-    override var placeholder: LbcTextSpec?,
+    override val label: LbcTextSpec?,
+    override val placeholder: LbcTextSpec?,
     override val isFieldInError: (String) -> UiFieldError?,
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
