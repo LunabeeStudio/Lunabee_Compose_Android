@@ -221,12 +221,14 @@ private fun MavenPublication.setPom() {
 }
 
 private fun setupSigning(publication: MavenPublication) {
-    signing {
-        isRequired = true
-        val signingKey: String? by project
-        val signingPassword: String? by project
-        useInMemoryPgpKeys(signingKey, signingPassword)
-        sign(publication)
+    val signingKey: String? by project
+    val signingPassword: String? by project
+    if (signingKey != null) {
+        signing {
+            isRequired = true
+            useInMemoryPgpKeys(signingKey, signingPassword)
+            sign(publication)
+        }
     }
 }
 
