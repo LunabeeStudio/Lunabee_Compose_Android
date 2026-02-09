@@ -55,7 +55,7 @@ object AndroidConfig {
     const val LBCTHEME_VERSION: String = "1.10.0"
     const val MATERIAL_COLOR_UTILITIES_VERSION: String = "1.10.0"
     const val LBCHAPTIC_VERSION: String = "1.8.0"
-    const val LBCUIFIELD_CORE_VERSION: String = "1.13.1"
+    const val LBCUIFIELD_CORE_VERSION: String = "1.14.0"
     const val LBCUIFIELD_PHONEPICKER_VERSION: String = "1.8.0"
     const val LBCUIFIELD_COUNTRYPICKER_VERSION: String = "1.7.0"
     const val LBCIMAGE_VERSION: String = "1.8.0"

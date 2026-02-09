@@ -20,7 +20,7 @@ import studio.lunabee.compose.foundation.uifield.UiField
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 
 /**
- * Base field class for text-based uifields
+ * Base class for text-based uifields
  */
 abstract class TextUiField<T> : UiField<T>() {
 
