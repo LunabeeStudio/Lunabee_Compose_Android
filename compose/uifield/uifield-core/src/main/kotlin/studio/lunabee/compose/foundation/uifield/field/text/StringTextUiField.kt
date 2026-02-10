@@ -16,13 +16,25 @@
 
 package studio.lunabee.compose.foundation.uifield.field.text
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
 import studio.lunabee.compose.foundation.uifield.UiField
+import studio.lunabee.compose.foundation.uifield.field.style.DefaultUiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 
 /**
- * Base class for text-based uifields
+ * Base class for text-based uifields working with TextFieldValue
  */
-abstract class TextUiField<T> : UiField<T>() {
+abstract class TextUiField<T>(
+    private val uiFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData(),
+) : UiField<T, TextFieldValue>() {
 
-    abstract val uiFieldStyleData: UiFieldStyleData
+    @Composable
+    final override fun Composable(modifier: Modifier) {
+        Composable(modifier, uiFieldStyleData)
+    }
+
+    @Composable
+    abstract fun Composable(modifier: Modifier, uiFieldStyleData: UiFieldStyleData)
 }

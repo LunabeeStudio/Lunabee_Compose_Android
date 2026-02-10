@@ -25,6 +25,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
@@ -32,8 +33,8 @@ import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 class DefaultUiFieldStyleData : UiFieldStyleData {
     @Composable
     override fun ComposeTextField(
-        value: String,
-        onValueChange: (String) -> Unit,
+        value: TextFieldValue,
+        onValueChange: (TextFieldValue) -> Unit,
         modifier: Modifier,
         placeholder: LbcTextSpec?,
         label: LbcTextSpec?,

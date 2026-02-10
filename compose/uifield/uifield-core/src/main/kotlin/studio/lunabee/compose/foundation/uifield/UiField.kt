@@ -25,21 +25,27 @@ import kotlinx.coroutines.flow.map
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 
-abstract class UiField<T> {
+/**
+ * Base class for uifields
+ *
+ * @param Form internal form type
+ * @param Display user displayed type
+ */
+abstract class UiField<Form, Display> {
     abstract val id: String
     abstract val savedStateHandle: SavedStateHandle
-    abstract val initialValue: T
+    abstract val initialValue: Form
     abstract val placeholder: LbcTextSpec?
     abstract val label: LbcTextSpec?
     abstract val options: List<UiFieldOption>
-    abstract val isFieldInError: (T) -> UiFieldError?
-    abstract val onValueChange: (T) -> Unit
+    abstract val isFieldInError: (Form) -> UiFieldError?
+    abstract val onValueChange: (Form) -> Unit
     abstract val readOnly: Boolean
     abstract val enabled: Boolean
 
-    protected val mValue: MutableStateFlow<T> by lazy {
+    protected val mValue: MutableStateFlow<Form> by lazy {
         MutableStateFlow(
-            savedStateHandle.get<String>(id)?.let(::savedValueToData) ?: initialValue,
+            restoreFromSavedStateHandle(savedStateHandle) ?: initialValue,
         )
     }
 
@@ -52,10 +58,10 @@ abstract class UiField<T> {
      */
     protected var hasBeenFocused: Boolean = false
 
-    var value: T
+    var value: Form
         get() = mValue.value
         set(value) {
-            savedStateHandle.set(key = id, valueToSavedString(value))
+            saveToSavedStateHandle(value, savedStateHandle)
             mValue.value = value
             onValueChange(value)
         }
@@ -74,11 +80,20 @@ abstract class UiField<T> {
         error.value = displayError
     }
 
-    abstract fun valueToDisplayedString(value: T): String
+    /**
+     * Convert from form model [Form] to user visible model [Display]
+     */
+    abstract fun formToDisplay(value: Form): Display
 
-    abstract fun valueToSavedString(value: T): String
+    /**
+     * Save form model [Form] to saved state handle
+     */
+    abstract fun saveToSavedStateHandle(value: Form, savedStateHandle: SavedStateHandle)
 
-    abstract fun savedValueToData(value: String): T
+    /**
+     * Restore form model [Form] from saved state handle
+     */
+    abstract fun restoreFromSavedStateHandle(savedStateHandle: SavedStateHandle): Form?
 
     @Composable
     abstract fun Composable(modifier: Modifier)

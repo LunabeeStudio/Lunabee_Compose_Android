@@ -51,6 +51,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.CoroutineScope
@@ -272,11 +273,11 @@ private fun rememberDisabledDateUiField(savedStateHandle: SavedStateHandle): Dat
 @Composable
 private fun rememberDisabledField(savedStateHandle: SavedStateHandle): NormalUiTextField = remember {
     NormalUiTextField(
-        initialValue = "Disabled field",
+        initialValue = TextFieldValue("Disabled field"),
         placeholder = LbcTextSpec.Raw(""),
         label = LbcTextSpec.Raw("Disabled"),
         isFieldInError = { value ->
-            if (value.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
+            if (value.text.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
         },
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Next,
@@ -291,11 +292,11 @@ private fun rememberDisabledField(savedStateHandle: SavedStateHandle): NormalUiT
 @Composable
 private fun rememberReadOnlyField(savedStateHandle: SavedStateHandle): NormalUiTextField = remember {
     NormalUiTextField(
-        initialValue = "Read only field",
+        initialValue = TextFieldValue("Read only field"),
         placeholder = LbcTextSpec.Raw(""),
         label = LbcTextSpec.Raw("Read only"),
         isFieldInError = { value ->
-            if (value.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
+            if (value.text.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
         },
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Next,
@@ -397,11 +398,11 @@ private fun rememberPasswordUiTextField(savedStateHandle: SavedStateHandle): Pas
 @Composable
 private fun rememberNormalUiTextField(savedStateHandle: SavedStateHandle): NormalUiTextField = remember {
     NormalUiTextField(
-        initialValue = "Yes yes",
+        initialValue = TextFieldValue("Yes yes"),
         placeholder = LbcTextSpec.Raw("This is a normal text field"),
         label = LbcTextSpec.Raw("Normal"),
         isFieldInError = { value ->
-            if (value.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
+            if (value.text.isBlank()) UiFieldError(LbcTextSpec.Raw("Should not be null")) else null
         },
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Next,

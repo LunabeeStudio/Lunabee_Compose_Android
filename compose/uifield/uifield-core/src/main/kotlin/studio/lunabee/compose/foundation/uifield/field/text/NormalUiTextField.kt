@@ -23,6 +23,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,39 +37,56 @@ import studio.lunabee.compose.foundation.uifield.field.style.DefaultUiFieldStyle
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 
 class NormalUiTextField(
-    override val initialValue: String = "",
+    override val initialValue: TextFieldValue = TextFieldValue(),
     override val label: LbcTextSpec?,
     override val placeholder: LbcTextSpec?,
-    override val isFieldInError: (String) -> UiFieldError?,
+    override val isFieldInError: (TextFieldValue) -> UiFieldError?,
     override val id: String,
     override val savedStateHandle: SavedStateHandle,
     override val options: List<UiFieldOption> = listOf(),
     val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     val keyboardActions: KeyboardActions = KeyboardActions.Default,
-    override val uiFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData(),
+    uiFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData(),
     val maxLine: Int = 1,
     override val readOnly: Boolean = false,
     override val enabled: Boolean = true,
     val visualTransformation: StateFlow<VisualTransformation> = MutableStateFlow(
         VisualTransformation.None,
     ).asStateFlow(),
-    override val onValueChange: (String) -> Unit = {},
-) : TextUiField<String>() {
-    override fun valueToDisplayedString(value: String): String = value
+    override val onValueChange: (TextFieldValue) -> Unit = {},
+) : TextUiField<TextFieldValue>(uiFieldStyleData) {
 
-    override fun valueToSavedString(value: String): String = value
+    override fun formToDisplay(value: TextFieldValue): TextFieldValue = value
 
-    override fun savedValueToData(value: String): String = value
+    override fun saveToSavedStateHandle(value: TextFieldValue, savedStateHandle: SavedStateHandle) {
+        savedStateHandle["${id}_text"] = value.text
+        savedStateHandle["${id}_selStart"] = value.selection.start
+        savedStateHandle["${id}_selEnd"] = value.selection.end
+    }
+
+    override fun restoreFromSavedStateHandle(savedStateHandle: SavedStateHandle): TextFieldValue? {
+        val text = savedStateHandle.get<String>("${id}_text").orEmpty()
+        val start = savedStateHandle["${id}_selStart"] ?: 0
+        val end = savedStateHandle["${id}_selEnd"] ?: 0
+
+        return TextFieldValue(
+            text = text,
+            selection = TextRange(start, end),
+        )
+    }
 
     @Composable
-    override fun Composable(modifier: Modifier) {
+    override fun Composable(
+        modifier: Modifier,
+        uiFieldStyleData: UiFieldStyleData,
+    ) {
         val collectedValue by mValue.collectAsState()
         val collectedVisualTransformation by visualTransformation.collectAsState()
         val collectedError by error.collectAsState()
         uiFieldStyleData.ComposeTextField(
-            value = valueToDisplayedString(collectedValue),
+            value = formToDisplay(collectedValue),
             onValueChange = {
-                value = savedValueToData(it)
+                value = it
                 dismissError()
             },
             modifier = modifier.onFocusEvent {

@@ -29,17 +29,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.text.input.VisualTransformation
+import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.text.TextUiField
 
-abstract class TimeUiField<T> : TextUiField<T>() {
-
-    //    override val visualTransformation: StateFlow<VisualTransformation> = MutableStateFlow(VisualTransformation.None)
-    //    override val keyboardOptions: KeyboardOptions = KeyboardOptions.Default
-    //    override val keyboardActions: KeyboardActions = KeyboardActions.Default
-    //    override val maxLine: Int = 1
+abstract class TimeUiField<T>(uiFieldStyleData: UiFieldStyleData) : TextUiField<T>(uiFieldStyleData) {
 
     @Composable
-    override fun Composable(modifier: Modifier) {
+    override fun Composable(modifier: Modifier, uiFieldStyleData: UiFieldStyleData) {
         val collectedValue by mValue.collectAsState()
         val collectedError by error.collectAsState()
         // https://stackoverflow.com/a/70335041
@@ -57,7 +53,7 @@ abstract class TimeUiField<T> : TextUiField<T>() {
             null
         }
         uiFieldStyleData.ComposeTextField(
-            value = valueToDisplayedString(collectedValue),
+            value = formToDisplay(collectedValue),
             onValueChange = {},
             modifier = modifier
                 .fillMaxWidth()
