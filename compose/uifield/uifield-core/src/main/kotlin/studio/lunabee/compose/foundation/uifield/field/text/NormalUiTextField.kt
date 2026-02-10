@@ -65,14 +65,16 @@ class NormalUiTextField(
     }
 
     override fun restoreFromSavedStateHandle(savedStateHandle: SavedStateHandle): TextFieldValue? {
-        val text = savedStateHandle.get<String>("${id}_text").orEmpty()
+        val text = savedStateHandle.get<String>("${id}_text")
         val start = savedStateHandle["${id}_selStart"] ?: 0
         val end = savedStateHandle["${id}_selEnd"] ?: 0
 
-        return TextFieldValue(
-            text = text,
-            selection = TextRange(start, end),
-        )
+        return text?.let {
+            TextFieldValue(
+                text = it,
+                selection = TextRange(start, end),
+            )
+        }
     }
 
     @Composable

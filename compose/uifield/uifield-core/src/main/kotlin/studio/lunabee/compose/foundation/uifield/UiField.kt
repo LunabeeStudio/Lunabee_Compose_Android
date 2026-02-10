@@ -95,3 +95,13 @@ abstract class UiField<Form, Display> {
     @Composable
     abstract fun Composable(modifier: Modifier)
 }
+
+abstract class BooleanUiField : UiField<Boolean, Boolean>() {
+    override fun formToDisplay(value: Boolean): Boolean = value
+
+    override fun saveToSavedStateHandle(value: Boolean, savedStateHandle: SavedStateHandle) {
+        savedStateHandle[id] = value
+    }
+
+    override fun restoreFromSavedStateHandle(savedStateHandle: SavedStateHandle): Boolean? = savedStateHandle[id]
+}
