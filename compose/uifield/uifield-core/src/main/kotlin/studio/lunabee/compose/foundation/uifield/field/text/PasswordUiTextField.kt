@@ -38,9 +38,9 @@ import studio.lunabee.compose.foundation.uifield.field.text.option.password.Pass
 import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityOptionHolder
 
 class PasswordUiTextField(
-    override var label: LbcTextSpec?,
+    val label: LbcTextSpec?,
     override val initialValue: String,
-    override var placeholder: LbcTextSpec?,
+    val placeholder: LbcTextSpec?,
     override val isFieldInError: (String) -> UiFieldError?,
     override val visibilityOptionData: PasswordVisibilityOptionData,
     override val id: String,

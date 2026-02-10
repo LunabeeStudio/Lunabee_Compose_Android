@@ -19,6 +19,7 @@ package studio.lunabee.compose.foundation.uifield.field.text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
+import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiField
 import studio.lunabee.compose.foundation.uifield.field.style.DefaultUiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
@@ -29,6 +30,9 @@ import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 abstract class TextUiField<T>(
     private val uiFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData(),
 ) : UiField<T, TextFieldValue>() {
+
+    abstract val placeholder: LbcTextSpec?
+    abstract val label: LbcTextSpec?
 
     @Composable
     final override fun Composable(modifier: Modifier) {
