@@ -94,6 +94,7 @@ addComposeModule(
     "uifield/uifield-core",
     "uifield/uifield-countrypicker",
     "uifield/uifield-phonepicker",
+    "uifield/uifield-form",
 )
 // endregion
 

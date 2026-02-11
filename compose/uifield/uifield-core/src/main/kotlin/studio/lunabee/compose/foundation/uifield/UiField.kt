@@ -63,6 +63,11 @@ abstract class UiField<Form, Display> {
             onValueChange(value)
         }
 
+    /**
+     * Run field validation and display error if any
+     *
+     * @return true if there is an error
+     */
     fun checkAndDisplayError(): Boolean {
         val error = isFieldInError(value)
         error?.let(::displayError)

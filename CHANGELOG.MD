@@ -8,10 +8,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## Unreleased
 
 ```
-LbcuifieldCore 2.0.0
+Lbcuifield 2.0.0
+LbcuifieldForm 0.9.0
 ```
 
 - **break:** Move from string based text field to `TextFieldValue` based
+- **new**: `uifield-form` library to create simple form from uifields
 
 ## 2026-02-11
 
