@@ -14,25 +14,13 @@
  * limitations under the License.
  */
 
-plugins {
-    id("lunabee.kmp-library-conventions")
-    id("lunabee.library-publish-conventions")
-}
+package studio.lunabee.monitoring.ui.list
 
-description = "Monitoring Core library"
-version = AndroidConfig.MONITORING_CORE_VERSION
+import androidx.paging.PagingData
+import studio.lunabee.monitoring.core.LBRequest
+import kotlinx.coroutines.flow.Flow
 
-kotlin {
-    jvm()
-
-    sourceSets {
-        all {
-            languageSettings.optIn("kotlin.uuid.ExperimentalUuidApi")
-        }
-
-        commonMain.dependencies {
-            api(libs.androidxPagingCommon)
-            implementation(libs.kotlinxDatetime)
-        }
-    }
-}
+data class NetworkRequestListUiState(
+    val pagingRequests: Flow<PagingData<LBRequest>>,
+    val requestCount: Int,
+)

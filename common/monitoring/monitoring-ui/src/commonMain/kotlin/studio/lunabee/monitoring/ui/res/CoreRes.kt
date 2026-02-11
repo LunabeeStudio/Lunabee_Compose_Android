@@ -14,25 +14,9 @@
  * limitations under the License.
  */
 
-plugins {
-    id("lunabee.kmp-library-conventions")
-    id("lunabee.library-publish-conventions")
-}
+package studio.lunabee.monitoring.ui.res
 
-description = "Monitoring Core library"
-version = AndroidConfig.MONITORING_CORE_VERSION
+import studio.lunabee.monitoring.ui.res.Res
 
-kotlin {
-    jvm()
-
-    sourceSets {
-        all {
-            languageSettings.optIn("kotlin.uuid.ExperimentalUuidApi")
-        }
-
-        commonMain.dependencies {
-            api(libs.androidxPagingCommon)
-            implementation(libs.kotlinxDatetime)
-        }
-    }
-}
+internal typealias CoreString = Res.string
+internal typealias CoreDrawable = Res.drawable

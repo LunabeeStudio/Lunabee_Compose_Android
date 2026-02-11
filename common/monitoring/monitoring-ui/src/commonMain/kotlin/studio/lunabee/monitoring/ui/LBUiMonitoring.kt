@@ -14,25 +14,20 @@
  * limitations under the License.
  */
 
-plugins {
-    id("lunabee.kmp-library-conventions")
-    id("lunabee.library-publish-conventions")
-}
+package studio.lunabee.monitoring.ui
 
-description = "Monitoring Core library"
-version = AndroidConfig.MONITORING_CORE_VERSION
+import studio.lunabee.monitoring.core.LBMonitoring
+import studio.lunabee.monitoring.ui.di.UiMonitoringIsolatedContext
+import org.koin.dsl.module
 
-kotlin {
-    jvm()
-
-    sourceSets {
-        all {
-            languageSettings.optIn("kotlin.uuid.ExperimentalUuidApi")
-        }
-
-        commonMain.dependencies {
-            api(libs.androidxPagingCommon)
-            implementation(libs.kotlinxDatetime)
+object LBUiMonitoring {
+    fun init(monitoring: LBMonitoring) {
+        _root_ide_package_.studio.lunabee.monitoring.ui.di.UiMonitoringIsolatedContext.init {
+            _root_ide_package_.org.koin.core.KoinApplication.modules(
+                module {
+                    single<LBMonitoring> { monitoring }
+                },
+            )
         }
     }
 }

@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
+@file:Suppress("MatchingDeclarationName", "Filename")
+
 package studio.lunabee.monitoring.room
 
-import androidx.room.TypeConverter
-import kotlin.uuid.Uuid
+import android.content.Context
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.SQLiteDriver
+import androidx.sqlite.driver.AndroidSQLiteDriver
 
-class UuidConverter {
-    @TypeConverter
-    fun uuidToBytes(uuid: Uuid?): ByteArray? {
-        return uuid?.toByteArray()
+internal actual class RoomPlatformBuilder(private val context: Context) {
+    actual fun getDriver(): SQLiteDriver {
+        return AndroidSQLiteDriver()
     }
 
-    @TypeConverter
-    fun bytesToUuid(bytes: ByteArray?): Uuid? {
-        return bytes?.let { Uuid.fromByteArray(it) }
+    actual fun builder(): RoomDatabase.Builder<RoomMonitoringDatabase> {
+        return Room.databaseBuilder<RoomMonitoringDatabase>(
+            context = context,
+            name = context.getDatabasePath(DatabaseName).absolutePath,
+        )
     }
 }

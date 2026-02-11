@@ -14,41 +14,35 @@
  * limitations under the License.
  */
 
-package studio.lunabee.monitoring.room.di
+package studio.lunabee.monitoring.ui.di
 
-import studio.lunabee.monitoring.room.RoomMonitoringDatabase
-import studio.lunabee.monitoring.room.dao.RoomRequestDao
-import studio.lunabee.monitoring.room.getRoomDb
+import studio.lunabee.monitoring.ui.details.NetworkRequestDetailViewModel
+import studio.lunabee.monitoring.ui.list.NetworkRequestListViewModel
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
-import org.koin.core.component.KoinComponent
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.koinApplication
 import org.koin.dsl.module
 
-internal object RoomMonitoringKoinProvider : RoomMonitoringIsolatedComponent {
-    val requestDao: RoomRequestDao
-        get() = getKoin().get()
-}
-
-internal object RoomMonitoringIsolatedContext {
+internal object UiMonitoringIsolatedContext {
     private var koinApp: KoinApplication? = null
 
     val koin: Koin
-        get() = koinApp?.koin ?: throw IllegalArgumentException("KoinApp not initialized")
+        get() = getSafeKoinApp().koin
+
+    fun getSafeKoinApp(): KoinApplication {
+        return checkNotNull(koinApp) { "Did you call start()?" }
+    }
 
     fun init(block: KoinApplication.() -> Unit) {
         koinApp = koinApplication {
             block()
             modules(
                 module {
-                    single { getRoomDb(builder = get(), dispatcher = get()) }
-                    single { get<RoomMonitoringDatabase>().requestDao() }
+                    viewModelOf(::NetworkRequestListViewModel)
+                    viewModelOf(::NetworkRequestDetailViewModel)
                 },
             )
         }
     }
-}
-
-internal interface RoomMonitoringIsolatedComponent : KoinComponent {
-    override fun getKoin(): Koin = RoomMonitoringIsolatedContext.koin
 }
