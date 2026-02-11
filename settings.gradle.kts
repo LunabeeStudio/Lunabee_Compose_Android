@@ -47,7 +47,10 @@ rootProject.name = "LBAndroid"
 
 includeBuild("build-logic")
 
-include("demo-compose")
+include(
+    "demo-compose",
+    "ios-demo",
+)
 
 fun addComposeModule(vararg projectRelPath: String) {
     projectRelPath.forEach { path ->
