@@ -7,6 +7,7 @@ plugins {
 }
 
 description = "Compose UI for monitoring"
+version = AndroidConfig.MONITORING_UI_VERSION
 
 kotlin {
 

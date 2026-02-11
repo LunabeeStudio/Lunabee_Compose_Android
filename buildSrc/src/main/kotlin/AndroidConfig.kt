@@ -71,6 +71,11 @@ object AndroidConfig {
     const val LOADING_VERSION: String = "4.9.0"
     const val PLATFORM_VERSION: String = "4.9.0"
     const val EXTENSIONS_ANDROID_VERSION: String = "4.9.0"
+    const val MONITORING_CORE_VERSION: String = "4.9.0"
+    const val MONITORING_KTOR_VERSION: String = MONITORING_CORE_VERSION
+    const val MONITORING_OKHTTP_VERSION: String = MONITORING_CORE_VERSION
+    const val MONITORING_ROOM_VERSION: String = MONITORING_CORE_VERSION
+    const val MONITORING_UI_VERSION: String = MONITORING_CORE_VERSION
 
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_21
     val JVM_TARGET: JvmTarget = JvmTarget.JVM_21

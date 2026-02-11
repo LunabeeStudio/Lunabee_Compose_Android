@@ -4,6 +4,7 @@ plugins {
 }
 
 description = "Ktor remote layer implementation of monitoring"
+version = AndroidConfig.MONITORING_KTOR_VERSION
 
 kotlin {
     jvm()

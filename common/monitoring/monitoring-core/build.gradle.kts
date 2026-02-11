@@ -4,6 +4,7 @@ plugins {
 }
 
 description = "Monitoring Core library"
+version = AndroidConfig.MONITORING_CORE_VERSION
 
 kotlin {
     jvm()

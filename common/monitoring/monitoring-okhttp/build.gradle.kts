@@ -3,11 +3,12 @@ plugins {
     id("lunabee.library-publish-conventions")
 }
 
+description = "OkHttp integration to monitoring library"
+version = AndroidConfig.MONITORING_OKHTTP_VERSION
+
 android {
     namespace = "studio.lunabee.onitoring.okhttp"
 }
-
-description = "OkHttp integration to monitoring library"
 
 dependencies {
     implementation(libs.kotlinxDatetime)
