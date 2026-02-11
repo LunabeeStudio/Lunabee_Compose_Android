@@ -43,6 +43,11 @@ dependencies {
         addJvmModule(projects.loggerKermit)
         addModule(projects.loggerKermitCrashlytics)
         addModule(projects.test)
+        addModule(projects.monitoringCore)
+        addModule(projects.monitoringKtor)
+        addModule(projects.monitoringOkhttp)
+        addModule(projects.monitoringRoom)
+        addModule(projects.monitoringUi)
     }
 }
 

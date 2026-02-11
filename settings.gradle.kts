@@ -112,6 +112,11 @@ addCommonModule(
     "loading/loading-compose",
     "loading/loading-hilt",
     "loading/loading-koin",
+    "monitoring/monitoring-core",
+    "monitoring/monitoring-ktor",
+    "monitoring/monitoring-okhttp",
+    "monitoring/monitoring-room",
+    "monitoring/monitoring-ui",
 )
 addModule(":loading-checks", File("common/loading/loading-compose/checks"), "loading-checks")
 // endregion

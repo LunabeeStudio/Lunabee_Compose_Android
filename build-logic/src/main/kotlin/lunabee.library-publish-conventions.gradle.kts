@@ -64,10 +64,6 @@ jreleaser {
                     //  https://github.com/jreleaser/jreleaser/issues/1746
                     applyMavenCentralRules = false
                     artifactOverride {
-                        artifactId.set("${project.name.get()}-iosx64")
-                        this.jar = false
-                    }
-                    artifactOverride {
                         artifactId.set("${project.name.get()}-iosarm64")
                         this.jar = false
                     }
