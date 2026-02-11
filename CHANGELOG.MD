@@ -7,6 +7,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## 2026-02-11
+
+```
+monitoring 4.9.0
+```
+
+- Add `monitoring` library to track remote calls. Provide implementations for Ktor, OkHttp, Room and Compose UI
+
 ## 2026-01-21
 
 ```
