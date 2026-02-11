@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-@file:Suppress("MatchingDeclarationName", "Filename")
-
 package studio.lunabee.monitoring.room
 
 import android.content.Context
