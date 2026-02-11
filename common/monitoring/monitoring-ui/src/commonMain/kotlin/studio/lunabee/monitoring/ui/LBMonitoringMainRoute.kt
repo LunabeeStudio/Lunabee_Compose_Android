@@ -26,12 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import studio.lunabee.monitoring.ui.di.UiMonitoringIsolatedContext
-import studio.lunabee.monitoring.ui.details.NetworkRequestDetailDestination
-import studio.lunabee.monitoring.ui.details.NetworkRequestDetailNavScope
-import studio.lunabee.monitoring.ui.list.NetworkRequestListDestination
-import studio.lunabee.monitoring.ui.list.NetworkRequestListNavScope
 import org.koin.compose.KoinIsolatedContext
+import studio.lunabee.monitoring.ui.list.NetworkRequestListDestination
 import kotlin.uuid.Uuid
 
 @Composable
@@ -39,7 +35,7 @@ fun LBMonitoringMainRoute(
     closeMonitoring: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    KoinIsolatedContext(context = _root_ide_package_.studio.lunabee.monitoring.ui.di.UiMonitoringIsolatedContext.getSafeKoinApp()) {
+    KoinIsolatedContext(context = studio.lunabee.monitoring.ui.di.UiMonitoringIsolatedContext.getSafeKoinApp()) {
         val rootNavController: NavHostController = rememberNavController()
         MaterialTheme(
             colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme(),
@@ -47,23 +43,23 @@ fun LBMonitoringMainRoute(
             Surface {
                 NavHost(
                     navController = rootNavController,
-                    startDestination = _root_ide_package_.studio.lunabee.monitoring.ui.list.NetworkRequestListDestination,
+                    startDestination = NetworkRequestListDestination,
                     modifier = modifier,
                 ) {
-                    _root_ide_package_.studio.lunabee.monitoring.ui.list.NetworkRequestListDestination.composable(
+                    NetworkRequestListDestination.composable(
                         navGraphBuilder = this,
                         navScope = object : studio.lunabee.monitoring.ui.list.NetworkRequestListNavScope {
                             override val navigateBack: () -> Unit = closeMonitoring
                             override val navigateToRequestDetail: (requestId: Uuid) -> Unit = { requestId ->
                                 rootNavController.navigate(
-                                    _root_ide_package_.studio.lunabee.monitoring.ui.details.NetworkRequestDetailDestination(
+                                    studio.lunabee.monitoring.ui.details.NetworkRequestDetailDestination(
                                         requestId = requestId.toHexString(),
                                     ),
                                 )
                             }
                         },
                     )
-                    _root_ide_package_.studio.lunabee.monitoring.ui.details.NetworkRequestDetailDestination.Companion.composable(
+                    studio.lunabee.monitoring.ui.details.NetworkRequestDetailDestination.Companion.composable(
                         navGraphBuilder = this,
                         navScope = object : studio.lunabee.monitoring.ui.details.NetworkRequestDetailNavScope {
                             override val navigateBack: () -> Unit = { rootNavController.popBackStack() }

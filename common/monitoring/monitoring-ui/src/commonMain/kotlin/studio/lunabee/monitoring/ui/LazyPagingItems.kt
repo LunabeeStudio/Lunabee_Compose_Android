@@ -165,10 +165,10 @@ internal class LazyPagingItems<T : Any> internal constructor(
     public var loadState: CombinedLoadStates by mutableStateOf(
         pagingDataPresenter.loadStateFlow.value
             ?: CombinedLoadStates(
-                refresh = _root_ide_package_.studio.lunabee.monitoring.ui.InitialLoadStates.refresh,
-                prepend = _root_ide_package_.studio.lunabee.monitoring.ui.InitialLoadStates.prepend,
-                append = _root_ide_package_.studio.lunabee.monitoring.ui.InitialLoadStates.append,
-                source = _root_ide_package_.studio.lunabee.monitoring.ui.InitialLoadStates,
+                refresh = studio.lunabee.monitoring.ui.InitialLoadStates.refresh,
+                prepend = studio.lunabee.monitoring.ui.InitialLoadStates.prepend,
+                append = studio.lunabee.monitoring.ui.InitialLoadStates.append,
+                source = studio.lunabee.monitoring.ui.InitialLoadStates,
             ),
     )
         private set
@@ -189,8 +189,8 @@ internal class LazyPagingItems<T : Any> internal constructor(
 private val IncompleteLoadState = LoadState.NotLoading(false)
 private val InitialLoadStates = LoadStates(
     LoadState.Loading,
-    _root_ide_package_.studio.lunabee.monitoring.ui.IncompleteLoadState,
-    _root_ide_package_.studio.lunabee.monitoring.ui.IncompleteLoadState,
+    studio.lunabee.monitoring.ui.IncompleteLoadState,
+    studio.lunabee.monitoring.ui.IncompleteLoadState,
 )
 
 /**
@@ -207,7 +207,7 @@ private val InitialLoadStates = LoadStates(
 internal fun <T : Any> Flow<PagingData<T>>.collectAsLazyPagingItems(
     context: CoroutineContext = EmptyCoroutineContext,
 ): studio.lunabee.monitoring.ui.LazyPagingItems<T> {
-    val lazyPagingItems = remember(this) { _root_ide_package_.studio.lunabee.monitoring.ui.LazyPagingItems(this) }
+    val lazyPagingItems = remember(this) { studio.lunabee.monitoring.ui.LazyPagingItems(this) }
 
     LaunchedEffect(lazyPagingItems) {
         if (context == EmptyCoroutineContext) {

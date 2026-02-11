@@ -91,7 +91,7 @@ internal fun CoreRequest(
             }
             Text(
                 text = stringResource(
-                    resource = _root_ide_package_.studio.lunabee.monitoring.ui.res.CoreString.networkRequestDuration,
+                    resource = CoreString.networkRequestDuration,
                     if (request.duration < 500.milliseconds) "🚀" else "🐌",
                     request.duration.inWholeMilliseconds,
                 ),
@@ -119,7 +119,7 @@ internal fun CoreRequest(
             }
             Text(
                 text = stringResource(
-                    resource = _root_ide_package_.studio.lunabee.monitoring.ui.res.CoreString.networkRequestListSendingAt,
+                    resource = CoreString.networkRequestListSendingAt,
                     request.sendingAt.format(DateTimeComponents.Formats.RFC_1123),
                 ),
                 style = MaterialTheme.typography.bodySmall.copy(fontStyle = FontStyle.Italic),
@@ -129,7 +129,7 @@ internal fun CoreRequest(
             if (config.showCurrentTimeZoneDate) {
                 Text(
                     text = stringResource(
-                        resource = _root_ide_package_.studio.lunabee.monitoring.ui.res.CoreString.networkRequestListSendingAt,
+                        resource = CoreString.networkRequestListSendingAt,
                         request.sendingAt.format(
                             DateTimeComponents.Formats.RFC_1123,
                             TimeZone.currentSystemDefault().offsetAt(Clock.System.now()),
@@ -143,7 +143,7 @@ internal fun CoreRequest(
         }
         if (config.isChevronDisplayed) {
             Icon(
-                painter = painterResource(resource = _root_ide_package_.studio.lunabee.monitoring.ui.res.CoreDrawable.ic_chevron_right),
+                painter = painterResource(resource = CoreDrawable.ic_chevron_right),
                 contentDescription = null,
             )
         }

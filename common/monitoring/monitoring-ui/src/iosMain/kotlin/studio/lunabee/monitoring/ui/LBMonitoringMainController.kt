@@ -27,13 +27,13 @@ object LBMonitoringMainController {
         monitoring: LBMonitoring,
         closeMonitoring: () -> Unit,
     ): UIViewController {
-        _root_ide_package_.studio.lunabee.monitoring.ui.LBUiMonitoring.init(monitoring = monitoring)
+        studio.lunabee.monitoring.ui.LBUiMonitoring.init(monitoring = monitoring)
         return ComposeUIViewController(
             configure = {
                 onFocusBehavior = OnFocusBehavior.DoNothing // Let Compose handle keyboard instead of iOS.
             },
         ) {
-            _root_ide_package_.studio.lunabee.monitoring.ui.LBMonitoringMainRoute(
+            studio.lunabee.monitoring.ui.LBMonitoringMainRoute(
                 closeMonitoring = closeMonitoring,
             )
         }

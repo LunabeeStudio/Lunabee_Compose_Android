@@ -54,28 +54,28 @@ import kotlin.uuid.Uuid
 
 @Composable
 internal fun NetworkRequestListScreen(
-    navScope: studio.lunabee.monitoring.ui.list.NetworkRequestListNavScope,
-    viewmodel: studio.lunabee.monitoring.ui.list.NetworkRequestListViewModel = koinViewModel(),
+    navScope: NetworkRequestListNavScope,
+    viewmodel: NetworkRequestListViewModel = koinViewModel(),
 ) {
     val uiState by viewmodel.uiState.collectAsStateWithLifecycle()
-    val requests: studio.lunabee.monitoring.ui.LazyPagingItems<LBRequest> = uiState.pagingRequests.collectAsLazyPagingItems()
+    val requests: LazyPagingItems<LBRequest> = uiState.pagingRequests.collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier
             .fillMaxSize(),
     ) {
-        _root_ide_package_.studio.lunabee.monitoring.ui.theme.CoreTopBar(
+        CoreTopBar(
             title = stringResource(
-                _root_ide_package_.studio.lunabee.monitoring.ui.res.CoreString.networkRequestListTitle,
+                CoreString.networkRequestListTitle,
                 uiState.requestCount,
             ),
             onBackClicked = navScope.navigateBack,
             actions = {
                 IconButton(
-                    onClick = studio.lunabee.monitoring.ui.list.NetworkRequestListViewModel::flushRequests,
+                    onClick = viewmodel::flushRequests,
                 ) {
                     Icon(
-                        painter = painterResource(_root_ide_package_.studio.lunabee.monitoring.ui.res.CoreDrawable.ic_bin),
+                        painter = painterResource(CoreDrawable.ic_bin),
                         contentDescription = "Delete all requests",
                     )
                 }
@@ -93,9 +93,9 @@ internal fun NetworkRequestListScreen(
                 count = requests.itemCount,
             ) { index ->
                 requests[index]?.let { request ->
-                    _root_ide_package_.studio.lunabee.monitoring.ui.theme.CoreRequest(
+                    CoreRequest(
                         request = request,
-                        config = _root_ide_package_.studio.lunabee.monitoring.ui.theme.CoreRequestConfig.List,
+                        config = CoreRequestConfig.List,
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable { navScope.navigateToRequestDetail(request.id) }
@@ -110,9 +110,9 @@ internal fun NetworkRequestListScreen(
 
 @Serializable
 internal data object NetworkRequestListDestination {
-    fun composable(navGraphBuilder: NavGraphBuilder, navScope: studio.lunabee.monitoring.ui.list.NetworkRequestListNavScope) {
-        navGraphBuilder.composable<studio.lunabee.monitoring.ui.list.NetworkRequestListDestination> {
-            _root_ide_package_.studio.lunabee.monitoring.ui.list.NetworkRequestListScreen(navScope = navScope)
+    fun composable(navGraphBuilder: NavGraphBuilder, navScope: NetworkRequestListNavScope) {
+        navGraphBuilder.composable<NetworkRequestListDestination> {
+            NetworkRequestListScreen(navScope = navScope)
         }
     }
 }

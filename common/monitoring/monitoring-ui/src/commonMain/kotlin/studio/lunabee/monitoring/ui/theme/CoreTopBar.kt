@@ -40,7 +40,7 @@ internal fun CoreTopBar(
                 onClick = onBackClicked,
             ) {
                 Icon(
-                    painter = painterResource(_root_ide_package_.studio.lunabee.monitoring.ui.theme.BackButton),
+                    painter = painterResource(BackButton),
                     contentDescription = "Navigate back",
                 )
             }

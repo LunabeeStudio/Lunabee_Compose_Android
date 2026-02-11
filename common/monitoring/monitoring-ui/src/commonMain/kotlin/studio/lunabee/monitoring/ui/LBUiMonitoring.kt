@@ -16,14 +16,14 @@
 
 package studio.lunabee.monitoring.ui
 
+import org.koin.dsl.module
 import studio.lunabee.monitoring.core.LBMonitoring
 import studio.lunabee.monitoring.ui.di.UiMonitoringIsolatedContext
-import org.koin.dsl.module
 
 object LBUiMonitoring {
     fun init(monitoring: LBMonitoring) {
-        _root_ide_package_.studio.lunabee.monitoring.ui.di.UiMonitoringIsolatedContext.init {
-            _root_ide_package_.org.koin.core.KoinApplication.modules(
+        UiMonitoringIsolatedContext.init {
+            modules(
                 module {
                     single<LBMonitoring> { monitoring }
                 },

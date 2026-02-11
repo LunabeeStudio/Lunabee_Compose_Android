@@ -34,9 +34,9 @@ internal class NetworkRequestListViewModel(
         .getPagingRequests()
         .cachedIn(viewModelScope)
 
-    val uiState: StateFlow<studio.lunabee.monitoring.ui.list.NetworkRequestListUiState> = monitoring.getRequestCountAsFlow()
+    val uiState: StateFlow<NetworkRequestListUiState> = monitoring.getRequestCountAsFlow()
         .map { count ->
-            _root_ide_package_.studio.lunabee.monitoring.ui.list.NetworkRequestListUiState(
+            NetworkRequestListUiState(
                 pagingRequests = pagingRequests,
                 requestCount = count,
             )
@@ -44,7 +44,7 @@ internal class NetworkRequestListViewModel(
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
-            initialValue = _root_ide_package_.studio.lunabee.monitoring.ui.list.NetworkRequestListUiState(pagingRequests, 0),
+            initialValue = NetworkRequestListUiState(pagingRequests, 0),
         )
 
     fun flushRequests() {

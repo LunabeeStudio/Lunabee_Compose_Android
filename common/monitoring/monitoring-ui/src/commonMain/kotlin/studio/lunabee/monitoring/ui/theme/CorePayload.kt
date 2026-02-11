@@ -48,6 +48,7 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import studio.lunabee.monitoring.core.LBPayload
+import studio.lunabee.monitoring.ui.res.CoreDrawable
 import studio.lunabee.monitoring.ui.res.CoreString
 import studio.lunabee.monitoring.ui.res.ic_chevron_right
 import studio.lunabee.monitoring.ui.res.networkRequestDetailBody
@@ -92,7 +93,7 @@ internal fun CorePayload(
                 )
                 Text(
                     text = stringResource(
-                        resource = _root_ide_package_.studio.lunabee.monitoring.ui.res.CoreString.networkRequestDetailContentLengthValue,
+                        resource = CoreString.networkRequestDetailContentLengthValue,
                         if (payload.size > 500) "🍔" else "🥦",
                         payload.size,
                     ),
@@ -100,7 +101,7 @@ internal fun CorePayload(
                 )
             }
             Icon(
-                painter = painterResource(resource = _root_ide_package_.studio.lunabee.monitoring.ui.res.CoreDrawable.ic_chevron_right),
+                painter = painterResource(resource = CoreDrawable.ic_chevron_right),
                 contentDescription = null,
                 modifier = Modifier
                     .rotate(degrees = rotation.value),

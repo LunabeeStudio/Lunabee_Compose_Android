@@ -65,8 +65,8 @@ internal fun NetworkRequestDetailScreen(
         ),
     ) {
         stickyHeader {
-            _root_ide_package_.studio.lunabee.monitoring.ui.theme.CoreTopBar(
-                title = stringResource(_root_ide_package_.studio.lunabee.monitoring.ui.res.CoreString.networkRequestDetailTitle),
+            CoreTopBar(
+                title = stringResource(CoreString.networkRequestDetailTitle),
                 onBackClicked = navScope.navigateBack,
                 actions = {
                     IconButton(
@@ -76,7 +76,7 @@ internal fun NetworkRequestDetailScreen(
                         },
                     ) {
                         Icon(
-                            painter = painterResource(_root_ide_package_.studio.lunabee.monitoring.ui.res.CoreDrawable.ic_bin),
+                            painter = painterResource(CoreDrawable.ic_bin),
                             contentDescription = "Delete request",
                         )
                     }
@@ -89,9 +89,9 @@ internal fun NetworkRequestDetailScreen(
                 val modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
-                _root_ide_package_.studio.lunabee.monitoring.ui.theme.CoreRequest(
+                CoreRequest(
                     request = safeRequest,
-                    config = _root_ide_package_.studio.lunabee.monitoring.ui.theme.CoreRequestConfig.Details,
+                    config = CoreRequestConfig.Details,
                     modifier = modifier,
                 )
                 HorizontalDivider(
@@ -101,9 +101,9 @@ internal fun NetworkRequestDetailScreen(
             }
             safeRequest.outgoingPayload?.let { outgoingPayload ->
                 item {
-                    _root_ide_package_.studio.lunabee.monitoring.ui.theme.CorePayload(
+                    CorePayload(
                         payload = outgoingPayload,
-                        title = _root_ide_package_.studio.lunabee.monitoring.ui.res.CoreString.networkRequestDetailSentTitle,
+                        title = CoreString.networkRequestDetailSentTitle,
                         modifier = Modifier
                             .fillMaxWidth(),
                     )
@@ -111,9 +111,9 @@ internal fun NetworkRequestDetailScreen(
             }
             safeRequest.incomingPayload?.let { outgoingPayload ->
                 item {
-                    _root_ide_package_.studio.lunabee.monitoring.ui.theme.CorePayload(
+                    CorePayload(
                         payload = outgoingPayload,
-                        title = _root_ide_package_.studio.lunabee.monitoring.ui.res.CoreString.networkRequestDetailReceivedTitle,
+                        title = CoreString.networkRequestDetailReceivedTitle,
                         modifier = Modifier
                             .fillMaxWidth(),
                     )
@@ -130,7 +130,7 @@ internal data class NetworkRequestDetailDestination(
     companion object {
         fun composable(navGraphBuilder: NavGraphBuilder, navScope: studio.lunabee.monitoring.ui.details.NetworkRequestDetailNavScope) {
             navGraphBuilder.composable<studio.lunabee.monitoring.ui.details.NetworkRequestDetailDestination> {
-                _root_ide_package_.studio.lunabee.monitoring.ui.details.NetworkRequestDetailScreen(navScope = navScope)
+                studio.lunabee.monitoring.ui.details.NetworkRequestDetailScreen(navScope = navScope)
             }
         }
     }
