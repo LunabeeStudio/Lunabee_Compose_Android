@@ -21,12 +21,11 @@
     <string name="foundation_screen_title">"Foundation"</string>
     <string name="foundation_screen_subtitle">"Composants dérivés de androidx.compose.foundation"</string>
     <string name="theme_screen_title">"Theme"</string>
-     <string name="theme_screen_subtitle">"Utilitaires pour créer ses thèmes Material3 dynamiquement"</string>
+    <string name="theme_screen_subtitle">"Utilitaires pour créer ses thèmes Material3 dynamiquement"</string>
     <string name="crop_screen_title">"Crop"</string>
     <string name="crop_screen_subtitle">"Composant permettant de zommer et croper des images."</string>
     <string name="uiFields_screen_title">"UiFields"</string>
     <string name="uiFields_screen_subtitle">"Composant permettant la creation de formulaire en Compose"</string>
-
 
     <!-- TextScreen -->
     <string name="text_screen_highlight_placeholder">"Séparez les textes à mettre en évidence par une virgule"</string>
@@ -54,5 +53,9 @@
 
     <!-- ImageScreen -->
     <string name="image_title">Image</string>
-    <string name="image_description">Chargement d\'images</string>
+    <string name="image_description">Chargement d’images.</string>
+
+    <!-- KtorScreen -->
+    <string name="ktor_title">Ktor</string>
+    <string name="ktor_description">Ktor surveillance.</string>
 </resources>

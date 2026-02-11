@@ -17,6 +17,9 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".DemoApp"
         android:allowBackup="true"
@@ -35,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".demo.monitoring.NetworkLogActivity"
+            android:exported="false" />
 
         <!-- Widget declaration -->
         <receiver

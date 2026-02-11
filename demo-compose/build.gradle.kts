@@ -19,6 +19,7 @@ plugins {
     id(libs.plugins.composePlugin.get().pluginId)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
@@ -97,6 +98,8 @@ dependencies {
     implementation(libs.composeMaterialIconsExtended)
     implementation(libs.googleAndroidMaterial)
     implementation(libs.hiltAndroid)
+    implementation(libs.ktorClientAndroid)
+    implementation(libs.ktorClientCore)
     implementation(libs.navigationCompose)
 
     implementation(projects.compose.accessibility)
@@ -112,6 +115,14 @@ dependencies {
     implementation(projects.compose.uifieldCore)
     implementation(projects.compose.uifieldCountrypicker)
     implementation(projects.compose.uifieldPhonepicker)
+    implementation(projects.ktorCore)
+    implementation(projects.ktorJson)
+    implementation(projects.ktorKermit)
+    implementation(projects.loggerKermit)
+    implementation(projects.monitoringCore)
+    implementation(projects.monitoringKtor)
+    implementation(projects.monitoringRoom)
+    implementation(projects.monitoringUi)
 
     debugImplementation(libs.androidxUiTooling)
     debugImplementation(libs.composeUiTestManifest)

@@ -68,6 +68,11 @@ fun MainScreen(
                 subtitle = LbcTextSpec.StringResource(R.string.image_description),
                 direction = directions.navigateToImageScreen,
             ),
+            MenuDescription(
+                title = LbcTextSpec.StringResource(R.string.ktor_title),
+                subtitle = LbcTextSpec.StringResource(R.string.ktor_description),
+                direction = directions.navigateToKtorScreen,
+            ),
         ),
     )
 }

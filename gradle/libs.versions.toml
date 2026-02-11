@@ -147,6 +147,7 @@ kotlinxCoroutinesTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-corou
 kotlinxDatetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinxSerializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 kotlinxViewModel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "kotlinxViewModel" }
+ktorClientAndroid = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
 ktorClientCore = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktorContentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktorJsonSerialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }

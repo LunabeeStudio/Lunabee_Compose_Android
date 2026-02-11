@@ -29,6 +29,7 @@ kotlin {
 
     androidLibrary {
         namespace = "studio.lunabee.monitoring.ui"
+        experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
     }
 
     sourceSets {

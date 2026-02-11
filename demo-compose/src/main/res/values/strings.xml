@@ -56,4 +56,8 @@
     <!-- ImageScreen -->
     <string name="image_title">Image</string>
     <string name="image_description">Image loading.</string>
+
+    <!-- KtorScreen -->
+    <string name="ktor_title">Ktor</string>
+    <string name="ktor_description">Ktor monitoring.</string>
 </resources>
