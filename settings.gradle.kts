@@ -47,76 +47,79 @@ rootProject.name = "LBAndroid"
 
 includeBuild("build-logic")
 
-include("demo-compose")
+include(
+    "demo-compose",
+    "ios-demo",
+)
+
+fun addComposeModule(vararg projectRelPath: String) {
+    projectRelPath.forEach { path ->
+        val projectName = ":compose:${path.split(File.separator).last()}"
+        val projectDir = File("compose/$path")
+        addModule(projectName, projectDir)
+    }
+}
+
+fun addCommonModule(vararg projectRelPath: String) {
+    projectRelPath.forEach { path ->
+        val projectName = ":${path.split(File.separator).last()}"
+        val projectDir = File("common/$path")
+        addModule(projectName, projectDir)
+    }
+}
+
+fun addModule(path: String, projectDir: File, name: String = projectDir.name) {
+    include(path)
+    project(path).apply {
+        this.projectDir = projectDir
+        this.name = name
+    }
+}
 
 // region Compose
-include(":compose:material-color-utilities")
-project(":compose:material-color-utilities").projectDir = File("compose/material-color-utilities")
-include(":compose:accessibility")
-project(":compose:accessibility").projectDir = File("compose/accessibility")
-include(":compose:androidtest")
-project(":compose:androidtest").projectDir = File("compose/test/androidtest")
-include(":compose:core")
-project(":compose:core").projectDir = File("compose/core")
-include(":compose:crop")
-project(":compose:crop").projectDir = File("compose/crop")
-include(":compose:foundation")
-project(":compose:foundation").projectDir = File("compose/foundation")
-include(":compose:glance")
-project(":compose:glance").projectDir = File("compose/glance")
-include(":compose:haptic")
-project(":compose:haptic").projectDir = File("compose/haptic")
-include(":compose:image")
-project(":compose:image").projectDir = File("compose/image")
-include(":compose:theme")
-project(":compose:theme").projectDir = File("compose/theme")
-include(":compose:robolectrictest")
-project(":compose:robolectrictest").projectDir = File("compose/test/robolectrictest")
-include(":compose:presenter")
-project(":compose:presenter").projectDir = File("compose/presenter/presenter")
-include(":compose:presenter-koin")
-project(":compose:presenter-koin").projectDir = File("compose/presenter/presenter-koin")
-include(":compose:uifield-core")
-project(":compose:uifield-core").projectDir = File("compose/uifield/uifield-core")
-include(":compose:uifield-countrypicker")
-project(":compose:uifield-countrypicker").projectDir = File("compose/uifield/uifield-countrypicker")
-include(":compose:uifield-phonepicker")
-project(":compose:uifield-phonepicker").projectDir = File("compose/uifield/uifield-phonepicker")
+addComposeModule(
+    "material-color-utilities",
+    "accessibility",
+    "test/androidtest",
+    "core",
+    "crop",
+    "foundation",
+    "glance",
+    "haptic",
+    "image",
+    "theme",
+    "test/robolectrictest",
+    "presenter/presenter",
+    "presenter/presenter-koin",
+    "uifield/uifield-core",
+    "uifield/uifield-countrypicker",
+    "uifield/uifield-phonepicker",
+)
 // endregion
 
 // region Common
-include("platform")
-project(":platform").projectDir = File("common/platform")
-include("logger-kermit")
-project(":logger-kermit").projectDir = File("common/logger/logger-kermit")
-include("logger-kermit-crashlytics")
-project(":logger-kermit-crashlytics").projectDir = File("common/logger/logger-kermit-crashlytics")
-include("core")
-project(":core").projectDir = File("common/core/core")
-include("core-compose")
-project(":core-compose").projectDir = File("common/core/core-compose")
-include("core-android")
-project(":core-android").projectDir = File("common/core/core-android")
-include("extension")
-project(":extension").projectDir = File("common/extension/extension")
-include("extension-android")
-project(":extension-android").projectDir = File("common/extension/extension-android")
-include("test")
-project(":test").projectDir = File("common/test")
-include(":ktor-core")
-project(":ktor-core").projectDir = File("common/ktor/ktor-core")
-include(":ktor-kermit")
-project(":ktor-kermit").projectDir = File("common/ktor/ktor-kermit")
-include(":ktor-json")
-project(":ktor-json").projectDir = File("common/ktor/ktor-json")
-include(":loading-core")
-project(":loading-core").projectDir = File("common/loading/loading-core")
-include(":loading-checks")
-project(":loading-checks").projectDir = File("common/loading/loading-compose/checks")
-include(":loading-compose")
-project(":loading-compose").projectDir = File("common/loading/loading-compose")
-include(":loading-hilt")
-project(":loading-hilt").projectDir = File("common/loading/loading-hilt")
-include(":loading-koin")
-project(":loading-koin").projectDir = File("common/loading/loading-koin")
+addCommonModule(
+    "platform",
+    "logger/logger-kermit",
+    "logger/logger-kermit-crashlytics",
+    "core/core",
+    "core/core-compose",
+    "core/core-android",
+    "extension/extension",
+    "extension/extension-android",
+    "test",
+    "ktor/ktor-core",
+    "ktor/ktor-kermit",
+    "ktor/ktor-json",
+    "loading/loading-core",
+    "loading/loading-compose",
+    "loading/loading-hilt",
+    "loading/loading-koin",
+    "monitoring/monitoring-core",
+    "monitoring/monitoring-ktor",
+    "monitoring/monitoring-okhttp",
+    "monitoring/monitoring-room",
+    "monitoring/monitoring-ui",
+)
+addModule(":loading-checks", File("common/loading/loading-compose/checks"), "loading-checks")
 // endregion

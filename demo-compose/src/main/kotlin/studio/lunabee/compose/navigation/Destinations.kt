@@ -26,6 +26,7 @@ object Destinations {
     const val PresenterRoute: String = "Presenter"
     const val GlanceRoute: String = "GlanceRoute"
     const val ImageRoute: String = "ImageRoute"
+    const val KtorRoute: String = "KtorRoute"
 
     val BackNavigationScreen: List<String> = listOf(
         FoundationRoute,
@@ -36,5 +37,6 @@ object Destinations {
         PresenterRoute,
         GlanceRoute,
         ImageRoute,
+        KtorRoute,
     )
 }

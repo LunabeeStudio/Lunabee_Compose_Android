@@ -64,4 +64,8 @@ class Directions(navController: NavHostController) {
     val navigateToImageScreen: ToDirection = {
         navController.navigate(route = Destinations.ImageRoute)
     }
+
+    val navigateToKtorScreen: ToDirection = {
+        navController.navigate(route = Destinations.KtorRoute)
+    }
 }

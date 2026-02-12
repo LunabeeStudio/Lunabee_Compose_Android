@@ -64,10 +64,6 @@ jreleaser {
                     //  https://github.com/jreleaser/jreleaser/issues/1746
                     applyMavenCentralRules = false
                     artifactOverride {
-                        artifactId.set("${project.name.get()}-iosx64")
-                        this.jar = false
-                    }
-                    artifactOverride {
                         artifactId.set("${project.name.get()}-iosarm64")
                         this.jar = false
                     }
@@ -225,12 +221,14 @@ private fun MavenPublication.setPom() {
 }
 
 private fun setupSigning(publication: MavenPublication) {
-    signing {
-        isRequired = true
-        val signingKey: String? by project
-        val signingPassword: String? by project
-        useInMemoryPgpKeys(signingKey, signingPassword)
-        sign(publication)
+    val signingKey: String? by project
+    val signingPassword: String? by project
+    if (signingKey != null) {
+        signing {
+            isRequired = true
+            useInMemoryPgpKeys(signingKey, signingPassword)
+            sign(publication)
+        }
     }
 }
 

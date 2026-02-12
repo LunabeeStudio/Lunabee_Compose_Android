@@ -100,3 +100,6 @@ lint/tmp/
 
 .DS_Store
 *.salive
+
+# iOS
+*.xcuserdatad
