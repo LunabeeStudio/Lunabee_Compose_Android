@@ -28,7 +28,7 @@ import studio.lunabee.compose.foundation.uifield.UiFieldId
 open class Form(
     val fields: LinkedHashMap<UiFieldId, UiField<*, *>>,
 ) {
-    constructor(fields: List<UiField<*, *>>) : this(
+    constructor(fields: Collection<UiField<*, *>>) : this(
         LinkedHashMap<UiFieldId, UiField<*, *>>().apply {
             fields.associateByTo(this) { it.id }
         },
@@ -46,9 +46,9 @@ open class Form(
     /**
      * Checks all fields validity and displays errors on them if any
      *
-     * @return true if all fields are valid, false otherwise
+     * @return true if any field is invalid, false otherwise
      */
-    open fun checkAndDisplayError(): Boolean {
-        return fields.map { it.value.checkAndDisplayError() }.all { it }
+    open fun checkAndDisplayErrors(): Boolean {
+        return fields.map { it.value.checkAndDisplayError() }.any { it }
     }
 }
