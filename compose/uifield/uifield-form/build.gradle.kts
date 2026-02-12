@@ -19,14 +19,20 @@ plugins {
     id("lunabee.library-publish-conventions")
 }
 
-android {
-    namespace = "studio.lunabee.compose.uifield.form"
-}
-
 description = "Form library based on uifields"
 version = AndroidConfig.LBCUIFIELD_FORM_VERSION
 
+android {
+    namespace = "studio.lunabee.compose.uifield.form"
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
+}
+
 dependencies {
+    coreLibraryDesugaring(libs.desugarJdk)
+
     implementation(platform(libs.kotlinxCoroutinesBom))
 
     implementation(libs.kotlinxCoroutinesCore)
