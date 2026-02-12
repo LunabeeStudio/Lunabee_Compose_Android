@@ -23,7 +23,7 @@ plugins {
 
 val rootProjectGroup: String = "studio.lunabee"
 description = "Lunabee libraries bill of materials"
-version = AndroidConfig.commonVersionName()
+version = AndroidConfig.bomVersion()
 
 dependencies {
     constraints {
