@@ -69,7 +69,7 @@ object AndroidConfig {
     const val TEST_VERSION: String = "4.9.0"
     const val KTOR_VERSION: String = "4.9.0"
     const val LOADING_VERSION: String = "4.9.0"
-    const val PLATFORM_VERSION: String = "4.9.0"
+    const val PLATFORM_VERSION: String = "4.10.0"
     const val EXTENSIONS_ANDROID_VERSION: String = "4.9.0"
     const val MONITORING_CORE_VERSION: String = "4.9.0"
     const val MONITORING_KTOR_VERSION: String = MONITORING_CORE_VERSION
@@ -80,5 +80,5 @@ object AndroidConfig {
     val JDK_VERSION: JavaVersion = JavaVersion.VERSION_21
     val JVM_TARGET: JvmTarget = JvmTarget.JVM_21
 
-    fun commonVersionName(): String = System.getenv(EnvConfig.EnvVersionName)?.takeIf { it.isNotBlank() } ?: PLATFORM_VERSION
+    fun bomVersion(): String = System.getenv(EnvConfig.EnvVersionName)?.takeIf { it.isNotBlank() } ?: PLATFORM_VERSION
 }
