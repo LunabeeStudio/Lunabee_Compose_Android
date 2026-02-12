@@ -41,6 +41,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import kotlinx.coroutines.CoroutineScope
 import studio.lunabee.compose.core.LbcTextSpec
+import studio.lunabee.compose.foundation.uifield.UiFieldId
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.countrypicker.CountryPickerBottomSheetRenderer
 import studio.lunabee.compose.foundation.uifield.countrypicker.CountrySearchDelegate
@@ -55,7 +56,7 @@ class PhonePickerUiField(
     override val initialValue: CountryCodeFieldData,
     override var label: LbcTextSpec?,
     override var placeholder: LbcTextSpec?,
-    override val id: String,
+    override val id: UiFieldId,
     override val savedStateHandle: SavedStateHandle,
     override val isFieldInError: (CountryCodeFieldData) -> UiFieldError?,
     uiFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData(),

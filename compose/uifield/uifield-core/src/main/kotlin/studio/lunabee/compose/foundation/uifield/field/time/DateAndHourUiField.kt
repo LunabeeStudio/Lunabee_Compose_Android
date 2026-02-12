@@ -21,6 +21,7 @@ import androidx.compose.material3.SelectableDates
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import studio.lunabee.compose.core.LbcTextSpec
+import studio.lunabee.compose.foundation.uifield.UiFieldId
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.DefaultUiFieldStyleData
@@ -31,6 +32,8 @@ import studio.lunabee.compose.foundation.uifield.field.time.option.date.DatePick
 import studio.lunabee.compose.foundation.uifield.field.time.option.hour.HourPickerData
 import studio.lunabee.compose.foundation.uifield.field.time.option.hour.HourPickerHolder
 import studio.lunabee.compose.foundation.uifield.field.time.option.hour.HourPickerOption
+import studio.lunabee.compose.foundation.uifield.get
+import studio.lunabee.compose.foundation.uifield.set
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -42,7 +45,7 @@ class DateAndHourUiField(
     override var label: LbcTextSpec?,
     override var placeholder: LbcTextSpec?,
     override val isFieldInError: (LocalDateTime?) -> UiFieldError?,
-    override val id: String,
+    override val id: UiFieldId,
     override val savedStateHandle: SavedStateHandle,
     uiFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData(),
     override val selectableDates: SelectableDates = DatePickerDefaults.AllDates,

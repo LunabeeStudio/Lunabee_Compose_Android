@@ -31,6 +31,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import studio.lunabee.compose.core.LbcTextSpec
+import studio.lunabee.compose.foundation.uifield.UiFieldId
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.DefaultUiFieldStyleData
@@ -41,7 +42,7 @@ class NormalUiTextField(
     override val label: LbcTextSpec?,
     override val placeholder: LbcTextSpec?,
     override val isFieldInError: (TextFieldValue) -> UiFieldError?,
-    override val id: String,
+    override val id: UiFieldId,
     override val savedStateHandle: SavedStateHandle,
     override val options: List<UiFieldOption> = listOf(),
     val keyboardOptions: KeyboardOptions = KeyboardOptions.Default,

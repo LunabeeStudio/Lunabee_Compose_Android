@@ -20,18 +20,25 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import studio.lunabee.compose.foundation.uifield.UiField
+import studio.lunabee.compose.foundation.uifield.UiFieldId
 
 /**
- * Represents a form with a list of [UiField]
+ * Represents a form with a map of [UiField]
  */
 open class Form(
-    val fields: List<UiField<*, *>>,
+    val fields: LinkedHashMap<UiFieldId, UiField<*, *>>,
 ) {
+    constructor(fields: List<UiField<*, *>>) : this(
+        LinkedHashMap<UiFieldId, UiField<*, *>>().apply {
+            fields.associateByTo(this) { it.id }
+        },
+    )
+
     /**
      * Emits true when all fields are valid, false otherwise
      */
     open fun observeFieldsValidity(): Flow<Boolean> {
-        return combine(fields.map { it.isInError }) { errors ->
+        return combine(fields.map { it.value.isInError }) { errors ->
             errors.all { !it }
         }.distinctUntilChanged()
     }
@@ -42,6 +49,6 @@ open class Form(
      * @return true if all fields are valid, false otherwise
      */
     open fun checkAndDisplayError(): Boolean {
-        return fields.map { it.checkAndDisplayError() }.all { it }
+        return fields.map { it.value.checkAndDisplayError() }.all { it }
     }
 }

@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
+import studio.lunabee.compose.foundation.uifield.UiFieldId
 import studio.lunabee.compose.foundation.uifield.countrypicker.ext.normalized
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.text.NormalUiTextField
@@ -168,4 +169,4 @@ class CountrySearchDelegate(
         .orEmpty()
 }
 
-private const val SearchUiFieldId: String = "SearchUiField"
+private val SearchUiFieldId: UiFieldId = UiFieldId("SearchUiField")
