@@ -52,6 +52,9 @@ include(
     "ios-demo",
 )
 
+/**
+ * Add module locate in ./compose folder. Subproject :compose will be used.
+ */
 fun addComposeModule(vararg projectRelPath: String) {
     projectRelPath.forEach { path ->
         val projectName = ":compose:${path.split(File.separator).last()}"
@@ -60,6 +63,9 @@ fun addComposeModule(vararg projectRelPath: String) {
     }
 }
 
+/**
+ * Add module locate in ./common folder
+ */
 fun addCommonModule(vararg projectRelPath: String) {
     projectRelPath.forEach { path ->
         val projectName = ":${path.split(File.separator).last()}"
@@ -76,7 +82,6 @@ fun addModule(path: String, projectDir: File, name: String = projectDir.name) {
     }
 }
 
-// region Compose
 addComposeModule(
     "material-color-utilities",
     "accessibility",
@@ -96,9 +101,7 @@ addComposeModule(
     "uifield/uifield-phonepicker",
     "uifield/uifield-form",
 )
-// endregion
 
-// region Common
 addCommonModule(
     "platform",
     "logger/logger-kermit",
@@ -123,4 +126,3 @@ addCommonModule(
     "monitoring/monitoring-ui",
 )
 addModule(":loading-checks", File("common/loading/loading-compose/checks"), "loading-checks")
-// endregion
