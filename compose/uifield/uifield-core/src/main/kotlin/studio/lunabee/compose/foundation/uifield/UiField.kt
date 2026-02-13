@@ -31,7 +31,7 @@ import studio.lunabee.compose.foundation.uifield.field.UiFieldError
  * @param Display user displayed type
  */
 abstract class UiField<Form, Display> {
-    abstract val id: UiFieldId
+    abstract val id: String
     abstract val savedStateHandle: SavedStateHandle
     abstract val initialValue: Form
     abstract val options: List<UiFieldOption>

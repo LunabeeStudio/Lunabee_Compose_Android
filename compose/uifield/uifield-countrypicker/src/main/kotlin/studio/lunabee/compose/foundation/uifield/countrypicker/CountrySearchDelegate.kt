@@ -28,7 +28,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
-import studio.lunabee.compose.foundation.uifield.UiFieldId
 import studio.lunabee.compose.foundation.uifield.countrypicker.ext.normalized
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.text.NormalUiTextField
@@ -40,7 +39,7 @@ class CountrySearchDelegate(
     searchFieldPlaceHolder: LbcTextSpec?,
     searchFieldStyleData: UiFieldStyleData,
     private val coroutineScope: CoroutineScope,
-    private val context: Context,
+    context: Context,
 ) {
 
     private var allCountryCodes: List<CountrySearchItem> =
@@ -73,7 +72,7 @@ class CountrySearchDelegate(
 
     val searchUiField: NormalUiTextField by lazy {
         NormalUiTextField(
-            id = SearchUiFieldId,
+            id = SearchString,
             initialValue = TextFieldValue(),
             label = searchFieldLabel,
             placeholder = searchFieldPlaceHolder,
@@ -169,4 +168,4 @@ class CountrySearchDelegate(
         .orEmpty()
 }
 
-private val SearchUiFieldId: UiFieldId = UiFieldId("SearchUiField")
+private const val SearchString: String = "SearchUiField"

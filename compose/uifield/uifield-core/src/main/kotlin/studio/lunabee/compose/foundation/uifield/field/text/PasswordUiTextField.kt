@@ -29,7 +29,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import studio.lunabee.compose.core.LbcTextSpec
 import studio.lunabee.compose.foundation.uifield.UiField
-import studio.lunabee.compose.foundation.uifield.UiFieldId
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.PasswordUiFieldData
@@ -37,8 +36,6 @@ import studio.lunabee.compose.foundation.uifield.field.style.PasswordUiFieldData
 import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityFieldOption
 import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityOptionData
 import studio.lunabee.compose.foundation.uifield.field.text.option.password.PasswordVisibilityOptionHolder
-import studio.lunabee.compose.foundation.uifield.get
-import studio.lunabee.compose.foundation.uifield.set
 
 class PasswordUiTextField(
     val label: LbcTextSpec?,
@@ -46,7 +43,7 @@ class PasswordUiTextField(
     val placeholder: LbcTextSpec?,
     override val isFieldInError: (String) -> UiFieldError?,
     override val visibilityOptionData: PasswordVisibilityOptionData,
-    override val id: UiFieldId,
+    override val id: String,
     override val savedStateHandle: SavedStateHandle,
     private val passwordUiFieldData: PasswordUiFieldData = PasswordUiFieldDataDefault(),
     override val onValueChange: (String) -> Unit = {},

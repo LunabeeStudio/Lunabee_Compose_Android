@@ -59,7 +59,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import studio.lunabee.compose.core.LbcImageSpec
 import studio.lunabee.compose.core.LbcTextSpec
-import studio.lunabee.compose.foundation.uifield.UiFieldId
 import studio.lunabee.compose.foundation.uifield.countrypicker.CountryPickerBottomSheetRenderer
 import studio.lunabee.compose.foundation.uifield.countrypicker.CountryPickerUiField
 import studio.lunabee.compose.foundation.uifield.countrypicker.CountrySearchItem
@@ -149,7 +148,7 @@ private fun rememberCountryPickerField(savedStateHandle: SavedStateHandle): Coun
         placeholder = LbcTextSpec.Raw(""),
         label = LbcTextSpec.Raw("Country"),
         isFieldInError = { null },
-        id = UiFieldId("9"),
+        id = "9",
         savedStateHandle = savedStateHandle,
         onValueChange = {},
         coroutineScope = CoroutineScope(Dispatchers.Default),
@@ -195,7 +194,7 @@ private fun rememberPhonePickerField(savedStateHandle: SavedStateHandle): PhoneP
                     .isValid(phone.fullNumber())
             }
         },
-        id = UiFieldId("8"),
+        id = "8",
         savedStateHandle = savedStateHandle,
         onValueChange = {},
         coroutineScope = CoroutineScope(Dispatchers.Default),
@@ -261,7 +260,7 @@ private fun rememberDisabledDateUiField(savedStateHandle: SavedStateHandle): Dat
                 Instant.now().toEpochMilli() < utcTimeMillis
         },
         savedStateHandle = savedStateHandle,
-        id = UiFieldId("7"),
+        id = "7",
         datePickerData = DatePickerData(
             datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
             datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
@@ -284,7 +283,7 @@ private fun rememberDisabledField(savedStateHandle: SavedStateHandle): NormalUiT
             imeAction = ImeAction.Next,
         ),
         savedStateHandle = savedStateHandle,
-        id = UiFieldId("6"),
+        id = "6",
         readOnly = true,
         enabled = false,
     )
@@ -303,7 +302,7 @@ private fun rememberReadOnlyField(savedStateHandle: SavedStateHandle): NormalUiT
             imeAction = ImeAction.Next,
         ),
         savedStateHandle = savedStateHandle,
-        id = UiFieldId("5"),
+        id = "5",
         readOnly = true,
     )
 }
@@ -323,7 +322,7 @@ private fun rememberDateUiField(savedStateHandle: SavedStateHandle): DateUiField
                 Instant.now().toEpochMilli() < utcTimeMillis
         },
         savedStateHandle = savedStateHandle,
-        id = UiFieldId("4"),
+        id = "4",
         datePickerData = DatePickerData(
             datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
             datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
@@ -351,7 +350,7 @@ private fun rememberDateAndHourUiField(savedStateHandle: SavedStateHandle): Date
             }
         },
         savedStateHandle = savedStateHandle,
-        id = UiFieldId("3"),
+        id = "3",
         datePickerData = DatePickerData(
             datePickerClickLabel = LbcTextSpec.Raw("Picker Date"),
             datePickerConfirmLabel = LbcTextSpec.Raw("Confirm"),
@@ -386,7 +385,7 @@ private fun rememberPasswordUiTextField(savedStateHandle: SavedStateHandle): Pas
             imeAction = ImeAction.Next,
         ),
         savedStateHandle = savedStateHandle,
-        id = UiFieldId("2"),
+        id = "2",
         visibilityOptionData = PasswordVisibilityOptionData(
             hidePasswordClickLabel = LbcTextSpec.Raw("Hide password"),
             showPasswordClickLabel = LbcTextSpec.Raw("Show password"),
@@ -409,7 +408,7 @@ private fun rememberNormalUiTextField(savedStateHandle: SavedStateHandle): Norma
             imeAction = ImeAction.Next,
         ),
         savedStateHandle = savedStateHandle,
-        id = UiFieldId("1"),
+        id = "1",
     )
 }
 

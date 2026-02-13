@@ -42,14 +42,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
 import studio.lunabee.compose.core.LbcTextSpec
-import studio.lunabee.compose.foundation.uifield.UiFieldId
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.DefaultUiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 import studio.lunabee.compose.foundation.uifield.field.text.TextUiField
-import studio.lunabee.compose.foundation.uifield.get
-import studio.lunabee.compose.foundation.uifield.set
 
 /**
  * A [UiField] implementation for selecting a country from a list presented in a bottom sheet.
@@ -78,7 +75,7 @@ class CountryPickerUiField(
     override val initialValue: String,
     override var label: LbcTextSpec?,
     override var placeholder: LbcTextSpec?,
-    override val id: UiFieldId,
+    override val id: String,
     override val savedStateHandle: SavedStateHandle,
     override val isFieldInError: (String?) -> UiFieldError?,
     uiFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData(),

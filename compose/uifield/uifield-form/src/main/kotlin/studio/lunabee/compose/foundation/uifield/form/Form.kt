@@ -20,16 +20,15 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import studio.lunabee.compose.foundation.uifield.UiField
-import studio.lunabee.compose.foundation.uifield.UiFieldId
 
 /**
  * Represents a form with a map of [UiField]
  */
 open class Form(
-    val fields: LinkedHashMap<UiFieldId, UiField<*, *>>,
+    val fields: LinkedHashMap<String, UiField<*, *>>,
 ) {
     constructor(fields: Collection<UiField<*, *>>) : this(
-        LinkedHashMap<UiFieldId, UiField<*, *>>().apply {
+        LinkedHashMap<String, UiField<*, *>>().apply {
             fields.associateByTo(this) { it.id }
         },
     )
