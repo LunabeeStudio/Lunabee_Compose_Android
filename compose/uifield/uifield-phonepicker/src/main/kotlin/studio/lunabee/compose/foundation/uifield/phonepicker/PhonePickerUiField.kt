@@ -41,6 +41,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import kotlinx.coroutines.CoroutineScope
 import studio.lunabee.compose.core.LbcTextSpec
+import studio.lunabee.compose.foundation.uifield.TextFieldValueUtils
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.countrypicker.CountryPickerBottomSheetRenderer
 import studio.lunabee.compose.foundation.uifield.countrypicker.CountrySearchDelegate
@@ -71,23 +72,23 @@ class PhonePickerUiField(
 
     override val options: List<UiFieldOption> = emptyList()
 
-    override fun formToDisplay(value: CountryCodeFieldData): TextFieldValue = TextFieldValue(value.phoneNumber)
+    override fun formToDisplay(value: CountryCodeFieldData): TextFieldValue = value.phoneNumber
 
     override fun saveToSavedStateHandle(value: CountryCodeFieldData, savedStateHandle: SavedStateHandle) {
         savedStateHandle["${id}_countryCode"] = value.countryCode
-        savedStateHandle["${id}_phoneNumber"] = value.phoneNumber
+        TextFieldValueUtils.saveToSavedStateHandle("${id}_phoneNumber", value.phoneNumber, savedStateHandle)
     }
 
     override fun restoreFromSavedStateHandle(savedStateHandle: SavedStateHandle): CountryCodeFieldData? {
         val countryCode = savedStateHandle.get<String>("${id}_countryCode")
-        val phoneNumber = savedStateHandle.get<String>("${id}_phoneNumber")
+        val phoneNumber = TextFieldValueUtils.restoreFromSavedStateHandle("${id}_phoneNumber", savedStateHandle)
 
         return if (countryCode == null && phoneNumber == null) {
             null
         } else {
             CountryCodeFieldData(
-                countryCode = savedStateHandle.get<String>("${id}_countryCode").orEmpty(),
-                phoneNumber = savedStateHandle.get<String>("${id}_phoneNumber").orEmpty(),
+                countryCode = countryCode.orEmpty(),
+                phoneNumber = phoneNumber ?: TextFieldValue(),
             )
         }
     }
@@ -120,7 +121,7 @@ class PhonePickerUiField(
                 uiFieldStyleData.ComposeTextField(
                     value = formToDisplay(collectedValue),
                     onValueChange = {
-                        value = value.copy(phoneNumber = it.text)
+                        value = value.copy(phoneNumber = it)
                         dismissError()
                     },
                     modifier = modifier
@@ -237,12 +238,12 @@ class PhonePickerUiField(
             try {
                 val phoneNumber = PhoneNumberUtil.getInstance().parse(rawPhoneNumber, null)
                 return CountryCodeFieldData(
-                    phoneNumber = phoneNumber.nationalNumber.toString(),
+                    phoneNumber = TextFieldValue(phoneNumber.nationalNumber.toString()),
                     countryCode = phoneNumber.countryCode.toString(),
                 )
             } catch (_: Exception) {
                 return CountryCodeFieldData(
-                    phoneNumber = rawPhoneNumber,
+                    phoneNumber = TextFieldValue(rawPhoneNumber),
                     countryCode = fallbackCountryCode.orEmpty(),
                 )
             }

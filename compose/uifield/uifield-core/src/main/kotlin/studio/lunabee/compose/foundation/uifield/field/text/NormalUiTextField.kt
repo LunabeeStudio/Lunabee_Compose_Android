@@ -23,7 +23,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.lifecycle.SavedStateHandle
@@ -31,6 +30,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import studio.lunabee.compose.core.LbcTextSpec
+import studio.lunabee.compose.foundation.uifield.TextFieldValueUtils
 import studio.lunabee.compose.foundation.uifield.UiFieldOption
 import studio.lunabee.compose.foundation.uifield.field.UiFieldError
 import studio.lunabee.compose.foundation.uifield.field.style.DefaultUiFieldStyleData
@@ -59,23 +59,11 @@ class NormalUiTextField(
     override fun formToDisplay(value: TextFieldValue): TextFieldValue = value
 
     override fun saveToSavedStateHandle(value: TextFieldValue, savedStateHandle: SavedStateHandle) {
-        savedStateHandle["${id}_text"] = value.text
-        savedStateHandle["${id}_selStart"] = value.selection.start
-        savedStateHandle["${id}_selEnd"] = value.selection.end
+        TextFieldValueUtils.saveToSavedStateHandle(id, value, savedStateHandle)
     }
 
-    override fun restoreFromSavedStateHandle(savedStateHandle: SavedStateHandle): TextFieldValue? {
-        val text = savedStateHandle.get<String>("${id}_text")
-        val start = savedStateHandle["${id}_selStart"] ?: 0
-        val end = savedStateHandle["${id}_selEnd"] ?: 0
-
-        return text?.let {
-            TextFieldValue(
-                text = it,
-                selection = TextRange(start, end),
-            )
-        }
-    }
+    override fun restoreFromSavedStateHandle(savedStateHandle: SavedStateHandle): TextFieldValue? =
+        TextFieldValueUtils.restoreFromSavedStateHandle(id, savedStateHandle)
 
     @Composable
     override fun Composable(

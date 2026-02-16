@@ -27,9 +27,9 @@ import studio.lunabee.compose.foundation.uifield.field.style.UiFieldStyleData
 /**
  * Base class for text-based uifields working with TextFieldValue
  */
-abstract class TextUiField<T>(
+abstract class TextUiField<Form>(
     private val uiFieldStyleData: UiFieldStyleData = DefaultUiFieldStyleData(),
-) : UiField<T, TextFieldValue>() {
+) : UiField<Form, TextFieldValue>() {
 
     abstract val placeholder: LbcTextSpec?
     abstract val label: LbcTextSpec?

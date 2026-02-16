@@ -16,8 +16,10 @@
 
 package studio.lunabee.compose.foundation.uifield.phonepicker
 
+import androidx.compose.ui.text.input.TextFieldValue
+
 data class CountryCodeFieldData(
-    val phoneNumber: String,
+    val phoneNumber: TextFieldValue,
     val countryCode: String,
 ) {
     fun fullNumber(): String = "+$countryCode$phoneNumber"
